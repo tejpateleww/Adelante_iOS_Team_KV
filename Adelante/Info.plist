@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Aileron-UltraLightItalic.otf</string>
+		<string>Aileron-UltraLight.otf</string>
+		<string>Aileron-ThinItalic.otf</string>
+		<string>Aileron-Thin.otf</string>
+		<string>Aileron-SemiBoldItalic.otf</string>
+		<string>Aileron-SemiBold.otf</string>
+		<string>Aileron-Regular.otf</string>
+		<string>Aileron-LightItalic.otf</string>
+		<string>Aileron-Light.otf</string>
+		<string>Aileron-Italic.otf</string>
+		<string>Aileron-HeavyItalic.otf</string>
+		<string>Aileron-Heavy.otf</string>
+		<string>Aileron-BoldItalic.otf</string>
+		<string>Aileron-Bold.otf</string>
+		<string>Aileron-BlackItalic.otf</string>
+		<string>Aileron-Black.otf</string>
+		<string>NexaThinItalic.otf</string>
+		<string>NexaThin.otf</string>
+		<string>NexaLightItalic.otf</string>
+		<string>NexaLight.otf</string>
+		<string>NexaBookItalic.otf</string>
+		<string>NexaBook.otf</string>
+		<string>NexaBoldItalic.otf</string>
+		<string>NexaBold.otf</string>
+		<string>NexaBlackItalic.otf</string>
+		<string>NexaBlack.otf</string>
+		<string>Nexa Light.otf</string>
+		<string>Nexa Bold.otf</string>
+		<string>Nexa Regular.otf</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>Auth</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+</dict>
+</plist>
