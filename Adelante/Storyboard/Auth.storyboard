@@ -53,20 +53,59 @@ Back</string>
                                             <constraint firstAttribute="bottom" secondItem="T1r-ZK-cpC" secondAttribute="bottom" id="s3S-lw-yD0"/>
                                         </constraints>
                                     </view>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GyQ-w2-rWM">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GyQ-w2-rWM">
                                         <rect key="frame" x="0.0" y="351" width="414" height="467"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJt-GQ-bW9">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="467"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJt-GQ-bW9">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9HV-kr-gTV">
-                                                        <rect key="frame" x="18" y="37" width="240" height="128"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="52" translatesAutoresizingMaskIntoConstraints="NO" id="9HV-kr-gTV">
+                                                        <rect key="frame" x="18" y="37" width="378" height="128"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4or-Q6-WI7">
-                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4or-Q6-WI7">
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="38"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email / Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C8x-B2-NSw" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="38"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="38" id="355-XU-s69"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="C8x-B2-NSw" secondAttribute="trailing" id="786-U1-5Uv"/>
+                                                                    <constraint firstItem="C8x-B2-NSw" firstAttribute="leading" secondItem="4or-Q6-WI7" secondAttribute="leading" id="H0i-Yt-vGd"/>
+                                                                    <constraint firstItem="C8x-B2-NSw" firstAttribute="top" secondItem="4or-Q6-WI7" secondAttribute="top" id="hkj-Ke-bXH"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="C8x-B2-NSw" secondAttribute="bottom" id="ipO-e6-JT3"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3t-t0-FVf">
+                                                                <rect key="frame" x="0.0" y="90" width="378" height="38"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-d2-yLt" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="372" height="38"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="38" id="gmm-cf-TDd"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="B7K-d2-yLt" secondAttribute="trailing" id="1rU-TC-QTe"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="B7K-d2-yLt" secondAttribute="bottom" id="4z9-Yp-qZp"/>
+                                                                    <constraint firstItem="B7K-d2-yLt" firstAttribute="leading" secondItem="d3t-t0-FVf" secondAttribute="leading" id="CnW-5n-ILZ"/>
+                                                                    <constraint firstItem="B7K-d2-yLt" firstAttribute="top" secondItem="d3t-t0-FVf" secondAttribute="top" id="eCp-aA-JQM"/>
+                                                                </constraints>
                                                             </view>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="378" id="Xyz-bh-qTY"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

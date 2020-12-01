@@ -16,7 +16,7 @@ class titleLabel : UILabel {
     override func awakeFromNib() {
         super.awakeFromNib()
         if isWelcomeTitle {
-            self.font = CustomFont.NexaRegular.returnFont(16)
+            self.font = CustomFont.NexaRegular.returnFont(41)
             self.textAlignment = .left
             self.numberOfLines = 2
             self.lineBreakMode = .byTruncatingTail

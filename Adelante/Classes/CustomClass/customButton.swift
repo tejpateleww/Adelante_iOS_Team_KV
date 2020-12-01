@@ -36,7 +36,7 @@ class submitButton: UIButton {
             self.setTitleColor(colors.black.value, for: .normal)
         } else if isSkipButton {
             self.backgroundColor = .clear
-            self.titleLabel?.font = CustomFont.NexaLight.returnFont(17)
+            self.titleLabel?.font = CustomFont.NexaRegular.returnFont(17)
             self.setTitleColor(colors.appOrangeColor.value, for: .normal)
         }
         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkyFloatingLabelTextField
 
 class customTextField: UITextField {
     
@@ -93,4 +94,14 @@ class customTextField: UITextField {
                self.layoutSubviews()
            }
        }
+}
+
+class floatTextField: SkyFloatingLabelTextField {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.font = CustomFont.NexaRegular.returnFont(16)
+        self.textColor = colors.textFieldColor.value
+        self.lineColor = colors.textFieldColor.value
+        self.lineHeight = 1.0
+    }
 }
