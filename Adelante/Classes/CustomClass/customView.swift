@@ -9,6 +9,23 @@
 import Foundation
 import UIKit
 
+class customImageView: UIImageView {
+    
+    @IBInspectable  var isCornerRadius:Bool = false
+    @IBInspectable var cornerRadiusValue: CGFloat = 0
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.contentMode = .scaleAspectFill
+        
+        if isCornerRadius {
+            self.layer.cornerRadius = cornerRadiusValue
+            self.clipsToBounds = true
+        }
+    }
+}
+
 class customView: UIView {
     
     override func awakeFromNib() {

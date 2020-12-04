@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     //    FirebaseApp.configure()
         registerForPushNotifications()
         navigateToSplash()
-       // printAppFonts()
+//        printAppFonts()
         return true
     }
     

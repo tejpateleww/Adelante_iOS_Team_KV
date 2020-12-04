@@ -15,11 +15,114 @@ class titleLabel : UILabel {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         if isWelcomeTitle {
-            self.font = CustomFont.NexaRegular.returnFont(41)
+            self.font = CustomFont.NexaBold.returnFont(41)
             self.textAlignment = .left
             self.numberOfLines = 2
             self.lineBreakMode = .byTruncatingTail
+        }
+    }
+}
+
+class myLocationLabel : UILabel {
+    
+    @IBInspectable var isHeader:Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if isHeader {
+            self.textColor = colors.myLocTitleHome.value.withAlphaComponent(0.8)
+            self.font = CustomFont.NexaRegular.returnFont(16)
+        } else {
+            self.textColor = colors.myLocValueHome.value
+            self.font = CustomFont.NexaRegular.returnFont(14)
+        }
+    }
+}
+
+class themeLabel: UILabel {
+    
+    @IBInspectable var isUnderline:Bool = false
+    @IBInspectable var underLineColor: UIColor?
+    @IBInspectable var labelColor: UIColor?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if isUnderline {
+            let attributedString = NSMutableAttributedString(string: self.text ?? "")
+            attributedString.addAttributes([NSAttributedString.Key.underlineStyle:NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor:underLineColor ?? UIColor.clear], range: NSMakeRange(0, attributedString.length))
+        }
+        self.textColor = labelColor
+    }
+}
+
+class colVwRestaurantLabel: UILabel {
+    
+    @IBInspectable var isRestaurantTitle:Bool = false
+    @IBInspectable var isRestaurantDesc:Bool = false
+    
+    @IBInspectable var topInset: CGFloat = 0.0
+    @IBInspectable var bottomInset: CGFloat = 0.0
+    @IBInspectable var leftInset: CGFloat = 0.0
+    @IBInspectable var rightInset: CGFloat = 0.0
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if isRestaurantTitle {
+            self.font = CustomFont.NexaBold.returnFont(23)
+            self.backgroundColor = colors.appOrangeColor.value.withAlphaComponent(0.78)
+            self.roundCorners(corners: [.topRight, .bottomRight], radius: 5)
+            self.textColor = colors.white.value
+            self.numberOfLines = 1
+            self.lineBreakMode = .byTruncatingTail
+        } else if isRestaurantDesc {
+            self.font = CustomFont.NexaRegular.returnFont(14)
+            self.backgroundColor = UIColor(hexString: "#1C1C1C").withAlphaComponent(0.78)
+            self.roundCorners(corners: [.topRight, .bottomRight], radius: 5)
+            self.textColor = colors.white.value
+            self.numberOfLines = 1
+            self.lineBreakMode = .byTruncatingTail
+        }
+    }
+
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + leftInset + rightInset,
+                      height: size.height + topInset + bottomInset)
+    }
+
+    override var bounds: CGRect {
+        didSet {
+            // ensures this works within stack views if multi-line
+            preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
+        }
+    }
+}
+
+class tblHomeLabels: UILabel {
+    
+    @IBInspectable var isRestaurantName:Bool = false
+    @IBInspectable var isPrice:Bool = false
+    @IBInspectable var isRating:Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.textColor = colors.black.value
+        if isRestaurantName {
+            self.font = CustomFont.NexaRegular.returnFont(15)
+        } else if isPrice {
+            self.font = CustomFont.NexaBold.returnFont(13)
+        } else if isRating {
+            self.font = CustomFont.NexaRegular.returnFont(9)
+            self.textAlignment = .center
         }
     }
 }

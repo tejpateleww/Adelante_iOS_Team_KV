@@ -55,8 +55,10 @@
 		8105FE0D25751644008D36D6 /* NexaBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8105FDF125751644008D36D6 /* NexaBold.otf */; };
 		8105FE0E25751644008D36D6 /* NexaLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8105FDF225751644008D36D6 /* NexaLight.otf */; };
 		8105FE0F25751644008D36D6 /* NexaBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8105FDF325751644008D36D6 /* NexaBook.otf */; };
+		81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */; };
 		81B447F325760D2300A0724E /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B447F225760D2300A0724E /* CustomLabel.swift */; };
 		81B447F5257613DB00A0724E /* Nexa Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 81B447F4257613DB00A0724E /* Nexa Regular.otf */; };
+		81B447F725763C3700A0724E /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B447F625763C3500A0724E /* UICollectionViewCell+Extension.swift */; };
 		81CFFD6B2574C60D005AA86A /* ApiPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD372574C60D005AA86A /* ApiPaths.swift */; };
 		81CFFD6C2574C60D005AA86A /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD382574C60D005AA86A /* Method.swift */; };
 		81CFFD6D2574C60D005AA86A /* ResposneInitClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD3B2574C60D005AA86A /* ResposneInitClass.swift */; };
@@ -145,8 +147,10 @@
 		8105FDF125751644008D36D6 /* NexaBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaBold.otf; sourceTree = "<group>"; };
 		8105FDF225751644008D36D6 /* NexaLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaLight.otf; sourceTree = "<group>"; };
 		8105FDF325751644008D36D6 /* NexaBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaBook.otf; sourceTree = "<group>"; };
+		81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		81B447F225760D2300A0724E /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		81B447F4257613DB00A0724E /* Nexa Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Regular.otf"; sourceTree = "<group>"; };
+		81B447F625763C3500A0724E /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		81CFFD372574C60D005AA86A /* ApiPaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiPaths.swift; sourceTree = "<group>"; };
 		81CFFD382574C60D005AA86A /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		81CFFD3B2574C60D005AA86A /* ResposneInitClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResposneInitClass.swift; sourceTree = "<group>"; };
@@ -455,6 +459,8 @@
 		81CFFD502574C60D005AA86A /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */,
+				81B447F625763C3500A0724E /* UICollectionViewCell+Extension.swift */,
 				8105FDC62574F07C008D36D6 /* UIViewController+Extension.swift */,
 				81CFFD512574C60D005AA86A /* UIColor+Extension.swift */,
 				81CFFD522574C60D005AA86A /* UILabel+Extension.swift */,
@@ -661,6 +667,7 @@
 				81CFFD792574C60D005AA86A /* Fonts.swift in Sources */,
 				81CFFD852574C60D005AA86A /* Data+Extensions.swift in Sources */,
 				81CFFD872574C60D005AA86A /* customTextField.swift in Sources */,
+				81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */,
 				81CFFD7E2574C60D005AA86A /* String+Extensions.swift in Sources */,
 				8105FDD325751289008D36D6 /* customButton.swift in Sources */,
 				81CFFD842574C60D005AA86A /* UISearchbar+Extension.swift in Sources */,
@@ -698,6 +705,7 @@
 				81CFFD862574C60D005AA86A /* CustomSlider.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,
 				81CFFD822574C60D005AA86A /* UIStoryboard+Extension.swift in Sources */,
+				81B447F725763C3700A0724E /* UICollectionViewCell+Extension.swift in Sources */,
 				8105FDB82574D08E008D36D6 /* HomeVC.swift in Sources */,
 				81CFFD6D2574C60D005AA86A /* ResposneInitClass.swift in Sources */,
 				81CFFD752574C60D005AA86A /* ImagePicker.swift in Sources */,

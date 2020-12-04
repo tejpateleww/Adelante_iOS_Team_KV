@@ -60,13 +60,14 @@ class CustomTabBarVC: UITabBarController {
     }
     
     override func viewDidLayoutSubviews() {
-          super.viewDidLayoutSubviews()
+        super.viewDidLayoutSubviews()
+        
         var h = tabBar.frame.height + 12
-        if #available(iOS 13.0, *){
+        if #available(iOS 13.0, *) {
             h = tabBar.frame.height + 25
         }
 
-        coustmeTabBarView.layer.cornerRadius = 20
+        coustmeTabBarView.layer.cornerRadius = 8
         coustmeTabBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         coustmeTabBarView.clipsToBounds = true
         
@@ -89,6 +90,7 @@ class CustomTabBarVC: UITabBarController {
 //                h = tabBar.frame.height + 25
 //            }
 //        }
+        
         let tabBarFrame = CGRect(x: tabBar.frame.origin.x, y: view.frame.height - h, width: tabBar.frame.width, height: h)
         tabBar.frame = tabBarFrame
         coustmeTabBarView.frame = tabBar.frame

@@ -71,7 +71,7 @@ extension UIViewController {
         }
         if isRight {
             var w = 90
-            var h = 25
+            var h = 30 //25
             if DeviceType.hasTopNotch {
                 w = 110
                 h = 40
