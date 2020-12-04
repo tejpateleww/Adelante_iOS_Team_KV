@@ -26,13 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     //    FirebaseApp.configure()
        // registerForPushNotifications()
-        navigateToView()
+   //     navigateToView()
         //navigateToSplash()
        // printAppFonts()
         return true
     }
     func navigateToView() {
-       let controller = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID) as? RateReviewVC
+       let controller = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: MyFoodlistVC.storyboardID) as? MyFoodlistVC
        let nav = UINavigationController(rootViewController: controller!)
         nav.navigationBar.isHidden = true
        self.window?.rootViewController = nav

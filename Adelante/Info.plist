@@ -55,7 +55,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>Auth</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>temp</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

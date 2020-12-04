@@ -11,6 +11,8 @@
 		345563962578BE2C002FF281 /* RestaurantReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345563952578BE2C002FF281 /* RestaurantReviewVC.swift */; };
 		3455639825790FF8002FF281 /* RateReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455639725790FF8002FF281 /* RateReviewVC.swift */; };
 		3455B8AB2579E37100E8B053 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455B8AA2579E37100E8B053 /* CustomTextView.swift */; };
+		3455B8AD2579EDA000E8B053 /* temp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3455B8AC2579EDA000E8B053 /* temp.storyboard */; };
+		3455B8B12579EF5700E8B053 /* MyFoodlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455B8B02579EF5700E8B053 /* MyFoodlistVC.swift */; };
 		3460E7B4257668DA00E31231 /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460E7B3257668DA00E31231 /* MyProfileVC.swift */; };
 		3460E7B6257687AD00E31231 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460E7B5257687AD00E31231 /* EditProfileVC.swift */; };
 		346D4E7B257788B000A81FF3 /* FeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346D4E7A257788B000A81FF3 /* FeedbackVC.swift */; };
@@ -110,6 +112,8 @@
 		345563952578BE2C002FF281 /* RestaurantReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewVC.swift; sourceTree = "<group>"; };
 		3455639725790FF8002FF281 /* RateReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateReviewVC.swift; sourceTree = "<group>"; };
 		3455B8AA2579E37100E8B053 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		3455B8AC2579EDA000E8B053 /* temp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = temp.storyboard; sourceTree = "<group>"; };
+		3455B8B02579EF5700E8B053 /* MyFoodlistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFoodlistVC.swift; sourceTree = "<group>"; };
 		3460E7B3257668DA00E31231 /* MyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
 		3460E7B5257687AD00E31231 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		346D4E7A257788B000A81FF3 /* FeedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackVC.swift; sourceTree = "<group>"; };
@@ -222,6 +226,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3455B8AE2579EECA00E8B053 /* Temp */ = {
+			isa = PBXGroup;
+			children = (
+				3455B8AF2579EED700E8B053 /* Foolist */,
+			);
+			path = Temp;
+			sourceTree = "<group>";
+		};
+		3455B8AF2579EED700E8B053 /* Foolist */ = {
+			isa = PBXGroup;
+			children = (
+				3455B8B02579EF5700E8B053 /* MyFoodlistVC.swift */,
+			);
+			path = Foolist;
+			sourceTree = "<group>";
+		};
 		64C68AD5241BBB2900B97B25 = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +266,7 @@
 				8105FDAD2574CE3C008D36D6 /* Auth.storyboard */,
 				8105FDC22574D3E1008D36D6 /* Main.storyboard */,
 				8105FDCC2574F331008D36D6 /* LaunchScreen.storyboard */,
+				3455B8AC2579EDA000E8B053 /* temp.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -253,6 +274,7 @@
 		8105FDAC2574CDD0008D36D6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3455B8AE2579EECA00E8B053 /* Temp */,
 				8105FDAF2574CE6A008D36D6 /* Auth */,
 				8105FDB02574CE76008D36D6 /* Main */,
 			);
@@ -626,6 +648,7 @@
 				8105FE0025751644008D36D6 /* Aileron-Italic.otf in Resources */,
 				8105FDFA25751644008D36D6 /* Aileron-LightItalic.otf in Resources */,
 				8105FDF525751644008D36D6 /* Aileron-BoldItalic.otf in Resources */,
+				3455B8AD2579EDA000E8B053 /* temp.storyboard in Resources */,
 				8105FDF925751644008D36D6 /* Aileron-UltraLightItalic.otf in Resources */,
 				8105FE0125751644008D36D6 /* Aileron-BlackItalic.otf in Resources */,
 				8105FE0D25751644008D36D6 /* NexaBold.otf in Resources */,
@@ -703,6 +726,7 @@
 				81CFFD7F2574C60D005AA86A /* UIButton+Extension.swift in Sources */,
 				81CFFD882574C60D005AA86A /* GradientButton.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,
+				3455B8B12579EF5700E8B053 /* MyFoodlistVC.swift in Sources */,
 				3460E7B6257687AD00E31231 /* EditProfileVC.swift in Sources */,
 				81CFFD7B2574C60D005AA86A /* Colors.swift in Sources */,
 				8105FDC12574D0F9008D36D6 /* FavouritesVC.swift in Sources */,
