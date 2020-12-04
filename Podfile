@@ -10,5 +10,6 @@ target 'Adelante' do
     pod 'Firebase/Messaging'
     pod 'BetterSegmentedControl'
     pod 'SkyFloatingLabelTextField'
-    
+    pod 'SDWebImage'
+    pod 'GrowingTextView', '0.7.2'
 end

@@ -12,28 +12,9 @@ import SkyFloatingLabelTextField
 class customTextField: UITextField {
     
     private let defaultUnderlineColor = UIColor.gray
-    private let bottomLine = UIView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        borderStyle = .none
-        bottomLine.translatesAutoresizingMaskIntoConstraints = false
-        bottomLine.backgroundColor = defaultUnderlineColor
-
-        self.addSubview(bottomLine)
-        bottomLine.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 1).isActive = true
-        bottomLine.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        bottomLine.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        bottomLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-
-    public func setUnderlineColor(color: UIColor = .red) {
-        bottomLine.backgroundColor = color
-    }
-
-    public func setDefaultUnderlineColor() {
-        bottomLine.backgroundColor = defaultUnderlineColor
     }
     //MARK:- LeftImage Set
     @IBInspectable var leftImage : UIImage? {
@@ -97,11 +78,15 @@ class customTextField: UITextField {
 }
 
 class floatTextField: SkyFloatingLabelTextField {
+    @IBInspectable var isEditProfile:Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         self.font = CustomFont.NexaRegular.returnFont(16)
-        self.textColor = colors.textFieldColor.value
+        self.selectedTitleColor = colors.titleColor.value
         self.lineColor = colors.textFieldColor.value
         self.lineHeight = 1.0
+        if isEditProfile{
+            self.selectedTitleColor = colors.titleColor.value
+        }
     }
 }

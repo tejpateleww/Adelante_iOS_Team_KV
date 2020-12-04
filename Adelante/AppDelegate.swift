@@ -25,12 +25,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     //    FirebaseApp.configure()
+<<<<<<< HEAD
         registerForPushNotifications()
         navigateToSplash()
 //        printAppFonts()
+=======
+       // registerForPushNotifications()
+        navigateToView()
+        //navigateToSplash()
+       // printAppFonts()
+>>>>>>> d54e4d40b838dd1d54ee3d2e20c953490db17001
         return true
     }
-    
+    func navigateToView() {
+       let controller = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID) as? RateReviewVC
+       let nav = UINavigationController(rootViewController: controller!)
+        nav.navigationBar.isHidden = true
+       self.window?.rootViewController = nav
+    }
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
     }

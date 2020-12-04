@@ -19,15 +19,24 @@ class submitButton: UIButton {
     @IBInspectable var hasShadow:Bool = false
     @IBInspectable var isSkipButton:Bool = false
     @IBInspectable var isUnderline:Bool = false
+<<<<<<< HEAD
     @IBInspectable var underLineCol: UIColor?
     @IBInspectable var isBold: Bool = false
     @IBInspectable var isEditProfile: Bool = false
     
+=======
+    @IBInspectable var underlineColor:UIColor?
+    @IBInspectable var isBold:Bool = false
+    @IBInspectable var isEditAccount:Bool = false
+>>>>>>> d54e4d40b838dd1d54ee3d2e20c953490db17001
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.titleLabel?.font = CustomFont.NexaBold.returnFont(18)
         
+        if isUnderline {
+                   self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
+               }
         if isAppOrangeBg {
             self.backgroundColor = colors.appOrangeColor.value
             self.setTitleColor(colors.white.value, for: .normal)
@@ -39,13 +48,23 @@ class submitButton: UIButton {
             self.setTitleColor(colors.black.value, for: .normal)
         } else if isSkipButton {
             self.backgroundColor = .clear
-            self.titleLabel?.font = CustomFont.NexaRegular.returnFont(17)
+            self.titleLabel?.font = CustomFont.NexaRegular.returnFont(18)
+            self.setTitleColor(colors.appOrangeColor.value, for: .normal)
+        }else if isBold{
+            self.backgroundColor = .clear
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
+            self.setTitleColor(colors.appOrangeColor.value, for: .normal)
+            self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
+        }else if isEditAccount {
+            self.backgroundColor = .clear
+            self.titleLabel?.font = CustomFont.NexaRegular.returnFont(14)
             self.setTitleColor(colors.appOrangeColor.value, for: .normal)
         } else if isEditProfile {
             self.backgroundColor = .clear
             self.titleLabel?.font = CustomFont.NexaRegular.returnFont(14)
             self.setTitleColor(colors.appOrangeColor.value, for: .normal)
         }
+        
         
         if isCornerRadius {
             self.layer.cornerRadius = self.frame.size.height / 2
@@ -60,6 +79,7 @@ class submitButton: UIButton {
             self.layer.shadowRadius = 5.0
         }
         
+<<<<<<< HEAD
         if isUnderline {
             self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underLineCol ?? UIColor.clear , font: self.titleLabel?.font ?? CustomFont.NexaBold.returnFont(17))
         }
@@ -85,5 +105,8 @@ class collectionVwFilterBtns: UIButton {
             self.layer.cornerRadius = self.frame.size.height / 2
             self.clipsToBounds = true
         }
+=======
+       
+>>>>>>> d54e4d40b838dd1d54ee3d2e20c953490db17001
     }
 }
