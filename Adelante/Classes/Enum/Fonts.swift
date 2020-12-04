@@ -63,7 +63,7 @@ enum CustomFont{
         case .NexaLight:
             return UIFont(name: "Nexa-Light", size: font)!
         case .NexaBold:
-            return UIFont(name: "Nexa-Bold", size: font)!
+            return UIFont(name: "NexaBold", size: font)!
         case .NexaBook:
             return UIFont(name: "Nexa-Book", size: font)!
         case .NexaRegular:
