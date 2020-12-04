@@ -55,6 +55,18 @@
 		8105FE0D25751644008D36D6 /* NexaBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8105FDF125751644008D36D6 /* NexaBold.otf */; };
 		8105FE0E25751644008D36D6 /* NexaLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8105FDF225751644008D36D6 /* NexaLight.otf */; };
 		8105FE0F25751644008D36D6 /* NexaBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8105FDF325751644008D36D6 /* NexaBook.otf */; };
+		8170CAEE257A10B500B24B7A /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAE4257A10B400B24B7A /* ForgotPasswordVC.swift */; };
+		8170CAEF257A10B500B24B7A /* RestaurantReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAE5257A10B400B24B7A /* RestaurantReviewVC.swift */; };
+		8170CAF0257A10B500B24B7A /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAE6257A10B400B24B7A /* EditProfileVC.swift */; };
+		8170CAF1257A10B500B24B7A /* RateReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAE7257A10B400B24B7A /* RateReviewVC.swift */; };
+		8170CAF2257A10B500B24B7A /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAE8257A10B400B24B7A /* NotificationVC.swift */; };
+		8170CAF3257A10B500B24B7A /* FeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAE9257A10B400B24B7A /* FeedbackVC.swift */; };
+		8170CAF4257A10B500B24B7A /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAEA257A10B500B24B7A /* MyProfileVC.swift */; };
+		8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAEB257A10B500B24B7A /* CategoryVC.swift */; };
+		8170CAF6257A10B500B24B7A /* CommonWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAEC257A10B500B24B7A /* CommonWebViewVC.swift */; };
+		8170CAF7257A10B500B24B7A /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */; };
+		8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAF8257A142200B24B7A /* CustomTextView.swift */; };
+		8170CAFF257A771000B24B7A /* MyFoodlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */; };
 		81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */; };
 		81B447F325760D2300A0724E /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B447F225760D2300A0724E /* CustomLabel.swift */; };
 		81B447F5257613DB00A0724E /* Nexa Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 81B447F4257613DB00A0724E /* Nexa Regular.otf */; };
@@ -147,6 +159,18 @@
 		8105FDF125751644008D36D6 /* NexaBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaBold.otf; sourceTree = "<group>"; };
 		8105FDF225751644008D36D6 /* NexaLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaLight.otf; sourceTree = "<group>"; };
 		8105FDF325751644008D36D6 /* NexaBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaBook.otf; sourceTree = "<group>"; };
+		8170CAE4257A10B400B24B7A /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		8170CAE5257A10B400B24B7A /* RestaurantReviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantReviewVC.swift; sourceTree = "<group>"; };
+		8170CAE6257A10B400B24B7A /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		8170CAE7257A10B400B24B7A /* RateReviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateReviewVC.swift; sourceTree = "<group>"; };
+		8170CAE8257A10B400B24B7A /* NotificationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		8170CAE9257A10B400B24B7A /* FeedbackVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackVC.swift; sourceTree = "<group>"; };
+		8170CAEA257A10B500B24B7A /* MyProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
+		8170CAEB257A10B500B24B7A /* CategoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
+		8170CAEC257A10B500B24B7A /* CommonWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonWebViewVC.swift; sourceTree = "<group>"; };
+		8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		8170CAF8257A142200B24B7A /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFoodlistVC.swift; sourceTree = "<group>"; };
 		81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		81B447F225760D2300A0724E /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		81B447F4257613DB00A0724E /* Nexa Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Regular.otf"; sourceTree = "<group>"; };
@@ -252,6 +276,17 @@
 		8105FDB02574CE76008D36D6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */,
+				8170CAEB257A10B500B24B7A /* CategoryVC.swift */,
+				8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */,
+				8170CAEC257A10B500B24B7A /* CommonWebViewVC.swift */,
+				8170CAE6257A10B400B24B7A /* EditProfileVC.swift */,
+				8170CAE9257A10B400B24B7A /* FeedbackVC.swift */,
+				8170CAE4257A10B400B24B7A /* ForgotPasswordVC.swift */,
+				8170CAEA257A10B500B24B7A /* MyProfileVC.swift */,
+				8170CAE8257A10B400B24B7A /* NotificationVC.swift */,
+				8170CAE7257A10B400B24B7A /* RateReviewVC.swift */,
+				8170CAE5257A10B400B24B7A /* RestaurantReviewVC.swift */,
 				8105FDB72574D08E008D36D6 /* HomeVC.swift */,
 				8105FDBA2574D0A9008D36D6 /* SearchVC.swift */,
 				8105FDBC2574D0B7008D36D6 /* MyOrdersVC.swift */,
@@ -479,6 +514,7 @@
 		81CFFD5B2574C60D005AA86A /* CustomClass */ = {
 			isa = PBXGroup;
 			children = (
+				8170CAF8257A142200B24B7A /* CustomTextView.swift */,
 				81CFFD5C2574C60D005AA86A /* CustomSlider.swift */,
 				81CFFD5D2574C60D005AA86A /* customTextField.swift */,
 				81CFFD5E2574C60D005AA86A /* GradientButton.swift */,
@@ -676,8 +712,12 @@
 				81CFFD882574C60D005AA86A /* GradientButton.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,
 				81CFFD7B2574C60D005AA86A /* Colors.swift in Sources */,
+				8170CAFF257A771000B24B7A /* MyFoodlistVC.swift in Sources */,
+				8170CAF4257A10B500B24B7A /* MyProfileVC.swift in Sources */,
 				8105FDC12574D0F9008D36D6 /* FavouritesVC.swift in Sources */,
+				8170CAF2257A10B500B24B7A /* NotificationVC.swift in Sources */,
 				81CFFD712574C60D005AA86A /* LoginReqModel.swift in Sources */,
+				8170CAEE257A10B500B24B7A /* ForgotPasswordVC.swift in Sources */,
 				81CFFD6F2574C60D005AA86A /* ResProfileDatum.swift in Sources */,
 				8105FDC92574F101008D36D6 /* AppStoryboards.swift in Sources */,
 				81CFFD772574C60D005AA86A /* WebServices.swift in Sources */,
@@ -696,25 +736,33 @@
 				81CFFD702574C60D005AA86A /* RequestModel.swift in Sources */,
 				81CFFD742574C60D005AA86A /* Singleton.swift in Sources */,
 				81CFFD782574C60D005AA86A /* Validators.swift in Sources */,
+				8170CAF7257A10B500B24B7A /* ChangePasswordVC.swift in Sources */,
 				8105FDCF2574F714008D36D6 /* SplashVC.swift in Sources */,
+				8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */,
 				81CFFD7D2574C60D005AA86A /* UILabel+Extension.swift in Sources */,
+				8170CAF1257A10B500B24B7A /* RateReviewVC.swift in Sources */,
 				8105FDB62574D014008D36D6 /* BaseViewController.swift in Sources */,
 				81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */,
+				8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */,
 				81CFFD8A2574C60D005AA86A /* AppInfo.swift in Sources */,
 				81CFFD6E2574C60D005AA86A /* UserInfo.swift in Sources */,
 				81CFFD862574C60D005AA86A /* CustomSlider.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,
 				81CFFD822574C60D005AA86A /* UIStoryboard+Extension.swift in Sources */,
 				81B447F725763C3700A0724E /* UICollectionViewCell+Extension.swift in Sources */,
+				8170CAF3257A10B500B24B7A /* FeedbackVC.swift in Sources */,
 				8105FDB82574D08E008D36D6 /* HomeVC.swift in Sources */,
 				81CFFD6D2574C60D005AA86A /* ResposneInitClass.swift in Sources */,
 				81CFFD752574C60D005AA86A /* ImagePicker.swift in Sources */,
+				8170CAF6257A10B500B24B7A /* CommonWebViewVC.swift in Sources */,
+				8170CAF0257A10B500B24B7A /* EditProfileVC.swift in Sources */,
 				8105FDA92574C9A2008D36D6 /* ProfileUpdateReqModel.swift in Sources */,
 				8105FDD1257501C4008D36D6 /* customView.swift in Sources */,
 				81CFFD762574C60D005AA86A /* WebServicesSubClass.swift in Sources */,
 				8105FDB42574CFEC008D36D6 /* CustomTabBarVC.swift in Sources */,
 				81CFFD832574C60D005AA86A /* UITextField+Extension.swift in Sources */,
 				81CFFD732574C60D005AA86A /* Utilities.swift in Sources */,
+				8170CAEF257A10B500B24B7A /* RestaurantReviewVC.swift in Sources */,
 				8105FDC52574D659008D36D6 /* NavigationItems.swift in Sources */,
 				81CFFD722574C60D005AA86A /* Constants.swift in Sources */,
 			);

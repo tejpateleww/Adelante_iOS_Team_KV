@@ -97,11 +97,15 @@ class customTextField: UITextField {
 }
 
 class floatTextField: SkyFloatingLabelTextField {
+    @IBInspectable var isEditProfile:Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         self.font = CustomFont.NexaRegular.returnFont(16)
-        self.textColor = colors.textFieldColor.value
-        self.lineColor = colors.textFieldColor.value
+        self.selectedTitleColor = colors.forgotpassGreyColor.value
+        self.selectedLineColor = colors.textFieldColor.value
         self.lineHeight = 1.0
+        if isEditProfile{
+            self.selectedTitleColor = colors.forgotpassGreyColor.value
+        }
     }
 }

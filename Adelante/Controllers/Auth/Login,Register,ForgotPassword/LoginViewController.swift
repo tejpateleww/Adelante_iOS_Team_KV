@@ -19,17 +19,25 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    // MARK: - IBActions
+    @IBAction func btnForgotPasswordClicked(_ sender: Any) {
+        let signIn = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID)
+        self.navigationController?.pushViewController(signIn, animated: true)
+    }
+    
+    @IBAction func btnCreateAccountClicked(_ sender: Any) {
+        let registerVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: RegisterViewController.storyboardID)
+        self.navigationController?.pushViewController(registerVC, animated: true)
+    }
+    
    //MARK:- Webservice
     func webserviceForlogin()
     {
         let login = LoginReqModel(email:  txtEmail.text ?? "", password: txtPassword.text ?? "", deviceToken: SingletonClass.sharedInstance.DeviceToken, deviceType: AppInfo.appUrl )
-      
         WebServiceSubClass.login(loginModel: login, showHud: true) { (json, status, response) in
-           
             if(status)
             {
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-                
                 let loginModelDetails = UserInfo.init(fromJson: json)
                 UserDefaults.standard.set(loginModelDetails.data.xApiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 
@@ -57,11 +65,9 @@ class LoginViewController: UIViewController {
                 // create the alert
                 let alert = UIAlertController(title: AppInfo.appName, message: msg, preferredStyle: UIAlertController.Style.alert)
                 
-                
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (Action) in
                     self.dismiss(animated: true, completion: nil)
                 }))
-                
                 
                 // show the alert
                 self.present(alert, animated: true, completion: nil)
@@ -72,7 +78,6 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
     
     //MARK:- Validation
     func validation() -> Bool
@@ -93,15 +98,4 @@ class LoginViewController: UIViewController {
         
         return true
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

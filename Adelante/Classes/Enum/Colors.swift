@@ -10,7 +10,7 @@ import Foundation
 import  UIKit
 
 enum colors{
-    case white,black, red, appOrangeColor,appGreenColor, badgeColor, segmentSelectedColor, segmentDeselectedColor, searchBarBg, submitButtonShadow, textFieldColor, myLocTitleHome, myLocValueHome, selectedFilterBtn, normalFilterBtn
+    case white,black, red, appOrangeColor,appGreenColor, badgeColor, segmentSelectedColor, segmentDeselectedColor, searchBarBg, submitButtonShadow, textFieldColor, myLocTitleHome, myLocValueHome, selectedFilterBtn, normalFilterBtn, clearCol, forgotpassGreyColor
     
     var value:UIColor{
         switch self {
@@ -44,6 +44,10 @@ enum colors{
             return UIColor(hexString: "#D3D8DF")
         case .normalFilterBtn:
             return UIColor(hexString: "#F3F5F9")
+        case .clearCol:
+            return UIColor.clear
+        case .forgotpassGreyColor:
+            return UIColor(hexString: "#9597A8")
+            }
         }
     }
-}

@@ -124,6 +124,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             }
             
     }
+    
     // MARK: - Api Calls
     
 }
