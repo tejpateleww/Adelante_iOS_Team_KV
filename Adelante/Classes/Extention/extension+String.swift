@@ -66,7 +66,6 @@ extension String {
                 //Get the string without its last component
                 let stringWithoutLastComponent = self.substring(to: rangeOfLastComponent.lowerBound)
                 
-                
                 //Encode the last component
                 if let lastComponentEncoded = lastComponentAsString.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) {
                     
@@ -82,8 +81,8 @@ extension String {
         
         return nil;
     }
-    
 }
+
 extension StringProtocol {
     
     /// Returns the string with only [0-9], all other characters are filtered out

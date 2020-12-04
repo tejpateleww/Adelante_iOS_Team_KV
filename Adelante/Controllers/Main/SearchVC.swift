@@ -18,17 +18,18 @@ class SearchVC: BaseViewController {
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.customTabBarController?.hideTabBar()
+        self.customTabBarController?.showTabBar()
     }
     
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     
     // MARK: - IBActions

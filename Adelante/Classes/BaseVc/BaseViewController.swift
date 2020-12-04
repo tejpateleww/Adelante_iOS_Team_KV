@@ -21,8 +21,11 @@ class BaseViewController: UIViewController {
 //        self.UpdateView()
     }
     
+    var vwNavHomeTopBar = UIView()
+    let lblNavAddressHome = myLocationLabel()
+    var btnNavAddressHome = UIButton()
     
-    func setNavigationBarInViewController (controller : UIViewController,naviColor : UIColor, naviTitle : String, leftImage : String , rightImages : [String], isTranslucent : Bool)
+    func setNavigationBarInViewController (controller : UIViewController,naviColor : UIColor, naviTitle : String, leftImage : String , rightImages : [String], isTranslucent : Bool, isShowHomeTopBar:Bool)
     {
         UIApplication.shared.statusBarStyle = .lightContent
         controller.navigationController?.isNavigationBarHidden = false
@@ -42,13 +45,53 @@ class BaseViewController: UIViewController {
        
         controller.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         controller.navigationController?.navigationBar.shadowImage = UIImage()
-
+//        controller.navigationController?.navigationBar.backgroundColor = .red
+        if isShowHomeTopBar {
+            vwNavHomeTopBar.frame = CGRect(x: 10, y: 0, width: ((controller.navigationController?.navigationBar.frame.size.width)!), height: 40)
+//            vwHomeTopBar.backgroundColor = .red
+            let verticalStack = UIStackView.init(frame: vwNavHomeTopBar.frame)
+            verticalStack.axis = .vertical
+            
+            let lblMyLocation = myLocationLabel.init(frame: CGRect(x: 0, y: 0, width: vwNavHomeTopBar.frame.size.width, height: 16))
+            lblMyLocation.text = "My Location"
+            lblMyLocation.isHeader = true
+            lblMyLocation.textColor = colors.myLocTitleHome.value.withAlphaComponent(0.8)
+            lblMyLocation.font = CustomFont.NexaRegular.returnFont(16)
+            verticalStack.addArrangedSubview(lblMyLocation)
+            
+            let horizontalStack = UIStackView.init(frame: CGRect(x: 0, y: 16, width: vwNavHomeTopBar.frame.size.width, height: verticalStack.frame.size.height - 16))
+            horizontalStack.spacing = 3
+            horizontalStack.axis = .horizontal
+            let imgLoc = UIImageView.init()
+            imgLoc.image = UIImage.init(named: "location")
+            horizontalStack.addArrangedSubview(imgLoc)
+            
+            
+            
+            lblNavAddressHome.textColor = colors.myLocValueHome.value
+            lblNavAddressHome.font = CustomFont.NexaRegular.returnFont(14)
+            horizontalStack.addArrangedSubview(lblNavAddressHome)
+            
+            let vwPen = UIView.init()
+            let btnPen = UIButton.init(frame: CGRect(x: 0, y: 0, width: 28, height: 10))
+            btnPen.setImage(UIImage.init(named: "editLocation"), for: .normal)
+            vwPen.addSubview(btnPen)
+            
+            horizontalStack.addArrangedSubview(vwPen)
+            
+            verticalStack.addArrangedSubview(horizontalStack)
+            btnNavAddressHome = UIButton.init(frame: vwNavHomeTopBar.frame)
+            
+            vwNavHomeTopBar.addSubview(btnNavAddressHome)
+            vwNavHomeTopBar.addSubview(verticalStack)
+            controller.navigationItem.titleView = vwNavHomeTopBar
+        }
         if leftImage != "" {
             if leftImage == NavItemsLeft.back.value {
                 let btnLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
                 btnLeft.setImage(UIImage.init(named: "nav_back"), for: .normal)
                 btnLeft.layer.setValue(controller, forKey: "controller")
-                btnLeft.addTarget(self, action: #selector(self.btnBackAction), for: .touchUpInside)
+//                btnLeft.addTarget(self, action: #selector(self.btnBackAction), for: .touchUpInside)
                 let LeftView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
                 LeftView.addSubview(btnLeft)
             
@@ -60,25 +103,25 @@ class BaseViewController: UIViewController {
         if rightImages.count != 0 {
             var arrButtons = [UIBarButtonItem]()
             rightImages.forEach { (title) in
-//                if title == NavItemsRight.notifications.value {
-//                    let vwNotif = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-//
-//                    let btnNotif = UIButton.init()
-//                    btnNotif.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//                    btnNotif.setImage(UIImage.init(named: "ic_notification"), for: .normal)
+                if title == NavItemsRight.notifBell.value {
+                    let vwNotif = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+
+                    let btnNotif = UIButton.init()
+                    btnNotif.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+                    btnNotif.setImage(UIImage.init(named: "notif"), for: .normal)
 //                    btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
-//                    btnNotif.layer.setValue(controller, forKey: "controller")
-//                    vwNotif.addSubview(btnNotif)
-//
+                    btnNotif.layer.setValue(controller, forKey: "controller")
+                    vwNotif.addSubview(btnNotif)
+
 //                    lblNavNotifBadge = badgeLabel.init(frame: CGRect(x: 26, y: 0, width: 17, height: 17))
 //                    lblNavNotifBadge.isNotifBadge = true
 //                    lblNavNotifBadge.text = "0"
 //                    vwNotif.addSubview(lblNavNotifBadge)
-//
-//                    let btnRightBar : UIBarButtonItem = UIBarButtonItem.init(customView: vwNotif)
-//                    btnRightBar.style = .plain
-//                    arrButtons.append(btnRightBar)
-//                }
+
+                    let btnRightBar : UIBarButtonItem = UIBarButtonItem.init(customView: vwNotif)
+                    btnRightBar.style = .plain
+                    arrButtons.append(btnRightBar)
+                }
 //                else if title == NavItemsRight.profile.value {
 //                    let vwProfile = viewfullCornerRadiusForProfile(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
 //

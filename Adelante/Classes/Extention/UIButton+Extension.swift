@@ -78,6 +78,7 @@ extension UIButton{
         self.layer.shadowRadius = 10.0
         self.layer.masksToBounds = false
     }
+    
     func setunderline(title:String ,color: colors, font: UIFont){
         self.setAttributedTitle(NSMutableAttributedString(string: title, attributes:  [.font: font,
                                                                                        .foregroundColor: color.value,

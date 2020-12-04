@@ -18,17 +18,18 @@ class FavouritesVC: BaseViewController {
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.customTabBarController?.hideTabBar()
+        self.customTabBarController?.showTabBar()
     }
     
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
-        addNavBarImage(isLeft: false, isRight: false)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.favourites.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true)
+        addNavBarImage(isLeft: true, isRight: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.favourites.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     
     // MARK: - IBActions
