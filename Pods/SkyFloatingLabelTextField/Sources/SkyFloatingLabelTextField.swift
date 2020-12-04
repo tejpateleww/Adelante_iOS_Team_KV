@@ -206,9 +206,9 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     */
     open var titleFormatter: ((String) -> String) = { (text: String) -> String in
         if #available(iOS 9.0, *) {
-            return text.localizedCapitalized
+            return text.localizedUppercase
         } else {
-            return text.capitalized
+            return text.uppercased()
         }
     }
 
