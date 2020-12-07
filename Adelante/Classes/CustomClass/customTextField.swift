@@ -13,7 +13,8 @@ class customTextField: UITextField {
     
     private let defaultUnderlineColor = UIColor.gray
     private let bottomLine = UIView()
-
+    @IBInspectable var isSearchBar:Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -26,6 +27,9 @@ class customTextField: UITextField {
         bottomLine.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         bottomLine.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         bottomLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        if isSearchBar {
+            self.font = CustomFont.NexaRegular.returnFont(15)
+        }
     }
 
     public func setUnderlineColor(color: UIColor = .red) {
@@ -107,5 +111,17 @@ class floatTextField: SkyFloatingLabelTextField {
         if isEditProfile{
             self.selectedTitleColor = colors.forgotpassGreyColor.value
         }
+    }
+}
+
+
+class addCarddetailsTextField : UITextField {
+    override func awakeFromNib() {
+       
+        self.font = CustomFont.NexaRegular.returnFont(15)
+        self.textColor = UIColor(hexString: "#222B45")
+        self.textAlignment = .left
+        
+        
     }
 }

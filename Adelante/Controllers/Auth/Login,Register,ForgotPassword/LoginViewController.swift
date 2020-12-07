@@ -21,8 +21,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func btnForgotPasswordClicked(_ sender: Any) {
-        let signIn = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID)
-        self.navigationController?.pushViewController(signIn, animated: true)
+        let forgotPassVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ForgotPasswordVC.storyboardID)
+        self.navigationController?.pushViewController(forgotPassVc, animated: true)
     }
     
     @IBAction func btnCreateAccountClicked(_ sender: Any) {

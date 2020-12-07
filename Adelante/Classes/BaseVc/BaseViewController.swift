@@ -56,7 +56,7 @@ class BaseViewController: UIViewController {
             lblMyLocation.text = "My Location"
             lblMyLocation.isHeader = true
             lblMyLocation.textColor = colors.myLocTitleHome.value.withAlphaComponent(0.8)
-            lblMyLocation.font = CustomFont.NexaRegular.returnFont(16)
+            lblMyLocation.font = CustomFont.NexaBold.returnFont(16)
             verticalStack.addArrangedSubview(lblMyLocation)
             
             let horizontalStack = UIStackView.init(frame: CGRect(x: 0, y: 16, width: vwNavHomeTopBar.frame.size.width, height: verticalStack.frame.size.height - 16))
@@ -91,7 +91,7 @@ class BaseViewController: UIViewController {
                 let btnLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
                 btnLeft.setImage(UIImage.init(named: "nav_back"), for: .normal)
                 btnLeft.layer.setValue(controller, forKey: "controller")
-//                btnLeft.addTarget(self, action: #selector(self.btnBackAction), for: .touchUpInside)
+                btnLeft.addTarget(self, action: #selector(self.btnBackAction), for: .touchUpInside)
                 let LeftView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
                 LeftView.addSubview(btnLeft)
             

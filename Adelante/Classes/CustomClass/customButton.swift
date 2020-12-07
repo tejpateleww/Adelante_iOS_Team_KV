@@ -23,6 +23,7 @@ class submitButton: UIButton {
     @IBInspectable var isBold:Bool = false
     @IBInspectable var isEditAccount:Bool = false
     @IBInspectable var isForgotPass:Bool = false
+    @IBInspectable var isShareOrderDetails:Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,6 +58,9 @@ class submitButton: UIButton {
             self.backgroundColor = .clear
             self.titleLabel?.font = CustomFont.NexaRegular.returnFont(12)
             self.setTitleColor(colors.forgotpassGreyColor.value, for: .normal)
+        } else if isShareOrderDetails {
+            self.backgroundColor = .clear
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(12)
         }
         if isUnderline {
             self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
@@ -100,14 +104,15 @@ class collectionVwFilterBtns: UIButton {
         }
     }
 }
-@IBDesignable
-class CustomButton: UIButton{
 
-@IBInspectable var borderWidth: CGFloat = 0.0{
+@IBDesignable class CustomButton: UIButton{
+
+@IBInspectable var borderWidth: CGFloat = 0.0 {
     didSet{
         self.layer.borderWidth = borderWidth
     }
 }
+    
 //@IBInspectable var borderColor: UIColor = UIColor.clear {
 //    didSet {
 //        self.layer.borderColor = borderColor.cgColor
@@ -116,4 +121,94 @@ class CustomButton: UIButton{
 override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
 }
+}
+
+
+class myOrdersBtn: UIButton {
+    
+    @IBInspectable var isCancelOrder:Bool = false
+    @IBInspectable var isReorder:Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if isCancelOrder {
+            self.setTitleColor(colors.appRedColor.value, for: .normal)
+        } else if isReorder {
+            self.setTitleColor(colors.appGreenColor.value, for: .normal)
+        }
+        self.titleLabel?.font = CustomFont.NexaBold.returnFont(11)
+    }
+}
+
+class orderDetailsButton: UIButton {
+    
+    @IBInspectable var isCancel:Bool = false
+    @IBInspectable var isRateOrder:Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if isCancel {
+            self.setTitleColor(colors.appRedColor.value, for: .normal)
+        } else if isRateOrder {
+            self.setTitleColor(colors.appOrangeColor.value, for: .normal)
+        }
+        self.titleLabel?.font = CustomFont.NexaBold.returnFont(16)
+    }
+}
+
+class editProfileBtn : UIButton {
+    override func awakeFromNib() {
+        self.setTitleColor(UIColor(hexString: "#E34A25"), for: .normal)
+        self.titleLabel?.font = CustomFont.NexaRegular.returnFont(14)
+        self.titleLabel?.textAlignment = .center
+        
+        
+    }
+}
+
+class checkoutButton : UIButton {
+     @IBInspectable var isChangeLocation : Bool = false
+      @IBInspectable var isApplyPromocode : Bool = false
+    @IBInspectable var isSeeMenu : Bool = false
+     @IBInspectable var isReadPolicy : Bool = false
+    
+    //.double.rawValue, .thick.rawValue
+    override func awakeFromNib() {
+        if isChangeLocation {
+            let yourAttributes: [NSAttributedString.Key: Any] = [
+                .font: CustomFont.NexaBold.returnFont(10),
+                .foregroundColor: UIColor(hexString: "#E34A25"),
+                .underlineStyle: NSUnderlineStyle.single.rawValue]
+            let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text)!,
+                                                            attributes: yourAttributes)
+            self.setAttributedTitle(attributeString, for: .normal)
+        } else if isApplyPromocode {
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
+            self.setTitleColor(UIColor(hexString: "#E34A25"), for: .normal)
+            
+        } else if isSeeMenu {
+            let yourAttributes: [NSAttributedString.Key: Any] = [
+                .font: CustomFont.NexaBold.returnFont(12),
+                .foregroundColor: UIColor(hexString: "#E34A25"),
+                .underlineStyle: NSUnderlineStyle.single.rawValue]
+            let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text)!,
+                                                            attributes: yourAttributes)
+            self.setAttributedTitle(attributeString, for: .normal)
+        } else if isReadPolicy {
+            let yourAttributes: [NSAttributedString.Key: Any] = [
+                .font: CustomFont.NexaRegular.returnFont(14),
+                .foregroundColor: UIColor(hexString: "#E34A25"),
+                .underlineStyle: NSUnderlineStyle.single.rawValue]
+            let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text)!,
+                                                            attributes: yourAttributes)
+            self.setAttributedTitle(attributeString, for: .normal)
+        } else {
+            self.setTitleColor(UIColor(hexString: "#E34A25"), for: .normal)
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(16)
+        }
+        
+    }
+    
+    
+    
 }

@@ -107,6 +107,14 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.colVwFilter {
+            
+        } else {
+            let restListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
+            self.navigationController?.pushViewController(restListVc, animated: true)
+        }
+    }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return 5

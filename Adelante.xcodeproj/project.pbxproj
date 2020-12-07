@@ -67,6 +67,7 @@
 		8170CAF7257A10B500B24B7A /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */; };
 		8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAF8257A142200B24B7A /* CustomTextView.swift */; };
 		8170CAFF257A771000B24B7A /* MyFoodlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */; };
+		819B0C94257E101700289BBF /* MyOrderDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B0C93257E101700289BBF /* MyOrderDetailsVC.swift */; };
 		81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */; };
 		81B447F325760D2300A0724E /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B447F225760D2300A0724E /* CustomLabel.swift */; };
 		81B447F5257613DB00A0724E /* Nexa Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 81B447F4257613DB00A0724E /* Nexa Regular.otf */; };
@@ -106,6 +107,11 @@
 		81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD662574C60D005AA86A /* LoginViewController.swift */; };
 		81CFFD8E2574C60D005AA86A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD672574C60D005AA86A /* RegisterViewController.swift */; };
 		81CFFD8F2574C60D005AA86A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD682574C60D005AA86A /* AppDelegate.swift */; };
+		81E6720F257E506100DCE9DA /* RestaurantListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6720E257E506100DCE9DA /* RestaurantListVC.swift */; };
+		81E67211257E62DC00DCE9DA /* RestaurantDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */; };
+		81E67215257E68BC00DCE9DA /* checkOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E67212257E68BB00DCE9DA /* checkOutVC.swift */; };
+		81E67216257E68BC00DCE9DA /* AddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E67213257E68BC00DCE9DA /* AddCardVC.swift */; };
+		81E67217257E68BC00DCE9DA /* addPaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E67214257E68BC00DCE9DA /* addPaymentVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +177,7 @@
 		8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		8170CAF8257A142200B24B7A /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFoodlistVC.swift; sourceTree = "<group>"; };
+		819B0C93257E101700289BBF /* MyOrderDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDetailsVC.swift; sourceTree = "<group>"; };
 		81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		81B447F225760D2300A0724E /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		81B447F4257613DB00A0724E /* Nexa Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Regular.otf"; sourceTree = "<group>"; };
@@ -211,6 +218,11 @@
 		81CFFD672574C60D005AA86A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		81CFFD682574C60D005AA86A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81CFFD692574C60D005AA86A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81E6720E257E506100DCE9DA /* RestaurantListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListVC.swift; sourceTree = "<group>"; };
+		81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsVC.swift; sourceTree = "<group>"; };
+		81E67212257E68BB00DCE9DA /* checkOutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = checkOutVC.swift; sourceTree = "<group>"; };
+		81E67213257E68BC00DCE9DA /* AddCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardVC.swift; sourceTree = "<group>"; };
+		81E67214257E68BC00DCE9DA /* addPaymentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addPaymentVC.swift; sourceTree = "<group>"; };
 		86784D51C37BBA35E10C918A /* Pods-ApiStructureModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.release.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.release.xcconfig"; sourceTree = "<group>"; };
 		A149B2D0075A5FCD377E0D23 /* Pods-Adelante.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adelante.release.xcconfig"; path = "Target Support Files/Pods-Adelante/Pods-Adelante.release.xcconfig"; sourceTree = "<group>"; };
 		CD772C2DF1828C83DDDD515E /* Pods-ApiStructureModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.debug.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.debug.xcconfig"; sourceTree = "<group>"; };
@@ -276,21 +288,19 @@
 		8105FDB02574CE76008D36D6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */,
+				81E67213257E68BC00DCE9DA /* AddCardVC.swift */,
+				81E67214257E68BC00DCE9DA /* addPaymentVC.swift */,
+				81E67212257E68BB00DCE9DA /* checkOutVC.swift */,
+				81E6720D257E502100DCE9DA /* Home */,
+				819B0C95257E101C00289BBF /* Profile */,
+				819B0C92257E0FF200289BBF /* MyOrders */,
 				8170CAEB257A10B500B24B7A /* CategoryVC.swift */,
-				8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */,
 				8170CAEC257A10B500B24B7A /* CommonWebViewVC.swift */,
-				8170CAE6257A10B400B24B7A /* EditProfileVC.swift */,
 				8170CAE9257A10B400B24B7A /* FeedbackVC.swift */,
-				8170CAE4257A10B400B24B7A /* ForgotPasswordVC.swift */,
-				8170CAEA257A10B500B24B7A /* MyProfileVC.swift */,
 				8170CAE8257A10B400B24B7A /* NotificationVC.swift */,
 				8170CAE7257A10B400B24B7A /* RateReviewVC.swift */,
 				8170CAE5257A10B400B24B7A /* RestaurantReviewVC.swift */,
-				8105FDB72574D08E008D36D6 /* HomeVC.swift */,
 				8105FDBA2574D0A9008D36D6 /* SearchVC.swift */,
-				8105FDBC2574D0B7008D36D6 /* MyOrdersVC.swift */,
-				8105FDBE2574D0E7008D36D6 /* MyAccountVC.swift */,
 				8105FDC02574D0F9008D36D6 /* FavouritesVC.swift */,
 			);
 			path = Main;
@@ -370,6 +380,28 @@
 				8105FDF325751644008D36D6 /* NexaBook.otf */,
 			);
 			path = Nexa;
+			sourceTree = "<group>";
+		};
+		819B0C92257E0FF200289BBF /* MyOrders */ = {
+			isa = PBXGroup;
+			children = (
+				8105FDBC2574D0B7008D36D6 /* MyOrdersVC.swift */,
+				819B0C93257E101700289BBF /* MyOrderDetailsVC.swift */,
+			);
+			path = MyOrders;
+			sourceTree = "<group>";
+		};
+		819B0C95257E101C00289BBF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8170CAEA257A10B500B24B7A /* MyProfileVC.swift */,
+				8170CAE6257A10B400B24B7A /* EditProfileVC.swift */,
+				8105FDBE2574D0E7008D36D6 /* MyAccountVC.swift */,
+				8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */,
+				8170CAE4257A10B400B24B7A /* ForgotPasswordVC.swift */,
+				8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		81CFFD332574C60D005AA86A /* Adelante */ = {
@@ -534,6 +566,16 @@
 				81CFFD672574C60D005AA86A /* RegisterViewController.swift */,
 			);
 			path = "Login,Register,ForgotPassword";
+			sourceTree = "<group>";
+		};
+		81E6720D257E502100DCE9DA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8105FDB72574D08E008D36D6 /* HomeVC.swift */,
+				81E6720E257E506100DCE9DA /* RestaurantListVC.swift */,
+				81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		B7F05C3E06CAA5224C293454 /* Frameworks */ = {
@@ -718,12 +760,14 @@
 				8170CAF2257A10B500B24B7A /* NotificationVC.swift in Sources */,
 				81CFFD712574C60D005AA86A /* LoginReqModel.swift in Sources */,
 				8170CAEE257A10B500B24B7A /* ForgotPasswordVC.swift in Sources */,
+				81E67216257E68BC00DCE9DA /* AddCardVC.swift in Sources */,
 				81CFFD6F2574C60D005AA86A /* ResProfileDatum.swift in Sources */,
 				8105FDC92574F101008D36D6 /* AppStoryboards.swift in Sources */,
 				81CFFD772574C60D005AA86A /* WebServices.swift in Sources */,
 				8105FDBD2574D0B7008D36D6 /* MyOrdersVC.swift in Sources */,
 				81CFFD812574C60D005AA86A /* extension+String.swift in Sources */,
 				81CFFD8E2574C60D005AA86A /* RegisterViewController.swift in Sources */,
+				81E67211257E62DC00DCE9DA /* RestaurantDetailsVC.swift in Sources */,
 				81CFFD6B2574C60D005AA86A /* ApiPaths.swift in Sources */,
 				81CFFD802574C60D005AA86A /* UIView+Extension.swift in Sources */,
 				8105FDC72574F07C008D36D6 /* UIViewController+Extension.swift in Sources */,
@@ -745,9 +789,12 @@
 				81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */,
 				8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */,
 				81CFFD8A2574C60D005AA86A /* AppInfo.swift in Sources */,
+				81E67215257E68BC00DCE9DA /* checkOutVC.swift in Sources */,
 				81CFFD6E2574C60D005AA86A /* UserInfo.swift in Sources */,
 				81CFFD862574C60D005AA86A /* CustomSlider.swift in Sources */,
+				81E67217257E68BC00DCE9DA /* addPaymentVC.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,
+				819B0C94257E101700289BBF /* MyOrderDetailsVC.swift in Sources */,
 				81CFFD822574C60D005AA86A /* UIStoryboard+Extension.swift in Sources */,
 				81B447F725763C3700A0724E /* UICollectionViewCell+Extension.swift in Sources */,
 				8170CAF3257A10B500B24B7A /* FeedbackVC.swift in Sources */,
@@ -758,6 +805,7 @@
 				8170CAF0257A10B500B24B7A /* EditProfileVC.swift in Sources */,
 				8105FDA92574C9A2008D36D6 /* ProfileUpdateReqModel.swift in Sources */,
 				8105FDD1257501C4008D36D6 /* customView.swift in Sources */,
+				81E6720F257E506100DCE9DA /* RestaurantListVC.swift in Sources */,
 				81CFFD762574C60D005AA86A /* WebServicesSubClass.swift in Sources */,
 				8105FDB42574CFEC008D36D6 /* CustomTabBarVC.swift in Sources */,
 				81CFFD832574C60D005AA86A /* UITextField+Extension.swift in Sources */,
@@ -889,6 +937,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4D3EEF10A4484D80DEFA8759 /* Pods-Adelante.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LNR2265795;
@@ -909,6 +958,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A149B2D0075A5FCD377E0D23 /* Pods-Adelante.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LNR2265795;
