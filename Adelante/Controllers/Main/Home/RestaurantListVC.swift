@@ -10,7 +10,7 @@ import UIKit
 
 class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
-// MARK: - Properties
+    // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets

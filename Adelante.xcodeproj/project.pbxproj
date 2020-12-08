@@ -107,6 +107,7 @@
 		81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD662574C60D005AA86A /* LoginViewController.swift */; };
 		81CFFD8E2574C60D005AA86A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD672574C60D005AA86A /* RegisterViewController.swift */; };
 		81CFFD8F2574C60D005AA86A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFFD682574C60D005AA86A /* AppDelegate.swift */; };
+		81DB713B257F3AAB00606EE2 /* Popup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81DB713A257F3AAB00606EE2 /* Popup.storyboard */; };
 		81E6720F257E506100DCE9DA /* RestaurantListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6720E257E506100DCE9DA /* RestaurantListVC.swift */; };
 		81E67211257E62DC00DCE9DA /* RestaurantDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */; };
 		81E67215257E68BC00DCE9DA /* checkOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E67212257E68BB00DCE9DA /* checkOutVC.swift */; };
@@ -218,6 +219,7 @@
 		81CFFD672574C60D005AA86A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		81CFFD682574C60D005AA86A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81CFFD692574C60D005AA86A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81DB713A257F3AAB00606EE2 /* Popup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Popup.storyboard; sourceTree = "<group>"; };
 		81E6720E257E506100DCE9DA /* RestaurantListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListVC.swift; sourceTree = "<group>"; };
 		81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsVC.swift; sourceTree = "<group>"; };
 		81E67212257E68BB00DCE9DA /* checkOutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = checkOutVC.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				8105FDAD2574CE3C008D36D6 /* Auth.storyboard */,
 				8105FDC22574D3E1008D36D6 /* Main.storyboard */,
 				8105FDCC2574F331008D36D6 /* LaunchScreen.storyboard */,
+				81DB713A257F3AAB00606EE2 /* Popup.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 		8105FDAC2574CDD0008D36D6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				81DB713C257F3AB100606EE2 /* Popup */,
 				8105FDAF2574CE6A008D36D6 /* Auth */,
 				8105FDB02574CE76008D36D6 /* Main */,
 			);
@@ -568,6 +572,13 @@
 			path = "Login,Register,ForgotPassword";
 			sourceTree = "<group>";
 		};
+		81DB713C257F3AB100606EE2 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
 		81E6720D257E502100DCE9DA /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,6 +679,7 @@
 				8105FE0225751644008D36D6 /* Aileron-Black.otf in Resources */,
 				8105FE0525751644008D36D6 /* NexaBookItalic.otf in Resources */,
 				8105FE0925751644008D36D6 /* NexaLightItalic.otf in Resources */,
+				81DB713B257F3AAB00606EE2 /* Popup.storyboard in Resources */,
 				8105FDFE25751644008D36D6 /* Aileron-SemiBold.otf in Resources */,
 				8105FE0825751644008D36D6 /* NexaBoldItalic.otf in Resources */,
 				8105FDF425751644008D36D6 /* Aileron-Light.otf in Resources */,
