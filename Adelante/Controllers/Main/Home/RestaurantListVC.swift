@@ -53,6 +53,11 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
+        self.navigationController?.pushViewController(restDetailsVc, animated: true)
+    }
+    
     // MARK: - Api Calls
     
 }

@@ -87,7 +87,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             cell.lblRestDesc.text = "Lorem Ipsum is simply dummy text"
             return cell
         }
-    }
+    }   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.colVwFilter {

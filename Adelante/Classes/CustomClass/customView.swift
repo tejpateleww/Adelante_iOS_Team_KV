@@ -22,7 +22,7 @@ class customImageView: UIImageView {
         self.contentMode = .scaleAspectFill
         
         if isCornerRadius {
-            self.layer.cornerRadius = self.layer.bounds.height/2
+            self.layer.cornerRadius = cornerRadiusValue
             self.clipsToBounds = true
         }
         

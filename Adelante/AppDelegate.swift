@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //        setupNavigation()
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
         registerForPushNotifications()
         navigateToSplash()
-        printAppFonts()
+//        printAppFonts()
         return true
     }
     
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func navigateToHome() {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
         let nav = UINavigationController(rootViewController: controller)
-        nav.navigationBar.isHidden = true
+        nav.navigationBar.isHidden = false
         self.window?.rootViewController = nav
     }
     

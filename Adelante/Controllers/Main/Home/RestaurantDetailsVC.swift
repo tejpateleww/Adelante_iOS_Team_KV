@@ -8,65 +8,124 @@
 
 import UIKit
 
-class RestaurantDetailsVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
-    let sections = ["Menu","Sandwich","Salad"]
+class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
+    
+    // MARK: - Properties
+    var customTabBarController: CustomTabBarVC?
+    let arrSections = ["Menu","Sandwiches","Salad"]
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
+    
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.customTabBarController?.hideTabBar()
+    }
+    
+    // MARK: - Other Methods
+    func setup() {
+        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+        addNavBarImage(isLeft: true, isRight: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.restaurantDetails.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         tblRestaurantDetails.delegate = self
         tblRestaurantDetails.dataSource = self
         tblRestaurantDetails.reloadData()
-        heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height + CGFloat((sections.count * 70))
     }
+    
+    override func viewDidLayoutSubviews() {
+        heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height
+    }
+    
+    // MARK: - IBActions
+    
+    // MARK: - UITableViewDelegates And Datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sections.count
+        return self.arrSections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 3
         case 1:
-            return 2
+            return 5
         case 2:
-            return 2
+            return 8
         default:
             return 0
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
+            cell.selectionStyle = .none
             return cell
-        }else{
+        } else {
             let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
+            cell.selectionStyle = .none
             return cell
         }
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 70))
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 51.5))
         let label = UILabel()
-        label.frame = CGRect.init(x: 20, y: 0, width: headerView.frame.width-40, height: headerView.frame.height-40)
-        label.text = sections[section]
-        label.font = CustomFont.NexaRegular.returnFont(15)
+        label.frame = CGRect.init(x: 20, y: 17.5, width: headerView.frame.width-40, height: 20)
+        label.text = arrSections[section]
+        label.font = CustomFont.NexaBold.returnFont(20)
         label.textColor = colors.black.value
         headerView.addSubview(label)
         return headerView
     }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 70
+//    }
+    
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        if indexPath.section == 0 {
 //            return 110
 //        }else{
 //            return 55
 //        }
+//        return tableView.estimatedRowHeight
 //    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+        return arrSections[section]
     }
+    
+    // MARK: - Api Calls
 }
+
+// MARK: - UITableViewCell - RestaurantDetailsCell
 class RestaurantDetailsCell:UITableViewCell{
     
+    @IBOutlet weak var vwSeperator: seperatorView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
 }
+
+// MARK: - UITableViewCell - RestaurantDetailsCell
 class RestaurantItemCell:UITableViewCell{
     
+    @IBOutlet weak var vwSeperator: seperatorView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
 }
