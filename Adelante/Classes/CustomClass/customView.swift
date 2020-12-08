@@ -22,7 +22,7 @@ class customImageView: UIImageView {
         self.contentMode = .scaleAspectFill
         
         if isCornerRadius {
-            self.layer.cornerRadius = cornerRadiusValue
+            self.layer.cornerRadius = self.layer.bounds.height/2
             self.clipsToBounds = true
         }
         
@@ -35,7 +35,26 @@ class customImageView: UIImageView {
         }
     }
 }
-
+class CustomviewRadius:UIView{
+    @IBInspectable var isCornerRadius:Bool = false
+    @IBInspectable var hasShadow:Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if isCornerRadius {
+            self.layer.cornerRadius = self.layer.bounds.height/2
+            self.clipsToBounds = true
+        }
+        if hasShadow {
+            self.layer.masksToBounds = false
+            self.layer.shadowColor = colors.submitButtonShadow.value.cgColor
+            self.layer.shadowOffset = CGSize(width: -1, height: 4.0)
+            self.layer.shadowOpacity = 0.5
+            self.layer.shadowRadius = 5.0
+        }
+    }
+}
 @IBDesignable
 class CustomView: UIView{
 

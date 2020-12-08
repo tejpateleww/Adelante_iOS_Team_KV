@@ -57,7 +57,8 @@ class themeLabel: UILabel {
     @IBInspectable var isAddress:Bool = false
     @IBInspectable var isdescription:Bool = false
     @IBInspectable var isYourFavTitle:Bool = false
-    
+    @IBInspectable var isBoldLabel:Bool = false
+    @IBInspectable var isRegularLabel:Bool = false
 override func awakeFromNib() {
 super.awakeFromNib()
 
@@ -91,6 +92,10 @@ super.awakeFromNib()
         self.font = CustomFont.NexaRegular.returnFont(12)
     } else if isYourFavTitle{
            self.font = CustomFont.NexaBold.returnFont(20)
+    }else if isBoldLabel{
+        self.font = CustomFont.NexaBold.returnFont(16)
+    }else if isRegularLabel{
+        self.font = CustomFont.NexaRegular.returnFont(16)
     }
     self.textColor = LabelColor
     
