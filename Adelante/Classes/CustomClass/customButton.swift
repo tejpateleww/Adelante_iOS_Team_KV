@@ -11,7 +11,7 @@ import UIKit
 
 
 class submitButton: UIButton {
-    
+    @IBInspectable var isRoundCorner:Bool = false
     @IBInspectable var isAppOrangeBg:Bool = false
     @IBInspectable var isAppGreenBg:Bool = false
     @IBInspectable var isWhiteBg:Bool = false
@@ -27,7 +27,9 @@ class submitButton: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        if isRoundCorner {
+            self.layer.cornerRadius = self.frame.size.height / 2
+        }
         self.titleLabel?.font = CustomFont.NexaBold.returnFont(18)
         
         
@@ -165,7 +167,6 @@ class editProfileBtn : UIButton {
         
     }
 }
-
 class checkoutButton : UIButton {
      @IBInspectable var isChangeLocation : Bool = false
       @IBInspectable var isApplyPromocode : Bool = false
@@ -212,3 +213,5 @@ class checkoutButton : UIButton {
     
     
 }
+
+

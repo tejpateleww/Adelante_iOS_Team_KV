@@ -109,6 +109,7 @@ class BaseViewController: UIViewController {
                     let btnNotif = UIButton.init()
                     btnNotif.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
                     btnNotif.setImage(UIImage.init(named: "notif"), for: .normal)
+                    
 //                    btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
                     btnNotif.layer.setValue(controller, forKey: "controller")
                     vwNotif.addSubview(btnNotif)
@@ -121,7 +122,27 @@ class BaseViewController: UIViewController {
                     let btnRightBar : UIBarButtonItem = UIBarButtonItem.init(customView: vwNotif)
                     btnRightBar.style = .plain
                     arrButtons.append(btnRightBar)
-                }
+                } else if title == NavItemsRight.clearAll.value {
+                                    let vwClearAll = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+
+                                    let btnClearALl = UIButton.init()
+                                    btnClearALl.frame = CGRect(x: 0, y: 0, width: 60, height: 40)
+                    btnClearALl.setTitle("Clear All", for: .normal)
+                    btnClearALl.setTitleColor(colors.appOrangeColor.value, for: .normal)
+                    btnClearALl.titleLabel?.font = CustomFont.NexaBold.returnFont(13)
+                //                    btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
+                                    btnClearALl.layer.setValue(controller, forKey: "controller")
+                                    vwClearAll.addSubview(btnClearALl)
+
+                //                    lblNavNotifBadge = badgeLabel.init(frame: CGRect(x: 26, y: 0, width: 17, height: 17))
+                //                    lblNavNotifBadge.isNotifBadge = true
+                //                    lblNavNotifBadge.text = "0"
+                //                    vwNotif.addSubview(lblNavNotifBadge)
+
+                                    let btnRightBar : UIBarButtonItem = UIBarButtonItem.init(customView: vwClearAll)
+                                    btnRightBar.style = .plain
+                                    arrButtons.append(btnRightBar)
+                                }
 //                else if title == NavItemsRight.profile.value {
 //                    let vwProfile = viewfullCornerRadiusForProfile(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
 //

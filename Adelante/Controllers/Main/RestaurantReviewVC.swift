@@ -28,7 +28,6 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.ratingAndReviews.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
-    
     // MARK: - IBActions
         
     // MARK: - UITableViewDelegates And Datasource

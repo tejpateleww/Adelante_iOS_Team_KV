@@ -60,6 +60,15 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             cell.vwCancelOrder.isHidden = false
             cell.vwRepeatOrder.isHidden = true
         }
+        
+        cell.Repeat = {
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        cell.cancel = {
+            
+        }
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -93,7 +102,18 @@ class MyOrdersCell: UITableViewCell {
     @IBOutlet weak var btnCancelOrder: myOrdersBtn!
     
     // MARK: - Properties
-    
+    var cancel : (() -> ())?
+    var Repeat : (() -> ())?
+    @IBAction func btnCancel(_ sender: myOrdersBtn) {
+        if let click = self.cancel {
+            click()
+        }
+    }
+    @IBAction func btnRepeat(_ sender: myOrdersBtn) {
+        if let click = self.Repeat {
+            click()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
     }

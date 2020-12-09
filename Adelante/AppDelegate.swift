@@ -26,7 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 //        FirebaseApp.configure()
         registerForPushNotifications()
-        navigateToSplash()
+        
+        
+            navigateToSplash()
+        
 //        printAppFonts()
         return true
     }

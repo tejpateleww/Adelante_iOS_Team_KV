@@ -33,12 +33,19 @@ class EditProfileVC: BaseViewController{
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing : false)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+           self.customTabBarController?.hideTabBar()
+       }
     // MARK: - IBActions
     @IBAction func btnProfilePicTap(_ sender: UIButton)
     {
         self.imagePicker.present(from: self.imgProfile, viewPresented: self.view)
     }
+    
+    @IBAction func Btnsave(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     
     // MARK: - Api Calls
 }

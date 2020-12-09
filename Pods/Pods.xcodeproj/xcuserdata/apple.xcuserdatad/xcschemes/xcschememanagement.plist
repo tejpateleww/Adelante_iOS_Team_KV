@@ -11,6 +11,16 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>BetterSegmentedControl.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
+		<key>Cosmos.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
 		<key>Firebase.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -53,6 +63,11 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>FormTextField.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
 		<key>GoogleDataTransport.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,12 +82,22 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>GrowingTextView.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>Pods-Adelante.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
 		</dict>
 		<key>Pods-ApiStructureModule.xcscheme</key>
 		<dict>
@@ -94,6 +119,16 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>13</integer>
+		</dict>
+		<key>SDWebImage.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>SkyFloatingLabelTextField.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>

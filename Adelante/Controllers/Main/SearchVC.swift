@@ -31,7 +31,7 @@ class SearchVC: BaseViewController {
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
-    
+
     // MARK: - IBActions
     
     // MARK: - Api Calls

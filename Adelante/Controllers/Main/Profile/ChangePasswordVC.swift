@@ -23,12 +23,17 @@ class ChangePasswordVC: BaseViewController {
 
     // MARK: - Other Methods
     func setup() {
+        self.navigationController?.navigationBar.isHidden = false
+
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.aboutUs.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+           self.customTabBarController?.hideTabBar()
+       }
     // MARK: - IBActions
     
+   
     // MARK: - Api Calls
 }

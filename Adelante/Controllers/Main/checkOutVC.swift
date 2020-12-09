@@ -10,7 +10,7 @@ import UIKit
 
 class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
-    
+     var customTabBarController: CustomTabBarVC?
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
     
@@ -21,12 +21,16 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var arrayForPrice : [String] = ["30","2","7"]
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         tblOrderDetailsHeight.constant = CGFloat(arrayForTitle.count * 43)
         tblAddProductHeight.constant = CGFloat(arrayForTitle.count * 60)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+                 self.customTabBarController?.hideTabBar()
+             }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case tblAddedProduct:

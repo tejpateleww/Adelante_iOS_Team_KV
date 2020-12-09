@@ -88,11 +88,20 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-        
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+               //controller.modalPresentationStyle = .fullScreen
+        controller.isCancleOrder = true
+               controller.btnSubmit = {
+                   self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popViewController(animated: true)
+                
+               }
+               self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {
-        
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID)
+                   self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {

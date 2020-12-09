@@ -74,9 +74,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 70))
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 48))
         let label = UILabel()
         label.frame = CGRect.init(x: 20, y: 17.5, width: headerView.frame.width-40, height: 20)
+        label.center.y = headerView.frame.size.height / 2
         label.text = arrSections[section]
         label.font = CustomFont.NexaBold.returnFont(20)
         label.textColor = colors.black.value
@@ -84,10 +85,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         return headerView
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 70
-//    }
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 48
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+         let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 1))
+        footerView.backgroundColor = UIColor(hexString: "#707070").withAlphaComponent(0.2)
+       
+        return footerView
+    }
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        if indexPath.section == 0 {
 //            return 110

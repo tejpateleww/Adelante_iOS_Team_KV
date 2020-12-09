@@ -26,7 +26,10 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.clearAll.value], isTranslucent: true, isShowHomeTopBar: false)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.customTabBarController?.hideTabBar()
     }
     
     // MARK: - IBActions

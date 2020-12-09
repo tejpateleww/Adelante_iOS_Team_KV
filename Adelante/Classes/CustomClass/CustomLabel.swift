@@ -9,6 +9,220 @@
 import Foundation
 import UIKit
 
+//MARK: -new
+//MARK: -views
+
+class myaccountLabel : UILabel {
+    @IBInspectable var isUserName : Bool = false
+    @IBInspectable var isSubDetails : Bool = false
+  
+    override func awakeFromNib() {
+        if isUserName {
+            self.textAlignment = .left
+            self.font = CustomFont.NexaBold.returnFont(18)
+            self.textColor = colors.black.value
+        } else if isSubDetails {
+            self.textAlignment = .left
+            self.font = CustomFont.NexaRegular.returnFont(14)
+            self.textColor = colors.black.value
+        }
+        
+    }
+}
+
+
+
+class CheckOutLabel : UILabel {
+     @IBInspectable var isUserName : Bool = false
+     @IBInspectable var isAddress : Bool = false
+     @IBInspectable var isYourOrder : Bool = false
+    @IBInspectable var isYourOrderSubTitle : Bool = false
+     @IBInspectable var isYourOrderPrice : Bool = false
+    @IBInspectable var isYourOrderTotalTitle : Bool = false
+       @IBInspectable var isYourOrderTotalPrice : Bool = false
+     @IBInspectable var isCancellationPolicy: Bool = false
+     @IBInspectable var isTotalQuantity: Bool = false
+     @IBInspectable var isProductName: Bool = false
+    @IBInspectable var isProductTotalPrice: Bool = false
+    override func drawText(in rect: CGRect) {
+      
+        if isUserName || isAddress {
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
+                   super.drawText(in: rect.inset(by: insets))
+        } else {
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                  super.drawText(in: rect.inset(by: insets))
+        }
+       
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        if isUserName || isAddress {
+            
+            return CGSize(width: size.width + 0 + 0,
+                          height: size.height + 0 + 5)
+        }
+        return CGSize(width: size.width, height: size.height)
+    }
+
+    override var bounds: CGRect {
+        didSet {
+            if isUserName || isAddress {
+                preferredMaxLayoutWidth = bounds.width - (0 + 0)
+            }
+        }
+       
+        
+    }
+    override func awakeFromNib() {
+        if isUserName {
+            self.font = CustomFont.NexaBold.returnFont(20)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        } else if isAddress {
+            self.font = CustomFont.NexaRegular.returnFont(13)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        } else if isYourOrder {
+            self.font = CustomFont.NexaBold.returnFont(18)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        } else if isYourOrderSubTitle {
+            self.font = CustomFont.NexaRegular.returnFont(15)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        } else if isYourOrderPrice {
+            self.font = CustomFont.NexaBold.returnFont(15)
+            self.textColor = colors.black.value
+            self.textAlignment = .right
+        } else if isYourOrderTotalTitle {
+            self.font = CustomFont.NexaBold.returnFont(15)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        } else if isYourOrderTotalPrice {
+            self.font = CustomFont.NexaBold.returnFont(20)
+            self.textColor = colors.black.value
+            self.textAlignment = .right
+        } else if isCancellationPolicy {
+            self.font = CustomFont.NexaRegular.returnFont(14)
+            self.textColor = UIColor(hexString: "#636455")
+            self.textAlignment = .left
+            
+        } else if isTotalQuantity {
+            self.font = CustomFont.NexaRegular.returnFont(12)
+            self.textColor = colors.black.value
+            self.textAlignment = .center
+        } else if isProductName {
+            self.font = CustomFont.NexaBold.returnFont(14)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        }
+        else if isProductTotalPrice {
+            self.font = CustomFont.NexaRegular.returnFont(14)
+            self.textColor = colors.black.value
+            self.textAlignment = .right
+        }
+        
+        
+        
+    }
+}
+
+
+class addPaymentlable : UILabel {
+    @IBInspectable var isWallet : Bool = false
+    @IBInspectable var isCardNumber : Bool = false
+    @IBInspectable var isExpires : Bool = false
+    override func awakeFromNib() {
+        if isWallet {
+            self.font = CustomFont.NexaBold.returnFont(18)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        }  else if isCardNumber {
+            self.font = CustomFont.NexaBold.returnFont(18)
+            self.textColor = UIColor(hexString: "#222B45")
+            self.textAlignment = .left
+        } else if isExpires {
+            self.font = CustomFont.NexaLight.returnFont(13)
+            self.textColor = UIColor(hexString: "#222B45")
+            self.textAlignment = .left
+        }
+        
+    }
+}
+
+
+
+class addCardLabel : UILabel {
+    @IBInspectable var isDetailsTitle : Bool = false
+    override func awakeFromNib() {
+        self.font = CustomFont.NexaRegular.returnFont(11)
+        self.textColor = UIColor(hexString: "#ACB1C0")
+        self.textAlignment = .left
+        if isDetailsTitle {
+            self.font = CustomFont.NexaRegular.returnFont(12)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        }
+        
+    }
+}
+
+
+class bffComboLabel : UILabel {
+    @IBInspectable var isDetailsTitle : Bool = false
+    override func awakeFromNib() {
+        self.textColor = colors.white.value
+        self.font = CustomFont.NexaRegular.returnFont(16)
+       
+        if isDetailsTitle {
+            self.textColor = colors.black.value
+            self.font = CustomFont.NexaRegular.returnFont(15)
+        }
+       
+    }
+}
+class sortPopUPLabel : UILabel {
+    @IBInspectable var isTitle : Bool = false
+    override func awakeFromNib() {
+       self.textColor = colors.black.value
+       self.font = CustomFont.NexaRegular.returnFont(18)
+       
+        if isTitle {
+            self.textColor = colors.black.value
+                   self.font = CustomFont.NexaBold.returnFont(25)
+            
+        }
+       
+    }
+}
+class commonPopUPLabel : UILabel {
+     @IBInspectable var isTitle : Bool = false
+    override func awakeFromNib() {
+        self.textAlignment = .center
+        self.textColor = UIColor(hexString: "#1E1E1E")
+        self.font = CustomFont.NexaRegular.returnFont(20)
+        
+        if isTitle {
+            self.textAlignment = .center
+            self.textColor = UIColor(hexString: "#1E1E1E")
+            self.font = CustomFont.NexaBold.returnFont(25)
+        }
+    }
+}
+
+class commonPopupButton : UIButton {
+    override func awakeFromNib() {
+        self.setTitleColor(colors.white.value, for: .normal)
+        self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
+        self.titleLabel?.textAlignment = .center
+    }
+}
+
+
+//MARK: -old
+
 class titleLabel : UILabel {
     
     @IBInspectable var isWelcomeTitle:Bool = false
@@ -17,7 +231,7 @@ class titleLabel : UILabel {
         super.awakeFromNib()
         
         if isWelcomeTitle {
-            self.font = CustomFont.NexaBold.returnFont(41)
+            self.font = CustomFont.NexaRegular.returnFont(41)
             self.textAlignment = .left
             self.numberOfLines = 2
             self.lineBreakMode = .byTruncatingTail
@@ -126,8 +340,8 @@ class colVwRestaurantLabel: UILabel {
     
     @IBInspectable var topInset: CGFloat = 0.0
     @IBInspectable var bottomInset: CGFloat = 0.0
-    @IBInspectable var leftInset: CGFloat = 0.0
-    @IBInspectable var rightInset: CGFloat = 0.0
+    @IBInspectable var leftInset: CGFloat = 4.0
+    @IBInspectable var rightInset: CGFloat = 4.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -135,14 +349,16 @@ class colVwRestaurantLabel: UILabel {
         if isRestaurantTitle {
             self.font = CustomFont.NexaBold.returnFont(23)
             self.backgroundColor = colors.appOrangeColor.value.withAlphaComponent(0.78)
-            self.roundCorners(corners: [.topRight, .bottomRight], radius: 5)
+            self.layer.cornerRadius = 5
+           // self.roundCorners(corners: [.topRight, .bottomRight, .bottomLeft , .topLeft], radius: 5)
             self.textColor = colors.white.value
             self.numberOfLines = 1
             self.lineBreakMode = .byTruncatingTail
         } else if isRestaurantDesc {
             self.font = CustomFont.NexaRegular.returnFont(14)
             self.backgroundColor = UIColor(hexString: "#1C1C1C").withAlphaComponent(0.78)
-            self.roundCorners(corners: [.topRight, .bottomRight], radius: 5)
+            self.layer.cornerRadius = 5
+          //  self.roundCorners(corners: [.topRight, .bottomRight, .bottomLeft , .topLeft], radius: 5)
             self.textColor = colors.white.value
             self.numberOfLines = 1
             self.lineBreakMode = .byTruncatingTail
@@ -174,6 +390,13 @@ class tblHomeLabels: UILabel {
     @IBInspectable var isPrice:Bool = false
     @IBInspectable var isRating:Bool = false
     @IBInspectable var isDistance:Bool = false
+    
+    
+      @IBInspectable var topInset: CGFloat = 2.0
+      @IBInspectable var bottomInset: CGFloat = 0.0
+      @IBInspectable var leftInset: CGFloat = 0.0
+      @IBInspectable var rightInset: CGFloat = 0.0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textColor = colors.black.value
@@ -186,9 +409,44 @@ class tblHomeLabels: UILabel {
             self.textAlignment = .right
         }  else if isRating {
             self.font = CustomFont.NexaRegular.returnFont(9)
-            self.textAlignment = .center
+            self.textAlignment = .right
         }
     }
+    override func drawText(in rect: CGRect) {
+        if isRating {
+            let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+            super.drawText(in: rect.inset(by: insets))
+        } else {
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            super.drawText(in: rect.inset(by: insets))
+        }
+          
+      }
+
+      override var intrinsicContentSize: CGSize {
+        if isRating {
+            let size = super.intrinsicContentSize
+            return CGSize(width: size.width + leftInset + rightInset,
+                          height: size.height + topInset + bottomInset)
+        } else {
+            let size = super.intrinsicContentSize
+            return CGSize(width: size.width + 0 + 0,
+                          height: size.height + 0 + 0)
+        }
+          
+      }
+
+      override var bounds: CGRect {
+          didSet {
+            if isRating {
+                 preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
+            } else {
+                 preferredMaxLayoutWidth = bounds.width - (0 + 0)
+            }
+              // ensures this works within stack views if multi-line
+             
+          }
+      }
 }
 
 class tblMyOrdersLabel: UILabel {
@@ -272,124 +530,3 @@ class orderDetailsLabel:UILabel {
     }
 }
 
-class myaccountLabel : UILabel {
-    @IBInspectable var isUserName : Bool = false
-    @IBInspectable var isSubDetails : Bool = false
-  
-    override func awakeFromNib() {
-        if isUserName {
-            self.textAlignment = .center
-            self.font = CustomFont.NexaBold.returnFont(18)
-            self.textColor = colors.black.value
-        } else if isSubDetails {
-            self.textAlignment = .left
-            self.font = CustomFont.NexaRegular.returnFont(14)
-            self.textColor = colors.black.value
-        }
-        
-    }
-}
-
-class CheckOutLabel : UILabel {
-     @IBInspectable var isUserName : Bool = false
-     @IBInspectable var isAddress : Bool = false
-     @IBInspectable var isYourOrder : Bool = false
-    @IBInspectable var isYourOrderSubTitle : Bool = false
-     @IBInspectable var isYourOrderPrice : Bool = false
-    @IBInspectable var isYourOrderTotalTitle : Bool = false
-       @IBInspectable var isYourOrderTotalPrice : Bool = false
-     @IBInspectable var isCancellationPolicy: Bool = false
-     @IBInspectable var isTotalQuantity: Bool = false
-     @IBInspectable var isProductName: Bool = false
-    @IBInspectable var isProductTotalPrice: Bool = false
-
-    override func awakeFromNib() {
-        if isUserName {
-            self.font = CustomFont.NexaBold.returnFont(20)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        } else if isAddress {
-            self.font = CustomFont.NexaRegular.returnFont(13)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        } else if isYourOrder {
-            self.font = CustomFont.NexaBold.returnFont(18)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        } else if isYourOrderSubTitle {
-            self.font = CustomFont.NexaRegular.returnFont(15)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        } else if isYourOrderPrice {
-            self.font = CustomFont.NexaBold.returnFont(15)
-            self.textColor = colors.black.value
-            self.textAlignment = .right
-        } else if isYourOrderTotalTitle {
-            self.font = CustomFont.NexaBold.returnFont(15)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        } else if isYourOrderTotalPrice {
-            self.font = CustomFont.NexaBold.returnFont(20)
-            self.textColor = colors.black.value
-            self.textAlignment = .right
-        } else if isCancellationPolicy {
-            self.font = CustomFont.NexaRegular.returnFont(14)
-            self.textColor = UIColor(hexString: "#636455")
-            self.textAlignment = .left
-            
-        } else if isTotalQuantity {
-            self.font = CustomFont.NexaRegular.returnFont(12)
-            self.textColor = colors.black.value
-            self.textAlignment = .center
-        } else if isProductName {
-            self.font = CustomFont.NexaBold.returnFont(14)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        }
-        else if isProductTotalPrice {
-            self.font = CustomFont.NexaRegular.returnFont(14)
-            self.textColor = colors.black.value
-            self.textAlignment = .right
-        }
-        
-        
-        
-    }
-}
-
-class addPaymentlable : UILabel {
-    @IBInspectable var isWallet : Bool = false
-    @IBInspectable var isCardNumber : Bool = false
-    @IBInspectable var isExpires : Bool = false
-    override func awakeFromNib() {
-        if isWallet {
-            self.font = CustomFont.NexaBold.returnFont(18)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        }  else if isCardNumber {
-            self.font = CustomFont.NexaBold.returnFont(18)
-            self.textColor = UIColor(hexString: "#222B45")
-            self.textAlignment = .left
-        } else if isExpires {
-            self.font = CustomFont.NexaLight.returnFont(13)
-            self.textColor = UIColor(hexString: "#222B45")
-            self.textAlignment = .left
-        }
-        
-    }
-}
-
-class addCardLabel : UILabel {
-    @IBInspectable var isDetailsTitle : Bool = false
-    override func awakeFromNib() {
-        self.font = CustomFont.NexaRegular.returnFont(11)
-        self.textColor = UIColor(hexString: "#ACB1C0")
-        self.textAlignment = .left
-        if isDetailsTitle {
-            self.font = CustomFont.NexaRegular.returnFont(12)
-            self.textColor = colors.black.value
-            self.textAlignment = .left
-        }
-        
-    }
-}

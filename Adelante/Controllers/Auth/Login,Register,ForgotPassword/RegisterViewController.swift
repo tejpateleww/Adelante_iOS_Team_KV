@@ -47,10 +47,13 @@ class RegisterViewController: UIViewController {
     
     //MARK:- Button action
     @IBAction func btnSignUp(sender:Any){
-        if(validation())
-        {
-            webserviceForRegister()
-        }
+//        if(validation())
+//        {
+//            webserviceForRegister()
+//        }
+        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+        appDel.navigateToHome()
+        
     }
     
     @IBAction func btnBackLogin(sender:UIButton){
@@ -62,7 +65,7 @@ class RegisterViewController: UIViewController {
     @IBAction func btnGoogleSignUp(sender:UIButton){
         
     }
-    
+   
     //MARK :- Validation
     func validation() -> Bool
     {
@@ -124,6 +127,7 @@ class RegisterViewController: UIViewController {
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: loginModelDetails)
                 userDefault.set(encodedData, forKey:  UserDefaultsKey.userProfile.rawValue)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = loginModelDetails
+                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 appDel.navigateToHome()
             }
             else

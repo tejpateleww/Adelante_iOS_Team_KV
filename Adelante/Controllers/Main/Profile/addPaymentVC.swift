@@ -8,20 +8,36 @@
 
 import UIKit
 
-class addPaymentVC: UIViewController ,UITableViewDelegate,UITableViewDataSource {
+class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource {
     
     var cardDetails : [String] = []
+    var customTabBarController: CustomTabBarVC?
+    @IBOutlet weak var tblPaymentMethod: UITableView!
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+        addNavBarImage(isLeft: true, isRight: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.customTabBarController?.hideTabBar()
+    }
+    
+    //MARK: -tblViewMethods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-      switch section {
-            case 0:
-                return 3
-            case 1:
-                return 1
-            default:
-                return 0
-            }
+        switch section {
+        case 0:
+            return 3
+        case 1:
+            return 1
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,12 +56,12 @@ class addPaymentVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
                 let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
                 if indexPath.row == 1
                 {
-                    cell2.paymentMethodImageView.image = UIImage(named: "ic_wallet")
+                    cell2.paymentMethodImageView.image = UIImage(named: "ic_masterCard")
                     cell2.lblcardDetails.text = "**** **** **** 5967"
                     cell2.lblExpiresDate.text = "Expires 09/25"
                     cell2.selectPaymentMethodButton.isHidden = true
                 } else if indexPath.row == 2 {
-                    cell2.paymentMethodImageView.image = UIImage(named: "ic_wallet")
+                    cell2.paymentMethodImageView.image = UIImage(named: "ic_visa")
                     cell2.lblcardDetails.text = "**** **** **** 3802"
                     cell2.lblExpiresDate.text = "Expires 10/27"
                     cell2.selectPaymentMethodButton.isHidden = true
@@ -81,14 +97,14 @@ class addPaymentVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-       switch section {
-            case 0:
-                return 43
-            case 1:
-                return 43
-            default:
-                return 0
-            }
+        switch section {
+        case 0:
+            return 43
+        case 1:
+            return 43
+        default:
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
@@ -96,8 +112,8 @@ class addPaymentVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
             let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: tblPaymentMethod.frame.size.width, height: 43))
             let label = UILabel()
             label.frame = CGRect(x: 16, y: 0, width:  headerView .frame.size.width, height: 19)
-           // let label = UILabel.init(frame: )
-             label.center.y = headerView.frame.size.height / 2
+            // let label = UILabel.init(frame: )
+            label.center.y = headerView.frame.size.height / 2
             label.text = "Choose desired Payment Method"
             label.font = CustomFont.NexaRegular.returnFont(15)
             label.textColor = UIColor(hexString: "#222B45")
@@ -107,38 +123,40 @@ class addPaymentVC: UIViewController ,UITableViewDelegate,UITableViewDataSource 
             return headerView
         case 1:
             let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: tblPaymentMethod.frame.size.width, height: 43))
-                       let label = UILabel.init(frame: CGRect(x: 16, y: 0, width:  headerView.frame.size.width, height: 19))
+            let label = UILabel.init(frame: CGRect(x: 16, y: 0, width:  headerView.frame.size.width, height: 19))
             label.center.y = headerView.frame.size.height / 2
-                                  label.text = "CURRENT METHOD"
-                                  label.font = CustomFont.NexaLight.returnFont(13)
-                                  label.textColor = UIColor(hexString: "#ACB1C0")
-                                  label.textAlignment = .left
-                                  headerView.addSubview(label)
-                       return headerView
+            label.text = "CURRENT METHOD"
+            label.font = CustomFont.NexaLight.returnFont(13)
+            label.textColor = UIColor(hexString: "#ACB1C0")
+            label.textAlignment = .left
+            headerView.addSubview(label)
+            return headerView
         default:
-             let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                       
-                       return headerView
+            let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            
+            return headerView
         }
     }
-
-    
-    @IBOutlet weak var tblPaymentMethod: UITableView!
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       // addNavBarImage(isLeft: true, isRight: true)
-       //        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: true)
-        // Do any additional setup after loading the view.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        //controller.modalPresentationStyle = .fullScreen
+        controller.btnSubmit = {
+            self.dismiss(animated: true, completion: nil)
+            // self.navigationController?.popViewController(animated: true)
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        self.present(controller, animated: true, completion: nil)
     }
     
+    
+    //MARK: -btnAction
     @IBAction func placeOrderBtn(_ sender: submitButton) {
-          let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID)
-          self.navigationController?.pushViewController(controller, animated: true)
-      }
-   
-
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
 }
 class paymentMethodCell1 : UITableViewCell {
     

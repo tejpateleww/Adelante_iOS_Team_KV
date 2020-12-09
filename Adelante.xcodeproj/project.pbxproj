@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18F369532580AE0000992FCD /* BffComboVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369502580ADFE00992FCD /* BffComboVC.swift */; };
+		18F369542580AE0000992FCD /* commonPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369512580ADFE00992FCD /* commonPopup.swift */; };
+		18F369552580AE0000992FCD /* sortPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369522580ADFF00992FCD /* sortPopupVC.swift */; };
 		4BD05A891D199EA6A88DAFB6 /* Pods_Adelante.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5F2D505CEAA7CF6129117F /* Pods_Adelante.framework */; };
 		8105FDA92574C9A2008D36D6 /* ProfileUpdateReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105FDA72574C9A2008D36D6 /* ProfileUpdateReqModel.swift */; };
 		8105FDAA2574C9A2008D36D6 /* RegisterReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105FDA82574C9A2008D36D6 /* RegisterReqModel.swift */; };
@@ -116,6 +119,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18F369502580ADFE00992FCD /* BffComboVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BffComboVC.swift; sourceTree = "<group>"; };
+		18F369512580ADFE00992FCD /* commonPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonPopup.swift; sourceTree = "<group>"; };
+		18F369522580ADFF00992FCD /* sortPopupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sortPopupVC.swift; sourceTree = "<group>"; };
 		4C5F2D505CEAA7CF6129117F /* Pods_Adelante.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adelante.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3EEF10A4484D80DEFA8759 /* Pods-Adelante.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adelante.debug.xcconfig"; path = "Target Support Files/Pods-Adelante/Pods-Adelante.debug.xcconfig"; sourceTree = "<group>"; };
 		64C68ADE241BBB2900B97B25 /* Adelante.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Adelante.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -292,17 +298,18 @@
 		8105FDB02574CE76008D36D6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				81E67213257E68BC00DCE9DA /* AddCardVC.swift */,
-				81E67214257E68BC00DCE9DA /* addPaymentVC.swift */,
-				81E67212257E68BB00DCE9DA /* checkOutVC.swift */,
+				18F369502580ADFE00992FCD /* BffComboVC.swift */,
 				81E6720D257E502100DCE9DA /* Home */,
 				819B0C95257E101C00289BBF /* Profile */,
 				819B0C92257E0FF200289BBF /* MyOrders */,
 				8170CAEB257A10B500B24B7A /* CategoryVC.swift */,
 				8170CAEC257A10B500B24B7A /* CommonWebViewVC.swift */,
 				8170CAE9257A10B400B24B7A /* FeedbackVC.swift */,
+				81E67212257E68BB00DCE9DA /* checkOutVC.swift */,
+				18F369522580ADFF00992FCD /* sortPopupVC.swift */,
 				8170CAE8257A10B400B24B7A /* NotificationVC.swift */,
 				8170CAE7257A10B400B24B7A /* RateReviewVC.swift */,
+				18F369512580ADFE00992FCD /* commonPopup.swift */,
 				8170CAE5257A10B400B24B7A /* RestaurantReviewVC.swift */,
 				8105FDBA2574D0A9008D36D6 /* SearchVC.swift */,
 				8105FDC02574D0F9008D36D6 /* FavouritesVC.swift */,
@@ -398,9 +405,11 @@
 		819B0C95257E101C00289BBF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				8105FDBE2574D0E7008D36D6 /* MyAccountVC.swift */,
+				81E67213257E68BC00DCE9DA /* AddCardVC.swift */,
+				81E67214257E68BC00DCE9DA /* addPaymentVC.swift */,
 				8170CAEA257A10B500B24B7A /* MyProfileVC.swift */,
 				8170CAE6257A10B400B24B7A /* EditProfileVC.swift */,
-				8105FDBE2574D0E7008D36D6 /* MyAccountVC.swift */,
 				8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */,
 				8170CAE4257A10B400B24B7A /* ForgotPasswordVC.swift */,
 				8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */,
@@ -780,6 +789,7 @@
 				81CFFD812574C60D005AA86A /* extension+String.swift in Sources */,
 				81CFFD8E2574C60D005AA86A /* RegisterViewController.swift in Sources */,
 				81E67211257E62DC00DCE9DA /* RestaurantDetailsVC.swift in Sources */,
+				18F369532580AE0000992FCD /* BffComboVC.swift in Sources */,
 				81CFFD6B2574C60D005AA86A /* ApiPaths.swift in Sources */,
 				81CFFD802574C60D005AA86A /* UIView+Extension.swift in Sources */,
 				8105FDC72574F07C008D36D6 /* UIViewController+Extension.swift in Sources */,
@@ -796,6 +806,7 @@
 				8105FDCF2574F714008D36D6 /* SplashVC.swift in Sources */,
 				8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */,
 				81CFFD7D2574C60D005AA86A /* UILabel+Extension.swift in Sources */,
+				18F369542580AE0000992FCD /* commonPopup.swift in Sources */,
 				8170CAF1257A10B500B24B7A /* RateReviewVC.swift in Sources */,
 				8105FDB62574D014008D36D6 /* BaseViewController.swift in Sources */,
 				81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */,
@@ -803,6 +814,7 @@
 				81CFFD8A2574C60D005AA86A /* AppInfo.swift in Sources */,
 				81E67215257E68BC00DCE9DA /* checkOutVC.swift in Sources */,
 				81CFFD6E2574C60D005AA86A /* UserInfo.swift in Sources */,
+				18F369552580AE0000992FCD /* sortPopupVC.swift in Sources */,
 				81CFFD862574C60D005AA86A /* CustomSlider.swift in Sources */,
 				81E67217257E68BC00DCE9DA /* addPaymentVC.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,

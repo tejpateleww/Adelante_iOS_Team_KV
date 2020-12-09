@@ -42,7 +42,7 @@ enum NavItemsRight {
 }
 
 enum NavTitles {
-    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites
+    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites , addPaymentVC , AddCardVC , bffComboVC , FeedbackVC ,checkOutVC
     
     var value:String {
         switch self {
@@ -91,6 +91,16 @@ enum NavTitles {
             return "Notifications"
         case .favourites:
             return "Your Favourites"
+        case .addPaymentVC:
+            return "Add Payment"
+        case .AddCardVC:
+            return "Add Card"
+        case .bffComboVC:
+            return "BFF Combo"
+        case .FeedbackVC:
+            return "Feedback"
+        case .checkOutVC:
+            return "Checkout"
         }
     }
 }

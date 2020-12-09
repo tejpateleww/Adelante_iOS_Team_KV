@@ -22,13 +22,20 @@ class LoginViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func btnForgotPasswordClicked(_ sender: Any) {
         let forgotPassVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ForgotPasswordVC.storyboardID)
-        self.navigationController?.pushViewController(forgotPassVc, animated: true)
+               self.navigationController?.pushViewController(forgotPassVc, animated: true)
+        
+       
     }
     
     @IBAction func btnCreateAccountClicked(_ sender: Any) {
         let registerVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: RegisterViewController.storyboardID)
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
+    
+    @IBAction func btnlogin(_ sender: Any) {
+        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+          appDel.navigateToHome()
+       }
     
    //MARK:- Webservice
     func webserviceForlogin()
@@ -46,6 +53,7 @@ class LoginViewController: UIViewController {
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: loginModelDetails)
                 userDefault.set(encodedData, forKey:  UserDefaultsKey.userProfile.rawValue)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = loginModelDetails
+                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 appDel.navigateToHome()
             }
             else

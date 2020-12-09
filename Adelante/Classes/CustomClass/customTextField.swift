@@ -9,6 +9,16 @@
 import UIKit
 import SkyFloatingLabelTextField
 
+class addCarddetailsTextField : UITextField {
+    override func awakeFromNib() {
+       
+        self.font = CustomFont.NexaRegular.returnFont(15)
+        self.textColor = UIColor(hexString: "#222B45")
+        self.textAlignment = .left
+        
+        
+    }
+}
 class customTextField: UITextField {
     
     private let defaultUnderlineColor = UIColor.gray
@@ -96,32 +106,42 @@ class customTextField: UITextField {
             self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
            //    self.isHighlightedField = false
                self.layoutSubviews()
-           }
-       }
+        }
+    }
 }
 
 class floatTextField: SkyFloatingLabelTextField {
     @IBInspectable var isEditProfile:Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.font = CustomFont.NexaRegular.returnFont(16)
-        self.selectedTitleColor = colors.forgotpassGreyColor.value
+        self.lineColor = colors.forgotpassGreyColor.value
+        self.titleColor = colors.textFieldColor.value
+        
+        self.selectedTitleColor = colors.textFieldColor.value
         self.selectedLineColor = colors.textFieldColor.value
-        self.lineHeight = 1.0
+        
+        self.textColor = colors.black.value
+        self.titleFormatter = { $0 }
+        
+        self.titleFont = CustomFont.NexaRegular.returnFont(16)
+        self.font = CustomFont.NexaRegular.returnFont(16)
+        
         if isEditProfile{
+            self.lineColor = colors.forgotpassGreyColor.value
+            self.titleColor = colors.black.value
+            
+            self.selectedTitleColor = colors.textFieldColor.value
+            self.selectedLineColor = colors.textFieldColor.value
+            
+            self.textColor = colors.textFieldColor.value
+            self.titleFormatter = { $0 }
+            
+            self.titleFont = CustomFont.NexaBold.returnFont(18)
+            self.font = CustomFont.NexaRegular.returnFont(16)
+            
             self.selectedTitleColor = colors.forgotpassGreyColor.value
         }
     }
 }
 
 
-class addCarddetailsTextField : UITextField {
-    override func awakeFromNib() {
-       
-        self.font = CustomFont.NexaRegular.returnFont(15)
-        self.textColor = UIColor(hexString: "#222B45")
-        self.textAlignment = .left
-        
-        
-    }
-}

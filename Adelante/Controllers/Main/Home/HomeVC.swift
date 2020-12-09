@@ -13,10 +13,9 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrFilter = ["Drive-Thru", "Dine-in", "Pickup", "Featured"]
+    var arrFilter = ["Mobile Pickup", "Recently Viewed", "Top Rated"]
     var arrImagesForPage = ["dummyRest1", "dummyRest2" , "dummyRest1"]
     var arrImages = ["dummyRest1", "dummyRest2" , "dummyRest1", "dummyRest1", "dummyRest2" , "dummyRest1"]
-    
     
     // MARK: - IBOutlets
     @IBOutlet weak var colVwFilter: UICollectionView!

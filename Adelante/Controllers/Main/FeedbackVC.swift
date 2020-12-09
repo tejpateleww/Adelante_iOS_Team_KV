@@ -25,9 +25,11 @@ class FeedbackVC: BaseViewController {
     func setUp() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.FeedbackVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+                 self.customTabBarController?.hideTabBar()
+             }
     // MARK: - IBActions
     
     // MARK: - Api Calls

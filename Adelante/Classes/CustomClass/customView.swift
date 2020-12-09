@@ -10,6 +10,90 @@ import Foundation
 import UIKit
 import BetterSegmentedControl
 
+class viewWithClearBG : UIView {
+    override func awakeFromNib() {
+        self.backgroundColor = .clear
+        
+    }
+}
+
+
+class myAccountView : UIView {
+     @IBInspectable var isProfile : Bool = false
+    override func awakeFromNib() {
+        if isProfile {
+            self.clipsToBounds = true
+                   self.layer.cornerRadius = self.frame.height / 2
+        }
+       
+       // self.layer.borderWidth = 2
+        //self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.6).cgColor
+    }
+}
+class checkoutView : UIView {
+     @IBInspectable var isMapView : Bool = false
+    override func awakeFromNib() {
+        self.layer.cornerRadius = 14
+        self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
+        self.layer.borderWidth = 1
+        if isMapView {
+            self.layer.cornerRadius = 7
+            self.clipsToBounds = true
+        }
+    }
+}
+
+class PaymentView : UIView {
+    override func awakeFromNib() {
+        self.layer.cornerRadius = 5
+         self.clipsToBounds = true
+        
+        self.layer.masksToBounds = false
+        
+        self.layer.shadowColor = colors.black.value.cgColor
+        self.layer.shadowOffset = CGSize(width: -1, height: 1.0)
+        self.layer.shadowOpacity = 0.16
+        self.layer.shadowRadius = 3.0
+    }
+}
+class addCardDetailsView : UIView {
+    override func awakeFromNib() {
+        self.layer.cornerRadius = 7
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
+       
+    }
+}
+class bffComboView : UIView {
+    override func awakeFromNib() {
+        self.backgroundColor = colors.appGreenColor.value
+       
+       
+    }
+}
+class homeBlockView : UIView {
+       
+       @IBInspectable var isPopUpBlock: Bool = false
+           
+           override func awakeFromNib() {
+               super.awakeFromNib()
+               self.layer.cornerRadius = 5
+               self.clipsToBounds = true
+
+               self.layer.masksToBounds = false
+            self.layer.shadowColor = UIColor(hexString: "#004080").cgColor
+               self.layer.shadowOffset = CGSize(width: -1, height: 4.0)
+               self.layer.shadowOpacity = 0.16
+               self.layer.shadowRadius = 5.0
+
+               if isPopUpBlock {
+                self.layer.borderColor = colors.black.value.withAlphaComponent(0.06).cgColor
+                   self.layer.borderWidth = 3
+               }
+           }
+   }
+
+
 class customImageView: UIImageView {
     
     @IBInspectable  var isCornerRadius:Bool = false
@@ -95,62 +179,11 @@ class seperatorView: UIView {
         }
     }
 }
-
-class viewWithClearBG : UIView {
+class viewRestorentRatingView : UIView
+{
     override func awakeFromNib() {
-        self.backgroundColor = .clear
-        
-    }
-}
-
-
-class myAccountView : UIView {
-     @IBInspectable var isProfile : Bool = false
-    override func awakeFromNib() {
-        if isProfile {
-            self.clipsToBounds = true
-                   self.layer.cornerRadius = self.frame.height / 2
-        }
-       
-       // self.layer.borderWidth = 2
-        //self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.6).cgColor
-    }
-}
-
-
-class checkoutView : UIView {
-     @IBInspectable var isMapView : Bool = false
-    override func awakeFromNib() {
-        self.layer.cornerRadius = 14
-        self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
-        self.layer.borderWidth = 1
-        if isMapView {
-            self.layer.cornerRadius = 7
-            self.clipsToBounds = true
-        }
-    }
-}
-
-class PaymentView : UIView {
-    override func awakeFromNib() {
-        self.layer.cornerRadius = 5
-         self.clipsToBounds = true
-        
-        self.layer.masksToBounds = false
-        
-        self.layer.shadowColor = colors.black.value.cgColor
-        self.layer.shadowOffset = CGSize(width: -1, height: 4.0)
-        self.layer.shadowOpacity = 0.16
-        self.layer.shadowRadius = 5.0
-    }
-}
-
-class addCardDetailsView : UIView {
-    override func awakeFromNib() {
-        self.layer.cornerRadius = 7
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
-       
+        self.backgroundColor = UIColor(hexString: "#D9D9D9")
+        self.layer.cornerRadius = self.frame.size.height / 2
     }
 }
 //class GradientView: UIView {

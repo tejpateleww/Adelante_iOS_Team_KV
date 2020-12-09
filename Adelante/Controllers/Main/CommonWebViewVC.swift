@@ -46,7 +46,9 @@ class CommonWebViewVC: BaseViewController, WKNavigationDelegate {
         self.webView.load(request)
         Utilities.showHud()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+              self.customTabBarController?.hideTabBar()
+          }
     // MARK: - IBActions
     
     // MARK: - Api Calls

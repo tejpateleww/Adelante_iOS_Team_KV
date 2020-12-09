@@ -27,8 +27,15 @@ class MyProfileVC: BaseViewController {
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.customTabBarController?.hideTabBar()
+    }
     
     // MARK: - IBActions
     
+    @IBAction func BtnEditAccount(_ sender: Any) {
+       let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: EditProfileVC.storyboardID) as! EditProfileVC
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
     // MARK: - Api Calls
 }

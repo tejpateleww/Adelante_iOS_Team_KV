@@ -11,7 +11,7 @@ import UIKit
 class ForgotPasswordVC: BaseViewController {
 
     // MARK: - Properties
-    var customTabBarController: CustomTabBarVC?
+   // var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets
     
@@ -23,11 +23,14 @@ class ForgotPasswordVC: BaseViewController {
 
     // MARK: - Other Methods
     func setUp() {
-        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+       // self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+        self.navigationController?.navigationBar.isHidden = false
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
-    
+    @IBAction func btnSend(_ sender: Any) {
+           self.navigationController?.popViewController(animated: true)
+       }
     // MARK: - IBActions
     
     // MARK: - Api Calls

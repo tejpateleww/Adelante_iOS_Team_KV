@@ -27,7 +27,9 @@ class RateReviewVC: BaseViewController {
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.ratingAndReviews.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+                 self.customTabBarController?.hideTabBar()
+             }
     // MARK: - IBActions
     
     // MARK: - Api Calls
