@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func navigateToHome() {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
         let nav = UINavigationController(rootViewController: controller)
-        nav.navigationBar.isHidden = false
+        nav.navigationBar.isHidden = true
         self.window?.rootViewController = nav
     }
     

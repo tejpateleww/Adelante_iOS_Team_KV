@@ -74,7 +74,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 51.5))
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 70))
         let label = UILabel()
         label.frame = CGRect.init(x: 20, y: 17.5, width: headerView.frame.width-40, height: 20)
         label.text = arrSections[section]
