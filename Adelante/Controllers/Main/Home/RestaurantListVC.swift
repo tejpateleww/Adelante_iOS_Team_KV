@@ -71,7 +71,13 @@ class RestaurantListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    @IBAction func BtnLikeDislike(_ sender: UIButton) {
+           if sender.isSelected {
+               sender.isSelected = false
+           } else {
+               sender.isSelected = true
+           }
+       }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

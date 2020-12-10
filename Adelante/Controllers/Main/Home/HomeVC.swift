@@ -78,74 +78,40 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         
         if collectionView == self.colVwFilter {
             let cell = colVwFilter.dequeueReusableCell(withReuseIdentifier: FilterCell.reuseIdentifier, for: indexPath) as! FilterCell
-            
-//            if indexPath.row == selectedSortTypedIndexFromcolVwFilter {
-//
-//
-//            }
-            
-//           cell.btnFilter.setTitle(arrFilter[indexPath.row], for: .normal)
-//            let image = UIImage(named: "filterImage")?.withRenderingMode(.alwaysTemplate)
-//            cell.btnFilter.setImage(image, for: .normal)
-//            if indexPath.row == selectedSortTypedIndexFromcolVwFilter
-//            {
-//                cell.btnFilter.setTitleColor(colors.black.value.withAlphaComponent(1.0), for: .normal)
-//                cell.btnFilter.backgroundColor = colors.segmentSelectedColor.value
-//
-//                cell.btnFilter.imageView?.tintColor = colors.black.value.withAlphaComponent(1.0)
-//            } else {cell.btnFilter.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
-//                cell.btnFilter.backgroundColor = colors.segmentDeselectedColor.value
-//                cell.btnFilter.imageView?.tintColor = colors.black.value.withAlphaComponent(0.3)
-//            }
-            
-            
-//
+
             cell.btnFilter.setTitle("", for: .normal)
             if indexPath.row == 0 {
                 if selectedSortTypedIndexFromcolVwFilter == indexPath.row {
-                    
+                    self.previousIndexPath = indexPath
                     cell.btnFilter.setImage(UIImage(named: "filterImageSelected"), for: .normal)
                 }
                 else {
                     
-                cell.btnFilter.setImage(UIImage(named: "filterImage"), for: .normal)
-            }
+                    cell.btnFilter.setImage(UIImage(named: "filterImage"), for: .normal)
+                }
             } else {
+                cell.btnFilter.setImage(UIImage(named: ""), for: .normal)
                 cell.btnFilter.setTitle(arrFilter[indexPath.row - 1], for: .normal)
                 if selectedSortTypedIndexFromcolVwFilter == indexPath.row {
-                        
-                        cell.btnFilter.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-                    }
-                    else {
-                        
+                    self.previousIndexPath = indexPath
+                    cell.btnFilter.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
+                }
+                else {
+                    
                     cell.btnFilter.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
                 }
                 
             }
             
             if selectedSortTypedIndexFromcolVwFilter == indexPath.row {
-                    
-                    cell.btnFilter.backgroundColor = colors.segmentSelectedColor.value
-                }
-                else {
+                
+                cell.btnFilter.backgroundColor = colors.segmentSelectedColor.value
+            }
+            else {
                     
                 cell.btnFilter.backgroundColor = colors.segmentDeselectedColor.value
             }
             
-            
-            
-            
-//            if indexPath.row == selectedSortTypedIndexFromcolVwFilter
-//            {
-//                cell.btnFilter.backgroundColor = colors.segmentSelectedColor.value
-//                cell.btnFilter.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-//
-//                self.previousIndexPath = indexPath
-//            } else {
-//                cell.btnFilter.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
-//                cell.btnFilter.backgroundColor = colors.segmentDeselectedColor.value
-//                cell.btnFilter.imageView?.tintColor = colors.black.value.withAlphaComponent(0.3)
-//            }
 
             return cell
         } else {
@@ -178,20 +144,19 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.colVwFilter {
             self.selectedSortTypedIndexFromcolVwFilter = indexPath.row
-    //self.colVwFilter.reloadItems/(at: [indexPath,previousIndexPath])
-            //self.colVwFilter.reloadItems(at: [IndexPath(row: self.selectedSortTypedIndexFromcolVwFilter, section: 0)])
             DispatchQueue.main.async {
-                 self.colVwFilter.reloadData()
+                self.colVwFilter.reloadItems(at: [indexPath,self.previousIndexPath])
+            
             }
            
-//            if indexPath.row == 0 {
-//                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID)
-//                let navController = UINavigationController.init(rootViewController: vc)
-//                navController.modalPresentationStyle = .overFullScreen
-//                navController.navigationController?.modalTransitionStyle = .crossDissolve
-//                navController.navigationBar.isHidden = true
-//                self.present(navController, animated: false, completion: nil)
-//            }
+            if indexPath.row == 0 {
+                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID)
+                let navController = UINavigationController.init(rootViewController: vc)
+                navController.modalPresentationStyle = .overFullScreen
+                navController.navigationController?.modalTransitionStyle = .crossDissolve
+                navController.navigationBar.isHidden = true
+                self.present(navController, animated: false, completion: nil)
+            }
         } else {
             let restListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
             self.navigationController?.pushViewController(restListVc, animated: true)
