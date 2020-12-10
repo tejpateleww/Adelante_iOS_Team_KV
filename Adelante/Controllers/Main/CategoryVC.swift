@@ -25,7 +25,7 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     
     // MARK: - Other Methods
     func setup() {
-        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+      //  self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.topCategories.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         let padding = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.tfSearch.frame.height))
@@ -43,6 +43,12 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:CategoryCell = collectionCategory.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath)as! CategoryCell
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+       
+        let widthForCell = (collectionCategory.frame.size.width - 12) / 2
+        let heightForCell = (widthForCell * 120) / 164
+        return CGSize(width: widthForCell, height: heightForCell)
     }
     
     // MARK: - Api Calls

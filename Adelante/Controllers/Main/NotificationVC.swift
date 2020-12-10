@@ -30,6 +30,9 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.notifications.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.customTabBarController?.hideTabBar()
+    }
     // MARK: - IBActions
     
     // MARK: - UITableViewDelegates And Datasource

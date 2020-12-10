@@ -9,7 +9,7 @@
 import UIKit
 import BetterSegmentedControl
 
-class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -19,15 +19,19 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var tblOrders: UITableView!
     
     // MARK: - ViewController Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-    }
+     override func viewDidLoad() {
+          super.viewDidLoad()
+          setup()
+      
+      self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+      }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.customTabBarController?.showTabBar()
-    }
-    
+      override func viewWillAppear(_ animated: Bool) {
+          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+          self.customTabBarController?.showTabBar()
+        
+      }
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -39,6 +43,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     // MARK: - IBActions
+    @IBAction func btnRepeat(_ sender: myOrdersBtn) {
+       let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+                    self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
         selectedSegmentTag = sender.index
         self.tblOrders.reloadData()
@@ -60,11 +69,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             cell.vwCancelOrder.isHidden = false
             cell.vwRepeatOrder.isHidden = true
         }
-        
-        cell.Repeat = {
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
+        cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeat(_:)), for: .touchUpInside)
+//        cell.Repeat = {
+//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
         cell.cancel = {
             
         }

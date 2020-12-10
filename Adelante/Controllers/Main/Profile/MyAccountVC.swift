@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     var myACDetailsARray:[String] = ["","","","","","",""]
     
     var allDetails = [myAccountDetails]()
@@ -18,26 +18,33 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource 
     
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addNavBarImage(isLeft: true, isRight: true)
-        
-        allDetails = [myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
-                      
-                      myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "Payment", subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "My Foodlist", subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_aboutUS")!, title: "About Us", subTitle: [subAccountDetails(subTitle: "Terms & conditions "),subAccountDetails(subTitle: "Privacy policy ")], selectedIcon: UIImage(named: "ic_aboutUSSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "Help", subTitle: [subAccountDetails(subTitle: "Feedback")], selectedIcon: UIImage(named: "ic_HelpSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "Change Password", subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "Logout", subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
-        ]
-        setup()
-    }
+  
     var customTabBarController: CustomTabBarVC?
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.customTabBarController?.showTabBar()
-    }
+    override func viewDidLoad() {
+          super.viewDidLoad()
+         addNavBarImage(isLeft: true, isRight: true)
+          
+          allDetails = [myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
+                        
+                        myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "Payment", subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
+                        myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "My Foodlist", subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
+                        myAccountDetails(icon: UIImage(named: "ic_aboutUS")!, title: "About Us", subTitle: [subAccountDetails(subTitle: "Terms & conditions "),subAccountDetails(subTitle: "Privacy policy ")], selectedIcon: UIImage(named: "ic_aboutUSSelected")!),
+                        myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "Help", subTitle: [subAccountDetails(subTitle: "Feedback")], selectedIcon: UIImage(named: "ic_HelpSelected")!),
+                        myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "Change Password", subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
+                        myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "Logout", subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
+          ]
+          setup()
+      
+      self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+      }
+    
+      override func viewWillAppear(_ animated: Bool) {
+          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+          self.customTabBarController?.showTabBar()
+        
+      }
     
     // MARK: - Other Methods
     func setup() {

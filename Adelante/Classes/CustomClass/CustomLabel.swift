@@ -273,9 +273,12 @@ class themeLabel: UILabel {
     @IBInspectable var isYourFavTitle:Bool = false
     @IBInspectable var isBoldLabel:Bool = false
     @IBInspectable var isRegularLabel:Bool = false
+    @IBInspectable var isRestorentDescription:Bool = false
+     @IBInspectable var isNotificatioTitle:Bool = false
+    @IBInspectable var isNotificatioDescription:Bool = false
 override func awakeFromNib() {
 super.awakeFromNib()
-
+ self.textColor = LabelColor
     if isUnderline {
         let attributedString = NSMutableAttributedString(string: self.text ?? "")
         attributedString.addAttributes([NSAttributedString.Key.underlineStyle:NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor:underLineColor ?? UIColor.clear], range: NSMakeRange(0, attributedString.length))
@@ -310,14 +313,65 @@ super.awakeFromNib()
         self.font = CustomFont.NexaBold.returnFont(16)
     }else if isRegularLabel{
         self.font = CustomFont.NexaRegular.returnFont(16)
+    } else if isRestorentDescription {
+       self.font = CustomFont.NexaRegular.returnFont(13)
+    } else if isNotificatioTitle {
+        self.font = CustomFont.NexaRegular.returnFont(17)
+        self.textColor = UIColor(hexString: "#242E42")
+    } else if isNotificatioDescription {
+        self.font = CustomFont.NexaRegular.returnFont(17)
+               self.textColor = UIColor(hexString: "#242E42")
     }
-    self.textColor = LabelColor
+   
     
 }
 }
 
 class CustomLabel:UILabel{
+    @IBInspectable var borderWidth: CGFloat = 0.0{
+        didSet{
+            self.layer.borderWidth = borderWidth
+        }
+    }
+    @IBInspectable var borderColor: UIColor = UIColor.clear {
+        didSet {
+            self.layer.borderColor = borderColor.cgColor
+        }
+    }
     @IBInspectable var isdescription:Bool = false
+    
+    override func drawText(in rect: CGRect) {
+      
+        if isdescription {
+            let insets = UIEdgeInsets(top: 7, left: 11, bottom: 6, right: 11)
+                   super.drawText(in: rect.inset(by: insets))
+        } else {
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                  super.drawText(in: rect.inset(by: insets))
+        }
+       
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        if isdescription {
+            
+            return CGSize(width: size.width + 11 + 11,
+                          height: size.height + 7 + 6)
+        }
+        return CGSize(width: size.width, height: size.height)
+    }
+
+    override var bounds: CGRect {
+        didSet {
+            if isdescription {
+                preferredMaxLayoutWidth = bounds.width - (11 + 11)
+            }
+        }
+       
+        
+    }
+    
     override func awakeFromNib() {
     super.awakeFromNib()
 
@@ -327,6 +381,7 @@ class CustomLabel:UILabel{
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
         self.attributedText = attributedString
         if isdescription{
+    
             self.font = CustomFont.NexaRegular.returnFont(12)
         }
     }
@@ -392,7 +447,7 @@ class tblHomeLabels: UILabel {
     @IBInspectable var isDistance:Bool = false
     
     
-      @IBInspectable var topInset: CGFloat = 2.0
+      @IBInspectable var topInset: CGFloat = 0.0
       @IBInspectable var bottomInset: CGFloat = 0.0
       @IBInspectable var leftInset: CGFloat = 0.0
       @IBInspectable var rightInset: CGFloat = 0.0
@@ -416,6 +471,9 @@ class tblHomeLabels: UILabel {
         if isRating {
             let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
             super.drawText(in: rect.inset(by: insets))
+        } else if isRestaurantName {
+           let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+            super.drawText(in: rect.inset(by: insets))
         } else {
             let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             super.drawText(in: rect.inset(by: insets))
@@ -428,6 +486,10 @@ class tblHomeLabels: UILabel {
             let size = super.intrinsicContentSize
             return CGSize(width: size.width + leftInset + rightInset,
                           height: size.height + topInset + bottomInset)
+        } else if isRestaurantName {
+           let size = super.intrinsicContentSize
+                       return CGSize(width: size.width + leftInset + rightInset,
+                                     height: size.height + topInset + bottomInset)
         } else {
             let size = super.intrinsicContentSize
             return CGSize(width: size.width + 0 + 0,
@@ -440,6 +502,8 @@ class tblHomeLabels: UILabel {
           didSet {
             if isRating {
                  preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
+            } else if isRestaurantName {
+                preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
             } else {
                  preferredMaxLayoutWidth = bounds.width - (0 + 0)
             }
@@ -456,7 +520,11 @@ class tblMyOrdersLabel: UILabel {
     @IBInspectable var isPrice:Bool = false
     @IBInspectable var isItem:Bool = false
     @IBInspectable var isDateTime:Bool = false
+    @IBInspectable var isDescription:Bool = false
     
+    @IBInspectable var isItemName:Bool = false
+    @IBInspectable var isItemSize:Bool = false
+    @IBInspectable var isItemPrice:Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -471,6 +539,15 @@ class tblMyOrdersLabel: UILabel {
             self.font = CustomFont.NexaBold.returnFont(12)
         } else if isDateTime {
             self.font = CustomFont.NexaRegular.returnFont(10)
+        } else if isDescription {
+            self.font = CustomFont.NexaRegular.returnFont(10)
+        } else if isItemName {
+            self.font = CustomFont.NexaRegular.returnFont(14)
+        } else if isItemSize {
+            self.font = CustomFont.NexaRegular.returnFont(12)
+            self.textColor = UIColor(hexString: "#000000").withAlphaComponent(0.33)
+        } else if isItemPrice {
+            self.font = CustomFont.NexaBold.returnFont(12)
         }
     }
 }

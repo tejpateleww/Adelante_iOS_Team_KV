@@ -101,6 +101,7 @@ class CustomTabBarVC: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         var newSafeArea = UIEdgeInsets()
 
         // Adjust the safe area to the height of the bottom views.

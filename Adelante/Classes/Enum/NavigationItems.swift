@@ -25,7 +25,7 @@ enum NavItemsLeft {
 
 
 enum NavItemsRight {
-    case none, clearAll, saved, notifBell
+    case none, clearAll, saved, notifBell , liked
     
     var value:String {
         switch self {
@@ -37,12 +37,14 @@ enum NavItemsRight {
             return "saved"
         case .notifBell:
             return "notifBell"
+        case .liked:
+            return "Liked"
         }
     }
 }
 
 enum NavTitles {
-    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites , addPaymentVC , AddCardVC , bffComboVC , FeedbackVC ,checkOutVC
+    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites , addPaymentVC , AddCardVC , bffComboVC , FeedbackVC ,checkOutVC ,BffComboVC
     
     var value:String {
         switch self {
@@ -101,6 +103,8 @@ enum NavTitles {
             return "Feedback"
         case .checkOutVC:
             return "Checkout"
+        case .BffComboVC:
+            return "BFF Combo"
         }
     }
 }

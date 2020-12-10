@@ -39,6 +39,11 @@ class customTextField: UITextField {
         bottomLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         if isSearchBar {
             self.font = CustomFont.NexaRegular.returnFont(15)
+            bottomLine.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+                   bottomLine.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+                   bottomLine.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+                   bottomLine.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            //self.bottomLine.frame.size.height = 0
         }
     }
 

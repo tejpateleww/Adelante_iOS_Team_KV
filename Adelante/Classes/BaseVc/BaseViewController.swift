@@ -110,7 +110,7 @@ class BaseViewController: UIViewController {
                     btnNotif.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
                     btnNotif.setImage(UIImage.init(named: "notif"), for: .normal)
                     
-//                    btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
+                    btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
                     btnNotif.layer.setValue(controller, forKey: "controller")
                     vwNotif.addSubview(btnNotif)
 
@@ -122,7 +122,26 @@ class BaseViewController: UIViewController {
                     let btnRightBar : UIBarButtonItem = UIBarButtonItem.init(customView: vwNotif)
                     btnRightBar.style = .plain
                     arrButtons.append(btnRightBar)
-                } else if title == NavItemsRight.clearAll.value {
+                } else if title == NavItemsRight.liked.value {
+                                    let vwLike = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+
+                                    let btnLike = UIButton.init()
+                                    btnLike.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+                                    btnLike.setImage(UIImage.init(named: "ic_RestaurantdisLiked"), for: .normal)
+                                    
+                                  //  btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
+                                    btnLike.layer.setValue(controller, forKey: "controller")
+                                    vwLike.addSubview(btnLike)
+
+                //                    lblNavNotifBadge = badgeLabel.init(frame: CGRect(x: 26, y: 0, width: 17, height: 17))
+                //                    lblNavNotifBadge.isNotifBadge = true
+                //                    lblNavNotifBadge.text = "0"
+                //                    vwNotif.addSubview(lblNavNotifBadge)
+
+                                    let btnRightBar : UIBarButtonItem = UIBarButtonItem.init(customView: vwLike)
+                                    btnRightBar.style = .plain
+                                    arrButtons.append(btnRightBar)
+                                } else if title == NavItemsRight.clearAll.value {
                                     let vwClearAll = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
 
                                     let btnClearALl = UIButton.init()
@@ -130,7 +149,7 @@ class BaseViewController: UIViewController {
                     btnClearALl.setTitle("Clear All", for: .normal)
                     btnClearALl.setTitleColor(colors.appOrangeColor.value, for: .normal)
                     btnClearALl.titleLabel?.font = CustomFont.NexaBold.returnFont(13)
-                //                    btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
+                                  //  btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
                                     btnClearALl.layer.setValue(controller, forKey: "controller")
                                     vwClearAll.addSubview(btnClearALl)
 
@@ -311,9 +330,9 @@ class BaseViewController: UIViewController {
     }
     
     @objc func OpenNotificationsVC(_ sender: UIButton?) {
-//        let controller = sender?.layer.value(forKey: "controller") as? UIViewController
-//        let notifVc = AppStoryboard.Home.instance.instantiateViewController(withIdentifier: NotificationsListVC.storyboardID)
-//        controller?.navigationController?.pushViewController(notifVc, animated: true)
+        let controller = sender?.layer.value(forKey: "controller") as? UIViewController
+        let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)
+        controller?.navigationController?.pushViewController(notifVc, animated: true)
     }
     
     @objc func OpenOtherProfileVC(_ sender: UIButton?) {

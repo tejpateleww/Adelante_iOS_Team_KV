@@ -97,8 +97,7 @@ class collectionVwFilterBtns: UIButton {
         }
         self.titleLabel?.font = CustomFont.NexaRegular.returnFont(14)
         self.setTitleColor(colors.black.value, for: .selected)
-        self.setTitleColor(colors.black.value, for: .highlighted)
-        self.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
+        
         self.backgroundColor = colors.selectedFilterBtn.value
         if isCornerRadius {
             self.layer.cornerRadius = self.frame.size.height / 2

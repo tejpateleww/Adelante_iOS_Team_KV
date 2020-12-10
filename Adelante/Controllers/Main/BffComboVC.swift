@@ -9,15 +9,22 @@
 import UIKit
 
 class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-   
+    var customTabBarController: CustomTabBarVC?
     var selectedcategory = 0
     var selectedSection = 0
     var expendedCell = -1
     @IBOutlet weak var tblBFFCombo: UITableView!
     var bffComboData = [bffCombo]()
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.customTabBarController?.hideTabBar()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addNavBarImage(isLeft: true, isRight: true)
+        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+        addNavBarImage(isLeft: true, isRight: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.BffComboVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         bffComboData.append(bffCombo(name: "Choices of Sub", subComboArray: [subBFFCombo(name: "Chicken Kofta", price: "", selected: false),subBFFCombo(name: "Chicken Slice", price: "", selected: true),subBFFCombo(name: "Roasted Chicken Slice", price: "", selected: false)], expanded: true))
         bffComboData.append(bffCombo(name: "Choices of Bread", subComboArray: [subBFFCombo(name: "Multigrain bread", price: "", selected: false),subBFFCombo(name: "Honey Oats Bread", price: "", selected: true),subBFFCombo(name: "Roasted Chicken Slice", price: "", selected: false),subBFFCombo(name: "Plain Bread", price: "", selected: false),subBFFCombo(name: "Toasted Bread", price: "", selected: false)], expanded: true))
         
@@ -126,9 +133,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     
     @IBAction func btnViewCart(_ sender: Any) {
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID)
-        //controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+      
             
     }
     

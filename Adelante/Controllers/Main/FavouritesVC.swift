@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -19,13 +19,18 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-    }
+          super.viewDidLoad()
+          setup()
+      
+      self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+      }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.customTabBarController?.showTabBar()
-    }
+      override func viewWillAppear(_ animated: Bool) {
+          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+          self.customTabBarController?.showTabBar()
+        
+      }
     
     // MARK: - Other Methods
     func setup() {
