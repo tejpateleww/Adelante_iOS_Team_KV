@@ -7,13 +7,14 @@
 //
 
 import UIKit
-
+import MapKit
 class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
-     var customTabBarController: CustomTabBarVC?
+    var customTabBarController: CustomTabBarVC?
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
     
+    @IBOutlet weak var restaurantLocationView: checkoutView!
     @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
     
     @IBOutlet weak var tblAddProductHeight: NSLayoutConstraint!
@@ -21,26 +22,35 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var arrayForPrice : [String] = ["30","2","7"]
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         tblOrderDetailsHeight.constant = CGFloat(arrayForTitle.count * 43)
         tblAddProductHeight.constant = CGFloat(arrayForTitle.count * 60)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        addMapView()
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-                 self.customTabBarController?.hideTabBar()
-             }
+        self.customTabBarController?.hideTabBar()
+    }
+    
+    func addMapView()
+    {
+        let mapView = MKMapView()
+        mapView.frame = CGRect(x: 0, y: 0, width: restaurantLocationView.frame.size.width, height: restaurantLocationView.frame.size.height)
+        restaurantLocationView.addSubview(mapView)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case tblAddedProduct:
             return arrayForTitle.count
         case tblOrderDetails:
-             return arrayForPrice.count
+            return arrayForPrice.count
         default:
             return 0
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,9 +67,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             return cell
         case tblOrderDetails:
             let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: orderDetailsCell.reuseIdentifier, for: indexPath) as! orderDetailsCell
-                   cell.lblTitle.text = arrayForTitle[indexPath.row]
-                   cell.lblPrice.text = "$\(arrayForPrice[indexPath.row])"
-                   return cell
+            cell.lblTitle.text = arrayForTitle[indexPath.row]
+            cell.lblPrice.text = "$\(arrayForPrice[indexPath.row])"
+            return cell
         default:
             return UITableViewCell()
         }
@@ -67,13 +77,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView {
-          case tblAddedProduct:
-              return 60
-          case tblOrderDetails:
-              return 43
-          default:
-              return 43
-          }
+        case tblAddedProduct:
+            return 60
+        case tblOrderDetails:
+            return 43
+        default:
+            return 43
+        }
         
     }
     
@@ -97,7 +107,7 @@ class addedProductCell : UITableViewCell {
             click()
         }
     }
-     var decreaseClick : (() -> ())?
+    var decreaseClick : (() -> ())?
     var increaseClick : (() -> ())?
     @IBAction func increaseBtn(_ sender: Any) {
         if let click = self.increaseClick {

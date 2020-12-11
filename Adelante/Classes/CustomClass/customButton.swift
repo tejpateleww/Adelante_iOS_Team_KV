@@ -214,3 +214,13 @@ class checkoutButton : UIButton {
 }
 
 
+class underLineButton : UIButton {
+    @IBInspectable var isUnderline:Bool = false
+    @IBInspectable var underlineColor:UIColor?
+    override func awakeFromNib() {
+        self.titleLabel?.font = CustomFont.NexaRegular.returnFont(12)
+        if isUnderline {
+            self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
+        }
+    }
+}

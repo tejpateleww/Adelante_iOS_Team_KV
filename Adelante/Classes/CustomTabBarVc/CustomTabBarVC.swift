@@ -98,6 +98,16 @@ class CustomTabBarVC: UITabBarController {
         for vc in self.viewControllers! {
             vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: normalTitleFont], for: .normal)
         }
+        
+        
+        for vc in self.viewControllers! {
+            if DeviceType.hasTopNotch {
+                vc.tabBarItem.imageInsets = UIEdgeInsets(top: -5, left: 0.0, bottom: 5.0, right: 0.0)
+            } else {
+                vc.tabBarItem.imageInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+            }
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

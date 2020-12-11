@@ -38,11 +38,24 @@ class BaseViewController: UIViewController {
 //        if naviTitle == NavTitles.Home.value {
 //            controller.navigationItem.titleView = UIView()
 //        } else {
-            controller.navigationItem.title = naviTitle //.Localized()
-//        }
-            controller.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : colors.black.value, NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(20)]
         
-       
+        //    controller.navigationItem.title = naviTitle //.Localized()
+//        }
+    //        controller.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : colors.black.value, NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(20)]
+        
+      // let viewForNavigationTitle = UIView()
+       // viewForNavigationTitle.frame.size = navigationItem.titleView?.frame.size as! CGSize
+        let label = navigationTitleLabel()
+        label.text = naviTitle
+        label.textColor = colors.black.value
+        label.font = CustomFont.NexaBold.returnFont(20)
+        label.adjustsFontSizeToFitWidth = true
+        controller.navigationItem.titleView?.clipsToBounds = false
+        // controller.navigationItem.title = naviTitle //.Localized()
+        controller.navigationItem.titleView = label
+      //navigationController?.navigationBar.setTitleVerticalPositionAdjustment(5, for: UIBarMetrics.default) // set any number you want between -20 to 15
+
+        controller.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(5, for: UIBarMetrics.default)
         controller.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         controller.navigationController?.navigationBar.shadowImage = UIImage()
 //        controller.navigationController?.navigationBar.backgroundColor = .red
@@ -128,7 +141,8 @@ class BaseViewController: UIViewController {
                                     let btnLike = UIButton.init()
                                     btnLike.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
                                     btnLike.setImage(UIImage.init(named: "ic_RestaurantdisLiked"), for: .normal)
-                                    
+                    btnLike.setImage(UIImage.init(named: ""), for: .selected)
+                    btnLike.addTarget(self, action: #selector(likeDislikeReaustrant(_:)), for: .touchUpInside)
                                   //  btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
                                     btnLike.layer.setValue(controller, forKey: "controller")
                                     vwLike.addSubview(btnLike)
@@ -334,7 +348,15 @@ class BaseViewController: UIViewController {
         let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)
         controller?.navigationController?.pushViewController(notifVc, animated: true)
     }
-    
+    @objc func likeDislikeReaustrant(_ sender: UIButton?) {
+        if sender!.isSelected {
+            sender?.isSelected = false
+        }
+            else {
+                sender?.isSelected = false
+        }
+         
+       }
     @objc func OpenOtherProfileVC(_ sender: UIButton?) {
 //        let controller = sender?.layer.value(forKey: "controller") as? UIViewController
 //        let notifVc = AppStoryboard.Home.instance.instantiateViewController(withIdentifier: ProfileVC.storyboardID)

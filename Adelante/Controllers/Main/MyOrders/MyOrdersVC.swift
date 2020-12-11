@@ -43,16 +43,27 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     // MARK: - IBActions
-    @IBAction func btnRepeat(_ sender: myOrdersBtn) {
-       let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
-                    self.navigationController?.pushViewController(controller, animated: true)
-    }
-    
+
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
         selectedSegmentTag = sender.index
         self.tblOrders.reloadData()
     }
     
+    @objc func btnShareClick()
+    {
+        let text = ""
+
+               // set up activity view controller
+               let textToShare = [ text ]
+               let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+               activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+
+               // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+
+               // present the view controller
+               self.present(activityViewController, animated: true, completion: nil)
+    }
     // MARK: - UITableView Delegates & Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -69,11 +80,12 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             cell.vwCancelOrder.isHidden = false
             cell.vwRepeatOrder.isHidden = true
         }
-        cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeat(_:)), for: .touchUpInside)
-//        cell.Repeat = {
-//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }
+        cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
+       // cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeatNew), for: .touchUpInside)
+        cell.Repeat = {
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
         cell.cancel = {
             
         }
@@ -123,6 +135,7 @@ class MyOrdersCell: UITableViewCell {
             click()
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

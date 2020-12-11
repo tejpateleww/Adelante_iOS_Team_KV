@@ -138,6 +138,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
         //controller.modalPresentationStyle = .fullScreen
         controller.btnSubmit = {

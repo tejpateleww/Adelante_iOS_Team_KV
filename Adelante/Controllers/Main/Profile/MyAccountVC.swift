@@ -10,28 +10,27 @@
 import UIKit
 
 class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+    
+    //MARK: - Properties
+    
     var myACDetailsARray:[String] = ["","","","","","",""]
-    
-    var allDetails = [myAccountDetails]()
-    
-    @IBOutlet weak var tblAcountDetails: UITableView!
-    
-    
-    
-  
     var customTabBarController: CustomTabBarVC?
-    
+    var allDetails = [myAccountDetails]()
+    var expendedCell = 0
+    // MARK: - IBOutlets
+    @IBOutlet weak var tblAcountDetails: UITableView!
+       // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
-          super.viewDidLoad()
-         addNavBarImage(isLeft: true, isRight: true)
-          
-          allDetails = [myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
-                        
-                        myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "Payment", subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
-                        myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "My Foodlist", subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
-                        myAccountDetails(icon: UIImage(named: "ic_aboutUS")!, title: "About Us", subTitle: [subAccountDetails(subTitle: "Terms & conditions "),subAccountDetails(subTitle: "Privacy policy ")], selectedIcon: UIImage(named: "ic_aboutUSSelected")!),
-                        myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "Help", subTitle: [subAccountDetails(subTitle: "Feedback")], selectedIcon: UIImage(named: "ic_HelpSelected")!),
-                        myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "Change Password", subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
+        super.viewDidLoad()
+        addNavBarImage(isLeft: true, isRight: true)
+        
+        allDetails = [myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
+                      
+                      myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "Payment", subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
+                      myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "My Foodlist", subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
+                      myAccountDetails(icon: UIImage(named: "ic_aboutUS")!, title: "About Us", subTitle: [subAccountDetails(subTitle: "Terms & conditions "),subAccountDetails(subTitle: "Privacy policy ")], selectedIcon: UIImage(named: "ic_aboutUSSelected")!),
+                      myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "Help", subTitle: [subAccountDetails(subTitle: "Feedback")], selectedIcon: UIImage(named: "ic_HelpSelected")!),
+                      myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "Change Password", subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
                         myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "Logout", subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
           ]
           setup()
@@ -54,6 +53,59 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         
         tblAcountDetails.reloadData()
     }
+    
+    @objc  func btnExpand(_ sender : UIButton) {
+           switch sender.tag {
+           case 0:
+               print(sender.tag)
+               customTabBarController?.selectedIndex = 2
+           //
+           case 1:
+               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+               self.navigationController?.pushViewController(controller, animated: true)
+            
+               print(sender.tag)
+           case 2:
+               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyFoodlistVC.storyboardID) as! MyFoodlistVC
+               self.navigationController?.pushViewController(controller, animated: true)
+            
+               print(sender.tag)
+           case 3:
+               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+               controller.strNavTitle = "About Us"
+               self.navigationController?.pushViewController(controller, animated: true)
+               print(sender.tag)
+           case 4:
+               print(sender.tag)
+           case 5:
+               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ChangePasswordVC.storyboardID) as! ChangePasswordVC
+               self.navigationController?.pushViewController(controller, animated: true)
+               print(sender.tag)
+           case 6:
+               
+               print(sender.tag)
+           case 7:
+               print(sender.tag)
+           default:
+               print(sender.tag)
+           }
+           if expendedCell == sender.tag
+           {
+               expendedCell = -1
+               DispatchQueue.main.async {
+                   self.tblAcountDetails.reloadData()
+               }
+               
+           }
+           else
+           {
+               expendedCell = sender.tag
+               DispatchQueue.main.async {
+                   self.tblAcountDetails.reloadData()
+               }
+           }
+       }
+    
     //MARK: -btnAction
     @IBAction func btnMyprofile(_ sender: UIButton)
     {
@@ -124,57 +176,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         
         return headerView
     }
-    @objc  func btnExpand(_ sender : UIButton) {
-        switch sender.tag {
-        case 0:
-            print(sender.tag)
-            customTabBarController?.selectedIndex = 2
-        //
-        case 1:
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-            self.navigationController?.pushViewController(controller, animated: true)
-         
-            print(sender.tag)
-        case 2:
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyFoodlistVC.storyboardID) as! MyFoodlistVC
-            self.navigationController?.pushViewController(controller, animated: true)
-         
-            print(sender.tag)
-        case 3:
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-            controller.strNavTitle = "About Us"
-            self.navigationController?.pushViewController(controller, animated: true)
-            print(sender.tag)
-        case 4:
-            print(sender.tag)
-        case 5:
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ChangePasswordVC.storyboardID) as! ChangePasswordVC
-            self.navigationController?.pushViewController(controller, animated: true)
-            print(sender.tag)
-        case 6:
-            
-            print(sender.tag)
-        case 7:
-            print(sender.tag)
-        default:
-            print(sender.tag)
-        }
-        if expendedCell == sender.tag
-        {
-            expendedCell = -1
-            DispatchQueue.main.async {
-                self.tblAcountDetails.reloadData()
-            }
-            
-        }
-        else
-        {
-            expendedCell = sender.tag
-            DispatchQueue.main.async {
-                self.tblAcountDetails.reloadData()
-            }
-        }
-    }
+   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 3 {
             switch indexPath.row {
@@ -201,7 +203,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             }
         }
     }
-    var expendedCell = 0
+   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 43.5
     }

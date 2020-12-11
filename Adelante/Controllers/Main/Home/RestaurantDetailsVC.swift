@@ -44,6 +44,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     // MARK: - IBActions
     
+    @IBAction func btnViewPolicy(_ sender: Any) {
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+        controller.strNavTitle = "Privacy policy"
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantReviewVC.storyboardID) as! RestaurantReviewVC
         self.navigationController?.pushViewController(controller, animated: true)
@@ -70,6 +75,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         if indexPath.section == 0 {
             let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
             cell.selectionStyle = .none
+            cell.customize = {
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                  self.navigationController?.pushViewController(controller, animated: true)
+            }
             return cell
         } else {
             let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
@@ -99,8 +108,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                   self.navigationController?.pushViewController(controller, animated: true)
+//             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+//                   self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:
             break
@@ -137,7 +146,13 @@ class RestaurantDetailsCell:UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    var customize : (() -> ())?
 
+    @IBAction func btnCustomize(_ sender: Any) {
+        if let click = self.customize {
+            click()
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
