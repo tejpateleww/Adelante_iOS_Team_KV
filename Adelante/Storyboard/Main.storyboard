@@ -2382,7 +2382,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D6H-kd-b9H">
                                                             <rect key="frame" x="86" y="9.5" width="288" height="69.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LK-zl-hyG" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LK-zl-hyG" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -2391,7 +2391,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isNotificatioTitle" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Order #1234 has been Successfully completed " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-Ej-Hq6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your Order #1234 has been Successfully completed " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-Ej-Hq6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="28.5" width="288" height="41"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -5284,7 +5284,7 @@ remont,CA</string>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAddress" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Df-Vb-Tad" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Df-Vb-Tad" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
                                                         <rect key="frame" x="299" y="233" width="100" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="1i7-DB-M1l"/>
@@ -5424,6 +5424,63 @@ remont,CA</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGA-MH-9fS">
                                                         <rect key="frame" x="18" y="415" width="378" height="60"/>
                                                         <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QvG-Jd-fIU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_applyPromoCode" translatesAutoresizingMaskIntoConstraints="NO" id="Dpj-Sw-27k">
+                                                                        <rect key="frame" x="12" y="12" width="36" height="36"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="36" id="MRy-Oe-pb7"/>
+                                                                            <constraint firstAttribute="width" secondItem="Dpj-Sw-27k" secondAttribute="height" multiplier="1:1" id="muq-3G-pDs"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="Nu7-37-K87"/>
+                                                                    <constraint firstItem="Dpj-Sw-27k" firstAttribute="centerY" secondItem="QvG-Jd-fIU" secondAttribute="centerY" id="kJZ-qS-Cck"/>
+                                                                    <constraint firstItem="Dpj-Sw-27k" firstAttribute="centerX" secondItem="QvG-Jd-fIU" secondAttribute="centerX" id="sJD-nP-YQ6"/>
+                                                                    <constraint firstAttribute="width" constant="60" id="vhv-Xr-lc0"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="2Zd-7R-EBD">
+                                                                <rect key="frame" x="71" y="0.0" width="307" height="60"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs9-ZV-bix" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="307" height="60"/>
+                                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                                        <state key="normal" title="Add promo code"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isApplyPromocode" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="ApplyPromoCode:" destination="qZS-Pr-oep" eventType="touchUpInside" id="man-z0-EhL"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AAAAAA" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYY-XW-Tvp" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isPromo" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKU-pt-HNu" customClass="myOrdersBtn" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="60" id="tbH-62-fct"/>
+                                                                        </constraints>
+                                                                        <state key="normal" title="Cancel"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCancelOrder" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="canclePromoCode:" destination="qZS-Pr-oep" eventType="touchUpInside" id="7CD-NX-h7q"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
                                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpA-G7-Kjt">
                                                                 <rect key="frame" x="0.0" y="59" width="378" height="1"/>
                                                                 <color key="backgroundColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5431,31 +5488,19 @@ remont,CA</string>
                                                                     <constraint firstAttribute="height" constant="1" id="sus-Gv-qrI"/>
                                                                 </constraints>
                                                             </view>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_applyPromoCode" translatesAutoresizingMaskIntoConstraints="NO" id="Dpj-Sw-27k">
-                                                                <rect key="frame" x="0.0" y="12" width="36" height="36"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="36" id="MRy-Oe-pb7"/>
-                                                                    <constraint firstAttribute="width" secondItem="Dpj-Sw-27k" secondAttribute="height" multiplier="1:1" id="muq-3G-pDs"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs9-ZV-bix" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="46" y="15" width="114" height="30"/>
-                                                                <state key="normal" title="Add promo code"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isApplyPromocode" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
-                                                            <constraint firstItem="qs9-ZV-bix" firstAttribute="leading" secondItem="Dpj-Sw-27k" secondAttribute="trailing" constant="10" id="7pZ-GO-k2M"/>
-                                                            <constraint firstItem="qs9-ZV-bix" firstAttribute="centerY" secondItem="Dpj-Sw-27k" secondAttribute="centerY" id="N0N-Q7-31N"/>
+                                                            <constraint firstAttribute="bottom" secondItem="2Zd-7R-EBD" secondAttribute="bottom" id="AtW-EL-Dxi"/>
+                                                            <constraint firstItem="2Zd-7R-EBD" firstAttribute="leading" secondItem="QvG-Jd-fIU" secondAttribute="trailing" constant="11" id="Bxn-ln-DsX"/>
+                                                            <constraint firstItem="2Zd-7R-EBD" firstAttribute="top" secondItem="CGA-MH-9fS" secondAttribute="top" id="CiS-EY-KKb"/>
+                                                            <constraint firstItem="QvG-Jd-fIU" firstAttribute="top" secondItem="CGA-MH-9fS" secondAttribute="top" id="Eu8-ZE-UoE"/>
+                                                            <constraint firstAttribute="trailing" secondItem="2Zd-7R-EBD" secondAttribute="trailing" id="ORN-LV-b70"/>
                                                             <constraint firstAttribute="bottom" secondItem="hpA-G7-Kjt" secondAttribute="bottom" id="a1D-KM-AxQ"/>
                                                             <constraint firstItem="hpA-G7-Kjt" firstAttribute="leading" secondItem="CGA-MH-9fS" secondAttribute="leading" id="ei2-UF-9ez"/>
-                                                            <constraint firstItem="Dpj-Sw-27k" firstAttribute="centerY" secondItem="CGA-MH-9fS" secondAttribute="centerY" id="iGC-uM-Old"/>
                                                             <constraint firstAttribute="trailing" secondItem="hpA-G7-Kjt" secondAttribute="trailing" id="ivs-ox-dqL"/>
                                                             <constraint firstAttribute="height" constant="60" id="liW-iS-Z1C"/>
-                                                            <constraint firstItem="Dpj-Sw-27k" firstAttribute="leading" secondItem="CGA-MH-9fS" secondAttribute="leading" id="xw8-QG-QS4"/>
+                                                            <constraint firstItem="QvG-Jd-fIU" firstAttribute="leading" secondItem="CGA-MH-9fS" secondAttribute="leading" id="u7k-KV-ge6"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tW-8T-74J">
@@ -5476,6 +5521,9 @@ remont,CA</string>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isChangeLocation" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="seeMenu:" destination="qZS-Pr-oep" eventType="touchUpInside" id="cml-PG-sZa"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -5749,6 +5797,10 @@ avoid cancellations </string>
                     </view>
                     <navigationItem key="navigationItem" id="5ti-52-oow"/>
                     <connections>
+                        <outlet property="LblTotlaPrice" destination="dd1-Ed-hw9" id="Brd-fw-T9R"/>
+                        <outlet property="btnAppyPromoCode" destination="qs9-ZV-bix" id="eYy-Z0-1Yk"/>
+                        <outlet property="btnCanclePromoCOde" destination="NKU-pt-HNu" id="lu4-ky-QvX"/>
+                        <outlet property="lblPromoCode" destination="hYY-XW-Tvp" id="9ff-Kj-kGL"/>
                         <outlet property="restaurantLocationView" destination="PTa-TT-FW4" id="xDX-Uq-73T"/>
                         <outlet property="tblAddProductHeight" destination="dd5-9d-Q05" id="OHs-lc-Tsc"/>
                         <outlet property="tblAddedProduct" destination="5oT-qZ-CLh" id="5dU-zS-hP0"/>
@@ -5839,6 +5891,7 @@ avoid cancellations </string>
                                             <outlet property="lblWallet" destination="8gN-eU-dN8" id="3vD-72-N60"/>
                                             <outlet property="lblwalletBalance" destination="fOe-RJ-RyA" id="Kke-Fn-snT"/>
                                             <outlet property="paymentImageView" destination="qNX-WM-MiQ" id="5yG-PY-Gjh"/>
+                                            <outlet property="vWMain" destination="5ca-R8-ZNB" id="gLN-dr-ouR"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentMethodCell2" rowHeight="100" id="uU2-ie-afK" customClass="paymentMethodCell2" customModule="Adelante" customModuleProvider="target">
@@ -5917,6 +5970,7 @@ avoid cancellations </string>
                                             <outlet property="lblcardDetails" destination="mi5-Jq-Sq9" id="mLf-Lj-RhP"/>
                                             <outlet property="paymentMethodImageView" destination="9zr-2z-obl" id="EVu-nj-Snb"/>
                                             <outlet property="selectPaymentMethodButton" destination="7Vp-hu-Q4V" id="6VK-Zo-DHA"/>
+                                            <outlet property="vWMain" destination="n9X-DA-swm" id="HiC-xl-PTI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

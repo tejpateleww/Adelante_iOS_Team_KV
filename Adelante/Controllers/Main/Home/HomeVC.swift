@@ -103,7 +103,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 navController.modalPresentationStyle = .overFullScreen
                 navController.navigationController?.modalTransitionStyle = .crossDissolve
                 navController.navigationBar.isHidden = true
-                self.present(navController, animated: false, completion: nil)
+                self.present(navController, animated: true, completion: nil)
             }
         }
     }

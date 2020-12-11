@@ -4,6 +4,141 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Apply Promo CodeVC-->
+        <scene sceneID="mpP-ed-y3Y">
+            <objects>
+                <viewController storyboardIdentifier="applyPromoCodeVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="dY3-cr-pfC" customClass="applyPromoCodeVC" customModule="Adelante" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nLS-5f-pAm" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwz-jm-2xr" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKY-aa-6qg" customClass="homeBlockView" customModule="Adelante" customModuleProvider="target">
+                                        <rect key="frame" x="18" y="347" width="378" height="202"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply Promocode" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBe-rC-yyV" customClass="commonPopUPLabel" customModule="Adelante" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="378" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Ihl-uf-OiE"/>
+                                                    <constraint firstAttribute="height" constant="25" id="cPC-jC-vTe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-ed-Mar" customClass="applyPromoCode" customModule="Adelante" customModuleProvider="target">
+                                                <rect key="frame" x="15" y="73" width="348" height="39"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="39" id="y7T-u2-nUP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="RjU-Sj-uLx">
+                                                <rect key="frame" x="48" y="138" width="282" height="38"/>
+                                                <subviews>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7uy-uZ-uDS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="126" height="38"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d11-aC-XrY" customClass="applyPromoCodeButtton" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="126" height="38"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Apply"/>
+                                                                <connections>
+                                                                    <action selector="okButtonAction:" destination="dY3-cr-pfC" eventType="touchUpInside" id="Evk-c2-8U1"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="38" id="IQi-SI-Ogv"/>
+                                                            <constraint firstAttribute="width" constant="126" id="KV5-4S-AO6"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="19"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o48-8h-TER">
+                                                        <rect key="frame" x="156" y="0.0" width="126" height="38"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J88-H7-FPx" customClass="applyPromoCodeButtton" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="126" height="38"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Cancel"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCancle" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="CancleButtonAction:" destination="dY3-cr-pfC" eventType="touchUpInside" id="Elj-WX-BS2"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="126" id="92v-Bs-8sL"/>
+                                                            <constraint firstAttribute="height" constant="38" id="pfs-QP-daA"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="19"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="RjU-Sj-uLx" firstAttribute="centerX" secondItem="UKY-aa-6qg" secondAttribute="centerX" id="1pK-E6-C3g"/>
+                                            <constraint firstItem="TBe-rC-yyV" firstAttribute="leading" secondItem="UKY-aa-6qg" secondAttribute="leading" id="8vS-be-E1K"/>
+                                            <constraint firstItem="TBe-rC-yyV" firstAttribute="top" secondItem="UKY-aa-6qg" secondAttribute="top" constant="27.800000000000001" id="QQ5-Ik-YnH"/>
+                                            <constraint firstItem="RjU-Sj-uLx" firstAttribute="top" secondItem="Mba-ed-Mar" secondAttribute="bottom" constant="26" id="Z1w-83-M4b"/>
+                                            <constraint firstItem="Mba-ed-Mar" firstAttribute="leading" secondItem="UKY-aa-6qg" secondAttribute="leading" constant="15" id="Z4i-i1-Haz"/>
+                                            <constraint firstAttribute="bottom" secondItem="RjU-Sj-uLx" secondAttribute="bottom" constant="26" id="jHh-3q-0vy"/>
+                                            <constraint firstItem="Mba-ed-Mar" firstAttribute="top" secondItem="TBe-rC-yyV" secondAttribute="bottom" constant="20" id="jbj-1y-jvX"/>
+                                            <constraint firstAttribute="trailing" secondItem="TBe-rC-yyV" secondAttribute="trailing" id="jcv-tO-HJc"/>
+                                            <constraint firstAttribute="trailing" secondItem="Mba-ed-Mar" secondAttribute="trailing" constant="15" id="rck-Ve-6V0"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="UKY-aa-6qg" firstAttribute="leading" secondItem="jwz-jm-2xr" secondAttribute="leading" constant="18" id="6Nk-EO-WMv"/>
+                                    <constraint firstItem="UKY-aa-6qg" firstAttribute="centerX" secondItem="jwz-jm-2xr" secondAttribute="centerX" id="fcg-0D-KLb"/>
+                                    <constraint firstAttribute="trailing" secondItem="UKY-aa-6qg" secondAttribute="trailing" constant="18" id="mPd-rJ-qiV"/>
+                                    <constraint firstItem="UKY-aa-6qg" firstAttribute="centerY" secondItem="jwz-jm-2xr" secondAttribute="centerY" id="un2-Fh-e6Z"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jwz-jm-2xr" firstAttribute="leading" secondItem="iuS-iT-h63" secondAttribute="leading" id="7Ld-nl-RzJ"/>
+                            <constraint firstItem="jwz-jm-2xr" firstAttribute="top" secondItem="nLS-5f-pAm" secondAttribute="top" id="80A-zY-XmD"/>
+                            <constraint firstItem="iuS-iT-h63" firstAttribute="trailing" secondItem="jwz-jm-2xr" secondAttribute="trailing" id="BA1-fD-AAh"/>
+                            <constraint firstAttribute="bottom" secondItem="jwz-jm-2xr" secondAttribute="bottom" id="NHN-Dh-ozm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iuS-iT-h63"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancleButton" destination="J88-H7-FPx" id="sd7-AZ-yYK"/>
+                        <outlet property="okButton" destination="d11-aC-XrY" id="zGB-uh-iL2"/>
+                        <outlet property="vwMain" destination="jwz-jm-2xr" id="xVo-fw-Qkz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOe-rX-73j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="248" y="78"/>
+        </scene>
+    </scenes>
 </document>

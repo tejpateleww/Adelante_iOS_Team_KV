@@ -144,9 +144,20 @@ class floatTextField: SkyFloatingLabelTextField {
             self.titleFont = CustomFont.NexaBold.returnFont(18)
             self.font = CustomFont.NexaRegular.returnFont(16)
             
-            self.selectedTitleColor = colors.forgotpassGreyColor.value
+            self.selectedTitleColor = colors.textFieldColor.value
         }
     }
 }
 
-
+class applyPromoCode : UITextField {
+    override func awakeFromNib() {
+        self.font = CustomFont.NexaRegular.returnFont(16)
+        self.textColor = colors.textFieldColor.value
+        let attributes = [
+            NSAttributedString.Key.foregroundColor: colors.textFieldColor.value,
+            NSAttributedString.Key.font : CustomFont.NexaRegular.returnFont(16) // Note the !
+        ]
+        self.attributedPlaceholder = NSAttributedString(string: "Apply Promocode", attributes:attributes)
+    
+    }
+}

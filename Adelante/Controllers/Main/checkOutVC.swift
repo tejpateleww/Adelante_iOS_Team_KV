@@ -13,10 +13,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var customTabBarController: CustomTabBarVC?
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
-    
+     @IBOutlet weak var LblTotlaPrice: CheckOutLabel!
     @IBOutlet weak var restaurantLocationView: checkoutView!
     @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var btnCanclePromoCOde: myOrdersBtn!
+    @IBOutlet weak var lblPromoCode: CheckOutLabel!
+    @IBOutlet weak var btnAppyPromoCode: checkoutButton!
     @IBOutlet weak var tblAddProductHeight: NSLayoutConstraint!
     var arrayForTitle : [String] = ["Subtotal","Service Fee","Taxes"]
     var arrayForPrice : [String] = ["30","2","7"]
@@ -86,11 +89,48 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         }
         
     }
-    
+    //MARK: -btnActions
+    @IBAction func ApplyPromoCode(_ sender: submitButton) {
+        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: applyPromoCodeVC.storyboardID) as! applyPromoCodeVC
+        //controller.modalPresentationStyle = .fullScreen
+        controller.btnOk = {
+            self.dismiss(animated: true, completion: nil)
+            self.btnAppyPromoCode.isHidden = true
+            self.lblPromoCode.isHidden = false
+            self.btnCanclePromoCOde.isHidden = false
+            
+            self.lblPromoCode.text = "AD200"
+            self.arrayForTitle.append("Promo Code")
+            self.arrayForPrice.append("2")
+            self.tblOrderDetailsHeight.constant = CGFloat(self.arrayForTitle.count * 43)
+            self.LblTotlaPrice.text = "$37"
+            self.tblOrderDetails.reloadData()
+        }
+      
+        self.present(controller, animated: true, completion: nil)
+    }
     @IBAction func placeOrderBtn(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID)
         self.navigationController?.pushViewController(controller, animated: true)
     }
+    @IBAction func seeMenu(_ sender: submitButton) {
+          let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
+          self.navigationController?.pushViewController(controller, animated: true)
+      }
+    @IBAction func canclePromoCode(_ sender: myOrdersBtn) {
+        lblPromoCode.isHidden = true
+        btnCanclePromoCOde.isHidden = true
+        btnAppyPromoCode.isHidden = false
+        btnAppyPromoCode.titleLabel?.textAlignment = .left
+        
+        lblPromoCode.text = ""
+        self.LblTotlaPrice.text = "$39"
+        self.arrayForPrice.removeLast()
+        self.arrayForTitle.removeLast()
+       tblOrderDetailsHeight.constant = CGFloat(arrayForTitle.count * 43)
+       self.tblOrderDetails.reloadData()
+    }
+    
 }
 
 class orderDetailsCell : UITableViewCell {

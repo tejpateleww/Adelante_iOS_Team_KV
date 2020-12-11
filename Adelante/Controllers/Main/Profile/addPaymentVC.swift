@@ -12,6 +12,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     
     var cardDetails : [String] = []
     var customTabBarController: CustomTabBarVC?
+    var selectedPaymentMethods = 1
     @IBOutlet weak var tblPaymentMethod: UITableView!
     
     
@@ -51,9 +52,22 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell1.paymentImageView.image = UIImage(named: "ic_wallet")
                 cell1.lblWallet.text = "Wallet"
                 cell1.lblwalletBalance.text = "$250.00"
+                cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                if indexPath.row == selectedPaymentMethods {
+                    cell1.vWMain.layer.borderWidth = 1
+                } else {
+                     cell1.vWMain.layer.borderWidth = 0
+                }
+                
                 cell = cell1
             } else {
                 let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
+                cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                if indexPath.row == selectedPaymentMethods {
+                    cell2.vWMain.layer.borderWidth = 1
+                } else {
+                     cell2.vWMain.layer.borderWidth = 0
+                }
                 if indexPath.row == 1
                 {
                     cell2.paymentMethodImageView.image = UIImage(named: "ic_masterCard")
@@ -138,7 +152,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        selectedPaymentMethods = indexPath.row
+        tblPaymentMethod.reloadData()
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
         //controller.modalPresentationStyle = .fullScreen
         controller.btnSubmit = {
@@ -160,13 +175,13 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     
 }
 class paymentMethodCell1 : UITableViewCell {
-    
+     @IBOutlet weak var vWMain: PaymentView!
     @IBOutlet weak var lblWallet: addPaymentlable!
     @IBOutlet weak var lblwalletBalance: addPaymentlable!
     @IBOutlet weak var paymentImageView: UIImageView!
 }
 class paymentMethodCell2 : UITableViewCell {
-    
+     @IBOutlet weak var vWMain: PaymentView!
     @IBOutlet weak var selectPaymentMethodButton: UIButton!
     @IBOutlet weak var paymentMethodImageView: UIImageView!
     @IBOutlet weak var lblExpiresDate: addPaymentlable!

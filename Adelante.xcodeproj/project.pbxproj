@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18526CFC25836DF600F105B8 /* applyPromoCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18526CFB25836DF500F105B8 /* applyPromoCodeVC.swift */; };
 		18F369532580AE0000992FCD /* BffComboVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369502580ADFE00992FCD /* BffComboVC.swift */; };
 		18F369542580AE0000992FCD /* commonPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369512580ADFE00992FCD /* commonPopup.swift */; };
 		18F369552580AE0000992FCD /* sortPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369522580ADFF00992FCD /* sortPopupVC.swift */; };
@@ -119,6 +120,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18526CFB25836DF500F105B8 /* applyPromoCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = applyPromoCodeVC.swift; path = Adelante/Controllers/Main/applyPromoCodeVC.swift; sourceTree = SOURCE_ROOT; };
 		18F369502580ADFE00992FCD /* BffComboVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BffComboVC.swift; sourceTree = "<group>"; };
 		18F369512580ADFE00992FCD /* commonPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonPopup.swift; sourceTree = "<group>"; };
 		18F369522580ADFF00992FCD /* sortPopupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sortPopupVC.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 		81DB713C257F3AB100606EE2 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
+				18526CFB25836DF500F105B8 /* applyPromoCodeVC.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				8105FDD325751289008D36D6 /* customButton.swift in Sources */,
 				81CFFD842574C60D005AA86A /* UISearchbar+Extension.swift in Sources */,
 				81CFFD7C2574C60D005AA86A /* UIColor+Extension.swift in Sources */,
+				18526CFC25836DF600F105B8 /* applyPromoCodeVC.swift in Sources */,
 				81CFFD7F2574C60D005AA86A /* UIButton+Extension.swift in Sources */,
 				81CFFD882574C60D005AA86A /* GradientButton.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,

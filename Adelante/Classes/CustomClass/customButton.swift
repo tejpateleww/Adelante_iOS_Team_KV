@@ -133,6 +133,7 @@ class myOrdersBtn: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         if isCancelOrder {
+            self.titleLabel?.textAlignment = .right
             self.setTitleColor(colors.appRedColor.value, for: .normal)
         } else if isReorder {
             self.setTitleColor(colors.appGreenColor.value, for: .normal)
@@ -185,6 +186,7 @@ class checkoutButton : UIButton {
         } else if isApplyPromocode {
             self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
             self.setTitleColor(UIColor(hexString: "#E34A25"), for: .normal)
+            self.titleLabel?.textAlignment = .left
             
         } else if isSeeMenu {
             let yourAttributes: [NSAttributedString.Key: Any] = [
@@ -222,5 +224,18 @@ class underLineButton : UIButton {
         if isUnderline {
             self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
         }
+    }
+}
+class applyPromoCodeButtton : UIButton {
+    @IBInspectable var isCancle:Bool = false
+    override func awakeFromNib() {
+           self.setTitleColor(colors.white.value, for: .normal)
+             self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
+             self.titleLabel?.textAlignment = .center
+        self.backgroundColor = colors.appGreenColor.value
+        if isCancle {
+             self.backgroundColor = colors.appRedColor.value
+        }
+        
     }
 }

@@ -16,7 +16,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var myACDetailsARray:[String] = ["","","","","","",""]
     var customTabBarController: CustomTabBarVC?
     var allDetails = [myAccountDetails]()
-    var expendedCell = 0
+    var expendedCell = -1
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
        // MARK: - ViewController Lifecycle
