@@ -61,7 +61,9 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         lblNavAddressHome.text = "30 Memorial Drive, Avon MA 2322"
         btnNavAddressHome.addTarget(self, action: #selector(btnNavAddressHomeClicked(_:)), for: .touchUpInside)
         
-        selectedSortTypedIndexFromcolVwFilter = 1
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "deselectFilterOptionHome"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: NSNotification.Name(rawValue: "deselectFilterOptionHome"), object: nil)
+        
         colVwRestWthPage.delegate = self
         colVwRestWthPage.dataSource = self
         colVwRestWthPage.reloadData()
@@ -77,7 +79,18 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         pageControl.hidesForSinglePage = true
     }
     
+    @objc func deSelectFilterAndRefresh() {
+        selectedSortTypedIndexFromcolVwFilter = -1
+        colVwFilterOptions.reloadData()
+    }
+    
     // MARK: - IBActions
+    
+    @IBAction func btnNotifClicked(_ sender: Any) {
+        let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)
+        self.navigationController?.pushViewController(notifVc, animated: true)
+    }
+    
     @IBAction func btnNavAddressHomeClicked(_ sender: Any) {
         
     }
@@ -103,10 +116,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 navController.modalPresentationStyle = .overFullScreen
                 navController.navigationController?.modalTransitionStyle = .crossDissolve
                 navController.navigationBar.isHidden = true
-                self.present(navController, animated: false, completion: nil)
+                self.present(navController, animated: true, completion: nil)
             }
         }
     }
+    
     // MARK: - UICollectionView Delegates And Datasource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.colVwFilterOptions{

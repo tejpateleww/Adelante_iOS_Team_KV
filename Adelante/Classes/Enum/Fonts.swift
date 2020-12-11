@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 enum CustomFont{
     
-    case AileronLight, AileronBoldItalic, AileronThiItalic, AileronUltraLight, AileronHeavy, AileronUltraLightItalic, AileronLightItalic, AileronThin, AileronHeavyItalic, AileronSemiBoldItalic, AileronSemiBold, AileronBold, AileronItalic, AileronBlackItalic, AileronBlack, AileronRegular, NexaBlackItalic, NexaBookItalic, NexaBlack, NexaBoldItalic, NexaLightItalic, NexaThinItalic, NexaThin, NexaLight, NexaBold, NexaBook, NexaRegular
+    case AileronLight, AileronBoldItalic, AileronThiItalic, AileronUltraLight, AileronHeavy, AileronUltraLightItalic, AileronLightItalic, AileronThin, AileronHeavyItalic, AileronSemiBoldItalic, AileronSemiBold, AileronBold, AileronItalic, AileronBlackItalic, AileronBlack, AileronRegular, NexaBlackItalic, NexaBookItalic, NexaBlack, NexaBoldItalic, NexaLightItalic, NexaThinItalic, NexaThin, NexaLight, NexaBold, NexaBook, NexaRegular, NunitoBlack, NunitoBlackItalic, NunitoBold, NunitoBoldItalic, NunitoExtraBold, NunitoExtraBoldItalic, NunitoExtraLight, NunitoExtraLightItalic, NunitoItalic, NunitoLight, NunitoLightItalic, NunitoRegular, NunitoSemiBold, NunitoSemiBoldItalic
     
     func returnFont(_ font:CGFloat)->UIFont{
         switch self {
@@ -68,6 +68,56 @@ enum CustomFont{
             return UIFont(name: "Nexa-Book", size: font)!
         case .NexaRegular:
             return UIFont(name: "NexaRegular", size: font)!
+//        case .NexaBlackItalic:
+//            return UIFont(name: "Nunito-BlackItalic", size: font)!
+//        case .NexaBookItalic:
+//            return UIFont(name: "Nunito-BookItalic", size: font)!
+//        case .NexaBlack:
+//            return UIFont(name: "Nunito-Black", size: font)!
+//        case .NexaBoldItalic:
+//            return UIFont(name: "Nunito-BoldItalic", size: font)!
+//        case .NexaLightItalic:
+//            return UIFont(name: "Nunito-LightItalic", size: font)!
+//        case .NexaThinItalic:
+//            return UIFont(name: "Nunito-ThinItalic", size: font)!
+//        case .NexaThin:
+//            return UIFont(name: "Nunito-Thin", size: font)!
+//        case .NexaLight:
+//            return UIFont(name: "Nunito-Light", size: font)!
+//        case .NexaBold:
+//            return UIFont(name: "Nunito-Bold", size: font)!
+//        case .NexaBook:
+//            return UIFont(name: "Nunito-Book", size: font)!
+//        case .NexaRegular:
+//            return UIFont(name: "Nunito-Regular", size: font)!
+        case .NunitoBlack:
+            return UIFont(name: "Nunito-Black", size: font)!
+        case .NunitoBlackItalic:
+            return UIFont(name: "Nunito-BlackItalic", size: font)!
+        case .NunitoBold:
+            return UIFont(name: "Nunito-Bold", size: font)!
+        case .NunitoBoldItalic:
+            return UIFont(name: "Nunito-BoldItalic", size: font)!
+        case .NunitoExtraBold:
+            return UIFont(name: "Nunito-ExtraBold", size: font)!
+        case .NunitoExtraBoldItalic:
+            return UIFont(name: "Nunito-ExtraBoldItalic", size: font)!
+        case .NunitoExtraLight:
+            return UIFont(name: "Nunito-ExtraLight", size: font)!
+        case .NunitoExtraLightItalic:
+            return UIFont(name: "Nunito-ExtraLightItalic", size: font)!
+        case .NunitoItalic:
+            return UIFont(name: "Nunito-Italic", size: font)!
+        case .NunitoLight:
+            return UIFont(name: "Nunito-Light", size: font)!
+        case .NunitoLightItalic:
+            return UIFont(name: "Nunito-LightItalic", size: font)!
+        case .NunitoRegular:
+            return UIFont(name: "Nunito-Regular", size: font)!
+        case .NunitoSemiBold:
+            return UIFont(name: "Nunito-SemiBold", size: font)!
+        case .NunitoSemiBoldItalic:
+            return UIFont(name: "Nunito-SemiBoldItalic", size: font)!
         }
     }
 }

@@ -80,8 +80,6 @@ class submitButton: UIButton {
             self.layer.shadowOpacity = 0.17
             self.layer.shadowRadius = 5.0
         }
-        
-       
     }
 }
 
@@ -213,7 +211,6 @@ class checkoutButton : UIButton {
     
 }
 
-
 class underLineButton : UIButton {
     @IBInspectable var isUnderline:Bool = false
     @IBInspectable var underlineColor:UIColor?
@@ -221,6 +218,19 @@ class underLineButton : UIButton {
         self.titleLabel?.font = CustomFont.NexaRegular.returnFont(12)
         if isUnderline {
             self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
+        }
+    }
+}
+
+class applyPromoCodeButtton : UIButton {
+    @IBInspectable var isCancle:Bool = false
+    override func awakeFromNib() {
+           self.setTitleColor(colors.white.value, for: .normal)
+             self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
+             self.titleLabel?.textAlignment = .center
+        self.backgroundColor = colors.appGreenColor.value
+        if isCancle {
+             self.backgroundColor = colors.appRedColor.value
         }
     }
 }

@@ -63,11 +63,17 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     //    }
     
     @IBAction func btnActionHide(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionHome"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionRest"), object: nil)
+        })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionHome"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionRest"), object: nil)
+        })
     }
     
     //MARK: -tblViewMethods
@@ -108,7 +114,6 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
     @objc public func dismissPresentView(){
         self.dismiss(animated: true) {
-            
             
         }
     }

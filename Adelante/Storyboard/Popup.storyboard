@@ -1,9 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Apply Promo CodeVC-->
+        <scene sceneID="0RQ-re-uXh">
+            <objects>
+                <viewController storyboardIdentifier="applyPromoCodeVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="k3t-X2-WSN" customClass="applyPromoCodeVC" customModule="Adelante" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AcK-iL-j7m" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6O-ye-Q6q" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3G-NN-N1W" customClass="homeBlockView" customModule="Adelante" customModuleProvider="target">
+                                        <rect key="frame" x="18" y="347" width="378" height="202"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply Promocode" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEN-jp-6i5" customClass="commonPopUPLabel" customModule="Adelante" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="378" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="Wb8-59-4v2"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Y2x-yg-iCE"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xKq-gU-5DU" customClass="applyPromoCode" customModule="Adelante" customModuleProvider="target">
+                                                <rect key="frame" x="15" y="73" width="348" height="39"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="39" id="jXi-e0-bDt"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0lt-aT-N8N">
+                                                <rect key="frame" x="48" y="138" width="282" height="38"/>
+                                                <subviews>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-7k-rGv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="126" height="38"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahi-XF-U72" customClass="applyPromoCodeButtton" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="126" height="38"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Apply"/>
+                                                                <connections>
+                                                                    <action selector="okButtonAction:" destination="k3t-X2-WSN" eventType="touchUpInside" id="dQF-69-WN9"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="126" id="8hb-i5-OW0"/>
+                                                            <constraint firstAttribute="height" constant="38" id="EoI-Ee-GEk"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="19"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHO-Uf-Bzf">
+                                                        <rect key="frame" x="156" y="0.0" width="126" height="38"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mi-GN-iR3" customClass="applyPromoCodeButtton" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="126" height="38"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Cancel"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCancle" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="CancleButtonAction:" destination="k3t-X2-WSN" eventType="touchUpInside" id="9cB-by-bZo"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="126" id="7XS-cI-5oh"/>
+                                                            <constraint firstAttribute="height" constant="38" id="qpL-jZ-Y7b"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="19"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="xKq-gU-5DU" firstAttribute="leading" secondItem="Z3G-NN-N1W" secondAttribute="leading" constant="15" id="2nu-3c-8Cr"/>
+                                            <constraint firstItem="ZEN-jp-6i5" firstAttribute="top" secondItem="Z3G-NN-N1W" secondAttribute="top" constant="27.800000000000001" id="WtP-mM-NcI"/>
+                                            <constraint firstItem="0lt-aT-N8N" firstAttribute="centerX" secondItem="Z3G-NN-N1W" secondAttribute="centerX" id="XH2-zT-8ao"/>
+                                            <constraint firstAttribute="bottom" secondItem="0lt-aT-N8N" secondAttribute="bottom" constant="26" id="XbT-Kx-Dmc"/>
+                                            <constraint firstItem="0lt-aT-N8N" firstAttribute="top" secondItem="xKq-gU-5DU" secondAttribute="bottom" constant="26" id="YAT-0x-sYI"/>
+                                            <constraint firstItem="xKq-gU-5DU" firstAttribute="top" secondItem="ZEN-jp-6i5" secondAttribute="bottom" constant="20" id="gbL-Ly-wiu"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZEN-jp-6i5" secondAttribute="trailing" id="kM0-WK-Jfp"/>
+                                            <constraint firstItem="ZEN-jp-6i5" firstAttribute="leading" secondItem="Z3G-NN-N1W" secondAttribute="leading" id="ktg-E7-Blr"/>
+                                            <constraint firstAttribute="trailing" secondItem="xKq-gU-5DU" secondAttribute="trailing" constant="15" id="nn8-Ha-q4g"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Z3G-NN-N1W" firstAttribute="centerY" secondItem="H6O-ye-Q6q" secondAttribute="centerY" id="2ro-jw-8MS"/>
+                                    <constraint firstItem="Z3G-NN-N1W" firstAttribute="centerX" secondItem="H6O-ye-Q6q" secondAttribute="centerX" id="4xh-tO-jVJ"/>
+                                    <constraint firstItem="Z3G-NN-N1W" firstAttribute="leading" secondItem="H6O-ye-Q6q" secondAttribute="leading" constant="18" id="EMV-gP-d2j"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z3G-NN-N1W" secondAttribute="trailing" constant="18" id="oC4-qE-j2z"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zf1-WV-vnp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="H6O-ye-Q6q" firstAttribute="top" secondItem="AcK-iL-j7m" secondAttribute="top" id="1xA-7S-3A2"/>
+                            <constraint firstAttribute="bottom" secondItem="H6O-ye-Q6q" secondAttribute="bottom" id="Iei-N6-e0G"/>
+                            <constraint firstItem="H6O-ye-Q6q" firstAttribute="leading" secondItem="Zf1-WV-vnp" secondAttribute="leading" id="QAd-18-c0P"/>
+                            <constraint firstItem="Zf1-WV-vnp" firstAttribute="trailing" secondItem="H6O-ye-Q6q" secondAttribute="trailing" id="nbl-0q-wmd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancleButton" destination="9mi-GN-iR3" id="tud-L0-Shb"/>
+                        <outlet property="okButton" destination="ahi-XF-U72" id="EiS-No-rb4"/>
+                        <outlet property="vwMain" destination="H6O-ye-Q6q" id="Rsl-Tp-OEQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bCt-XI-Z04" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="248" y="78"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

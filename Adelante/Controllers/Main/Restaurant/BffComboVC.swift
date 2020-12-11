@@ -13,14 +13,15 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var selectedcategory = 0
     var selectedSection = 0
     var expendedCell = -1
+    
     @IBOutlet weak var tblBFFCombo: UITableView!
     var bffComboData = [bffCombo]()
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addNavBarImage(isLeft: true, isRight: true)
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
@@ -41,7 +42,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     //MARK: - tblview Mathod
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (bffComboData[section].isExpanded == true) ? bffComboData[section].subCombo.count : 0
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,20 +58,17 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         }
         
         cell.selectedBtn = {
-            
             for i in 0...self.bffComboData[indexPath.section].subCombo.count
             {
                 if i == self.bffComboData[indexPath.section].subCombo.count {
                     self.bffComboData[indexPath.section].subCombo[indexPath.row].isSelected = true
                     self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
-                    
                 }
                 else
                 {
                     self.bffComboData[indexPath.section].subCombo[i].isSelected = false
                 }
             }
-            
         }
         
         return cell

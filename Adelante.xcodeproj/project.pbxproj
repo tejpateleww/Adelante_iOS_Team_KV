@@ -70,6 +70,21 @@
 		8170CAF7257A10B500B24B7A /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */; };
 		8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAF8257A142200B24B7A /* CustomTextView.swift */; };
 		8170CAFF257A771000B24B7A /* MyFoodlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */; };
+		817A16F425839D7100C11BB2 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16E625839D7000C11BB2 /* Nunito-ExtraBold.ttf */; };
+		817A16F525839D7100C11BB2 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16E725839D7000C11BB2 /* Nunito-Black.ttf */; };
+		817A16F625839D7100C11BB2 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16E825839D7000C11BB2 /* Nunito-SemiBoldItalic.ttf */; };
+		817A16F725839D7100C11BB2 /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16E925839D7000C11BB2 /* Nunito-LightItalic.ttf */; };
+		817A16F825839D7100C11BB2 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16EA25839D7000C11BB2 /* Nunito-BoldItalic.ttf */; };
+		817A16F925839D7100C11BB2 /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16EB25839D7100C11BB2 /* Nunito-ExtraLightItalic.ttf */; };
+		817A16FA25839D7100C11BB2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16EC25839D7100C11BB2 /* Nunito-Bold.ttf */; };
+		817A16FB25839D7100C11BB2 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16ED25839D7100C11BB2 /* Nunito-Regular.ttf */; };
+		817A16FC25839D7100C11BB2 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16EE25839D7100C11BB2 /* Nunito-BlackItalic.ttf */; };
+		817A16FD25839D7100C11BB2 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16EF25839D7100C11BB2 /* Nunito-SemiBold.ttf */; };
+		817A16FE25839D7100C11BB2 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16F025839D7100C11BB2 /* Nunito-Italic.ttf */; };
+		817A16FF25839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16F125839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf */; };
+		817A170025839D7100C11BB2 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16F225839D7100C11BB2 /* Nunito-ExtraLight.ttf */; };
+		817A170125839D7100C11BB2 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817A16F325839D7100C11BB2 /* Nunito-Light.ttf */; };
+		817A171A2583ABF900C11BB2 /* applyPromoCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A17192583ABF900C11BB2 /* applyPromoCodeVC.swift */; };
 		819B0C94257E101700289BBF /* MyOrderDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B0C93257E101700289BBF /* MyOrderDetailsVC.swift */; };
 		81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */; };
 		81B447F325760D2300A0724E /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B447F225760D2300A0724E /* CustomLabel.swift */; };
@@ -184,6 +199,21 @@
 		8170CAED257A10B500B24B7A /* ChangePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		8170CAF8257A142200B24B7A /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		8170CAFE257A770F00B24B7A /* MyFoodlistVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFoodlistVC.swift; sourceTree = "<group>"; };
+		817A16E625839D7000C11BB2 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		817A16E725839D7000C11BB2 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
+		817A16E825839D7000C11BB2 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		817A16E925839D7000C11BB2 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
+		817A16EA25839D7000C11BB2 /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
+		817A16EB25839D7100C11BB2 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		817A16EC25839D7100C11BB2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		817A16ED25839D7100C11BB2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		817A16EE25839D7100C11BB2 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		817A16EF25839D7100C11BB2 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		817A16F025839D7100C11BB2 /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic.ttf"; sourceTree = "<group>"; };
+		817A16F125839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		817A16F225839D7100C11BB2 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
+		817A16F325839D7100C11BB2 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
+		817A17192583ABF900C11BB2 /* applyPromoCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = applyPromoCodeVC.swift; sourceTree = "<group>"; };
 		819B0C93257E101700289BBF /* MyOrderDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDetailsVC.swift; sourceTree = "<group>"; };
 		81B06F7C257905D4003AD48B /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		81B447F225760D2300A0724E /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
@@ -298,18 +328,16 @@
 		8105FDB02574CE76008D36D6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				18F369502580ADFE00992FCD /* BffComboVC.swift */,
+				817A16CD25836F1500C11BB2 /* Checkout & Payment */,
+				817A16CC25836F0300C11BB2 /* Restaurant */,
 				81E6720D257E502100DCE9DA /* Home */,
 				819B0C95257E101C00289BBF /* Profile */,
 				819B0C92257E0FF200289BBF /* MyOrders */,
 				8170CAEB257A10B500B24B7A /* CategoryVC.swift */,
 				8170CAEC257A10B500B24B7A /* CommonWebViewVC.swift */,
 				8170CAE9257A10B400B24B7A /* FeedbackVC.swift */,
-				81E67212257E68BB00DCE9DA /* checkOutVC.swift */,
-				18F369522580ADFF00992FCD /* sortPopupVC.swift */,
 				8170CAE8257A10B400B24B7A /* NotificationVC.swift */,
 				8170CAE7257A10B400B24B7A /* RateReviewVC.swift */,
-				18F369512580ADFE00992FCD /* commonPopup.swift */,
 				8170CAE5257A10B400B24B7A /* RestaurantReviewVC.swift */,
 				8105FDBA2574D0A9008D36D6 /* SearchVC.swift */,
 				8105FDC02574D0F9008D36D6 /* FavouritesVC.swift */,
@@ -344,6 +372,7 @@
 		8105FDD525751630008D36D6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				817A16E525839CD300C11BB2 /* Nunito */,
 				8105FDD625751643008D36D6 /* Aileron */,
 				8105FDE725751643008D36D6 /* Nexa */,
 			);
@@ -391,6 +420,45 @@
 				8105FDF325751644008D36D6 /* NexaBook.otf */,
 			);
 			path = Nexa;
+			sourceTree = "<group>";
+		};
+		817A16CC25836F0300C11BB2 /* Restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				81E6720E257E506100DCE9DA /* RestaurantListVC.swift */,
+				81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */,
+				18F369502580ADFE00992FCD /* BffComboVC.swift */,
+			);
+			path = Restaurant;
+			sourceTree = "<group>";
+		};
+		817A16CD25836F1500C11BB2 /* Checkout & Payment */ = {
+			isa = PBXGroup;
+			children = (
+				81E67212257E68BB00DCE9DA /* checkOutVC.swift */,
+			);
+			path = "Checkout & Payment";
+			sourceTree = "<group>";
+		};
+		817A16E525839CD300C11BB2 /* Nunito */ = {
+			isa = PBXGroup;
+			children = (
+				817A16E725839D7000C11BB2 /* Nunito-Black.ttf */,
+				817A16EE25839D7100C11BB2 /* Nunito-BlackItalic.ttf */,
+				817A16EC25839D7100C11BB2 /* Nunito-Bold.ttf */,
+				817A16EA25839D7000C11BB2 /* Nunito-BoldItalic.ttf */,
+				817A16E625839D7000C11BB2 /* Nunito-ExtraBold.ttf */,
+				817A16F125839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf */,
+				817A16F225839D7100C11BB2 /* Nunito-ExtraLight.ttf */,
+				817A16EB25839D7100C11BB2 /* Nunito-ExtraLightItalic.ttf */,
+				817A16F025839D7100C11BB2 /* Nunito-Italic.ttf */,
+				817A16F325839D7100C11BB2 /* Nunito-Light.ttf */,
+				817A16E925839D7000C11BB2 /* Nunito-LightItalic.ttf */,
+				817A16ED25839D7100C11BB2 /* Nunito-Regular.ttf */,
+				817A16EF25839D7100C11BB2 /* Nunito-SemiBold.ttf */,
+				817A16E825839D7000C11BB2 /* Nunito-SemiBoldItalic.ttf */,
+			);
+			path = Nunito;
 			sourceTree = "<group>";
 		};
 		819B0C92257E0FF200289BBF /* MyOrders */ = {
@@ -584,6 +652,9 @@
 		81DB713C257F3AB100606EE2 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
+				817A17192583ABF900C11BB2 /* applyPromoCodeVC.swift */,
+				18F369512580ADFE00992FCD /* commonPopup.swift */,
+				18F369522580ADFF00992FCD /* sortPopupVC.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -592,8 +663,6 @@
 			isa = PBXGroup;
 			children = (
 				8105FDB72574D08E008D36D6 /* HomeVC.swift */,
-				81E6720E257E506100DCE9DA /* RestaurantListVC.swift */,
-				81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -678,6 +747,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8105FE0E25751644008D36D6 /* NexaLight.otf in Resources */,
+				817A16FE25839D7100C11BB2 /* Nunito-Italic.ttf in Resources */,
 				8105FDAE2574CE3C008D36D6 /* Auth.storyboard in Resources */,
 				8105FE0725751644008D36D6 /* Nexa Bold.otf in Resources */,
 				81B447F5257613DB00A0724E /* Nexa Regular.otf in Resources */,
@@ -685,25 +755,36 @@
 				8105FE0C25751644008D36D6 /* Nexa Light.otf in Resources */,
 				8105FE0A25751644008D36D6 /* NexaThinItalic.otf in Resources */,
 				8105FDF625751644008D36D6 /* Aileron-ThinItalic.otf in Resources */,
+				817A170025839D7100C11BB2 /* Nunito-ExtraLight.ttf in Resources */,
 				8105FE0225751644008D36D6 /* Aileron-Black.otf in Resources */,
 				8105FE0525751644008D36D6 /* NexaBookItalic.otf in Resources */,
 				8105FE0925751644008D36D6 /* NexaLightItalic.otf in Resources */,
+				817A16F925839D7100C11BB2 /* Nunito-ExtraLightItalic.ttf in Resources */,
+				817A170125839D7100C11BB2 /* Nunito-Light.ttf in Resources */,
 				81DB713B257F3AAB00606EE2 /* Popup.storyboard in Resources */,
+				817A16F825839D7100C11BB2 /* Nunito-BoldItalic.ttf in Resources */,
 				8105FDFE25751644008D36D6 /* Aileron-SemiBold.otf in Resources */,
 				8105FE0825751644008D36D6 /* NexaBoldItalic.otf in Resources */,
+				817A16FD25839D7100C11BB2 /* Nunito-SemiBold.ttf in Resources */,
 				8105FDF425751644008D36D6 /* Aileron-Light.otf in Resources */,
 				8105FDFC25751644008D36D6 /* Aileron-HeavyItalic.otf in Resources */,
+				817A16FB25839D7100C11BB2 /* Nunito-Regular.ttf in Resources */,
+				817A16FF25839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				8105FDF725751644008D36D6 /* Aileron-UltraLight.otf in Resources */,
 				8105FDFB25751644008D36D6 /* Aileron-Thin.otf in Resources */,
 				8105FE0025751644008D36D6 /* Aileron-Italic.otf in Resources */,
 				8105FDFA25751644008D36D6 /* Aileron-LightItalic.otf in Resources */,
 				8105FDF525751644008D36D6 /* Aileron-BoldItalic.otf in Resources */,
+				817A16F625839D7100C11BB2 /* Nunito-SemiBoldItalic.ttf in Resources */,
 				8105FDF925751644008D36D6 /* Aileron-UltraLightItalic.otf in Resources */,
 				8105FE0125751644008D36D6 /* Aileron-BlackItalic.otf in Resources */,
+				817A16FA25839D7100C11BB2 /* Nunito-Bold.ttf in Resources */,
 				8105FE0D25751644008D36D6 /* NexaBold.otf in Resources */,
 				8105FDF825751644008D36D6 /* Aileron-Heavy.otf in Resources */,
+				817A16FC25839D7100C11BB2 /* Nunito-BlackItalic.ttf in Resources */,
 				81CFFD892574C60D005AA86A /* Assets.xcassets in Resources */,
 				8105FDC32574D3E1008D36D6 /* Main.storyboard in Resources */,
+				817A16F425839D7100C11BB2 /* Nunito-ExtraBold.ttf in Resources */,
 				8105FE0625751644008D36D6 /* NexaBlack.otf in Resources */,
 				8105FE0F25751644008D36D6 /* NexaBook.otf in Resources */,
 				8105FDFD25751644008D36D6 /* Aileron-SemiBoldItalic.otf in Resources */,
@@ -711,6 +792,8 @@
 				8105FE0325751644008D36D6 /* Aileron-Regular.otf in Resources */,
 				8105FE0B25751644008D36D6 /* NexaThin.otf in Resources */,
 				8105FE0425751644008D36D6 /* NexaBlackItalic.otf in Resources */,
+				817A16F725839D7100C11BB2 /* Nunito-LightItalic.ttf in Resources */,
+				817A16F525839D7100C11BB2 /* Nunito-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,6 +854,7 @@
 				8105FDD325751289008D36D6 /* customButton.swift in Sources */,
 				81CFFD842574C60D005AA86A /* UISearchbar+Extension.swift in Sources */,
 				81CFFD7C2574C60D005AA86A /* UIColor+Extension.swift in Sources */,
+				817A171A2583ABF900C11BB2 /* applyPromoCodeVC.swift in Sources */,
 				81CFFD7F2574C60D005AA86A /* UIButton+Extension.swift in Sources */,
 				81CFFD882574C60D005AA86A /* GradientButton.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,

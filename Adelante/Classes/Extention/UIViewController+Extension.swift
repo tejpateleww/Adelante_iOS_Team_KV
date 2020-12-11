@@ -108,7 +108,9 @@ extension UIViewController {
     }
     
     @objc func dismissView(gesture: UISwipeGestureRecognizer) {
+        
         UIView.animate(withDuration: 0.1) {
+            
            // self.dismiss(animated: true, completion: nil)
             if let theWindow = UIApplication.shared.keyWindow {
                 gesture.view?.frame = CGRect(x:theWindow.frame.width - 15 , y: theWindow.frame.height - 15, width: 10 , height: 10)
@@ -132,7 +134,10 @@ extension UIViewController {
         } else if sender.state == UIGestureRecognizer.State.ended || sender.state == UIGestureRecognizer.State.cancelled {
             if touchPoint.y - initialTouchPoint.y > 100 {
                 print(">100",touchPoint)
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionHome"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionRest"), object: nil)
+                })
             } else {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)

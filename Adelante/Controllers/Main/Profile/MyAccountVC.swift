@@ -16,7 +16,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var myACDetailsARray:[String] = ["","","","","","",""]
     var customTabBarController: CustomTabBarVC?
     var allDetails = [myAccountDetails]()
-    var expendedCell = 0
+    var expendedCell = -1
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
        // MARK: - ViewController Lifecycle
@@ -24,7 +24,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         super.viewDidLoad()
         addNavBarImage(isLeft: true, isRight: true)
         
-        allDetails = [myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
+        allDetails = [
+//            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
                       
                       myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "Payment", subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
                       myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "My Foodlist", subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
@@ -54,37 +55,54 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         tblAcountDetails.reloadData()
     }
     
+    func showLogout() {
+            
+            let alertController = UIAlertController(title: AppName,
+                                                    message: GlobalStrings.Alert_logout.rawValue,
+                                                    preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alertController.addAction(UIAlertAction(title: "Logout", style: .default){ _ in
+//                appDel.performLogout()
+                userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                appDel.navigateToLogin()
+            })
+            
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true)
+            }
+            
+            
+    
+    }
     @objc  func btnExpand(_ sender : UIButton) {
            switch sender.tag {
-           case 0:
-               print(sender.tag)
-               customTabBarController?.selectedIndex = 2
+//           case 0:
+//               print(sender.tag)
+//               customTabBarController?.selectedIndex = 2
            //
-           case 1:
+           case 0:
                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
                self.navigationController?.pushViewController(controller, animated: true)
             
                print(sender.tag)
-           case 2:
+           case 1:
                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyFoodlistVC.storyboardID) as! MyFoodlistVC
                self.navigationController?.pushViewController(controller, animated: true)
             
                print(sender.tag)
+           case 2:
+//               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+//               controller.strNavTitle = "About Us"
+//               self.navigationController?.pushViewController(controller, animated: true)
+               print(sender.tag)
            case 3:
-               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-               controller.strNavTitle = "About Us"
-               self.navigationController?.pushViewController(controller, animated: true)
                print(sender.tag)
            case 4:
-               print(sender.tag)
-           case 5:
                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ChangePasswordVC.storyboardID) as! ChangePasswordVC
                self.navigationController?.pushViewController(controller, animated: true)
                print(sender.tag)
-           case 6:
-               
-               print(sender.tag)
-           case 7:
+           case 5:
+            showLogout()
                print(sender.tag)
            default:
                print(sender.tag)
@@ -178,7 +196,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 {
+        if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
@@ -191,7 +209,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             default:
                 print(indexPath.row)
             }
-        } else if indexPath.section == 4 {
+        } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: FeedbackVC.storyboardID) as! FeedbackVC

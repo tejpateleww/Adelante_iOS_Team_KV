@@ -55,7 +55,7 @@ class BaseViewController: UIViewController {
         controller.navigationItem.titleView = label
       //navigationController?.navigationBar.setTitleVerticalPositionAdjustment(5, for: UIBarMetrics.default) // set any number you want between -20 to 15
 
-        controller.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(5, for: UIBarMetrics.default)
+//        controller.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(5, for: UIBarMetrics.default)
         controller.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         controller.navigationController?.navigationBar.shadowImage = UIImage()
 //        controller.navigationController?.navigationBar.backgroundColor = .red
@@ -99,6 +99,7 @@ class BaseViewController: UIViewController {
             vwNavHomeTopBar.addSubview(verticalStack)
             controller.navigationItem.titleView = vwNavHomeTopBar
         }
+        
         if leftImage != "" {
             if leftImage == NavItemsLeft.back.value {
                 let btnLeft = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -141,7 +142,7 @@ class BaseViewController: UIViewController {
                                     let btnLike = UIButton.init()
                                     btnLike.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
                                     btnLike.setImage(UIImage.init(named: "ic_RestaurantdisLiked"), for: .normal)
-                    btnLike.setImage(UIImage.init(named: ""), for: .selected)
+                    btnLike.setImage(UIImage(), for: .selected)
                     btnLike.addTarget(self, action: #selector(likeDislikeReaustrant(_:)), for: .touchUpInside)
                                   //  btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
                                     btnLike.layer.setValue(controller, forKey: "controller")

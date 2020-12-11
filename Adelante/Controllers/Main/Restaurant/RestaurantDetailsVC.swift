@@ -8,11 +8,23 @@
 
 import UIKit
 
+struct structSections {
+    
+    var strTitle:String
+    var isExpanded:Bool
+    var rowCount:Int
+    
+    init(strTitle:String, isExpanded:Bool, rowCount:Int) {
+        self.strTitle = strTitle
+        self.isExpanded = isExpanded
+        self.rowCount = rowCount
+    }
+}
 class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    let arrSections = ["Menu","Sandwiches","Salad"]
+    var arrSections = [structSections(strTitle:"Menu",isExpanded:false, rowCount: 3), structSections(strTitle:"Sandwiches",isExpanded:true, rowCount: 5), structSections(strTitle:"Salad",isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
@@ -35,6 +47,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.restaurantDetails.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.liked.value], isTranslucent: true, isShowHomeTopBar: false)
         tblRestaurantDetails.delegate = self
         tblRestaurantDetails.dataSource = self
+        tblRestaurantDetails.estimatedRowHeight = 20
         tblRestaurantDetails.reloadData()
     }
     
@@ -52,23 +65,45 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantReviewVC.storyboardID) as! RestaurantReviewVC
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc  func btnExpand(_ sender : UIButton) {
+        for i in 0..<arrSections.count {
+            if sender.tag != 0 {
+                if sender.tag == i {
+                    if arrSections[i].isExpanded == true {
+                        arrSections[i].isExpanded = false
+                        break
+                    } else {
+                        arrSections[i].isExpanded = true
+                    }
+                } else {
+                    arrSections[i].isExpanded = false
+                }
+            }
+        }
+//        if arrSections[sender.tag].isExpanded! {
+//            arrSections[sender.tag].isExpanded = false
+//        } else {
+//            arrSections[sender.tag].isExpanded = true
+//        }
         
+        DispatchQueue.main.async {
+            self.tblRestaurantDetails.reloadData()
+//            self.heightTblRestDetails.constant = self.tblRestaurantDetails.contentSize.height
+//            self.view.layoutIfNeeded()
+        }
     }
     // MARK: - UITableViewDelegates And Datasource
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.arrSections.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 3
-        case 1:
-            return 5
-        case 2:
-            return 8
-        default:
-            return 0
+        if section == 0 {
+            return arrSections[section].rowCount
         }
+        return arrSections[section].isExpanded == true ? arrSections[section].rowCount : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,8 +112,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             cell.selectionStyle = .none
             cell.customize = {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                                  self.navigationController?.pushViewController(controller, animated: true)
+                self.navigationController?.pushViewController(controller, animated: true)
             }
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
@@ -92,10 +128,25 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         let label = UILabel()
         label.frame = CGRect.init(x: 20, y: 14, width: headerView.frame.width-40, height: 20)
         label.center.y = headerView.frame.size.height / 2
-        label.text = arrSections[section]
+            label.text = arrSections[section].strTitle
         label.font = CustomFont.NexaBold.returnFont(20)
         label.textColor = colors.black.value
         headerView.addSubview(label)
+        
+        if section != 0 {
+            let expandImageView = UIImageView()
+            expandImageView.frame = CGRect.init(x: headerView.frame.width - 35.66, y: 34.31, width: 16.66, height: 8.38)
+            expandImageView.center.y = headerView.frame.size.height / 2
+            expandImageView.image = UIImage(named: "ic_expand")
+            headerView.addSubview(expandImageView)
+            
+            let expandButton = UIButton()
+            expandButton.frame = CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+            
+            expandButton.tag = section
+            expandButton.addTarget(self, action: #selector(btnExpand(_:)), for: .touchUpInside)
+            headerView.addSubview(expandButton)
+        }
         return headerView
     }
     
@@ -105,22 +156,26 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-//             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-//                   self.navigationController?.pushViewController(controller, animated: true)
-            break
-        case 1:
-            break
-        default:
-            break
-        }
-    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//            return UITableView.automaticDimension
+//    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        switch indexPath.section {
+//        case 0:
+////             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+////                   self.navigationController?.pushViewController(controller, animated: true)
+//            break
+//        case 1:
+//            break
+//        default:
+//            break
+//        }
+//    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
          let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 1))
         footerView.backgroundColor = UIColor(hexString: "#707070").withAlphaComponent(0.2)
-       
         return footerView
     }
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -132,9 +187,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
 //        return tableView.estimatedRowHeight
 //    }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return arrSections[section]
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return arrSections[section].strTitle
+//    }
     
     // MARK: - Api Calls
 }
