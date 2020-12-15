@@ -35,16 +35,14 @@ enum AppStoryboard : String {
     func initialViewController() -> UIViewController? {
         return instance.instantiateInitialViewController()
     }
-    
 }
 
 /* Usage :
  
-  //check UIViewController+Extension for instantiate func.
+// check UIViewController+Extension for instantiate func.
  let greenScene = GreenVC.instantiate(fromAppStoryboard: .Main)
 
  let greenScene = AppStoryboard.Main.viewController(viewControllerClass: GreenVC.self)
 
  let greenScene = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: GreenVC.storyboardID)
- 
- */
+*/

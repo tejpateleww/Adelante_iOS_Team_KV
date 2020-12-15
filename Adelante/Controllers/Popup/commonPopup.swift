@@ -22,8 +22,19 @@ class commonPopup: UIViewController {
     @IBOutlet weak var lblDescription: commonPopUPLabel!
     @IBOutlet weak var btnBGView: UIView!
     @IBOutlet weak var submitButton: commonPopupButton!
+    @IBOutlet weak var btnCancel: commonPopupButton!
     
     var btnSubmit : (() -> ())?
+    
+    var isHideCancelButton = true
+    var isHideSubmitButton = true
+    var submitBtnTitle = ""
+    var cancelBtnTitle = ""
+    var strDescription = ""
+    
+    @IBOutlet weak var vwCancel: UIView!
+    @IBOutlet weak var vwSubmit: UIView!
+    
     // MARK: - UIView Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,8 +94,7 @@ class commonPopup: UIViewController {
         }
         
     }
-    
-    
+        
     func setUp() {
         tap = UITapGestureRecognizer(target: self, action: #selector(dismissView(_:)))
         view.addGestureRecognizer(tap)
@@ -92,19 +102,35 @@ class commonPopup: UIViewController {
         
         imgStatus.image = UIImage(named: "ic_popupPaymentSucessful")
         lblTitle.text = "Payment Successful"
-        lblDescription.text = "Your order has been placed"
+        lblDescription.text = "Your order has been placed."
         submitButton.setTitle("OK", for: .normal)
         submitButton.backgroundColor = colors.appGreenColor.value
+        btnCancel.backgroundColor = colors.appGreenColor.value
+        
         if isCancleOrder {
             imgStatus.image = UIImage(named: "ic_popupCancleOrder")
             lblTitle.text = "Are you Sure?"
-            lblDescription.text = "Do you really want  to cancel the order."
+            lblDescription.text = "Do you really want  to cancel the order?"
             submitButton.setTitle("Cancel Order", for: .normal)
             submitButton.backgroundColor = UIColor(hexString: "#FF172F")
+            btnCancel.backgroundColor = UIColor(hexString: "#FF172F")
         }
         
-        
+        if submitBtnTitle != ""
+        {
+            submitButton.setTitle(submitBtnTitle, for: .normal)
+        }
+        if cancelBtnTitle != "" {
+            btnCancel.setTitle(cancelBtnTitle, for: .normal)
+        }
+        if strDescription != ""
+        {
+            lblDescription.text = strDescription
+        }
+        self.vwCancel.isHidden = isHideCancelButton
+        self.vwSubmit.isHidden = isHideSubmitButton
     }
+    
     // MARK: - IBActions
     @objc func dismissView(_ gesture : UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
@@ -118,5 +144,8 @@ class commonPopup: UIViewController {
         }
     }
     
-    
+    @IBAction func btnCancelAction(_ sender: commonPopupButton) {
+            self.dismiss(animated: true, completion: nil)
+            view.removeGestureRecognizer(tap)
+    }
 }

@@ -88,7 +88,10 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        
+        controller.isHideCancelButton = true
+        controller.isHideSubmitButton = false
                //controller.modalPresentationStyle = .fullScreen
         controller.isCancleOrder = true
                controller.btnSubmit = {
@@ -128,6 +131,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
     // MARK: - Api Calls
     
 }

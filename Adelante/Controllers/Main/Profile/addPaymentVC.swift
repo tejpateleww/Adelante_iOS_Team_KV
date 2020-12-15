@@ -154,8 +154,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPaymentMethods = indexPath.row
         tblPaymentMethod.reloadData()
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        
+        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
         //controller.modalPresentationStyle = .fullScreen
+        controller.isHideCancelButton = true
+        controller.isHideSubmitButton = false
         controller.btnSubmit = {
             self.dismiss(animated: true, completion: nil)
             // self.navigationController?.popViewController(animated: true)

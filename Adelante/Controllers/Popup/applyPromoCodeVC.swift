@@ -101,6 +101,6 @@ class applyPromoCodeVC: UIViewController {
       }
     @IBAction func CancleButtonAction(_ sender: commonPopupButton) {
         self.dismiss(animated: true, completion: nil)
-         }
+    }
     // MARK: - Api Calls
 }

@@ -46,50 +46,56 @@ enum CustomFont{
             return UIFont(name: "Aileron-Black", size: font)!
         case .AileronRegular:
             return UIFont(name: "Aileron-Regular", size: font)!
-        case .NexaBlackItalic:
-            return UIFont(name: "Nexa-BlackItalic", size: font)!
-        case .NexaBookItalic:
-            return UIFont(name: "Nexa-BookItalic", size: font)!
-        case .NexaBlack:
-            return UIFont(name: "Nexa-Black", size: font)!
-        case .NexaBoldItalic:
-            return UIFont(name: "Nexa-BoldItalic", size: font)!
-        case .NexaLightItalic:
-            return UIFont(name: "Nexa-LightItalic", size: font)!
-        case .NexaThinItalic:
-            return UIFont(name: "Nexa-ThinItalic", size: font)!
-        case .NexaThin:
-            return UIFont(name: "Nexa-Thin", size: font)!
-        case .NexaLight:
-            return UIFont(name: "Nexa-Light", size: font)!
-        case .NexaBold:
-            return UIFont(name: "NexaBold", size: font)!
-        case .NexaBook:
-            return UIFont(name: "Nexa-Book", size: font)!
-        case .NexaRegular:
-            return UIFont(name: "NexaRegular", size: font)!
+            
+        // Nexa
 //        case .NexaBlackItalic:
-//            return UIFont(name: "Nunito-BlackItalic", size: font)!
+//            return UIFont(name: "Nexa-BlackItalic", size: font)!
 //        case .NexaBookItalic:
-//            return UIFont(name: "Nunito-BookItalic", size: font)!
+//            return UIFont(name: "Nexa-BookItalic", size: font)!
 //        case .NexaBlack:
-//            return UIFont(name: "Nunito-Black", size: font)!
+//            return UIFont(name: "Nexa-Black", size: font)!
 //        case .NexaBoldItalic:
-//            return UIFont(name: "Nunito-BoldItalic", size: font)!
+//            return UIFont(name: "Nexa-BoldItalic", size: font)!
 //        case .NexaLightItalic:
-//            return UIFont(name: "Nunito-LightItalic", size: font)!
+//            return UIFont(name: "Nexa-LightItalic", size: font)!
 //        case .NexaThinItalic:
-//            return UIFont(name: "Nunito-ThinItalic", size: font)!
+//            return UIFont(name: "Nexa-ThinItalic", size: font)!
 //        case .NexaThin:
-//            return UIFont(name: "Nunito-Thin", size: font)!
+//            return UIFont(name: "Nexa-Thin", size: font)!
 //        case .NexaLight:
-//            return UIFont(name: "Nunito-Light", size: font)!
+//            return UIFont(name: "Nexa-Light", size: font)!
 //        case .NexaBold:
-//            return UIFont(name: "Nunito-Bold", size: font)!
+//            return UIFont(name: "NexaBold", size: font)!
 //        case .NexaBook:
-//            return UIFont(name: "Nunito-Book", size: font)!
+//            return UIFont(name: "Nexa-Book", size: font)!
 //        case .NexaRegular:
-//            return UIFont(name: "Nunito-Regular", size: font)!
+//            return UIFont(name: "NexaRegular", size: font)!
+            
+        // Nunito Replacement
+        case .NexaBlackItalic:
+            return UIFont(name: "Nunito-BlackItalic", size: font)!
+        case .NexaBookItalic:
+            return UIFont(name: "Nunito-BookItalic", size: font)!
+        case .NexaBlack:
+            return UIFont(name: "Nunito-Black", size: font)!
+        case .NexaBoldItalic:
+            return UIFont(name: "Nunito-BoldItalic", size: font)!
+        case .NexaLightItalic:
+            return UIFont(name: "Nunito-LightItalic", size: font)!
+        case .NexaThinItalic:
+            return UIFont(name: "Nunito-ThinItalic", size: font)!
+        case .NexaThin:
+            return UIFont(name: "Nunito-Thin", size: font)!
+        case .NexaLight:
+            return UIFont(name: "Nunito-Light", size: font)!
+        case .NexaBold:
+            return UIFont(name: "Nunito-Bold", size: font)!
+        case .NexaBook:
+            return UIFont(name: "Nunito-Book", size: font)!
+        case .NexaRegular:
+            return UIFont(name: "Nunito-Regular", size: font)!
+            
+        // Nunito
         case .NunitoBlack:
             return UIFont(name: "Nunito-Black", size: font)!
         case .NunitoBlackItalic:

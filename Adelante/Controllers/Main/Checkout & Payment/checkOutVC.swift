@@ -89,6 +89,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         }
         
     }
+    
     //MARK: -btnActions
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: applyPromoCodeVC.storyboardID) as! applyPromoCodeVC
@@ -106,9 +107,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             self.LblTotlaPrice.text = "$37"
             self.tblOrderDetails.reloadData()
         }
-      
         self.present(controller, animated: true, completion: nil)
     }
+    
     @IBAction func placeOrderBtn(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID)
         self.navigationController?.pushViewController(controller, animated: true)
@@ -116,7 +117,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBAction func seeMenu(_ sender: submitButton) {
           let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
           self.navigationController?.pushViewController(controller, animated: true)
-      }
+    }
+    
     @IBAction func canclePromoCode(_ sender: myOrdersBtn) {
         lblPromoCode.isHidden = true
         btnCanclePromoCOde.isHidden = true
@@ -131,6 +133,23 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
        self.tblOrderDetails.reloadData()
     }
     
+    @IBAction func btnChangeLocationClicked(_ sender: Any) {
+        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        //controller.modalPresentationStyle = .fullScreen
+        controller.isHideCancelButton = false
+        controller.isHideSubmitButton = false
+        controller.submitBtnTitle = "OK"
+        controller.cancelBtnTitle = "Cancel"
+        controller.strDescription = "All items in your cart will be deleted. Do you really want to proceed further?"
+        controller.isCancleOrder = true
+        controller.btnSubmit = {
+            self.dismiss(animated: true, completion: nil)
+            // self.navigationController?.popViewController(animated: true)
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        self.present(controller, animated: true, completion: nil)
+    }
 }
 
 class orderDetailsCell : UITableViewCell {

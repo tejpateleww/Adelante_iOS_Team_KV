@@ -153,6 +153,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 49
     }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
