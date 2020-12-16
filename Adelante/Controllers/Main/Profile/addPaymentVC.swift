@@ -155,17 +155,19 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         selectedPaymentMethods = indexPath.row
         tblPaymentMethod.reloadData()
         
-        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-        //controller.modalPresentationStyle = .fullScreen
-        controller.isHideCancelButton = true
-        controller.isHideSubmitButton = false
-        controller.btnSubmit = {
-            self.dismiss(animated: true, completion: nil)
-            // self.navigationController?.popViewController(animated: true)
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID)
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
-        self.present(controller, animated: true, completion: nil)
+//        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+//        //controller.modalPresentationStyle = .fullScreen
+//        controller.isHideCancelButton = true
+//        controller.isHideSubmitButton = false
+//        controller.btnSubmit = {
+//            self.dismiss(animated: true, completion: nil)
+//            // self.navigationController?.popViewController(animated: true)
+//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID)
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
+//        self.present(controller, animated: true, completion: nil)
+        
+        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, viewController: self)
     }
     
     

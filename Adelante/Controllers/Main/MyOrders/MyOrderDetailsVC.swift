@@ -88,18 +88,19 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-        
-        controller.isHideCancelButton = true
-        controller.isHideSubmitButton = false
-               //controller.modalPresentationStyle = .fullScreen
-        controller.isCancleOrder = true
-               controller.btnSubmit = {
-                   self.dismiss(animated: true, completion: nil)
-                    self.navigationController?.popViewController(animated: true)
-                
-               }
-               self.present(controller, animated: true, completion: nil)
+//        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+//
+//        controller.isHideCancelButton = true
+//        controller.isHideSubmitButton = false
+//               //controller.modalPresentationStyle = .fullScreen
+//        controller.isCancleOrder = true
+//               controller.btnSubmit = {
+//                   self.dismiss(animated: true, completion: nil)
+//                    self.navigationController?.popViewController(animated: true)
+//
+//               }
+//               self.present(controller, animated: true, completion: nil)
+        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {
