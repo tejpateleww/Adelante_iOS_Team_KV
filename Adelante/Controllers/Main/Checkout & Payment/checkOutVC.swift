@@ -158,7 +158,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Do you want to choose other location for same restaurant?", isCancleOrder: false, viewController: self)
 
         // Do you want to choose other location for same restaurant?
-        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Different Outlets with same Restaurant going to listed, Are you sure to proceed ?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
+        // Different Outlets with same Restaurant going to listed, Are you sure to proceed ?
+        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Are you sure you want to choose another location for this restaurant chain or franchise?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
     }
     
     @IBAction func btnChangeRestaurantClicked(_ sender: Any) {
@@ -180,7 +181,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         
         
         // Do you want to choose other restaurant? All items in your cart will be deleted.
-        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Do you want to choose other Restaurant? Cart will be empty, Are you sure to proceed ?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
+        // Do you want to choose other Restaurant? Cart will be empty, Are you sure to proceed ?
+        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Changing restaurants will empty your cart. Are you sure you want to continue?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
     }
 }
 
