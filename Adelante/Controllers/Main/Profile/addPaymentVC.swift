@@ -166,10 +166,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
 //            self.navigationController?.pushViewController(controller, animated: true)
 //        }
 //        self.present(controller, animated: true, completion: nil)
+        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appGreenColor, viewController: self)
         
-        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, viewController: self)
+//        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appRedColor.value,cancelBtnColor: colors.appGreenColor.value ,viewController: self)
     }
-    
     
     //MARK: -btnAction
     @IBAction func placeOrderBtn(_ sender: submitButton) {

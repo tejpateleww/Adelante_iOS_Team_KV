@@ -35,6 +35,9 @@ class commonPopup: UIViewController {
     var strPopupTitle = ""
     var strPopupImage = ""
     
+    var submitBtnColor: colors!
+    var cancelBtnColor: colors!
+    
     @IBOutlet weak var vwCancel: UIView!
     @IBOutlet weak var vwSubmit: UIView!
     
@@ -96,14 +99,11 @@ class commonPopup: UIViewController {
                 self.view.bringSubviewToFront(vwMain)
             }
         }
-        
     }
         
     func setUp() {
         tap = UITapGestureRecognizer(target: self, action: #selector(dismissView(_:)))
         view.addGestureRecognizer(tap)
-        
-        
 //        imgStatus.image = UIImage(named: "ic_popupPaymentSucessful")
 //        lblTitle.text = "Payment Successful"
 //        lblDescription.text = "Your order has been placed."
@@ -130,18 +130,22 @@ class commonPopup: UIViewController {
         } else {
             imgStatus.image = UIImage()
         }
-        if isCancleOrder {
-            submitButton.backgroundColor = colors.appRedColor.value
-            btnCancel.backgroundColor = colors.appRedColor.value
-        } else {
-            submitButton.backgroundColor = colors.appGreenColor.value
-            btnCancel.backgroundColor = colors.appGreenColor.value
-        }
+//        if isCancleOrder {
+//            submitButton.backgroundColor = colors.appRedColor.value
+//            btnCancel.backgroundColor = colors.appRedColor.value
+//        } else {
+//            submitButton.backgroundColor = colors.appGreenColor.value
+//            btnCancel.backgroundColor = colors.appGreenColor.value
+//        }
+        
+        submitButton.backgroundColor = self.submitBtnColor.value
+        btnCancel.backgroundColor = self.cancelBtnColor.value
+        
         self.vwCancel.isHidden = isHideCancelButton
         self.vwSubmit.isHidden = isHideSubmitButton
     }
     
-    class func customAlert(isHideCancelButton: Bool,isHideSubmitButton : Bool,strSubmitTitle : String = "Yes",strCancelButtonTitle : String = "No",strDescription : String, strTitle:String, isShowImage:Bool, strImage:String, isCancleOrder : Bool = false, viewController : UIViewController) {
+    class func customAlert(isHideCancelButton: Bool,isHideSubmitButton : Bool,strSubmitTitle : String = "Yes",strCancelButtonTitle : String = "No",strDescription : String, strTitle:String, isShowImage:Bool, strImage:String, isCancleOrder : Bool = false, submitBtnColor: colors, cancelBtnColor: colors , viewController : UIViewController) {
         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
         //controller.modalPresentationStyle = .fullScreen
         controller.isHideCancelButton = isHideCancelButton
@@ -150,12 +154,14 @@ class commonPopup: UIViewController {
         controller.cancelBtnTitle = strCancelButtonTitle
         controller.strDescription = strDescription
         controller.strPopupTitle = strTitle
+        controller.submitBtnColor = submitBtnColor
+        controller.cancelBtnColor = cancelBtnColor
+        
         if isShowImage {
             controller.strPopupImage = strImage
         } else {
             controller.strPopupImage = ""
         }
-        
         controller.isCancleOrder = isCancleOrder
         controller.btnSubmit = {
 //            self.dismiss(animated: true, completion: nil)

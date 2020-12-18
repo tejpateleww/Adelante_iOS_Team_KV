@@ -35,6 +35,7 @@ class BaseViewController: UIViewController {
         
         controller.navigationController?.navigationBar.barTintColor = naviColor;
         controller.navigationController?.navigationBar.tintColor = colors.white.value;
+        
 //        if naviTitle == NavTitles.Home.value {
 //            controller.navigationItem.titleView = UIView()
 //        } else {

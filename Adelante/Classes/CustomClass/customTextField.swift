@@ -129,8 +129,8 @@ class floatTextField: SkyFloatingLabelTextField {
 //        self.textColor = colors.black.value
 //        self.titleFormatter = { $0 }
         self.titleColor = colors.black.value
-        self.lineHeight = 1.0
-        self.selectedLineHeight = 1.0
+        self.lineHeight = 0.0
+        self.selectedLineHeight = 0.0
         self.selectedTitleColor = colors.black.value
         self.lineColor = colors.forgotpassGreyColor.value
         self.selectedLineColor = colors.forgotpassGreyColor.value

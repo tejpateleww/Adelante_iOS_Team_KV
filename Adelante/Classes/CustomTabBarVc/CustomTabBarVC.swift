@@ -3,7 +3,6 @@
 //  corner&shadowTabbar
 //
 
-
 import UIKit
 
 class CustomTabBarVC: UITabBarController {
@@ -22,6 +21,7 @@ class CustomTabBarVC: UITabBarController {
 //        } else {
 //            view.backgroundColor = colors.white.value
 //        }
+        
         view.backgroundColor = colors.white.value
         view.layer.cornerRadius = 8
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

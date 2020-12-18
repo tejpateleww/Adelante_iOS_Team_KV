@@ -66,6 +66,11 @@ class RegisterViewController: UIViewController {
         
     }
    
+    
+    @IBAction func btnSignInClicked(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     //MARK :- Validation
     func validation() -> Bool
     {

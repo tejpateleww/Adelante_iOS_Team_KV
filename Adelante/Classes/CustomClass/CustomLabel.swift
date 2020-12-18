@@ -236,7 +236,7 @@ class commonPopupButton : UIButton {
 
 //MARK: -old
 
-class titleLabel : UILabel {
+class themeTitleLabel : UILabel {
     
     @IBInspectable var isWelcomeTitle:Bool = false
     
@@ -244,7 +244,7 @@ class titleLabel : UILabel {
         super.awakeFromNib()
         
         if isWelcomeTitle {
-            self.font = CustomFont.NexaRegular.returnFont(41)
+            self.font = CustomFont.NexaBold.returnFont(41)
             self.textAlignment = .left
             self.numberOfLines = 2
             self.lineBreakMode = .byTruncatingTail

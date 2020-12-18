@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //        FirebaseApp.configure()
         registerForPushNotifications()
         
-        
-            navigateToSplash()
+        navigateToSplash()
         
 //        printAppFonts()
         return true
@@ -53,7 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().barTintColor = UIColor.white
         UINavigationBar.appearance().isTranslucent = true
-        
     }
     
     func printAppFonts() {
