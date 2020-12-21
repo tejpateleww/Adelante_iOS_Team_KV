@@ -75,10 +75,10 @@ class customTextField: UITextField {
         didSet {
             if let image = rightImage {
                 rightViewMode = .always
-                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))  // w:22, h: 22
                 imageView.image = image
                 imageView.tintColor = tintColor
-                let view = UIView(frame : CGRect(x: 0, y: 0, width: 30, height: 22))
+                let view = UIView(frame : CGRect(x: 0, y: 0, width: 35, height: 22))
                 view.addSubview(imageView)
                 rightView = view
             }else{
@@ -86,6 +86,7 @@ class customTextField: UITextField {
             }
         }
     }
+    
     //MARK:- valid
     func valid(){
         self.textColor = .white
@@ -146,5 +147,3 @@ class floatTextField: SkyFloatingLabelTextField {
         }
     }
 }
-
-

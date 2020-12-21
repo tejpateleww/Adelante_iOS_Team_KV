@@ -70,7 +70,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 }
             }
         }
-        
+        cell.selectionStyle = .none
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -83,7 +83,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell = cell2
             }
             
-            
+            cell.selectionStyle = .none
             return cell
         case 1:
             let cell = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
@@ -91,6 +91,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.lblcardDetails.text = "Paypal"
             cell.lblExpiresDate.text = "Default method"
             cell.selectPaymentMethodButton.isHidden = false
+            cell.selectionStyle = .none
             return cell
         default:
             return UITableViewCell()

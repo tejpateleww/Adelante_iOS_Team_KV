@@ -144,6 +144,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblAcountDetails.dequeueReusableCell(withIdentifier: myAccountSubDetails.reuseIdentifier, for: indexPath) as! myAccountSubDetails
         cell.lblAccountSubDetails.text = allDetails[indexPath.section].subDetails![indexPath.row].subAccountTitle
+        cell.selectionStyle = .none
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {

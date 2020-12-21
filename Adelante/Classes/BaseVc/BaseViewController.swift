@@ -46,6 +46,8 @@ class BaseViewController: UIViewController {
         
       // let viewForNavigationTitle = UIView()
        // viewForNavigationTitle.frame.size = navigationItem.titleView?.frame.size as! CGSize
+        
+        
         let label = navigationTitleLabel()
         label.text = naviTitle
         label.textColor = colors.black.value

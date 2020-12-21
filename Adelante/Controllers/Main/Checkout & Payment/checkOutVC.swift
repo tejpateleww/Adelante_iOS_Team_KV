@@ -70,11 +70,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 cell.lbltotalCount.text = "\(Int(cell.lbltotalCount.text!)! + 1)"
                 
             }
+            cell.selectionStyle = .none
             return cell
         case tblOrderDetails:
             let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: orderDetailsCell.reuseIdentifier, for: indexPath) as! orderDetailsCell
             cell.lblTitle.text = arrayForTitle[indexPath.row]
             cell.lblPrice.text = "$\(arrayForPrice[indexPath.row])"
+            cell.selectionStyle = .none
             return cell
         default:
             return UITableViewCell()
@@ -94,6 +96,10 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     //MARK: -btnActions
+    @objc func btnSubmitCommonPopupClicked() {
+        
+    }
+    
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: applyPromoCodeVC.storyboardID) as! applyPromoCodeVC
         //controller.modalPresentationStyle = .fullScreen

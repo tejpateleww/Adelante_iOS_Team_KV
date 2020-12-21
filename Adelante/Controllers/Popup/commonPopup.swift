@@ -164,7 +164,7 @@ class commonPopup: UIViewController {
         }
         controller.isCancleOrder = isCancleOrder
         controller.btnSubmit = {
-//            self.dismiss(animated: true, completion: nil)
+            viewController.dismiss(animated: true, completion: nil)
 //            // self.navigationController?.popViewController(animated: true)
 //            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
 //            self.navigationController?.pushViewController(controller, animated: true)

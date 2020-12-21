@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yvt-Nf-udP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yvt-Nf-udP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -924,7 +924,7 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="45c-lV-znp">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="254" height="77"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -933,7 +933,7 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="23.5" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -942,10 +942,10 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isLocation" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
+                                                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
                                                                                                                     <rect key="frame" x="0.0" y="47" width="254" height="30"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="3" width="254" height="27"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
@@ -1378,107 +1378,73 @@
                                                     <constraint firstAttribute="height" constant="1" id="yYx-Tf-Jyx"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8.9000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="ept-QC-QtK">
-                                                <rect key="frame" x="18" y="281.5" width="378" height="56"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ept-QC-QtK">
+                                                <rect key="frame" x="18" y="281.5" width="378" height="146"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcQ-xO-eg7" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="23.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isBold" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
-                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="johansmith@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QD-b3-mNo" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="32.5" width="378" height="23.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
-                                                                <color key="value" red="0.47059291600000003" green="0.4705821872" blue="0.47058433290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8eH-qc-JgD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QPd-3g-SxC" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="47" id="6Jp-Fb-hVo"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </textField>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FU-ec-5c3" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="aox-Ma-4Nu"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="moi-Wz-00b">
+                                                        <rect key="frame" x="0.0" y="83" width="378" height="63"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ypJ-aF-6Y5" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="47" id="jEh-qT-jBV"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </textField>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qD-n2-tkL" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="qcd-G2-BfW"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="56" id="Gir-qA-J6j"/>
-                                                </constraints>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xT8-pu-w2v">
-                                                <rect key="frame" x="18" y="347.5" width="378" height="1"/>
-                                                <color key="backgroundColor" red="0.93334203959999995" green="0.93332189320000003" blue="0.93332594629999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1.2" id="22d-kn-d5M"/>
-                                                </constraints>
-                                            </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8.9000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="XE6-Pj-WA5">
-                                                <rect key="frame" x="18" y="383.5" width="378" height="56"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0g-sI-4Wi" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="23.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isBold" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
-                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 65326565265" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sez-7s-Hs1" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="32.5" width="378" height="23.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
-                                                                <color key="value" red="0.47059291600000003" green="0.4705821872" blue="0.47058433290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="56" id="LPz-9f-6qf"/>
-                                                </constraints>
-                                            </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmy-x8-J1k">
-                                                <rect key="frame" x="18" y="449.5" width="378" height="1.5"/>
-                                                <color key="backgroundColor" red="0.93334203959999995" green="0.93332189320000003" blue="0.93332594629999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1.2" id="xcN-e4-BMY"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="Kmy-x8-J1k" firstAttribute="leading" secondItem="xnW-ib-XI8" secondAttribute="leading" constant="18" id="1vG-xh-Vhe"/>
                                             <constraint firstAttribute="trailing" secondItem="ept-QC-QtK" secondAttribute="trailing" constant="18" id="2Zg-nS-pTu"/>
                                             <constraint firstItem="ipV-pX-70I" firstAttribute="leading" secondItem="xnW-ib-XI8" secondAttribute="leading" id="8Cx-4J-2Os"/>
                                             <constraint firstItem="ept-QC-QtK" firstAttribute="top" secondItem="ipV-pX-70I" secondAttribute="bottom" constant="37.5" id="AY5-Ee-SuZ"/>
                                             <constraint firstAttribute="trailing" secondItem="ipV-pX-70I" secondAttribute="trailing" id="AoS-UX-EM8"/>
-                                            <constraint firstAttribute="trailing" secondItem="Kmy-x8-J1k" secondAttribute="trailing" constant="18" id="BSL-HM-U5c"/>
                                             <constraint firstItem="ipV-pX-70I" firstAttribute="centerX" secondItem="xnW-ib-XI8" secondAttribute="centerX" id="GqO-Ll-y54"/>
                                             <constraint firstItem="bXA-Ko-xkj" firstAttribute="centerX" secondItem="xnW-ib-XI8" secondAttribute="centerX" id="JGb-Jf-YTy"/>
                                             <constraint firstItem="ept-QC-QtK" firstAttribute="leading" secondItem="xnW-ib-XI8" secondAttribute="leading" constant="18" id="MIl-V5-aZU"/>
                                             <constraint firstItem="D7F-SR-VkU" firstAttribute="top" secondItem="fhz-Oz-zwe" secondAttribute="bottom" constant="17" id="NpY-pK-jiw"/>
                                             <constraint firstItem="ipV-pX-70I" firstAttribute="top" secondItem="bXA-Ko-xkj" secondAttribute="bottom" constant="20.5" id="OVz-my-aEO"/>
-                                            <constraint firstItem="xT8-pu-w2v" firstAttribute="leading" secondItem="xnW-ib-XI8" secondAttribute="leading" constant="18" id="R2s-r6-FC1"/>
-                                            <constraint firstAttribute="trailing" secondItem="xT8-pu-w2v" secondAttribute="trailing" constant="18" id="TAV-kL-P2g"/>
-                                            <constraint firstAttribute="trailing" secondItem="XE6-Pj-WA5" secondAttribute="trailing" constant="18" id="TWV-or-Qnh"/>
                                             <constraint firstItem="D7F-SR-VkU" firstAttribute="centerX" secondItem="xnW-ib-XI8" secondAttribute="centerX" id="UwY-ur-Sf1"/>
-                                            <constraint firstItem="XE6-Pj-WA5" firstAttribute="leading" secondItem="xnW-ib-XI8" secondAttribute="leading" constant="18" id="XDH-m3-6VA"/>
                                             <constraint firstItem="fhz-Oz-zwe" firstAttribute="centerX" secondItem="xnW-ib-XI8" secondAttribute="centerX" id="b9h-5N-o17"/>
-                                            <constraint firstItem="XE6-Pj-WA5" firstAttribute="top" secondItem="xT8-pu-w2v" secondAttribute="bottom" constant="35" id="cnu-ga-cEy"/>
                                             <constraint firstItem="bXA-Ko-xkj" firstAttribute="top" secondItem="D7F-SR-VkU" secondAttribute="bottom" constant="12" id="hm8-h1-REF"/>
                                             <constraint firstItem="fhz-Oz-zwe" firstAttribute="top" secondItem="xnW-ib-XI8" secondAttribute="top" constant="27" id="lse-HZ-FWh"/>
-                                            <constraint firstItem="xT8-pu-w2v" firstAttribute="top" secondItem="ept-QC-QtK" secondAttribute="bottom" constant="10" id="nei-e6-gB0"/>
-                                            <constraint firstItem="Kmy-x8-J1k" firstAttribute="top" secondItem="XE6-Pj-WA5" secondAttribute="bottom" constant="10" id="pe6-dz-okn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1521,7 +1487,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LS-ub-T68">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="708"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="683"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfe-ck-WaO">
                                                         <rect key="frame" x="18" y="27" width="116" height="116"/>
@@ -1596,120 +1562,182 @@
                                                             <constraint firstAttribute="trailing" secondItem="F6Q-2r-l6G" secondAttribute="trailing" constant="12" id="jcg-PW-27e"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="MWD-rc-OeO">
-                                                        <rect key="frame" x="18" y="172" width="378" height="420"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MWD-rc-OeO">
+                                                        <rect key="frame" x="18" y="172" width="378" height="395"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rN-z1-ohE" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="56"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="56" id="y2l-nw-pKB"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Smith" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-U3-ebv" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="91" width="378" height="56"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </textField>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-f8-XtO">
-                                                                <rect key="frame" x="0.0" y="182" width="378" height="56"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ho2-Ag-MoL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="johansmith@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ut-AC-9Qr" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="56"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rN-z1-ohE" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="47" id="y2l-nw-pKB"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                                        <textInputTraits key="textInputTraits"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textField>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDy-Ir-Fod" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="317.5" y="36" width="58.5" height="12"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFP-yD-lbK" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="12" id="z8O-hf-G5P"/>
+                                                                            <constraint firstAttribute="height" constant="1" id="JKX-Ok-bdw"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
-                                                                                <color key="value" red="0.12551537160000001" green="0.58456528190000001" blue="0.074335567650000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isVerified" value="YES"/>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                    </label>
+                                                                    </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="bottom" secondItem="yDy-Ir-Fod" secondAttribute="bottom" constant="8.0999999999999996" id="AiK-jx-Wyq"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="2Ut-AC-9Qr" secondAttribute="bottom" id="RVB-S0-5WW"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="2Ut-AC-9Qr" secondAttribute="trailing" id="RlG-wU-gcs"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="yDy-Ir-Fod" secondAttribute="trailing" constant="1.8999999999999999" id="Wd5-kC-8L1"/>
-                                                                    <constraint firstItem="2Ut-AC-9Qr" firstAttribute="leading" secondItem="dvh-f8-XtO" secondAttribute="leading" id="sGC-rl-dQb"/>
-                                                                    <constraint firstItem="2Ut-AC-9Qr" firstAttribute="top" secondItem="dvh-f8-XtO" secondAttribute="top" id="upd-k9-Tzj"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb9-AB-RJI">
-                                                                <rect key="frame" x="0.0" y="273" width="378" height="56"/>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="T9D-1L-onG">
+                                                                <rect key="frame" x="0.0" y="83" width="378" height="63"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1 6532 6565 265" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cc0-dj-TGl" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="56"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Smith" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-U3-ebv" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="47" id="VwD-7K-XZG"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                                        <textInputTraits key="textInputTraits"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textField>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unverified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEh-No-iE4" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="298" y="36" width="78" height="12"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ckr-6i-SAE" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="12" id="D77-0F-ypp"/>
+                                                                            <constraint firstAttribute="height" constant="1" id="ICP-CB-Ook"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
-                                                                                <color key="value" red="0.99934226270000004" green="0.044778443869999997" blue="0.19167947769999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isVerified" value="YES"/>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                    </label>
+                                                                    </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="gEh-No-iE4" secondAttribute="trailing" constant="1.8999999999999999" id="1eA-N7-CJX"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="cc0-dj-TGl" secondAttribute="bottom" id="4Zv-cB-II7"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="cc0-dj-TGl" secondAttribute="trailing" id="JjO-yy-pHG"/>
-                                                                    <constraint firstItem="cc0-dj-TGl" firstAttribute="top" secondItem="qb9-AB-RJI" secondAttribute="top" id="KgJ-PE-Dsf"/>
-                                                                    <constraint firstItem="cc0-dj-TGl" firstAttribute="leading" secondItem="qb9-AB-RJI" secondAttribute="leading" id="XvY-6i-V4e"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="gEh-No-iE4" secondAttribute="bottom" constant="8.0999999999999996" id="a1d-2c-cMi"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="*********" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lWD-a0-7KT" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="364" width="378" height="56"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </textField>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="spM-lk-skB">
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="63"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-f8-XtO">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="johansmith@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ut-AC-9Qr" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </textField>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDy-Ir-Fod" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="317.5" y="27" width="58.5" height="12"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="12" id="z8O-hf-G5P"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
+                                                                                        <color key="value" red="0.12551537160000001" green="0.58456528190000001" blue="0.074335567650000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isVerified" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="yDy-Ir-Fod" secondAttribute="bottom" constant="8.0999999999999996" id="AiK-jx-Wyq"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="2Ut-AC-9Qr" secondAttribute="bottom" id="RVB-S0-5WW"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="2Ut-AC-9Qr" secondAttribute="trailing" id="RlG-wU-gcs"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="yDy-Ir-Fod" secondAttribute="trailing" constant="1.8999999999999999" id="Wd5-kC-8L1"/>
+                                                                            <constraint firstItem="2Ut-AC-9Qr" firstAttribute="leading" secondItem="dvh-f8-XtO" secondAttribute="leading" id="sGC-rl-dQb"/>
+                                                                            <constraint firstItem="2Ut-AC-9Qr" firstAttribute="top" secondItem="dvh-f8-XtO" secondAttribute="top" id="upd-k9-Tzj"/>
+                                                                            <constraint firstAttribute="height" constant="47" id="vj5-1Z-vNk"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9g-nl-fwN" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="za3-hc-vHH"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="023-Ft-wuQ">
+                                                                <rect key="frame" x="0.0" y="249" width="378" height="63"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb9-AB-RJI">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1 6532 6565 265" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cc0-dj-TGl" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </textField>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unverified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEh-No-iE4" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="298" y="27" width="78" height="12"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="12" id="D77-0F-ypp"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="LabelColor">
+                                                                                        <color key="value" red="0.99934226270000004" green="0.044778443869999997" blue="0.19167947769999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isVerified" value="YES"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="gEh-No-iE4" secondAttribute="trailing" constant="1.8999999999999999" id="1eA-N7-CJX"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="cc0-dj-TGl" secondAttribute="bottom" id="4Zv-cB-II7"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="cc0-dj-TGl" secondAttribute="trailing" id="JjO-yy-pHG"/>
+                                                                            <constraint firstItem="cc0-dj-TGl" firstAttribute="top" secondItem="qb9-AB-RJI" secondAttribute="top" id="KgJ-PE-Dsf"/>
+                                                                            <constraint firstItem="cc0-dj-TGl" firstAttribute="leading" secondItem="qb9-AB-RJI" secondAttribute="leading" id="XvY-6i-V4e"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="gEh-No-iE4" secondAttribute="bottom" constant="8.0999999999999996" id="a1d-2c-cMi"/>
+                                                                            <constraint firstAttribute="height" constant="47" id="pUx-JF-Hzb"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeM-hB-SZV" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="Pz4-bD-qTU"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="DkS-96-maS">
+                                                                <rect key="frame" x="0.0" y="332" width="378" height="63"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="*********" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lWD-a0-7KT" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="47" id="p70-ba-fRn"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isEditProfile" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </textField>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96l-fk-YT7" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="e5H-25-Y6x"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="qb9-AB-RJI" firstAttribute="height" secondItem="4rN-z1-ohE" secondAttribute="height" id="5Ex-l0-zm4"/>
-                                                            <constraint firstItem="dvh-f8-XtO" firstAttribute="height" secondItem="4rN-z1-ohE" secondAttribute="height" id="XDZ-yU-6oJ"/>
-                                                            <constraint firstItem="lWD-a0-7KT" firstAttribute="height" secondItem="4rN-z1-ohE" secondAttribute="height" id="kd4-gO-U4w"/>
-                                                            <constraint firstItem="0t8-U3-ebv" firstAttribute="height" secondItem="4rN-z1-ohE" secondAttribute="height" id="qEK-ZD-Vzs"/>
-                                                        </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ9-fw-5lB" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="18" y="641" width="378" height="47"/>
+                                                        <rect key="frame" x="18" y="616" width="378" height="47"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="OA1-mm-DHg"/>
                                                         </constraints>
@@ -1896,7 +1924,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPw-Gg-yXm">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="632"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="658"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvH-7N-5bc">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="303"/>
@@ -1929,37 +1957,109 @@
                                                             <constraint firstAttribute="bottom" secondItem="e9E-XZ-4z3" secondAttribute="bottom" constant="55" id="vGG-bU-iu8"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="5GM-j7-bsO">
-                                                        <rect key="frame" x="18" y="303" width="378" height="203"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5GM-j7-bsO">
+                                                        <rect key="frame" x="18" y="303" width="378" height="229"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Old Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-j9-vWm" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="39"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpG-cH-cJN">
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Wyn-yR-fNN">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Old Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-j9-vWm" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="47" id="qXG-gt-WCj"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2c-bx-Xry" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="1" id="Ok6-J7-afi"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="39" id="qXG-gt-WCj"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Wyn-yR-fNN" secondAttribute="trailing" id="Emd-Px-5nx"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Wyn-yR-fNN" secondAttribute="bottom" id="Jm8-gt-FXv"/>
+                                                                    <constraint firstItem="Wyn-yR-fNN" firstAttribute="top" secondItem="tpG-cH-cJN" secondAttribute="top" id="XXI-dO-v6S"/>
+                                                                    <constraint firstItem="Wyn-yR-fNN" firstAttribute="leading" secondItem="tpG-cH-cJN" secondAttribute="leading" id="Xww-Fi-vCB"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M00-EB-i9S" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="82" width="378" height="39"/>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDG-Xx-MBW">
+                                                                <rect key="frame" x="0.0" y="83" width="378" height="63"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="HzK-MD-4He">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M00-EB-i9S" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="47" id="VQA-7Y-app"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6G3-56-Auf" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="1" id="g1p-Kb-Ezf"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="39" id="VQA-7Y-app"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="HzK-MD-4He" secondAttribute="bottom" id="2Ia-WJ-yXf"/>
+                                                                    <constraint firstItem="HzK-MD-4He" firstAttribute="top" secondItem="iDG-Xx-MBW" secondAttribute="top" id="C8p-AS-ceY"/>
+                                                                    <constraint firstItem="HzK-MD-4He" firstAttribute="leading" secondItem="iDG-Xx-MBW" secondAttribute="leading" id="Uyz-wa-rAz"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="HzK-MD-4He" secondAttribute="trailing" id="zrw-On-cfa"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cpW-fr-cqC" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="164" width="378" height="39"/>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eC-nq-afX">
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="63"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="f7F-Zc-IA6">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cpW-fr-cqC" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="47" id="nVR-JB-ZtS"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ww5-ew-YP9" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="1" id="JdJ-u0-Xyv"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="39" id="nVR-JB-ZtS"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="f7F-Zc-IA6" secondAttribute="trailing" id="I3w-Xh-DHh"/>
+                                                                    <constraint firstItem="f7F-Zc-IA6" firstAttribute="leading" secondItem="6eC-nq-afX" secondAttribute="leading" id="MzY-3e-gbR"/>
+                                                                    <constraint firstItem="f7F-Zc-IA6" firstAttribute="top" secondItem="6eC-nq-afX" secondAttribute="top" id="kVK-bf-diV"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="f7F-Zc-IA6" secondAttribute="bottom" id="nwa-iP-HjQ"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
+                                                            </view>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6m-t0-eK4" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="555" width="350" height="47"/>
+                                                        <rect key="frame" x="32" y="581" width="350" height="47"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="hH8-zv-vua"/>
                                                         </constraints>
@@ -2034,7 +2134,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BB7-fs-FdX">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="484"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="508"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRn-AA-Yh2">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="331"/>
@@ -2068,16 +2168,28 @@
                                                             <constraint firstItem="xa7-Jy-uZG" firstAttribute="top" secondItem="IRn-AA-Yh2" secondAttribute="top" constant="66" id="tFt-tP-Rlr"/>
                                                         </constraints>
                                                     </view>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Email / Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJ2-zK-PS6" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="18" y="331" width="378" height="39"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="39" id="i07-2O-CQF"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zHo-4a-EjV">
+                                                        <rect key="frame" x="18" y="331" width="378" height="63"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Email / Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJ2-zK-PS6" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="47" id="i07-2O-CQF"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oJ-8c-3kC" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="KwC-km-Pay"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sse-Yr-vmz" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="407" width="350" height="47"/>
+                                                        <rect key="frame" x="32" y="431" width="350" height="47"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="6Qb-pm-rSs"/>
                                                         </constraints>
@@ -2096,16 +2208,16 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="mJ2-zK-PS6" firstAttribute="leading" secondItem="BB7-fs-FdX" secondAttribute="leading" constant="18" id="1YX-nS-Yv3"/>
-                                                    <constraint firstAttribute="trailing" secondItem="mJ2-zK-PS6" secondAttribute="trailing" constant="18" id="Dvt-xg-Xbw"/>
-                                                    <constraint firstItem="mJ2-zK-PS6" firstAttribute="top" secondItem="IRn-AA-Yh2" secondAttribute="bottom" id="GdM-cl-UYw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zHo-4a-EjV" secondAttribute="trailing" constant="18" id="2uz-G2-VBj"/>
+                                                    <constraint firstItem="zHo-4a-EjV" firstAttribute="top" secondItem="IRn-AA-Yh2" secondAttribute="bottom" id="99z-jA-ss8"/>
+                                                    <constraint firstItem="Sse-Yr-vmz" firstAttribute="top" secondItem="zHo-4a-EjV" secondAttribute="bottom" constant="37" id="DlU-dj-scy"/>
                                                     <constraint firstAttribute="trailing" secondItem="Sse-Yr-vmz" secondAttribute="trailing" constant="32" id="L2e-BN-IQA"/>
                                                     <constraint firstItem="IRn-AA-Yh2" firstAttribute="leading" secondItem="BB7-fs-FdX" secondAttribute="leading" id="OOd-CG-U2D"/>
                                                     <constraint firstItem="Sse-Yr-vmz" firstAttribute="leading" secondItem="BB7-fs-FdX" secondAttribute="leading" constant="32" id="P4T-bT-ZUh"/>
-                                                    <constraint firstItem="Sse-Yr-vmz" firstAttribute="top" secondItem="mJ2-zK-PS6" secondAttribute="bottom" constant="37" id="bzM-FP-AcZ"/>
                                                     <constraint firstAttribute="bottom" secondItem="Sse-Yr-vmz" secondAttribute="bottom" constant="30" id="e3m-p3-AOW"/>
                                                     <constraint firstAttribute="trailing" secondItem="IRn-AA-Yh2" secondAttribute="trailing" id="iXz-Ir-cRC"/>
                                                     <constraint firstItem="IRn-AA-Yh2" firstAttribute="top" secondItem="BB7-fs-FdX" secondAttribute="top" id="pih-0P-0w0"/>
+                                                    <constraint firstItem="zHo-4a-EjV" firstAttribute="leading" secondItem="BB7-fs-FdX" secondAttribute="leading" constant="18" id="vay-bv-zRa"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -6418,6 +6530,12 @@
                                                                             </stackView>
                                                                         </subviews>
                                                                     </stackView>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPb-aB-cO7">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="44"/>
+                                                                        <connections>
+                                                                            <action selector="btnNavAddressHomeClicked:" destination="wni-gD-ddk" eventType="touchUpInside" id="0AB-M0-ZnZ"/>
+                                                                        </connections>
+                                                                    </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
@@ -6425,6 +6543,10 @@
                                                                     <constraint firstItem="yw3-Yh-Ul0" firstAttribute="leading" secondItem="nJo-2g-fLJ" secondAttribute="leading" id="FI3-3J-4fh"/>
                                                                     <constraint firstAttribute="bottom" secondItem="yw3-Yh-Ul0" secondAttribute="bottom" id="RrD-aX-Un3"/>
                                                                     <constraint firstItem="yw3-Yh-Ul0" firstAttribute="top" secondItem="nJo-2g-fLJ" secondAttribute="top" id="aya-fP-ww4"/>
+                                                                    <constraint firstItem="JPb-aB-cO7" firstAttribute="leading" secondItem="nJo-2g-fLJ" secondAttribute="leading" id="ghT-z3-x8f"/>
+                                                                    <constraint firstItem="JPb-aB-cO7" firstAttribute="top" secondItem="nJo-2g-fLJ" secondAttribute="top" id="hqE-vt-oY9"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="JPb-aB-cO7" secondAttribute="trailing" id="nUZ-qS-1V0"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="JPb-aB-cO7" secondAttribute="bottom" id="r6c-ln-sZB"/>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3V-Cr-PTO">
@@ -6452,21 +6574,14 @@
                                                             </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPb-aB-cO7">
-                                                        <rect key="frame" x="18" y="0.0" width="378" height="44"/>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="JPb-aB-cO7" firstAttribute="top" secondItem="OYw-Ox-BJo" secondAttribute="top" id="9gI-qc-Z2B"/>
                                                     <constraint firstItem="OYw-Ox-BJo" firstAttribute="leading" secondItem="aIS-U1-Fqe" secondAttribute="leading" constant="18" id="9jo-XW-94v"/>
                                                     <constraint firstAttribute="height" constant="44" id="Bdz-nk-nWP"/>
                                                     <constraint firstItem="OYw-Ox-BJo" firstAttribute="top" secondItem="aIS-U1-Fqe" secondAttribute="top" id="JYg-9P-JoJ"/>
-                                                    <constraint firstItem="JPb-aB-cO7" firstAttribute="leading" secondItem="OYw-Ox-BJo" secondAttribute="leading" id="KgC-q6-QUz"/>
                                                     <constraint firstAttribute="trailing" secondItem="OYw-Ox-BJo" secondAttribute="trailing" constant="18" id="NvP-PV-2Qo"/>
-                                                    <constraint firstItem="JPb-aB-cO7" firstAttribute="trailing" secondItem="OYw-Ox-BJo" secondAttribute="trailing" id="OPa-eR-yoS"/>
                                                     <constraint firstAttribute="bottom" secondItem="OYw-Ox-BJo" secondAttribute="bottom" id="YMT-Ky-r07"/>
-                                                    <constraint firstItem="JPb-aB-cO7" firstAttribute="bottom" secondItem="OYw-Ox-BJo" secondAttribute="bottom" id="qhH-qX-C9S"/>
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xKs-s3-oCl">
@@ -8223,6 +8338,50 @@ avoid cancellations </string>
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="97" height="34"/>
+        </designable>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="178" height="34"/>
+        </designable>
+        <designable name="3GA-xR-sBq">
+            <size key="intrinsicContentSize" width="56.5" height="34"/>
+        </designable>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="98" height="34"/>
+        </designable>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="123" height="34"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="62.5" height="34"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="149" height="34"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="145.5" height="34"/>
+        </designable>
+        <designable name="e7e-lV-S2y">
+            <size key="intrinsicContentSize" width="62.5" height="34"/>
+        </designable>
+        <designable name="hoR-ao-l7p">
+            <size key="intrinsicContentSize" width="169" height="34"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="90.5" height="34"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="208.5" height="34"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="116.5" height="34"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="124.5" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
         <image name="DetailsFood" width="161" height="158"/>
