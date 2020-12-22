@@ -44,7 +44,7 @@ class submitButton: UIButton {
             self.setTitleColor(colors.black.value, for: .normal)
         } else if isSkipButton {
             self.backgroundColor = .clear
-            self.titleLabel?.font = CustomFont.NexaRegular.returnFont(18)
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(18)
             self.setTitleColor(colors.appOrangeColor.value, for: .normal)
         //    self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
         } else if isBold{

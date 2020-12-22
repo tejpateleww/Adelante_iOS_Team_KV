@@ -92,7 +92,7 @@ enum NavTitles {
         case .notifications:
             return "Notifications"
         case .favourites:
-            return "Your Favourites"
+            return "Your Favorites"
         case .addPaymentVC:
             return "Add Payment"
         case .AddCardVC:

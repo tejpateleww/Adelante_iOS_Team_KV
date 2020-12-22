@@ -705,4 +705,6 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
         }
         return titleFormatter(title)
     }
-} // swiftlint:disable:this file_length
+ // swiftlint:disable:this file_length
+
+}

@@ -88,7 +88,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width - 118, height: 19)
         label.center.y = headerView.frame.size.height / 2
         label.text = bffComboData[section].comboName
-        label.font = CustomFont.NexaRegular.returnFont(17)
+        label.font = CustomFont.NexaBold.returnFont(17)
         label.textColor = colors.black.value// colors.black.value
         //headerView.backgroundColor = colors.white.value
         headerView.addSubview(label)
@@ -120,9 +120,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
   
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
+  
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 47
     }
@@ -130,8 +128,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     
     @IBAction func btnViewCart(_ sender: Any) {
-      
-            
+      let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+      self.navigationController?.pushViewController(controller, animated: true)
     }
     
 }

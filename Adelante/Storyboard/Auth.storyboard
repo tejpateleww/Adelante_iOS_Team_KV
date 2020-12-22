@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FtS-Gd-2Qr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FtS-Gd-2Qr">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -53,7 +52,7 @@ Back</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstItem="XUu-y7-WlW" firstAttribute="leading" secondItem="bq4-09-wwK" secondAttribute="leading" constant="18" id="GmA-vS-cfd"/>
                                                     <constraint firstItem="XUu-y7-WlW" firstAttribute="top" secondItem="bq4-09-wwK" secondAttribute="top" constant="88" id="IqB-co-KVF"/>
@@ -84,7 +83,7 @@ Back</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BZ-t6-TJV" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="3CC-dA-I2e"/>
                                                                                 </constraints>
@@ -92,7 +91,7 @@ Back</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="kOP-aK-XHg" secondAttribute="trailing" id="Oiq-As-KOB"/>
                                                                     <constraint firstAttribute="bottom" secondItem="kOP-aK-XHg" secondAttribute="bottom" id="YCv-rY-nef"/>
@@ -116,7 +115,7 @@ Back</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9MG-18-zb5" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="7m4-XZ-N1O"/>
                                                                                 </constraints>
@@ -124,7 +123,7 @@ Back</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="5W8-2G-Rat" secondAttribute="trailing" id="0A6-hg-q3o"/>
                                                                     <constraint firstAttribute="bottom" secondItem="5W8-2G-Rat" secondAttribute="bottom" id="4Ks-Tg-VJY"/>
@@ -134,7 +133,7 @@ Back</string>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAA-cC-sBU" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAA-cC-sBU" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                         <rect key="frame" x="301" y="196.5" width="95" height="27"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <state key="normal" title="Forgot Password">
@@ -177,7 +176,7 @@ Back</string>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstItem="xjO-g2-Bzc" firstAttribute="top" secondItem="Kds-T1-Ct7" secondAttribute="top" id="6dE-rg-lce"/>
                                                             <constraint firstAttribute="bottom" secondItem="xjO-g2-Bzc" secondAttribute="bottom" id="8EF-4T-222"/>
@@ -202,7 +201,7 @@ Back</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-IO-Syi" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-IO-Syi" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="183" y="0.0" width="125" height="16"/>
                                                                 <fontDescription key="fontDescription" name="NexaBold" family="Nexa Bold" pointSize="17"/>
                                                                 <state key="normal" title="Create Account"/>
@@ -223,7 +222,7 @@ Back</string>
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="Kds-T1-Ct7" secondAttribute="trailing" constant="18" id="1qi-cm-dO6"/>
                                                     <constraint firstItem="Kds-T1-Ct7" firstAttribute="top" secondItem="DAA-cC-sBU" secondAttribute="bottom" constant="25" id="8C3-Zm-Lzv"/>
@@ -251,7 +250,7 @@ Back</string>
                                         </constraints>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="GyQ-w2-rWM" secondAttribute="bottom" id="A1G-5Z-JLj"/>
                                     <constraint firstAttribute="trailing" secondItem="GyQ-w2-rWM" secondAttribute="trailing" id="ahc-Th-hUk"/>
@@ -260,8 +259,7 @@ Back</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="X43-tL-i8V"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Tlz-fe-wbT" firstAttribute="top" secondItem="X43-tL-i8V" secondAttribute="top" id="1gq-jS-nfC"/>
                             <constraint firstItem="Tlz-fe-wbT" firstAttribute="trailing" secondItem="X43-tL-i8V" secondAttribute="trailing" id="3ap-Ec-qaJ"/>
@@ -276,6 +274,7 @@ Back</string>
                             <constraint firstItem="Tlz-fe-wbT" firstAttribute="leading" secondItem="X43-tL-i8V" secondAttribute="leading" id="wpz-jA-YF0"/>
                             <constraint firstItem="X43-tL-i8V" firstAttribute="trailing" secondItem="Tlz-fe-wbT" secondAttribute="trailing" id="zlZ-NH-bak"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="X43-tL-i8V"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55H-Ek-OXD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -294,14 +293,14 @@ Back</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="c6e-4P-tBE"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="3IH-cN-d6o" secondAttribute="bottom" id="FwY-ZJ-Okq"/>
                             <constraint firstItem="3IH-cN-d6o" firstAttribute="top" secondItem="jwt-Zt-zKp" secondAttribute="top" id="MNf-KA-qDo"/>
                             <constraint firstItem="c6e-4P-tBE" firstAttribute="trailing" secondItem="3IH-cN-d6o" secondAttribute="trailing" id="r5Q-zZ-jA4"/>
                             <constraint firstItem="3IH-cN-d6o" firstAttribute="leading" secondItem="c6e-4P-tBE" secondAttribute="leading" id="rSl-1Z-d3G"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="c6e-4P-tBE"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1sS-MD-732" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -328,7 +327,7 @@ Back</string>
                                             <constraint firstAttribute="width" secondItem="qNh-vg-GLg" secondAttribute="height" multiplier="287:75" id="ycc-2X-Gg1"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wt-wW-qhH" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wt-wW-qhH" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                         <rect key="frame" x="20" y="18" width="33" height="30"/>
                                         <state key="normal" title="SKIP"/>
                                         <userDefinedRuntimeAttributes>
@@ -345,7 +344,7 @@ Back</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="BOc-Ia-q6j">
                                         <rect key="frame" x="32" y="671" width="350" height="132"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaj-xH-qVR" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaj-xH-qVR" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="Ytw-Gv-Rrd"/>
@@ -360,7 +359,7 @@ Back</string>
                                                     <action selector="btnSignInClicked:" destination="GK4-N0-Uxy" eventType="touchUpInside" id="RDu-oP-GIl"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ec2-nO-GvX" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ec2-nO-GvX" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="77" width="350" height="55"/>
                                                 <state key="normal" title="Create Account"/>
                                                 <userDefinedRuntimeAttributes>
@@ -390,8 +389,7 @@ Back</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="1Ad-CY-TN6"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Ndx-FW-mSe" secondAttribute="trailing" id="HD6-Ry-9VH"/>
                             <constraint firstAttribute="bottom" secondItem="sT4-BD-4xf" secondAttribute="bottom" id="Hzd-rp-0KV"/>
@@ -402,6 +400,7 @@ Back</string>
                             <constraint firstItem="Ndx-FW-mSe" firstAttribute="leading" secondItem="oeG-b0-Wg3" secondAttribute="leading" id="u5z-MV-slx"/>
                             <constraint firstItem="1Ad-CY-TN6" firstAttribute="trailing" secondItem="sT4-BD-4xf" secondAttribute="trailing" id="uzG-r8-Rr0"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Ad-CY-TN6"/>
                     </view>
                     <navigationItem key="navigationItem" id="HHe-TT-agw"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -449,7 +448,7 @@ Adelante</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstItem="Yvq-R5-5mN" firstAttribute="leading" secondItem="Qep-kU-lAb" secondAttribute="leading" constant="18" id="6ja-2W-NOH"/>
                                                     <constraint firstItem="CpT-mS-Rcj" firstAttribute="top" secondItem="Yvq-R5-5mN" secondAttribute="bottom" constant="45" id="LOR-I7-NqZ"/>
@@ -481,7 +480,7 @@ Adelante</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qc-xL-nKe" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="8ty-YM-hnj"/>
                                                                                 </constraints>
@@ -489,7 +488,7 @@ Adelante</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="JFl-7o-0YW" secondAttribute="bottom" id="8Mm-VC-i4d"/>
                                                                     <constraint firstItem="JFl-7o-0YW" firstAttribute="leading" secondItem="kad-eD-h8J" secondAttribute="leading" id="Lre-5j-GZh"/>
@@ -513,7 +512,7 @@ Adelante</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lah-bJ-5Il" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="sCz-lK-xBY"/>
                                                                                 </constraints>
@@ -521,7 +520,7 @@ Adelante</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="NFq-z6-RF0" firstAttribute="top" secondItem="iUN-OV-OJP" secondAttribute="top" id="1d8-4w-0aF"/>
                                                                     <constraint firstAttribute="trailing" secondItem="NFq-z6-RF0" secondAttribute="trailing" id="4SU-sr-4vB"/>
@@ -545,7 +544,7 @@ Adelante</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70e-EU-Drj" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="klB-PJ-090"/>
                                                                                 </constraints>
@@ -553,7 +552,7 @@ Adelante</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="1zj-bg-BGc" firstAttribute="leading" secondItem="YcF-Qa-t04" secondAttribute="leading" id="7zF-cQ-1Ml"/>
                                                                     <constraint firstAttribute="bottom" secondItem="1zj-bg-BGc" secondAttribute="bottom" id="WWz-rk-rNE"/>
@@ -577,7 +576,7 @@ Adelante</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dz-Wr-P8S" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="MXa-CS-4ry"/>
                                                                                 </constraints>
@@ -585,7 +584,7 @@ Adelante</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="YNP-Cy-Jdx" firstAttribute="leading" secondItem="ce6-D5-lay" secondAttribute="leading" id="BfY-kC-Yqr"/>
                                                                     <constraint firstAttribute="trailing" secondItem="YNP-Cy-Jdx" secondAttribute="trailing" id="JwO-QC-dWb"/>
@@ -609,7 +608,7 @@ Adelante</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHu-Oz-d0w" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="lv4-Ly-8nF"/>
                                                                                 </constraints>
@@ -617,7 +616,7 @@ Adelante</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="Bae-gL-y8N" firstAttribute="top" secondItem="nFJ-GY-zO4" secondAttribute="top" id="DDC-OM-rgl"/>
                                                                     <constraint firstAttribute="trailing" secondItem="Bae-gL-y8N" secondAttribute="trailing" id="Dvm-R7-Vjw"/>
@@ -641,7 +640,7 @@ Adelante</string>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUe-zu-Eyu" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="G9T-P1-Ool"/>
                                                                                 </constraints>
@@ -649,7 +648,7 @@ Adelante</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="32w-Qq-LRL" secondAttribute="bottom" id="EBk-xy-76O"/>
                                                                     <constraint firstItem="32w-Qq-LRL" firstAttribute="top" secondItem="cDJ-Fb-joT" secondAttribute="top" id="Fc4-1n-H1z"/>
@@ -663,7 +662,7 @@ Adelante</string>
                                                         <rect key="frame" x="18" y="538" width="378" height="63"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ab-4f-f8g" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="1" y="21" width="118.5" height="20.5"/>
+                                                                <rect key="frame" x="1" y="21" width="119" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -682,7 +681,7 @@ Adelante</string>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstItem="7ab-4f-f8g" firstAttribute="centerY" secondItem="D9g-c5-ppY" secondAttribute="centerY" id="2ue-RK-fFB"/>
                                                             <constraint firstAttribute="bottom" secondItem="GML-Cw-jvs" secondAttribute="bottom" id="9r0-oL-aRp"/>
@@ -694,10 +693,10 @@ Adelante</string>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IZJ-l9-Yu9">
-                                                        <rect key="frame" x="86" y="628.5" width="242" height="30"/>
+                                                        <rect key="frame" x="85.5" y="628.5" width="243" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLy-vP-WB6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="188" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -707,8 +706,8 @@ Adelante</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBK-qV-OHW" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="195" y="0.0" width="47" height="30"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBK-qV-OHW" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="196" y="0.0" width="47" height="30"/>
                                                                 <state key="normal" title="Sign In"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isBold" value="YES"/>
@@ -724,7 +723,7 @@ Adelante</string>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstItem="IZJ-l9-Yu9" firstAttribute="top" secondItem="D9g-c5-ppY" secondAttribute="bottom" constant="27.699999999999999" id="2gp-zz-YCi"/>
                                                     <constraint firstItem="TDM-Ur-Np6" firstAttribute="top" secondItem="QPi-1e-xsK" secondAttribute="top" constant="30" id="7vJ-ze-yYc"/>
@@ -750,7 +749,7 @@ Adelante</string>
                                         </constraints>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="unn-uh-8S3" secondAttribute="bottom" id="JJM-7A-bHj"/>
                                     <constraint firstItem="unn-uh-8S3" firstAttribute="top" secondItem="DbS-ML-0cd" secondAttribute="top" id="Vbz-1c-tT6"/>
@@ -759,14 +758,14 @@ Adelante</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="j5A-2S-f7r"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="DbS-ML-0cd" firstAttribute="leading" secondItem="j5A-2S-f7r" secondAttribute="leading" id="Cgf-gm-w9g"/>
                             <constraint firstItem="j5A-2S-f7r" firstAttribute="trailing" secondItem="DbS-ML-0cd" secondAttribute="trailing" id="fMo-nf-TDA"/>
                             <constraint firstItem="DbS-ML-0cd" firstAttribute="top" secondItem="j5A-2S-f7r" secondAttribute="top" id="iv0-gy-BEf"/>
                             <constraint firstItem="j5A-2S-f7r" firstAttribute="bottom" secondItem="DbS-ML-0cd" secondAttribute="bottom" id="lhc-Bd-1T7"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="j5A-2S-f7r"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3y-sr-1bF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -791,14 +790,14 @@ Adelante</string>
                             </userDefinedRuntimeAttributes>
                         </textField>
                     </subviews>
-                    <viewLayoutGuide key="safeArea" id="01e-zt-92c"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="6J4-UA-qRl" secondAttribute="bottom" id="6OV-4U-7r4"/>
                         <constraint firstAttribute="trailing" secondItem="6J4-UA-qRl" secondAttribute="trailing" id="7ML-0L-UdW"/>
                         <constraint firstItem="6J4-UA-qRl" firstAttribute="leading" secondItem="dgM-Do-Pfj" secondAttribute="leading" id="dJX-5r-P7K"/>
                         <constraint firstItem="6J4-UA-qRl" firstAttribute="top" secondItem="dgM-Do-Pfj" secondAttribute="top" id="rZQ-Zg-Fmy"/>
                     </constraints>
+                    <viewLayoutGuide key="safeArea" id="01e-zt-92c"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="976.81159420289862" y="-537.05357142857144"/>
@@ -822,43 +821,11 @@ Adelante</string>
             <point key="canvasLocation" x="-1426.0869565217392" y="-536.38392857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="6J4-UA-qRl">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="6tv-ps-pmp">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="B7K-d2-yLt">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="C8x-B2-NSw">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="Fzc-oY-XVq">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="dUz-LN-60d">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="qFI-49-A7Q">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="uln-Rl-AH4">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="zgZ-JQ-I7N">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-    </designables>
     <resources>
         <image name="adelanteLogo" width="127" height="125"/>
         <image name="adlanteLoginLogo" width="287" height="75"/>
         <image name="mainLoginBg" width="375" height="812"/>
         <image name="signInArrow" width="63.5" height="63.5"/>
         <image name="splashBg" width="375" height="812"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
