@@ -1486,7 +1486,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LS-ub-T68">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="683"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfe-ck-WaO">
                                                         <rect key="frame" x="18" y="27" width="116" height="116"/>
@@ -1562,7 +1562,7 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MWD-rc-OeO">
-                                                        <rect key="frame" x="18" y="172" width="378" height="395"/>
+                                                        <rect key="frame" x="18" y="172" width="378" height="312"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ho2-Ag-MoL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1710,8 +1710,8 @@
                                                                     </view>
                                                                 </subviews>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="DkS-96-maS">
-                                                                <rect key="frame" x="0.0" y="332" width="378" height="63"/>
+                                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="DkS-96-maS">
+                                                                <rect key="frame" x="0.0" y="312" width="378" height="63"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="*********" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lWD-a0-7KT" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
@@ -1736,7 +1736,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ9-fw-5lB" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="18" y="616" width="378" height="47"/>
+                                                        <rect key="frame" x="18" y="533" width="378" height="47"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="OA1-mm-DHg"/>
                                                         </constraints>
@@ -1818,110 +1818,109 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-a4-mfH">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="259"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
+                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1Y-fw-4uz">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
-                                                                        <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-oG-ldn" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="47" id="eQo-Lr-4Yg"/>
-                                                                                </constraints>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Title"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </textField>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCt-gM-K5G" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="1" id="7af-KU-qMN"/>
-                                                                                </constraints>
-                                                                            </view>
-                                                                        </subviews>
-                                                                    </stackView>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-oG-ldn" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="47" id="eQo-Lr-4Yg"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Title"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </textField>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCt-gM-K5G" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="7af-KU-qMN"/>
+                                                                        </constraints>
+                                                                    </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="8S6-ob-Qcu" firstAttribute="top" secondItem="l1Y-fw-4uz" secondAttribute="top" id="M1K-Yb-cDP"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="8S6-ob-Qcu" secondAttribute="trailing" id="f2D-AX-ajl"/>
-                                                                    <constraint firstItem="8S6-ob-Qcu" firstAttribute="leading" secondItem="l1Y-fw-4uz" secondAttribute="leading" id="haA-xQ-Dj4"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="8S6-ob-Qcu" secondAttribute="bottom" id="xud-QH-J2m"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" id="msr-EI-myL">
-                                                                <rect key="frame" x="0.0" y="98" width="378" height="63"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CGz-WV-nKW">
+                                                                <rect key="frame" x="0.0" y="83" width="378" height="63"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CGz-WV-nKW">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
-                                                                        <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNM-X4-rQ4" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="47" id="dmV-uU-gd4"/>
-                                                                                </constraints>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </textField>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orp-MA-zsB" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="1" id="3DR-Mf-5Wl"/>
-                                                                                </constraints>
-                                                                            </view>
-                                                                        </subviews>
-                                                                    </stackView>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNM-X4-rQ4" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="47" id="dmV-uU-gd4"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </textField>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orp-MA-zsB" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="3DR-Mf-5Wl"/>
+                                                                        </constraints>
+                                                                    </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="CGz-WV-nKW" firstAttribute="leading" secondItem="msr-EI-myL" secondAttribute="leading" id="1pR-zf-Pxb"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="CGz-WV-nKW" secondAttribute="bottom" id="ELx-Ql-O0g"/>
-                                                                    <constraint firstItem="CGz-WV-nKW" firstAttribute="top" secondItem="msr-EI-myL" secondAttribute="top" id="Wmu-0E-jvk"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="CGz-WV-nKW" secondAttribute="trailing" id="mnB-1H-0dM"/>
-                                                                </constraints>
-                                                                <viewLayoutGuide key="safeArea" id="R3I-ZI-IPk"/>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" id="2ct-jJ-trv">
-                                                                <rect key="frame" x="0.0" y="196" width="378" height="63"/>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="VFS-UJ-pgn">
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n6X-GE-mFq" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="79" id="vPi-Eo-fsR"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Feedback Description"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </textField>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkw-8n-RGO" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="g7L-Lh-CRr"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <view hidden="YES" contentMode="scaleToFill" id="2ct-jJ-trv">
+                                                                <rect key="frame" x="0.0" y="281" width="378" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dlo-Ab-Y2f" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="47" id="lzK-76-f2X"/>
-                                                                                </constraints>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lte-4J-DBH" customClass="JVFloatLabeledTextView">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Feedback Description"/>
-                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
-                                                                                        <real key="value" value="0.0"/>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                                                                        <real key="value" value="-1"/>
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
-                                                                            </textField>
+                                                                            </textView>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="62" width="378" height="1"/>
+                                                                                <rect key="frame" x="0.0" y="78" width="378" height="1"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="79" id="Fcc-9s-ObS"/>
+                                                                        </constraints>
                                                                     </stackView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1931,7 +1930,6 @@
                                                                     <constraint firstAttribute="trailing" secondItem="CdW-6o-K39" secondAttribute="trailing" id="xBA-GC-KFo"/>
                                                                     <constraint firstItem="CdW-6o-K39" firstAttribute="top" secondItem="2ct-jJ-trv" secondAttribute="top" id="xyv-bD-G4g"/>
                                                                 </constraints>
-                                                                <viewLayoutGuide key="safeArea" id="W9k-SI-D9I"/>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
@@ -2579,7 +2577,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D6H-kd-b9H">
                                                             <rect key="frame" x="86" y="9.5" width="288" height="69.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LK-zl-hyG" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LK-zl-hyG" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -2588,7 +2586,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isNotificatioTitle" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your Order #1234 has been Successfully completed " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-Ej-Hq6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Order #1234 has been Successfully completed " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-Ej-Hq6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="28.5" width="288" height="41"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>

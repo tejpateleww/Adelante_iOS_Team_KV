@@ -14,4 +14,5 @@ target 'Adelante' do
     pod 'Cosmos'
     pod 'GrowingTextView', '0.7.2'
     pod 'FormTextField'
+    pod 'JVFloatLabeledTextField'
 end
