@@ -47,13 +47,3 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     // MARK: - Api Calls
 }
-
-// MARK: - UITableViewCell - ReViewCell
-class ReViewCell:UITableViewCell{
-    
-}
-
-// MARK: - UITableViewCell - ReViewDiscCell
-class ReViewDiscCell:UITableViewCell{
-    
-}

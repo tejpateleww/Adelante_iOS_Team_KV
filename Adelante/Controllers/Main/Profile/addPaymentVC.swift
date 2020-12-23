@@ -180,16 +180,3 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     
     
 }
-class paymentMethodCell1 : UITableViewCell {
-     @IBOutlet weak var vWMain: PaymentView!
-    @IBOutlet weak var lblWallet: addPaymentlable!
-    @IBOutlet weak var lblwalletBalance: addPaymentlable!
-    @IBOutlet weak var paymentImageView: UIImageView!
-}
-class paymentMethodCell2 : UITableViewCell {
-     @IBOutlet weak var vWMain: PaymentView!
-    @IBOutlet weak var selectPaymentMethodButton: UIButton!
-    @IBOutlet weak var paymentMethodImageView: UIImageView!
-    @IBOutlet weak var lblExpiresDate: addPaymentlable!
-    @IBOutlet weak var lblcardDetails: addPaymentlable!
-}

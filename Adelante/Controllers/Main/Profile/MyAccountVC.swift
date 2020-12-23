@@ -231,10 +231,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     
 }
-class myAccountSubDetails : UITableViewCell {
-    
-    @IBOutlet weak var lblAccountSubDetails: myaccountLabel!
-}
 class myAccountDetails
 {
     var detailsIcon : UIImage?

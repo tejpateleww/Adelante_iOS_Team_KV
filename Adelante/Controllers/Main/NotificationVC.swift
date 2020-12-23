@@ -51,7 +51,3 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     // MARK: - Api Calls
 }
-
-class NotificationCell: UITableViewCell{
-    
-}

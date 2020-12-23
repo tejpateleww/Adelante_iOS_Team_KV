@@ -193,26 +193,3 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Changing restaurants will empty your cart. Are you sure you want to continue?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
     }
 }
-
-class orderDetailsCell : UITableViewCell {
-    
-    @IBOutlet weak var lblTitle: CheckOutLabel!
-    @IBOutlet weak var lblPrice: CheckOutLabel!
-}
-
-class addedProductCell : UITableViewCell {
-    
-    @IBOutlet weak var lbltotalCount: CheckOutLabel!
-    @IBAction func decreaseBtn(_ sender: Any) {
-        if let click = self.decreaseClick {
-            click()
-        }
-    }
-    var decreaseClick : (() -> ())?
-    var increaseClick : (() -> ())?
-    @IBAction func increaseBtn(_ sender: Any) {
-        if let click = self.increaseClick {
-            click()
-        }
-    }
-}

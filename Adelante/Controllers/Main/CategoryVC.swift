@@ -54,7 +54,3 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     // MARK: - Api Calls
 }
 
-// MARK: - UICollectionViewCell - CategoryCell
-class CategoryCell : UICollectionViewCell{
-    
-}

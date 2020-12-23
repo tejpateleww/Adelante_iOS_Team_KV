@@ -137,23 +137,3 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - Api Calls
     
 }
-
-// MARK: - UITableViewCell --> MyOrderDetailsCell
-class MyOrderDetailsCell: UITableViewCell {
-    
-    // MARK: - IBOutlets of MyOrderDetailsCell
-    
-    @IBOutlet weak var lblItemName: orderDetailsLabel!
-    @IBOutlet weak var lblDateTime: orderDetailsLabel!
-    @IBOutlet weak var lblSharedFrom: orderDetailsLabel!
-    
-    // MARK: - Properties
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-   
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-}

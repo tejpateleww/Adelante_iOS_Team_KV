@@ -194,35 +194,3 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     // MARK: - Api Calls
 }
-
-// MARK: - UITableViewCell - RestaurantDetailsCell
-class RestaurantDetailsCell:UITableViewCell{
-    
-    @IBOutlet weak var vwSeperator: seperatorView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    var customize : (() -> ())?
-
-    @IBAction func btnCustomize(_ sender: Any) {
-        if let click = self.customize {
-            click()
-        }
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-}
-
-// MARK: - UITableViewCell - RestaurantDetailsCell
-class RestaurantItemCell:UITableViewCell{
-    
-    @IBOutlet weak var vwSeperator: seperatorView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-}

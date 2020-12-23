@@ -51,8 +51,3 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - Api Calls
 }
-
-// MARK: - UITableViewCell - MyFoodlistCell
-class MyFoodlistCell:UITableViewCell {
-    
-}

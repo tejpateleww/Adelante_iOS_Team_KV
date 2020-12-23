@@ -61,17 +61,3 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - Api Calls
     
 }
-
-// MARK: - UITableViewCell - YourFavouriteCell
-class YourFavouriteCell: UITableViewCell {
-    
-    @IBOutlet weak var imgRestaurant: customImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-}

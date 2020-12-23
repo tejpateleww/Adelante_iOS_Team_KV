@@ -133,22 +133,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
 }
-class bffComboCell : UITableViewCell {
-    
-    @IBOutlet weak var lblBffComboPrice: UILabel!
-    @IBOutlet weak var lblbffComboTitle: UILabel!
-    @IBOutlet weak var selectButton: UIButton!
-    
-    var selectedBtn : (() -> ())?
-    
-    @IBAction func selectBff(_ sender: UIButton) {
-        if let click = self.selectedBtn
-        {
-            click()
-        }
-    }
-    
-}
 class bffCombo {
     var comboName : String?
     var subCombo : [subBFFCombo]

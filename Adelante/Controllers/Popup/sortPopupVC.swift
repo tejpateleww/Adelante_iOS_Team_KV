@@ -124,17 +124,3 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
      }
      */
 }
-class sortCell : UITableViewCell
-{
-    @IBOutlet weak var imageSelected: UIImageView!
-    @IBOutlet weak var SortListName: UILabel!
-    var btnClickNew : (() -> ())?
-    
-
-    @IBAction func btnClick(_ sender: Any) {
-        if let click = self.btnClickNew
-        {
-            click()
-        }
-    }
-}
