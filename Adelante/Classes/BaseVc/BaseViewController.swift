@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
     var vwNavHomeTopBar = UIView()
     let lblNavAddressHome = myLocationLabel()
     var btnNavAddressHome = UIButton()
-    
+    var btnNavLike = UIButton()
     func setNavigationBarInViewController (controller : UIViewController,naviColor : UIColor, naviTitle : String, leftImage : String , rightImages : [String], isTranslucent : Bool, isShowHomeTopBar:Bool)
     {
         UIApplication.shared.statusBarStyle = .lightContent
@@ -142,14 +142,15 @@ class BaseViewController: UIViewController {
                 } else if title == NavItemsRight.liked.value {
                                     let vwLike = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
 
-                                    let btnLike = UIButton.init()
-                                    btnLike.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-                                    btnLike.setImage(UIImage.init(named: "ic_RestaurantdisLiked"), for: .normal)
-                    btnLike.setImage(UIImage(), for: .selected)
-                    btnLike.addTarget(self, action: #selector(likeDislikeReaustrant(_:)), for: .touchUpInside)
+                    btnNavLike = UIButton.init()
+                    btnNavLike.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+                    btnNavLike.setImage(UIImage.init(named: "ic_RestaurantdisLiked"), for: .normal)
+                    btnNavLike.setImage(UIImage.init(named: "ic_RestaurantLiked"), for: .selected)
+                    btnNavLike.setImage(UIImage.init(named: "ic_RestaurantLiked"), for: .highlighted)
+                   btnNavLike.addTarget(self, action: #selector(likeDislikeReaustrant(_:)), for: .touchUpInside)
                                   //  btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
-                                    btnLike.layer.setValue(controller, forKey: "controller")
-                                    vwLike.addSubview(btnLike)
+                    btnNavLike.layer.setValue(controller, forKey: "controller")
+                                    vwLike.addSubview(btnNavLike)
 
                 //                    lblNavNotifBadge = badgeLabel.init(frame: CGRect(x: 26, y: 0, width: 17, height: 17))
                 //                    lblNavNotifBadge.isNotifBadge = true
@@ -357,7 +358,7 @@ class BaseViewController: UIViewController {
             sender?.isSelected = false
         }
             else {
-                sender?.isSelected = false
+                sender?.isSelected = true
         }
          
        }

@@ -23,6 +23,7 @@ class themeTextView: GrowingTextView {
             self.font = CustomFont.NexaRegular.returnFont(16)
             self.textColor = colors.textFieldColor.value
             self.minHeight = 79
+            self.maxHeight = 79
             self.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
         }else{
             self.font = CustomFont.NexaRegular.returnFont(15)

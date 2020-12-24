@@ -50,7 +50,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         tblRestaurantDetails.estimatedRowHeight = 20
         tblRestaurantDetails.reloadData()
     }
-    
     override func viewDidLayoutSubviews() {
         heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height
     }
@@ -67,6 +66,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @IBAction func btnViewCart(_ sender: Any) {
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
     @objc  func btnExpand(_ sender : UIButton) {
         for i in 0..<arrSections.count {
             if sender.tag != 0 {

@@ -100,6 +100,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    @IBAction func btnReadPolicyTap(_ sender: Any) {
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+        controller.strNavTitle = "Privacy Policy"
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: applyPromoCodeVC.storyboardID) as! applyPromoCodeVC
         //controller.modalPresentationStyle = .fullScreen
@@ -121,12 +126,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBAction func placeOrderBtn(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID)
+        
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func seeMenu(_ sender: submitButton) {
-          let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
-          self.navigationController?.pushViewController(controller, animated: true)
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func canclePromoCode(_ sender: myOrdersBtn) {
@@ -139,57 +145,57 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         self.LblTotlaPrice.text = "$39"
         self.arrayForPrice.removeLast()
         self.arrayForTitle.removeLast()
-       tblOrderDetailsHeight.constant = CGFloat(arrayForTitle.count * 43)
-       self.tblOrderDetails.reloadData()
+        tblOrderDetailsHeight.constant = CGFloat(arrayForTitle.count * 43)
+        self.tblOrderDetails.reloadData()
     }
     
     @IBAction func btnChangeLocationClicked(_ sender: Any) {
-//        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-//        //controller.modalPresentationStyle = .fullScreen
-//        controller.isHideCancelButton = false
-//        controller.isHideSubmitButton = false
-//        controller.submitBtnTitle = "Yes"
-//        controller.cancelBtnTitle = "No"
-//        controller.strDescription = "Do you want to choose other location for same restaurant?"
-//        controller.strPopupTitle = ""
-//        controller.isCancleOrder = true
-//        controller.btnSubmit = {
-//            self.dismiss(animated: true, completion: nil)
-//            // self.navigationController?.popViewController(animated: true)
-//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }
-//        self.present(controller, animated: true, completion: nil)
-//
-//        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Do you want to choose other location for same restaurant?", isCancleOrder: false, viewController: self)
-
+        //        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        //        //controller.modalPresentationStyle = .fullScreen
+        //        controller.isHideCancelButton = false
+        //        controller.isHideSubmitButton = false
+        //        controller.submitBtnTitle = "Yes"
+        //        controller.cancelBtnTitle = "No"
+        //        controller.strDescription = "Do you want to choose other location for same restaurant?"
+        //        controller.strPopupTitle = ""
+        //        controller.isCancleOrder = true
+        //        controller.btnSubmit = {
+        //            self.dismiss(animated: true, completion: nil)
+        //            // self.navigationController?.popViewController(animated: true)
+        //            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
+        //            self.navigationController?.pushViewController(controller, animated: true)
+        //        }
+        //        self.present(controller, animated: true, completion: nil)
+        //
+        //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Do you want to choose other location for same restaurant?", isCancleOrder: false, viewController: self)
+        
         // Do you want to choose other location for same restaurant?
         // Different Outlets with same Restaurant going to listed, Are you sure to proceed ?
         commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Are you sure you want to choose another location for this restaurant chain or franchise?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-//        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Are you sure you want to choose another location for this restaurant chain or franchise?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
+        //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Are you sure you want to choose another location for this restaurant chain or franchise?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
     }
     
     @IBAction func btnChangeRestaurantClicked(_ sender: Any) {
-//        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-//        //controller.modalPresentationStyle = .fullScreen
-//        controller.isHideCancelButton = false
-//        controller.isHideSubmitButton = false
-//        controller.submitBtnTitle = "Yes"
-//        controller.cancelBtnTitle = "No"
-//        controller.strDescription = "Do you want to choose other restaurant? All items in your cart will be deleted."
-//        controller.isCancleOrder = true
-//        controller.btnSubmit = {
-//            self.dismiss(animated: true, completion: nil)
-//            // self.navigationController?.popViewController(animated: true)
-//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }
-//        self.present(controller, animated: true, completion: nil)
+        //        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        //        //controller.modalPresentationStyle = .fullScreen
+        //        controller.isHideCancelButton = false
+        //        controller.isHideSubmitButton = false
+        //        controller.submitBtnTitle = "Yes"
+        //        controller.cancelBtnTitle = "No"
+        //        controller.strDescription = "Do you want to choose other restaurant? All items in your cart will be deleted."
+        //        controller.isCancleOrder = true
+        //        controller.btnSubmit = {
+        //            self.dismiss(animated: true, completion: nil)
+        //            // self.navigationController?.popViewController(animated: true)
+        //            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
+        //            self.navigationController?.pushViewController(controller, animated: true)
+        //        }
+        //        self.present(controller, animated: true, completion: nil)
         
         
         // Do you want to choose other restaurant? All items in your cart will be deleted.
         // Do you want to choose other Restaurant? Cart will be empty, Are you sure to proceed ?
         commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Changing restaurants will empty your cart. Are you sure you want to continue?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-//        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Changing restaurants will empty your cart. Are you sure you want to continue?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
+        //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Changing restaurants will empty your cart. Are you sure you want to continue?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
     }
 }

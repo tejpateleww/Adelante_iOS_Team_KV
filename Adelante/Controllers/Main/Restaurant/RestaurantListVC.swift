@@ -95,5 +95,4 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - Api Calls
-    
 }
