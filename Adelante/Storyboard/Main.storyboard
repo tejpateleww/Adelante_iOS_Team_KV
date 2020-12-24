@@ -2971,6 +2971,11 @@
                                                                 <color key="value" red="0.60784316059999999" green="0.60788023469999997" blue="0.60392481090000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Comments"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isBorder" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCornerRadius" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="RadiusValue">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textView>
                                                 </subviews>
@@ -8391,14 +8396,6 @@ avoid cancellations </string>
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="Tme-wR-K6Z">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-        <designable name="oP7-OM-AFy">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
         <image name="DetailsFood" width="161" height="158"/>
