@@ -30,14 +30,14 @@ class themeTextView: GrowingTextView {
             self.minHeight = 134
             self.textContainerInset = UIEdgeInsets(top: 13, left: 13, bottom: 13, right: 13)
         }
-//        if isBorder{
-//            self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
-//            self.layer.borderWidth = 1
-//        }
-//        if isCornerRadius{
-//            self.layer.cornerRadius = RadiusValue
-//            self.clipsToBounds = true
-//        }
+        if isBorder{
+            self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
+            self.layer.borderWidth = 1
+        }
+        if isCornerRadius{
+            self.layer.cornerRadius = RadiusValue
+            self.clipsToBounds = true
+        }
     }
 }
 

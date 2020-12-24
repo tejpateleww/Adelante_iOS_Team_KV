@@ -74,11 +74,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>JVFloatLabeledTextField.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Adelante.xcscheme</key>
 		<dict>
 			<key>isShown</key>

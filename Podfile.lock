@@ -56,7 +56,6 @@ PODS:
     - GoogleUtilities/Logger
   - GrowingTextView (0.7.2)
   - IQKeyboardManagerSwift (6.3.0)
-  - JVFloatLabeledTextField (1.2.2)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -78,7 +77,6 @@ DEPENDENCIES:
   - FormTextField
   - GrowingTextView (= 0.7.2)
   - IQKeyboardManagerSwift (= 6.3.0)
-  - JVFloatLabeledTextField
   - SDWebImage
   - SkyFloatingLabelTextField
   - SwiftyJSON (= 4.0)
@@ -99,7 +97,6 @@ SPEC REPOS:
     - GoogleUtilities
     - GrowingTextView
     - IQKeyboardManagerSwift
-    - JVFloatLabeledTextField
     - nanopb
     - PromisesObjC
     - Protobuf
@@ -122,7 +119,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GrowingTextView: 876bf42005b5e4a4fd740597db12caaf41f0fe6c
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
-  JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
@@ -130,6 +126,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 129a41b0b1e0dc1ae65db9885795af3f65840cb6
+PODFILE CHECKSUM: 442ff3269080ebb22b2bcc74e4df26d05cf9a97e
 
 COCOAPODS: 1.10.0
