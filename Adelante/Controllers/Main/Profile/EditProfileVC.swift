@@ -19,10 +19,18 @@ class EditProfileVC: BaseViewController{
     // MARK: - IBOutlets
     @IBOutlet weak var btnUpdatePicture: UIButton!
     @IBOutlet weak var imgProfile: UIImageView!{ didSet{ imgProfile.layer.cornerRadius = imgProfile.frame.size.height / 2}}
+    @IBOutlet weak var txtFirstName: floatTextField!
+    @IBOutlet weak var txtLastName: floatTextField!
+    @IBOutlet weak var txtEmail: floatTextField!
+    @IBOutlet weak var lblVerified: themeLabel!
+    @IBOutlet weak var txtPhoneNumber: floatTextField!
+    @IBOutlet weak var lblUnverified: themeLabel!
+    @IBOutlet weak var btnSave: submitButton!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setUp()
     }
     
@@ -45,7 +53,15 @@ class EditProfileVC: BaseViewController{
     @IBAction func Btnsave(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    
+    func setUpLocalizedStrings() {
+        txtFirstName.placeholder = "EditProfileVC_txtFirstName".Localized()
+        txtLastName.placeholder = "EditProfileVC_txtLastName".Localized()
+        txtEmail.placeholder = "EditProfileVC_txtEmail".Localized()
+        lblVerified.text = "EditProfileVC_lblVerified".Localized()
+        txtPhoneNumber.placeholder = "EditProfileVC_txtPhoneNumber".Localized()
+        lblUnverified.text = "EditProfileVC_lblUnverified".Localized()
+        btnSave.setTitle("EditProfileVC_btnSave".Localized(), for: .normal)
+    }
     
     // MARK: - Api Calls
 }

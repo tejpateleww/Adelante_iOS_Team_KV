@@ -17,16 +17,18 @@ class applyPromoCodeVC: UIViewController {
     @IBOutlet weak var vwMain: viewWithClearBG!
    @IBOutlet weak var okButton: applyPromoCodeButtton!
        @IBOutlet weak var cancleButton: applyPromoCodeButtton!
+    @IBOutlet weak var lblPromoCode: commonPopUPLabel!
+    @IBOutlet weak var txtPromoCode: UITextField!
     
     
     // MARK: - UIView Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpBlurView()
+        setUpLocalizedStrings()
         setUp()
+    
     }
-    
-    
     // MARK: - Other Methods
     
     
@@ -80,6 +82,12 @@ class applyPromoCodeVC: UIViewController {
             }
         }
         
+    }
+    func setUpLocalizedStrings(){
+        okButton.setTitle("applyPromoCodeVC_okButton".Localized(), for: .normal)
+        cancleButton.setTitle("applyPromoCodeVC_cancleButton".Localized(), for: .normal)
+        lblPromoCode.text = "applyPromoCodeVC_lblPromoCode".Localized()
+        txtPromoCode.placeholder = "applyPromoCodeVC_txtPromoCode".Localized()
     }
     func setUp() {
        // tap = UITapGestureRecognizer(target: self, action: #selector(dismissView))

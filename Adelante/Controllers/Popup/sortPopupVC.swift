@@ -15,16 +15,18 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     @IBOutlet weak var tblSorting: UITableView!
     @IBOutlet weak var viewBG: UIView!
     
+    @IBOutlet weak var lblSort: sortPopUPLabel!
     @IBOutlet weak var heightTblSorting: NSLayoutConstraint!
     
     var arrayForSort : [String] = ["Picked for you","Nearest","Popular near you","Today’s special","Top selling","Loved by locals"]
     
-    // var arrayForSort : [String] = ["Picked for you Picked for you Picked for you Picked for you Picked for you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you","Nearest Nearest Nearest Nearest","Popular near you Popular near you Popular near you Popular near you"]
+    
     
     @IBOutlet weak var viewDragable: UIView!
     var selectedIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         isSwipable(view: viewDragable)
         
        // self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -79,6 +81,9 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     //MARK: -tblViewMethods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayForSort.count
+    }
+    func setUpLocalizedStrings(){
+        lblSort.text = "sortPopupVC_lblSort".Localized()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

@@ -9,7 +9,8 @@
 import UIKit
 
 class ReViewDiscCell: UITableViewCell {
-
+    @IBOutlet weak var lblDescription: CustomLabel!
+    @IBOutlet weak var lblName: themeLabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

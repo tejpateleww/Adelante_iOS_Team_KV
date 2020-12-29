@@ -10,12 +10,17 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var txtEmail : UITextField!
-    @IBOutlet weak var txtPassword : UITextField!
-
+    @IBOutlet weak var lblTitle: themeTitleLabel!
+    @IBOutlet weak var txtEmail : floatTextField!
+    @IBOutlet weak var txtPassword : floatTextField!
+    @IBOutlet weak var btnForgotPassword: submitButton!
+    @IBOutlet weak var lblSignin: themeLabel!
+    @IBOutlet weak var lblDontHave: themeLabel!
+    @IBOutlet weak var btnCreateAccount: submitButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUpLocalizedStrings()
         // Do any additional setup after loading the view.
     }
     
@@ -36,7 +41,16 @@ class LoginViewController: UIViewController {
         userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
           appDel.navigateToHome()
        }
-    
+    //MARK:- Other Method
+    func setUpLocalizedStrings() {
+        lblTitle.text = "LoginViewController_lblTitle".Localized()
+        txtEmail.placeholder = "LoginViewController_txtEmail".Localized()
+        txtPassword.placeholder = "LoginViewController_txtPassword".Localized()
+        btnForgotPassword.setTitle("LoginViewController_btnForgotPassword".Localized(), for: .normal)
+        lblSignin.text = "LoginViewController_lblSignin".Localized()
+        lblDontHave.text = "LoginViewController_lblDontHave".Localized()
+        btnCreateAccount.setTitle("LoginViewController_btnCreateAccount".Localized(), for: .normal)
+    }
    //MARK:- Webservice
     func webserviceForlogin()
     {

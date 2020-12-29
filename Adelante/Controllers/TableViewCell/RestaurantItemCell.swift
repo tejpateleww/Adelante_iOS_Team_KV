@@ -10,6 +10,10 @@ import UIKit
 
 class RestaurantItemCell: UITableViewCell {
 
+    @IBOutlet weak var lblItem: tblMyOrdersLabel!
+    @IBOutlet weak var btnAdd: UIButton!
+    @IBOutlet weak var lblItemPrice: tblMyOrdersLabel!
+    @IBOutlet weak var lblSizeOfItem: tblMyOrdersLabel!
     @IBOutlet weak var vwSeperator: seperatorView!
     override func awakeFromNib() {
         super.awakeFromNib()

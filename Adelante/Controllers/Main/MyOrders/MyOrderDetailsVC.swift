@@ -23,6 +23,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var lblRestName: UILabel!
     @IBOutlet weak var lblLocation: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
+    @IBOutlet weak var lblYourOrder: orderDetailsLabel!
     @IBOutlet weak var lblSubTotalTitle: UILabel!
     @IBOutlet weak var lblSubTotal: UILabel!
     @IBOutlet weak var lblServiceFeeTitle: UILabel!
@@ -38,12 +39,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var vwCancel: UIView!
     @IBOutlet weak var vwRateOrder: UIView!
     @IBOutlet weak var vwShareOrder: UIView!
-    
     @IBOutlet weak var heightTblItems: NSLayoutConstraint!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setup()
         
     }
@@ -88,18 +89,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-//        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-//
-//        controller.isHideCancelButton = true
-//        controller.isHideSubmitButton = false
-//               //controller.modalPresentationStyle = .fullScreen
-//        controller.isCancleOrder = true
-//               controller.btnSubmit = {
-//                   self.dismiss(animated: true, completion: nil)
-//                    self.navigationController?.popViewController(animated: true)
-//
-//               }
-//               self.present(controller, animated: true, completion: nil)
+
         commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appRedColor, cancelBtnColor: colors.appRedColor, viewController: self)
 //        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor.value, cancelBtnColor: colors.appOrangeColor.value ,viewController: self)
     }
@@ -133,7 +123,26 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+    func setUpLocalizedStrings()
+    {
+        lblOrderId.text = "MyOrderDetailsVC_lblOrderId".Localized()
+        lblNoOfItems.text = String(format: "MyOrderDetailsVC_lblNoOfItems".Localized(), "1")
+        lblRestName.text = "MyOrderDetailsVC_lblRestName".Localized()
+        lblLocation.text = "MyOrderDetailsVC_lblLocation".Localized()
+        lblAddress.text = "43369 Ellsworth St, remont,CA"
+        lblYourOrder.text = "MyOrderDetailsVC_lblYourOrder".Localized()
+        lblSubTotalTitle.text = "MyOrderDetailsVC_lblSubTotalTitle".Localized()
+        lblSubTotal.text = "$30"
+        lblServiceFeeTitle.text = "MyOrderDetailsVC_lblServiceFeeTitle".Localized()
+        lblServiceFee.text = "$2"
+        lblTaxesTitle.text = "MyOrderDetailsVC_lblTaxesTitle".Localized()
+        lblTaxes.text = "$7"
+        lblTotalTitle.text = "MyOrderDetailsVC_lblTotalTitle".Localized()
+        lblTotal.text = "$39"
+        btnCancel.setTitle("MyOrderDetailsVC_btnCancel".Localized(), for: .normal)
+        btnRateOrder.setTitle("MyOrderDetailsVC_btnRateOrder".Localized(), for: .normal)
+        btnShareOrder.setTitle("MyOrderDetailsVC_btnShareOrder".Localized(), for: .normal)
+    }
     // MARK: - Api Calls
     
 }

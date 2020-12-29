@@ -11,7 +11,9 @@ import UIKit
 class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     
+   
     // MARK: - Properties
+    
     var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets

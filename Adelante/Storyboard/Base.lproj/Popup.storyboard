@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,7 +36,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xKq-gU-5DU" customClass="applyPromoCode" customModule="Adelante" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xKq-gU-5DU">
                                                 <rect key="frame" x="15" y="73" width="348" height="39"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="39" id="jXi-e0-bDt"/>
@@ -133,7 +133,9 @@
                     </view>
                     <connections>
                         <outlet property="cancleButton" destination="9mi-GN-iR3" id="tud-L0-Shb"/>
+                        <outlet property="lblPromoCode" destination="ZEN-jp-6i5" id="2et-pK-rbL"/>
                         <outlet property="okButton" destination="ahi-XF-U72" id="EiS-No-rb4"/>
+                        <outlet property="txtPromoCode" destination="xKq-gU-5DU" id="eag-Ht-BV4"/>
                         <outlet property="vwMain" destination="H6O-ye-Q6q" id="Rsl-Tp-OEQ"/>
                     </connections>
                 </viewController>

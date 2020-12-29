@@ -14,10 +14,15 @@ class MyProfileVC: BaseViewController {
     var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets
+    @IBOutlet weak var lblName: themeLabel!
+    @IBOutlet weak var btnEditAccount: submitButton!
+    @IBOutlet weak var txtEmail: floatTextField!
+    @IBOutlet weak var txtPhoneNumber: floatTextField!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setUp()
     }
 
@@ -30,7 +35,12 @@ class MyProfileVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
-    
+    func setUpLocalizedStrings() {
+        lblName.text = "MyProfileVC_lblName".Localized()
+        btnEditAccount.setTitle("MyProfileVC_btnEditAccount".Localized(), for: .normal)
+        txtEmail.placeholder = "MyProfileVC_txtEmail".Localized()
+        txtPhoneNumber.placeholder = "MyProfileVC_txtPhoneNumber".Localized()
+    }
     // MARK: - IBActions
     
     @IBAction func BtnEditAccount(_ sender: Any) {

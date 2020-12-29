@@ -18,7 +18,7 @@ enum NavItemsLeft {
         case .none:
             return ""
         case .back:
-            return "back"
+            return "NavigationTitles_NavItemsLeft_back".Localized()
         }
     }
 }
@@ -32,13 +32,13 @@ enum NavItemsRight {
         case .none:
             return ""
         case .clearAll:
-            return "clearAll"
+            return "NavigationTitles_NavItemsRight_clearAll".Localized()
         case .saved:
-            return "saved"
+            return "NavigationTitles_NavItemsRight_saved".Localized()
         case .notifBell:
-            return "notifBell"
+            return "NavigationTitles_NavItemsRight_notifBell".Localized()
         case .liked:
-            return "Liked"
+            return "NavigationTitles_NavItemsRight_Liked".Localized()
         }
     }
 }
@@ -52,59 +52,59 @@ enum NavTitles {
         case .none:
             return ""
         case .myOrders:
-            return "My Orders"
+            return "NavigationTitles_MyOrders".Localized()
         case .pastOrderDetails:
-            return "Past Order Details"
+            return "NavigationTitles_PastOrderDetails".Localized()
         case .upcomingOrderDetails:
-            return "Upcoming Order Details"
+            return "NavigationTitles_UpcomingOrderDetails".Localized()
         case .checkout:
-            return "Checkout"
+            return "NavigationTitles_Checkout".Localized()
         case .addPayment:
-            return "Add Payment"
+            return "NavigationTitles_AddPayment".Localized()
         case .addCard:
-            return "Add Card"
+            return "NavigationTitles_AddCard".Localized()
         case .myAccount:
-            return "My Account"
+            return "NavigationTitles_MyAccount".Localized()
         case .myProfile:
-            return "My Profile"
+            return "NavigationTitles_MyProfile".Localized()
         case .editProfile:
-            return "Edit Profile"
+            return "NavigationTitles_EditProfile".Localized()
         case .ratingAndReviews:
-            return "Ratings & Reviews"
+            return "NavigationTitles_Ratings&Reviews".Localized()
         case .restaurantList:
-            return "Restaurant List"
+            return "NavigationTitles_RestaurantList".Localized()
         case .restaurantDetails:
-            return "Restaurant Details"
+            return "NavigationTitles_RestaurantDetails".Localized()
         case .myFoodlist:
-            return "My Foodlist"
+            return "NavigationTitles_MyFoodlist".Localized()
         case .termsAndConditions:
-            return "Terms & conditions"
+            return "NavigationTitles_Terms&conditions".Localized()
         case .privacyPolicy:
-            return "Privacy policy"
+            return "NavigationTitles_Privacypolicy".Localized()
         case .aboutUs:
-            return "About Us"
+            return "NavigationTitles_AboutUs".Localized()
         case .feedback:
-            return "Feedback"
+            return "NavigationTitles_Feedback".Localized()
         case .topCategories:
-            return "Top Categories"
+            return "NavigationTitles_TopCategories".Localized()
         case .bffCombo:
-            return "BFF Combo"
+            return "NavigationTitles_BFFCombo".Localized()
         case .notifications:
-            return "Notifications"
+            return "NavigationTitles_Notifications".Localized()
         case .favourites:
-            return "Your Favorites"
+            return "NavigationTitles_YourFavorites".Localized()
         case .addPaymentVC:
-            return "Add Payment"
+            return "NavigationTitles_AddPayment".Localized()
         case .AddCardVC:
-            return "Add Card"
+            return "NavigationTitles_AddCard".Localized()
         case .bffComboVC:
-            return "BFF Combo"
+            return "NavigationTitles_BFFCombo".Localized()
         case .FeedbackVC:
-            return "Feedback"
+            return "NavigationTitles_Feedback".Localized()
         case .checkOutVC:
-            return "Checkout"
+            return "NavigationTitles_Checkout".Localized()
         case .BffComboVC:
-            return "BFF Combo"
+            return "NavigationTitles_BFFCombo".Localized()
         }
     }
 }

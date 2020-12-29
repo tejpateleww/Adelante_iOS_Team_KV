@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 //        FirebaseApp.configure()
         registerForPushNotifications()
-        
+        checkAndSetDefaultLanguage()
         navigateToSplash()
         
 //        printAppFonts()
@@ -39,7 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
     func applicationWillTerminate(_ application: UIApplication) {
     }
-    
+    func checkAndSetDefaultLanguage() {
+            if userDefault.value(forKey: UserDefaultsKey.selLanguage.rawValue) == nil {
+                setLanguageEnglish()
+            }
+        }
+        
+        func setLanguageEnglish() {
+            userDefault.setValue("en", forKey: UserDefaultsKey.selLanguage.rawValue)
+        }
     func setupNavigation(){
         if #available(iOS 13.0, *) {
             // prefer a light interface style with this:

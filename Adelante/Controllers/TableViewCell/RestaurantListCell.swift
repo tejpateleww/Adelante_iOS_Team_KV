@@ -12,7 +12,9 @@ class RestaurantListCell: UITableViewCell {
 
     @IBOutlet weak var imgRestaurant: customImageView!
     @IBOutlet weak var lblDistance: tblHomeLabels!
-    
+    @IBOutlet weak var lblMiles: tblHomeLabels!
+    @IBOutlet weak var lblRating: tblHomeLabels!
+    @IBOutlet weak var lblPrice: tblHomeLabels!
     override func awakeFromNib() {
         super.awakeFromNib()
     }

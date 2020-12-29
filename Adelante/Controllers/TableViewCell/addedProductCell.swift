@@ -11,6 +11,8 @@ import UIKit
 class addedProductCell: UITableViewCell {
 
     @IBOutlet weak var lbltotalCount: CheckOutLabel!
+    @IBOutlet weak var lblItem: CheckOutLabel!
+    @IBOutlet weak var lblPrice: CheckOutLabel!
     @IBAction func decreaseBtn(_ sender: Any) {
         if let click = self.decreaseClick {
             click()

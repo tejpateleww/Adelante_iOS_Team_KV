@@ -12,13 +12,18 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-        
+   
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tbvReview: UITableView!
-    
+    @IBOutlet weak var lblAreaName: themeLabel!
+    @IBOutlet weak var lblAddress: themeLabel!
+    @IBOutlet weak var lblRating: themeLabel!
+    @IBOutlet weak var lblReviews: themeLabel!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setUp()
     }
 
@@ -27,6 +32,13 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.ratingAndReviews.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+    }
+    func setUpLocalizedStrings()
+    {
+        lblAreaName.text = "RestaurantReviewVC_lblAreaName".Localized()
+        lblAddress.text = "43369 Ellsworth St, remont,CA"
+        lblRating.text = "4.2"
+        lblReviews.text = String(format: "RestaurantReviewVC_lblReviews".Localized(), "35")
     }
     // MARK: - IBActions
         

@@ -197,7 +197,7 @@ class checkoutButton : UIButton {
                 .font: CustomFont.NexaRegular.returnFont(14),
                 .foregroundColor: UIColor(hexString: "#E34A25"),
                 .underlineStyle: NSUnderlineStyle.single.rawValue]
-            let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text)!,
+            let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text ?? ""),
                                                             attributes: yourAttributes)
             self.setAttributedTitle(attributeString, for: .normal)
         } else {

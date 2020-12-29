@@ -9,7 +9,9 @@
 import UIKit
 
 class NotificationCell: UITableViewCell {
-
+    @IBOutlet weak var imgNotificationIcon: UIImageView!
+    @IBOutlet weak var lblNotificationName: themeLabel!
+    @IBOutlet weak var lblNotificationDetail: themeLabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

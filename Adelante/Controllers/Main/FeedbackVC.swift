@@ -14,10 +14,15 @@ class FeedbackVC: BaseViewController {
     var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets
+    @IBOutlet weak var txtTitle: floatTextField!
+    @IBOutlet weak var txtEmail: floatTextField!
+    @IBOutlet weak var tvFeedback: themeTextView!
+    @IBOutlet weak var btnSubmit: submitButton!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setUp()
     }
 
@@ -30,6 +35,12 @@ class FeedbackVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
                  self.customTabBarController?.hideTabBar()
              }
+    func setUpLocalizedStrings(){
+        txtTitle.placeholder = "FeedbackVC_txtTitle".Localized()
+        txtEmail.placeholder = "FeedbackVC_txtEmail".Localized()
+        tvFeedback.placeholder = "FeedbackVC_tvFeedback".Localized()
+        btnSubmit.setTitle("FeedbackVC_btnSubmit".Localized(), for: .normal)
+    }
     // MARK: - IBActions
     
     // MARK: - Api Calls

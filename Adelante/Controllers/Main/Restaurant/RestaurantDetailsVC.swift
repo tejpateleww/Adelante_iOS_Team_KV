@@ -10,7 +10,9 @@ import UIKit
 
 struct structSections {
     
+
     var strTitle:String
+   
     var isExpanded:Bool
     var rowCount:Int
     
@@ -24,22 +26,41 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrSections = [structSections(strTitle:"Menu",isExpanded:false, rowCount: 3), structSections(strTitle:"Sandwiches",isExpanded:true, rowCount: 5), structSections(strTitle:"Salad",isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
+    var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
+    @IBOutlet weak var imgFoodDetails: UIImageView!
+    @IBOutlet weak var lblRestaurantName: themeLabel!
+    @IBOutlet weak var lblRating: themeLabel!
+    @IBOutlet weak var lblReviews: themeLabel!
+    @IBOutlet weak var lblPromoCode: themeLabel!
+    @IBOutlet weak var lblCode: themeLabel!
+    @IBOutlet weak var lblDistance: themeLabel!
+    @IBOutlet weak var lblAddress: themeLabel!
+    @IBOutlet weak var lblOpenTime: themeLabel!
+    @IBOutlet weak var lblTime: themeLabel!
+    @IBOutlet weak var lblTimeZone: themeLabel!
+    @IBOutlet weak var lblEastern: themeLabel!
+    @IBOutlet weak var lblAboutRestaurant: themeLabel!
+    @IBOutlet weak var btnViewPolicy: submitButton!
+    @IBOutlet weak var lblNoOfItem: themeLabel!
+    @IBOutlet weak var lblSign: themeLabel!
+    @IBOutlet weak var lblPrice: themeLabel!
+    @IBOutlet weak var lblViewCards: themeLabel!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
-    
+   
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -50,6 +71,25 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         tblRestaurantDetails.estimatedRowHeight = 20
         tblRestaurantDetails.reloadData()
     }
+    func setUpLocalizedStrings(){
+        lblRestaurantName.text = "RestaurantDetailsVC_lblRestaurantName".Localized()
+        lblRating.text = "4.2"
+        lblReviews.text = String(format: "RestaurantDetailsVC_lblReviews".Localized(), "53")
+        lblPromoCode.text = "RestaurantDetailsVC_lblPromoCode".Localized()
+        lblCode.text = "RestaurantDetailsVC_lblCode".Localized()
+        lblDistance.text = String(format: "RestaurantDetailsVC_lblDistance".Localized(), "1.7")
+        lblAddress.text = "43369 Ellsworth St, remont,CA";
+        lblOpenTime.text = "RestaurantDetailsVC_lblOpenTime".Localized()
+        lblTime.text = "RestaurantDetailsVC_lblTime".Localized()
+        lblTimeZone.text = "RestaurantDetailsVC_lblTimeZone".Localized()
+        lblEastern.text = "RestaurantDetailsVC_lblEastern".Localized()
+        lblAboutRestaurant.text = "RestaurantDetailsVC_lblAboutRestaurant".Localized()
+        btnViewPolicy.setTitle("RestaurantDetailsVC_btnViewPolicy".Localized(), for: .normal)
+        lblNoOfItem.text = String(format: "RestaurantDetailsVC_lblNoOfItem".Localized(), "1")
+        lblSign.text = "RestaurantDetailsVC_lblSign".Localized()
+        lblPrice.text = "$30"
+        lblViewCards.text = "RestaurantDetailsVC_lblViewCart".Localized()
+    }
     override func viewDidLayoutSubviews() {
         heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height
     }
@@ -58,7 +98,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     @IBAction func btnViewPolicy(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-        controller.strNavTitle = "Privacy policy"
+        controller.strNavTitle = "NavigationTitles_Privacypolicy"
         self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {

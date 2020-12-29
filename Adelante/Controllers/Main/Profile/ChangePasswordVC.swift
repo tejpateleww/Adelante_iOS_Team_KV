@@ -14,10 +14,16 @@ class ChangePasswordVC: BaseViewController {
     var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets
+    @IBOutlet weak var lblTitle: themeLabel!
+    @IBOutlet weak var txtOldPassword: floatTextField!
+    @IBOutlet weak var txtNewPassword: floatTextField!
+    @IBOutlet weak var txtConfirmPassword: floatTextField!
+    @IBOutlet weak var btnSave: submitButton!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setup()
     }
 
@@ -32,6 +38,13 @@ class ChangePasswordVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
            self.customTabBarController?.hideTabBar()
        }
+    func setUpLocalizedStrings(){
+        lblTitle.text = "ChangePasswordVC_lblTitle".Localized()
+        txtOldPassword.placeholder = "ChangePasswordVC_txtOldPassword".Localized()
+        txtNewPassword.placeholder = "ChangePasswordVC_txtNewPassword".Localized()
+        txtConfirmPassword.placeholder = "ChangePasswordVC_txtConfirmPassword".Localized()
+        btnSave.setTitle("ChangePasswordVC_btnSave".Localized(), for: .normal)
+    }
     // MARK: - IBActions
     
    

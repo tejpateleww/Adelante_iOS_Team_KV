@@ -14,10 +14,14 @@ class RateReviewVC: BaseViewController {
     var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets
+    @IBOutlet weak var lblRateRestaurant: UILabel!
+    @IBOutlet weak var tvRateReview: themeTextView!
+    @IBOutlet weak var btnSubmit: submitButton!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setUp()
     }
 
@@ -30,6 +34,11 @@ class RateReviewVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
                  self.customTabBarController?.hideTabBar()
              }
+    func setUpLocalizedStrings(){
+        lblRateRestaurant.text = "RateReviewVC_lblRateRestaurant".Localized()
+        tvRateReview.placeholder = "RateReviewVC_tvRateReview".Localized()
+        btnSubmit.setTitle("RateReviewVC_btnSubmit".Localized(), for: .normal)
+    }
     // MARK: - IBActions
     
     // MARK: - Api Calls

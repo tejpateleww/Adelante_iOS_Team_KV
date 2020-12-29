@@ -9,15 +9,19 @@
 import UIKit
 
 class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource {
-    
+    // MARK: - Properties
     var cardDetails : [String] = []
     var customTabBarController: CustomTabBarVC?
     var selectedPaymentMethods = 1
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
+    @IBOutlet weak var btnAddCart: submitButton!
     
-    
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
@@ -27,7 +31,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
-    
     //MARK: -tblViewMethods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -50,7 +53,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell1.reuseIdentifier, for: indexPath) as! paymentMethodCell1
                 
                 cell1.paymentImageView.image = UIImage(named: "ic_wallet")
-                cell1.lblWallet.text = "Wallet"
+                cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
                 cell1.lblwalletBalance.text = "$250.00"
                 cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
                 if indexPath.row == selectedPaymentMethods {
@@ -71,13 +74,13 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 if indexPath.row == 1
                 {
                     cell2.paymentMethodImageView.image = UIImage(named: "ic_masterCard")
-                    cell2.lblcardDetails.text = "**** **** **** 5967"
-                    cell2.lblExpiresDate.text = "Expires 09/25"
+                    cell2.lblcardDetails.text = "addPaymentVC_lblcardDetails".Localized()
+                    cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), "09/25")
                     cell2.selectPaymentMethodButton.isHidden = true
                 } else if indexPath.row == 2 {
                     cell2.paymentMethodImageView.image = UIImage(named: "ic_visa")
                     cell2.lblcardDetails.text = "**** **** **** 3802"
-                    cell2.lblExpiresDate.text = "Expires 10/27"
+                    cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), "10/27")
                     cell2.selectPaymentMethodButton.isHidden = true
                 }
                 cell = cell2
@@ -152,24 +155,13 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             return headerView
         }
     }
+    func setUpLocalizedStrings(){
+        btnAddCart.setTitle("addPaymentVC_btnAddCart".Localized(), for: .normal)
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPaymentMethods = indexPath.row
         tblPaymentMethod.reloadData()
-        
-//        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-//        //controller.modalPresentationStyle = .fullScreen
-//        controller.isHideCancelButton = true
-//        controller.isHideSubmitButton = false
-//        controller.btnSubmit = {
-//            self.dismiss(animated: true, completion: nil)
-//            // self.navigationController?.popViewController(animated: true)
-//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID)
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }
-//        self.present(controller, animated: true, completion: nil)
         commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appGreenColor, viewController: self)
-        
-//        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appRedColor.value,cancelBtnColor: colors.appGreenColor.value ,viewController: self)
     }
     
     //MARK: -btnAction
@@ -177,6 +169,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID)
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    
+    // MARK: - Api Calls
     
 }

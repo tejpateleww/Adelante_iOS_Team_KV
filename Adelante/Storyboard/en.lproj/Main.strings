@@ -1,0 +1,582 @@
+
+/* Class = "UIButton"; normalTitle = "Customize"; ObjectID = "0bE-lu-FAf"; */
+"0bE-lu-FAf.normalTitle" = "Customize";
+
+/* Class = "UITextField"; placeholder = "Last Name"; ObjectID = "0t8-U3-ebv"; */
+"0t8-U3-ebv.placeholder" = "Last Name";
+
+/* Class = "UITextField"; text = "Smith"; ObjectID = "0t8-U3-ebv"; */
+"0t8-U3-ebv.text" = "Smith";
+
+/* Class = "UILabel"; text = "Lorem Ipsum is simply dummy text"; ObjectID = "1eu-Jo-iGS"; */
+"1eu-Jo-iGS.text" = "Lorem Ipsum is simply dummy text";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "2Ut-AC-9Qr"; */
+"2Ut-AC-9Qr.placeholder" = "Email";
+
+/* Class = "UITextField"; text = "johansmith@gmail.com"; ObjectID = "2Ut-AC-9Qr"; */
+"2Ut-AC-9Qr.text" = "johansmith@gmail.com";
+
+/* Class = "UILabel"; text = "$19.99"; ObjectID = "2Vc-2l-J1v"; */
+"2Vc-2l-J1v.text" = "$19.99";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "2X5-UF-9Lj"; */
+"2X5-UF-9Lj.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "|"; ObjectID = "2mf-jL-Hc5"; */
+"2mf-jL-Hc5.text" = "|";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "30L-ei-DtY"; */
+"30L-ei-DtY.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Repeat Order"; ObjectID = "3KJ-di-jsq"; */
+"3KJ-di-jsq.normalTitle" = "Repeat Order";
+
+/* Class = "UILabel"; text = "$30"; ObjectID = "3Qb-hP-qHb"; */
+"3Qb-hP-qHb.text" = "$30";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "3zb-xX-NEB"; */
+"3zb-xX-NEB.text" = "$25.00";
+
+/* Class = "UIButton"; normalTitle = "Cancel Order"; ObjectID = "4eL-tz-KpK"; */
+"4eL-tz-KpK.normalTitle" = "Cancel Order";
+
+/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "4rN-z1-ohE"; */
+"4rN-z1-ohE.placeholder" = "First Name";
+
+/* Class = "UITextField"; text = "John"; ObjectID = "4rN-z1-ohE"; */
+"4rN-z1-ohE.text" = "John";
+
+/* Class = "UILabel"; text = "$19.99"; ObjectID = "55C-zJ-NmG"; */
+"55C-zJ-NmG.text" = "$19.99";
+
+/* Class = "UILabel"; text = "2.5 miles"; ObjectID = "56w-F3-5CO"; */
+"56w-F3-5CO.text" = "2.5 miles";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "5hG-y8-dvI"; */
+"5hG-y8-dvI.normalTitle" = "Submit";
+
+/* Class = "UILabel"; text = "Shared from Mike"; ObjectID = "5ld-2s-teq"; */
+"5ld-2s-teq.text" = "Shared from Mike";
+
+/* Class = "UILabel"; text = "2.5 miles"; ObjectID = "5xN-9E-6hC"; */
+"5xN-9E-6hC.text" = "2.5 miles";
+
+/* Class = "UILabel"; text = "System"; ObjectID = "6LK-zl-hyG"; */
+"6LK-zl-hyG.text" = "System";
+
+/* Class = "UILabel"; text = "Santa Rosa"; ObjectID = "7df-cO-jXz"; */
+"7df-cO-jXz.text" = "Santa Rosa";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam."; ObjectID = "7gx-w0-JvE"; */
+"7gx-w0-JvE.text" = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "7hC-7L-Wnq"; */
+"7hC-7L-Wnq.text" = "4.2";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "8IW-Pz-wYk"; */
+"8IW-Pz-wYk.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "Debit cards are accepted at some locations and for some categories."; ObjectID = "8WH-C6-JIx"; */
+"8WH-C6-JIx.text" = "Debit cards are accepted at some locations and for some categories.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "8gN-eU-dN8"; */
+"8gN-eU-dN8.text" = "Label";
+
+/* Class = "UILabel"; text = "$10.00"; ObjectID = "9U7-VY-4KF"; */
+"9U7-VY-4KF.text" = "$10.00";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "9ri-ry-wIm"; */
+"9ri-ry-wIm.text" = "4.2";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "BHm-OZ-6gg"; */
+"BHm-OZ-6gg.text" = "$25.00";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "BWf-TO-j3Z"; */
+"BWf-TO-j3Z.text" = "1";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea."; ObjectID = "BZr-L2-N6w"; */
+"BZr-L2-N6w.text" = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.";
+
+/* Class = "UILabel"; text = "4.5"; ObjectID = "BiE-7E-qqz"; */
+"BiE-7E-qqz.text" = "4.5";
+
+/* Class = "UILabel"; text = "Operating Hours"; ObjectID = "C9O-po-tfs"; */
+"C9O-po-tfs.text" = "Operating Hours";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "CSX-KQ-9Bx"; */
+"CSX-KQ-9Bx.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "53 Reviews"; ObjectID = "Cfh-di-FA0"; */
+"Cfh-di-FA0.text" = "53 Reviews";
+
+/* Class = "UILabel"; text = "Promo Code :"; ObjectID = "CnF-zR-fpE"; */
+"CnF-zR-fpE.text" = "Promo Code :";
+
+/* Class = "UILabel"; text = "John Smith"; ObjectID = "D7F-SR-VkU"; */
+"D7F-SR-VkU.text" = "John Smith";
+
+/* Class = "UILabel"; text = "4.5"; ObjectID = "EQq-hg-rds"; */
+"EQq-hg-rds.text" = "4.5";
+
+/* Class = "UILabel"; text = "$30"; ObjectID = "EyW-yp-yJ5"; */
+"EyW-yp-yJ5.text" = "$30";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "FJ4-wJ-tbB"; */
+"FJ4-wJ-tbB.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "43369 Ellsworth St, remont,CA"; ObjectID = "FP5-w0-S5A"; */
+"FP5-w0-S5A.text" = "43369 Ellsworth St, remont,CA";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "FQ9-fw-5lB"; */
+"FQ9-fw-5lB.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "Fpi-pz-veW"; */
+"Fpi-pz-veW.text" = "4.2";
+
+/* Class = "UITextField"; placeholder = "Search For Food And Restaurant                                                                                                                                                       "; ObjectID = "GIp-9o-Z9k"; */
+"GIp-9o-Z9k.placeholder" = "Search For Food And Restaurant                                                                                                                                                       ";
+
+/* Class = "UILabel"; text = "43369 Ellsworth St, remont,CA"; ObjectID = "HIH-7Y-rOG"; */
+"HIH-7Y-rOG.text" = "43369 Ellsworth St, remont,CA";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "HbA-0F-efW"; */
+"HbA-0F-efW.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "HrR-rn-xdA"; */
+"HrR-rn-xdA.text" = "4.2";
+
+/* Class = "UILabel"; text = "53 Reviews"; ObjectID = "IFB-wS-V0Z"; */
+"IFB-wS-V0Z.text" = "53 Reviews";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "IGm-Fu-7OX"; */
+"IGm-Fu-7OX.text" = "Total";
+
+/* Class = "UILabel"; text = "Sandwich"; ObjectID = "IQD-Ro-PEC"; */
+"IQD-Ro-PEC.text" = "Sandwich";
+
+/* Class = "UILabel"; text = "Your Order #1234 has been Successfully completed "; ObjectID = "Io0-Ej-Hq6"; */
+"Io0-Ej-Hq6.text" = "Your Order #1234 has been Successfully completed ";
+
+/* Class = "UIButton"; normalTitle = "Change Restaurant"; ObjectID = "IoP-wf-JIS"; */
+"IoP-wf-JIS.normalTitle" = "Change Restaurant";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "JCS-4M-9UG"; */
+"JCS-4M-9UG.text" = "4.2";
+
+/* Class = "UILabel"; text = "SU652"; ObjectID = "JMV-9t-a6c"; */
+"JMV-9t-a6c.text" = "SU652";
+
+/* Class = "UILabel"; text = "2.5 miles"; ObjectID = "JZT-24-Ihi"; */
+"JZT-24-Ihi.text" = "2.5 miles";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "KFM-AF-FmY"; */
+"KFM-AF-FmY.text" = "4.2";
+
+/* Class = "UIButton"; normalTitle = "Pizza"; ObjectID = "L2L-un-3hX"; */
+"L2L-un-3hX.normalTitle" = "Pizza";
+
+/* Class = "UILabel"; text = "Subtotal"; ObjectID = "LFe-tC-Rcj"; */
+"LFe-tC-Rcj.text" = "Subtotal";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "LPk-6t-ase"; */
+"LPk-6t-ase.text" = "4.2";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "Lof-p0-YQG"; */
+"Lof-p0-YQG.text" = "$25.00";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "Lss-aJ-Wt2"; */
+"Lss-aJ-Wt2.text" = "Kangkung siram sambel";
+
+/* Class = "UITextField"; placeholder = "New Password"; ObjectID = "M00-EB-i9S"; */
+"M00-EB-i9S.placeholder" = "New Password";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "M7a-5f-Ppm"; */
+"M7a-5f-Ppm.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "MQy-Ec-K3Q"; */
+"MQy-Ec-K3Q.text" = "$25.00";
+
+/* Class = "UILabel"; text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.Lorem Ipsum is simply dummy text of the printing and typesetting industry."; ObjectID = "MSc-1R-Zli"; */
+"MSc-1R-Zli.text" = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+
+/* Class = "UILabel"; text = "March 6, 20  "; ObjectID = "MaY-B1-FxI"; */
+"MaY-B1-FxI.text" = "March 6, 20  ";
+
+/* Class = "UILabel"; text = "Your Favorites"; ObjectID = "NCs-Rm-a73"; */
+"NCs-Rm-a73.text" = "Your Favorites";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "NEg-8N-9AX"; */
+"NEg-8N-9AX.text" = "$25.00";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "NMU-dL-fOK"; */
+"NMU-dL-fOK.text" = "Name";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "NMk-sf-Zgu"; */
+"NMk-sf-Zgu.text" = "4.2";
+
+/* Class = "UILabel"; text = "Santa Rosa"; ObjectID = "NTh-O8-Ajd"; */
+"NTh-O8-Ajd.text" = "Santa Rosa";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "NdQ-i6-SwJ"; */
+"NdQ-i6-SwJ.text" = "Label";
+
+/* Class = "UILabel"; text = "Review Your Order details to\navoid cancellations "; ObjectID = "O23-VB-lNa"; */
+"O23-VB-lNa.text" = "Review Your Order details to\navoid cancellations ";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "ODi-KW-tld"; */
+"ODi-KW-tld.text" = "$25.00";
+
+/* Class = "UILabel"; text = "$30"; ObjectID = "OHm-IQ-8Y9"; */
+"OHm-IQ-8Y9.text" = "$30";
+
+/* Class = "UILabel"; text = "$39"; ObjectID = "OWQ-W5-aXI"; */
+"OWQ-W5-aXI.text" = "$39";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "OeP-hZ-J2S"; */
+"OeP-hZ-J2S.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "OhR-gk-x3U"; */
+"OhR-gk-x3U.text" = "Kangkung siram sambel";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Pwj-UI-oxD"; */
+"Pwj-UI-oxD.normalTitle" = "Cancel";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "QPd-3g-SxC"; */
+"QPd-3g-SxC.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "El Meson"; ObjectID = "Qi1-WL-BMk"; */
+"Qi1-WL-BMk.text" = "El Meson";
+
+/* Class = "UIButton"; normalTitle = "Read Policy"; ObjectID = "RQc-rq-Zx8"; */
+"RQc-rq-Zx8.normalTitle" = "Read Policy";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "SGg-en-F9y"; */
+"SGg-en-F9y.text" = "4.2";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "Sse-Yr-vmz"; */
+"Sse-Yr-vmz.normalTitle" = "Send";
+
+/* Class = "UILabel"; text = "Bff Combo Meal(L)"; ObjectID = "T3p-2X-uFZ"; */
+"T3p-2X-uFZ.text" = "Bff Combo Meal(L)";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "URI-zg-jGB"; */
+"URI-zg-jGB.text" = "$25.00";
+
+/* Class = "UILabel"; text = "$39"; ObjectID = "USK-oh-BOC"; */
+"USK-oh-BOC.text" = "$39";
+
+/* Class = "UILabel"; text = "AAAAAA"; ObjectID = "Ucu-Z4-78R"; */
+"Ucu-Z4-78R.text" = "AAAAAA";
+
+/* Class = "UILabel"; text = "4.5"; ObjectID = "Vku-J4-toj"; */
+"Vku-J4-toj.text" = "4.5";
+
+/* Class = "UILabel"; text = "Eastern"; ObjectID = "Y5m-oO-DW4"; */
+"Y5m-oO-DW4.text" = "Eastern";
+
+/* Class = "UILabel"; text = "View Cart"; ObjectID = "YKV-sc-3sT"; */
+"YKV-sc-3sT.text" = "View Cart";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "YXr-yN-Jlp"; */
+"YXr-yN-Jlp.text" = "4.2";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Yyk-zl-cbC"; */
+"Yyk-zl-cbC.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "Z6L-LA-AE3"; */
+"Z6L-LA-AE3.text" = "4.2";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Zp6-1g-6Tn"; */
+"Zp6-1g-6Tn.text" = "Label";
+
+/* Class = "UILabel"; text = "Lorem Ipsum   "; ObjectID = "Ztc-Td-o3k"; */
+"Ztc-Td-o3k.text" = "Lorem Ipsum   ";
+
+/* Class = "UILabel"; text = "Expires"; ObjectID = "aGG-6X-NB2"; */
+"aGG-6X-NB2.text" = "Expires";
+
+/* Class = "UIButton"; normalTitle = "Add promo code"; ObjectID = "bTS-qV-aoA"; */
+"bTS-qV-aoA.normalTitle" = "Add promo code";
+
+/* Class = "UIButton"; normalTitle = "EDIT ACCOUNT"; ObjectID = "bXA-Ko-xkj"; */
+"bXA-Ko-xkj.normalTitle" = "EDIT ACCOUNT";
+
+/* Class = "UILabel"; text = "Forgot Password"; ObjectID = "bgc-lv-DHd"; */
+"bgc-lv-DHd.text" = "Forgot Password";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "boH-M9-Nv8"; */
+"boH-M9-Nv8.text" = "Label";
+
+/* Class = "UILabel"; text = "View Cart"; ObjectID = "bqS-tq-tSZ"; */
+"bqS-tq-tSZ.text" = "View Cart";
+
+/* Class = "UILabel"; text = "Chicken Burger"; ObjectID = "cE9-zM-f6m"; */
+"cE9-zM-f6m.text" = "Chicken Burger";
+
+/* Class = "UILabel"; text = "2.5 miles"; ObjectID = "cMB-Yr-Kpi"; */
+"cMB-Yr-Kpi.text" = "2.5 miles";
+
+/* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "cc0-dj-TGl"; */
+"cc0-dj-TGl.placeholder" = "Phone Number";
+
+/* Class = "UITextField"; text = "+1 6532 6565 265"; ObjectID = "cc0-dj-TGl"; */
+"cc0-dj-TGl.text" = "+1 6532 6565 265";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "cit-Kb-TV4"; */
+"cit-Kb-TV4.text" = "4.2";
+
+/* Class = "UILabel"; text = "43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA"; ObjectID = "cja-pL-c34"; */
+"cja-pL-c34.text" = "43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA";
+
+/* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "cpW-fr-cqC"; */
+"cpW-fr-cqC.placeholder" = "Confirm Password";
+
+/* Class = "UILabel"; text = "Vegetable Sandwich "; ObjectID = "d20-J3-Mbd"; */
+"d20-J3-Mbd.text" = "Vegetable Sandwich ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dKy-CH-8im"; */
+"dKy-CH-8im.text" = "Label";
+
+/* Class = "UILabel"; text = "43369 Ellsworth St, remont,CA"; ObjectID = "dSs-XN-eqZ"; */
+"dSs-XN-eqZ.text" = "43369 Ellsworth St, remont,CA";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "dqL-ey-UVH"; */
+"dqL-ey-UVH.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "e0i-n9-PIi"; */
+"e0i-n9-PIi.text" = "$25.00";
+
+/* Class = "UILabel"; text = "Change Password"; ObjectID = "e9E-XZ-4z3"; */
+"e9E-XZ-4z3.text" = "Change Password";
+
+/* Class = "UILabel"; text = "My Location"; ObjectID = "ea9-5q-A9k"; */
+"ea9-5q-A9k.text" = "My Location";
+
+/* Class = "UIButton"; normalTitle = "Add To Food List"; ObjectID = "epc-Qg-J09"; */
+"epc-Qg-J09.normalTitle" = "Add To Food List";
+
+/* Class = "UILabel"; text = "Timezone"; ObjectID = "f7Y-Cd-Sht"; */
+"f7Y-Cd-Sht.text" = "Timezone";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "fOe-RJ-RyA"; */
+"fOe-RJ-RyA.text" = "Label";
+
+/* Class = "UILabel"; text = "$2"; ObjectID = "fVT-sH-WSs"; */
+"fVT-sH-WSs.text" = "$2";
+
+/* Class = "UIButton"; normalTitle = "Change Location"; ObjectID = "fas-mi-2K3"; */
+"fas-mi-2K3.normalTitle" = "Change Location";
+
+/* Class = "UITextField"; placeholder = "Search For Food And Restaurant                                                                                                                                                       "; ObjectID = "fbb-FJ-B00"; */
+"fbb-FJ-B00.placeholder" = "Search For Food And Restaurant                                                                                                                                                       ";
+
+/* Class = "UILabel"; text = "$7"; ObjectID = "g31-CE-GWs"; */
+"g31-CE-GWs.text" = "$7";
+
+/* Class = "UILabel"; text = "Chicken Burger"; ObjectID = "g9C-Mq-hVt"; */
+"g9C-Mq-hVt.text" = "Chicken Burger";
+
+/* Class = "UIButton"; normalTitle = "View Store Policy"; ObjectID = "gB5-SD-PGD"; */
+"gB5-SD-PGD.normalTitle" = "View Store Policy";
+
+/* Class = "UILabel"; text = "Unverified"; ObjectID = "gEh-No-iE4"; */
+"gEh-No-iE4.text" = "Unverified";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "h0Z-as-dQO"; */
+"h0Z-as-dQO.normalTitle" = "+";
+
+/* Class = "UIButton"; normalTitle = "Place Order"; ObjectID = "hDn-ZD-Muc"; */
+"hDn-ZD-Muc.normalTitle" = "Place Order";
+
+/* Class = "UITextField"; text = "John Smith"; ObjectID = "hSq-bl-ut4"; */
+"hSq-bl-ut4.text" = "John Smith";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hh7-6B-lgL"; */
+"hh7-6B-lgL.text" = "Label";
+
+/* Class = "UITextField"; text = "****"; ObjectID = "i6K-uc-hch"; */
+"i6K-uc-hch.text" = "****";
+
+/* Class = "UILabel"; text = "March 6, 20  4:22 PM"; ObjectID = "iFR-Ze-2LN"; */
+"iFR-Ze-2LN.text" = "March 6, 20  4:22 PM";
+
+/* Class = "UILabel"; text = "4.5"; ObjectID = "iRD-3Q-gko"; */
+"iRD-3Q-gko.text" = "4.5";
+
+/* Class = "UILabel"; text = "Your Order"; ObjectID = "iSS-hO-lx8"; */
+"iSS-hO-lx8.text" = "Your Order";
+
+/* Class = "UILabel"; text = "El Meson"; ObjectID = "im5-ED-EDl"; */
+"im5-ED-EDl.text" = "El Meson";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "irD-Wc-hkv"; */
+"irD-Wc-hkv.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "4.5"; ObjectID = "iv3-Ax-wh5"; */
+"iv3-Ax-wh5.text" = "4.5";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam."; ObjectID = "iyn-9V-Kbh"; */
+"iyn-9V-Kbh.text" = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.";
+
+/* Class = "UITextField"; placeholder = "Search For Food And Restaurant                                                                                                                                                       "; ObjectID = "jDn-Nr-3lG"; */
+"jDn-Nr-3lG.placeholder" = "Search For Food And Restaurant                                                                                                                                                       ";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "jPb-JH-btQ"; */
+"jPb-JH-btQ.text" = "$25.00";
+
+/* Class = "UIButton"; normalTitle = "Share Order"; ObjectID = "jUc-oB-axk"; */
+"jUc-oB-axk.normalTitle" = "Share Order";
+
+/* Class = "UILabel"; text = "1.7 Miles"; ObjectID = "jlZ-Il-jiR"; */
+"jlZ-Il-jiR.text" = "1.7 Miles";
+
+/* Class = "UILabel"; text = "2 Items"; ObjectID = "kIW-ca-7gL"; */
+"kIW-ca-7gL.text" = "2 Items";
+
+/* Class = "UIButton"; normalTitle = "Add Card"; ObjectID = "klJ-Qe-LNZ"; */
+"klJ-Qe-LNZ.normalTitle" = "Add Card";
+
+/* Class = "UILabel"; text = "Order Id : 258112548"; ObjectID = "kmS-BN-YJh"; */
+"kmS-BN-YJh.text" = "Order Id : 258112548";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "l5g-QZ-7X8"; */
+"l5g-QZ-7X8.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "lWD-a0-7KT"; */
+"lWD-a0-7KT.placeholder" = "Password";
+
+/* Class = "UITextField"; text = "*********"; ObjectID = "lWD-a0-7KT"; */
+"lWD-a0-7KT.text" = "*********";
+
+/* Class = "UILabel"; text = "Small Size"; ObjectID = "mAd-2M-Ynn"; */
+"mAd-2M-Ynn.text" = "Small Size";
+
+/* Class = "UITextField"; placeholder = "Enter Email / Phone Number"; ObjectID = "mJ2-zK-PS6"; */
+"mJ2-zK-PS6.placeholder" = "Enter Email / Phone Number";
+
+/* Class = "UILabel"; text = "How would you rate your experience?"; ObjectID = "mZC-5g-sUL"; */
+"mZC-5g-sUL.text" = "How would you rate your experience?";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "mi5-Jq-Sq9"; */
+"mi5-Jq-Sq9.text" = "Label";
+
+/* Class = "UILabel"; text = "Service Fee"; ObjectID = "mvX-Da-ZHa"; */
+"mvX-Da-ZHa.text" = "Service Fee";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "n2g-1X-6I5"; */
+"n2g-1X-6I5.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "Your Order"; ObjectID = "n3s-QK-CWX"; */
+"n3s-QK-CWX.text" = "Your Order";
+
+/* Class = "UILabel"; text = "4.2"; ObjectID = "nFg-BL-Q3U"; */
+"nFg-BL-Q3U.text" = "4.2";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel "; ObjectID = "nJn-ZB-XVO"; */
+"nJn-ZB-XVO.text" = "Kangkung siram sambel ";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "ocz-JM-odK"; */
+"ocz-JM-odK.normalTitle" = "Submit";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "p2Y-CK-0q0"; */
+"p2Y-CK-0q0.text" = "$25.00";
+
+/* Class = "UITextField"; placeholder = "Old Password"; ObjectID = "pGH-j9-vWm"; */
+"pGH-j9-vWm.placeholder" = "Old Password";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "qKQ-Hf-nO8"; */
+"qKQ-Hf-nO8.text" = "Kangkung siram sambel";
+
+/* Class = "UITextField"; placeholder = "Search For Food And Restaurant                                                                                                                                                       "; ObjectID = "qQW-G4-gaz"; */
+"qQW-G4-gaz.placeholder" = "Search For Food And Restaurant                                                                                                                                                       ";
+
+/* Class = "UILabel"; text = "1 Item |  $30"; ObjectID = "qS1-0X-0zZ"; */
+"qS1-0X-0zZ.text" = "1 Item |  $30";
+
+/* Class = "UILabel"; text = "9 am To 9 pm"; ObjectID = "qqz-NS-JK1"; */
+"qqz-NS-JK1.text" = "9 am To 9 pm";
+
+/* Class = "UILabel"; text = "Chicken Burger"; ObjectID = "rPU-09-8do"; */
+"rPU-09-8do.text" = "Chicken Burger";
+
+/* Class = "UITextField"; text = "**** - **** -  **** - **85"; ObjectID = "rWw-Xa-v9T"; */
+"rWw-Xa-v9T.text" = "**** - **** -  **** - **85";
+
+/* Class = "UILabel"; text = "30 Memorial Drive, Avon MA 2322"; ObjectID = "sSi-Jk-NWy"; */
+"sSi-Jk-NWy.text" = "30 Memorial Drive, Avon MA 2322";
+
+/* Class = "UILabel"; text = "My Location"; ObjectID = "sVH-w6-Tu3"; */
+"sVH-w6-Tu3.text" = "My Location";
+
+/* Class = "UILabel"; text = "4.5"; ObjectID = "sez-D1-MvV"; */
+"sez-D1-MvV.text" = "4.5";
+
+/* Class = "UILabel"; text = "1 Item"; ObjectID = "t95-ys-DSS"; */
+"t95-ys-DSS.text" = "1 Item";
+
+/* Class = "UIButton"; normalTitle = "Rate order"; ObjectID = "tWn-kO-oIB"; */
+"tWn-kO-oIB.normalTitle" = "Rate order";
+
+/* Class = "UIButton"; normalTitle = "-"; ObjectID = "tkG-BB-TmR"; */
+"tkG-BB-TmR.normalTitle" = "-";
+
+/* Class = "UILabel"; text = "Taxes"; ObjectID = "tz7-tl-nWP"; */
+"tz7-tl-nWP.text" = "Taxes";
+
+/* Class = "UILabel"; text = "Sort"; ObjectID = "u5B-1n-MZd"; */
+"u5B-1n-MZd.text" = "Sort";
+
+/* Class = "UILabel"; text = "CVV"; ObjectID = "uIa-fx-82c"; */
+"uIa-fx-82c.text" = "CVV";
+
+/* Class = "UILabel"; text = "Card Number"; ObjectID = "uh0-4O-qsD"; */
+"uh0-4O-qsD.text" = "Card Number";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "upe-p5-jOo"; */
+"upe-p5-jOo.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "v6m-t0-eK4"; */
+"v6m-t0-eK4.normalTitle" = "Save";
+
+/* Class = "UIButton"; normalTitle = "See Menu"; ObjectID = "vCM-iX-yG2"; */
+"vCM-iX-yG2.normalTitle" = "See Menu";
+
+/* Class = "UILabel"; text = "$34"; ObjectID = "vUB-jC-vUD"; */
+"vUB-jC-vUD.text" = "$34";
+
+/* Class = "UILabel"; text = "BFF COMBO MEAL (L)"; ObjectID = "vdh-Yc-sO5"; */
+"vdh-Yc-sO5.text" = "BFF COMBO MEAL (L)";
+
+/* Class = "UILabel"; text = "John Smith"; ObjectID = "vf1-pQ-gG0"; */
+"vf1-pQ-gG0.text" = "John Smith";
+
+/* Class = "UILabel"; text = "2.5 miles"; ObjectID = "wSm-qC-mXw"; */
+"wSm-qC-mXw.text" = "2.5 miles";
+
+/* Class = "UILabel"; text = "30 Memorial Drive, Avon MA 2322"; ObjectID = "x83-38-z7j"; */
+"x83-38-z7j.text" = "30 Memorial Drive, Avon MA 2322";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "xrW-aI-xlY"; */
+"xrW-aI-xlY.text" = "Total";
+
+/* Class = "UITextField"; text = "10/27/2030"; ObjectID = "y5W-73-fb3"; */
+"y5W-73-fb3.text" = "10/27/2030";
+
+/* Class = "UILabel"; text = "Verified"; ObjectID = "yDy-Ir-Fod"; */
+"yDy-Ir-Fod.text" = "Verified";
+
+/* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "yTk-1R-LRY"; */
+"yTk-1R-LRY.text" = "Kangkung siram sambel";
+
+/* Class = "UILabel"; text = "All Restaurants"; ObjectID = "yiQ-n2-fIK"; */
+"yiQ-n2-fIK.text" = "All Restaurants";
+
+/* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "ypJ-aF-6Y5"; */
+"ypJ-aF-6Y5.placeholder" = "Phone Number";
+
+/* Class = "UILabel"; text = "$25.00"; ObjectID = "zL6-Gw-yOf"; */
+"zL6-Gw-yOf.text" = "$25.00";
+
+/* Class = "UILabel"; text = "John Smith"; ObjectID = "zYp-Jc-w1z"; */
+"zYp-Jc-w1z.text" = "John Smith";

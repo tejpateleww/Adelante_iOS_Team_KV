@@ -14,18 +14,23 @@ class RegisterViewController: UIViewController {
     
     
     //MARK:- Outlet
-    @IBOutlet weak var txtFirstName:customTextField!
-    @IBOutlet weak var txtLastName:customTextField!
-    @IBOutlet weak var txtEmail:customTextField!
-    @IBOutlet weak var txtPassword:customTextField!
-    @IBOutlet weak var txtConPassword:customTextField!
-    @IBOutlet weak var btnSignUp:GradientButton!
-    @IBOutlet weak var btnLogin:UIButton!
-    @IBOutlet weak var lblOr:UILabel!
+    @IBOutlet weak var lblTitle: themeTitleLabel!
+    @IBOutlet weak var txtFirstName:floatTextField!
+    @IBOutlet weak var txtLastName:floatTextField!
+    @IBOutlet weak var txtEmail:floatTextField!
+    @IBOutlet weak var txtPhoneNumber: floatTextField!
+    @IBOutlet weak var txtPassword:floatTextField!
+    @IBOutlet weak var txtConPassword:floatTextField!
+    @IBOutlet weak var lblCreateAccount: themeLabel!
+    @IBOutlet weak var lblAlreadyHave: themeLabel!
+    @IBOutlet weak var btnSignup: UIButton!
+    @IBOutlet weak var btnSignin: submitButton!
+    
     
     //MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setUp()
     }
     
@@ -44,7 +49,18 @@ class RegisterViewController: UIViewController {
         
         
     }
-    
+    func setUpLocalizedStrings() {
+        lblTitle.text = "RegisterViewController_lblTitle".Localized()
+        txtFirstName.placeholder = "RegisterViewController_txtFirstName".Localized()
+        txtLastName.placeholder = "RegisterViewController_txtLastName".Localized()
+        txtEmail.placeholder = "RegisterViewController_txtEmail".Localized()
+        txtPhoneNumber.placeholder = "RegisterViewController_txtPhoneNumber".Localized()
+        txtPassword.placeholder = "RegisterViewController_txtPassword".Localized()
+        txtConPassword.placeholder = "RegisterViewController_txtConPassword".Localized()
+        lblCreateAccount.text = "RegisterViewController_lblCreateAccount".Localized()
+        lblAlreadyHave.text = "RegisterViewController_lblAlreadyHave".Localized()
+        btnSignin.setTitle("RegisterViewController_btnSignin".Localized(), for: .normal)
+    }
     //MARK:- Button action
     @IBAction func btnSignUp(sender:Any){
 //        if(validation())
@@ -101,7 +117,7 @@ class RegisterViewController: UIViewController {
         }
         else if (txtPassword.text != txtConPassword.text)
         {
-            Utilities.displayAlert("Password do not match")
+            Utilities.displayAlert("MessagePassword")
             return checkPassword.0
         }
         return true
@@ -137,7 +153,7 @@ class RegisterViewController: UIViewController {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "MessageTitle".Localized())
             }
         }
     }

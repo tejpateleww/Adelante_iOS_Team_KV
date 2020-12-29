@@ -1,0 +1,63 @@
+
+/* Class = "UITextField"; placeholder = "Email / Phone Number"; ObjectID = "6J4-UA-qRl"; */
+"6J4-UA-qRl.placeholder" = "Email / Phone Number";
+
+/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "6tv-ps-pmp"; */
+"6tv-ps-pmp.placeholder" = "First Name";
+
+/* Class = "UILabel"; text = "Create Account"; ObjectID = "7ab-4f-f8g"; */
+"7ab-4f-f8g.text" = "Create Account";
+
+/* Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "8wt-wW-qhH"; */
+"8wt-wW-qhH.normalTitle" = "SKIP";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "B7K-d2-yLt"; */
+"B7K-d2-yLt.placeholder" = "Password";
+
+/* Class = "UITextField"; placeholder = "Email / Phone Number"; ObjectID = "C8x-B2-NSw"; */
+"C8x-B2-NSw.placeholder" = "Email / Phone Number";
+
+/* Class = "UILabel"; text = "Welcome To\nAdelante"; ObjectID = "CpT-mS-Rcj"; */
+"CpT-mS-Rcj.text" = "Welcome To\nAdelante";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "DAA-cC-sBU"; */
+"DAA-cC-sBU.normalTitle" = "Forgot Password";
+
+/* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "Ec2-nO-GvX"; */
+"Ec2-nO-GvX.normalTitle" = "Create Account";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "Fzc-oY-XVq"; */
+"Fzc-oY-XVq.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Welcome \nBack"; ObjectID = "T1r-ZK-cpC"; */
+"T1r-ZK-cpC.text" = "Welcome \nBack";
+
+/* Class = "UILabel"; text = "Sign In"; ObjectID = "WUB-dV-8E1"; */
+"WUB-dV-8E1.text" = "Sign In";
+
+/* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "dUz-LN-60d"; */
+"dUz-LN-60d.placeholder" = "Phone Number";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "iBK-qV-OHW"; */
+"iBK-qV-OHW.normalTitle" = "Sign In";
+
+/* Class = "UILabel"; text = "Already have an account"; ObjectID = "oLy-vP-WB6"; */
+"oLy-vP-WB6.text" = "Already have an account";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "oaj-xH-qVR"; */
+"oaj-xH-qVR.normalTitle" = "Sign In";
+
+/* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "pg1-IO-Syi"; */
+"pg1-IO-Syi.normalTitle" = "Create Account";
+
+/* Class = "UITextField"; placeholder = "Last Name"; ObjectID = "qFI-49-A7Q"; */
+"qFI-49-A7Q.placeholder" = "Last Name";
+
+/* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "uln-Rl-AH4"; */
+"uln-Rl-AH4.placeholder" = "Confirm Password";
+
+/* Class = "UILabel"; text = "Don't have an account"; ObjectID = "yWm-7i-pZb"; */
+"yWm-7i-pZb.text" = "Don't have an account";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "zgZ-JQ-I7N"; */
+"zgZ-JQ-I7N.placeholder" = "Email";

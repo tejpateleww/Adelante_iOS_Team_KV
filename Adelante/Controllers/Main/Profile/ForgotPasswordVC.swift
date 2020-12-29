@@ -14,10 +14,14 @@ class ForgotPasswordVC: BaseViewController {
    // var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets
+    @IBOutlet weak var lblForgotPassword: themeLabel!
+    @IBOutlet weak var txtEmailOrPhone: floatTextField!
+    @IBOutlet weak var btnSend: submitButton!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setUp()
     }
 
@@ -31,6 +35,11 @@ class ForgotPasswordVC: BaseViewController {
     @IBAction func btnSend(_ sender: Any) {
            self.navigationController?.popViewController(animated: true)
        }
+    func setUpLocalizedStrings(){
+        lblForgotPassword.text = "ForgotPasswordVC_lblForgotPassword".Localized()
+        txtEmailOrPhone.placeholder = "ForgotPasswordVC_txtEmailOrPhone".Localized()
+        btnSend.setTitle("ForgotPasswordVC_btnSend".Localized(), for: .normal)
+    }
     // MARK: - IBActions
     
     // MARK: - Api Calls

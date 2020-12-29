@@ -18,6 +18,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     // MARK: - ViewController Lifecycle
       override func viewDidLoad() {
           super.viewDidLoad()
+        setUpLocalizedStrings()
           setup()
       
       self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -39,6 +40,9 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         let padding = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.txtSearch.frame.height))
                txtSearch.leftView = padding
                txtSearch.leftViewMode = UITextField.ViewMode.always
+    }
+    func setUpLocalizedStrings() {
+        txtSearch.placeholder = "SearchVC_txtSearch".Localized()
     }
 
     // MARK: - IBActions

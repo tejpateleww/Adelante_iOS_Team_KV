@@ -40,10 +40,16 @@ class MyOrdersCell: UITableViewCell {
      
      override func awakeFromNib() {
          super.awakeFromNib()
+        setUpLocalizedStrings()
      }
     
      override func setSelected(_ selected: Bool, animated: Bool) {
          super.setSelected(selected, animated: animated)
      }
-
+    
+    func setUpLocalizedStrings() {
+        btnRepeatOrder.setTitle("MyOrderVC_MyOrdersCess_btnRepeatOrder".Localized(), for: .normal)
+        btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
+    }
+    
 }

@@ -10,24 +10,42 @@ import UIKit
 import MapKit
 class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
+    // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
+    var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]
+    var arrayForPrice : [String] = ["30","2","7"]
+    // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
+   
     @IBOutlet weak var tblOrderDetails: UITableView!
-    @IBOutlet weak var LblTotlaPrice: CheckOutLabel!
+   
     @IBOutlet weak var restaurantLocationView: checkoutView!
     @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
     
     @IBOutlet weak var btnCanclePromoCOde: myOrdersBtn!
     @IBOutlet weak var lblPromoCode: CheckOutLabel!
-    @IBOutlet weak var btnAppyPromoCode: checkoutButton!
+   
     @IBOutlet weak var tblAddProductHeight: NSLayoutConstraint!
-    var arrayForTitle : [String] = ["Subtotal","Service Fee","Taxes"]
-    var arrayForPrice : [String] = ["30","2","7"]
+    
     @IBOutlet weak var vwChangeLocOptions: UIView!
+    @IBOutlet weak var lblItemName: CheckOutLabel!
+    @IBOutlet weak var lblAddress: CheckOutLabel!
+    @IBOutlet weak var btnChangeLocation: checkoutButton!
+    @IBOutlet weak var btnChangeRestaurant: checkoutButton!
+    @IBOutlet weak var btnAppyPromoCode: checkoutButton!
+    @IBOutlet weak var lblYourOrder: CheckOutLabel!
+    @IBOutlet weak var btnSeeMenu: checkoutButton!
+    @IBOutlet weak var lblTotal: CheckOutLabel!
+    @IBOutlet weak var LblTotlaPrice: CheckOutLabel!
+    @IBOutlet weak var lblCancellation: CheckOutLabel!
+    @IBOutlet weak var btnReadPOlicy: checkoutButton!
+    @IBOutlet weak var btnAddFoodlist: checkoutButton!
+    @IBOutlet weak var btnPlaceOrder: submitButton!
     
-    
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         tblOrderDetailsHeight.constant = CGFloat(arrayForTitle.count * 43)
         tblAddProductHeight.constant = CGFloat(arrayForTitle.count * 60)
@@ -39,14 +57,29 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
-    
+    // MARK: - Other Methods
     func addMapView()
     {
         let mapView = MKMapView()
         mapView.frame = CGRect(x: 0, y: 0, width: restaurantLocationView.frame.size.width, height: restaurantLocationView.frame.size.height)
         restaurantLocationView.addSubview(mapView)
     }
-    
+    func setUpLocalizedStrings()
+    {
+        lblItemName.text = "checkOutVC_lblItemName".Localized()
+        lblAddress.text = "43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA"
+        btnChangeLocation.setTitle("checkOutVC_btnChangeLocation".Localized(), for: .normal)
+        btnChangeRestaurant.setTitle("checkOutVC_btnChangeRestaurant".Localized(), for: .normal)
+        btnAppyPromoCode.setTitle("checkOutVC_btnAppyPromoCode".Localized(), for: .normal)
+        lblYourOrder.text = "checkOutVC_lblYourOrder".Localized()
+        btnSeeMenu.setTitle("checkOutVC_btnSeeMenu".Localized(), for: .normal)
+        lblTotal.text = "checkOutVC_lblTotal".Localized()
+        LblTotlaPrice.text = "$39"
+        lblCancellation.text = "checkOutVC_lblCancellation".Localized()
+        btnReadPOlicy.setTitle("checkOutVC_btnReadPOlicy".Localized(), for: .normal)
+        btnAddFoodlist.setTitle("checkOutVC_btnAddFoodlist".Localized(), for: .normal)
+        btnPlaceOrder.setTitle("checkOutVC_btnPlaceOrder".Localized(), for: .normal)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case tblAddedProduct:
@@ -95,14 +128,14 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    //MARK: -btnActions
+    //MARK: -IBActions
     @objc func btnSubmitCommonPopupClicked() {
         
     }
     
     @IBAction func btnReadPolicyTap(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-        controller.strNavTitle = "Privacy Policy"
+        controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
         self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
@@ -150,52 +183,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func btnChangeLocationClicked(_ sender: Any) {
-        //        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-        //        //controller.modalPresentationStyle = .fullScreen
-        //        controller.isHideCancelButton = false
-        //        controller.isHideSubmitButton = false
-        //        controller.submitBtnTitle = "Yes"
-        //        controller.cancelBtnTitle = "No"
-        //        controller.strDescription = "Do you want to choose other location for same restaurant?"
-        //        controller.strPopupTitle = ""
-        //        controller.isCancleOrder = true
-        //        controller.btnSubmit = {
-        //            self.dismiss(animated: true, completion: nil)
-        //            // self.navigationController?.popViewController(animated: true)
-        //            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
-        //            self.navigationController?.pushViewController(controller, animated: true)
-        //        }
-        //        self.present(controller, animated: true, completion: nil)
-        //
-        //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Do you want to choose other location for same restaurant?", isCancleOrder: false, viewController: self)
-        
-        // Do you want to choose other location for same restaurant?
-        // Different Outlets with same Restaurant going to listed, Are you sure to proceed ?
-        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Are you sure you want to choose another location for this restaurant chain or franchise?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-        //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Are you sure you want to choose another location for this restaurant chain or franchise?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
+        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "checkOutVC_strSubmit_title".Localized(), strCancelButtonTitle: "checkOutVC_strCancel_title".Localized(), strDescription: "checkOutVC_strDescription_title1".Localized(), strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
     }
     
     @IBAction func btnChangeRestaurantClicked(_ sender: Any) {
-        //        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-        //        //controller.modalPresentationStyle = .fullScreen
-        //        controller.isHideCancelButton = false
-        //        controller.isHideSubmitButton = false
-        //        controller.submitBtnTitle = "Yes"
-        //        controller.cancelBtnTitle = "No"
-        //        controller.strDescription = "Do you want to choose other restaurant? All items in your cart will be deleted."
-        //        controller.isCancleOrder = true
-        //        controller.btnSubmit = {
-        //            self.dismiss(animated: true, completion: nil)
-        //            // self.navigationController?.popViewController(animated: true)
-        //            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
-        //            self.navigationController?.pushViewController(controller, animated: true)
-        //        }
-        //        self.present(controller, animated: true, completion: nil)
-        
-        
-        // Do you want to choose other restaurant? All items in your cart will be deleted.
-        // Do you want to choose other Restaurant? Cart will be empty, Are you sure to proceed ?
-        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Changing restaurants will empty your cart. Are you sure you want to continue?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-        //        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "Yes", strCancelButtonTitle: "No", strDescription: "Changing restaurants will empty your cart. Are you sure you want to continue?", strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, viewController: self)
+        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "checkOutVC_strSubmit_title".Localized(), strCancelButtonTitle: "checkOutVC_strCancel_title".Localized(), strDescription: "checkOutVC_strDescription_title2".Localized(), strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
     }
+    // MARK: - Api Calls
 }

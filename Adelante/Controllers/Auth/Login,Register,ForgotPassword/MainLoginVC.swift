@@ -9,19 +9,26 @@
 import UIKit
 
 class MainLoginVC: UIViewController {
-
+    
     // MARK: - Properties
     
     //MARK: - IBOutlets
+    @IBOutlet weak var btnSkip: submitButton!
+    @IBOutlet weak var btnSignin: submitButton!
+    @IBOutlet weak var btnCreateAccount: submitButton!
     
     // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUpLocalizedStrings()
     }
     
     // MARK: - Other Methods
-
+    func setUpLocalizedStrings() {
+        btnSkip.setTitle("MainLoginVC_btnSkip".Localized(), for: .normal)
+        btnSignin.setTitle("MainLoginVC_btnSignin".Localized(), for: .normal)
+        btnCreateAccount.setTitle("MainLoginVC_btnCreateAccount".Localized(), for: .normal)
+    }
     
     //MARK:- IBActions
     @IBAction func btnSkipClicked(_ sender: Any) {
@@ -39,6 +46,6 @@ class MainLoginVC: UIViewController {
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
     
-     // MARK: - Api Calls
+    // MARK: - Api Calls
     
 }

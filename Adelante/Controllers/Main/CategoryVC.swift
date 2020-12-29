@@ -20,6 +20,7 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setup()
     }
     
@@ -32,7 +33,9 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
         tfSearch.leftView = padding
         tfSearch.leftViewMode = UITextField.ViewMode.always
     }
-    
+    func setUpLocalizedStrings(){
+        tfSearch.placeholder = "CategoryVC_tfSearch".Localized()
+    }
     // MARK: - IBActions
     
     // MARK: - UICollectionView Delegates And Datasource

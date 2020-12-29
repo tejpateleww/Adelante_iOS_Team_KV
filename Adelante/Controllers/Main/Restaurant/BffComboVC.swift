@@ -9,28 +9,35 @@
 import UIKit
 
 class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var selectedcategory = 0
     var selectedSection = 0
     var expendedCell = -1
     
+    // MARK: - IBOutlets
     @IBOutlet weak var tblBFFCombo: UITableView!
+    @IBOutlet weak var lblItem: bffComboLabel!
+    @IBOutlet weak var lblViewCart: bffComboLabel!
     var bffComboData = [bffCombo]()
+    
+    // MARK: - ViewController Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         addNavBarImage(isLeft: true, isRight: true)
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.BffComboVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        bffComboData.append(bffCombo(name: "Choices of Sub", subComboArray: [subBFFCombo(name: "Chicken Kofta", price: "", selected: false),subBFFCombo(name: "Chicken Slice", price: "", selected: true),subBFFCombo(name: "Roasted Chicken Slice", price: "", selected: false)], expanded: true))
-        bffComboData.append(bffCombo(name: "Choices of Bread", subComboArray: [subBFFCombo(name: "Multigrain bread", price: "", selected: false),subBFFCombo(name: "Honey Oats Bread", price: "", selected: true),subBFFCombo(name: "Roasted Chicken Slice", price: "", selected: false),subBFFCombo(name: "Plain Bread", price: "", selected: false),subBFFCombo(name: "Toasted Bread", price: "", selected: false)], expanded: true))
+        bffComboData.append(bffCombo(name: "bffComboData_name1".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo_name2".Localized(), price: "", selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo_name3".Localized(), price: "", selected: false)], expanded: true))
+        bffComboData.append(bffCombo(name: "bffComboData_name2".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name2".Localized(), price: "", selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name3".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name4".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name5".Localized(), price: "", selected: false)], expanded: true))
         
-        bffComboData.append(bffCombo(name: "Choices of Vegetables", subComboArray: [subBFFCombo(name: "Onion", price: "", selected: false),subBFFCombo(name: "Tomato", price: "", selected: true),subBFFCombo(name: "Pickle", price: "", selected: false),subBFFCombo(name: "Olives", price: "", selected: false)], expanded: true))
-        bffComboData.append(bffCombo(name: "Choices of Sauces", subComboArray: [subBFFCombo(name: "Mayonnaise", price: "", selected: false),subBFFCombo(name: "Mint Mayonnaise", price: "$3", selected: true),subBFFCombo(name: "Barbeque", price: "$3", selected: false),subBFFCombo(name: "Sweet Onion", price: "", selected: false)], expanded: true))
+        bffComboData.append(bffCombo(name: "bffComboData_name3".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name2".Localized(), price: "", selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name3".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name4".Localized(), price: "", selected: false)], expanded: true))
+        bffComboData.append(bffCombo(name: "bffComboData_name4".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name2".Localized(), price: "bffComboData_subComboArray_subBFFCombo4_price1".Localized(), selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name3".Localized(), price: "bffComboData_subComboArray_subBFFCombo4_price2".Localized(), selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name4".Localized(), price: "", selected: false)], expanded: true))
         
         let footerView = UIView()
         footerView.backgroundColor = .white
@@ -39,7 +46,12 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         // Do any additional setup after loading the view.
     }
     
-    //MARK: - tblview Mathod
+    // MARK: - Other Methods
+    func setUpLocalizedStrings(){
+        lblItem.text = "BffComboVC_lblItem".Localized()
+        lblViewCart.text = "BffComboVC_lblViewCart".Localized()
+    }
+    // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (bffComboData[section].isExpanded == true) ? bffComboData[section].subCombo.count : 0
     }
@@ -126,12 +138,12 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     
-    
+    // MARK: - IBActions
     @IBAction func btnViewCart(_ sender: Any) {
       let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
       self.navigationController?.pushViewController(controller, animated: true)
     }
-    
+    // MARK: - Api Calls
 }
 class bffCombo {
     var comboName : String?

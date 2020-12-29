@@ -9,7 +9,10 @@
 import UIKit
 
 class MyFoodlistCell: UITableViewCell {
-
+    @IBOutlet weak var lblDisc: UILabel!
+    @IBOutlet weak var lblPrice: tblMyOrdersLabel!
+    @IBOutlet weak var lblComboTitle: tblMyOrdersLabel!
+    @IBOutlet weak var imgFoodLIst: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

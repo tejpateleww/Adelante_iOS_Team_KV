@@ -25,12 +25,12 @@ extension String{
                 output += "+"
             }
             else if thisChar == "." ||
-                thisChar == "-" ||
-                thisChar == "_" ||
-                thisChar == "~" ||
-                (thisChar >= "a" && thisChar <= "z") ||
-                (thisChar >= "A" && thisChar <= "Z") ||
-                (thisChar >= "0" && thisChar <= "9") {
+                        thisChar == "-" ||
+                        thisChar == "_" ||
+                        thisChar == "~" ||
+                        (thisChar >= "a" && thisChar <= "z") ||
+                        (thisChar >= "A" && thisChar <= "Z") ||
+                        (thisChar >= "0" && thisChar <= "9") {
                 let code = String(thisChar).utf8.map{ UInt8($0) }[0]
                 output += String(format: "%c", code)
             }
@@ -223,5 +223,13 @@ extension String{
             return 0
         }
     }
-    
+    //MARK: - ================================
+    //MARK: Localization
+    //MARK: ==================================
+    func Localized() -> String {
+        guard let lang = userDefault.value(forKey: UserDefaultsKey.selLanguage.rawValue) as? String else { return "" }
+        let path = Bundle.main.path(forResource: lang , ofType: "lproj")
+        let bundle = Bundle(path: path!)!
+        return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
+    }
 }

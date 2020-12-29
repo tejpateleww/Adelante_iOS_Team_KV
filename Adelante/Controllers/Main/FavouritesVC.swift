@@ -9,7 +9,7 @@
 import UIKit
 
 class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
-
+    
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     
@@ -19,18 +19,19 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
-          super.viewDidLoad()
-          setup()
-      
-      self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-
-      }
-    
-      override func viewWillAppear(_ animated: Bool) {
-          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-          self.customTabBarController?.showTabBar()
+        super.viewDidLoad()
+        setUpLocalizedStrings()
+        setup()
         
-      }
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.customTabBarController?.showTabBar()
+        
+    }
     
     // MARK: - Other Methods
     func setup() {
@@ -44,14 +45,16 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         tblMainList.dataSource = self
         tblMainList.reloadData()
     }
-    
+    func setUpLocalizedStrings() {
+        txtSearch.placeholder = "FavouritesVC_txtSearch".Localized()
+    }
     // MARK: - IBActions
     
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 10
-        }
-        
+        return 10
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblMainList.dequeueReusableCell(withIdentifier: YourFavouriteCell.reuseIdentifier, for: indexPath) as! YourFavouriteCell
         cell.selectionStyle = .none

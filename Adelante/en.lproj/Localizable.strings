@@ -1,0 +1,274 @@
+/* 
+ Localizable.strings
+ Adelante
+ 
+ Created by baps on 24/12/20.
+ Copyright © 2020 EWW071. All rights reserved.
+ */
+
+//MainLoginVC
+"MainLoginVC_btnSkip" = "SKIP";
+"MainLoginVC_btnSignin" = "Sign In";
+"MainLoginVC_btnCreateAccount" = "Create Account";
+
+//LoginViewController
+"LoginViewController_lblTitle" = "Welcome\nBack";
+"LoginViewController_txtEmail" = "Email / Phone Number";
+"LoginViewController_txtPassword" = "Password";
+"LoginViewController_btnForgotPassword" = "Forgot Password";
+"LoginViewController_lblSignin" = "Sign In";
+"LoginViewController_lblDontHave" = "Don't have an account";
+"LoginViewController_btnCreateAccount" = "Create Account";
+
+//RegisterViewController
+"RegisterViewController_lblTitle" = "Welcome To\nAdelante";
+"RegisterViewController_txtFirstName" = "First Name";
+"RegisterViewController_txtLastName" = "Last Name";
+"RegisterViewController_txtEmail" = "Email";
+"RegisterViewController_txtPhoneNumber" = "Phone Number";
+"RegisterViewController_txtPassword" = "Password";
+"RegisterViewController_txtConPassword" = "Confirm Password";
+"RegisterViewController_lblCreateAccount" = "Create Account";
+"RegisterViewController_lblAlreadyHave" = "Already have an account";
+"RegisterViewController_btnSignin" = "Sign In";
+
+//SearchVC
+"SearchVC_txtSearch" = "Search For Food And Restaurant";
+
+//FavouritesVC
+"FavouritesVC_txtSearch" = "Search for Food and Restaurant";
+
+//MyOrderVC
+"MyOrderVC_lblPastOrders" = "Past orders";
+"MyOrderVC_lblUpcomingOrders" = "Upcoming";
+"MyOrderVC_MyOrdersCess_btnRepeatOrder" = "Repeat Order";
+"MyOrderVC_MyOrdersCess_btnCancelOrder" = "Cancel Order";
+
+//MyProfileVC
+"MyProfileVC_lblName" = "John Smith";
+"MyProfileVC_btnEditAccount" = "EDIT ACCOUNT";
+"MyProfileVC_txtEmail" = "Email";
+"MyProfileVC_txtPhoneNumber" = "Phone Number";
+
+//EditProfileVC
+"EditProfileVC_txtFirstName" = "First Name";
+"EditProfileVC_txtLastName" = "Last Name";
+"EditProfileVC_txtEmail" = "Email";
+"EditProfileVC_lblVerified" = "Verified";
+"EditProfileVC_txtPhoneNumber" = "Phone Number";
+"EditProfileVC_lblUnverified" = "Unverified";
+"EditProfileVC_btnSave" = "Save";
+
+//FeedbackVC
+"FeedbackVC_txtTitle" = "Title";
+"FeedbackVC_txtEmail" = "Email";
+"FeedbackVC_tvFeedback" = "Feedback Description";
+"FeedbackVC_btnSubmit" = "Submit";
+
+//ChangePasswordVC
+"ChangePasswordVC_lblTitle" = "Change Password";
+"ChangePasswordVC_txtOldPassword" = "Old Password";
+"ChangePasswordVC_txtNewPassword" = "New Password";
+"ChangePasswordVC_txtConfirmPassword" = "Confirm Password";
+"ChangePasswordVC_btnSave" = "Save";
+
+//ForgotPasswordVC
+"ForgotPasswordVC_lblForgotPassword" = "Forgot Password";
+"ForgotPasswordVC_txtEmailOrPhone" = "Enter Email / Phone Number";
+"ForgotPasswordVC_btnSend" = "Send";
+
+//CategoryVC
+"CategoryVC_tfSearch" = "Search for Food and Restaurant";
+
+//RestaurantReviewVC
+"RestaurantReviewVC_lblAreaName" = "Kangkung siram sambel";
+//"RestaurantReviewVC_lblAddress" = "43369 Ellsworth St, remont,CA";
+//"RestaurantReviewVC_lblRating" = "4.2";
+"RestaurantReviewVC_lblReviews" = "%@ Reviews";
+
+//RateReviewVC
+"RateReviewVC_lblRateRestaurant" = "How Would You Rate\nyour Experience?";
+"RateReviewVC_tvRateReview" = "Comments";
+"RateReviewVC_btnSubmit" = "Submit";
+
+//MyOrderDetailsVC
+"MyOrderDetailsVC_lblOrderId" = "Order Id : 258112548";
+"MyOrderDetailsVC_lblNoOfItems" = "%@ Items";
+"MyOrderDetailsVC_lblRestName" = "El Meson";
+"MyOrderDetailsVC_lblLocation" = "Santa Rosa";
+//"MyOrderDetailsVC_lblAddress" = "43369 Ellsworth St, remont,CA";
+"MyOrderDetailsVC_lblYourOrder" = "Your Order";
+"MyOrderDetailsVC_lblSubTotalTitle" = "Subtotal";
+//"MyOrderDetailsVC_lblSubTotal" = "$30";
+"MyOrderDetailsVC_lblServiceFeeTitle" = "Service Fee";
+//"MyOrderDetailsVC_lblServiceFee" = "$2";
+"MyOrderDetailsVC_lblTaxesTitle" = "Taxes";
+//"MyOrderDetailsVC_lblTaxes" = "$7";
+"MyOrderDetailsVC_lblTotalTitle" = "Total";
+//"MyOrderDetailsVC_lblTotal" = "$39";
+"MyOrderDetailsVC_btnCancel" = "Cancel";
+"MyOrderDetailsVC_btnRateOrder" = "Rate Order";
+"MyOrderDetailsVC_btnShareOrder" = "Share Order";
+
+//RestaurantListVC
+"RestaurantListVC_txtSearch" = "Search for Food and Restaurant";
+"RestaurantListVC_lblAllRestaurants" = "All Restaurants";
+
+//BffComboVC
+"BffComboVC_lblItem" = "1 Item | $30";
+"BffComboVC_lblViewCart" = "View Cart";
+"bffComboData_name1" = "Choices of Sub";
+"bffComboData_subComboArray_subBFFCombo_name1" = "Chicken Kofta";
+"bffComboData_subComboArray_subBFFCombo_name2" = "Chicken Slice";
+"bffComboData_subComboArray_subBFFCombo_name3" = "Roasted Chicken Slice";
+"bffComboData_name2" = "Choices of Bread";
+"bffComboData_subComboArray_subBFFCombo2_name1" = "Multigrain bread";
+"bffComboData_subComboArray_subBFFCombo2_name2" = "Honey Oats Bread";
+"bffComboData_subComboArray_subBFFCombo2_name3" = "Roasted Chicken Slice";
+"bffComboData_subComboArray_subBFFCombo2_name4" = "Plain Bread";
+"bffComboData_subComboArray_subBFFCombo2_name5" = "Toasted Bread";
+"bffComboData_name3" = "Choices of Vegetables";
+"bffComboData_subComboArray_subBFFCombo3_name1" = "Onion";
+"bffComboData_subComboArray_subBFFCombo3_name2" = "Tomato";
+"bffComboData_subComboArray_subBFFCombo3_name3" = "Pickle";
+"bffComboData_subComboArray_subBFFCombo3_name4" = "Olives";
+"bffComboData_name4" = "Choices of Sauces";
+"bffComboData_subComboArray_subBFFCombo4_name1" = "Mayonnaise";
+"bffComboData_subComboArray_subBFFCombo4_name2" = "Mint Mayonnaise";
+"bffComboData_subComboArray_subBFFCombo4_price1" = "$3";
+"bffComboData_subComboArray_subBFFCombo4_name3" = "Barbeque";
+"bffComboData_subComboArray_subBFFCombo4_price2" = "$3";
+"bffComboData_subComboArray_subBFFCombo4_name4" = "Sweet Onion";
+
+//addPaymentVC
+"addPaymentVC_btnAddCart" = "Add Card";
+"addPaymentVC_lblWallet" = "Wallet";
+"addPaymentVC_lblcardDetails" = "**** **** **** 5967";
+"addPaymentVC_lblExpiresDate" = "Expires %@";
+
+
+//sortPopupVC
+"sortPopupVC_lblSort" = "Sort";
+
+//"MyAccountVC
+"MyAccountVC_lblName" = "John Smith";
+"MyAccountVC_title1" = "Payment";
+"MyAccountVC_title2" = "My Foodlist";
+"MyAccountVC_title3" = "About Us";
+"MyAccountVC_title3_A" = "Terms & conditions";
+"MyAccountVC_title3_B" = "Privacy policy";
+"MyAccountVC_title4" = "Help";
+"MyAccountVC_title4_A" = "Feedback";
+"MyAccountVC_title5" = "Change Password";
+"MyAccountVC_title6" = "Logout";
+"MyAccountVC_titleCancel" = "Cancel";
+"MyAccountVC_titleLogout" = "Logout";
+
+//"RestaurantDetailsVC
+"RestaurantDetailsVC_lblRestaurantName" = "Kangkung siram sambel ";
+//"RestaurantDetailsVC_lblRating" = "4.2";
+"RestaurantDetailsVC_lblReviews" = "%@ Reviews";
+"RestaurantDetailsVC_lblCode" = "SU652";
+"RestaurantDetailsVC_lblPromoCode" = "Promo Code :";
+"RestaurantDetailsVC_lblDistance" = "1.7 Miles";
+//"RestaurantDetailsVC_lblAddress" = "43369 Ellsworth St, remont,CA";
+"RestaurantDetailsVC_lblOpenTime" = "Operating Hours";
+"RestaurantDetailsVC_lblTime" = "9 am To 9 pm";
+"RestaurantDetailsVC_lblTimeZone" = "Timezone";
+"RestaurantDetailsVC_lblEastern" = "Eastern";
+"RestaurantDetailsVC_lblAboutRestaurant" = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.";
+"RestaurantDetailsVC_btnViewPolicy" = "View Store Policy";
+"RestaurantDetailsVC_RestaurantDetailsCell_btnCustomize" = "Customize";
+"RestaurantDetailsVC_lblNoOfItem" = "%@ Item ";
+"RestaurantDetailsVC_lblSign" = "|";
+//"RestaurantDetailsVC_lblPrice" = " $30";
+"RestaurantDetailsVC_lblViewCart" = "View Cart";
+"RestaurantDetailsVC_arrSection" = "Menu";
+"RestaurantDetailsVC_arrSection1" = "Sandwiches";
+"RestaurantDetailsVC_arrSection2" = "Salad";
+
+//AddCardVC
+"AddCardVC_lblName" = "Name";
+"AddCardVC_txtName" = "Name";
+"AddCardVC_lblCardNumber" = "Card Number";
+"AddCardVC_txtCardNumber" = "Card Number";
+"AddCardVC_lblExpires" = "Expires";
+"AddCardVC_txtDate" = "Expire Date";
+"AddCardVC_lblCvv" = "Cvv";
+"AddCardVC_txtCvv" = "Cvv Code";
+"AddCardVC_lblDebitcardDetail" = "Debit cards are accepted at some locations and for some categories.";
+"AddCardVC_btnSave" = "Save";
+
+//HomeVC
+"HomeVC_lblMylocation" = "My Location";
+//"HomeVC_lblAddress" = "30 Memorial Drive, Avon MA 2322";
+"HomeVC_RestaurantCell_lblMiles" = "%@ miles";
+"HomeVC_arrFilter_title1" = "Mobile Pickup";
+"HomeVC_arrFilter_title2" = "Recently Viewed";
+"HomeVC_arrFilter_title3" = "Top Rated";
+
+//checkOutVC
+"checkOutVC_lblItemName" = "Kangkung siram sambel";
+//"checkOutVC_lblAddress" = "43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA";
+"checkOutVC_btnChangeLocation" = "Change Location";
+"checkOutVC_btnChangeRestaurant" = "Change Restaurant";
+"checkOutVC_btnAppyPromoCode" = "Add promo code";
+"checkOutVC_lblYourOrder" = "Your Order";
+"checkOutVC_btnSeeMenu" = "See Menu";
+"checkOutVC_lblTotal" = "Total";
+//"checkOutVC_LblTotlaPrice" = "$39";
+"checkOutVC_lblCancellation" = "Review Your Order details to\navoid cancellations ";
+"checkOutVC_btnReadPOlicy" = "Read Policy";
+"checkOutVC_btnAddFoodlist" = "Add To Food List";
+"checkOutVC_btnPlaceOrder" = "Place Order";
+"checkOutVC_arrayForTitle_title" = "Subtotal";
+"checkOutVC_arrayForTitle_title1" = "Service Fee";
+"checkOutVC_arrayForTitle_title2" = "Taxes";
+"checkOutVC_strCancel_title" = "No";
+"checkOutVC_strSubmit_title" = "Yes";
+"checkOutVC_strDescription_title1" = "Are you sure you want to choose another location for this restaurant chain or franchise?";
+"checkOutVC_strDescription_title2" = "Changing restaurants will empty your cart. Are you sure you want to continue?";
+
+
+//applyPromoCodeVC
+"applyPromoCodeVC_okButton" = "Apply";
+"applyPromoCodeVC_cancleButton" = "Cancel";
+"applyPromoCodeVC_lblPromoCode" = "Apply Promocode";
+"applyPromoCodeVC_txtPromoCode" = "Promocode";
+
+//NavigationTitles
+"NavigationTitles_Privacypolicy" = "Privacy policy";
+"NavigationTitles_MyOrders" = "My Orders";
+"NavigationTitles_PastOrderDetails" = "Past Order Details";
+"NavigationTitles_UpcomingOrderDetails" = "Upcoming Order Details";
+"NavigationTitles_Checkout" = "Checkout";
+"NavigationTitles_AddPayment" = "Add Payment";
+"NavigationTitles_AddCard" = "Add Card";
+"NavigationTitles_MyAccount" = "My Account";
+"NavigationTitles_MyProfile" = "My Profile";
+"NavigationTitles_EditProfile" = "Edit Profile";
+"NavigationTitles_Ratings&Reviews" = "Ratings & Reviews";
+"NavigationTitles_RestaurantList" = "Restaurant List";
+"NavigationTitles_RestaurantDetails" = "Restaurant Details";
+"NavigationTitles_MyFoodlist" = "My Foodlist";
+"NavigationTitles_Terms&conditions" = "Terms & conditions";
+"NavigationTitles_AboutUs" = "About Us";
+"NavigationTitles_Feedback" = "Feedback";
+"NavigationTitles_TopCategories" = "Top Categories";
+"NavigationTitles_BFFCombo" = "BFF Combo";
+"NavigationTitles_Notifications" = "Notifications";
+"NavigationTitles_YourFavorites" = "Your Favorites";
+"NavigationTitles_AddPayment" = "Add Payment";
+"NavigationTitles_AddCard" = "Add Card";
+"NavigationTitles_BFFComboVC" = "BFF Combo";
+"NavigationTitles_Checkout" = "Checkout";
+"NavigationTitles_NavItemsLeft_back" = "back";
+"NavigationTitles_NavItemsRight_clearAll" = "clearAll";
+"NavigationTitles_NavItemsRight_saved" = "saved";
+"NavigationTitles_NavItemsRight_notifBell" = "notifBell";
+"NavigationTitles_NavItemsRight_Liked" = "Liked";
+
+//Message
+"MessageTitle" = "Something went wrong";
+"MessagePassword" = "Password do not match";
+ 

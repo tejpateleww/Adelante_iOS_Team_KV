@@ -19,20 +19,23 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var expendedCell = -1
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
-       // MARK: - ViewController Lifecycle
+    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var lblName: myaccountLabel!
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         addNavBarImage(isLeft: true, isRight: true)
         
         allDetails = [
 //            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
                       
-                      myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "Payment", subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "My Foodlist", subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_aboutUS")!, title: "About Us", subTitle: [subAccountDetails(subTitle: "Terms & conditions "),subAccountDetails(subTitle: "Privacy policy ")], selectedIcon: UIImage(named: "ic_aboutUSSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "Help", subTitle: [subAccountDetails(subTitle: "Feedback")], selectedIcon: UIImage(named: "ic_HelpSelected")!),
-                      myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "Change Password", subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
-                        myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "Logout", subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "MyAccountVC_title1".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "MyAccountVC_title2".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_aboutUS")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized())], selectedIcon: UIImage(named: "ic_aboutUSSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "MyAccountVC_title4".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title4_A".Localized())], selectedIcon: UIImage(named: "ic_HelpSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "MyAccountVC_title5".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "MyAccountVC_title6".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
           ]
           setup()
       
@@ -60,8 +63,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             let alertController = UIAlertController(title: AppName,
                                                     message: GlobalStrings.Alert_logout.rawValue,
                                                     preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            alertController.addAction(UIAlertAction(title: "Logout", style: .default){ _ in
+        alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel))
+        alertController.addAction(UIAlertAction(title: "MyAccountVC_titleLogout".Localized(), style: .default){ _ in
 //                appDel.performLogout()
                 userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 appDel.navigateToLogin()
@@ -124,7 +127,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
            }
        }
     
-    //MARK: -btnAction
+    //MARK: -IBActions
     @IBAction func btnMyprofile(_ sender: UIButton)
     {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyProfileVC.storyboardID) as! MyProfileVC
@@ -196,16 +199,19 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         return headerView
     }
    
+    func setUpLocalizedStrings(){
+        lblName.text = "MyAccountVC_lblName".Localized()
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-                controller.strNavTitle = "Terms & conditions"
+                controller.strNavTitle = "NavigationTitles_Terms&conditions".Localized()
                 self.navigationController?.pushViewController(controller, animated: true)
             case 1:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-                controller.strNavTitle = "Privacy policy"
+                controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
                 self.navigationController?.pushViewController(controller, animated: true)
             default:
                 print(indexPath.row)
@@ -229,7 +235,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
-    
+    // MARK: - Api Calls
 }
 class myAccountDetails
 {

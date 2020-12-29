@@ -15,5 +15,11 @@ class RestWithPageCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpLocalizedStrings()
+    }
+    
+    func setUpLocalizedStrings(){
+        lblRestName.text = "Lorem Ipsum"
+        lblRestDesc.text = "Lorem Ipsum is simply dummy text"
     }
 }

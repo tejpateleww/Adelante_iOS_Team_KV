@@ -13,14 +13,17 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: customTextField!
     @IBOutlet weak var btnFilterOptions: UIButton!
+    @IBOutlet weak var lblAllRestaurants: themeLabel!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setup()
     }
     
@@ -45,7 +48,10 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblMainList.dataSource = self
         tblMainList.reloadData()
     }
-    
+    func setUpLocalizedStrings(){
+        txtSearch.placeholder = "RestaurantListVC_txtSearch".Localized()
+        lblAllRestaurants.text = "RestaurantListVC_lblAllRestaurants".Localized()
+    }
     @objc func deSelectFilterAndRefresh() {
         btnFilterOptions.isSelected = false
         changeLayoutOfFilterButton()

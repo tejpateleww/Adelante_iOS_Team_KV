@@ -9,5 +9,6 @@
 import UIKit
 
 class CategoryCell: UICollectionViewCell {
-    
+    @IBOutlet weak var imgCategory: UIImageView!
+    @IBOutlet weak var lblCategoryName: themeLabel!
 }

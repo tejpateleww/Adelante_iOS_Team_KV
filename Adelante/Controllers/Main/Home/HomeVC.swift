@@ -26,14 +26,16 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrFilter = [structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: ""),
-                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "Mobile Pickup"),
-                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "Recently Viewed"),
-                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "Top Rated")] //["","Mobile Pickup", "Recently Viewed", "Top Rated"]
+                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title1".Localized()),
+                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title2".Localized()),
+                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title3".Localized())] //["","Mobile Pickup", "Recently Viewed", "Top Rated"]
     var arrImagesForPage = ["dummyRest1", "dummyRest2" , "dummyRest1"]
     var arrImages = ["dummyRest1", "dummyRest2" , "dummyRest1", "dummyRest1", "dummyRest2" , "dummyRest1"]
     var selectedSortTypedIndexFromcolVwFilter = -1
 
     // MARK: - IBOutlets
+    @IBOutlet weak var lblMylocation: myLocationLabel!
+    @IBOutlet weak var lblAddress: myLocationLabel!
     @IBOutlet weak var colVwRestWthPage: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var tblMainList: UITableView!
@@ -42,6 +44,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLocalizedStrings()
         setup()
     
     self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -83,7 +86,10 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         selectedSortTypedIndexFromcolVwFilter = -1
         colVwFilterOptions.reloadData()
     }
-    
+    func setUpLocalizedStrings(){
+        lblMylocation.text = "HomeVC_lblMylocation".Localized()
+        lblAddress.text = "30 Memorial Drive, Avon MA 2322"
+    }
     // MARK: - IBActions
     
     @IBAction func btnNotifClicked(_ sender: Any) {
