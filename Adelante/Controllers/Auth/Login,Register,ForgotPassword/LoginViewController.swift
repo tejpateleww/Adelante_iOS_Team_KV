@@ -38,8 +38,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnlogin(_ sender: Any) {
-        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-          appDel.navigateToHome()
+        webserviceForlogin()
+        
        }
     //MARK:- Other Method
     func setUpLocalizedStrings() {
@@ -54,27 +54,35 @@ class LoginViewController: UIViewController {
    //MARK:- Webservice
     func webserviceForlogin()
     {
-//        let login = LoginReqModel(email:  txtEmail.text ?? "", password: txtPassword.text ?? "", deviceToken: SingletonClass.sharedInstance.DeviceToken, deviceType: AppInfo.appUrl )
-//        WebServiceSubClass.login(loginModel: login, showHud: true) { (json, status, response) in
-//            if(status)
-//            {
-//                UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-//                let loginModelDetails = UserInfo.init(fromJson: json)
-//                UserDefaults.standard.set(loginModelDetails.data.xApiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
-//                
-//                SingletonClass.sharedInstance.UserId = loginModelDetails.data.id
-//                SingletonClass.sharedInstance.Api_Key = loginModelDetails.data.xApiKey
-//                let encodedData = NSKeyedArchiver.archivedData(withRootObject: loginModelDetails)
-//                userDefault.set(encodedData, forKey:  UserDefaultsKey.userProfile.rawValue)
-//                SingletonClass.sharedInstance.LoginRegisterUpdateData = loginModelDetails
-//                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-//                appDel.navigateToHome()
-//            }
-//            else
-//            {
-//                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
-//            }
-//        }
+        let login = LoginReqModel()
+        login.user_name = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        login.password = txtPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        login.phone = ""
+        login.device_token = "123456"
+        login.device_type = ReqDeviceType
+        login.lat = "23.076448"
+        login.lng = "72.508116 "
+        
+        WebServiceSubClass.login(loginModel: login, completion: { (json, status, response) in
+            if(status)
+            {
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                let loginModelDetails = Profile.init(fromJson: json)
+                UserDefaults.standard.set(loginModelDetails.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
+                
+                SingletonClass.sharedInstance.UserId = loginModelDetails.id
+                SingletonClass.sharedInstance.Api_Key = loginModelDetails.apiKey
+                let encodedData = NSKeyedArchiver.archivedData(withRootObject: loginModelDetails)
+                userDefault.set(encodedData, forKey:  UserDefaultsKey.userProfile.rawValue)
+                SingletonClass.sharedInstance.LoginRegisterUpdateData = loginModelDetails
+                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                appDel.navigateToHome()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
     }
     
     func webserviceForForgotPassword(strEmail : String)

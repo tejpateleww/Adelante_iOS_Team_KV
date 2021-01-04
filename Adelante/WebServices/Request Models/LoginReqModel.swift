@@ -9,10 +9,13 @@
 import Foundation
 
 class LoginReqModel : RequestModel {
-    var email : String = ""
+    var user_name : String = ""
     var password : String = ""
+    var phone : String = ""
     var device_token : String = "abc123"
     var device_type : String = ReqDeviceType
+    var lat : String = ""
+    var lng : String = ""
 }
 
 struct UserRegistrationRequest : Encodable

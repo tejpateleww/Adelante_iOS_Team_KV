@@ -25,7 +25,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
-        addNavBarImage(isLeft: true, isRight: true)
+        //addNavBarImage(isLeft: true, isRight: true)
         
         allDetails = [
 //            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),

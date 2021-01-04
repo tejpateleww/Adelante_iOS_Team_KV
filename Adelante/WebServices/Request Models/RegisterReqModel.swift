@@ -10,7 +10,7 @@ import Foundation
 class RegisterReqModel : RequestModel {
     var first_name : String = ""
     var last_name : String = ""
-    var email : String = ""
+    var user_name : String = ""
     var phone : String = ""
     var password : String = ""
     var device_token : String = ""
