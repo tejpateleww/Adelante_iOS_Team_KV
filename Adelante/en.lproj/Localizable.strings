@@ -33,7 +33,7 @@
 "RegisterViewController_btnSignin" = "Sign In";
 
 //SearchVC
-"SearchVC_txtSearch" = "Search For Food And Restaurant";
+"SearchVC_txtSearch" = "Search For Food and Restaurant";
 
 //FavouritesVC
 "FavouritesVC_txtSearch" = "Search for Food and Restaurant";

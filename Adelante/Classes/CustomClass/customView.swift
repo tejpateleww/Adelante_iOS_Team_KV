@@ -119,6 +119,25 @@ class customImageView: UIImageView {
         }
     }
 }
+class customImagewithShadow: UIImageView {
+    @IBInspectable var isViewRadius : Bool = false
+    @IBInspectable var isShadow : Bool = false
+    override func awakeFromNib() {
+        if isViewRadius{
+            self.layer.cornerRadius = 8
+        }else if isShadow{
+            self.layer.cornerRadius = 5
+            self.clipsToBounds = false
+            self.layer.masksToBounds = true;
+            self.backgroundColor = UIColor.clear
+            self.layer.shadowColor = colors.submitButtonShadow.value.cgColor
+            self.layer.shadowOpacity = 0.50
+            self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+            self.layer.shadowRadius = 4.0
+            self.layer.masksToBounds = false
+        }
+    }
+}
 class CustomviewRadius:UIView{
     @IBInspectable var isCornerRadius:Bool = false
     @IBInspectable var hasShadow:Bool = false

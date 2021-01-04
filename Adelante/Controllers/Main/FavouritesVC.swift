@@ -60,7 +60,10 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         cell.selectionStyle = .none
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
+            self.navigationController?.pushViewController(controller, animated: true)
+    }
     // MARK: - Api Calls
     
 }

@@ -55,10 +55,16 @@ extension UIViewController {
     
     func addNavBarImage(isLeft:Bool, isRight:Bool) {
         if isLeft {
-            var w = 133
+//            var w = 133
+//            var h = 91
+//            if DeviceType.hasTopNotch {
+//                w = 173
+//                h = 106
+//            }
+            var w = 93
             var h = 91
             if DeviceType.hasTopNotch {
-                w = 173
+                w = 113
                 h = 106
             }
             let img = UIImageView(frame: CGRect(x: 0, y: 0, width: w, height: h))

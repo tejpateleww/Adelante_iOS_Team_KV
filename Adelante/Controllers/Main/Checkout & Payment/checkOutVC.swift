@@ -19,7 +19,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
    
     @IBOutlet weak var tblOrderDetails: UITableView!
    
-    @IBOutlet weak var restaurantLocationView: checkoutView!
+    @IBOutlet weak var restaurantLocationView: customImagewithShadow!
     @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
     
     @IBOutlet weak var btnCanclePromoCOde: myOrdersBtn!
