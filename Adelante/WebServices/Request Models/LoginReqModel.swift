@@ -8,19 +8,11 @@
 
 import Foundation
 
-struct LoginReqModel : Encodable {
-    
-    //    let email,password,deviceToken,deviceType : String
+class LoginReqModel : RequestModel {
     var email : String = ""
     var password : String = ""
-    var deviceToken : String = "abc123"
-    var deviceName : String? = ""
-    var deviceType : String = "2"
-    enum CodingKeys: String, CodingKey {
-        case email,password,deviceName
-        case deviceToken = "device_token"
-        case deviceType = "device_type"
-    }
+    var device_token : String = "abc123"
+    var device_type : String = ReqDeviceType
 }
 
 struct UserRegistrationRequest : Encodable

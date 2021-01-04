@@ -63,12 +63,10 @@ class RegisterViewController: UIViewController {
     }
     //MARK:- Button action
     @IBAction func btnSignUp(sender:Any){
-//        if(validation())
-//        {
-//            webserviceForRegister()
-//        }
-        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-        appDel.navigateToHome()
+        //        if(validation())
+        //        {
+        webserviceForRegister()
+        //     }
         
     }
     
@@ -81,7 +79,7 @@ class RegisterViewController: UIViewController {
     @IBAction func btnGoogleSignUp(sender:UIButton){
         
     }
-   
+    
     
     @IBAction func btnSignInClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -126,21 +124,22 @@ class RegisterViewController: UIViewController {
     //MARK:- Webservice
     func webserviceForRegister()
     {
-        guard let strFirstName = self.txtFirstName.text else {return}
-        guard let strLastName = self.txtLastName.text else {return}
-        guard let strEmail = self.txtEmail.text else {return}
-        guard let strPassword = self.txtPassword.text else {return}
-        let strDeviceToken = SingletonClass.sharedInstance.DeviceToken
-        let strDeviceType = AppInfo.deviceType
         
         
-        let register = RegisterReqModel(firstName: strFirstName, lastName: strLastName, email: strEmail, mobileNumber: "", deviceToken: strDeviceToken, deviceType: strDeviceType, password: strPassword)
-      
-        WebServiceSubClass.register(registerModel: register, showHud: true) { (json, status, response) in
-            
+        let register = RegisterReqModel()
+        register.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        register.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        register.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        register.phone = txtPhoneNumber.text ?? ""
+        register.password = txtPassword.text ?? ""
+        register.device_token = "123456"
+        register.device_type = ReqDeviceType
+        register.lat = "23.076448"
+        register.lng = "72.508116"
+        WebServiceSubClass.register(registerModel: register, completion: { (json, status, response) in
             if(status)
             {
-                UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 let loginModelDetails = UserInfo.init(fromJson: json)
                 UserDefaults.standard.set(loginModelDetails.data.xApiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 SingletonClass.sharedInstance.UserId = loginModelDetails.data.id
@@ -155,7 +154,7 @@ class RegisterViewController: UIViewController {
             {
                 Utilities.displayErrorAlert(json["message"].string ?? "MessageTitle".Localized())
             }
-        }
+        })
     }
     
 }

@@ -17,10 +17,11 @@ enum UserDefaultsKey : String {
     case X_API_KEY = "X_API_KEY"
     case DeviceToken = "DeviceToken"
     case selLanguage = "language"
+    
 }
 enum APIEnvironment : String{
     
-    case bu = "http://admin.virtuwoof.com/Api/"
+    case bu = "http://adelante.excellentwebworld.in/api/User/"
   
     
     static var baseURL: String{
@@ -48,7 +49,7 @@ enum APIEnvironment : String{
 //                            let userdata = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! ResLoginRegisterUpdate
 //                            SingletonClass.sharedInstance.Api_Key = userdata.data.apiKey
 
-                        return ["X-API-KEY":SingletonClass.sharedInstance.Api_Key]
+                            return ["key" : Headerkey, "X-API-KEY":SingletonClass.sharedInstance.Api_Key]
 
                     }
 
@@ -57,23 +58,17 @@ enum APIEnvironment : String{
         }
 
     }
-        return ["X-API-KEY": SingletonClass.sharedInstance.Api_Key]
+        return ["key" : Headerkey, "X-API-KEY": SingletonClass.sharedInstance.Api_Key]
     }
 
 }
 enum ApiKey: String {
-    case Init                  = "User_api/init/"
-    case login                 = "User_api/login"
-    case ForgotPassword        = "User_api/forgot_password"
-    case changePassword        = "User_api/change_password"
-    case register              = "User_api/register"
-    case UpdateProfile         = "User_api/profile_update"
-    case Logout                = "User_api/logout/"
-    
-    // HOME SCREEN API
-    case PadsLibraryList       = "Pads_api/pads_library_list"
-    case PadsList              = "Pads_api/pads_list"
-    case Order                 = "Pads_api/order"
-    case CreateSong            = "Pads_api/create_song"
+    case Init = "init"
+    case Register = "register"
+    case login = "login"
+    case changePassword = "changePassword"
+    case ForgotPassword = "ForgotPassword"
+    case UpdateProfile = "UpdateProfile"
+    case Logout = "Logout"
 }
 

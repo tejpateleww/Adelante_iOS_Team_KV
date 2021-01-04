@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>When in use permissions</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>always permissions</string>
-    <key>NSLocationAlwaysAndWhenInUsageDescription</key>
-    <string>Always and in usage permissions</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -30,6 +24,17 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSLocationAlwaysAndWhenInUsageDescription</key>
+	<string>Always and in usage permissions</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>always permissions</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>When in use permissions</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Aileron-UltraLightItalic.otf</string>
@@ -61,21 +66,20 @@
 		<string>Nexa Light.otf</string>
 		<string>Nexa Bold.otf</string>
 		<string>Nexa Regular.otf</string>
-        
-        <string>Nunito-Black.ttf</string>
-        <string>Nunito-BlackItalic.ttf</string>
-        <string>Nunito-Bold.ttf</string>
-        <string>Nunito-BoldItalic.ttf</string>
-        <string>Nunito-ExtraBold.ttf</string>
-        <string>Nunito-ExtraBoldItalic.ttf</string>
-        <string>Nunito-ExtraLight.ttf</string>
-        <string>Nunito-ExtraLightItalic.ttf</string>
-        <string>Nunito-Italic.ttf</string>
-        <string>Nunito-Light.ttf</string>
-        <string>Nunito-LightItalic.ttf</string>
-        <string>Nunito-Regular.ttf</string>
-        <string>Nunito-SemiBold.ttf</string>
-        <string>Nunito-SemiBoldItalic.ttf</string>
+		<string>Nunito-Black.ttf</string>
+		<string>Nunito-BlackItalic.ttf</string>
+		<string>Nunito-Bold.ttf</string>
+		<string>Nunito-BoldItalic.ttf</string>
+		<string>Nunito-ExtraBold.ttf</string>
+		<string>Nunito-ExtraBoldItalic.ttf</string>
+		<string>Nunito-ExtraLight.ttf</string>
+		<string>Nunito-ExtraLightItalic.ttf</string>
+		<string>Nunito-Italic.ttf</string>
+		<string>Nunito-Light.ttf</string>
+		<string>Nunito-LightItalic.ttf</string>
+		<string>Nunito-Regular.ttf</string>
+		<string>Nunito-SemiBold.ttf</string>
+		<string>Nunito-SemiBoldItalic.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Auth</string>

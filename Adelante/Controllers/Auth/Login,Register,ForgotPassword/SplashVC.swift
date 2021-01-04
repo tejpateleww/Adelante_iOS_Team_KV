@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class SplashVC: UIViewController {
 
@@ -39,4 +40,39 @@ class SplashVC: UIViewController {
     //MARK:- IBActions
     
     // MARK: - Api Calls
+}
+extension SplashVC{
+    func webservice_Init(){
+        let strURL = APIEnvironment.baseURL + ApiKey.Init.rawValue + "/" + kAPPVesion + "/" + "ios_customer"
+        WebServiceSubClass.initApi(strURL: strURL) { (response, status, error) in
+            
+            let initData = InitObject.init(fromJson: response)
+//            self.showAlertWithTwoButtonCompletion(title: AppName, Message: initData.message, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
+//                if index == 0{
+                    
+//                }
+            }
+        }
+    }
+//}
+struct InitObject {
+    
+    var serviceCharge : Double!
+    var message : String!
+    var status : Bool!
+    var support : String!
+    var update: String!
+    var isMaintenance : String!
+   
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
+            return
+        }
+        serviceCharge = json["service_charge"].doubleValue
+        message = json["message"].stringValue
+        status = json["status"].boolValue
+        support = json["support"].stringValue
+        update = json["update"].stringValue
+        isMaintenance = json["maintenance"].stringValue
+    }
 }

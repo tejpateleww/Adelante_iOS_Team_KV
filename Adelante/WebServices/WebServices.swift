@@ -92,6 +92,44 @@ class WebService{
                 }
         }
     }
+    func getMethod(url: URL, httpMethod:Method, completion: @escaping CompletionResponse)
+    {
+        AF.request(url, method: .get, parameters: nil, encoding: URLEncoding.httpBody, headers: APIEnvironment.headers)
+            .validate()
+            .responseJSON { (response) in
+                // LoaderClass.hideActivityIndicator()
+
+                print("The webservice call is for \(url)")
+
+                if let json = response.value{
+                    let resJson = JSON(json)
+                    print("the response is \(resJson)")
+
+                    if "\(url)".contains("geocode/json?latlng=") {
+                        let status = resJson["status"].stringValue.lowercased() == "ok"
+                        completion(resJson, status, json)
+                    }
+                    else {
+                        let status = resJson["status"].boolValue
+                        completion(resJson, status,json)
+                    }
+                }
+                else {
+                    //  LoaderClass.hideActivityIndicator()
+                    if let error = response.error {
+                        print("Error = \(error.localizedDescription)")
+                        if error.localizedDescription == "Response status code was unacceptable: 403."{
+                           //  appDel.SetLogout()
+                        }
+                        else{
+//                            utility.ShowAlert(OfMessage: error.localizedDescription)
+                        }
+                        completion(JSON(), false,error.localizedDescription)
+
+                    }
+                }
+        }
+    }
     func getMethod(api: ApiKey,parameterString:String, httpMethod:Method,showHud : Bool = false, completion: @escaping CompletionResponse)
     {
         guard isConnected else { completion(JSON(), false, ""); return }

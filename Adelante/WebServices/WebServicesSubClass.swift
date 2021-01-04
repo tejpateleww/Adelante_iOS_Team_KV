@@ -11,25 +11,19 @@ import UIKit
 class WebServiceSubClass
 {
     
-      class func initApi( strParams : String ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
-          WebService.shared.getMethod(api: .Init, parameterString: strParams, httpMethod: .get,showHud: showHud, completion: completion)
-      }
+    class func initApi( strURL : String  ,completion: @escaping CompletionResponse ) {
+        WebService.shared.getMethod(url: URL.init(string: strURL)!, httpMethod: .get, completion: completion)
+    }
       
       class func register( registerModel : RegisterReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
-          do {
-              let requestBody = try registerModel.asDictionary()
-              WebService.shared.requestMethod(api: .register, httpMethod: .post,showHud: showHud, parameters: requestBody, completion: completion)
-          } catch let error {
-              debugPrint(error.localizedDescription)
-          }
+        let  params : [String:String] = registerModel.generatPostParams() as! [String : String]
+              WebService.shared.requestMethod(api: .Register, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+         
       }
       class func login( loginModel : LoginReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
-          do {
-              let requestBody = try loginModel.asDictionary()
-              WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: requestBody, completion: completion)
-          } catch let error {
-              debugPrint(error.localizedDescription)
-          }
+        let  params : [String:String] = loginModel.generatPostParams() as! [String : String]
+          
+              WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
       }
       class func ChangePassword( changepassModel : ChangePasswordReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
           let  params : [String:String] = changepassModel.generatPostParams() as! [String : String]

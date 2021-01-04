@@ -16,7 +16,8 @@ let appDel = UIApplication.shared.delegate as! AppDelegate
 let kAPPVesion = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 let AppName = AppInfo.appName
 let AppURL = "itms-apps://itunes.apple.com/app/id1488928328"
-
+let ReqDeviceType = "ios"
+let Headerkey = "adelante123*#*"
 
 let NotificationBadges = NSNotification.Name(rawValue:"NotificationBadges")
 
