@@ -38,8 +38,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnlogin(_ sender: Any) {
-        webserviceForlogin()
-        
+       webserviceForlogin()
+//        UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+//        appDel.navigateToHome()
        }
     //MARK:- Other Method
     func setUpLocalizedStrings() {
@@ -67,11 +68,12 @@ class LoginViewController: UIViewController {
             if(status)
             {
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-                let loginModelDetails = Profile.init(fromJson: json)
-                UserDefaults.standard.set(loginModelDetails.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
+                let loginModel = Userinfo.init(fromJson: json)
+                let loginModelDetails = loginModel.profile
+                UserDefaults.standard.set(loginModelDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 
-                SingletonClass.sharedInstance.UserId = loginModelDetails.id
-                SingletonClass.sharedInstance.Api_Key = loginModelDetails.apiKey
+                SingletonClass.sharedInstance.UserId = loginModelDetails?.id ?? ""
+                SingletonClass.sharedInstance.Api_Key = loginModelDetails?.apiKey ?? ""
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: loginModelDetails)
                 userDefault.set(encodedData, forKey:  UserDefaultsKey.userProfile.rawValue)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = loginModelDetails
@@ -84,31 +86,39 @@ class LoginViewController: UIViewController {
             }
         })
     }
-    
-    func webserviceForForgotPassword(strEmail : String)
-    {
+    func webserviceForForgotPassword(){
+        let forgot = ForgotPasswordReqModel()
+       //forgot.user_name = txtEmailOrPhone.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: false, completion: { (response, status, error) in
+            if (status){
+                self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
+                    if index == 0{
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
         
-        WebServiceSubClass.ForgotPassword(email: strEmail, showHud: true) { (json, status, response) in
-            if(status)
-            {
-                let msg = json["message"].stringValue
-                // create the alert
-                let alert = UIAlertController(title: AppInfo.appName, message: msg, preferredStyle: UIAlertController.Style.alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (Action) in
-                    self.dismiss(animated: true, completion: nil)
-                }))
-                
-                // show the alert
-                self.present(alert, animated: true, completion: nil)
-            }
-            else
-            {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
-            }
-        }
     }
-    
+    func showAlertWithTwoButtonCompletion(title:String, Message:String, defaultButtonTitle:String, cancelButtonTitle:String ,  Completion:@escaping ((Int) -> ())) {
+        
+        let alertController = UIAlertController(title: title , message:Message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: defaultButtonTitle, style: .default) { (UIAlertAction) in
+            Completion(0)
+        }
+        if cancelButtonTitle != ""{
+            let CancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel) { (UIAlertAction) in
+                Completion(1)
+            }
+            alertController.addAction(OKAction)
+            alertController.addAction(CancelAction)
+        }else{
+            alertController.addAction(OKAction)
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
     //MARK:- Validation
     func validation() -> Bool
     {

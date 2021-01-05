@@ -66,9 +66,9 @@ enum ApiKey: String {
     case Init = "init"
     case Register = "register"
     case login = "login"
-    case changePassword = "changePassword"
-    case ForgotPassword = "ForgotPassword"
-    case UpdateProfile = "UpdateProfile"
-    case Logout = "Logout"
+    case ForgotPassword = "forgot_password"
+    case changePassword = "changePassword"    
+    case EditProfile = "profile_edit"
+    case Logout = "logout"
 }
 

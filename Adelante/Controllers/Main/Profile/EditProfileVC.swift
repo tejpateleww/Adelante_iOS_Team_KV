@@ -9,13 +9,12 @@
 import UIKit
 import SDWebImage
 
-class EditProfileVC: BaseViewController{
+class EditProfileVC: BaseViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     
     // MARK: - Properties
-    private var imagePicker: ImagePicker!
     var selectedImage : UIImage?
     var customTabBarController: CustomTabBarVC?
-    
+    var imageupload = UIImagePickerController()
     // MARK: - IBOutlets
     @IBOutlet weak var btnUpdatePicture: UIButton!
     @IBOutlet weak var imgProfile: UIImageView!{ didSet{ imgProfile.layer.cornerRadius = imgProfile.frame.size.height / 2}}
@@ -30,6 +29,10 @@ class EditProfileVC: BaseViewController{
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+//        imgProfile.layer.cornerRadius = imgProfile.layer.bounds.height / 2
+        imageupload.delegate = self
+        imageupload.sourceType = .photoLibrary
+        imageupload.allowsEditing = false
         setUpLocalizedStrings()
         setUp()
     }
@@ -39,7 +42,7 @@ class EditProfileVC: BaseViewController{
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing : false)
+      
     }
     override func viewWillAppear(_ animated: Bool) {
            self.customTabBarController?.hideTabBar()
@@ -47,11 +50,12 @@ class EditProfileVC: BaseViewController{
     // MARK: - IBActions
     @IBAction func btnProfilePicTap(_ sender: UIButton)
     {
-        self.imagePicker.present(from: self.imgProfile, viewPresented: self.view)
+        AlertSheet1()
     }
     
     @IBAction func Btnsave(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        webserviceForEditprofile()
+//        self.navigationController?.popViewController(animated: true)
     }
     func setUpLocalizedStrings() {
         txtFirstName.placeholder = "EditProfileVC_txtFirstName".Localized()
@@ -64,6 +68,129 @@ class EditProfileVC: BaseViewController{
     }
     
     // MARK: - Api Calls
+    func webserviceForEditprofile()
+    {
+        let EditProfile = EditProfileReqModel()
+        //EditProfile.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        EditProfile.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        EditProfile.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        //EditProfile.phone = txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        EditProfile.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: EditProfile, img: selectedImage ?? UIImage(), showHud: false, completion: { (response, status, error) in
+            if status{
+                let updatedData = Profile.init(fromJson: response)
+                SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData
+               // userDefault.setUserData()
+                Utilities.ShowAlert(OfMessage: response["message"].stringValue)
+                self.setUpdate(to: false)
+                self.btnUpdatePicture.setImage(#imageLiteral(resourceName: "EditProfilePhoto"), for: .normal)
+                self.showUserData()
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
+    func setUpdate(to enable : Bool ){
+        txtFirstName.isEnabled = enable
+        txtLastName.isEnabled = enable
+        txtPhoneNumber.isEnabled = enable
+        btnUpdatePicture.isEnabled = enable
+    }
+    func showUserData(){
+        if let userdata = SingletonClass.sharedInstance.LoginRegisterUpdateData{
+            txtFirstName.text = userdata.firstName ?? ""
+            txtLastName.text = userdata.lastName ?? ""
+            txtEmail.text = userdata.email ?? ""
+            txtPhoneNumber.text = userdata.phone
+        
+            if let imageURL = userdata.profilePicture{
+                imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                imgProfile.sd_setImage(with: URL(string: imageURL),  placeholderImage: UIImage(named: "default_user"))
+            }
+        }
+    }
+    func AlertSheet1(){
+        let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let firstAction: UIAlertAction = UIAlertAction(title: "Take Photo", style: .default) { [self] action -> Void in
+            self.camera()
+            print("First Action pressed")
+        }
+        
+        let secondAction: UIAlertAction = UIAlertAction(title: "Choose From Gallery", style: .default) { action -> Void in
+            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+                print("Button capture")
+                
+                //imagePicker.delegate = self
+                
+                
+                self.present(self.imageupload, animated: true, completion: nil)
+            }
+            print("Second Action pressed")
+        }
+        let thirdAction: UIAlertAction = UIAlertAction(title: "Remove Profile", style: .destructive) { [self] action -> Void in
+            self.imgProfile.image = #imageLiteral(resourceName: "user.png")
+            print("Second Action pressed")
+        }
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .destructive) { action -> Void in }
+        
+        // add actions
+        actionSheetController.addAction(firstAction)
+        actionSheetController.addAction(secondAction)
+        if imgProfile.image != #imageLiteral(resourceName: "dummyUser") {
+            actionSheetController.addAction(thirdAction)
+        }
+        actionSheetController.addAction(cancelAction)
+        present(actionSheetController, animated: true) {
+            print("option menu presented")
+        }
+    }
+    func camera()
+    {
+        let myPickerController = UIImagePickerController()
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerController.SourceType.camera
+        
+        self.present(myPickerController, animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imgProfile.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion:nil)
+    }
+    
+    open class CircularView: UIView {
+        @IBInspectable open var hasSquareCornerRadius: Bool = false {
+            didSet {
+                update()
+            }
+        }
+        
+        @IBInspectable open override var cornerRadius: CGFloat {
+            didSet {
+                update()
+            }
+        }
+        
+        public var normalizedCornerRadius: CGFloat {
+            return hasSquareCornerRadius ? bounds.height / 2 : cornerRadius
+        }
+        
+        fileprivate func update() {
+            
+            layer.cornerRadius = bounds.height / 2
+            layer.masksToBounds = true
+        }
+        override open func layoutSubviews() {
+            super.layoutSubviews()
+            update()
+        }
+    }
 }
 
 // MARK: - ImagePickerDelegate

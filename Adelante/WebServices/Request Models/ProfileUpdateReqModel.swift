@@ -7,20 +7,11 @@
 //
 
 import Foundation
-import UIKit
-
-struct ProfileUpdateReqModel : Encodable {
-    
-    let id,firstName,lastName : String
-    let image = UIImage()
-    enum CodingKeys: String, CodingKey {
-        case id = "user_id"
-        case firstName = "first_name"
-        case lastName = "last_name"
-        
-    }
-    
-    ///Optional
-    // var profile_picture : UIImage = UIImage()
-  //  var remove_image : String = "0"
+class EditProfileReqModel : RequestModel{
+    var phone : String = ""
+    var first_name : String = ""
+    var last_name : String = ""
+    var email : String = ""
+    var user_id : String = ""
+    //var profile_picture : String = ""
 }

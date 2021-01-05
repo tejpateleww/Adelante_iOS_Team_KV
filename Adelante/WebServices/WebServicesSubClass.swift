@@ -10,42 +10,40 @@ import Foundation
 import UIKit
 class WebServiceSubClass
 {
-    
+    //init Api
     class func initApi( strURL : String  ,completion: @escaping CompletionResponse ) {
         WebService.shared.getMethod(url: URL.init(string: strURL)!, httpMethod: .get, completion: completion)
     }
-      
-      class func register( registerModel : RegisterReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
+    //Register Api
+    class func register( registerModel : RegisterReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = registerModel.generatPostParams() as! [String : String]
-              WebService.shared.requestMethod(api: .Register, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
-         
-      }
-      class func login( loginModel : LoginReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
+        WebService.shared.requestMethod(api: .Register, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    //Login Api
+    class func login( loginModel : LoginReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = loginModel.generatPostParams() as! [String : String]
-          
-              WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
-      }
-      class func ChangePassword( changepassModel : ChangePasswordReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
-          let  params : [String:String] = changepassModel.generatPostParams() as! [String : String]
-          WebService.shared.requestMethod(api: .changePassword, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
-      }
-      class func ForgotPassword( email : String ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
-          let  params : [String:String] =  ["email" : email]
-          WebService.shared.requestMethod(api: .ForgotPassword, httpMethod: .post, showHud: showHud,parameters: params, completion: completion)
-      }
-      
-      class func UpdateProfileInfo( UpdateProfileReq : ProfileUpdateReqModel  ,img : UIImage ,showHud : Bool = false , completion: @escaping CompletionResponse ) {
-          do {
-              let requestBody = try UpdateProfileReq.asDictionary()
-              WebService.shared.postDataWithImage(api: .UpdateProfile, showHud: showHud, parameter: requestBody, image: img, imageParamName: "image", completion: completion)
-          } catch let error {
-              debugPrint(error.localizedDescription)
-          }
-      }
-      class func Logout( strParams : String ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
-          WebService.shared.getMethod(api: .Logout, parameterString: strParams, httpMethod: .get,showHud: showHud, completion: completion)
-      }
-      
+        
+        WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    class func ChangePassword( changepassModel : ChangePasswordReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = changepassModel.generatPostParams() as! [String : String]
+        WebService.shared.requestMethod(api: .changePassword, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    //Forgot Password Api
+    class func ForgotPassword( forgotPassword : ForgotPasswordReqModel  , showHud : Bool = false,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] =  forgotPassword.generatPostParams() as! [String : String]
+        WebService.shared.requestMethod(api: .ForgotPassword, httpMethod: .post, parameters: params, completion: completion)
+    }
+    
+    class func UpdateProfileInfo( editProfileModel : EditProfileReqModel  ,img : UIImage ,showHud : Bool = false , completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = editProfileModel.generatPostParams() as! [String : String]
+        WebService.shared.postDataWithImage(api: .EditProfile, showHud: false, parameter: params, image: img, imageParamName: "profile_picture", completion: completion)
+    }
+    class func Logout( logoutModel : LogoutReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = logoutModel.generatPostParams() as! [String : String]
+        WebService.shared.requestMethod(api: .Logout, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    
 }
 
 

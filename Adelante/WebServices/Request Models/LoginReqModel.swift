@@ -17,7 +17,10 @@ class LoginReqModel : RequestModel {
     var lat : String = ""
     var lng : String = ""
 }
-
+class ForgotPasswordReqModel : RequestModel
+{
+    var email : String = ""
+}
 struct UserRegistrationRequest : Encodable
 {
     let FirstName, LastName, Email, Password : String
@@ -28,18 +31,11 @@ struct UserRegistrationRequest : Encodable
         case Email, Password
     }
 }
-
-class ForgotPassword : Encodable
-{
-    var email : String = ""
-    enum CodingKeys: String, CodingKey {
-        case email
-    }
-}
-
 class ChangePasswordReqModel: RequestModel {
     var userId : String = ""
     var oldPassword : String = ""
     var newPassword : String = "abc123"
 }
-
+class LogoutReqModel: RequestModel{
+    var user_id : String = ""
+}

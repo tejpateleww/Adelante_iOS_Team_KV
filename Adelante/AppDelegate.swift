@@ -142,7 +142,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         }
         UIApplication.shared.registerForRemoteNotifications()
     }
-    
+    func performLogout(){
+        let logout = LogoutReqModel()
+        logout.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.Logout(logoutModel: logout, showHud: false, completion: { (response, status, error) in
+            //self.hideHUD()
+            if status{
+                userDefault.set(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                appDel.SetLogout()
+            }else{
+               
+            }
+        })
+    }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         print(#function, notification)
@@ -202,6 +214,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print(fcmToken)
     }
-    
+    func SetLogout() {
+        // Reset UserDefaults
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+        SingletonClass.sharedInstance.clearSingletonClass()
+    }
 }
 

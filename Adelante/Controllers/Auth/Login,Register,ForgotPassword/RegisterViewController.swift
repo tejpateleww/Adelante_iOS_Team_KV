@@ -65,10 +65,10 @@ class RegisterViewController: UIViewController {
     @IBAction func btnSignUp(sender:Any){
         //        if(validation())
         //        {
-//        webserviceForRegister()
+        webserviceForRegister()
         //     }
-        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-        appDel.navigateToHome()
+//        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+//        appDel.navigateToHome()
     }
     
     @IBAction func btnBackLogin(sender:UIButton){
@@ -125,12 +125,10 @@ class RegisterViewController: UIViewController {
     //MARK:- Webservice
     func webserviceForRegister()
     {
-        
-        
         let register = RegisterReqModel()
         register.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         register.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        register.user_name = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        register.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         register.phone = txtPhoneNumber.text ?? ""
         register.password = txtPassword.text ?? ""
         register.device_token = "123456"
@@ -141,10 +139,11 @@ class RegisterViewController: UIViewController {
             if(status)
             {
                 userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-                let registerRespoDetails = Profile(fromJson: json)
-                UserDefaults.standard.set(registerRespoDetails.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
-                SingletonClass.sharedInstance.UserId = registerRespoDetails.id
-                SingletonClass.sharedInstance.Api_Key = registerRespoDetails.apiKey
+                let loginModel = Userinfo.init(fromJson: json)
+                let registerRespoDetails = loginModel.profile
+                UserDefaults.standard.set(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
+                SingletonClass.sharedInstance.UserId = registerRespoDetails?.id ?? ""
+                SingletonClass.sharedInstance.Api_Key = registerRespoDetails?.apiKey ?? ""
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: registerRespoDetails)
                 userDefault.set(encodedData, forKey: UserDefaultsKey.userProfile.rawValue)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = registerRespoDetails

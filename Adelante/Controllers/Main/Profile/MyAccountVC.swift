@@ -59,23 +59,23 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     
     func showLogout() {
-            
-            let alertController = UIAlertController(title: AppName,
-                                                    message: GlobalStrings.Alert_logout.rawValue,
-                                                    preferredStyle: .alert)
+        
+        let alertController = UIAlertController(title: AppName,
+                                                message: GlobalStrings.Alert_logout.rawValue,
+                                                preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel))
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleLogout".Localized(), style: .default){ _ in
-//                appDel.performLogout()
-                userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
-                appDel.navigateToLogin()
-            })
-            
-            DispatchQueue.main.async {
-                self.present(alertController, animated: true)
-            }
-            
-            
-    
+            appDel.performLogout()
+            userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+            appDel.navigateToLogin()
+        })
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+        
+        
+        
     }
     @objc  func btnExpand(_ sender : UIButton) {
            switch sender.tag {

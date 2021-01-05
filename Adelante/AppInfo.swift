@@ -27,7 +27,7 @@ struct AppInfo {
     }
     
     static var appDynamicHeaderKey:String{
-        return "x-api-key"
+        return "apiKey"
     }
     
     

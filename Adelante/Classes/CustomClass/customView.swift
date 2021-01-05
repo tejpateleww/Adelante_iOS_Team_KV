@@ -19,19 +19,19 @@ class viewWithClearBG : UIView {
 
 
 class myAccountView : UIView {
-     @IBInspectable var isProfile : Bool = false
+    @IBInspectable var isProfile : Bool = false
     override func awakeFromNib() {
         if isProfile {
             self.clipsToBounds = true
-                   self.layer.cornerRadius = self.frame.height / 2
+            self.layer.cornerRadius = self.layer.bounds.height / 2
         }
-       
-       // self.layer.borderWidth = 2
+        
+        // self.layer.borderWidth = 2
         //self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.6).cgColor
     }
 }
 class checkoutView : UIView {
-     @IBInspectable var isMapView : Bool = false
+    @IBInspectable var isMapView : Bool = false
     override func awakeFromNib() {
         self.layer.cornerRadius = 14
         self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
@@ -46,7 +46,7 @@ class checkoutView : UIView {
 class PaymentView : UIView {
     override func awakeFromNib() {
         self.layer.cornerRadius = 5
-         self.clipsToBounds = true
+        self.clipsToBounds = true
         
         self.layer.masksToBounds = false
         
@@ -61,37 +61,37 @@ class addCardDetailsView : UIView {
         self.layer.cornerRadius = 7
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
-       
+        
     }
 }
 class bffComboView : UIView {
     override func awakeFromNib() {
         self.backgroundColor = colors.appGreenColor.value
-       
-       
+        
+        
     }
 }
 class homeBlockView : UIView {
-       
-       @IBInspectable var isPopUpBlock: Bool = false
-           
-           override func awakeFromNib() {
-               super.awakeFromNib()
-               self.layer.cornerRadius = 5
-               self.clipsToBounds = true
-
-               self.layer.masksToBounds = false
-            self.layer.shadowColor = UIColor(hexString: "#004080").cgColor
-               self.layer.shadowOffset = CGSize(width: -1, height: 4.0)
-               self.layer.shadowOpacity = 0.16
-               self.layer.shadowRadius = 5.0
-
-               if isPopUpBlock {
-                self.layer.borderColor = colors.black.value.withAlphaComponent(0.06).cgColor
-                   self.layer.borderWidth = 3
-               }
-           }
-   }
+    
+    @IBInspectable var isPopUpBlock: Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
+        
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor(hexString: "#004080").cgColor
+        self.layer.shadowOffset = CGSize(width: -1, height: 4.0)
+        self.layer.shadowOpacity = 0.16
+        self.layer.shadowRadius = 5.0
+        
+        if isPopUpBlock {
+            self.layer.borderColor = colors.black.value.withAlphaComponent(0.06).cgColor
+            self.layer.borderWidth = 3
+        }
+    }
+}
 
 
 class customImageView: UIImageView {
@@ -122,6 +122,7 @@ class customImageView: UIImageView {
 class customImagewithShadow: UIImageView {
     @IBInspectable var isViewRadius : Bool = false
     @IBInspectable var isShadow : Bool = false
+    @IBInspectable var isLeftBottomShadow : Bool = false
     override func awakeFromNib() {
         if isViewRadius{
             self.layer.cornerRadius = 8
@@ -132,7 +133,7 @@ class customImagewithShadow: UIImageView {
             self.backgroundColor = UIColor.clear
             self.layer.shadowColor = colors.submitButtonShadow.value.cgColor
             self.layer.shadowOpacity = 0.50
-            self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+            self.layer.shadowOffset = CGSize(width: -4.0, height: 4.0)
             self.layer.shadowRadius = 4.0
             self.layer.masksToBounds = false
         }
@@ -160,20 +161,20 @@ class CustomviewRadius:UIView{
 }
 @IBDesignable
 class CustomView: UIView{
-
-@IBInspectable var borderWidth: CGFloat = 0.0{
-    didSet{
-        self.layer.borderWidth = borderWidth
+    
+    @IBInspectable var borderWidth: CGFloat = 0.0{
+        didSet{
+            self.layer.borderWidth = borderWidth
+        }
     }
-}
-@IBInspectable var borderColor: UIColor = UIColor.clear {
-    didSet {
-        self.layer.borderColor = borderColor.cgColor
+    @IBInspectable var borderColor: UIColor = UIColor.clear {
+        didSet {
+            self.layer.borderColor = borderColor.cgColor
+        }
     }
-}
-override func prepareForInterfaceBuilder() {
-    super.prepareForInterfaceBuilder()
-}
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+    }
 }
 
 class myOrdersSegmentControl: BetterSegmentedControl {
@@ -205,22 +206,3 @@ class viewRestorentRatingView : UIView
         self.layer.cornerRadius = self.frame.size.height / 2
     }
 }
-//class GradientView: UIView {
-//
-//
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        if isVertical {
-//            let gradient = CAGradientLayer()
-//            gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
-//            gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
-//            let whiteColor = UIColor.white
-//            gradient.colors = [whiteColor.withAlphaComponent(0.2).cgColor, whiteColor.withAlphaComponent(0.5).cgColor, whiteColor.withAlphaComponent(0.2).cgColor, whiteColor.withAlphaComponent(0.9).cgColor]
-//            gradient.locations = [NSNumber(value: 0.0),NSNumber(value: 0.1),NSNumber(value: 0.75), NSNumber(value: 0.9)]
-//            gradient.frame = self.frame
-//            self.layer.mask = gradient
-//        } else {
-//            self.backgroundColor = .clear
-//        }
-//    }
-//}
