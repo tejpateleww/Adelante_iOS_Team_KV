@@ -21,9 +21,10 @@ enum UserDefaultsKey : String {
 }
 enum APIEnvironment : String{
     
-    case bu = "http://adelante.excellentwebworld.in/api/User/"
-  
-    
+//    case bu = "http://adelante.excellentwebworld.in/api/User/"
+//    case profileBu = "http://adelante.excellentwebworld.in/"
+    case bu = "http://18.208.18.170/api/User/"
+    case profileBu = "http://18.208.18.170/"
     static var baseURL: String{
         return APIEnvironment.environment.rawValue
     }
@@ -67,8 +68,11 @@ enum ApiKey: String {
     case Register = "register"
     case login = "login"
     case ForgotPassword = "forgot_password"
-    case changePassword = "changePassword"    
+    case changePassword = "change_password"    
     case EditProfile = "profile_edit"
     case Logout = "logout"
+    
+    case Dashboard = "dashboard"
+    case GetProfile = "profile"
 }
 

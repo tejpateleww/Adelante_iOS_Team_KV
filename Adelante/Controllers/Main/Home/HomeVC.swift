@@ -215,5 +215,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
    
     // MARK: - Api Calls
-    
+//    func webserviceGetDashboard(){
+//        WebServiceSubClass.deshboard(showHud: false, completion: <#T##CompletionResponse##CompletionResponse##(JSON, Bool, Any) -> ()#>)
+//    }
 }

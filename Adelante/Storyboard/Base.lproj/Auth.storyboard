@@ -80,7 +80,7 @@ Back</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="355-XU-s69"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BZ-t6-TJV" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -112,7 +112,7 @@ Back</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="gmm-cf-TDd"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9MG-18-zb5" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -488,7 +488,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="gkh-XS-t0G"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qc-xL-nKe" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -520,7 +520,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="HMo-6d-lnZ"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lah-bJ-5Il" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -552,7 +552,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="ppg-rl-ifi"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70e-EU-Drj" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -584,7 +584,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="Mwg-kC-KZW"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dz-Wr-P8S" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -616,7 +616,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="RHo-cn-rlu"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHu-Oz-d0w" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -648,7 +648,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="vNb-2e-qOw"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUe-zu-Eyu" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -846,6 +846,35 @@ Adelante</string>
             <point key="canvasLocation" x="-1426.0869565217392" y="-536.38392857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="6J4-UA-qRl">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="6tv-ps-pmp">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="B7K-d2-yLt">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="C8x-B2-NSw">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="Fzc-oY-XVq">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="dUz-LN-60d">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="qFI-49-A7Q">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="uln-Rl-AH4">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="zgZ-JQ-I7N">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+    </designables>
     <resources>
         <image name="adelanteLogo" width="127" height="125"/>
         <image name="adlanteLoginLogo" width="287" height="75"/>

@@ -12,7 +12,7 @@ class SingletonClass: NSObject
     static let sharedInstance = SingletonClass()
     
     
-    var UserId = String()
+    var UserId : String = ""
     var LoginRegisterUpdateData : Profile?
     var Api_Key = String()
     var DeviceToken : String = ""

@@ -149,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             //self.hideHUD()
             if status{
                 userDefault.set(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                userDefault.removeObject(forKey: UserDefaultsKey.userProfile.rawValue)
                 appDel.SetLogout()
             }else{
                

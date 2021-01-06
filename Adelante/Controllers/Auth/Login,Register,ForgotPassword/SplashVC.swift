@@ -30,6 +30,11 @@ class SplashVC: UIViewController {
     func setupNavigationToLogin() {
         Timer.scheduledTimer(withTimeInterval: 4.5, repeats: false) { (timer) in
             if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == true{
+            let dic = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? [String:Any]
+                let userData = Profile.init(fromDictionary: dic!)
+                SingletonClass.sharedInstance.UserId = userData.id
+                SingletonClass.sharedInstance.Api_Key = userData.apiKey
+            SingletonClass.sharedInstance.LoginRegisterUpdateData = userData
                 appDel.navigateToHome()
             } else {
                 appDel.navigateToMainLogin()

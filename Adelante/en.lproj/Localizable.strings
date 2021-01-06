@@ -45,7 +45,6 @@
 "MyOrderVC_MyOrdersCess_btnCancelOrder" = "Cancel Order";
 
 //MyProfileVC
-"MyProfileVC_lblName" = "John Smith";
 "MyProfileVC_btnEditAccount" = "EDIT ACCOUNT";
 "MyProfileVC_txtEmail" = "Email";
 "MyProfileVC_txtPhoneNumber" = "Phone Number";
@@ -82,8 +81,6 @@
 
 //RestaurantReviewVC
 "RestaurantReviewVC_lblAreaName" = "Kangkung siram sambel";
-//"RestaurantReviewVC_lblAddress" = "43369 Ellsworth St, remont,CA";
-//"RestaurantReviewVC_lblRating" = "4.2";
 "RestaurantReviewVC_lblReviews" = "%@ Reviews";
 
 //RateReviewVC
@@ -96,16 +93,11 @@
 "MyOrderDetailsVC_lblNoOfItems" = "%@ Items";
 "MyOrderDetailsVC_lblRestName" = "El Meson";
 "MyOrderDetailsVC_lblLocation" = "Santa Rosa";
-//"MyOrderDetailsVC_lblAddress" = "43369 Ellsworth St, remont,CA";
 "MyOrderDetailsVC_lblYourOrder" = "Your Order";
 "MyOrderDetailsVC_lblSubTotalTitle" = "Subtotal";
-//"MyOrderDetailsVC_lblSubTotal" = "$30";
 "MyOrderDetailsVC_lblServiceFeeTitle" = "Service Fee";
-//"MyOrderDetailsVC_lblServiceFee" = "$2";
 "MyOrderDetailsVC_lblTaxesTitle" = "Taxes";
-//"MyOrderDetailsVC_lblTaxes" = "$7";
 "MyOrderDetailsVC_lblTotalTitle" = "Total";
-//"MyOrderDetailsVC_lblTotal" = "$39";
 "MyOrderDetailsVC_btnCancel" = "Cancel";
 "MyOrderDetailsVC_btnRateOrder" = "Rate Order";
 "MyOrderDetailsVC_btnShareOrder" = "Share Order";
@@ -151,7 +143,6 @@
 "sortPopupVC_lblSort" = "Sort";
 
 //"MyAccountVC
-"MyAccountVC_lblName" = "John Smith";
 "MyAccountVC_title1" = "Payment";
 "MyAccountVC_title2" = "My Foodlist";
 "MyAccountVC_title3" = "About Us";
@@ -166,12 +157,10 @@
 
 //"RestaurantDetailsVC
 "RestaurantDetailsVC_lblRestaurantName" = "Kangkung siram sambel ";
-//"RestaurantDetailsVC_lblRating" = "4.2";
 "RestaurantDetailsVC_lblReviews" = "%@ Reviews";
 "RestaurantDetailsVC_lblCode" = "SU652";
 "RestaurantDetailsVC_lblPromoCode" = "Promo Code :";
 "RestaurantDetailsVC_lblDistance" = "1.7 Miles";
-//"RestaurantDetailsVC_lblAddress" = "43369 Ellsworth St, remont,CA";
 "RestaurantDetailsVC_lblOpenTime" = "Operating Hours";
 "RestaurantDetailsVC_lblTime" = "9 am To 9 pm";
 "RestaurantDetailsVC_lblTimeZone" = "Timezone";
@@ -181,7 +170,6 @@
 "RestaurantDetailsVC_RestaurantDetailsCell_btnCustomize" = "Customize";
 "RestaurantDetailsVC_lblNoOfItem" = "%@ Item ";
 "RestaurantDetailsVC_lblSign" = "|";
-//"RestaurantDetailsVC_lblPrice" = " $30";
 "RestaurantDetailsVC_lblViewCart" = "View Cart";
 "RestaurantDetailsVC_arrSection" = "Menu";
 "RestaurantDetailsVC_arrSection1" = "Sandwiches";
@@ -201,7 +189,6 @@
 
 //HomeVC
 "HomeVC_lblMylocation" = "My Location";
-//"HomeVC_lblAddress" = "30 Memorial Drive, Avon MA 2322";
 "HomeVC_RestaurantCell_lblMiles" = "%@ miles";
 "HomeVC_arrFilter_title1" = "Mobile Pickup";
 "HomeVC_arrFilter_title2" = "Recently Viewed";
@@ -209,14 +196,12 @@
 
 //checkOutVC
 "checkOutVC_lblItemName" = "Kangkung siram sambel";
-//"checkOutVC_lblAddress" = "43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA";
 "checkOutVC_btnChangeLocation" = "Change Location";
 "checkOutVC_btnChangeRestaurant" = "Change Restaurant";
 "checkOutVC_btnAppyPromoCode" = "Add promo code";
 "checkOutVC_lblYourOrder" = "Your Order";
 "checkOutVC_btnSeeMenu" = "See Menu";
 "checkOutVC_lblTotal" = "Total";
-//"checkOutVC_LblTotlaPrice" = "$39";
 "checkOutVC_lblCancellation" = "Review Your Order details to\navoid cancellations ";
 "checkOutVC_btnReadPOlicy" = "Read Policy";
 "checkOutVC_btnAddFoodlist" = "Add To Food List";

@@ -8,7 +8,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     //MARK: - Properties
@@ -16,6 +16,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var myACDetailsARray:[String] = ["","","","","","",""]
     var customTabBarController: CustomTabBarVC?
     var allDetails = [myAccountDetails]()
+    var loginModelDetails : Profile?
     var expendedCell = -1
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
@@ -24,9 +25,11 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpLocalizedStrings()
         //addNavBarImage(isLeft: true, isRight: true)
-        
+        lblName.text = SingletonClass.sharedInstance.LoginRegisterUpdateData?.fullName
+        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(loginModelDetails?.profilePicture ?? "")"
+            imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
         allDetails = [
 //            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
                       
@@ -197,10 +200,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         }
         
         return headerView
-    }
-   
-    func setUpLocalizedStrings(){
-        lblName.text = "MyAccountVC_lblName".Localized()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {

@@ -25,9 +25,9 @@ class WebServiceSubClass
         
         WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
     }
-    class func ChangePassword( changepassModel : ChangePasswordReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+    class func ChangePassword( changepassModel : ChangePasswordReqModel,showHud : Bool = false  ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = changepassModel.generatPostParams() as! [String : String]
-        WebService.shared.requestMethod(api: .changePassword, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .changePassword, httpMethod: .post, parameters: params, completion: completion)
     }
     //Forgot Password Api
     class func ForgotPassword( forgotPassword : ForgotPasswordReqModel  , showHud : Bool = false,completion: @escaping CompletionResponse ) {
@@ -43,7 +43,12 @@ class WebServiceSubClass
         let  params : [String:String] = logoutModel.generatPostParams() as! [String : String]
         WebService.shared.requestMethod(api: .Logout, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
     }
-    
+    class func deshboard(showHud : Bool = false, completion: @escaping CompletionResponse ) {
+        WebService.shared.getMethod(api: .Dashboard, parameterString: "", httpMethod: .get, showHud: false, completion: completion)
+    }
+    class func profile(strURL : String  ,showHud : Bool = false, completion: @escaping CompletionResponse ) {
+        WebService.shared.getMethod(url: URL.init(string: strURL)!, httpMethod: .get, completion: completion)
+    }
 }
 
 

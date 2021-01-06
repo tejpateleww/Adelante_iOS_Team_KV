@@ -453,7 +453,7 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="45c-lV-znp">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="254" height="77"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -462,7 +462,7 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="23.5" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -471,10 +471,10 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isLocation" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
+                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
                                                                                                                     <rect key="frame" x="0.0" y="47" width="254" height="30"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="3" width="254" height="27"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
@@ -854,10 +854,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnW-ib-XI8">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhz-Oz-zwe">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhz-Oz-zwe" customClass="myAccountView" customModule="Adelante" customModuleProvider="target">
                                                 <rect key="frame" x="149" y="27" width="116" height="116"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummyProfile" translatesAutoresizingMaskIntoConstraints="NO" id="GeI-Ci-Y6p">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GeI-Ci-Y6p">
                                                         <rect key="frame" x="0.0" y="0.0" width="116" height="116"/>
                                                     </imageView>
                                                 </subviews>
@@ -874,6 +874,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="58"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isProfile" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7F-SR-VkU" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
@@ -995,6 +996,7 @@
                     </view>
                     <connections>
                         <outlet property="btnEditAccount" destination="bXA-Ko-xkj" id="DrZ-ef-dSB"/>
+                        <outlet property="imgProfile" destination="GeI-Ci-Y6p" id="g8n-2b-SrU"/>
                         <outlet property="lblName" destination="D7F-SR-VkU" id="Shb-EI-NMs"/>
                         <outlet property="txtEmail" destination="QPd-3g-SxC" id="vfG-te-QPu"/>
                         <outlet property="txtPhoneNumber" destination="ypJ-aF-6Y5" id="y5F-dM-VGA"/>
@@ -1019,10 +1021,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LS-ub-T68">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="614"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfe-ck-WaO" customClass="myAccountView" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="18" y="27" width="130" height="130"/>
+                                                        <rect key="frame" x="18" y="27" width="116" height="116"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user (4)" translatesAutoresizingMaskIntoConstraints="NO" id="Z4K-2I-gVo">
                                                                 <rect key="frame" x="0.0" y="0.0" width="116" height="116"/>
@@ -1032,49 +1034,8 @@
                                                                     <constraint firstAttribute="height" constant="116" id="uNV-BL-EFz"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6Q-2r-l6G">
-                                                                <rect key="frame" x="86" y="86" width="24" height="24"/>
-                                                                <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-Il-TP5">
-                                                                        <rect key="frame" x="2" y="2" width="20" height="20"/>
-                                                                        <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EditProfilePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Dy5-0r-Lw5">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                                                            </imageView>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="Dy5-0r-Lw5" secondAttribute="trailing" id="V5C-Ch-VxV"/>
-                                                                            <constraint firstAttribute="width" secondItem="fQS-Il-TP5" secondAttribute="height" multiplier="1:1" id="ab2-y8-ZmP"/>
-                                                                            <constraint firstItem="Dy5-0r-Lw5" firstAttribute="leading" secondItem="fQS-Il-TP5" secondAttribute="leading" id="g2A-ZD-Q1X"/>
-                                                                            <constraint firstItem="Dy5-0r-Lw5" firstAttribute="top" secondItem="fQS-Il-TP5" secondAttribute="top" id="gfR-KW-AzQ"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="Dy5-0r-Lw5" secondAttribute="bottom" id="j7z-u4-VQf"/>
-                                                                        </constraints>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                <real key="value" value="10"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                    </view>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="fQS-Il-TP5" firstAttribute="top" secondItem="F6Q-2r-l6G" secondAttribute="top" constant="2" id="3Vg-jg-xdb"/>
-                                                                    <constraint firstAttribute="width" constant="24" id="6Rr-eT-AG5"/>
-                                                                    <constraint firstAttribute="width" secondItem="F6Q-2r-l6G" secondAttribute="height" multiplier="1:1" id="BIV-li-4B2"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="fQS-Il-TP5" secondAttribute="trailing" constant="2" id="I8m-ZV-K3m"/>
-                                                                    <constraint firstAttribute="height" constant="24" id="JZ2-Wn-dWc"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="fQS-Il-TP5" secondAttribute="bottom" constant="2" id="Orb-Gp-7l3"/>
-                                                                    <constraint firstItem="fQS-Il-TP5" firstAttribute="leading" secondItem="F6Q-2r-l6G" secondAttribute="leading" constant="2" id="qLF-6Y-n8d"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="12"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAg-mx-3VD">
-                                                                <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="116" height="116"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <connections>
                                                                     <action selector="btnProfilePicTap:" destination="M5q-4V-dmd" eventType="touchUpInside" id="6Xt-sS-VO7"/>
@@ -1084,24 +1045,60 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="TAg-mx-3VD" secondAttribute="bottom" id="0Dz-kl-6eI"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Z4K-2I-gVo" secondAttribute="trailing" constant="14" id="2FZ-H2-tg0"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Z4K-2I-gVo" secondAttribute="bottom" constant="14" id="63j-dl-64O"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Z4K-2I-gVo" secondAttribute="trailing" id="2FZ-H2-tg0"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Z4K-2I-gVo" secondAttribute="bottom" id="63j-dl-64O"/>
                                                             <constraint firstAttribute="trailing" secondItem="TAg-mx-3VD" secondAttribute="trailing" id="6Rz-Wm-LJm"/>
-                                                            <constraint firstAttribute="bottom" secondItem="F6Q-2r-l6G" secondAttribute="bottom" constant="20" id="7FH-7V-ue3"/>
-                                                            <constraint firstAttribute="width" constant="130" id="7JX-OD-Ku2"/>
                                                             <constraint firstItem="TAg-mx-3VD" firstAttribute="leading" secondItem="Lfe-ck-WaO" secondAttribute="leading" id="AcE-BL-0jH"/>
                                                             <constraint firstItem="Z4K-2I-gVo" firstAttribute="top" secondItem="Lfe-ck-WaO" secondAttribute="top" id="JTt-3D-nL6"/>
-                                                            <constraint firstAttribute="height" constant="130" id="T17-nB-VGU"/>
                                                             <constraint firstItem="Z4K-2I-gVo" firstAttribute="leading" secondItem="Lfe-ck-WaO" secondAttribute="leading" id="YlW-4h-gOz"/>
                                                             <constraint firstItem="TAg-mx-3VD" firstAttribute="top" secondItem="Lfe-ck-WaO" secondAttribute="top" id="eYJ-97-pqe"/>
-                                                            <constraint firstAttribute="trailing" secondItem="F6Q-2r-l6G" secondAttribute="trailing" constant="20" id="jcg-PW-27e"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isProfile" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6Q-2r-l6G">
+                                                        <rect key="frame" x="104" y="113" width="24" height="24"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-Il-TP5">
+                                                                <rect key="frame" x="2" y="2" width="20" height="20"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EditProfilePhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Dy5-0r-Lw5">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                    </imageView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="Dy5-0r-Lw5" secondAttribute="trailing" id="V5C-Ch-VxV"/>
+                                                                    <constraint firstAttribute="width" secondItem="fQS-Il-TP5" secondAttribute="height" multiplier="1:1" id="ab2-y8-ZmP"/>
+                                                                    <constraint firstItem="Dy5-0r-Lw5" firstAttribute="leading" secondItem="fQS-Il-TP5" secondAttribute="leading" id="g2A-ZD-Q1X"/>
+                                                                    <constraint firstItem="Dy5-0r-Lw5" firstAttribute="top" secondItem="fQS-Il-TP5" secondAttribute="top" id="gfR-KW-AzQ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Dy5-0r-Lw5" secondAttribute="bottom" id="j7z-u4-VQf"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="fQS-Il-TP5" firstAttribute="top" secondItem="F6Q-2r-l6G" secondAttribute="top" constant="2" id="3Vg-jg-xdb"/>
+                                                            <constraint firstAttribute="width" constant="24" id="6Rr-eT-AG5"/>
+                                                            <constraint firstAttribute="width" secondItem="F6Q-2r-l6G" secondAttribute="height" multiplier="1:1" id="BIV-li-4B2"/>
+                                                            <constraint firstAttribute="bottom" secondItem="fQS-Il-TP5" secondAttribute="bottom" constant="2" id="Orb-Gp-7l3"/>
+                                                            <constraint firstAttribute="trailing" secondItem="fQS-Il-TP5" secondAttribute="trailing" constant="2" id="lzd-YW-eyn"/>
+                                                            <constraint firstItem="fQS-Il-TP5" firstAttribute="leading" secondItem="F6Q-2r-l6G" secondAttribute="leading" constant="2" id="mhC-9p-5IH"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MWD-rc-OeO">
-                                                        <rect key="frame" x="18" y="186" width="378" height="312"/>
+                                                        <rect key="frame" x="18" y="172" width="378" height="312"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ho2-Ag-MoL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1275,7 +1272,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ9-fw-5lB" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="18" y="547" width="378" height="47"/>
+                                                        <rect key="frame" x="18" y="533" width="378" height="47"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="OA1-mm-DHg"/>
                                                         </constraints>
@@ -1293,6 +1290,7 @@
                                                 <constraints>
                                                     <constraint firstItem="Lfe-ck-WaO" firstAttribute="leading" secondItem="5LS-ub-T68" secondAttribute="leading" constant="18" id="5Wb-vJ-HR7"/>
                                                     <constraint firstAttribute="trailing" secondItem="MWD-rc-OeO" secondAttribute="trailing" constant="18" id="HCj-rS-zCp"/>
+                                                    <constraint firstItem="F6Q-2r-l6G" firstAttribute="bottom" secondItem="Lfe-ck-WaO" secondAttribute="bottom" constant="-6" id="Jqq-v3-Fnm"/>
                                                     <constraint firstAttribute="trailing" secondItem="FQ9-fw-5lB" secondAttribute="trailing" constant="18" id="NYv-zs-DUL"/>
                                                     <constraint firstItem="Lfe-ck-WaO" firstAttribute="top" secondItem="5LS-ub-T68" secondAttribute="top" constant="27" id="Tqb-V4-Pev"/>
                                                     <constraint firstItem="FQ9-fw-5lB" firstAttribute="top" secondItem="MWD-rc-OeO" secondAttribute="bottom" constant="48.899999999999999" id="e91-k9-7jI"/>
@@ -1300,6 +1298,7 @@
                                                     <constraint firstItem="MWD-rc-OeO" firstAttribute="top" secondItem="Lfe-ck-WaO" secondAttribute="bottom" constant="29.100000000000001" id="hUX-EP-rEN"/>
                                                     <constraint firstItem="FQ9-fw-5lB" firstAttribute="leading" secondItem="5LS-ub-T68" secondAttribute="leading" constant="18" id="jKI-B7-uBG"/>
                                                     <constraint firstAttribute="bottom" secondItem="FQ9-fw-5lB" secondAttribute="bottom" constant="20" id="yFW-hN-lnF"/>
+                                                    <constraint firstItem="F6Q-2r-l6G" firstAttribute="trailing" secondItem="Lfe-ck-WaO" secondAttribute="trailing" constant="-6" id="zXF-mj-1sw"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -1364,7 +1363,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
+                                                        <rect key="frame" x="18" y="55" width="378" height="215"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1395,7 +1394,7 @@
                                                                             <constraint firstAttribute="height" constant="47" id="dmV-uU-gd4"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
                                                                         </userDefinedRuntimeAttributes>
@@ -1410,10 +1409,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="49"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="33"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="79" id="GZk-3S-lMA"/>
@@ -1429,7 +1428,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="48" width="378" height="1"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -1565,7 +1564,7 @@
                                                                                     <constraint firstAttribute="height" constant="47" id="qXG-gt-WCj"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2c-bx-Xry" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -1597,7 +1596,7 @@
                                                                                     <constraint firstAttribute="height" constant="47" id="VQA-7Y-app"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6G3-56-Auf" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -1629,7 +1628,7 @@
                                                                                     <constraint firstAttribute="height" constant="47" id="nVR-JB-ZtS"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ww5-ew-YP9" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -1662,6 +1661,9 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAppOrangeBg" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isBold" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnSaveTap:" destination="iWG-61-PJp" eventType="touchUpInside" id="e88-xM-hIV"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1776,7 +1778,7 @@
                                                                     <constraint firstAttribute="height" constant="47" id="i07-2O-CQF"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oJ-8c-3kC" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -2102,7 +2104,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D6H-kd-b9H">
                                                             <rect key="frame" x="86" y="9.5" width="288" height="69.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LK-zl-hyG" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LK-zl-hyG" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -2111,7 +2113,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isNotificatioTitle" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Your Order #1234 has been Successfully completed " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-Ej-Hq6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Order #1234 has been Successfully completed " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io0-Ej-Hq6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="28.5" width="288" height="41"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -5582,7 +5584,7 @@
                                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="**** - **** -  **** - **85" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWw-Xa-v9T" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="16" y="0.0" width="350" height="48"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -7221,9 +7223,6 @@ avoid cancellations </string>
         <designable name="4rN-z1-ohE">
             <size key="intrinsicContentSize" width="98" height="34"/>
         </designable>
-        <designable name="G78-jH-dfh">
-            <size key="intrinsicContentSize" width="195" height="32"/>
-        </designable>
         <designable name="IOt-oG-ldn">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
@@ -7232,6 +7231,9 @@ avoid cancellations </string>
         </designable>
         <designable name="QPd-3g-SxC">
             <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="Tme-wR-K6Z">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
         </designable>
         <designable name="cc0-dj-TGl">
             <size key="intrinsicContentSize" width="149" height="34"/>
@@ -7244,6 +7246,9 @@ avoid cancellations </string>
         </designable>
         <designable name="mJ2-zK-PS6">
             <size key="intrinsicContentSize" width="208.5" height="34"/>
+        </designable>
+        <designable name="oP7-OM-AFy">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
         </designable>
         <designable name="pGH-j9-vWm">
             <size key="intrinsicContentSize" width="32" height="34"/>

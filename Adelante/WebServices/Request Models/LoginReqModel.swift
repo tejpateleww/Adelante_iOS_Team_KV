@@ -32,9 +32,9 @@ struct UserRegistrationRequest : Encodable
     }
 }
 class ChangePasswordReqModel: RequestModel {
-    var userId : String = ""
-    var oldPassword : String = ""
-    var newPassword : String = "abc123"
+    var user_id : String = ""
+    var old_password : String = ""
+    var new_password : String = ""
 }
 class LogoutReqModel: RequestModel{
     var user_id : String = ""
