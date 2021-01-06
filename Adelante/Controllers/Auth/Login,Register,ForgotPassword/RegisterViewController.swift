@@ -11,7 +11,7 @@ import UIKit
 class RegisterViewController: UIViewController {
     
     //MARK:- Properties
-    
+    var isSocialLogin : Bool = false
     
     //MARK:- Outlet
     @IBOutlet weak var lblTitle: themeTitleLabel!
@@ -63,12 +63,12 @@ class RegisterViewController: UIViewController {
     }
     //MARK:- Button action
     @IBAction func btnSignUp(sender:Any){
-        //        if(validation())
-        //        {
-        webserviceForRegister()
-        //     }
-//        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-//        appDel.navigateToHome()
+        if(validation())
+        {
+            webserviceForRegister()
+        }
+        //        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+        //        appDel.navigateToHome()
     }
     
     @IBAction func btnBackLogin(sender:UIButton){
@@ -87,36 +87,35 @@ class RegisterViewController: UIViewController {
     }
     
     //MARK :- Validation
-    func validation() -> Bool
-    {
-        let firstName = txtFirstName.validatedText(validationType: .requiredField(field: txtFirstName.placeholder ?? ""))
-        let lastName = txtLastName.validatedText(validationType: .requiredField(field: txtLastName.placeholder ?? ""))
+    func validation()->Bool{
+        let firstName = txtFirstName.validatedText(validationType: ValidatorType.username(field: "first name"))
+        let lastname =  txtLastName.validatedText(validationType: ValidatorType.username(field: "last name"))
         let checkEmail = txtEmail.validatedText(validationType: ValidatorType.email)
         let checkPassword = txtPassword.validatedText(validationType: ValidatorType.password)
+        let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "contact number"))
         
-        if(!firstName.0)
-        {
-            Utilities.displayAlert(firstName.1)
+        if (!firstName.0){
+            Utilities.ShowAlert(OfMessage: firstName.1)
             return firstName.0
-        }
-        if(!lastName.0)
+        }else if (!lastname.0){
+            Utilities.ShowAlert(OfMessage: lastname.1)
+            return lastname.0
+        }else if(!checkEmail.0)
         {
-            Utilities.displayAlert(lastName.1)
-            return lastName.0
-        }
-        if(!checkEmail.0)
-        {
-            Utilities.displayAlert(checkEmail.1)
+            Utilities.ShowAlert(OfMessage: checkEmail.1)
             return checkEmail.0
         }
-        else  if(!checkPassword.0)
-        {
-            Utilities.displayAlert(checkPassword.1)
-            return checkPassword.0
+//        else if (!phone.0){
+//            Utilities.ShowAlert(OfMessage: phone.1)
+//            return phone.0
+//        }
+        else if (txtPhoneNumber.text?.count ?? 0) < 9 {
+            Utilities.ShowAlert(OfMessage: "Please enter valid contact number")
+            return false
         }
-        else if (txtPassword.text != txtConPassword.text)
+        else  if(!checkPassword.0) && !isSocialLogin
         {
-            Utilities.displayAlert("MessagePassword")
+            Utilities.ShowAlert(OfMessage: checkPassword.1)
             return checkPassword.0
         }
         return true
@@ -138,16 +137,14 @@ class RegisterViewController: UIViewController {
         WebServiceSubClass.register(registerModel: register, completion: { (json, status, response) in
             if(status)
             {
-                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 let loginModel = Userinfo.init(fromJson: json)
                 let registerRespoDetails = loginModel.profile
-                UserDefaults.standard.set(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 SingletonClass.sharedInstance.UserId = registerRespoDetails?.id ?? ""
                 SingletonClass.sharedInstance.Api_Key = registerRespoDetails?.apiKey ?? ""
-                let encodedData = NSKeyedArchiver.archivedData(withRootObject: registerRespoDetails)
-                userDefault.set(encodedData, forKey: UserDefaultsKey.userProfile.rawValue)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = registerRespoDetails
+                userDefault.setValue(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                userDefault.setUserData(objProfile: registerRespoDetails!)
                 appDel.navigateToHome()
             }
             else

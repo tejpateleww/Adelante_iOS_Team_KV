@@ -40,8 +40,17 @@ class ForgotPasswordVC: BaseViewController {
     }
     // MARK: - IBActions
     @IBAction func btnSend(_ sender: Any) {
-           self.navigationController?.popViewController(animated: true)
+//           self.navigationController?.popViewController(animated: true)
       //  webserviceForForgotPassword()
+        let checkEmail = txtEmailOrPhone.validatedText(validationType: ValidatorType.requiredField(field: "Email/Phone Number"))
+        
+        if(!checkEmail.0)
+        {
+            Utilities.ShowAlert(OfMessage: checkEmail.1)
+            return
+        }else{
+            webserviceForForgotPassword()
+        }
        }
     // MARK: - Api Calls
     func webserviceForForgotPassword(){

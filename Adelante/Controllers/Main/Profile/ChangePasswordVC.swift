@@ -47,7 +47,9 @@ class ChangePasswordVC: BaseViewController {
     }
     // MARK: - IBActions
     @IBAction func btnSaveTap(_ sender: UIButton) {
+        if validations(){
             webservice_ChangePW()
+        }
     }
     
    
@@ -71,7 +73,29 @@ class ChangePasswordVC: BaseViewController {
             }
         }
     }
-    
+    func validations()->Bool{
+        let currentPW = txtOldPassword.validatedText(validationType: ValidatorType.requiredField(field: "current password"))
+        let newPW =  txtNewPassword.validatedText(validationType: ValidatorType.requiredField(field: "new password"))
+         let confirmPW = txtConfirmPassword.validatedText(validationType: ValidatorType.requiredField(field: "confirm password"))
+        if (!currentPW.0){
+            Utilities.ShowAlert(OfMessage: currentPW.1)
+            return currentPW.0
+        }else if (!newPW.0){
+            Utilities.ShowAlert(OfMessage: newPW.1)
+            return newPW.0
+        }else if (txtNewPassword.text?.count ?? 0) <= 7{
+            Utilities.ShowAlert(OfMessage: "New Password must contain at least 8 characters")
+            return false
+        }else if (!confirmPW.0){
+            Utilities.ShowAlert(OfMessage: "Please confirm the password")
+            return confirmPW.0
+        } else if txtNewPassword.text?.lowercased() != txtConfirmPassword.text?.lowercased(){
+            Utilities.ShowAlert(OfMessage: "New password and confirm password must be same")
+            return false
+        }
+        return true
+        
+    }
     func showAlertWithTwoButtonCompletion(title:String, Message:String, defaultButtonTitle:String, cancelButtonTitle:String ,  Completion:@escaping ((Int) -> ())) {
         
         let alertController = UIAlertController(title: title , message:Message, preferredStyle: .alert)

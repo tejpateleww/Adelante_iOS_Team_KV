@@ -7,7 +7,7 @@ import Foundation
 import SwiftyJSON
 
 
-class Userinfo : NSObject, NSCoding{
+class Userinfo : Codable{
     
     var message : String!
     var profile : Profile!

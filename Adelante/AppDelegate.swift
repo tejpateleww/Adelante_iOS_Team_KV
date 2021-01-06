@@ -149,7 +149,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             //self.hideHUD()
             if status{
                 userDefault.set(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
-                userDefault.removeObject(forKey: UserDefaultsKey.userProfile.rawValue)
                 appDel.SetLogout()
             }else{
                
@@ -223,6 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             defaults.removeObject(forKey: key)
         }
         SingletonClass.sharedInstance.clearSingletonClass()
+        self.checkAndSetDefaultLanguage()
     }
 }
 

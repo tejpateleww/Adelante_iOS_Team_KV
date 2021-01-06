@@ -7,7 +7,7 @@ import Foundation
 import SwiftyJSON
 
 
-class Profile : NSObject, NSCoding{
+class Profile : Codable{
     
     var activationCode : String!
     var activationSelector : String!

@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 class SplashVC: UIViewController {
-
+    
     //MARK: - Properties
     
     //MARK: - IBOutlets
@@ -30,12 +30,13 @@ class SplashVC: UIViewController {
     func setupNavigationToLogin() {
         Timer.scheduledTimer(withTimeInterval: 4.5, repeats: false) { (timer) in
             if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == true{
-            let dic = userDefault.value(forKey: UserDefaultsKey.userProfile.rawValue) as? [String:Any]
-                let userData = Profile.init(fromDictionary: dic!)
-                SingletonClass.sharedInstance.UserId = userData.id
-                SingletonClass.sharedInstance.Api_Key = userData.apiKey
-            SingletonClass.sharedInstance.LoginRegisterUpdateData = userData
-                appDel.navigateToHome()
+                if userDefault.getUserData() != nil{
+                    let userdata = userDefault.getUserData()
+                    SingletonClass.sharedInstance.UserId = userdata?.id ?? ""
+                    SingletonClass.sharedInstance.Api_Key = userdata?.apiKey ?? ""
+                    SingletonClass.sharedInstance.LoginRegisterUpdateData = userdata
+                    appDel.navigateToHome()
+                }
             } else {
                 appDel.navigateToMainLogin()
             }
@@ -45,6 +46,7 @@ class SplashVC: UIViewController {
     //MARK:- IBActions
     
     // MARK: - Api Calls
+    
 }
 extension SplashVC{
     func webservice_Init(){
@@ -52,13 +54,13 @@ extension SplashVC{
         WebServiceSubClass.initApi(strURL: strURL) { (response, status, error) in
             
             let initData = InitObject.init(fromJson: response)
-//            self.showAlertWithTwoButtonCompletion(title: AppName, Message: initData.message, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
-//                if index == 0{
-                    
-//                }
-            }
+            //            self.showAlertWithTwoButtonCompletion(title: AppName, Message: initData.message, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
+            //                if index == 0{
+            
+            //                }
         }
     }
+}
 //}
 struct InitObject {
     
@@ -68,7 +70,7 @@ struct InitObject {
     var support : String!
     var update: String!
     var isMaintenance : String!
-   
+    
     init(fromJson json: JSON!) {
         if json.isEmpty {
             return

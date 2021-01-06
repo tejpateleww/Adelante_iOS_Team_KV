@@ -15,7 +15,7 @@ protocol ValidatorConvertible {
 enum ValidatorType {
     case email
     case password
-//    case username
+    case username(field: String)
     case requiredField(field: String)
     case age
 }
@@ -25,7 +25,7 @@ enum VaildatorFactory {
         switch type {
         case .email: return EmailValidator()
         case .password: return PasswordValidator()
-//        case .username: return UserNameValidator()
+        case .username(let fieldName): return UserNameValidator(fieldName)
         case .requiredField(let fieldName): return RequiredFieldValidator(fieldName)
         case .age: return AgeValidator()
         }
@@ -54,14 +54,41 @@ struct RequiredFieldValidator: ValidatorConvertible {
     
     func validated(_ value: String) -> (Bool, String) {
         guard !value.isEmpty else {
-            return (false,ValidationError("Required field " + fieldName).message)
+            return (false,ValidationError("Please enter " + fieldName).message)
         }
         return (true,"")
     }
 }
-/*
 struct UserNameValidator: ValidatorConvertible {
-    func validated(_ value: String) throws -> String {
+    private let fieldName: String
+    
+    init(_ field: String) {
+        fieldName = field
+    }
+    func validated(_ value: String) -> (Bool, String) {
+        guard value != "" else {return (false,ValidationError("Please enter \(fieldName)").message)}
+        
+        guard value.count >= 3 else {
+            return (false , ValidationError("\(fieldName) must contain more than three characters").message)
+//            ValidationError("Username must contain more than three characters" )
+        }
+        guard value.count < 18 else {
+            return (false , ValidationError("\(fieldName) shoudn't conain more than 18 characters").message)
+//            throw ValidationError("Username shoudn't conain more than 18 characters" )
+        }
+        
+        do {
+            if try NSRegularExpression(pattern: "[!\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]+",  options: .caseInsensitive).firstMatch(in: value, options: [], range: NSRange(location: 0, length: value.count)) != nil {
+                return (false,ValidationError("Invalid \(fieldName), \(fieldName) should not contain numbers or special characters").message)
+            }
+        } catch {
+            return (false,ValidationError("Invalid \(fieldName), \(fieldName) should not contain numbers or special characters").message)
+        }
+        return (true , "")
+//        return value
+    }
+    
+   /* func validated(_ value: String) throws -> String {
         guard value.count >= 3 else {
             throw ValidationError("Username must contain more than three characters" )
         }
@@ -77,9 +104,8 @@ struct UserNameValidator: ValidatorConvertible {
             throw ValidationError("Invalid username, username should not contain whitespaces,  or special characters")
         }
         return value
-    }
+    } */
 }
-*/
 struct PasswordValidator: ValidatorConvertible {
     func validated(_ value: String)  -> (Bool,String) {
         guard value != "" else {return (false,ValidationError("Password is Required").message)}

@@ -38,7 +38,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnlogin(_ sender: Any) {
-       webserviceForlogin()
+        if validation(){
+            webserviceForlogin()
+        }
+      
 //        UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
 //        appDel.navigateToHome()
        }
@@ -67,17 +70,14 @@ class LoginViewController: UIViewController {
         WebServiceSubClass.login(loginModel: login, completion: { (json, status, response) in
             if(status)
             {
-                UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 let loginModel = Userinfo.init(fromJson: json)
                 let loginModelDetails = loginModel.profile
-                UserDefaults.standard.set(loginModelDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
-                
                 SingletonClass.sharedInstance.UserId = loginModelDetails?.id ?? ""
                 SingletonClass.sharedInstance.Api_Key = loginModelDetails?.apiKey ?? ""
-                let encodedData = NSKeyedArchiver.archivedData(withRootObject: loginModelDetails)
-                userDefault.set(encodedData, forKey:  UserDefaultsKey.userProfile.rawValue)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = loginModelDetails
+                userDefault.setValue(loginModelDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                userDefault.setUserData(objProfile: loginModelDetails!)
                 appDel.navigateToHome()
             }
             else
@@ -102,6 +102,7 @@ class LoginViewController: UIViewController {
         })
         
     }
+    
     func showAlertWithTwoButtonCompletion(title:String, Message:String, defaultButtonTitle:String, cancelButtonTitle:String ,  Completion:@escaping ((Int) -> ())) {
         
         let alertController = UIAlertController(title: title , message:Message, preferredStyle: .alert)
@@ -122,20 +123,18 @@ class LoginViewController: UIViewController {
     //MARK:- Validation
     func validation() -> Bool
     {
-        let checkEmail = txtEmail.validatedText(validationType: ValidatorType.email)
+        let checkEmail = txtEmail.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
         let checkPassword = txtPassword.validatedText(validationType: ValidatorType.password)
-        
-        if(!checkEmail.0)
+         if(!checkEmail.0)
         {
-            Utilities.displayAlert(checkEmail.1)
+            Utilities.ShowAlert(OfMessage: checkEmail.1)
             return checkEmail.0
         }
         else  if(!checkPassword.0)
         {
-            Utilities.displayAlert(checkPassword.1)
+            Utilities.ShowAlert(OfMessage: checkPassword.1)
             return checkPassword.0
         }
-        
         return true
     }
 }
