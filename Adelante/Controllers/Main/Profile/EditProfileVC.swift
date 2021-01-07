@@ -9,12 +9,13 @@
 import UIKit
 import SDWebImage
 
-class EditProfileVC: BaseViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+class EditProfileVC: BaseViewController{
     
     // MARK: - Properties
     var selectedImage : UIImage?
     var customTabBarController: CustomTabBarVC?
-    var imageupload = UIImagePickerController()
+    private var imagePicker : ImagePicker!
+    var isRemovePhoto = false
     // MARK: - IBOutlets
     @IBOutlet weak var btnUpdatePicture: UIButton!
     @IBOutlet weak var imgProfile: UIImageView!{ didSet{ imgProfile.layer.cornerRadius = imgProfile.frame.size.height / 2}}
@@ -30,9 +31,8 @@ class EditProfileVC: BaseViewController, UIImagePickerControllerDelegate , UINav
     override func viewDidLoad() {
         super.viewDidLoad()
 //        imgProfile.layer.cornerRadius = imgProfile.layer.bounds.height / 2
-        imageupload.delegate = self
-        imageupload.sourceType = .photoLibrary
-        imageupload.allowsEditing = false
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing: false)
+        showUserData()
         setUpLocalizedStrings()
         setUp()
     }
@@ -44,18 +44,58 @@ class EditProfileVC: BaseViewController, UIImagePickerControllerDelegate , UINav
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
       
     }
+    
+    func showUserData(){
+        if let userdata = SingletonClass.sharedInstance.LoginRegisterUpdateData{
+            txtFirstName.text = userdata.firstName ?? ""
+            txtLastName.text = userdata.lastName ?? ""
+            txtEmail.text = userdata.email ?? ""
+            txtPhoneNumber.text = userdata.phone
+
+            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(userdata.profilePicture ?? "")"
+                imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
            self.customTabBarController?.hideTabBar()
        }
     // MARK: - IBActions
     @IBAction func btnProfilePicTap(_ sender: UIButton)
     {
-        
+        resignFirstResponder()
+        self.imagePicker.present(from: self.imgProfile, viewPresented: self.view)
     }
     
     @IBAction func Btnsave(_ sender: Any) {
-        webserviceForEditprofile()
+        if !txtFirstName.isEnabled{
+            (sender as AnyObject).setImage(#imageLiteral(resourceName: "imgUpdateDone"), for: .normal)
+        }else{
+            if validation(){
+                webserviceForEditprofile()
+            }
+        }
 //        self.navigationController?.popViewController(animated: true)
+    }
+    func validation()->Bool{
+        let firstName = txtFirstName.validatedText(validationType: ValidatorType.username(field: "first name") )//ValidatorType.requiredField(field: "first name"))
+        let lastname =  txtLastName.validatedText(validationType: ValidatorType.username(field: "last name"))
+        
+        let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "contact number"))
+        
+        if (!firstName.0){
+            Utilities.ShowAlert(OfMessage: firstName.1)
+            return firstName.0
+        }else if (!lastname.0){
+            Utilities.ShowAlert(OfMessage: lastname.1)
+            return lastname.0
+        }
+        else if (!phone.0){
+            Utilities.ShowAlert(OfMessage: phone.1)
+            return phone.0
+        }
+        
+        return true
     }
     func setUpLocalizedStrings() {
         txtFirstName.placeholder = "EditProfileVC_txtFirstName".Localized()
@@ -66,21 +106,62 @@ class EditProfileVC: BaseViewController, UIImagePickerControllerDelegate , UINav
         lblUnverified.text = "EditProfileVC_lblUnverified".Localized()
         btnSave.setTitle("EditProfileVC_btnSave".Localized(), for: .normal)
     }
-    
+   
     // MARK: - Api Calls
     func webserviceForEditprofile()
     {
-       
-    }
-    
+        let updateModel = EditProfileReqModel()
+        updateModel.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        updateModel.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        updateModel.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        updateModel.phone = txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        updateModel.user_id = SingletonClass.sharedInstance.UserId
         
-     
-   
-}
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage() , showHud: false, completion: { (response, status, error) in
+           // self.hideHUD()
+            if status{
+                let updatedData = Userinfo.init(fromJson: response)
+                SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
+                userDefault.setUserData(objProfile: updatedData.profile)
+                Utilities.ShowAlert(OfMessage: response["message"].stringValue)
+            //    self.btnSave.setImage(#imageLiteral(resourceName: "imgUpdate"), for: .normal)
+                self.showUserData()
+                self.navigationController?.popViewController(animated: true)
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
+//    func webservice_RemoveProfilePicture(){
+//        let id = SingletonClass.sharedInstance.UserId
+//       // self.showHUD()
+//        WebServiceSubClass.RemoveProfilePicture(userId: id) { (response, status, error) in
+//            self.hideHUD()
+//            if status{
+//                self.imgProfile.image = UIImage(named: "default_user")
+//                self.selectedImage = nil
+//                self.isRemovePhoto = true
+//                utility.ShowAlert(OfMessage: response["message"].stringValue)
+//            }else{
+//                utility.showAlertOfAPIResponse(param: error, vc: self)
+//            }
+//        }
+    }
 
 // MARK: - ImagePickerDelegate
 extension EditProfileVC:ImagePickerDelegate {
     
     func didSelect(image: UIImage?, SelectedTag:Int) {
+        isRemovePhoto = false
+            if(image == nil && SelectedTag == 101){
+               
+                //webservice_RemoveProfilePicture()
+            }else if image != nil{
+                let fixedOrientedImage = image?.fixOrientation()
+               self.imgProfile.image = fixedOrientedImage
+                self.selectedImage = self.imgProfile.image
+            }else{
+                return
+            }
     }
 }

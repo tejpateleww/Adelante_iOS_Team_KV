@@ -24,11 +24,12 @@ class MyProfileVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
-        webserviceGetProfile()
+        
         setUp()
     }
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
+        webserviceGetProfile()
     }
     // MARK: - Other Methods
     func setUp() {

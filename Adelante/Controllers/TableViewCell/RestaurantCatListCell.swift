@@ -7,13 +7,19 @@
 //
 
 import UIKit
-
+import SDWebImage
+protocol RestaurantCatListDelegate : RestaurantCatListCell{
+    func SelectedCategory(_ CategoryId: String) -> (Bool,String)
+}
 class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
-     var selectedIndexForFood = 0
+        var selectedIndexForFood = 0
+        
+    var delegateResCatCell : RestaurantCatListDelegate?
        @IBOutlet weak var colRestaurantCatList: UICollectionView!
-       
-       var arrCategories = ["Pizza", "Fast Food", "Sandwich","Pizza", "Fast Food", "Sandwich","Pizza", "Fast Food", "Sandwich"]
+   
+    
+       var arrCategories = [Category]()
        
        override func awakeFromNib() {
            super.awakeFromNib()
@@ -32,26 +38,30 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
        
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            let cell = colRestaurantCatList.dequeueReusableCell(withReuseIdentifier: RestaurantCategoryCell.reuseIdentifier, for: indexPath) as! RestaurantCategoryCell
-           cell.btnCategory.setTitle(arrCategories[indexPath.row], for: .normal)
-           
-           let image = UIImage(named: "dummyPizza")?.withRenderingMode(.alwaysTemplate)
-           cell.btnCategory.setImage(image, for: .normal)
+       // cell.btnCategory.setTitle(arrCategories[indexPath.row].name, for: .normal)
+        cell.lblCategory.text = arrCategories[indexPath.row].name
+        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrCategories[indexPath.row].image ?? "")"
+        cell.imgCategory.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        cell.imgCategory.sd_setImage(with: URL(string: strUrl), placeholderImage: UIImage())
+//           cell.btnCategory.setImage(image, for: .normal)
            if indexPath.row == selectedIndexForFood
            {
-               cell.btnCategory.setTitleColor(colors.black.value.withAlphaComponent(1.0), for: .normal)
-               cell.btnCategory.backgroundColor = colors.segmentSelectedColor.value
-               
-               cell.btnCategory.imageView?.tintColor = colors.black.value.withAlphaComponent(1.0)
+            cell.viewCategory.backgroundColor = colors.segmentSelectedColor.value
+//               cell.btnCategory.setTitleColor(colors.black.value.withAlphaComponent(1.0), for: .normal)
+//               cell.btnCategory.backgroundColor = colors.segmentSelectedColor.value
+//
+//               cell.btnCategory.imageView?.tintColor = colors.black.value.withAlphaComponent(1.0)
            } else {
-               cell.btnCategory.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
-               cell.btnCategory.backgroundColor = colors.segmentDeselectedColor.value
-               cell.btnCategory.imageView?.tintColor = colors.black.value.withAlphaComponent(0.3)
+            cell.viewCategory.backgroundColor = colors.segmentDeselectedColor.value
+//               cell.btnCategory.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
+//               cell.btnCategory.backgroundColor = colors.segmentDeselectedColor.value
+//               cell.btnCategory.imageView?.tintColor = colors.black.value.withAlphaComponent(0.3)
            }
            return cell
        }
        
        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           let s = arrCategories[indexPath.row].size(withAttributes:[.font: CustomFont.NexaRegular.returnFont(14)])
+        let s = arrCategories[indexPath.row].name.size(withAttributes:[.font: CustomFont.NexaRegular.returnFont(14)])
            return CGSize(width: s.width + 20 + 35, height: colRestaurantCatList.frame.size.height)
        }
        

@@ -148,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         WebServiceSubClass.Logout(logoutModel: logout, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
-                userDefault.set(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                
                 appDel.SetLogout()
             }else{
                
@@ -221,8 +221,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         dictionary.keys.forEach { key in
             defaults.removeObject(forKey: key)
         }
+        userDefault.set(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
         SingletonClass.sharedInstance.clearSingletonClass()
         self.checkAndSetDefaultLanguage()
+        self.navigateToLogin()
     }
 }
 

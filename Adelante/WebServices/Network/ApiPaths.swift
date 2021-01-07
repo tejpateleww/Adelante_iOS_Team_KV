@@ -68,11 +68,11 @@ enum ApiKey: String {
     case Register = "register"
     case login = "login"
     case ForgotPassword = "forgot_password"
-    case changePassword = "change_password"    
-    case EditProfile = "profile_edit"
+    case changePassword = "change_password"
     case Logout = "logout"
     
     case Dashboard = "dashboard"
     case GetProfile = "profile"
+    case EditProfile = "profile_edit"
 }
 

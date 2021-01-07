@@ -16,7 +16,7 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var imgRestaurant: customImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setUpLocalizedStrings()
+       // setUpLocalizedStrings()
     }
     
     @IBAction func BtnLikeDislike(_ sender: UIButton) {

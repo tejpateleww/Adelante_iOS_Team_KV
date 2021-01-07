@@ -1,7 +1,7 @@
 //
 //  Banner.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 6, 2021
+//  Created on January 7, 2021
 
 import Foundation
 import SwiftyJSON
@@ -10,6 +10,7 @@ import SwiftyJSON
 class Banner : NSObject, NSCoding{
 
     var createdAt : String!
+    var descriptionField : String!
     var id : String!
     var image : String!
     var name : String!
@@ -26,6 +27,7 @@ class Banner : NSObject, NSCoding{
 			return
 		}
         createdAt = json["created_at"].stringValue
+        descriptionField = json["description"].stringValue
         id = json["id"].stringValue
         image = json["image"].stringValue
         name = json["name"].stringValue
@@ -43,6 +45,9 @@ class Banner : NSObject, NSCoding{
 		var dictionary = [String:Any]()
         if createdAt != nil{
         	dictionary["created_at"] = createdAt
+        }
+        if descriptionField != nil{
+        	dictionary["description"] = descriptionField
         }
         if id != nil{
         	dictionary["id"] = id
@@ -75,6 +80,7 @@ class Banner : NSObject, NSCoding{
     @objc required init(coder aDecoder: NSCoder)
 	{
 		createdAt = aDecoder.decodeObject(forKey: "created_at") as? String
+		descriptionField = aDecoder.decodeObject(forKey: "description") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
 		image = aDecoder.decodeObject(forKey: "image") as? String
 		name = aDecoder.decodeObject(forKey: "name") as? String
@@ -92,6 +98,9 @@ class Banner : NSObject, NSCoding{
 	{
 		if createdAt != nil{
 			aCoder.encode(createdAt, forKey: "created_at")
+		}
+		if descriptionField != nil{
+			aCoder.encode(descriptionField, forKey: "description")
 		}
 		if id != nil{
 			aCoder.encode(id, forKey: "id")

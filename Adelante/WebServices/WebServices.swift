@@ -81,7 +81,7 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                            //                            appDel.ForecedLogout()
+                                                        appDel.SetLogout()
                         }
                         else{
                             //                            utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -119,7 +119,7 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                           //  appDel.SetLogout()
+                             appDel.SetLogout()
                         }
                         else{
 //                            utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -177,7 +177,7 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                            // appDel.ForecedLogout()
+                             appDel.SetLogout()
                         }
                         else{
                             // utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -290,7 +290,7 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                            //                             appDel.ForecedLogout()
+                                                         appDel.SetLogout()
                         }
                         else{
                             //                            utility.ShowAlert(OfMessage: error.localizedDescription)

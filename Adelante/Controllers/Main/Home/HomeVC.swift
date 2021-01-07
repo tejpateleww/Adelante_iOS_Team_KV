@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 struct structFilter {
     
     var strselectedImage : UIImage
     var strDeselectedImage:UIImage
     var strTitle : String
-    
     init(strselectedImage:UIImage, strDeselectedImage:UIImage ,strTitle :String) {
         self.strselectedImage = strselectedImage
         self.strDeselectedImage = strDeselectedImage
@@ -21,7 +21,12 @@ struct structFilter {
     }
 }
 
-class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate, RestaurantCatListDelegate {
+    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
+        self.SelectedCatId = CategoryId
+        self.webserviceGetDashboard()
+    }
+    
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -32,7 +37,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     var arrImagesForPage = ["dummyRest1", "dummyRest2" , "dummyRest1"]
     var arrImages = ["dummyRest1", "dummyRest2" , "dummyRest1", "dummyRest1", "dummyRest2" , "dummyRest1"]
     var selectedSortTypedIndexFromcolVwFilter = -1
-
+    var refresher = UIRefreshControl()
+    var arrCategories = [Category]()
+    var arrRestaurant  = [Restaurant]()
+    var arrBanner = [Banner]()
+    var SelectedCatId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -45,6 +54,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
+        webserviceGetDashboard()
+        
         setup()
     
     self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -132,9 +143,9 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         if collectionView == self.colVwFilterOptions{
             return arrFilter.count
         } else if collectionView == self.colVwRestWthPage {
-            return arrImagesForPage.count
+            return arrBanner.count
         }
-        return arrImages.count
+        return arrRestaurant.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -158,9 +169,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             return cell
         }else {
             let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: RestWithPageCell.reuseIdentifier, for: indexPath) as! RestWithPageCell
-            cell.imgRestaurant.image = UIImage(named: arrImagesForPage[indexPath.row])
-            cell.lblRestName.text = "Lorem Ipsum"
-            cell.lblRestDesc.text = "Lorem Ipsum is simply dummy text"
+            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrBanner[indexPath.row].image ?? "")"
+            cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.lblRestName.text = arrBanner[indexPath.row].name
+            cell.lblRestDesc.text = arrBanner[indexPath.row].descriptionField
             return cell
         }
     }
@@ -191,16 +204,23 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
+        return arrRestaurant.count + 1    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier, for: indexPath) as! RestaurantCatListCell
+            cell.arrCategories = self.arrCategories
+            cell.colRestaurantCatList.reloadData()
             cell.selectionStyle = .none
             return cell
         } else {
             let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
+            cell.lblItemName.text = arrRestaurant[indexPath.row - 1].name
+            cell.lblMiles.text = String(format: "HomeVC_RestaurantCell_lblMiles".Localized(), arrRestaurant[indexPath.row - 1].distance)//arrRestaurant[indexPath.row - 1].distance
+            cell.lblRating.text = arrRestaurant[indexPath.row - 1].review
+            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
+            cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             cell.selectionStyle = .none
             return cell
         }
@@ -215,7 +235,28 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
    
     // MARK: - Api Calls
-//    func webserviceGetDashboard(){
-//        WebServiceSubClass.deshboard(showHud: false, completion: <#T##CompletionResponse##CompletionResponse##(JSON, Bool, Any) -> ()#>)
-//    }
+    func webserviceGetDashboard(){
+        let Deshboard = DashboardReqModel()
+        Deshboard.category_id = SelectedCatId
+        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (respose, status, error) in
+            //self.hideHUD()
+            if status{
+                let Homedata = DashBoardResModel.init(fromJson: respose)
+                self.arrCategories = Homedata.category
+                self.arrBanner = Homedata.banner
+                self.arrRestaurant = Homedata.restaurant
+                self.tblMainList.reloadData()
+                self.colVwRestWthPage.reloadData()
+//                    self.arrFeatureProduct = Homedata.banner
+//                    self.arrCategories = Homedata.category
+//                    self.viewLocation.isHidden = Homedata.address == "" ? true : false
+//                    self.lblAddress.text = Homedata.address
+//                    self.colVwFilterOptions.reloadData()
+//                    self.colVwRestWthPage.reloadData()
+                
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
 }

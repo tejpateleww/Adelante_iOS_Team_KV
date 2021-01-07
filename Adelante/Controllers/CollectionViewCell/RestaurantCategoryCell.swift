@@ -10,4 +10,8 @@ import UIKit
 
 class RestaurantCategoryCell: UICollectionViewCell {
     @IBOutlet weak var btnCategory: collectionVwFilterBtns!
+    @IBOutlet weak var imgCategory: UIImageView!
+    @IBOutlet weak var lblCategory: UILabel!
+    @IBOutlet weak var viewCategory: UIView!
+    
 }

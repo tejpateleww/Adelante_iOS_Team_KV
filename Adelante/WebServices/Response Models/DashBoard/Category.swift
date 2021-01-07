@@ -1,7 +1,7 @@
 //
 //  Category.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 6, 2021
+//  Created on January 7, 2021
 
 import Foundation
 import SwiftyJSON
@@ -15,6 +15,7 @@ class Category : NSObject, NSCoding{
     var name : String!
     var status : String!
     var trash : String!
+    var type : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -29,6 +30,7 @@ class Category : NSObject, NSCoding{
         name = json["name"].stringValue
         status = json["status"].stringValue
         trash = json["trash"].stringValue
+        type = json["type"].stringValue
 	}
 
 	/**
@@ -55,6 +57,9 @@ class Category : NSObject, NSCoding{
         if trash != nil{
         	dictionary["trash"] = trash
         }
+        if type != nil{
+        	dictionary["type"] = type
+        }
 		return dictionary
 	}
 
@@ -70,6 +75,7 @@ class Category : NSObject, NSCoding{
 		name = aDecoder.decodeObject(forKey: "name") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? String
 		trash = aDecoder.decodeObject(forKey: "trash") as? String
+		type = aDecoder.decodeObject(forKey: "type") as? String
 	}
 
     /**
@@ -95,6 +101,9 @@ class Category : NSObject, NSCoding{
 		}
 		if trash != nil{
 			aCoder.encode(trash, forKey: "trash")
+		}
+		if type != nil{
+			aCoder.encode(type, forKey: "type")
 		}
 
 	}

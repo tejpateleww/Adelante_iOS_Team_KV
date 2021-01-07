@@ -16,7 +16,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var myACDetailsARray:[String] = ["","","","","","",""]
     var customTabBarController: CustomTabBarVC?
     var allDetails = [myAccountDetails]()
-    var loginModelDetails : Profile?
     var expendedCell = -1
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
@@ -26,10 +25,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         //addNavBarImage(isLeft: true, isRight: true)
-        lblName.text = SingletonClass.sharedInstance.LoginRegisterUpdateData?.fullName
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(loginModelDetails?.profilePicture ?? "")"
-            imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
+        
         allDetails = [
 //            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
                       
@@ -47,8 +43,13 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
       }
     
       override func viewWillAppear(_ animated: Bool) {
-          self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-          self.customTabBarController?.showTabBar()
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.customTabBarController?.showTabBar()
+        lblName.text = SingletonClass.sharedInstance.LoginRegisterUpdateData?.fullName
+        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture ?? "")"
+            imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
+          
         
       }
     
@@ -69,8 +70,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel))
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleLogout".Localized(), style: .default){ _ in
             appDel.performLogout()
-            userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
-            appDel.navigateToLogin()
+//            userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+//            appDel.navigateToLogin()
         })
         
         DispatchQueue.main.async {
