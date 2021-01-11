@@ -10,9 +10,9 @@ import UIKit
 
 struct structSections {
     
-
+    
     var strTitle:String
-   
+    
     var isExpanded:Bool
     var rowCount:Int
     
@@ -27,7 +27,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
-    
+    var arrMenuitem = [MenuItem]()
+    var arrResData = [RestaurantRes]()
+    var arrReview = [Review]()
+    var arrResDetail = [RestaurantDetailsData]()
+    var SelectedCatId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
@@ -60,7 +64,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
-   
+    
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -98,7 +102,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     @IBAction func btnViewPolicy(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-        controller.strNavTitle = "NavigationTitles_Privacypolicy"
+        controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
         self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {
@@ -125,16 +129,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }
             }
         }
-//        if arrSections[sender.tag].isExpanded! {
-//            arrSections[sender.tag].isExpanded = false
-//        } else {
-//            arrSections[sender.tag].isExpanded = true
-//        }
         
         DispatchQueue.main.async {
             self.tblRestaurantDetails.reloadData()
-//            self.heightTblRestDetails.constant = self.tblRestaurantDetails.contentSize.height
-//            self.view.layoutIfNeeded()
         }
     }
     // MARK: - UITableViewDelegates And Datasource
@@ -152,7 +149,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
+            cell.lblItemName.text = arrMenuitem[indexPath.row].name
+            cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
+            cell.lblAboutItem.text = arrMenuitem[indexPath.row].description
+            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
+            cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             cell.selectionStyle = .none
+//            cell.
             cell.customize = {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                 self.navigationController?.pushViewController(controller, animated: true)
@@ -171,7 +175,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         let label = UILabel()
         label.frame = CGRect.init(x: 20, y: 14, width: headerView.frame.width-40, height: 20)
         label.center.y = headerView.frame.size.height / 2
-            label.text = arrSections[section].strTitle
+        label.text = arrSections[section].strTitle
         label.font = CustomFont.NexaBold.returnFont(20)
         label.textColor = colors.black.value
         headerView.addSubview(label)
@@ -201,39 +205,30 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         return 1
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//            return UITableView.automaticDimension
-//    }
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        switch indexPath.section {
-//        case 0:
-////             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-////                   self.navigationController?.pushViewController(controller, animated: true)
-//            break
-//        case 1:
-//            break
-//        default:
-//            break
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-         let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 1))
+        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 1))
         footerView.backgroundColor = UIColor(hexString: "#707070").withAlphaComponent(0.2)
         return footerView
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            return 110
-//        }else{
-//            return 55
-//        }
-//        return tableView.estimatedRowHeight
-//    }
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return arrSections[section].strTitle
-//    }
     
     // MARK: - Api Calls
+    func webservicePostRestaurantDetails(){
+        let ResDetails = RestaurantDetailsReqModel()
+        ResDetails.restaurant_id = ""
+        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
+            //self.hideHUD()
+            if status{
+                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
+                self.arrResData = RestDetail.RestaurantRes
+                self.arrReview = RestDetail.Review
+                self.arrResDetail = RestDetail.RestaurantDetailsData
+                self.arrMenuitem = RestDetail.MenuItem
+                self.tblMainList.reloadData()
+                self.colVwRestWthPage.reloadData()
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
 }

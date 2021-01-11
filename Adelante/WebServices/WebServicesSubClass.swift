@@ -53,10 +53,18 @@ class WebServiceSubClass
     class func profile(strURL : String  ,showHud : Bool = false, completion: @escaping CompletionResponse ) {
         WebService.shared.getMethod(url: URL.init(string: strURL)!, httpMethod: .get, completion: completion)
     }
-//    class func RemoveProfilePicture( userId : String  ,completion: @escaping CompletionResponse ) {
-//        let  params : [String:String] =  ["user_id" : userId]
-//        WebService.shared.requestMethod(api: .removeProfilePicture, httpMethod: .post, parameters: params, completion: completion)
-//    }
+    class func search( Searchmodel : SearchReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = Searchmodel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Search, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+    }
+    class func RestaurantList( RestaurantListmodel : RestaurantListReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = RestaurantListmodel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .RestaurantList, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+    }
+    class func RestaurantDetails( RestaurantDetailsmodel : RestaurantDetailsReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = RestaurantDetailsmodel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .RestaurantDetails, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+    }
 }
 
 

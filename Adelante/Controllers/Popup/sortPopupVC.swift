@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+@objc protocol RestaurantListDelegate {
+    func SelectedCategory(_ CategoryId: String)
+}
 class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
    // var customTabBarController: CustomTabBarVC?

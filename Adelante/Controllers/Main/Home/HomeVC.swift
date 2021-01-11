@@ -21,11 +21,12 @@ struct structFilter {
     }
 }
 
-class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate, RestaurantCatListDelegate {
-    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
-        self.SelectedCatId = CategoryId
-        self.webserviceGetDashboard()
-    }
+class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate{
+//    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
+//
+//        self.SelectedCatId = CategoryId
+//        self.webserviceGetDashboard()
+//    }
     
     
     // MARK: - Properties
@@ -210,6 +211,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         if indexPath.row == 0 {
             let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier, for: indexPath) as! RestaurantCatListCell
             cell.arrCategories = self.arrCategories
+            cell.delegateResCatCell = self
             cell.colRestaurantCatList.reloadData()
             cell.selectionStyle = .none
             return cell
@@ -233,27 +235,24 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
-   
+    // MARK: - RestaurantCatListCell
+    func SelectedCategory(_ CategoryId: String) {
+    self.SelectedCatId = CategoryId
+    self.webserviceGetDashboard()
+    }
     // MARK: - Api Calls
     func webserviceGetDashboard(){
         let Deshboard = DashboardReqModel()
         Deshboard.category_id = SelectedCatId
-        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (respose, status, error) in
+        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
-                let Homedata = DashBoardResModel.init(fromJson: respose)
+                let Homedata = DashBoardResModel.init(fromJson: response)
                 self.arrCategories = Homedata.category
                 self.arrBanner = Homedata.banner
                 self.arrRestaurant = Homedata.restaurant
                 self.tblMainList.reloadData()
                 self.colVwRestWthPage.reloadData()
-//                    self.arrFeatureProduct = Homedata.banner
-//                    self.arrCategories = Homedata.category
-//                    self.viewLocation.isHidden = Homedata.address == "" ? true : false
-//                    self.lblAddress.text = Homedata.address
-//                    self.colVwFilterOptions.reloadData()
-//                    self.colVwRestWthPage.reloadData()
-                
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

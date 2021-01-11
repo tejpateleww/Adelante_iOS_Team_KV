@@ -74,5 +74,8 @@ enum ApiKey: String {
     case Dashboard = "dashboard"
     case GetProfile = "profile"
     case EditProfile = "profile_edit"
+    case Search = "search"
+    case RestaurantList = "restaurant"
+    case RestaurantDetails = "restaurant_detail"
 }
 

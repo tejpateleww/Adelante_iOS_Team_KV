@@ -477,7 +477,7 @@ class tblHomeLabels: UILabel {
             self.textAlignment = .right
         }  else if isRating {
             self.font = CustomFont.NexaRegular.returnFont(9)
-            self.textAlignment = .right
+            self.textAlignment = .left
         }
     }
     override func drawText(in rect: CGRect) {
