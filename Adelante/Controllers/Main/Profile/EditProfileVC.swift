@@ -111,10 +111,13 @@ class EditProfileVC: BaseViewController{
     func webserviceForEditprofile()
     {
         let updateModel = EditProfileReqModel()
+        var StrPhone = txtPhoneNumber.text?.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: " ", with: "")
+        StrPhone = StrPhone?.replacingOccurrences(of: ")", with: "")
+        StrPhone = StrPhone?.replacingOccurrences(of: "-", with: "")
         updateModel.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        updateModel.phone = txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        updateModel.phone = StrPhone! //txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.user_id = SingletonClass.sharedInstance.UserId
         
         WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage() , showHud: false, completion: { (response, status, error) in

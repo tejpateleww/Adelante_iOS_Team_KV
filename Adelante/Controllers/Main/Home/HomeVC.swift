@@ -27,8 +27,6 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
 //        self.SelectedCatId = CategoryId
 //        self.webserviceGetDashboard()
 //    }
-    
-    
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrFilter = [structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: ""),
@@ -238,6 +236,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     // MARK: - RestaurantCatListCell
     func SelectedCategory(_ CategoryId: String) {
     self.SelectedCatId = CategoryId
+        print("selectedcategoryid",SelectedCatId)
     self.webserviceGetDashboard()
     }
     // MARK: - Api Calls

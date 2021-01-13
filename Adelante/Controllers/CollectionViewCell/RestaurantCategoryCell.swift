@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RestaurantCategoryCell: UICollectionViewCell {
+class RestaurantCategoryCell: UICollectionViewCell {    
     @IBOutlet weak var btnCategory: collectionVwFilterBtns!
     @IBOutlet weak var imgCategory: UIImageView!
     @IBOutlet weak var lblCategory: UILabel!

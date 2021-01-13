@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 struct structSections {
     
     
@@ -149,12 +149,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
-            cell.lblItemName.text = arrMenuitem[indexPath.row].name
-            cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
-            cell.lblAboutItem.text = arrMenuitem[indexPath.row].description
-            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
-            cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+//            cell.lblItemName.text = arrMenuitem[indexPath.row].name
+//            cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
+//            cell.lblAboutItem.text = arrMenuitem[indexPath.row].description
+//            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
+//            cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//            cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             cell.selectionStyle = .none
 //            cell.
             cell.customize = {
@@ -213,22 +213,23 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     // MARK: - Api Calls
-    func webservicePostRestaurantDetails(){
-        let ResDetails = RestaurantDetailsReqModel()
-        ResDetails.restaurant_id = ""
-        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
-            //self.hideHUD()
-            if status{
-                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
-                self.arrResData = RestDetail.RestaurantRes
-                self.arrReview = RestDetail.Review
-                self.arrResDetail = RestDetail.RestaurantDetailsData
-                self.arrMenuitem = RestDetail.MenuItem
-                self.tblMainList.reloadData()
-                self.colVwRestWthPage.reloadData()
-            }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
-            }
-        })
-    }
+//    func webservicePostRestaurantDetails(){
+//        let ResDetails = RestaurantDetailsReqModel()
+//        ResDetails.restaurant_id = ""
+//        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
+//            //self.hideHUD()
+//            if status{
+//                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
+//                self.arrResData = RestDetail.RestaurantRes
+//                self.arrReview = RestDetail.Review
+//                self.arrResDetail = RestDetail.RestaurantDetailsData
+//                self.arrMenuitem = RestDetail.MenuItem
+//                self.tblMainList.reloadData()
+//                self.colVwRestWthPage.reloadData()
+//            }else{
+//                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+//            }
+//        })
+//    }
 }
+

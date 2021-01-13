@@ -448,6 +448,12 @@
                                                                 <constraint firstAttribute="trailing" secondItem="OCX-tZ-9rm" secondAttribute="trailing" constant="18" id="uhv-xu-DhG"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="imgRestaurant" destination="fSI-io-gRG" id="qix-xt-Jlq"/>
+                                                            <outlet property="lblItemName" destination="acU-oZ-3jH" id="40H-tQ-gq8"/>
+                                                            <outlet property="lblPrice" destination="9sX-va-I9v" id="3gb-uY-Y6D"/>
+                                                            <outlet property="lblRating" destination="J7x-hk-get" id="HiN-7B-oy6"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -1489,7 +1495,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="215"/>
+                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1535,10 +1541,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                <rect key="frame" x="0.0" y="166" width="378" height="49"/>
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="79" id="GZk-3S-lMA"/>
@@ -1554,7 +1560,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="48" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -6430,6 +6436,7 @@
                                                                                                     </label>
                                                                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2L-un-3hX" customClass="collectionVwFilterBtns" customModule="Adelante" customModuleProvider="target">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="38"/>
+                                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="height" constant="38" id="HH1-EM-5Hf"/>
                                                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="lSf-E9-5hj"/>
@@ -7375,14 +7382,44 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
-        <designable name="G78-jH-dfh">
-            <size key="intrinsicContentSize" width="195" height="32"/>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="97" height="34"/>
         </designable>
-        <designable name="Tme-wR-K6Z">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="178" height="34"/>
         </designable>
-        <designable name="oP7-OM-AFy">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="98" height="34"/>
+        </designable>
+        <designable name="IOt-oG-ldn">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
+        </designable>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="149" height="34"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="90.5" height="34"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="208.5" height="34"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="zNM-X4-rQ4">
+            <size key="intrinsicContentSize" width="34.5" height="18.5"/>
         </designable>
     </designables>
     <resources>

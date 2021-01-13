@@ -65,7 +65,8 @@ class ChangePasswordVC: BaseViewController {
             if status{
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
                     if index == 0{
-                        self.navigationController?.popViewController(animated: true)
+//                        self.navigationController?.popViewController(animated: true)
+                        appDel.navigateToLogin()
                     }
                 }
             }else{

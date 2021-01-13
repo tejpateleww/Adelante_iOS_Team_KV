@@ -16,6 +16,7 @@ class SingletonClass: NSObject
     var LoginRegisterUpdateData : Profile?
     var Api_Key = String()
     var DeviceToken : String = ""
+    var arrSorting = [Sorting]()
 //    var currentLat = Double()
 //    var currentLong = Double()
     

@@ -12,12 +12,13 @@ import SwiftyJSON
 class SplashVC: UIViewController {
     
     //MARK: - Properties
-    
     //MARK: - IBOutlets
     
     // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        webservice_Init()
+        webserviceSorting()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,16 +53,25 @@ extension SplashVC{
     func webservice_Init(){
         let strURL = APIEnvironment.baseURL + ApiKey.Init.rawValue + "/" + kAPPVesion + "/" + "ios_customer"
         WebServiceSubClass.initApi(strURL: strURL) { (response, status, error) in
-            
             let initData = InitObject.init(fromJson: response)
-            //            self.showAlertWithTwoButtonCompletion(title: AppName, Message: initData.message, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
-            //                if index == 0{
-            
-            //                }
         }
     }
+    func webserviceSorting(){
+        WebServiceSubClass.sorting(showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                let sortingModel = sortingResModel.init(fromJson: json)
+                SingletonClass.sharedInstance.arrSorting = sortingModel.data
+                //self.setupUserDetails()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
+    }
 }
-//}
+
 struct InitObject {
     
     var serviceCharge : Double!

@@ -34,7 +34,25 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
            return arrCategories.count
        }
-       
+    @IBAction func btnCategortClick(_ sender : UIButton){
+        DispatchQueue.main.async {
+            if self.selectedIdForFood == "" {
+                self.selectedIdForFood = self.arrCategories[sender.tag].id
+                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+        }
+            else if self.selectedIdForFood == self.arrCategories[sender.tag].id{
+                self.selectedIdForFood = ""
+            let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+        } else {
+            self.selectedIdForFood = self.arrCategories[sender.tag].id
+            self.colRestaurantCatList.reloadData()
+        }
+        }
+        self.delegateResCatCell?.SelectedCategory(selectedIdForFood)
+
+    }
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            let cell = colRestaurantCatList.dequeueReusableCell(withReuseIdentifier: RestaurantCategoryCell.reuseIdentifier, for: indexPath) as! RestaurantCategoryCell
        // cell.btnCategory.setTitle(arrCategories[indexPath.row].name, for: .normal)
@@ -46,16 +64,11 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
         if arrCategories[indexPath.row].id == selectedIdForFood
         {
             cell.viewCategory.backgroundColor = colors.segmentSelectedColor.value
-//               cell.btnCategory.setTitleColor(colors.black.value.withAlphaComponent(1.0), for: .normal)
-//               cell.btnCategory.backgroundColor = colors.segmentSelectedColor.value
-//
-//               cell.btnCategory.imageView?.tintColor = colors.black.value.withAlphaComponent(1.0)
         } else {
             cell.viewCategory.backgroundColor = colors.segmentDeselectedColor.value
-//               cell.btnCategory.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
-//               cell.btnCategory.backgroundColor = colors.segmentDeselectedColor.value
-//               cell.btnCategory.imageView?.tintColor = colors.black.value.withAlphaComponent(0.3)
         }
+//        cell.btnCategory.tag = indexPath.row
+//        cell.btnCategory.addTarget(self, action: #selector(btnCategortClick(_:)), for: .touchUpOutside)
         return cell
     }
        
@@ -65,9 +78,25 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
        }
        
        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            selectedIdForFood = arrCategories[indexPath.row].id
-            self.delegateResCatCell?.SelectedCategory(selectedIdForFood)
-            self.colRestaurantCatList.reloadData()
+//            selectedIdForFood = arrCategories[indexPath.row].id
+//            self.delegateResCatCell?.SelectedCategory(selectedIdForFood)
+//            self.colRestaurantCatList.reloadData()
            //print(indexPath.row)
+//        DispatchQueue.main.async {
+            if self.selectedIdForFood == "" {
+                self.selectedIdForFood = self.arrCategories[indexPath.row].id
+                let selectedIndexPath = IndexPath(item:indexPath.row, section: 0)
+                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+        }
+            else if self.selectedIdForFood == self.arrCategories[indexPath.row].id{
+                self.selectedIdForFood = ""
+            let selectedIndexPath = IndexPath(item:indexPath.row , section: 0)
+                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+        } else {
+            self.selectedIdForFood = self.arrCategories[indexPath.row].id
+            self.colRestaurantCatList.reloadData()
+        }
+//        }
+        self.delegateResCatCell?.SelectedCategory(selectedIdForFood)
        }
 }

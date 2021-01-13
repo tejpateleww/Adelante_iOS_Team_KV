@@ -91,7 +91,8 @@ class RegisterViewController: UIViewController {
         let firstName = txtFirstName.validatedText(validationType: ValidatorType.username(field: "first name"))
         let lastname =  txtLastName.validatedText(validationType: ValidatorType.username(field: "last name"))
         let checkEmail = txtEmail.validatedText(validationType: ValidatorType.email)
-        let checkPassword = txtPassword.validatedText(validationType: ValidatorType.password)
+        let checkPassword = txtPassword.validatedText(validationType: ValidatorType.requiredField(field: "Password"))
+        let confirmPassword = txtConPassword.validatedText(validationType: ValidatorType.requiredField(field: "confirm Password"))
         let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "contact number"))
         
         if (!firstName.0){
@@ -105,10 +106,6 @@ class RegisterViewController: UIViewController {
             Utilities.ShowAlert(OfMessage: checkEmail.1)
             return checkEmail.0
         }
-//        else if (!phone.0){
-//            Utilities.ShowAlert(OfMessage: phone.1)
-//            return phone.0
-//        }
         else if (txtPhoneNumber.text?.count ?? 0) < 9 {
             Utilities.ShowAlert(OfMessage: "Please enter valid contact number")
             return false
@@ -117,6 +114,12 @@ class RegisterViewController: UIViewController {
         {
             Utilities.ShowAlert(OfMessage: checkPassword.1)
             return checkPassword.0
+        }else if(!confirmPassword.0){
+            Utilities.ShowAlert(OfMessage: confirmPassword.1)
+            return confirmPassword.0
+        }else if txtPassword.text?.lowercased() != txtConPassword.text?.lowercased(){
+            Utilities .ShowAlert(OfMessage: "New password and confirm password must be same")
+            return false
         }
         return true
     }

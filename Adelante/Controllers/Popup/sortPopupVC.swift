@@ -20,7 +20,7 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     @IBOutlet weak var lblSort: sortPopUPLabel!
     @IBOutlet weak var heightTblSorting: NSLayoutConstraint!
     
-    var arrayForSort : [String] = ["Picked for you","Nearest","Popular near you","Today’s special","Top selling","Loved by locals"]
+    var arrayForSort : [Sorting] = SingletonClass.sharedInstance.arrSorting
     
     
     
@@ -53,7 +53,9 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
         
         print("111")
         
-        
+        tblSorting.delegate = self
+        tblSorting.dataSource = self
+        tblSorting.reloadData()
     }
  
     override func viewDidLayoutSubviews() {
@@ -90,7 +92,7 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tblSorting.dequeueReusableCell(withIdentifier: sortCell.reuseIdentifier, for: indexPath) as! sortCell
-        cell.SortListName.text = arrayForSort[indexPath.row]
+        cell.SortListName.text = arrayForSort[indexPath.row].name
         
         cell.imageSelected.isHighlighted = selectedIndex == indexPath.row ? true : false
         cell.btnClickNew = {

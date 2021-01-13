@@ -70,11 +70,12 @@ enum ApiKey: String {
     case ForgotPassword = "forgot_password"
     case changePassword = "change_password"
     case Logout = "logout"
-    
-    case Dashboard = "dashboard"
     case GetProfile = "profile"
     case EditProfile = "profile_edit"
     case Search = "search"
+    case Dashboard = "dashboard"
+    case Sorting = "sorting"
+    case Favorite = "favourite_list"
     case RestaurantList = "restaurant"
     case RestaurantDetails = "restaurant_detail"
 }

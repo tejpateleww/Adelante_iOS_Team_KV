@@ -10,7 +10,7 @@ import UIKit
 
 class YourFavouriteCell: UITableViewCell {
     
-    @IBOutlet weak var imgRestaurant: customImageView!
+    @IBOutlet weak var imgRestaurant: customImagewithShadow!
     @IBOutlet weak var lblPrice: tblHomeLabels!
     @IBOutlet weak var lblItemName: tblHomeLabels!
     @IBOutlet weak var lblRating: tblHomeLabels!

@@ -12,7 +12,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    
+    var arrFavorite = [Favorite]()
+    var arrRestaurant = [RestaurantFav]()
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: customTextField!
@@ -65,5 +66,20 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
-    
+    func webservicePostRestaurantFav(strSearch : String){
+        let RestaurantFavorite = RestaurantFavoriteReqModel()
+        RestaurantFavorite.restaurant_id = strSearch
+        RestaurantFavorite.user_id = strSearch
+        RestaurantFavorite.page = strSearch
+        WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
+            //self.hideHUD()
+            if status{
+                let restaurantData = RestaurantListResModel.init(fromJson: response)
+//                self.arrRestaurantList = restaurantData.data
+                self.tblMainList.reloadData()
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
 }

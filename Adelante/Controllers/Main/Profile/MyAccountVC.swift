@@ -77,9 +77,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         DispatchQueue.main.async {
             self.present(alertController, animated: true)
         }
-        
-        
-        
     }
     @objc  func btnExpand(_ sender : UIButton) {
            switch sender.tag {
