@@ -1,15 +1,15 @@
 //
-//  Favorite.swift
+//  restaurantDetailsList.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 13, 2021
+//  Created on January 18, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class Favorite : NSObject, NSCoding{
+class restaurantDetailsList : NSObject, NSCoding{
 
-    var restaurant : [Restaurant]!
+    var restaurantDetails : [RestaurantFavorite]!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -18,11 +18,11 @@ class Favorite : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
-        restaurant = [Restaurant]()
+        restaurantDetails = [RestaurantFavorite]()
         let restaurantArray = json["restaurant"].arrayValue
         for restaurantJson in restaurantArray{
-            let value = Restaurant(fromJson: restaurantJson)
-            restaurant.append(value)
+            let value = RestaurantFavorite(fromJson: restaurantJson)
+            restaurantDetails.append(value)
         }
 	}
 
@@ -32,12 +32,12 @@ class Favorite : NSObject, NSCoding{
 	func toDictionary() -> [String:Any]
 	{
 		var dictionary = [String:Any]()
-        if restaurant != nil{
+        if restaurantDetails != nil{
         var dictionaryElements = [[String:Any]]()
-        for restaurantElement in restaurant {
+        for restaurantElement in restaurantDetails {
         	dictionaryElements.append(restaurantElement.toDictionary())
         }
-        dictionary["restaurant"] = dictionaryElements
+        dictionary["restaurantDetails"] = dictionaryElements
         }
 		return dictionary
 	}
@@ -48,7 +48,7 @@ class Favorite : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		restaurant = aDecoder.decodeObject(forKey: "restaurant") as? [Restaurant]
+        restaurantDetails = aDecoder.decodeObject(forKey: "restaurant") as? [RestaurantFavorite]
 	}
 
     /**
@@ -57,8 +57,8 @@ class Favorite : NSObject, NSCoding{
     */
     func encode(with aCoder: NSCoder)
 	{
-		if restaurant != nil{
-			aCoder.encode(restaurant, forKey: "restaurant")
+		if restaurantDetails != nil{
+			aCoder.encode(restaurantDetails, forKey: "restaurantDetails")
 		}
 
 	}

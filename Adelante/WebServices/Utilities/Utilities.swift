@@ -48,6 +48,38 @@ class Utilities:NSObject{
     //MARK: - ================================
     //MARK: ALERT MESSAGE
     //MARK: ==================================
+    static func displayAlert( title: String, message: String, completion:(( _ index: Int) -> Void)?, otherTitles: String? ...) {
+        
+        if message.trimmedString == "" {
+            return
+        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        if otherTitles.count > 0 {
+            var i = 0
+            for title in otherTitles {
+                
+                if let title = title {
+                    alert.addAction(UIAlertAction(title: title, style: .default, handler: { (UIAlertAction) in
+                        if (completion != nil) {
+                            i += 1
+                            completion!(i);
+                        }
+                    }))
+                }
+            }
+        }
+        // else {
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (UIAlertAction) in
+            if (completion != nil) {
+                completion!(0);
+            }
+        }))
+        // }
+        
+        DispatchQueue.main.async {
+            AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
+        }
+    }
     static func displayAlert(_ title: String, message: String, completion:((_ index: Int) -> Void)?, otherTitles: String? ...) {
         
         if message.trimmedString == "" {
@@ -247,14 +279,14 @@ class Utilities:NSObject{
     class func showHud()
     {
         let size = CGSize(width: 40, height: 40)
-//        let activityData = ActivityData(size: size, message: "", messageFont: nil, messageSpacing: nil, type: .lineScale, color: colors.btnColor.value, padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor: UIColor.black.withAlphaComponent(0.5), textColor: nil)
-//        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        //        let activityData = ActivityData(size: size, message: "", messageFont: nil, messageSpacing: nil, type: .lineScale, color: colors.btnColor.value, padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor: UIColor.black.withAlphaComponent(0.5), textColor: nil)
+        //        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
         
     }
     
     class func hideHud()
     {
-//        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        //        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
     
     /*
@@ -448,29 +480,29 @@ class Utilities:NSObject{
     }
     
     
-      //MARK:- Custom Method
+    //MARK:- Custom Method
     class  func getAudioFromDocumentDirectory(audioStr : String , documentsFolderUrl : URL) -> Data?
+    {
+        guard let audioUrl = URL(string: audioStr) else { return nil}
+        let destinationUrl = documentsFolderUrl.appendingPathComponent(audioUrl.lastPathComponent)
+        
+        if FileManager().fileExists(atPath: destinationUrl.path)
         {
-            guard let audioUrl = URL(string: audioStr) else { return nil}
-            let destinationUrl = documentsFolderUrl.appendingPathComponent(audioUrl.lastPathComponent)
-              
-            if FileManager().fileExists(atPath: destinationUrl.path)
-            {
-    //            let assets = AVAsset(url: audioUrl)
-    //           print(assets)
-                do {
-                    let GetAudioFromDirectory = try Data(contentsOf: destinationUrl)
-                     print("audio : ", GetAudioFromDirectory)
-                    return GetAudioFromDirectory
-                }catch(let error){
-                    print(error.localizedDescription)
-                }
+            //            let assets = AVAsset(url: audioUrl)
+            //           print(assets)
+            do {
+                let GetAudioFromDirectory = try Data(contentsOf: destinationUrl)
+                print("audio : ", GetAudioFromDirectory)
+                return GetAudioFromDirectory
+            }catch(let error){
+                print(error.localizedDescription)
             }
-            else{
-                print("No Audio Found")
-            }
-            return nil
         }
+        else{
+            print("No Audio Found")
+        }
+        return nil
+    }
     
     class func GetDestinationUrlOfSong(audioStr : String , documentsFolderUrl : URL) -> URL?
     {
@@ -538,18 +570,18 @@ class Utilities:NSObject{
 extension UIImage {
     
     func normalizedImage() -> UIImage {
-
+        
         if (self.imageOrientation == UIImage.Orientation.up) {
-          return self;
-      }
-
-      UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);
-      let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+            return self;
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         self.draw(in: rect)
-
+        
         let normalizedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-      UIGraphicsEndImageContext();
-      return normalizedImage;
+        UIGraphicsEndImageContext();
+        return normalizedImage;
     }
     
 }

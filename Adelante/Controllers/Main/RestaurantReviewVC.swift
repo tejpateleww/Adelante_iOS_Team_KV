@@ -12,7 +12,7 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-   
+    var refreshList = UIRefreshControl()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tbvReview: UITableView!
@@ -23,6 +23,8 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tbvReview.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostReview), for: .valueChanged)
         setUpLocalizedStrings()
         setUp()
     }
@@ -58,4 +60,9 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     // MARK: - Api Calls
+    @objc func webservicePostReview(){
+        DispatchQueue.main.async {
+            self.refreshList.endRefreshing()
+        }
+    }
 }

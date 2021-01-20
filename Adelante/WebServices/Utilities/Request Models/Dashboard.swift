@@ -10,4 +10,9 @@ import Foundation
 
 class DashboardReqModel:RequestModel{
     var category_id : String = ""
+    var user_id : String = ""
+    var filter : String = ""
+    var lat : String = ""
+    var lng : String = ""
+    var page : String = ""
 }

@@ -75,7 +75,10 @@ enum ApiKey: String {
     case Search = "search"
     case Dashboard = "dashboard"
     case Sorting = "sorting"
-    case Favorite = "favourite_list"
+    case favorite = "favorites"
+    case FavoriteList = "favourite_list"
+    case SettingsLink = "setting_link"
+    
     case RestaurantList = "restaurant"
     case RestaurantDetails = "restaurant_detail"
 }

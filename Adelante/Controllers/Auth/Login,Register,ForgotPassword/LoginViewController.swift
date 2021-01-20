@@ -64,8 +64,8 @@ class LoginViewController: UIViewController {
         login.phone = ""
         login.device_token = "123456"
         login.device_type = ReqDeviceType
-        login.lat = "23.076448"
-        login.lng = "72.508116 "
+        login.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+        login.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         
         WebServiceSubClass.login(loginModel: login, completion: { (json, status, response) in
             if(status)

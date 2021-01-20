@@ -28,13 +28,17 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSAllowsArbitraryLoadsUsageDescription</key>
+		<dict/>
 	</dict>
-	<key>NSLocationAlwaysAndWhenInUsageDescription</key>
-	<string>Always and in usage permissions</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) requires access to your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>always permissions</string>
+	<string>$(PRODUCT_NAME) requires access to your location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>$(PRODUCT_NAME) requires access to your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>When in use permissions</string>
+	<string>$(PRODUCT_NAME) requires access to your location</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Aileron-UltraLightItalic.otf</string>
@@ -80,6 +84,11 @@
 		<string>Nunito-Regular.ttf</string>
 		<string>Nunito-SemiBold.ttf</string>
 		<string>Nunito-SemiBoldItalic.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Auth</string>

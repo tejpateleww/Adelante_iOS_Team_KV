@@ -17,6 +17,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var customTabBarController: CustomTabBarVC?
     var allDetails = [myAccountDetails]()
     var expendedCell = -1
+    var SettingsData : SettingsResModel!
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
     @IBOutlet weak var imgProfile: UIImageView!
@@ -31,11 +32,12 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                       
             myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "MyAccountVC_title1".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "MyAccountVC_title2".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
-            myAccountDetails(icon: UIImage(named: "ic_aboutUS")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized())], selectedIcon: UIImage(named: "ic_aboutUSSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_SelectedSettings")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_C".Localized())], selectedIcon: UIImage(named: "ic_Settings")!),
             myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "MyAccountVC_title4".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title4_A".Localized())], selectedIcon: UIImage(named: "ic_HelpSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "MyAccountVC_title5".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "MyAccountVC_title6".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
           ]
+        webserviceGetSettings()
           setup()
       
       self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -204,11 +206,18 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             switch indexPath.row {
             case 0:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-                controller.strNavTitle = "NavigationTitles_Terms&conditions".Localized()
+                controller.strNavTitle = "MyAccountVC_title3_A".Localized()
+                controller.strUrl = SettingsData.termsCondition
                 self.navigationController?.pushViewController(controller, animated: true)
             case 1:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-                controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
+                controller.strNavTitle = "MyAccountVC_title3_B".Localized()
+                controller.strUrl = SettingsData.privacyPolicy
+                self.navigationController?.pushViewController(controller, animated: true)
+            case 2:
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+                controller.strNavTitle = "MyAccountVC_title3_C".Localized()
+                controller.strUrl = SettingsData.aboutUs
                 self.navigationController?.pushViewController(controller, animated: true)
             default:
                 print(indexPath.row)
@@ -233,6 +242,18 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         return 50
     }
     // MARK: - Api Calls
+    func webserviceGetSettings(){
+        
+        WebServiceSubClass.Settings(showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                self.SettingsData = SettingsResModel.init(fromJson: json)            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
+    }
 }
 class myAccountDetails
 {

@@ -1,7 +1,7 @@
 //
 //  MenuItem.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 8, 2021
+//  Created on January 18, 2021
 
 import Foundation
 import SwiftyJSON
@@ -21,6 +21,7 @@ class MenuItem : NSObject, NSCoding{
     var price : String!
     var quantity : String!
     var restaurantId : String!
+    var size : String!
     var status : String!
     var trash : String!
     var updatedAt : String!
@@ -47,6 +48,7 @@ class MenuItem : NSObject, NSCoding{
         price = json["price"].stringValue
         quantity = json["quantity"].stringValue
         restaurantId = json["restaurant_id"].stringValue
+        size = json["size"].stringValue
         status = json["status"].stringValue
         trash = json["trash"].stringValue
         updatedAt = json["updated_at"].stringValue
@@ -97,6 +99,9 @@ class MenuItem : NSObject, NSCoding{
         if restaurantId != nil{
         	dictionary["restaurant_id"] = restaurantId
         }
+        if size != nil{
+        	dictionary["size"] = size
+        }
         if status != nil{
         	dictionary["status"] = status
         }
@@ -136,6 +141,7 @@ class MenuItem : NSObject, NSCoding{
 		price = aDecoder.decodeObject(forKey: "price") as? String
 		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
 		restaurantId = aDecoder.decodeObject(forKey: "restaurant_id") as? String
+		size = aDecoder.decodeObject(forKey: "size") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? String
 		trash = aDecoder.decodeObject(forKey: "trash") as? String
 		updatedAt = aDecoder.decodeObject(forKey: "updated_at") as? String
@@ -185,6 +191,9 @@ class MenuItem : NSObject, NSCoding{
 		}
 		if restaurantId != nil{
 			aCoder.encode(restaurantId, forKey: "restaurant_id")
+		}
+		if size != nil{
+			aCoder.encode(size, forKey: "size")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

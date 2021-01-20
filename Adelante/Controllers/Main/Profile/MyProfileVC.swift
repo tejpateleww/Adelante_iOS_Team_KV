@@ -8,7 +8,9 @@
 
 import UIKit
 import SDWebImage
-class MyProfileVC: BaseViewController {
+class MyProfileVC: BaseViewController,EditProfileDelegate {
+   
+    
 
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -23,13 +25,12 @@ class MyProfileVC: BaseViewController {
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        webserviceGetProfile()
         setUpLocalizedStrings()
-        
         setUp()
     }
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
-        webserviceGetProfile()
     }
     // MARK: - Other Methods
     func setUp() {
@@ -56,6 +57,7 @@ class MyProfileVC: BaseViewController {
     
     @IBAction func BtnEditAccount(_ sender: Any) {
        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: EditProfileVC.storyboardID) as! EditProfileVC
+        controller.delegateEdit = self
         self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
@@ -67,6 +69,9 @@ class MyProfileVC: BaseViewController {
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 let loginModel = Userinfo.init(fromJson: json)
                 self.loginModelDetails = loginModel.profile
+                userDefault.setUserData(objProfile: self.loginModelDetails!)
+                SingletonClass.sharedInstance.LoginRegisterUpdateData = self.loginModelDetails
+//                self.loginModelDetails.ApiKey =
                 self.setupUserDetails()
             }
             else
@@ -74,5 +79,10 @@ class MyProfileVC: BaseViewController {
                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
+    }
+    
+    // MARK: - EditProfileDelegate
+    func refereshProfileScreen() {
+        webserviceGetProfile()
     }
 }

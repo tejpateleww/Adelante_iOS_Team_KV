@@ -145,9 +145,10 @@
 //"MyAccountVC
 "MyAccountVC_title1" = "Payment";
 "MyAccountVC_title2" = "My Foodlist";
-"MyAccountVC_title3" = "About Us";
+"MyAccountVC_title3" = "Settings";
 "MyAccountVC_title3_A" = "Terms & conditions";
 "MyAccountVC_title3_B" = "Privacy policy";
+"MyAccountVC_title3_C" = "About Us";
 "MyAccountVC_title4" = "Help";
 "MyAccountVC_title4_A" = "Feedback";
 "MyAccountVC_title5" = "Change Password";

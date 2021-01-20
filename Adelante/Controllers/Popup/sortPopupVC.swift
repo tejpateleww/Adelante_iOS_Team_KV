@@ -13,6 +13,10 @@ import UIKit
 class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
    // var customTabBarController: CustomTabBarVC?
+    var refreshList = UIRefreshControl()
+    
+    
+    
     // @IBOutlet weak var heightViewBG: NSLayoutConstraint!
     @IBOutlet weak var tblSorting: UITableView!
     @IBOutlet weak var viewBG: UIView!
@@ -55,6 +59,8 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
         
         tblSorting.delegate = self
         tblSorting.dataSource = self
+        tblSorting.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(""), for: .valueChanged)
         tblSorting.reloadData()
     }
  

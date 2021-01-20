@@ -1,13 +1,13 @@
 //
-//  RestaurantFav.swift
+//  RestaurantFavorite.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 13, 2021
+//  Created on January 18, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class RestaurantFav : NSObject, NSCoding{
+class RestaurantFavorite : NSObject, NSCoding{
 
     var createdAt : String!
     var distance : String!

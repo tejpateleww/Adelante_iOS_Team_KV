@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import CoreLocation
 
 struct structFilter {
     
@@ -41,6 +42,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     var arrRestaurant  = [Restaurant]()
     var arrBanner = [Banner]()
     var SelectedCatId = ""
+    var refreshList = UIRefreshControl()
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -54,7 +56,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         super.viewDidLoad()
         setUpLocalizedStrings()
         webserviceGetDashboard()
-        
+        tblMainList.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webserviceGetDashboard), for: .valueChanged)
+        let button = UIButton()
+        button.setTitle("", for: .normal)
+        button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         setup()
     
     self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -101,7 +107,16 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         lblAddress.text = "30 Memorial Drive, Avon MA 2322"
     }
     // MARK: - IBActions
-    
+    @IBAction func buttonTapFavorite(_ sender: UIButton) {
+        var Select = arrRestaurant[sender.tag - 1].favourite ?? ""
+        let restaurantId = arrRestaurant[sender.tag - 1].id ?? ""
+        if Select == "1"{
+            Select = "0"
+        }else{
+            Select = "1"
+        }
+        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+    }
     @IBAction func btnNotifClicked(_ sender: Any) {
         let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)
         self.navigationController?.pushViewController(notifVc, animated: true)
@@ -221,6 +236,13 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
             cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.btnFavorite.tag = indexPath.row
+            cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+            if arrRestaurant[indexPath.row - 1].favourite == "1"{
+                cell.btnFavorite.isSelected = true
+            }else{
+                cell.btnFavorite.isSelected = false
+            }
             cell.selectionStyle = .none
             return cell
         }
@@ -240,9 +262,14 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     self.webserviceGetDashboard()
     }
     // MARK: - Api Calls
-    func webserviceGetDashboard(){
+    @objc func webserviceGetDashboard(){
         let Deshboard = DashboardReqModel()
         Deshboard.category_id = SelectedCatId
+        Deshboard.user_id = SingletonClass.sharedInstance.UserId
+        Deshboard.filter = ""
+        Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+        Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        Deshboard.page = "1"
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
@@ -252,6 +279,23 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 self.arrRestaurant = Homedata.restaurant
                 self.tblMainList.reloadData()
                 self.colVwRestWthPage.reloadData()
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+            DispatchQueue.main.async {
+                self.refreshList.endRefreshing()
+            }
+        })
+    }
+    func webwerviceFavorite(strRestaurantId:String,Status:String){
+        let favorite = FavoriteReqModel()
+        favorite.restaurant_id = strRestaurantId
+        favorite.status = Status
+        favorite.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+//            self.hideHUD()
+            if status{
+                self.webserviceGetDashboard()
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

@@ -11,4 +11,6 @@ class RestaurantListReqModel:RequestModel{
     var filter : String = ""
     var item : String = ""
     var page : String = ""
+    var item_id : String = ""
+    var item_type : String = ""
 }

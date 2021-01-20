@@ -28,7 +28,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var customTabBarController: CustomTabBarVC?
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
     var arrMenuitem = [MenuItem]()
-    var arrResData = [RestaurantRes]()
+    var arrResData = [DetailsData]()
     var arrReview = [Review]()
     var arrResDetail = [RestaurantDetailsData]()
     var SelectedCatId = ""
@@ -213,23 +213,24 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     // MARK: - Api Calls
-//    func webservicePostRestaurantDetails(){
-//        let ResDetails = RestaurantDetailsReqModel()
-//        ResDetails.restaurant_id = ""
-//        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
-//            //self.hideHUD()
-//            if status{
-//                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
-//                self.arrResData = RestDetail.RestaurantRes
+    func webservicePostRestaurantDetails(){
+        let ResDetails = RestaurantDetailsReqModel()
+        ResDetails.restaurant_id = ""
+        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
+            //self.hideHUD()
+            if status{
+                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
+                
+//                self.arrResData = RestDetail.data
 //                self.arrReview = RestDetail.Review
 //                self.arrResDetail = RestDetail.RestaurantDetailsData
 //                self.arrMenuitem = RestDetail.MenuItem
 //                self.tblMainList.reloadData()
 //                self.colVwRestWthPage.reloadData()
-//            }else{
-//                Utilities.showAlertOfAPIResponse(param: error, vc: self)
-//            }
-//        })
-//    }
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
 }
 

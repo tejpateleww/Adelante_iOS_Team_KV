@@ -9,9 +9,14 @@
 import UIKit
 import SDWebImage
 
+protocol EditProfileDelegate {
+    func refereshProfileScreen()
+}
+
 class EditProfileVC: BaseViewController{
     
     // MARK: - Properties
+    var delegateEdit : EditProfileDelegate!
     var selectedImage : UIImage?
     var customTabBarController: CustomTabBarVC?
     private var imagePicker : ImagePicker!
@@ -126,10 +131,10 @@ class EditProfileVC: BaseViewController{
                 let updatedData = Userinfo.init(fromJson: response)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
                 userDefault.setUserData(objProfile: updatedData.profile)
-                Utilities.ShowAlert(OfMessage: response["message"].stringValue)
-            //    self.btnSave.setImage(#imageLiteral(resourceName: "imgUpdate"), for: .normal)
-                self.showUserData()
+                Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
                 self.navigationController?.popViewController(animated: true)
+                self.delegateEdit.refereshProfileScreen()
+                }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

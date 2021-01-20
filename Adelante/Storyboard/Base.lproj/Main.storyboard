@@ -31,7 +31,7 @@
                                         </scopeButtonTitles>
                                     </searchBar>
                                 </subviews>
-                                <color key="backgroundColor" red="0.95298641920000005" green="0.96062928439999995" blue="0.97641390559999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="nUq-9x-IMW" secondAttribute="trailing" id="4fo-U0-FqT"/>
                                     <constraint firstItem="nUq-9x-IMW" firstAttribute="centerY" secondItem="7iD-BR-Bce" secondAttribute="centerY" id="NUJ-YV-wB7"/>
@@ -210,24 +210,17 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGB-KV-TMQ">
                                                         <rect key="frame" x="18" y="0.0" width="378" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jDn-Nr-3lG" customClass="customTextField" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Dzj-qS-eIp">
+                                                                <rect key="frame" x="0.0" y="-3" width="378" height="56"/>
                                                                 <textInputTraits key="textInputTraits"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="tabSearchUnselected"/>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSearchBar" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </textField>
+                                                            </searchBar>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.95298641920000005" green="0.96062928439999995" blue="0.97641390559999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="CGl-4f-JYd"/>
-                                                            <constraint firstAttribute="trailing" secondItem="jDn-Nr-3lG" secondAttribute="trailing" id="Ki2-nO-VFr"/>
-                                                            <constraint firstItem="jDn-Nr-3lG" firstAttribute="leading" secondItem="CGB-KV-TMQ" secondAttribute="leading" id="TMP-NY-DyB"/>
-                                                            <constraint firstItem="jDn-Nr-3lG" firstAttribute="top" secondItem="CGB-KV-TMQ" secondAttribute="top" id="Tq5-q1-nRc"/>
-                                                            <constraint firstAttribute="bottom" secondItem="jDn-Nr-3lG" secondAttribute="bottom" id="h5m-AZ-sh0"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Dzj-qS-eIp" secondAttribute="trailing" id="b5E-iY-IWZ"/>
+                                                            <constraint firstItem="Dzj-qS-eIp" firstAttribute="leading" secondItem="CGB-KV-TMQ" secondAttribute="leading" id="iol-MJ-ADG"/>
+                                                            <constraint firstItem="Dzj-qS-eIp" firstAttribute="centerY" secondItem="CGB-KV-TMQ" secondAttribute="centerY" id="kjV-YN-hTn"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -481,7 +474,7 @@
                     <navigationItem key="navigationItem" id="ES5-e5-9X0"/>
                     <connections>
                         <outlet property="tblMainList" destination="98L-Tb-YGa" id="ZxT-8d-QOB"/>
-                        <outlet property="txtSearch" destination="jDn-Nr-3lG" id="hP5-xc-wMr"/>
+                        <outlet property="txtSearch" destination="Dzj-qS-eIp" id="eoO-uD-SnE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGD-tG-q4X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2777,6 +2770,7 @@
                                                                                     <subviews>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dummy-Sandwich" translatesAutoresizingMaskIntoConstraints="NO" id="3AT-mA-9tg" customClass="customImagewithShadow" customModule="Adelante" customModuleProvider="target">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="94" height="97"/>
+                                                                                            <color key="tintColor" red="0.82352941176470584" green="0.33333333333333331" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
                                                                                             </userDefinedRuntimeAttributes>
@@ -3767,7 +3761,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.95298641920000005" green="0.96062928439999995" blue="0.97641390559999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Er6-Cn-r6h"/>
                                                             <constraint firstItem="jEM-3l-Wit" firstAttribute="leading" secondItem="vn0-wh-4CH" secondAttribute="leading" id="Jua-2r-dIu"/>
@@ -3892,9 +3886,6 @@
                                                                                             </constraints>
                                                                                             <state key="normal" image="ic_dislike"/>
                                                                                             <state key="selected" image="ic_favouriteSelected"/>
-                                                                                            <connections>
-                                                                                                <action selector="BtnLikeDislike:" destination="hu2-bj-dns" eventType="touchUpInside" id="Z9I-qO-HoP"/>
-                                                                                            </connections>
                                                                                         </button>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4065,6 +4056,7 @@
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="btnFavorite" destination="QE5-fj-NCE" id="NJd-lR-NKD"/>
                                                             <outlet property="imgRestaurant" destination="raJ-Ag-LQK" id="dU5-iq-pwG"/>
                                                             <outlet property="lblMiles" destination="wSm-qC-mXw" id="Z4J-Lm-dRm"/>
                                                             <outlet property="lblName" destination="CSX-KQ-9Bx" id="NqP-wV-eQO"/>
@@ -6546,9 +6538,6 @@
                                                                                             </constraints>
                                                                                             <state key="normal" image="ic_dislike"/>
                                                                                             <state key="selected" image="ic_favouriteSelected"/>
-                                                                                            <connections>
-                                                                                                <action selector="BtnLikeDislike:" destination="YVw-po-u7R" eventType="touchUpInside" id="x2X-Ag-9mP"/>
-                                                                                            </connections>
                                                                                         </button>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -6719,6 +6708,7 @@
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="btnFavorite" destination="DJH-6L-uq1" id="feE-3o-bWR"/>
                                                             <outlet property="imgRestaurant" destination="Smh-om-Im1" id="KmO-bE-QLM"/>
                                                             <outlet property="lblItemName" destination="FJ4-wJ-tbB" id="MaS-fp-7Wf"/>
                                                             <outlet property="lblMiles" destination="cMB-Yr-Kpi" id="Wxh-mA-egp"/>
@@ -7381,47 +7371,6 @@ avoid cancellations </string>
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="0t8-U3-ebv">
-            <size key="intrinsicContentSize" width="97" height="34"/>
-        </designable>
-        <designable name="2Ut-AC-9Qr">
-            <size key="intrinsicContentSize" width="178" height="34"/>
-        </designable>
-        <designable name="4rN-z1-ohE">
-            <size key="intrinsicContentSize" width="98" height="34"/>
-        </designable>
-        <designable name="IOt-oG-ldn">
-            <size key="intrinsicContentSize" width="4" height="18.5"/>
-        </designable>
-        <designable name="M00-EB-i9S">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="QPd-3g-SxC">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="cc0-dj-TGl">
-            <size key="intrinsicContentSize" width="149" height="34"/>
-        </designable>
-        <designable name="cpW-fr-cqC">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="lWD-a0-7KT">
-            <size key="intrinsicContentSize" width="90.5" height="34"/>
-        </designable>
-        <designable name="mJ2-zK-PS6">
-            <size key="intrinsicContentSize" width="208.5" height="34"/>
-        </designable>
-        <designable name="pGH-j9-vWm">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="ypJ-aF-6Y5">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="zNM-X4-rQ4">
-            <size key="intrinsicContentSize" width="34.5" height="18.5"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
         <image name="DetailsFood" width="161" height="158"/>

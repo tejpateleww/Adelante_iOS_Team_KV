@@ -13,7 +13,7 @@ class CommonWebViewVC: BaseViewController, WKNavigationDelegate {
     
     //MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var strUrl = "https://www.google.com"
+    var strUrl = ""
     private let webView = WKWebView(frame: .zero)
     var strNavTitle = ""
     

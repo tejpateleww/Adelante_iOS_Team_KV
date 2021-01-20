@@ -13,6 +13,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var cardDetails : [String] = []
     var customTabBarController: CustomTabBarVC?
     var selectedPaymentMethods = 1
+    var refreshList = UIRefreshControl()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
@@ -21,6 +22,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tblPaymentMethod.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webserviceGetAddPayment), for: .valueChanged)
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
@@ -170,5 +173,9 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
-    
+    @objc func webserviceGetAddPayment(){
+        DispatchQueue.main.async {
+            self.refreshList.endRefreshing()
+        }
+    }
 }

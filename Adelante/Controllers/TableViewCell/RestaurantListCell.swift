@@ -15,6 +15,8 @@ class RestaurantListCell: UITableViewCell {
     @IBOutlet weak var lblMiles: tblHomeLabels!
     @IBOutlet weak var lblRating: tblHomeLabels!
     @IBOutlet weak var lblPrice: tblHomeLabels!
+    @IBOutlet weak var btnFavorite: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

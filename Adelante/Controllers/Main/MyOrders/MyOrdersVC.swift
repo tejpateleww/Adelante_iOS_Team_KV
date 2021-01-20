@@ -14,13 +14,15 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var selectedSegmentTag = 0
-    
+    var refreshList = UIRefreshControl()
     // MARK: - IBOutlets
     @IBOutlet weak var tblOrders: UITableView!
     
     // MARK: - ViewController Lifecycle
      override func viewDidLoad() {
           super.viewDidLoad()
+        tblOrders.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webserviceGetOrderDetail), for: .valueChanged)
           setup()
       
       self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -102,5 +104,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     
     
     // MARK: - Api Calls
-    
+    @objc func webserviceGetOrderDetail(){
+        DispatchQueue.main.async {
+            self.refreshList.endRefreshing()
+        }
+    }
 }

@@ -1,7 +1,7 @@
 //
 //  RestaurantDetailsData.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 8, 2021
+//  Created on January 18, 2021
 
 import Foundation
 import SwiftyJSON
@@ -9,9 +9,23 @@ import SwiftyJSON
 
 class RestaurantDetailsData : NSObject, NSCoding{
 
-    var menuItem : [MenuItem]!
-    var restaurant : Restaurant!
-    var review : Review!
+    var address : String!
+    var bannerId : String!
+    var createdAt : String!
+    var days : String!
+    var favourite : String!
+    var fromTime : String!
+    var id : String!
+    var name : String!
+    var serviceFee : String!
+    var status : String!
+    var tax : String!
+    var toTime : String!
+    var trash : String!
+    var type : String!
+    var updatedAt : String!
+    var userId : String!
+    var zipCode : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -20,20 +34,23 @@ class RestaurantDetailsData : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
-        menuItem = [MenuItem]()
-        let menuItemArray = json["menu_item"].arrayValue
-        for menuItemJson in menuItemArray{
-            let value = MenuItem(fromJson: menuItemJson)
-            menuItem.append(value)
-        }
-        let restaurantJson = json["restaurant"]
-        if !restaurantJson.isEmpty{
-            restaurant = Restaurant(fromJson: restaurantJson)
-        }
-        let reviewJson = json["review"]
-        if !reviewJson.isEmpty{
-            review = Review(fromJson: reviewJson)
-        }
+        address = json["address"].stringValue
+        bannerId = json["banner_id"].stringValue
+        createdAt = json["created_at"].stringValue
+        days = json["days"].stringValue
+        favourite = json["favourite"].stringValue
+        fromTime = json["from_time"].stringValue
+        id = json["id"].stringValue
+        name = json["name"].stringValue
+        serviceFee = json["service_fee"].stringValue
+        status = json["status"].stringValue
+        tax = json["tax"].stringValue
+        toTime = json["to_time"].stringValue
+        trash = json["trash"].stringValue
+        type = json["type"].stringValue
+        updatedAt = json["updated_at"].stringValue
+        userId = json["user_id"].stringValue
+        zipCode = json["zip_code"].stringValue
 	}
 
 	/**
@@ -42,18 +59,56 @@ class RestaurantDetailsData : NSObject, NSCoding{
 	func toDictionary() -> [String:Any]
 	{
 		var dictionary = [String:Any]()
-        if menuItem != nil{
-        var dictionaryElements = [[String:Any]]()
-        for menuItemElement in menuItem {
-        	dictionaryElements.append(menuItemElement.toDictionary())
+        if address != nil{
+        	dictionary["address"] = address
         }
-        dictionary["menuItem"] = dictionaryElements
+        if bannerId != nil{
+        	dictionary["banner_id"] = bannerId
         }
-        if restaurant != nil{
-        	dictionary["restaurant"] = restaurant.toDictionary()
+        if createdAt != nil{
+        	dictionary["created_at"] = createdAt
         }
-        if review != nil{
-        	dictionary["review"] = review.toDictionary()
+        if days != nil{
+        	dictionary["days"] = days
+        }
+        if favourite != nil{
+        	dictionary["favourite"] = favourite
+        }
+        if fromTime != nil{
+        	dictionary["from_time"] = fromTime
+        }
+        if id != nil{
+        	dictionary["id"] = id
+        }
+        if name != nil{
+        	dictionary["name"] = name
+        }
+        if serviceFee != nil{
+        	dictionary["service_fee"] = serviceFee
+        }
+        if status != nil{
+        	dictionary["status"] = status
+        }
+        if tax != nil{
+        	dictionary["tax"] = tax
+        }
+        if toTime != nil{
+        	dictionary["to_time"] = toTime
+        }
+        if trash != nil{
+        	dictionary["trash"] = trash
+        }
+        if type != nil{
+        	dictionary["type"] = type
+        }
+        if updatedAt != nil{
+        	dictionary["updated_at"] = updatedAt
+        }
+        if userId != nil{
+        	dictionary["user_id"] = userId
+        }
+        if zipCode != nil{
+        	dictionary["zip_code"] = zipCode
         }
 		return dictionary
 	}
@@ -64,9 +119,23 @@ class RestaurantDetailsData : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		menuItem = aDecoder.decodeObject(forKey: "menu_item") as? [MenuItem]
-		restaurant = aDecoder.decodeObject(forKey: "restaurant") as? Restaurant
-		review = aDecoder.decodeObject(forKey: "review") as? Review
+		address = aDecoder.decodeObject(forKey: "address") as? String
+		bannerId = aDecoder.decodeObject(forKey: "banner_id") as? String
+		createdAt = aDecoder.decodeObject(forKey: "created_at") as? String
+		days = aDecoder.decodeObject(forKey: "days") as? String
+		favourite = aDecoder.decodeObject(forKey: "favourite") as? String
+		fromTime = aDecoder.decodeObject(forKey: "from_time") as? String
+		id = aDecoder.decodeObject(forKey: "id") as? String
+		name = aDecoder.decodeObject(forKey: "name") as? String
+		serviceFee = aDecoder.decodeObject(forKey: "service_fee") as? String
+		status = aDecoder.decodeObject(forKey: "status") as? String
+		tax = aDecoder.decodeObject(forKey: "tax") as? String
+		toTime = aDecoder.decodeObject(forKey: "to_time") as? String
+		trash = aDecoder.decodeObject(forKey: "trash") as? String
+		type = aDecoder.decodeObject(forKey: "type") as? String
+		updatedAt = aDecoder.decodeObject(forKey: "updated_at") as? String
+		userId = aDecoder.decodeObject(forKey: "user_id") as? String
+		zipCode = aDecoder.decodeObject(forKey: "zip_code") as? String
 	}
 
     /**
@@ -75,14 +144,56 @@ class RestaurantDetailsData : NSObject, NSCoding{
     */
     func encode(with aCoder: NSCoder)
 	{
-		if menuItem != nil{
-			aCoder.encode(menuItem, forKey: "menu_item")
+		if address != nil{
+			aCoder.encode(address, forKey: "address")
 		}
-		if restaurant != nil{
-			aCoder.encode(restaurant, forKey: "restaurant")
+		if bannerId != nil{
+			aCoder.encode(bannerId, forKey: "banner_id")
 		}
-		if review != nil{
-			aCoder.encode(review, forKey: "review")
+		if createdAt != nil{
+			aCoder.encode(createdAt, forKey: "created_at")
+		}
+		if days != nil{
+			aCoder.encode(days, forKey: "days")
+		}
+		if favourite != nil{
+			aCoder.encode(favourite, forKey: "favourite")
+		}
+		if fromTime != nil{
+			aCoder.encode(fromTime, forKey: "from_time")
+		}
+		if id != nil{
+			aCoder.encode(id, forKey: "id")
+		}
+		if name != nil{
+			aCoder.encode(name, forKey: "name")
+		}
+		if serviceFee != nil{
+			aCoder.encode(serviceFee, forKey: "service_fee")
+		}
+		if status != nil{
+			aCoder.encode(status, forKey: "status")
+		}
+		if tax != nil{
+			aCoder.encode(tax, forKey: "tax")
+		}
+		if toTime != nil{
+			aCoder.encode(toTime, forKey: "to_time")
+		}
+		if trash != nil{
+			aCoder.encode(trash, forKey: "trash")
+		}
+		if type != nil{
+			aCoder.encode(type, forKey: "type")
+		}
+		if updatedAt != nil{
+			aCoder.encode(updatedAt, forKey: "updated_at")
+		}
+		if userId != nil{
+			aCoder.encode(userId, forKey: "user_id")
+		}
+		if zipCode != nil{
+			aCoder.encode(zipCode, forKey: "zip_code")
 		}
 
 	}

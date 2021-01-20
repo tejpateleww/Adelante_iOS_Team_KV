@@ -34,8 +34,9 @@ class SplashVC: UIViewController {
                 if userDefault.getUserData() != nil{
                     let userdata = userDefault.getUserData()
                     SingletonClass.sharedInstance.UserId = userdata?.id ?? ""
-                    SingletonClass.sharedInstance.Api_Key = userdata?.apiKey ?? ""
+                    SingletonClass.sharedInstance.Api_Key = "\(userDefault.value(forKey: UserDefaultsKey.X_API_KEY.rawValue) ?? "")"
                     SingletonClass.sharedInstance.LoginRegisterUpdateData = userdata
+                    userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                     appDel.navigateToHome()
                 }
             } else {

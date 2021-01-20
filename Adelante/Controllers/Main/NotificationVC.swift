@@ -15,13 +15,15 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     // MARK: - Properties
     
     var customTabBarController: CustomTabBarVC?
-    
+    var refreshList = UIRefreshControl()
     // MARK: - IBOutlets
     @IBOutlet weak var tbvNotification: UITableView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tbvNotification.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostNotification), for: .valueChanged)
         setUp()
     }
 
@@ -52,4 +54,9 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     // MARK: - Api Calls
+    @objc func webservicePostNotification(){
+        DispatchQueue.main.async {
+            self.refreshList.endRefreshing()
+        }
+    }
 }

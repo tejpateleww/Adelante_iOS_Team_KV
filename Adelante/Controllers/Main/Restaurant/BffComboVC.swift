@@ -14,6 +14,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var selectedcategory = 0
     var selectedSection = 0
     var expendedCell = -1
+    var refreshList = UIRefreshControl()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblBFFCombo: UITableView!
@@ -28,6 +29,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tblBFFCombo.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostCombo), for: .valueChanged)
         setUpLocalizedStrings()
         addNavBarImage(isLeft: true, isRight: true)
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -144,6 +147,11 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
       self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
+    @objc func webservicePostCombo(){
+        DispatchQueue.main.async {
+            self.refreshList.endRefreshing()
+        }
+    }
 }
 class bffCombo {
     var comboName : String?

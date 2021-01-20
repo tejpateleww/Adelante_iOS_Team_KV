@@ -7,21 +7,28 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrFavorite = [Favorite]()
-    var arrRestaurant = [RestaurantFav]()
+    var arrFavoriteRest = [RestaurantFavorite]()
+    private var lastSearchTxt = ""
+    var refreshList = UIRefreshControl()
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
-    @IBOutlet weak var txtSearch: customTextField!
+    @IBOutlet weak var txtSearch: UISearchBar!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtSearch.delegate = self
         setUpLocalizedStrings()
+        tblMainList.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostRestaurantFav(strSearch:)), for: .valueChanged)
+        webservicePostRestaurantFav(strSearch: "")
         setup()
         
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -40,8 +47,6 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.favourites.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         let padding = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.txtSearch.frame.height))
-        txtSearch.leftView = padding
-        txtSearch.leftViewMode = UITextField.ViewMode.always
         tblMainList.delegate = self
         tblMainList.dataSource = self
         tblMainList.reloadData()
@@ -53,11 +58,16 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return arrFavoriteRest.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblMainList.dequeueReusableCell(withIdentifier: YourFavouriteCell.reuseIdentifier, for: indexPath) as! YourFavouriteCell
+        cell.lblItemName.text = arrFavoriteRest[indexPath.row].name
+        cell.lblRating.text = arrFavoriteRest[indexPath.row].review
+        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrFavoriteRest[indexPath.row].image ?? "")"
+        cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         cell.selectionStyle = .none
         return cell
     }
@@ -66,20 +76,40 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
-    func webservicePostRestaurantFav(strSearch : String){
+    @objc func webservicePostRestaurantFav(strSearch : String){
         let RestaurantFavorite = RestaurantFavoriteReqModel()
-        RestaurantFavorite.restaurant_id = strSearch
-        RestaurantFavorite.user_id = strSearch
-        RestaurantFavorite.page = strSearch
+        RestaurantFavorite.name = strSearch
+        RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
+        RestaurantFavorite.page = "1"
         WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
-                let restaurantData = RestaurantListResModel.init(fromJson: response)
-//                self.arrRestaurantList = restaurantData.data
+                let restaurantData = RestaurantFavResModel.init(fromJson: response)
+                self.arrFavoriteRest = restaurantData.data.restaurantDetails
                 self.tblMainList.reloadData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
+            DispatchQueue.main.async {
+                self.refreshList.endRefreshing()
+            }
         })
+    }
+}
+extension FavouritesVC:UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if lastSearchTxt.isEmpty {
+            lastSearchTxt = searchText
+        }
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.makeNetworkCall), object: lastSearchTxt)
+        lastSearchTxt = searchText
+        self.perform(#selector(self.makeNetworkCall), with: searchText, afterDelay: 0.7)
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        txtSearch.resignFirstResponder()
+    }
+    @objc private func makeNetworkCall(_ query: String)
+    {
+        webservicePostRestaurantFav(strSearch: query)
     }
 }

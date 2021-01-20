@@ -12,13 +12,15 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
 
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    
+    var refreshList = UIRefreshControl()
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tblFoodLIst.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostMyFoodlist), for: .valueChanged)
         setup()
     }
     
@@ -50,4 +52,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     // MARK: - Api Calls
+    @objc func webservicePostMyFoodlist(){
+        DispatchQueue.main.async {
+            self.refreshList.endRefreshing()
+        }
+    }
 }

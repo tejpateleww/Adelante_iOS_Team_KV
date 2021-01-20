@@ -15,6 +15,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     var customTabBarController: CustomTabBarVC?
     var arrRestaurantList = [RestaurantList]()
     private var lastSearchTxt = ""
+    var refreshList = UIRefreshControl()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
@@ -26,8 +27,16 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         txtSearch.delegate = self
+        tblMainList.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webserviceGetRestaurantList(strSearch:strFilter:)), for: .valueChanged)
         setUpLocalizedStrings()
         webserviceGetRestaurantList(strSearch: "", strFilter: "")
+        
+        let button = UIButton()
+//        button.backgroundColor = .green
+        button.setTitle("", for: .normal)
+        button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
+        
         setup()
     }
     
@@ -68,6 +77,16 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - IBActions
+    @IBAction func buttonTapFavorite(_ sender: UIButton) {
+        var Select = arrRestaurantList[sender.tag].favourite ?? ""
+        let restaurantId = arrRestaurantList[sender.tag].id ?? ""
+        if Select == "1"{
+            Select = "0"
+        }else{
+            Select = "1"
+        }
+        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+    }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
@@ -97,6 +116,13 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurantList[indexPath.row].image ?? "")"
         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+        cell.btnFavorite.tag = indexPath.row
+        cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+        if arrRestaurantList[indexPath.row].favourite == "1"{
+            cell.btnFavorite.isSelected = true
+        }else{
+            cell.btnFavorite.isSelected = false
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -107,17 +133,36 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - Api Calls
-    func webserviceGetRestaurantList(strSearch:String,strFilter:String){
+    @objc func webserviceGetRestaurantList(strSearch:String,strFilter:String){
         let RestaurantList = RestaurantListReqModel()
         RestaurantList.filter = strFilter
         RestaurantList.item = strSearch
-        RestaurantList.page = strSearch
+        RestaurantList.page = "1"
+        RestaurantList.item_id = ""
+        RestaurantList.item_type = ""
         WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantListResModel.init(fromJson: response)
                 self.arrRestaurantList = restaurantData.data
                 self.tblMainList.reloadData()
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+            DispatchQueue.main.async {
+                self.refreshList.endRefreshing()
+            }
+        })
+    }
+    func webwerviceFavorite(strRestaurantId:String,Status:String){
+        let favorite = FavoriteReqModel()
+        favorite.restaurant_id = strRestaurantId
+        favorite.status = Status
+        favorite.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+//            self.hideHUD()
+            if status{
+                self.webserviceGetRestaurantList(strSearch: "", strFilter: "")
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

@@ -1,7 +1,7 @@
 //
 //  Review.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 8, 2021
+//  Created on January 18, 2021
 
 import Foundation
 import SwiftyJSON

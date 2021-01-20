@@ -135,8 +135,8 @@ class RegisterViewController: UIViewController {
         register.password = txtPassword.text ?? ""
         register.device_token = "123456"
         register.device_type = ReqDeviceType
-        register.lat = "23.076448"
-        register.lng = "72.508116"
+        register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+        register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         WebServiceSubClass.register(registerModel: register, completion: { (json, status, response) in
             if(status)
             {

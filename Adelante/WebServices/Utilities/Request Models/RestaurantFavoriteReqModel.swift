@@ -8,7 +8,7 @@
 
 import Foundation
 class RestaurantFavoriteReqModel:RequestModel{
-    var restaurant_id : String = ""
+    var name : String = ""
     var user_id : String = ""
     var page : String = ""
 }

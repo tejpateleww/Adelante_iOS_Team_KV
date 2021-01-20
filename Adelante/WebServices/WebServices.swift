@@ -98,9 +98,8 @@ class WebService{
             .validate()
             .responseJSON { (response) in
                 // LoaderClass.hideActivityIndicator()
-
-                print("The webservice call is for \(url)")
-
+                var headers = APIEnvironment.headers
+                print("The webservice call is for \(url) and the headers are \(headers)")
                 if let json = response.value{
                     let resJson = JSON(json)
                     print("the response is \(resJson)")

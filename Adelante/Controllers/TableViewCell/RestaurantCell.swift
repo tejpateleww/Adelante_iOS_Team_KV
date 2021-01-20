@@ -14,17 +14,12 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var lblRating: tblHomeLabels!
     @IBOutlet weak var lblMiles: tblHomeLabels!
     @IBOutlet weak var imgRestaurant: customImageView!
+    @IBOutlet weak var btnFavorite: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
        // setUpLocalizedStrings()
-    }
-    
-    @IBAction func BtnLikeDislike(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-        } else {
-            sender.isSelected = true
-        }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

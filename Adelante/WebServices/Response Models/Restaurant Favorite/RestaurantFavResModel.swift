@@ -1,5 +1,5 @@
 //
-//  RestaurantDetailsResModel.swift
+//  RestaurantFavResModel.swift
 //  Model Generated using http://www.jsoncafe.com/ 
 //  Created on January 18, 2021
 
@@ -7,9 +7,10 @@ import Foundation
 import SwiftyJSON
 
 
-class RestaurantDetailsResModel : NSObject, NSCoding{
+class RestaurantFavResModel : NSObject, NSCoding{
 
-    var data : DetailsData!
+    var data : restaurantDetailsList!
+    var message : String!
     var status : Bool!
 
 	/**
@@ -21,8 +22,9 @@ class RestaurantDetailsResModel : NSObject, NSCoding{
 		}
         let dataJson = json["data"]
         if !dataJson.isEmpty{
-            data = DetailsData(fromJson: dataJson)
+            data = restaurantDetailsList(fromJson: dataJson)
         }
+        message = json["message"].stringValue
         status = json["status"].boolValue
 	}
 
@@ -34,6 +36,9 @@ class RestaurantDetailsResModel : NSObject, NSCoding{
 		var dictionary = [String:Any]()
         if data != nil{
         	dictionary["data"] = data.toDictionary()
+        }
+        if message != nil{
+        	dictionary["message"] = message
         }
         if status != nil{
         	dictionary["status"] = status
@@ -47,7 +52,8 @@ class RestaurantDetailsResModel : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		data = aDecoder.decodeObject(forKey: "data") as? DetailsData
+		data = aDecoder.decodeObject(forKey: "data") as? restaurantDetailsList
+		message = aDecoder.decodeObject(forKey: "message") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
 
@@ -59,6 +65,9 @@ class RestaurantDetailsResModel : NSObject, NSCoding{
 	{
 		if data != nil{
 			aCoder.encode(data, forKey: "data")
+		}
+		if message != nil{
+			aCoder.encode(message, forKey: "message")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

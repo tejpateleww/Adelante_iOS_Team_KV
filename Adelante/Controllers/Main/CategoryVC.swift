@@ -12,7 +12,7 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     
     //MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    
+    var refreshList = UIRefreshControl()
     // MARK: - IBOutlets
     @IBOutlet weak var tfSearch: UITextField!
     @IBOutlet weak var collectionCategory: UICollectionView!
@@ -21,6 +21,8 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
+        collectionCategory.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostCategoryDetail), for: .valueChanged)
         setup()
     }
     
@@ -55,5 +57,11 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     }
     
     // MARK: - Api Calls
+    @objc func webservicePostCategoryDetail()
+    {
+        DispatchQueue.main.async {
+            self.refreshList.endRefreshing()
+        }
+    }
 }
 

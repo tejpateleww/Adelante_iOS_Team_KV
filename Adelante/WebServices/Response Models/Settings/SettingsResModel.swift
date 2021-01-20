@@ -1,17 +1,18 @@
 //
-//  RestaurantFavoriteResModel.swift
+//  SettingsResModel.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 13, 2021
+//  Created on January 18, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class RestaurantFavoriteResModel : NSObject, NSCoding{
+class SettingsResModel : NSObject, NSCoding{
 
-    var data : Favorite!
-    var message : String!
+    var aboutUs : String!
+    var privacyPolicy : String!
     var status : Bool!
+    var termsCondition : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -20,12 +21,10 @@ class RestaurantFavoriteResModel : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
-        let dataJson = json["data"]
-        if !dataJson.isEmpty{
-            data = Favorite(fromJson: dataJson)
-        }
-        message = json["message"].stringValue
+        aboutUs = json["about_us"].stringValue
+        privacyPolicy = json["privacy_policy"].stringValue
         status = json["status"].boolValue
+        termsCondition = json["terms_condition"].stringValue
 	}
 
 	/**
@@ -34,14 +33,17 @@ class RestaurantFavoriteResModel : NSObject, NSCoding{
 	func toDictionary() -> [String:Any]
 	{
 		var dictionary = [String:Any]()
-        if data != nil{
-        	dictionary["data"] = data.toDictionary()
+        if aboutUs != nil{
+        	dictionary["about_us"] = aboutUs
         }
-        if message != nil{
-        	dictionary["message"] = message
+        if privacyPolicy != nil{
+        	dictionary["privacy_policy"] = privacyPolicy
         }
         if status != nil{
         	dictionary["status"] = status
+        }
+        if termsCondition != nil{
+        	dictionary["terms_condition"] = termsCondition
         }
 		return dictionary
 	}
@@ -52,9 +54,10 @@ class RestaurantFavoriteResModel : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		data = aDecoder.decodeObject(forKey: "data") as? Favorite
-		message = aDecoder.decodeObject(forKey: "message") as? String
+		aboutUs = aDecoder.decodeObject(forKey: "about_us") as? String
+		privacyPolicy = aDecoder.decodeObject(forKey: "privacy_policy") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
+		termsCondition = aDecoder.decodeObject(forKey: "terms_condition") as? String
 	}
 
     /**
@@ -63,14 +66,17 @@ class RestaurantFavoriteResModel : NSObject, NSCoding{
     */
     func encode(with aCoder: NSCoder)
 	{
-		if data != nil{
-			aCoder.encode(data, forKey: "data")
+		if aboutUs != nil{
+			aCoder.encode(aboutUs, forKey: "about_us")
 		}
-		if message != nil{
-			aCoder.encode(message, forKey: "message")
+		if privacyPolicy != nil{
+			aCoder.encode(privacyPolicy, forKey: "privacy_policy")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")
+		}
+		if termsCondition != nil{
+			aCoder.encode(termsCondition, forKey: "terms_condition")
 		}
 
 	}

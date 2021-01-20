@@ -22,8 +22,10 @@ class WebServiceSubClass
     //Login Api
     class func login( loginModel : LoginReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = loginModel.generatPostParams() as! [String : String]
-        
         WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    class func Settings( showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        WebService.shared.getMethod(api: .SettingsLink, parameterString: "", httpMethod: .get, showHud: false, completion: completion)
     }
     //Change Password
     class func ChangePassword( changepassModel : ChangePasswordReqModel,showHud : Bool = false  ,completion: @escaping CompletionResponse ) {
@@ -64,7 +66,11 @@ class WebServiceSubClass
     }
     class func RestaurantFavorite( RestaurantFavoritemodel : RestaurantFavoriteReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = RestaurantFavoritemodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .Favorite, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .FavoriteList, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+    }
+    class func Favorite( Favoritemodel : FavoriteReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = Favoritemodel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .favorite, httpMethod: .post, showHud: false, parameters: params, completion: completion)
     }
     class func RestaurantList( RestaurantListmodel : RestaurantListReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = RestaurantListmodel.generatPostParams() as! [String:String]

@@ -13,6 +13,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     var customTabBarController: CustomTabBarVC?
     var arrSearchResult = [Datum]()
     private var lastSearchTxt = ""
+    var refreshList = UIRefreshControl()
     // MARK: - IBOutlets
     @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var tblSearch: UITableView!
@@ -22,7 +23,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         txtSearch.delegate = self
         tblSearch.delegate = self
         tblSearch.dataSource = self
-        
+        tblSearch.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webserviceSearchModel(strSearch:)), for: .valueChanged)
         setUpLocalizedStrings()
         setup()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -64,7 +66,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     // MARK: - IBActions
     
     // MARK: - Api Calls
-    func webserviceSearchModel(strSearch:String){
+    @objc func webserviceSearchModel(strSearch:String){
         let search = SearchReqModel()
         search.item = strSearch
         WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
@@ -75,6 +77,9 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                 self.tblSearch.reloadData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: response, vc: self)
+            }
+            DispatchQueue.main.async {
+                self.refreshList.endRefreshing()
             }
         })
     }

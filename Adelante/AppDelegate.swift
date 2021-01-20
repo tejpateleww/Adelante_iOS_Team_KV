@@ -10,11 +10,14 @@ import UIKit
 import IQKeyboardManagerSwift
 import Firebase
 import UserNotifications
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
     
     var window: UIWindow?
+    var locationManager: CLLocationManager?
+    
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
@@ -30,9 +33,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         navigateToSplash()
         
 //        printAppFonts()
+        setUpLocationServices()
         return true
     }
-    
+    func setUpLocationServices() {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestAlwaysAuthorization()
+        if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            
+            if ((locationManager?.responds(to: #selector(CLLocationManager.requestWhenInUseAuthorization))) != nil)
+            {
+                if locationManager?.location != nil
+                {
+                    locationManager?.startUpdatingLocation()
+                    locationManager?.delegate = self
+                }
+                //                manager.startUpdatingLocation()
+            }
+        }
+    }
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
     }
@@ -226,5 +247,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         self.checkAndSetDefaultLanguage()
         self.navigateToLogin()
     }
+    // MARK: - LocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location: CLLocation = locations.last!
+        SingletonClass.sharedInstance.userCurrentLocation = location
+        print(location.coordinate.latitude)
+    }
+    
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .restricted:
+            print("Location access was restricted.")
+        case .denied:
+            print("User denied access to location.")
+            // Display the map using the default location.
+           
+        case .notDetermined:
+            print("Location status not determined.")
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            print("Location status is OK.")
+        }
+    }
+    
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager?.stopUpdatingLocation()
+        
+//        SingletonClass.sharedInstance.arrCarLists
+        
+        print("Error: \(error)")
+    }
+    
 }
 
