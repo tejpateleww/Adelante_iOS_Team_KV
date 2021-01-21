@@ -21,8 +21,8 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
-        collectionCategory.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webservicePostCategoryDetail), for: .valueChanged)
+//        collectionCategory.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webservicePostCategoryDetail), for: .valueChanged)
         setup()
     }
     

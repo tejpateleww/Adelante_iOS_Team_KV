@@ -22,9 +22,14 @@ struct structSections {
         self.rowCount = rowCount
     }
 }
+protocol FavoriteUpdateDelegate {
+    func refreshRestaurantFavorite()
+}
+
 class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
     
     // MARK: - Properties
+    var delegateFavoprite : FavoriteUpdateDelegate!
     var customTabBarController: CustomTabBarVC?
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
     var arrMenuitem = [MenuItem]()
@@ -74,6 +79,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         tblRestaurantDetails.dataSource = self
         tblRestaurantDetails.estimatedRowHeight = 20
         tblRestaurantDetails.reloadData()
+//        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
+//        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+        
     }
     func setUpLocalizedStrings(){
         lblRestaurantName.text = "RestaurantDetailsVC_lblRestaurantName".Localized()
@@ -99,7 +107,21 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     // MARK: - IBActions
-    
+//    @IBAction func buttonTapFavorite(_ sender: UIButton) {
+////        var Select = arrResDetail[].favourite ?? ""
+////        let restaurantId = arrResDetail[sender.tag].id ?? ""
+////        if Select == "1"{
+////            Select = "0"
+////        }else{
+////            Select = "1"
+////        }
+////        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+//        if btnNavLike.isSelected{
+//            btnNavLike.isSelected = false
+//        }else{
+//            btnNavLike.isSelected = true
+//        }
+//    }
     @IBAction func btnViewPolicy(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
         controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
@@ -227,6 +249,20 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
 //                self.arrMenuitem = RestDetail.MenuItem
 //                self.tblMainList.reloadData()
 //                self.colVwRestWthPage.reloadData()
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
+    func webwerviceFavorite(strRestaurantId:String,Status:String){
+        let favorite = FavoriteReqModel()
+        favorite.restaurant_id = strRestaurantId
+        favorite.status = Status
+        favorite.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+//            self.hideHUD()
+            if status{
+                self.webservicePostRestaurantDetails()
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

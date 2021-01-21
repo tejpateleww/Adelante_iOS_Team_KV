@@ -9,7 +9,11 @@
 import UIKit
 import SDWebImage
 
-class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,FavoriteUpdateDelegate {
+    func refreshRestaurantFavorite() {
+        webwerviceFavorite(strRestaurantId: "", Status: "")
+    }
+    
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -27,8 +31,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         txtSearch.delegate = self
-        tblMainList.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceGetRestaurantList(strSearch:strFilter:)), for: .valueChanged)
+//        tblMainList.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webserviceGetRestaurantList(strSearch:strFilter:)), for: .valueChanged)
         setUpLocalizedStrings()
         webserviceGetRestaurantList(strSearch: "", strFilter: "")
         
@@ -135,6 +139,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - Api Calls
     @objc func webserviceGetRestaurantList(strSearch:String,strFilter:String){
         let RestaurantList = RestaurantListReqModel()
+        RestaurantList.user_id = SingletonClass.sharedInstance.UserId
         RestaurantList.filter = strFilter
         RestaurantList.item = strSearch
         RestaurantList.page = "1"

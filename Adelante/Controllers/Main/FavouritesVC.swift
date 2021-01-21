@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 
+
 class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Properties
@@ -26,9 +27,13 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         txtSearch.delegate = self
         setUpLocalizedStrings()
-        tblMainList.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webservicePostRestaurantFav(strSearch:)), for: .valueChanged)
-        webservicePostRestaurantFav(strSearch: "")
+//        tblMainList.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webservicePostRestaurantFav(strSearch:)), for: .valueChanged)
+        
+        let button = UIButton()
+//        button.backgroundColor = .green
+        button.setTitle("", for: .normal)
+        button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         setup()
         
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -38,7 +43,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
-        
+        webservicePostRestaurantFav(strSearch: "")
     }
     
     // MARK: - Other Methods
@@ -55,7 +60,16 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         txtSearch.placeholder = "FavouritesVC_txtSearch".Localized()
     }
     // MARK: - IBActions
-    
+    @IBAction func buttonTapFavorite(_ sender: UIButton) {
+        var Select = arrFavoriteRest[sender.tag].favourite ?? ""
+        let restaurantId = arrFavoriteRest[sender.tag].restaurantId ?? ""
+        if Select == "1"{
+            Select = "0"
+        }else{
+            Select = "1"
+        }
+        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+    }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrFavoriteRest.count
@@ -68,6 +82,13 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrFavoriteRest[indexPath.row].image ?? "")"
         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+        cell.btnFavorite.tag = indexPath.row
+        cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+        if arrFavoriteRest[indexPath.row].favourite == "1"{
+            cell.btnFavorite.isSelected = true
+        }else{
+            cell.btnFavorite.isSelected = false
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -92,6 +113,20 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
+            }
+        })
+    }
+    func webwerviceFavorite(strRestaurantId:String,Status:String){
+        let favorite = FavoriteReqModel()
+        favorite.restaurant_id = strRestaurantId
+        favorite.status = Status
+        favorite.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+//            self.hideHUD()
+            if status{
+                self.webservicePostRestaurantFav(strSearch: "")
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
     }

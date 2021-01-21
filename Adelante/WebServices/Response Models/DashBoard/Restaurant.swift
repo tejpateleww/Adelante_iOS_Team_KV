@@ -28,7 +28,7 @@ class Restaurant : NSObject, NSCoding{
     var favourite : String!
     var distance : String!
     var review : String!
-
+    var restaurant_id : String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -55,6 +55,7 @@ class Restaurant : NSObject, NSCoding{
         favourite = json["favourite"].stringValue
         distance = json["distance"].stringValue
         review = json["review"].stringValue
+        restaurant_id = json["restaurant_id"].stringValue
 	}
 
 	/**
@@ -120,6 +121,9 @@ class Restaurant : NSObject, NSCoding{
         if review != nil{
             dictionary["review"] = zipCode
         }
+        if restaurant_id != nil{
+            dictionary["restaurant_id"] = restaurant_id
+        }
 		return dictionary
 	}
 
@@ -148,6 +152,7 @@ class Restaurant : NSObject, NSCoding{
         favourite = aDecoder.decodeObject(forKey: "favourite") as? String
         distance = aDecoder.decodeObject(forKey: "distance") as? String
         review = aDecoder.decodeObject(forKey: "review") as? String
+        restaurant_id = aDecoder.decodeObject(forKey: "restaurant_id") as? String
 	}
 
     /**
@@ -205,15 +210,17 @@ class Restaurant : NSObject, NSCoding{
 			aCoder.encode(zipCode, forKey: "zip_code")
 		}
         if favourite != nil{
-            aCoder.encode(updatedAt, forKey: "favourite")
+            aCoder.encode(favourite, forKey: "favourite")
         }
         if distance != nil{
-            aCoder.encode(userId, forKey: "distance")
+            aCoder.encode(distance, forKey: "distance")
         }
         if review != nil{
-            aCoder.encode(zipCode, forKey: "review")
+            aCoder.encode(review, forKey: "review")
         }
-
+        if restaurant_id != nil{
+            aCoder.encode(restaurant_id, forKey: "restaurant_id")
+        }
 	}
 
 }

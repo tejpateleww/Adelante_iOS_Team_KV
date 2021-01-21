@@ -5,129 +5,45 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "594B4EB4-EF18-4433-8180-76E078BE8BC4"
+            uuid = "0308E56B-0555-4806-A72D-429539562CB4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantListVC.swift"
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5A43B418-66C8-4AE0-9F03-7661F398CE5E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Adelante/Controllers/Main/FavouritesVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "makeNetworkCall(_:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "setUpLocalizedStrings()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7FE0F0D6-73FF-4527-86D2-0179077BC4A9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/TableViewCell/RestaurantCatListCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "48DF84C1-F43A-4132-8667-C81A21D109AD"
+            uuid = "99BD4986-1AE9-4D99-9DC8-D0BB895B84C2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Popup/sortPopupVC.swift"
+            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "86A060C8-3978-44CC-A96B-B08D42D8472A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Profile/EditProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "webserviceForEditprofile()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "86A060C8-3978-44CC-A96B-B08D42D8472A - 55f8bfd3e9265ea9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Adelante.EditProfileVC.webserviceForEditprofile() -&gt; ()"
-                  moduleName = "Adelante"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/baps/Documents/Harsh%20Dave/Adelante/code/Final/Adelante/Adelante/Controllers/Main/Profile/EditProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "128"
-                  endingLineNumber = "128"
-                  offsetFromSymbolStart = "4352">
-               </Location>
-               <Location
-                  uuid = "86A060C8-3978-44CC-A96B-B08D42D8472A - 86d559a72098d1cb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftyJSON.JSON, Swift.Bool, Any) -&gt; () in Adelante.EditProfileVC.webserviceForEditprofile() -&gt; ()"
-                  moduleName = "Adelante"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/baps/Documents/Harsh%20Dave/Adelante/code/Final/Adelante/Adelante/Controllers/Main/Profile/EditProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "130"
-                  endingLineNumber = "130"
-                  offsetFromSymbolStart = "336">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4ECCDD1E-02D0-460E-A959-9A9E8A9BB6D8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Profile/MyProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "webserviceGetProfile()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0C49A370-9A72-4A08-ACF7-212211251828"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantListVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "buttonTapFavorite(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -135,95 +51,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "15151412-B383-4C9C-868C-12F624907189"
+            uuid = "3C6F4F40-291C-470A-8BE7-4E9B510143F6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantListVC.swift"
+            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "webwerviceFavorite(strRestaurantId:Status:)"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "buttonTapFavorite(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0B83CB08-F48A-465D-9B5C-89A9C6978320"
+            uuid = "98963A68-F0D7-46E1-91AA-30C5E9C5BE4F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantListVC.swift"
+            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "webserviceGetRestaurantList(strSearch:strFilter:)"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "buttonTapFavorite(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A6683AF3-0F81-4A7A-A9E5-961F0290370E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantListVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D93B2074-9674-4398-B63B-44DA810A69FE"
+            uuid = "7C53890C-56FF-4CC0-9C02-C72FBFD64E84"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Adelante/Controllers/Main/Home/HomeVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E4392C2E-8F6F-4FA5-9346-C7E715730D29"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Home/HomeVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F0E495B6-DCB3-4A32-A911-AC402E4EC548"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Home/HomeVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>

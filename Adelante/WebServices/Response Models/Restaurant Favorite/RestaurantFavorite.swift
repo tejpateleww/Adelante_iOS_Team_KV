@@ -19,6 +19,7 @@ class RestaurantFavorite : NSObject, NSCoding{
     var status : String!
     var subCategoryId : String!
     var userId : String!
+    var favourite : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -37,6 +38,7 @@ class RestaurantFavorite : NSObject, NSCoding{
         status = json["status"].stringValue
         subCategoryId = json["sub_category_id"].stringValue
         userId = json["user_id"].stringValue
+        favourite = json["favourite"].stringValue
 	}
 
 	/**
@@ -75,6 +77,9 @@ class RestaurantFavorite : NSObject, NSCoding{
         if userId != nil{
         	dictionary["user_id"] = userId
         }
+        if favourite != nil{
+            dictionary["favourite"] = favourite
+        }
 		return dictionary
 	}
 
@@ -94,6 +99,7 @@ class RestaurantFavorite : NSObject, NSCoding{
 		status = aDecoder.decodeObject(forKey: "status") as? String
 		subCategoryId = aDecoder.decodeObject(forKey: "sub_category_id") as? String
 		userId = aDecoder.decodeObject(forKey: "user_id") as? String
+        favourite = aDecoder.decodeObject(forKey: "favourite") as? String
 	}
 
     /**
@@ -132,6 +138,9 @@ class RestaurantFavorite : NSObject, NSCoding{
 		if userId != nil{
 			aCoder.encode(userId, forKey: "user_id")
 		}
+        if favourite != nil{
+            aCoder.encode(userId, forKey: "favourite")
+        }
 
 	}
 

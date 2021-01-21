@@ -22,8 +22,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tblPaymentMethod.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceGetAddPayment), for: .valueChanged)
+//        tblPaymentMethod.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webserviceGetAddPayment), for: .valueChanged)
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)

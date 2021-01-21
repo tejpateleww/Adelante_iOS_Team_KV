@@ -56,8 +56,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         super.viewDidLoad()
         setUpLocalizedStrings()
         webserviceGetDashboard()
-        tblMainList.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceGetDashboard), for: .valueChanged)
+//        tblMainList.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webserviceGetDashboard), for: .valueChanged)
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
@@ -108,8 +108,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
-        var Select = arrRestaurant[sender.tag - 1].favourite ?? ""
-        let restaurantId = arrRestaurant[sender.tag - 1].id ?? ""
+        var Select = arrRestaurant[sender.tag].favourite ?? ""
+        let restaurantId = arrRestaurant[sender.tag].id ?? ""
         if Select == "1"{
             Select = "0"
         }else{
@@ -236,7 +236,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
             cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-            cell.btnFavorite.tag = indexPath.row
+            cell.btnFavorite.tag = indexPath.row - 1
             cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
             if arrRestaurant[indexPath.row - 1].favourite == "1"{
                 cell.btnFavorite.isSelected = true

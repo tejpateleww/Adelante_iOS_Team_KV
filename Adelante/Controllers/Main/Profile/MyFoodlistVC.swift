@@ -19,8 +19,8 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tblFoodLIst.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webservicePostMyFoodlist), for: .valueChanged)
+//        tblFoodLIst.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webservicePostMyFoodlist), for: .valueChanged)
         setup()
     }
     

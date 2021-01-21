@@ -14,4 +14,5 @@ class YourFavouriteCell: UITableViewCell {
     @IBOutlet weak var lblPrice: tblHomeLabels!
     @IBOutlet weak var lblItemName: tblHomeLabels!
     @IBOutlet weak var lblRating: tblHomeLabels!
+    @IBOutlet weak var btnFavorite: UIButton!
 }

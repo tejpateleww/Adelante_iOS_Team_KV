@@ -21,8 +21,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     // MARK: - ViewController Lifecycle
      override func viewDidLoad() {
           super.viewDidLoad()
-        tblOrders.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceGetOrderDetail), for: .valueChanged)
+//        tblOrders.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webserviceGetOrderDetail), for: .valueChanged)
           setup()
       
       self.navigationController?.interactivePopGestureRecognizer?.delegate = self

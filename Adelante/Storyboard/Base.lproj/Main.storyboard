@@ -23,7 +23,7 @@
                                 <subviews>
                                     <searchBar contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUq-9x-IMW">
                                         <rect key="frame" x="0.0" y="-3" width="378" height="56"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <scopeButtonTitles>
                                             <string>Title</string>
@@ -31,7 +31,7 @@
                                         </scopeButtonTitles>
                                     </searchBar>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="nUq-9x-IMW" secondAttribute="trailing" id="4fo-U0-FqT"/>
                                     <constraint firstItem="nUq-9x-IMW" firstAttribute="centerY" secondItem="7iD-BR-Bce" secondAttribute="centerY" id="NUJ-YV-wB7"/>
@@ -442,6 +442,7 @@
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="btnFavorite" destination="XiE-wy-rpR" id="GrN-kq-C0E"/>
                                                             <outlet property="imgRestaurant" destination="fSI-io-gRG" id="qix-xt-Jlq"/>
                                                             <outlet property="lblItemName" destination="acU-oZ-3jH" id="40H-tQ-gq8"/>
                                                             <outlet property="lblPrice" destination="9sX-va-I9v" id="3gb-uY-Y6D"/>

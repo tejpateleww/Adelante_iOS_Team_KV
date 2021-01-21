@@ -23,8 +23,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         txtSearch.delegate = self
         tblSearch.delegate = self
         tblSearch.dataSource = self
-        tblSearch.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceSearchModel(strSearch:)), for: .valueChanged)
+//        tblSearch.refreshControl = refreshList
+//        refreshList.addTarget(self, action: #selector(webserviceSearchModel(strSearch:)), for: .valueChanged)
         setUpLocalizedStrings()
         setup()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self

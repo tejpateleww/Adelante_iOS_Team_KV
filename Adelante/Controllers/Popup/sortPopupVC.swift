@@ -59,7 +59,7 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
         
         tblSorting.delegate = self
         tblSorting.dataSource = self
-        tblSorting.refreshControl = refreshList
+//        tblSorting.refreshControl = refreshList
 //        refreshList.addTarget(self, action: #selector(""), for: .valueChanged)
         tblSorting.reloadData()
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 class RestaurantListReqModel:RequestModel{
+    var user_id : String = ""
     var filter : String = ""
     var item : String = ""
     var page : String = ""
