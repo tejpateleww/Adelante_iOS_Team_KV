@@ -19,7 +19,7 @@ let AppURL = "itms-apps://itunes.apple.com/app/id1488928328"
 let ReqDeviceType = "ios"
 let Headerkey = "adelante123*#*"
 
-let NotificationBadges = NSNotification.Name(rawValue:"NotificationBadges")
+let refreshfav = NSNotification.Name(rawValue:"RefreshList")
 
 
 enum DateFormatterString : String{

@@ -66,8 +66,9 @@ class LoginViewController: UIViewController {
         login.device_type = ReqDeviceType
         login.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         login.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        
-        WebServiceSubClass.login(loginModel: login, completion: { (json, status, response) in
+//        self.showHUD()
+        WebServiceSubClass.login(loginModel: login,showHud: true, completion: { (json, status, response) in
+//            self.hideHUD()
             if(status)
             {
                 let loginModel = Userinfo.init(fromJson: json)
@@ -89,7 +90,9 @@ class LoginViewController: UIViewController {
     func webserviceForForgotPassword(){
         let forgot = ForgotPasswordReqModel()
        //forgot.user_name = txtEmailOrPhone.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: false, completion: { (response, status, error) in
+        self.showHUD()
+        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: true, completion: { (response, status, error) in
+            self.hideHUD()
             if (status){
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
                     if index == 0{

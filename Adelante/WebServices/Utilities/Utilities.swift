@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MKProgress
 //import NVActivityIndicatorView
 
 
@@ -278,15 +279,26 @@ class Utilities:NSObject{
     
     class func showHud()
     {
-        let size = CGSize(width: 40, height: 40)
+//        let size = CGSize(width: 40, height: 40)
         //        let activityData = ActivityData(size: size, message: "", messageFont: nil, messageSpacing: nil, type: .lineScale, color: colors.btnColor.value, padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor: UIColor.black.withAlphaComponent(0.5), textColor: nil)
         //        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        MKProgress.config.hudType = .radial
+    MKProgress.config.hudColor = .clear
+    MKProgress.config.width = 65.0
+    MKProgress.config.height = 65.0
+    MKProgress.config.circleRadius = 30.0
+    MKProgress.config.cornerRadius = 16.0
+        MKProgress.config.circleBorderColor = UIColor.init(hexString: "#E34A25")
+    MKProgress.config.circleBorderWidth = 3.0
+    MKProgress.config.backgroundColor = .clear
+    MKProgress.show()
         
     }
     
     class func hideHud()
     {
         //        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        MKProgress.hide()
     }
     
     /*

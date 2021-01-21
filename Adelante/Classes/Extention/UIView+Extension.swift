@@ -61,6 +61,5 @@ set {
         mask.path = path.cgPath
         self.layer.mask = mask
     }
+    
 }
-
-

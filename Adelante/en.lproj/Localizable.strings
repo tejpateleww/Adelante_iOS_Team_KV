@@ -253,6 +253,7 @@
 "NavigationTitles_NavItemsRight_saved" = "saved";
 "NavigationTitles_NavItemsRight_notifBell" = "notifBell";
 "NavigationTitles_NavItemsRight_Liked" = "Liked";
+"NavigationTitles_search" = "Search";
 
 //Message
 "MessageTitle" = "Something went wrong";

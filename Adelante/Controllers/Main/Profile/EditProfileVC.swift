@@ -124,9 +124,9 @@ class EditProfileVC: BaseViewController{
         updateModel.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.phone = StrPhone! //txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.user_id = SingletonClass.sharedInstance.UserId
-        
-        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage() , showHud: false, completion: { (response, status, error) in
-           // self.hideHUD()
+        self.showHUD()
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage() , showHud: true, completion: { (response, status, error) in
+            self.hideHUD()
             if status{
                 let updatedData = Userinfo.init(fromJson: response)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
@@ -140,20 +140,6 @@ class EditProfileVC: BaseViewController{
             }
         })
     }
-//    func webservice_RemoveProfilePicture(){
-//        let id = SingletonClass.sharedInstance.UserId
-//       // self.showHUD()
-//        WebServiceSubClass.RemoveProfilePicture(userId: id) { (response, status, error) in
-//            self.hideHUD()
-//            if status{
-//                self.imgProfile.image = UIImage(named: "default_user")
-//                self.selectedImage = nil
-//                self.isRemovePhoto = true
-//                utility.ShowAlert(OfMessage: response["message"].stringValue)
-//            }else{
-//                utility.showAlertOfAPIResponse(param: error, vc: self)
-//            }
-//        }
     }
 
 // MARK: - ImagePickerDelegate

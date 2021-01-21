@@ -138,13 +138,13 @@ Back</string>
                                                         <rect key="frame" x="366" y="196.5" width="30" height="27"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <state key="normal">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="titleColor" systemColor="linkColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isUnderline" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="underlineColor">
-                                                                <color key="value" red="0.58431372549019611" green="0.59215686274509804" blue="0.6588235294117647" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isUnderline" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isForgotPass" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -202,7 +202,7 @@ Back</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-IO-Syi" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-IO-Syi" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="183" y="0.0" width="125" height="16"/>
                                                                 <fontDescription key="fontDescription" name="NexaBold" family="Nexa Bold" pointSize="17"/>
                                                                 <state key="normal" title="Create Account"/>
@@ -219,6 +219,8 @@ Back</string>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="pg1-IO-Syi" firstAttribute="centerY" secondItem="yWm-7i-pZb" secondAttribute="centerY" id="83Y-gI-V4W"/>
+                                                            <constraint firstItem="yWm-7i-pZb" firstAttribute="centerY" secondItem="rwS-jo-Y0e" secondAttribute="centerY" id="TL6-XT-QCD"/>
                                                             <constraint firstAttribute="height" constant="16" id="lAc-b5-N52"/>
                                                         </constraints>
                                                     </stackView>
@@ -881,6 +883,9 @@ Adelante</string>
         <image name="mainLoginBg" width="375" height="812"/>
         <image name="signInArrow" width="63.5" height="63.5"/>
         <image name="splashBg" width="375" height="812"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -32,10 +32,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var delegateFavoprite : FavoriteUpdateDelegate!
     var customTabBarController: CustomTabBarVC?
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
-    var arrMenuitem = [MenuItem]()
-    var arrResData = [DetailsData]()
-    var arrReview = [Review]()
-    var arrResDetail = [RestaurantDetailsData]()
+//    var arrMenuitem = [MenuItem]()
+//    var arrResData = [DetailsData]()
+//    var arrReview = [Review]()
+//    var arrResDetail = [RestaurantDetailsData]()
     var SelectedCatId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
@@ -238,10 +238,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func webservicePostRestaurantDetails(){
         let ResDetails = RestaurantDetailsReqModel()
         ResDetails.restaurant_id = ""
-        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
-                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
+//                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
                 
 //                self.arrResData = RestDetail.data
 //                self.arrReview = RestDetail.Review
@@ -259,7 +259,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
 //            self.hideHUD()
             if status{
                 self.webservicePostRestaurantDetails()

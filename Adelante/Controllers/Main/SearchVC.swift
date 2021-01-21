@@ -23,8 +23,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         txtSearch.delegate = self
         tblSearch.delegate = self
         tblSearch.dataSource = self
-//        tblSearch.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webserviceSearchModel(strSearch:)), for: .valueChanged)
+        tblSearch.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         setUpLocalizedStrings()
         setup()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -36,11 +36,14 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     }
     
     // MARK: - Other Methods
+    @objc func refreshFavList() {
+    self.webserviceSearchModel(strSearch: "")
+    }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.SearchVC.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        txtSearch.backgroundImage = UIImage()
         //        let padding = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.txtSearch.frame.height))
         //               txtSearch.leftView = padding
         //               txtSearch.leftViewMode = UITextField.ViewMode.always
@@ -69,7 +72,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     @objc func webserviceSearchModel(strSearch:String){
         let search = SearchReqModel()
         search.item = strSearch
-        WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.search(Searchmodel: search, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let result = SearchResModel(fromJson: response)

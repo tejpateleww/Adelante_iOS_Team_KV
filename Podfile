@@ -14,4 +14,6 @@ target 'Adelante' do
     pod 'Cosmos'
     pod 'GrowingTextView', '0.7.2'
     pod 'FormTextField'
+    pod 'MKProgress', '~> 1.1.0'
+    pod 'GooglePlaces'
 end

@@ -63,7 +63,7 @@ class MyProfileVC: BaseViewController,EditProfileDelegate {
     // MARK: - Api Calls
     func webserviceGetProfile(){
         let strURL = APIEnvironment.baseURL + ApiKey.GetProfile.rawValue + "/" + SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.profile(strURL: strURL, showHud: false, completion: { (json, status, response) in
+        WebServiceSubClass.profile(strURL: strURL, showHud: true, completion: { (json, status, response) in
             if(status)
             {
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)

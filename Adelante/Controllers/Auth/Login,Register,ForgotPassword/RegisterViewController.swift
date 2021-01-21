@@ -137,7 +137,7 @@ class RegisterViewController: UIViewController {
         register.device_type = ReqDeviceType
         register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.register(registerModel: register, completion: { (json, status, response) in
+        WebServiceSubClass.register(registerModel: register,showHud: true, completion: { (json, status, response) in
             if(status)
             {
                 let loginModel = Userinfo.init(fromJson: json)

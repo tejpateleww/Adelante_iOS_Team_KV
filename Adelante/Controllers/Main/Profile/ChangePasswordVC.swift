@@ -60,7 +60,7 @@ class ChangePasswordVC: BaseViewController {
         changePWReqModel.new_password = txtNewPassword.text ?? ""
         changePWReqModel.user_id = SingletonClass.sharedInstance.UserId
         //self.showHUD()
-        WebServiceSubClass.ChangePassword(changepassModel: changePWReqModel) { (response, status, error) in
+        WebServiceSubClass.ChangePassword(changepassModel: changePWReqModel,showHud: false) { (response, status, error) in
             //self.hideHUD()
             if status{
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in

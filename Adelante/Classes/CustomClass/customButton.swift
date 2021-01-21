@@ -24,7 +24,6 @@ class submitButton: UIButton {
     @IBInspectable var isEditAccount:Bool = false
     @IBInspectable var isForgotPass:Bool = false
     @IBInspectable var isShareOrderDetails:Bool = false
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         if isRoundCorner {

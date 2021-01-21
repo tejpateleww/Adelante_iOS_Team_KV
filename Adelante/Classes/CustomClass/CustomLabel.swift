@@ -150,7 +150,7 @@ class addPaymentlable : UILabel {
             self.textAlignment = .left
         } else if isExpires {
             self.font = CustomFont.NexaLight.returnFont(13)
-            self.textColor = UIColor(hexString: "#222B45")
+            self.textColor = UIColor(hexString: "#ACB1C0")
             self.textAlignment = .left
         }
         

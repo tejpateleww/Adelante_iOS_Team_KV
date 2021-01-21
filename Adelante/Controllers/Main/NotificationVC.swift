@@ -22,8 +22,8 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tbvNotification.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webservicePostNotification), for: .valueChanged)
+        tbvNotification.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostNotification), for: .valueChanged)
         setUp()
     }
 

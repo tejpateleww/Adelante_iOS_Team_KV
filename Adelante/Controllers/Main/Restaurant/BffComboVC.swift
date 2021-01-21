@@ -29,8 +29,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tblBFFCombo.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webservicePostCombo), for: .valueChanged)
+        tblBFFCombo.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostCombo), for: .valueChanged)
         setUpLocalizedStrings()
         addNavBarImage(isLeft: true, isRight: true)
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)

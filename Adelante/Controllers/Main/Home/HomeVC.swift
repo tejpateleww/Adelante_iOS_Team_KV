@@ -56,11 +56,13 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         super.viewDidLoad()
         setUpLocalizedStrings()
         webserviceGetDashboard()
-//        tblMainList.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webserviceGetDashboard), for: .valueChanged)
+        tblMainList.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webserviceGetDashboard), for: .valueChanged)
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
+        NotificationCenter.default.removeObserver(self, name: refreshfav, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(webserviceGetDashboard), name: refreshfav, object: nil)
         setup()
     
     self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -270,7 +272,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         Deshboard.page = "1"
-        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let Homedata = DashBoardResModel.init(fromJson: response)
@@ -292,7 +294,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
 //            self.hideHUD()
             if status{
                 self.webserviceGetDashboard()

@@ -166,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func performLogout(){
         let logout = LogoutReqModel()
         logout.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Logout(logoutModel: logout, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.Logout(logoutModel: logout, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 
@@ -185,7 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         print(userInfo)
         print(appDel.window?.rootViewController?.navigationController?.children.first as Any)
         
-        NotificationCenter.default.post(name: NotificationBadges, object: content)
+        NotificationCenter.default.post(name: refreshfav, object: content)
         completionHandler([.alert, .sound])
         
     }

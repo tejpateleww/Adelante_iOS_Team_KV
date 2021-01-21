@@ -23,8 +23,8 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tbvReview.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webservicePostReview), for: .valueChanged)
+        tbvReview.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webservicePostReview), for: .valueChanged)
         setUpLocalizedStrings()
         setUp()
     }

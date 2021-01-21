@@ -27,9 +27,9 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         txtSearch.delegate = self
         setUpLocalizedStrings()
-//        tblMainList.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webservicePostRestaurantFav(strSearch:)), for: .valueChanged)
-        
+        tblMainList.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
+        txtSearch.backgroundImage = UIImage()
         let button = UIButton()
 //        button.backgroundColor = .green
         button.setTitle("", for: .normal)
@@ -55,6 +55,9 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         tblMainList.delegate = self
         tblMainList.dataSource = self
         tblMainList.reloadData()
+    }
+    @objc func refreshFavList() {
+    self.webservicePostRestaurantFav(strSearch: "")
     }
     func setUpLocalizedStrings() {
         txtSearch.placeholder = "FavouritesVC_txtSearch".Localized()
@@ -102,7 +105,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         RestaurantFavorite.name = strSearch
         RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
         RestaurantFavorite.page = "1"
-        WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantFavResModel.init(fromJson: response)
@@ -121,10 +124,11 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
 //            self.hideHUD()
             if status{
                 self.webservicePostRestaurantFav(strSearch: "")
+                NotificationCenter.default.post(name: refreshfav, object: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

@@ -41,10 +41,17 @@ class CommonWebViewVC: BaseViewController, WKNavigationDelegate {
             self.webView.topAnchor.constraint(equalTo: self.vwWebMain.topAnchor),
         ])
         self.view.setNeedsLayout()
+        if strUrl != "" {
         let request = URLRequest(url: URL.init(string: strUrl)!)
         self.webView.navigationDelegate = self
         self.webView.load(request)
-        Utilities.showHud()
+        } else {
+        strUrl = "https://www.google.com"
+        let request = URLRequest(url: URL.init(string: strUrl)!)
+        self.webView.navigationDelegate = self
+        self.webView.load(request)
+        }
+//        Utilities.showHud()
     }
     override func viewWillAppear(_ animated: Bool) {
               self.customTabBarController?.hideTabBar()
