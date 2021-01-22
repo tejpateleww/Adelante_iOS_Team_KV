@@ -69,10 +69,10 @@ open class ImagePicker: NSObject {
             alertController.addAction(action)
         }
         let api_vector = UIImageView()
-        api_vector.sd_setImage(with: URL(string: "http://qwnched.excellentwebworld.in/assets/images/default_user.png"))
-//        http://qwnched.excellentwebworld.in/assets/images/default_user.png
+        let strUrl = "\(APIEnvironment.profileBu.rawValue)assets/images/user.png"
+        api_vector.sd_setImage(with: URL(string: strUrl))
         if let sourceImage = (sourceView as! UIImageView).image {
-            if let defaultImage = UIImage(named: "dummy_User") {
+            if let defaultImage = UIImage(named: "Default_user") {
                 let isDefaultImage = sourceImage.isEqualToImage(defaultImage)
                 if (!isDefaultImage) && !(sourceImage.isEqualToImage(api_vector.image ?? UIImage())) && isRemove == true{
                     alertController.addAction(UIAlertAction(title: "Remove Photo", style: .destructive, handler:

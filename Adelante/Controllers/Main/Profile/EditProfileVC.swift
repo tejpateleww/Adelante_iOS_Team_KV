@@ -64,7 +64,7 @@ class EditProfileVC: BaseViewController{
                 imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 selectedImage = imgProfile.image
             }else{
-                imgProfile.image = UIImage.init(named: "dummy_User")
+                imgProfile.image = UIImage.init(named: "Default_user")
             }
         }
     }
@@ -75,7 +75,7 @@ class EditProfileVC: BaseViewController{
     @IBAction func btnProfilePicTap(_ sender: UIButton)
     {
         resignFirstResponder()
-        if (self.imgProfile.image != nil || self.selectedImage != nil) && ((self.imgProfile.image?.isEqualToImage(UIImage.init(named: "dummy_User")!)) != nil){
+        if (self.imgProfile.image != nil || self.selectedImage != nil) && ((self.imgProfile.image?.isEqualToImage(UIImage.init(named: "Default_user")!)) != nil){
             self.imagePicker.present(from: self.imgProfile, viewPresented: self.view, isRemove: true)
         } else {
             self.imagePicker.present(from: self.imgProfile, viewPresented: self.view, isRemove: false)
@@ -162,7 +162,7 @@ extension EditProfileVC:ImagePickerDelegate {
         if(image == nil && SelectedTag == 101){
             self.selectedImage = UIImage()
             self.isRemovePhoto = true
-            self.imgProfile.image = UIImage.init(named: "dummy_User")
+            self.imgProfile.image = UIImage.init(named: "Default_user")
             //webservice_RemoveProfilePicture()
         }else if image != nil{
             let fixedOrientedImage = image?.fixOrientation()
