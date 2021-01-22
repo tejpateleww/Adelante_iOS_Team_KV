@@ -17,7 +17,9 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var arrFavoriteRest = [RestaurantFavorite]()
     private var lastSearchTxt = ""
     var refreshList = UIRefreshControl()
-    
+    var pageNumber = 1
+    var isNeedToReload = true
+    var pageLimit = 5
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
@@ -57,6 +59,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         tblMainList.reloadData()
     }
     @objc func refreshFavList() {
+        pageNumber = 1
     self.webservicePostRestaurantFav(strSearch: "")
     }
     func setUpLocalizedStrings() {
@@ -72,6 +75,18 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             Select = "1"
         }
         webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+    }
+    // MARK: - UIScrollView Delegates
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        stoppedScrolling()
+    }
+    
+    func stoppedScrolling() {
+        if isNeedToReload {
+            pageNumber = pageNumber + 1
+            webservicePostRestaurantFav(strSearch: "")
+        }
+        // done, do whatever
     }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,12 +119,24 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         let RestaurantFavorite = RestaurantFavoriteReqModel()
         RestaurantFavorite.name = strSearch
         RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
-        RestaurantFavorite.page = "1"
+        RestaurantFavorite.page = "\(pageNumber)"
         WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantFavResModel.init(fromJson: response)
-                self.arrFavoriteRest = restaurantData.data.restaurantDetails
+                if self.pageNumber == 1 {
+                    self.arrFavoriteRest = restaurantData.data.restaurantDetails
+                } else {
+                    let arrTemp = restaurantData.data.restaurantDetails
+                    if arrTemp!.count > 0 {
+                        for i in 0..<arrTemp!.count {
+                            self.arrFavoriteRest.append(arrTemp![i])
+                        }
+                    }
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    }
+                }
                 self.tblMainList.reloadData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)

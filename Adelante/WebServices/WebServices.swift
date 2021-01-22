@@ -232,14 +232,16 @@ class WebService{
     
     
     
-    func postDataWithImage(api: ApiKey,showHud : Bool, parameter dictParams: [String: Any], image: UIImage?, imageParamName: String, completion: @escaping CompletionResponse) {
+    func postDataWithImage(api: ApiKey, isRemoveimage: Bool, showHud : Bool, parameter dictParams: [String: Any], image: UIImage?, imageParamName: String, completion: @escaping CompletionResponse) {
         
         guard isConnected else { completion(JSON(), false, ""); return }
         guard let url = URL(string: APIEnvironment.baseURL + api.rawValue) else { return }
         //        let request = URLRequest(url: url)
         print("the url is \(url) and the parameters are \n \(dictParams) and the headers are \(APIEnvironment.headers)")
         
-        
+        if isRemoveimage {
+            
+        }
         if(showHud)
         {
             Utilities.showHud()
@@ -266,15 +268,18 @@ class WebService{
                     })
                 }
             }
-            
             let imageData = image?.jpegData(compressionQuality: 0.7)
-            multiPart.append(imageData ?? Data(), withName: imageParamName, fileName: "file.png", mimeType: "image/png")
+            if !isRemoveimage {
+                multiPart.append(imageData ?? Data(), withName: imageParamName, fileName: "\(imageParamName).jpeg", mimeType: "image/jpeg")
+            }
+            
         }, to: url, usingThreshold: UInt64.init(), method: .post, headers: APIEnvironment.headers, interceptor: .none, fileManager: .default)
             .responseJSON { (response) in
                 
                 if(showHud){
                     Utilities.hideHud()
                 }
+                
                 //Do what ever you want to do with response
                 if let json = response.value{
                     let resJson = JSON(json)

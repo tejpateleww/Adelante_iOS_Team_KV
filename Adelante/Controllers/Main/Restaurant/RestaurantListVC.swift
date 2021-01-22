@@ -166,6 +166,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         RestaurantList.page = "\(pageNumber)"
         RestaurantList.item_id = ""
         RestaurantList.item_type = ""
+        RestaurantList.page = "\(pageNumber)"
         WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{

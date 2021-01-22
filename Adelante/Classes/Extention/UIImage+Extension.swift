@@ -66,4 +66,7 @@ extension UIImage{
         // And now we just create a new UIImage from the drawing context and return it
         return UIImage(cgImage: ctx.makeImage()!)
     }
+    func isEqualToImage(_ image: UIImage) -> Bool {
+        return self.pngData() == image.pngData()
+    }
 }

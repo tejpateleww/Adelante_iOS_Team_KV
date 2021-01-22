@@ -35,10 +35,12 @@ class EditProfileVC: BaseViewController{
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        imgProfile.layer.cornerRadius = imgProfile.layer.bounds.height / 2
+        //        imgProfile.layer.cornerRadius = imgProfile.layer.bounds.height / 2
         self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing: false)
-        showUserData()
         setUpLocalizedStrings()
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing: true)
+        showUserData()
+    
         setUp()
     }
     
@@ -47,7 +49,7 @@ class EditProfileVC: BaseViewController{
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-      
+        
     }
     
     func showUserData(){
@@ -56,20 +58,28 @@ class EditProfileVC: BaseViewController{
             txtLastName.text = userdata.lastName ?? ""
             txtEmail.text = userdata.email ?? ""
             txtPhoneNumber.text = userdata.phone
-
-            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(userdata.profilePicture ?? "")"
+            if SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture != ""{
+                let strUrl = "\(APIEnvironment.profileBu.rawValue)\(userdata.profilePicture ?? "")"
                 imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
+                imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                selectedImage = imgProfile.image
+            }else{
+                imgProfile.image = UIImage.init(named: "dummy_User")
+            }
         }
     }
     override func viewWillAppear(_ animated: Bool) {
-           self.customTabBarController?.hideTabBar()
-       }
+        self.customTabBarController?.hideTabBar()
+    }
     // MARK: - IBActions
     @IBAction func btnProfilePicTap(_ sender: UIButton)
     {
         resignFirstResponder()
-        self.imagePicker.present(from: self.imgProfile, viewPresented: self.view)
+        if (self.imgProfile.image != nil || self.selectedImage != nil) && ((self.imgProfile.image?.isEqualToImage(UIImage.init(named: "dummy_User")!)) != nil){
+            self.imagePicker.present(from: self.imgProfile, viewPresented: self.view, isRemove: true)
+        } else {
+            self.imagePicker.present(from: self.imgProfile, viewPresented: self.view, isRemove: false)
+        }
     }
     
     @IBAction func Btnsave(_ sender: Any) {
@@ -80,7 +90,7 @@ class EditProfileVC: BaseViewController{
                 webserviceForEditprofile()
             }
         }
-//        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
     }
     func validation()->Bool{
         let firstName = txtFirstName.validatedText(validationType: ValidatorType.username(field: "first name") )//ValidatorType.requiredField(field: "first name"))
@@ -111,7 +121,7 @@ class EditProfileVC: BaseViewController{
         lblUnverified.text = "EditProfileVC_lblUnverified".Localized()
         btnSave.setTitle("EditProfileVC_btnSave".Localized(), for: .normal)
     }
-   
+    
     // MARK: - Api Calls
     func webserviceForEditprofile()
     {
@@ -124,38 +134,42 @@ class EditProfileVC: BaseViewController{
         updateModel.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.phone = StrPhone! //txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.user_id = SingletonClass.sharedInstance.UserId
-        self.showHUD()
-        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage() , showHud: true, completion: { (response, status, error) in
-            self.hideHUD()
+        if self.isRemovePhoto{
+            updateModel.remove_image = "1"
+        }
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: true, completion: { (response, status, error) in
             if status{
                 let updatedData = Userinfo.init(fromJson: response)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
                 userDefault.setUserData(objProfile: updatedData.profile)
+                self.isRemovePhoto = false
                 Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
-                self.navigationController?.popViewController(animated: true)
-                self.delegateEdit.refereshProfileScreen()
+                    self.navigationController?.popViewController(animated: true)
+                    self.delegateEdit.refereshProfileScreen()
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
     }
-    }
+}
 
 // MARK: - ImagePickerDelegate
 extension EditProfileVC:ImagePickerDelegate {
     
     func didSelect(image: UIImage?, SelectedTag:Int) {
-        isRemovePhoto = false
-            if(image == nil && SelectedTag == 101){
-               
-                //webservice_RemoveProfilePicture()
-            }else if image != nil{
-                let fixedOrientedImage = image?.fixOrientation()
-               self.imgProfile.image = fixedOrientedImage
-                self.selectedImage = self.imgProfile.image
-            }else{
-                return
-            }
+        //        isRemovePhoto = false
+        if(image == nil && SelectedTag == 101){
+            self.selectedImage = UIImage()
+            self.isRemovePhoto = true
+            self.imgProfile.image = UIImage.init(named: "dummy_User")
+            //webservice_RemoveProfilePicture()
+        }else if image != nil{
+            let fixedOrientedImage = image?.fixOrientation()
+            self.imgProfile.image = fixedOrientedImage
+            self.selectedImage = self.imgProfile.image
+        }else{
+            return
+        }
     }
 }

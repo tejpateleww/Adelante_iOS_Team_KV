@@ -38,9 +38,9 @@ class WebServiceSubClass
         WebService.shared.requestMethod(api: .ForgotPassword, httpMethod: .post, parameters: params, completion: completion)
     }
     //Update Profile
-    class func UpdateProfileInfo( editProfileModel : EditProfileReqModel  ,img : UIImage ,showHud : Bool = false , completion: @escaping CompletionResponse ) {
+    class func UpdateProfileInfo( editProfileModel : EditProfileReqModel  ,img : UIImage,isRemoveImage: Bool ,showHud : Bool = false , completion: @escaping CompletionResponse ) {
         let  params : [String:String] = editProfileModel.generatPostParams() as! [String : String]
-        WebService.shared.postDataWithImage(api: .EditProfile, showHud: false, parameter: params, image: img, imageParamName: "profile_picture", completion: completion)
+        WebService.shared.postDataWithImage(api: .EditProfile, isRemoveimage: isRemoveImage, showHud: false, parameter: params, image: img, imageParamName: "profile_picture", completion: completion)
     }
     //Logout
     class func Logout( logoutModel : LogoutReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {

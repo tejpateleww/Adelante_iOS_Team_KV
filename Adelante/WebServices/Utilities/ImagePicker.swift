@@ -54,7 +54,7 @@ open class ImagePicker: NSObject {
         }
     }
    
-    public func present(from sourceView: UIView , viewPresented : UIView) {
+    public func present(from sourceView: UIView , viewPresented : UIView, isRemove:Bool) {
         self.SelectedTag = sourceView.tag
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -72,10 +72,11 @@ open class ImagePicker: NSObject {
         api_vector.sd_setImage(with: URL(string: "http://qwnched.excellentwebworld.in/assets/images/default_user.png"))
 //        http://qwnched.excellentwebworld.in/assets/images/default_user.png
         if let sourceImage = (sourceView as! UIImageView).image {
-            if let defaultImage = UIImage(named: "default_user") {
+            if let defaultImage = UIImage(named: "dummy_User") {
                 let isDefaultImage = sourceImage.isEqualToImage(defaultImage)
-                if (!isDefaultImage) && !(sourceImage.isEqualToImage(api_vector.image ?? UIImage())) {
-                    alertController.addAction(UIAlertAction(title: "Remove Photo", style: .destructive, handler: { (action) in
+                if (!isDefaultImage) && !(sourceImage.isEqualToImage(api_vector.image ?? UIImage())) && isRemove == true{
+                    alertController.addAction(UIAlertAction(title: "Remove Photo", style: .destructive, handler:
+                    { (action) in
                         self.delegate?.didSelect(image: nil, SelectedTag:101)
                     }))
                 }
@@ -108,13 +109,6 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let chosenImage = info[.originalImage] as! UIImage
         self.pickerController(picker, didSelect: chosenImage)
-    }
-}
-
-extension UIImage {
-
-    func isEqualToImage(_ image: UIImage) -> Bool {
-        return self.pngData() == image.pngData()
     }
 }
 
@@ -179,4 +173,6 @@ extension ImagePicker {
         self.presentationController?.present(alert, animated: true)
     }
 }
+
+
 

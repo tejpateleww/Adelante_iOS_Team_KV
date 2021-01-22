@@ -43,6 +43,9 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     var arrBanner = [Banner]()
     var SelectedCatId = ""
     var refreshList = UIRefreshControl()
+    var pageNumber = 1
+    var isNeedToReload = true
+    var pageLimit = 5
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -261,7 +264,20 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func SelectedCategory(_ CategoryId: String) {
     self.SelectedCatId = CategoryId
         print("selectedcategoryid",SelectedCatId)
+        pageNumber = 1
     self.webserviceGetDashboard()
+    }
+    // MARK: - UIScrollView Delegates
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        stoppedScrolling()
+    }
+    
+    func stoppedScrolling() {
+        if isNeedToReload {
+            pageNumber = pageNumber + 1
+            webserviceGetDashboard()
+        }
+        // done, do whatever
     }
     // MARK: - Api Calls
     @objc func webserviceGetDashboard(){
@@ -271,14 +287,26 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         Deshboard.filter = ""
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        Deshboard.page = "1"
+        Deshboard.page = "\(pageNumber)"
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let Homedata = DashBoardResModel.init(fromJson: response)
                 self.arrCategories = Homedata.category
                 self.arrBanner = Homedata.banner
-                self.arrRestaurant = Homedata.restaurant
+                if self.pageNumber == 1 {
+                    self.arrRestaurant = Homedata.restaurant
+                } else {
+                    let arrTemp = Homedata.restaurant
+                    if arrTemp!.count > 0 {
+                        for i in 0..<arrTemp!.count {
+                            self.arrRestaurant.append(arrTemp![i])
+                        }
+                    }
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    }
+                }
                 self.tblMainList.reloadData()
                 self.colVwRestWthPage.reloadData()
             }else{
