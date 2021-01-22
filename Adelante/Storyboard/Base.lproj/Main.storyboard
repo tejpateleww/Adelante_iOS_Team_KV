@@ -579,7 +579,7 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="45c-lV-znp">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="254" height="77"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -588,7 +588,7 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="23.5" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -597,10 +597,10 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isLocation" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
+                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
                                                                                                                     <rect key="frame" x="0.0" y="47" width="254" height="30"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="3" width="254" height="27"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
@@ -895,7 +895,9 @@
         <scene sceneID="DIS-ye-txg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ECD-hI-71e" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tabSearchUnselected" selectedImage="tabSearchSelected" id="Bvb-AW-8DG"/>
+                    <tabBarItem key="tabBarItem" title="" image="tabSearchUnselected" selectedImage="tabSearchSelected" id="Bvb-AW-8DG">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X5i-xh-qQO">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1489,7 +1491,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="215"/>
+                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1535,10 +1537,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                <rect key="frame" x="0.0" y="166" width="378" height="49"/>
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="79" id="GZk-3S-lMA"/>
@@ -1554,7 +1556,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="48" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -2872,7 +2874,6 @@
                                                                                     </constraints>
                                                                                 </stackView>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="trailing" secondItem="se7-1T-sZN" secondAttribute="trailing" id="8Uo-17-mzv"/>
                                                                                 <constraint firstItem="se7-1T-sZN" firstAttribute="top" secondItem="gbF-Yx-Mnj" secondAttribute="top" id="FHF-iH-8Sx"/>
@@ -2917,6 +2918,7 @@
                                                                             <constraints>
                                                                                 <constraint firstItem="zUy-po-Tly" firstAttribute="top" secondItem="AEf-Or-B1k" secondAttribute="top" id="3Pe-UP-G72"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="zUy-po-Tly" secondAttribute="trailing" id="K0I-Gy-zNV"/>
+                                                                                <constraint firstAttribute="width" constant="65.5" id="cLj-DJ-5aZ"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -3183,7 +3185,7 @@
                                                                                                                         </label>
                                                                                                                     </subviews>
                                                                                                                 </stackView>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 6, 20  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaY-B1-FxI" customClass="orderDetailsLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 6, 20   4:22 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaY-B1-FxI" customClass="orderDetailsLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="25" width="378" height="20.5"/>
                                                                                                                     <constraints>
                                                                                                                         <constraint firstAttribute="height" constant="20.5" id="Zlg-CU-dJv"/>
@@ -7208,8 +7210,60 @@ avoid cancellations </string>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isCancellationPolicy" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQc-rq-Zx8" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="50" width="30" height="20"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQc-rq-Zx8" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="50" width="65" height="20"/>
+                                                                        <state key="normal">
+                                                                            <attributedString key="attributedTitle">
+                                                                                <fragment content="Read Policy">
+                                                                                    <attributes>
+                                                                                        <color key="NSColor" red="0.8901960784313725" green="0.29019607843137252" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                        <font key="NSFont" size="12" name="Helvetica"/>
+                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                                            <tabStops>
+                                                                                                <textTab alignment="left" location="28.299999237060547">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="56.650001525878906">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="85">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="113.34999847412109">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="141.69999694824219">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="170.05000305175781">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="198.39999389648438">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="226.75">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="255.10000610351562">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="283.45001220703125">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="311.79998779296875">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                                <textTab alignment="left" location="340.14999389648438">
+                                                                                                    <options/>
+                                                                                                </textTab>
+                                                                                            </tabStops>
+                                                                                        </paragraphStyle>
+                                                                                        <integer key="NSUnderline" value="1"/>
+                                                                                        <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                    </attributes>
+                                                                                </fragment>
+                                                                            </attributedString>
+                                                                        </state>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isReadPolicy" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
@@ -7236,6 +7290,10 @@ avoid cancellations </string>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epc-Qg-J09" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="60"/>
+                                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
+                                                                <state key="normal">
+                                                                    <color key="titleColor" red="0.8901960784313725" green="0.29019607843137252" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -7422,7 +7480,7 @@ avoid cancellations </string>
         <image name="tabProfileSelected" width="16.5" height="19.5"/>
         <image name="tabProfileUnselected" width="16.5" height="19.5"/>
         <image name="tabSearchSelected" width="19.5" height="19.5"/>
-        <image name="tabSearchUnselected" width="20" height="20"/>
+        <image name="tabSearchUnselected" width="19.5" height="19.5"/>
         <image name="user (4)" width="42" height="42"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
