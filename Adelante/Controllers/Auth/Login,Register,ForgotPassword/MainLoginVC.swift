@@ -32,7 +32,8 @@ class MainLoginVC: UIViewController {
     
     //MARK:- IBActions
     @IBAction func btnSkipClicked(_ sender: Any) {
-        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+        
+//        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
         appDel.navigateToHome()
     }
     

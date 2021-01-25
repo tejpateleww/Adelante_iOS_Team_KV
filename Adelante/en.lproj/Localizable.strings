@@ -222,6 +222,10 @@
 "applyPromoCodeVC_lblPromoCode" = "Apply Promocode";
 "applyPromoCodeVC_txtPromoCode" = "Promocode";
 
+
+//EditLocationVC
+"EditLocationVC_txtSearch" = "Enter Your Location";
+
 //NavigationTitles
 "NavigationTitles_Privacypolicy" = "Privacy policy";
 "NavigationTitles_MyOrders" = "My Orders";
@@ -254,6 +258,8 @@
 "NavigationTitles_NavItemsRight_notifBell" = "notifBell";
 "NavigationTitles_NavItemsRight_Liked" = "Liked";
 "NavigationTitles_search" = "Search";
+"NavigationTitles_searchLocation" = "Search Location";
+"NavigationTitles_NavItemsLeft_skip" = "SKIP";
 
 //Message
 "MessageTitle" = "Something went wrong";

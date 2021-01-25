@@ -24,6 +24,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     var pageNumber = 1
     var isNeedToReload = true
     var pageLimit = 5
+    var strItemId = ""
+    var strItemType = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
@@ -164,8 +166,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         RestaurantList.filter = strFilter
         RestaurantList.item = strSearch
         RestaurantList.page = "\(pageNumber)"
-        RestaurantList.item_id = ""
-        RestaurantList.item_type = ""
+        RestaurantList.item_id = strItemId
+        RestaurantList.item_type = strItemType
         RestaurantList.page = "\(pageNumber)"
         WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()

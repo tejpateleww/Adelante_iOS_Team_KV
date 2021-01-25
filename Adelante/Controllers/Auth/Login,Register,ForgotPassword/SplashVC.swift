@@ -63,6 +63,7 @@ extension SplashVC{
             {
                 let sortingModel = sortingResModel.init(fromJson: json)
                 SingletonClass.sharedInstance.arrSorting = sortingModel.data
+                SingletonClass.sharedInstance.topSellingId = sortingModel.top_selling_id
                 //self.setupUserDetails()
             }
             else

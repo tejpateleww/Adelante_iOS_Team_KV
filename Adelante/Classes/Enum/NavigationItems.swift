@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 enum NavItemsLeft {
-    case none, back
+    case none, back ,skip
     
     var value:String {
         switch self {
@@ -19,6 +19,8 @@ enum NavItemsLeft {
             return ""
         case .back:
             return "NavigationTitles_NavItemsLeft_back".Localized()
+        case .skip:
+            return "NavigationTitles_NavItemsLeft_skip".Localized()
         }
     }
 }
@@ -44,11 +46,11 @@ enum NavItemsRight {
 }
 
 enum NavTitles {
-    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites , addPaymentVC , AddCardVC , bffComboVC , FeedbackVC ,checkOutVC ,BffComboVC , SearchVC
+    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites , addPaymentVC , AddCardVC , bffComboVC , FeedbackVC ,checkOutVC ,BffComboVC , SearchVC ,EditLocationVC
     
     var value:String {
         switch self {
-            
+        
         case .none:
             return ""
         case .myOrders:
@@ -106,7 +108,9 @@ enum NavTitles {
         case .BffComboVC:
             return "NavigationTitles_BFFCombo".Localized()
         case .SearchVC:
-        return "NavigationTitles_search".Localized()
+            return "NavigationTitles_search".Localized()
+        case .EditLocationVC:
+            return "NavigationTitles_searchLocation".Localized()
         }
     }
 }

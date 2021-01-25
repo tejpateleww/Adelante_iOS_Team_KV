@@ -32,6 +32,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var delegateFavoprite : FavoriteUpdateDelegate!
     var customTabBarController: CustomTabBarVC?
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
+    var selectedRestaurantId = ""
 //    var arrMenuitem = [MenuItem]()
 //    var arrResData = [DetailsData]()
 //    var arrReview = [Review]()
@@ -237,7 +238,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     // MARK: - Api Calls
     func webservicePostRestaurantDetails(){
         let ResDetails = RestaurantDetailsReqModel()
-        ResDetails.restaurant_id = ""
+        ResDetails.restaurant_id = selectedRestaurantId
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{

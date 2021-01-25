@@ -14,7 +14,7 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
     // MARK: - IBOutlets
-    @IBOutlet weak var tfSearch: UITextField!
+    @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var collectionCategory: UICollectionView!
     
     // MARK: - ViewController Lifecycle
@@ -31,12 +31,13 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
       //  self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.topCategories.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        let padding = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.tfSearch.frame.height))
-        tfSearch.leftView = padding
-        tfSearch.leftViewMode = UITextField.ViewMode.always
+        txtSearch.backgroundImage = UIImage()
+//        let padding = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.tfSearch.frame.height))
+//        tfSearch.leftView = padding
+//        tfSearch.leftViewMode = UITextField.ViewMode.always
     }
     func setUpLocalizedStrings(){
-        tfSearch.placeholder = "CategoryVC_tfSearch".Localized()
+        txtSearch.placeholder = "CategoryVC_tfSearch".Localized()
     }
     // MARK: - IBActions
     

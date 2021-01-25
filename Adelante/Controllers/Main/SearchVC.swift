@@ -37,7 +37,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     
     // MARK: - Other Methods
     @objc func refreshFavList() {
-    self.webserviceSearchModel(strSearch: "")
+        self.webserviceSearchModel(strSearch: "")
     }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -61,6 +61,18 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         cell.imgFoodandres.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         cell.selectionStyle = .none
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if arrSearchResult[indexPath.row].type.caseInsensitiveCompare("dish") == .orderedSame{
+            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantListVC") as! RestaurantListVC
+            vc.strItemId = arrSearchResult[indexPath.row].id
+            vc.strItemType = arrSearchResult[indexPath.row].type
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if arrSearchResult[indexPath.row].type.caseInsensitiveCompare("restaurant") == .orderedSame{
+            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantDetailsVC") as! RestaurantDetailsVC
+            vc.selectedRestaurantId = arrSearchResult[indexPath.row].id
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     func setUpLocalizedStrings() {
         txtSearch.placeholder = "SearchVC_txtSearch".Localized()

@@ -19,6 +19,7 @@ class SingletonClass: NSObject
     var DeviceToken : String = ""
     var arrSorting = [Sorting]()
     var userCurrentLocation = CLLocation()
+    var topSellingId : String = ""
 //    var currentLat = Double()
 //    var currentLong = Double()
     

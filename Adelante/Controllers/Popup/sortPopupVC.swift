@@ -12,7 +12,7 @@ import UIKit
 }
 class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
-   // var customTabBarController: CustomTabBarVC?
+    // var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
     var delegateFilter : SortListDelegate!
     var selectedSortData = ""
@@ -29,13 +29,12 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
     
     @IBOutlet weak var viewDragable: UIView!
-    var selectedIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
         isSwipable(view: viewDragable)
         
-       // self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+        // self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         let footerView = UIView()
         footerView.backgroundColor = .white
         footerView.frame = CGRect.init(x: 0, y: 0, width: tblSorting.frame.size.width, height: 5)
@@ -59,11 +58,11 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
         
         tblSorting.delegate = self
         tblSorting.dataSource = self
-//        tblSorting.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webser), for: .valueChanged)
+        //        tblSorting.refreshControl = refreshList
+        //        refreshList.addTarget(self, action: #selector(webser), for: .valueChanged)
         tblSorting.reloadData()
     }
- 
+    
     override func viewDidLayoutSubviews() {
         self.viewBG.layer.cornerRadius = 10
         self.viewBG.clipsToBounds = true
@@ -99,22 +98,27 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
         
         let cell = tblSorting.dequeueReusableCell(withIdentifier: sortCell.reuseIdentifier, for: indexPath) as! sortCell
         cell.SortListName.text = arrayForSort[indexPath.row].name
-        
-        cell.imageSelected.isHighlighted = selectedIndex == indexPath.row ? true : false
+        if arrayForSort[indexPath.row].id == selectedSortData
+        {
+            cell.imageSelected.isHighlighted = true
+        } else {
+            cell.imageSelected.isHighlighted = false
+        }
         cell.btnClickNew = {
-            self.selectedIndex = indexPath.row
-            self.tblSorting.reloadData()
-            switch indexPath.row {
-            case 0:
-                self.dismiss(animated: true, completion: nil)
-            case 4:
-                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CategoryVC.storyboardID) as! CategoryVC
-                self.navigationController?.navigationBar.isHidden = false
-                       self.navigationController?.pushViewController(controller, animated: true)
-                //self.dismiss(animated: true, completion: nil)
-              
-            default:
-                break
+            if self.selectedSortData == ""{
+                self.selectedSortData = self.arrayForSort[indexPath.row].id
+                let selectedIndexpath = IndexPath(item: indexPath.row, section: 0)
+                self.tblSorting.reloadRows(at: [selectedIndexpath], with: .automatic)
+            }else if self.selectedSortData == self.arrayForSort[indexPath.row].id{
+                self.selectedSortData = ""
+                let selectedIndexpath = IndexPath(item: indexPath.row, section: 0)
+                self.tblSorting.reloadRows(at: [selectedIndexpath], with: .automatic)
+            }else{
+                self.selectedSortData = self.arrayForSort[indexPath.row].id
+                self.tblSorting.reloadData()
+            }
+            self.dismiss(animated: true) {
+                self.delegateFilter.SelectedSortList(self.selectedSortData)
             }
         }
         cell.selectionStyle = .none
@@ -122,20 +126,7 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.selectedSortData == ""{
-            self.selectedSortData = self.arrayForSort[indexPath.row].id
-            let selectedIndexpath = IndexPath(item: indexPath.row, section: 0)
-            self.tblSorting.reloadRows(at: [selectedIndexpath], with: .automatic)
-        }else if self.selectedSortData == self.arrayForSort[indexPath.row].id{
-                self.selectedSortData = ""
-            let selectedIndexpath = IndexPath(item: indexPath.row, section: 0)
-            self.tblSorting.reloadRows(at: [selectedIndexpath], with: .automatic)
-        }else{
-            self.selectedSortData = self.arrayForSort[indexPath.row].id
-            self.tblSorting.reloadData()
-        }
-        self.delegateFilter.SelectedSortList(selectedSortData)
-        }
+    }
     
     @objc public func dismissPresentView(){
         self.dismiss(animated: true) {
