@@ -7,15 +7,15 @@
 //
 
 import UIKit
-@objc protocol RestaurantListDelegate {
-    func SelectedCategory(_ CategoryId: String)
+@objc protocol SortListDelegate {
+    func SelectedSortList(_ SortId: String)
 }
 class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
    // var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
-    
-    
+    var delegateFilter : SortListDelegate!
+    var selectedSortData = ""
     
     // @IBOutlet weak var heightViewBG: NSLayoutConstraint!
     @IBOutlet weak var tblSorting: UITableView!
@@ -122,11 +122,20 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        
-   
-        
-    }
+        if self.selectedSortData == ""{
+            self.selectedSortData = self.arrayForSort[indexPath.row].id
+            let selectedIndexpath = IndexPath(item: indexPath.row, section: 0)
+            self.tblSorting.reloadRows(at: [selectedIndexpath], with: .automatic)
+        }else if self.selectedSortData == self.arrayForSort[indexPath.row].id{
+                self.selectedSortData = ""
+            let selectedIndexpath = IndexPath(item: indexPath.row, section: 0)
+            self.tblSorting.reloadRows(at: [selectedIndexpath], with: .automatic)
+        }else{
+            self.selectedSortData = self.arrayForSort[indexPath.row].id
+            self.tblSorting.reloadData()
+        }
+        self.delegateFilter.SelectedSortList(selectedSortData)
+        }
     
     @objc public func dismissPresentView(){
         self.dismiss(animated: true) {

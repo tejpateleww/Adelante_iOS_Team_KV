@@ -252,6 +252,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
+//            if self.arr.count > 0{
+//                self.tblRestaurantDetails.restore()
+//            }else {
+//                self.tblRestaurantDetails.setEmptyMessage("emptyMsg_Restaurant".Localized())
+//            }
         })
     }
     func webwerviceFavorite(strRestaurantId:String,Status:String){

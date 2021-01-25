@@ -12,6 +12,7 @@ class sortingResModel : NSObject, NSCoding{
     var data : [Sorting]!
     var message : String!
     var status : Bool!
+    var top_selling_id : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -28,6 +29,7 @@ class sortingResModel : NSObject, NSCoding{
         }
         message = json["message"].stringValue
         status = json["status"].boolValue
+        top_selling_id = json["top_selling_id"].stringValue
 	}
 
 	/**
@@ -49,6 +51,9 @@ class sortingResModel : NSObject, NSCoding{
         if status != nil{
         	dictionary["status"] = status
         }
+        if top_selling_id != nil{
+            dictionary["top_selling_id"] = top_selling_id
+        }
 		return dictionary
 	}
 
@@ -61,6 +66,7 @@ class sortingResModel : NSObject, NSCoding{
 		data = aDecoder.decodeObject(forKey: "data") as? [Sorting]
 		message = aDecoder.decodeObject(forKey: "message") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
+        top_selling_id = aDecoder.decodeObject(forKey: "top_selling_id") as? String
 	}
 
     /**
@@ -78,7 +84,9 @@ class sortingResModel : NSObject, NSCoding{
 		if status != nil{
 			aCoder.encode(status, forKey: "status")
 		}
-
+        if top_selling_id != nil{
+            aCoder.encode(top_selling_id, forKey: "top_selling_id")
+        }
 	}
 
 }

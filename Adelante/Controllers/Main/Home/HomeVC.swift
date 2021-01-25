@@ -22,7 +22,9 @@ struct structFilter {
     }
 }
 
-class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate{
+class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate{
+    
+    
 //    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
 //
 //        self.SelectedCatId = CategoryId
@@ -42,6 +44,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     var arrRestaurant  = [Restaurant]()
     var arrBanner = [Banner]()
     var SelectedCatId = ""
+    var SelectFilterId = ""
     var refreshList = UIRefreshControl()
     var pageNumber = 1
     var isNeedToReload = true
@@ -147,7 +150,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             self.colVwFilterOptions.reloadData()
         }
             if self.selectedSortTypedIndexFromcolVwFilter == 0 {
-                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID)
+                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID) as! sortPopupVC
+                vc.delegateFilter = self
                 let navController = UINavigationController.init(rootViewController: vc)
                 navController.modalPresentationStyle = .overFullScreen
                 navController.navigationController?.modalTransitionStyle = .crossDissolve
@@ -260,12 +264,18 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
-    // MARK: - RestaurantCatListCell
+    // MARK: - RestaurantCatListCelldelegate
     func SelectedCategory(_ CategoryId: String) {
     self.SelectedCatId = CategoryId
         print("selectedcategoryid",SelectedCatId)
         pageNumber = 1
     self.webserviceGetDashboard()
+    }
+    // MARK: - filterDelegate
+    func SelectedSortList(_ SortId: String) {
+        self.SelectFilterId = SortId
+        pageNumber = 1
+        webserviceGetDashboard()
     }
     // MARK: - UIScrollView Delegates
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -284,7 +294,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         let Deshboard = DashboardReqModel()
         Deshboard.category_id = SelectedCatId
         Deshboard.user_id = SingletonClass.sharedInstance.UserId
-        Deshboard.filter = ""
+        Deshboard.filter = SelectFilterId
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         Deshboard.page = "\(pageNumber)"
@@ -310,7 +320,13 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 self.tblMainList.reloadData()
                 self.colVwRestWthPage.reloadData()
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                Utilities.displayErrorAlert(response["message"].string ?? "Something went wrong")
+//                Utilities.showAlertOfAPIResponse(param: error ?? "Something went wrong", vc: self)
+            }
+            if self.arrRestaurant.count > 0{
+                self.tblMainList.restore()
+            }else {
+                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
@@ -331,4 +347,5 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             }
         })
     }
+    
 }

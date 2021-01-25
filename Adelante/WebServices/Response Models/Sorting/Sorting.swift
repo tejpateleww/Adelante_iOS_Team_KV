@@ -13,6 +13,7 @@ class Sorting : NSObject, NSCoding{
     var name : String!
     var status : String!
     var trash : String!
+    var base_name : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -25,6 +26,7 @@ class Sorting : NSObject, NSCoding{
         name = json["name"].stringValue
         status = json["status"].stringValue
         trash = json["trash"].stringValue
+        base_name = json["base_name"].stringValue
 	}
 
 	/**
@@ -45,6 +47,9 @@ class Sorting : NSObject, NSCoding{
         if trash != nil{
         	dictionary["trash"] = trash
         }
+        if base_name != nil{
+            dictionary["base_name"] = base_name
+        }
 		return dictionary
 	}
 
@@ -58,6 +63,7 @@ class Sorting : NSObject, NSCoding{
 		name = aDecoder.decodeObject(forKey: "name") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? String
 		trash = aDecoder.decodeObject(forKey: "trash") as? String
+        base_name = aDecoder.decodeObject(forKey: "base_name") as? String
 	}
 
     /**
@@ -78,6 +84,9 @@ class Sorting : NSObject, NSCoding{
 		if trash != nil{
 			aCoder.encode(trash, forKey: "trash")
 		}
+        if base_name != nil{
+            aCoder.encode(base_name, forKey: "base_name")
+        }
 
 	}
 

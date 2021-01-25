@@ -188,6 +188,11 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
+            if self.arrRestaurantList.count > 0{
+                self.tblMainList.restore()
+            }else {
+                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
+            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }

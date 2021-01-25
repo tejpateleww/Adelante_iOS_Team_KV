@@ -42,6 +42,7 @@
 		345EA8F125B5477100A4E56D /* RestaurantFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345EA8EE25B5477100A4E56D /* RestaurantFavorite.swift */; };
 		345EA8F225B5477100A4E56D /* restaurantDetailsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345EA8EF25B5477100A4E56D /* restaurantDetailsList.swift */; };
 		345EA97E25B5861400A4E56D /* SettingsResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345EA97D25B5861400A4E56D /* SettingsResModel.swift */; };
+		345FC23C25BE81EB00795BE7 /* UITableview+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345FC23B25BE81EB00795BE7 /* UITableview+Extension.swift */; };
 		347D953E25A70A23000C64B5 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347D953D25A70A23000C64B5 /* Dashboard.swift */; };
 		347D955B25A71637000C64B5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347D955725A71637000C64B5 /* Category.swift */; };
 		347D955C25A71637000C64B5 /* DashBoardResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347D955825A71637000C64B5 /* DashBoardResModel.swift */; };
@@ -217,6 +218,7 @@
 		345EA8EE25B5477100A4E56D /* RestaurantFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFavorite.swift; sourceTree = "<group>"; };
 		345EA8EF25B5477100A4E56D /* restaurantDetailsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restaurantDetailsList.swift; sourceTree = "<group>"; };
 		345EA97D25B5861400A4E56D /* SettingsResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsResModel.swift; sourceTree = "<group>"; };
+		345FC23B25BE81EB00795BE7 /* UITableview+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableview+Extension.swift"; sourceTree = "<group>"; };
 		347D953D25A70A23000C64B5 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		347D955725A71637000C64B5 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		347D955825A71637000C64B5 /* DashBoardResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardResModel.swift; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 				81CFFD592574C60D005AA86A /* UISearchbar+Extension.swift */,
 				81CFFD5A2574C60D005AA86A /* Data+Extensions.swift */,
 				34A5382C25A6D46E000037C5 /* UIImage+Extension.swift */,
+				345FC23B25BE81EB00795BE7 /* UITableview+Extension.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -1094,6 +1097,7 @@
 				34D603A125A8630300C82D63 /* RestaurantListResModel.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,
 				81CFFD7B2574C60D005AA86A /* Colors.swift in Sources */,
+				345FC23C25BE81EB00795BE7 /* UITableview+Extension.swift in Sources */,
 				8170CAFF257A771000B24B7A /* MyFoodlistVC.swift in Sources */,
 				8170CAF4257A10B500B24B7A /* MyProfileVC.swift in Sources */,
 				8105FDC12574D0F9008D36D6 /* FavouritesVC.swift in Sources */,
@@ -1362,7 +1366,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
@@ -1388,7 +1392,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";

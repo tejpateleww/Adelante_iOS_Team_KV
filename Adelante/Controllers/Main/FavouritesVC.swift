@@ -141,6 +141,13 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
+//            self.arrFavoriteRest.removeAll()
+//            self.tblMainList.reloadData()
+            if self.arrFavoriteRest.count > 0{
+                self.tblMainList.restore()
+            }else {
+                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
+            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
