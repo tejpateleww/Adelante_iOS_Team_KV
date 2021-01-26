@@ -5,8 +5,13 @@
 
 import UIKit
 
-class CustomTabBarVC: UITabBarController {
-    
+//protocol CustomTabBarDelegate {
+//    func didSelectItem()
+//}
+
+var selectedTabIndex = 2
+class CustomTabBarVC: UITabBarController, UITabBarControllerDelegate {
+    var lastSelectedIndex = 0
     let coustmeTabBarView:UIView = {
         //  daclare coustmeTabBarView as view
         let view = UIView(frame: .zero)
@@ -54,7 +59,8 @@ class CustomTabBarVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.delegate = self
+        self.selectedIndex = 0
         addcoustmeTabBarView()
         hideTabBarBorder()
     }
@@ -137,7 +143,7 @@ class CustomTabBarVC: UITabBarController {
         view.bringSubviewToFront(self.tabBar)
     }
     
-    func hideTabBarBorder()  {
+    func hideTabBarBorder() {
         let tabBar = self.tabBar
         tabBar.backgroundImage = UIImage.from(color: .clear)
         tabBar.shadowImage = UIImage()
@@ -152,6 +158,31 @@ class CustomTabBarVC: UITabBarController {
     func showTabBar() {
         self.tabBar.isHidden = false
         coustmeTabBarView.isHidden = false
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        lastSelectedIndex = tabBarController.selectedIndex
+        return true
+    }
+
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let i = tabBarController.selectedIndex
+        print("Selected Index: \(i)")
+        
+        selectedTabIndex = tabBarController.selectedIndex
+        if (tabBarController.selectedIndex == 2 || tabBarController.selectedIndex == 3 || tabBarController.selectedIndex == 4) {
+            if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) == nil || (userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false){
+            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+            let navController = UINavigationController.init(rootViewController: vc)
+            navController.modalPresentationStyle = .overFullScreen
+            navController.navigationController?.modalTransitionStyle = .crossDissolve
+            navController.navigationBar.isHidden = true
+            self.present(navController, animated: true, completion: nil)
+                appDel.clearData()
+                SingletonClass.sharedInstance.isFromCustomTab = true
+            tabBarController.selectedIndex = lastSelectedIndex
+            }
+        }
     }
 }
 

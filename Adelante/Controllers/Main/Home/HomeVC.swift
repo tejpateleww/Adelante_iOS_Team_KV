@@ -116,14 +116,23 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
-        var Select = arrRestaurant[sender.tag].favourite ?? ""
-        let restaurantId = arrRestaurant[sender.tag].id ?? ""
-        if Select == "1"{
-            Select = "0"
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+            let navController = UINavigationController.init(rootViewController: vc)
+            navController.modalPresentationStyle = .overFullScreen
+            navController.navigationController?.modalTransitionStyle = .crossDissolve
+            navController.navigationBar.isHidden = true
+            self.present(navController, animated: true, completion: nil)
         }else{
-            Select = "1"
+            var Select = arrRestaurant[sender.tag].favourite ?? ""
+            let restaurantId = arrRestaurant[sender.tag].id ?? ""
+            if Select == "1"{
+                Select = "0"
+            }else{
+                Select = "1"
+            }
+            webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
         }
-        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
     }
     @IBAction func btnNotifClicked(_ sender: Any) {
         let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)

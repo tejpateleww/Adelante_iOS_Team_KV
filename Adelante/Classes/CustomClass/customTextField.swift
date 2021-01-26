@@ -129,16 +129,16 @@ class floatTextField: SkyFloatingLabelTextField {
 //
 //        self.textColor = colors.black.value
 //        self.titleFormatter = { $0 }
-        self.titleColor = colors.black.value
+        self.titleColor = colors.forgotpassGreyColor.value
         self.lineHeight = 0.0
         self.selectedLineHeight = 0.0
-        self.selectedTitleColor = colors.black.value
+        self.selectedTitleColor = colors.forgotpassGreyColor.value
         self.lineColor = colors.forgotpassGreyColor.value
         self.selectedLineColor = colors.forgotpassGreyColor.value
         self.textColor = colors.textFieldColor.value
         self.titleFormatter = { $0 }
         
-        self.titleFont = CustomFont.NexaBold.returnFont(18)
+        self.titleFont = CustomFont.NexaRegular.returnFont(10)
         self.font = CustomFont.NexaRegular.returnFont(16)
         
         if isEditProfile {

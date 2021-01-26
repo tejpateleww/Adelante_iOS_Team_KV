@@ -5703,6 +5703,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="4rC-bj-VRz">
+                                <rect key="frame" x="0.0" y="367" width="414" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlj-FZ-oEj">
                                 <rect key="frame" x="0.0" y="72" width="414" height="790"/>
                                 <subviews>
@@ -5733,7 +5737,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvI-ot-5bM" customClass="addCardDetailsView" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="22" width="382" height="48"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John Smith" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSq-bl-ut4" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSq-bl-ut4" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="16" y="0.0" width="350" height="48"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
@@ -5778,7 +5782,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQC-0d-5DX" customClass="addCardDetailsView" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="22" width="382" height="48"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="**** - **** -  **** - **85" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWw-Xa-v9T" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWw-Xa-v9T" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="16" y="0.0" width="350" height="48"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -5831,7 +5835,7 @@
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CfS-Ib-9xr" customClass="addCardDetailsView" customModule="Adelante" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="22" width="182.5" height="48"/>
                                                                                         <subviews>
-                                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10/27/2030" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5W-73-fb3" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y5W-73-fb3" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
                                                                                                 <rect key="frame" x="16" y="0.0" width="150.5" height="48"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                 <textInputTraits key="textInputTraits"/>
@@ -5875,7 +5879,7 @@
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="te8-LB-Duy" customClass="addCardDetailsView" customModule="Adelante" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="22" width="182.5" height="48"/>
                                                                                         <subviews>
-                                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="****" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i6K-uc-hch" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i6K-uc-hch" customClass="addCarddetailsTextField" customModule="Adelante" customModuleProvider="target">
                                                                                                 <rect key="frame" x="16" y="0.0" width="150.5" height="48"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                 <textInputTraits key="textInputTraits"/>
@@ -6048,6 +6052,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Dtpicker" destination="4rC-bj-VRz" id="mbt-0Q-hEO"/>
                         <outlet property="btnSave" destination="Yyk-zl-cbC" id="XG4-2d-foq"/>
                         <outlet property="lblCardNumber" destination="uh0-4O-qsD" id="8TI-Ga-9pl"/>
                         <outlet property="lblCvv" destination="uIa-fx-82c" id="RKr-SH-Hu4"/>
@@ -7495,6 +7500,47 @@ avoid cancellations </string>
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="97" height="34"/>
+        </designable>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="178" height="34"/>
+        </designable>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="98" height="34"/>
+        </designable>
+        <designable name="IOt-oG-ldn">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
+        </designable>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="149" height="34"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="90.5" height="34"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="208.5" height="34"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="zNM-X4-rQ4">
+            <size key="intrinsicContentSize" width="34.5" height="18.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
         <image name="DetailsFood" width="161" height="158"/>

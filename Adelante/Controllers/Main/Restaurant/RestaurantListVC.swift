@@ -105,14 +105,25 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
-        var Select = arrRestaurantList[sender.tag].favourite ?? ""
-        let restaurantId = arrRestaurantList[sender.tag].id ?? ""
-        if Select == "1"{
-            Select = "0"
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+//             vc.delegateFilter = self
+//             vc.selectedSortData = self.SelectFilterId
+            let navController = UINavigationController.init(rootViewController: vc)
+            navController.modalPresentationStyle = .overFullScreen
+            navController.navigationController?.modalTransitionStyle = .crossDissolve
+            navController.navigationBar.isHidden = true
+            self.present(navController, animated: true, completion: nil)
         }else{
-            Select = "1"
+            var Select = arrRestaurantList[sender.tag].favourite ?? ""
+            let restaurantId = arrRestaurantList[sender.tag].id ?? ""
+            if Select == "1"{
+                Select = "0"
+            }else{
+                Select = "1"
+            }
+            webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
         }
-        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
     }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
         if sender.isSelected {

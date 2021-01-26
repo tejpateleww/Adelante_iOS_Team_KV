@@ -22,7 +22,9 @@ class MainLoginVC: UIViewController {
         super.viewDidLoad()
         setUpLocalizedStrings()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
     // MARK: - Other Methods
     func setUpLocalizedStrings() {
         btnSkip.setTitle("MainLoginVC_btnSkip".Localized(), for: .normal)

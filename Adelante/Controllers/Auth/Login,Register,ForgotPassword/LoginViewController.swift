@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
 
     @IBOutlet weak var lblTitle: themeTitleLabel!
     @IBOutlet weak var txtEmail : floatTextField!
@@ -20,10 +20,15 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         setUpLocalizedStrings()
         // Do any additional setup after loading the view.
     }
-    
+    func setup(){
+        self.navigationController?.navigationBar.isHidden = false
+        addNavBarImage(isLeft: true, isRight: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+    }
     // MARK: - IBActions
     @IBAction func btnForgotPasswordClicked(_ sender: Any) {
         let forgotPassVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ForgotPasswordVC.storyboardID)

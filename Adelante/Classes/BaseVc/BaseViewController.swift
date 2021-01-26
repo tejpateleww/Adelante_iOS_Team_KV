@@ -458,9 +458,13 @@ class BaseViewController: UIViewController {
 //    }
     
     @objc func btnBackAction() {
-        
         if self.navigationController?.children.count == 1 {
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            if SingletonClass.sharedInstance.isFromCustomTab  {
+                SingletonClass.sharedInstance.isFromCustomTab = false
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            } else {
+                appDel.navigateToMainLogin()
+            }
         }
         else {
             self.navigationController?.popViewController(animated: true)

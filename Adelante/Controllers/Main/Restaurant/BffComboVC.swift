@@ -143,8 +143,19 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     // MARK: - IBActions
     @IBAction func btnViewCart(_ sender: Any) {
-      let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
-      self.navigationController?.pushViewController(controller, animated: true)
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+            //             vc.delegateFilter = self
+            //             vc.selectedSortData = self.SelectFilterId
+            let navController = UINavigationController.init(rootViewController: vc)
+            navController.modalPresentationStyle = .overFullScreen
+            navController.navigationController?.modalTransitionStyle = .crossDissolve
+            navController.navigationBar.isHidden = true
+            self.present(navController, animated: true, completion: nil)
+        }else{
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     // MARK: - Api Calls
     @objc func webservicePostCombo(){
