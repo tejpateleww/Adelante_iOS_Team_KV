@@ -52,7 +52,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.customTabBarController?.showTabBar()
+        self.customTabBarController?.hideTabBar()
     }
     
     // MARK: - Other Methods

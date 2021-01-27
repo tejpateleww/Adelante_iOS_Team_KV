@@ -12,7 +12,7 @@ class FoodMenu : NSObject, NSCoding{
     var categoryId : String!
     var categoryName : String!
     var subMenu : [SubMenu]!
-    var isExpand : Bool = false
+    var isExpanded : Bool = false
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */

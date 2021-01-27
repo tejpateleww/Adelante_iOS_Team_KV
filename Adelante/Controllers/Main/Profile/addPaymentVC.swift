@@ -131,6 +131,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         switch section {
         case 0:
             let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: tblPaymentMethod.frame.size.width, height: 43))
+            headerView.backgroundColor = .white
+            
             let label = UILabel()
             label.frame = CGRect(x: 16, y: 0, width:  headerView .frame.size.width, height: 19)
             // let label = UILabel.init(frame: )
@@ -139,22 +141,25 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             label.font = CustomFont.NexaRegular.returnFont(15)
             label.textColor = UIColor(hexString: "#222B45")
             label.textAlignment = .left
+            
             print(headerView.frame)
             headerView.addSubview(label)
             return headerView
         case 1:
             let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: tblPaymentMethod.frame.size.width, height: 43))
+            headerView.backgroundColor = .white
+            
             let label = UILabel.init(frame: CGRect(x: 16, y: 0, width:  headerView.frame.size.width, height: 19))
             label.center.y = headerView.frame.size.height / 2
             label.text = "CURRENT METHOD"
-            label.font = CustomFont.NexaLight.returnFont(13)
+            label.font = CustomFont.NexaBold.returnFont(13)
             label.textColor = UIColor(hexString: "#ACB1C0")
             label.textAlignment = .left
             headerView.addSubview(label)
             return headerView
         default:
             let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-            
+            headerView.backgroundColor = .white
             return headerView
         }
     }

@@ -138,7 +138,7 @@ class floatTextField: SkyFloatingLabelTextField {
         self.textColor = colors.textFieldColor.value
         self.titleFormatter = { $0 }
         
-        self.titleFont = CustomFont.NexaRegular.returnFont(10)
+        self.titleFont = CustomFont.NexaRegular.returnFont(12)
         self.font = CustomFont.NexaRegular.returnFont(16)
         
         if isEditProfile {

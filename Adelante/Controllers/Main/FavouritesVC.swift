@@ -20,6 +20,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var pageNumber = 1
     var isNeedToReload = true
     var pageLimit = 5
+    var selectedRestaurantId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
@@ -33,7 +34,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         txtSearch.backgroundImage = UIImage()
         let button = UIButton()
-//        button.backgroundColor = .green
+        //        button.backgroundColor = .green
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         setup()
@@ -60,7 +61,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     @objc func refreshFavList() {
         pageNumber = 1
-    self.webservicePostRestaurantFav(strSearch: "")
+        self.webservicePostRestaurantFav(strSearch: "")
     }
     func setUpLocalizedStrings() {
         txtSearch.placeholder = "FavouritesVC_txtSearch".Localized()
@@ -111,8 +112,9 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
-            self.navigationController?.pushViewController(controller, animated: true)
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+        controller.selectedRestaurantId = arrFavoriteRest[indexPath.row].restaurantId
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
     @objc func webservicePostRestaurantFav(strSearch : String){
@@ -141,8 +143,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-//            self.arrFavoriteRest.removeAll()
-//            self.tblMainList.reloadData()
+            //            self.arrFavoriteRest.removeAll()
+            //            self.tblMainList.reloadData()
             if self.arrFavoriteRest.count > 0{
                 self.tblMainList.restore()
             }else {
@@ -159,9 +161,10 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
-//            self.hideHUD()
+            //            self.hideHUD()
             if status{
-                self.webservicePostRestaurantFav(strSearch: "")
+//                self.webservicePostRestaurantFav(strSearch: "")
+                self.arrFavoriteRest.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 NotificationCenter.default.post(name: refreshfav, object: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)

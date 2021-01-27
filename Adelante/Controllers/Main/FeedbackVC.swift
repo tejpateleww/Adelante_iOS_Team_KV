@@ -9,7 +9,7 @@
 import UIKit
 
 class FeedbackVC: BaseViewController {
-
+    
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     
@@ -25,7 +25,7 @@ class FeedbackVC: BaseViewController {
         setUpLocalizedStrings()
         setUp()
     }
-
+    
     // MARK: - Other Methods
     func setUp() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -33,8 +33,8 @@ class FeedbackVC: BaseViewController {
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.FeedbackVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     override func viewWillAppear(_ animated: Bool) {
-                 self.customTabBarController?.hideTabBar()
-             }
+        self.customTabBarController?.hideTabBar()
+    }
     func setUpLocalizedStrings(){
         txtTitle.placeholder = "FeedbackVC_txtTitle".Localized()
         txtEmail.placeholder = "FeedbackVC_txtEmail".Localized()
@@ -43,5 +43,31 @@ class FeedbackVC: BaseViewController {
     }
     // MARK: - IBActions
     
+    @IBAction func btnSubmitClick(_ sender: submitButton) {
+        webserviceForFeedback()
+    }
     // MARK: - Api Calls
+    func webserviceForFeedback()
+    {
+        let feedback = FeedbackReqModel()
+        feedback.user_id = SingletonClass.sharedInstance.UserId
+        feedback.title = txtTitle.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        feedback.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        feedback.message = tvFeedback.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        //        self.showHUD()
+        WebServiceSubClass.Feedback(Feedbackmodel: feedback, showHud: true, completion: { (json, status, response) in
+            //            self.hideHUD()
+            if(status)
+            {
+                Utilities.displayAlert(json["message"].string ?? "")
+                self.txtEmail.text = ""
+                self.txtTitle.text = ""
+                self.tvFeedback.text = ""
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
+    }
 }

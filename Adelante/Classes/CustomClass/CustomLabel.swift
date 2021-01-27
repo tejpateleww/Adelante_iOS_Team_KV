@@ -471,7 +471,7 @@ class tblHomeLabels: UILabel {
         super.awakeFromNib()
         self.textColor = colors.black.value
         if isRestaurantName {
-            self.font = CustomFont.NexaRegular.returnFont(15)
+            self.font = CustomFont.NexaRegular.returnFont(18)
         } else if isPrice {
             self.font = CustomFont.NexaBold.returnFont(13)
         } else if isDistance {

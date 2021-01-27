@@ -49,6 +49,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     var pageNumber = 1
     var isNeedToReload = true
     var pageLimit = 5
+    var selectedRestaurantId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -275,7 +276,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row != 0
         {
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+            controller.selectedRestaurantId = arrRestaurant[indexPath.row].id
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
@@ -365,7 +367,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             //            self.hideHUD()
             if status{
-                self.webserviceGetDashboard()
+//                self.webserviceGetDashboard()
+                self.arrRestaurant.first(where: { $0.id == strRestaurantId })?.favourite = Status
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

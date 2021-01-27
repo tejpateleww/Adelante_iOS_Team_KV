@@ -66,9 +66,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        let button = UIButton()
-        button.setTitle("", for: .normal)
-        button.addTarget(self, action: #selector(buttonAdd), for: .touchUpInside)
         webservicePostRestaurantDetails()
         setUpLocalizedStrings()
         setup()
@@ -134,7 +131,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         }
     }
     override func viewDidLayoutSubviews() {
-//         heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height + 50
+        self.calculateTableHeight()
     }
     
     // MARK: - IBActions
@@ -181,26 +178,26 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
+    
     @objc  func btnExpand(_ sender : UIButton) {
-        for i in 0..<arrSections.count {
-            if sender.tag != 0 {
+        for i in 0..<arrFoodMenu.count {
                 if sender.tag == i {
-                    if arrSections[i].isExpanded == true {
-                        arrSections[i].isExpanded = false
+                    if arrFoodMenu[i].isExpanded == true {
+                        arrFoodMenu[i].isExpanded = false
                         break
                     } else {
-                        arrSections[i].isExpanded = true
+                        arrFoodMenu[i].isExpanded = true
                     }
                 } else {
-                    arrSections[i].isExpanded = false
+                    arrFoodMenu[i].isExpanded = false
                 }
-            }
         }
         
         DispatchQueue.main.async {
             self.tblRestaurantDetails.reloadData()
         }
     }
+    
     // MARK: - UITableViewDelegates And Datasource
     func numberOfSections(in tableView: UITableView) -> Int {
         //        return self.arrSections.count
@@ -208,51 +205,146 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return arrMenuitem.count
-        }
-        return arrFoodMenu[section - 1].subMenu.count
-//        return arrSections[section].isExpanded == true ? arrSections[section].rowCount : 0
-//        if section == 0 {
-//            return arrSections[section].rowCount
-//        }
-//        return arrSections[section].isExpanded == true ? arrSections[section].rowCount : 0
+        return self.setRowCount(section: section)
     }
+    
     func setRowCount(section : Int) -> Int{
         var rowCount = 0
-        if section == 0{
-            if arrMenuitem.count > 0{
+        if arrMenuitem.count > 0{
+            if section == 0 {
                 rowCount = arrMenuitem.count
-            }else{
-                rowCount = arrFoodMenu[section].subMenu.c
+            } else {
+                if arrFoodMenu.count > 0 {
+                    rowCount = arrFoodMenu[section - 1].isExpanded == true ? arrFoodMenu[section - 1].subMenu.count : 0
+                }
+            }
+        } else {
+            if arrFoodMenu.count > 0 {
+                rowCount = arrFoodMenu[section].isExpanded == true ? arrFoodMenu[section].subMenu.count : 0
             }
         }
+        return rowCount
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
-            cell.lblItemName.text = arrMenuitem[indexPath.row].name
-            cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
-            cell.lblAboutItem.text = arrMenuitem[indexPath.row].descriptionField
-            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrMenuitem[indexPath.row].image ?? "")"
-            cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-            cell.selectionStyle = .none
-            //            cell.
+        if arrMenuitem.count > 0 {
+            if indexPath.section == 0 {
+                let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
+                cell.lblItemName.text = arrMenuitem[indexPath.row].name
+                cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
+                cell.lblAboutItem.text = arrMenuitem[indexPath.row].descriptionField
+                let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrMenuitem[indexPath.row].image ?? "")"
+                cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                cell.decreaseData = {
+                    if cell.lblNoOfItem.text != ""{
+                        var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                        if value == 1{
+                            cell.btnAddItem.isHidden = false
+                            cell.vwStapper.isHidden = true
+                        }else if value > 1{
+                            value = value - 1
+                            cell.lblNoOfItem.text = String(value)
+                        }
+                    }
+                }
+                cell.IncreseData = {
+                    if cell.lblNoOfItem.text != ""{
+                        var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                            value = value + 1
+                            cell.lblNoOfItem.text = String(value)
+                    }
+                }
+                cell.btnAddAction = {
+                    cell.btnAddItem.isHidden = true
+                    cell.vwStapper.isHidden = false
+                }
+                cell.selectionStyle = .none
+                cell.customize = {
+                    let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+                cell.selectionStyle = .none
+                return cell
+            } else {
+                let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
+                cell.lblItem.text = arrFoodMenu[indexPath.section - 1].categoryName
+                cell.lblItemPrice.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price
+                cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size
+//                if arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant == "1"{
+//                    cell.btnCustomize.isHidden = false
+//                }else{
+//                    cell.btnCustomize.isHidden = true
+//                }
+                cell.decreaseData = {
+                    if cell.lblNoOfItem.text != ""{
+                        var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                        if value == 1{
+                            cell.btnAdd.isHidden = false
+                            cell.vwStapper.isHidden = true
+                        }else if value > 1{
+                            value = value - 1
+                            cell.lblNoOfItem.text = String(value)
+                        }
+                    }
+                }
+                cell.IncreseData = {
+                    if cell.lblNoOfItem.text != ""{
+                        var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                            value = value + 1
+                            cell.lblNoOfItem.text = String(value)
+                    }
+                }
+                cell.btnAddAction = {
+                    cell.btnAdd.isHidden = true
+                    cell.vwStapper.isHidden = false
+                }
+                cell.customize = {
+                    let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+                cell.selectionStyle = .none
+                return cell
+            }
+        } else {
+                let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
+                cell.lblItem.text = arrFoodMenu[indexPath.section].categoryName
+                cell.lblItemPrice.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].price
+                cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].size
+//            if arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant == "1"{
+//                cell.btnCustomize.isHidden = false
+//            }else{
+//                cell.btnCustomize.isHidden = true
+//            }
+            cell.decreaseData = {
+                if cell.lblNoOfItem.text != ""{
+                    var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                    if value == 1{
+                        cell.btnAdd.isHidden = false
+                        cell.vwStapper.isHidden = true
+                    }else if value > 1{
+                        value = value - 1
+                        cell.lblNoOfItem.text = String(value)
+                    }
+                }
+            }
+            cell.IncreseData = {
+                if cell.lblNoOfItem.text != ""{
+                    var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                        value = value + 1
+                        cell.lblNoOfItem.text = String(value)
+                }
+            }
+            cell.btnAddAction = {
+                cell.btnAdd.isHidden = true
+                cell.vwStapper.isHidden = false
+            }
             cell.customize = {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                 self.navigationController?.pushViewController(controller, animated: true)
             }
-            cell.selectionStyle = .none
-            return cell
-        } else {
-            let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
-            cell.lblItem.text = arrFoodMenu[indexPath.row].categoryName
-            cell.lblItemPrice.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price
-            cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size
-            cell.btnAdd.addTarget(self, action: #selector(buttonAdd(_:)), for: .touchUpInside)
-            cell.selectionStyle = .none
-            return cell
+                cell.selectionStyle = .none
+                return cell
         }
     }
     
@@ -266,7 +358,24 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         label.textColor = colors.black.value
         headerView.addSubview(label)
         
-        if section != 0 {
+        if arrMenuitem.count > 0 {
+            if section == 0 {
+                label.text = "RestaurantDetailsVC_arrSection".Localized()
+            } else {
+                let expandImageView = UIImageView()
+                expandImageView.frame = CGRect.init(x: headerView.frame.width - 35.66, y: 34.31, width: 16.66, height: 8.38)
+                expandImageView.center.y = headerView.frame.size.height / 2
+                expandImageView.image = UIImage(named: "ic_expand")
+                headerView.addSubview(expandImageView)
+                
+                let expandButton = UIButton()
+                expandButton.frame = CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+                expandButton.tag = section - 1
+                expandButton.addTarget(self, action: #selector(btnExpand(_:)), for: .touchUpInside)
+                headerView.addSubview(expandButton)
+                label.text = arrFoodMenu[section - 1].categoryName
+            }
+        } else {
             let expandImageView = UIImageView()
             expandImageView.frame = CGRect.init(x: headerView.frame.width - 35.66, y: 34.31, width: 16.66, height: 8.38)
             expandImageView.center.y = headerView.frame.size.height / 2
@@ -279,11 +388,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             expandButton.tag = section
             expandButton.addTarget(self, action: #selector(btnExpand(_:)), for: .touchUpInside)
             headerView.addSubview(expandButton)
-            label.text = arrFoodMenu[section - 1].categoryName
-            
-        }
-        else{
-            label.text = "RestaurantDetailsVC_arrSection".Localized()
+            label.text = arrFoodMenu[section].categoryName
         }
         return headerView
     }
@@ -303,6 +408,20 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         return footerView
     }
     
+    func calculateTableHeight() {
+        var extraHeight = 0
+        if self.arrMenuitem.count > 0 {
+            extraHeight = extraHeight + 45
+            if self.arrFoodMenu.count > 0 {
+                extraHeight = extraHeight + (self.arrFoodMenu.count * 45)
+            }
+        } else {
+            extraHeight = self.arrFoodMenu.count * 45
+        }
+        self.heightTblRestDetails.constant = self.tblRestaurantDetails.contentSize.height + CGFloat(extraHeight)
+        self.tblRestaurantDetails.layoutIfNeeded()
+    }
+    
     // MARK: - Api Calls
     func webservicePostRestaurantDetails(){
         let ResDetails = RestaurantDetailsReqModel()
@@ -310,16 +429,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         ResDetails.page = "\(pageNumber)"
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
-            if status{
+            if status {
                 let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
                 self.arrMenuitem = RestDetail.data.restaurant.menuItem
                 self.arrFoodMenu = RestDetail.data.restaurant.foodMenu
-//                self.arrSubMenu = RestDetail.data.restaurant.
                 self.objRestaurant = RestDetail.data.restaurant
                 self.tblRestaurantDetails.reloadData()
-                self.heightTblRestDetails.constant = self.tblRestaurantDetails.contentSize.height + 150
+                self.calculateTableHeight()
                 self.setData()
-            }else{
+            } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
             //            if self.arrMenuitem.count > 0{
@@ -329,6 +447,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             //            }
         })
     }
+    
     func webwerviceFavorite(strRestaurantId:String,Status:String){
         let favorite = FavoriteReqModel()
         favorite.restaurant_id = strRestaurantId
@@ -336,9 +455,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         favorite.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             //            self.hideHUD()
-            if status{
+            if status {
                 self.webservicePostRestaurantDetails()
-            }else{
+            } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })

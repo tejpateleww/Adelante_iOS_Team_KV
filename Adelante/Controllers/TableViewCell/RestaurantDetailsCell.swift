@@ -17,15 +17,34 @@ class RestaurantDetailsCell: UITableViewCell {
     @IBOutlet weak var lblItemPrice: tblMyOrdersLabel!
     @IBOutlet weak var lblItemName: tblMyOrdersLabel!
     @IBOutlet weak var imgFoodDetails: UIImageView!
+    @IBOutlet weak var lblNoOfItem: UILabel!
+    @IBOutlet weak var vwStapper: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpLocalizedStrings()
     }
     var customize : (() -> ())?
-
+    var decreaseData : (() -> ())?
+    var IncreseData : (() -> ())?
+    var btnAddAction : (() -> ())?
     @IBAction func btnCustomize(_ sender: Any) {
         if let click = self.customize {
             click()
+        }
+    }
+    @IBAction func btnDecrease(_ sender: Any) {
+        if let Decrease = self.decreaseData{
+            Decrease()
+        }
+    }
+    @IBAction func btnIncrease(_ sender: Any) {
+        if let Increase = self.IncreseData{
+            Increase()
+        }
+    }
+    @IBAction func btnAdd(_ sender: Any) {
+        if let btnAdd = self.btnAddAction{
+            btnAdd()
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
