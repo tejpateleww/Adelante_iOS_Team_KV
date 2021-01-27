@@ -9,7 +9,7 @@ import UIKit
 //    func didSelectItem()
 //}
 
-var selectedTabIndex = 2
+var selectedTabIndex = 0
 class CustomTabBarVC: UITabBarController, UITabBarControllerDelegate {
     var lastSelectedIndex = 0
     let coustmeTabBarView:UIView = {
@@ -179,7 +179,7 @@ class CustomTabBarVC: UITabBarController, UITabBarControllerDelegate {
             navController.navigationBar.isHidden = true
             self.present(navController, animated: true, completion: nil)
                 appDel.clearData()
-                SingletonClass.sharedInstance.isFromCustomTab = true
+                SingletonClass.sharedInstance.isPresented = true
             tabBarController.selectedIndex = lastSelectedIndex
             }
         }

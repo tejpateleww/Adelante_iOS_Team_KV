@@ -36,6 +36,12 @@
 		3431E07225932587002F1435 /* orderDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3431E07125932587002F1435 /* orderDetailsCell.swift */; };
 		3431E074259325BF002F1435 /* addedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3431E073259325BF002F1435 /* addedProductCell.swift */; };
 		343C5A6225BFE98400C6A7CA /* CustomTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343C5A6125BFE98400C6A7CA /* CustomTabBarVC.swift */; };
+		3443D61D25C11E61001CFAFE /* RestaurantDetailsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D61725C11E60001CFAFE /* RestaurantDetailsData.swift */; };
+		3443D61E25C11E62001CFAFE /* RestaurantDetailsResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D61825C11E60001CFAFE /* RestaurantDetailsResModel.swift */; };
+		3443D61F25C11E62001CFAFE /* SubMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D61925C11E61001CFAFE /* SubMenu.swift */; };
+		3443D62025C11E62001CFAFE /* FoodMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D61A25C11E61001CFAFE /* FoodMenu.swift */; };
+		3443D62125C11E62001CFAFE /* Restaurantinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D61B25C11E61001CFAFE /* Restaurantinfo.swift */; };
+		3443D62225C11E62001CFAFE /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D61C25C11E61001CFAFE /* MenuItem.swift */; };
 		34525DFD25AED8A900406EB6 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34525DFB25AED8A800406EB6 /* Sorting.swift */; };
 		34525DFE25AED8A900406EB6 /* sortingResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34525DFC25AED8A800406EB6 /* sortingResModel.swift */; };
 		34525EB225AEF40800406EB6 /* RestaurantFavoriteReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34525EB125AEF40800406EB6 /* RestaurantFavoriteReqModel.swift */; };
@@ -213,6 +219,12 @@
 		3431E07125932587002F1435 /* orderDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orderDetailsCell.swift; sourceTree = "<group>"; };
 		3431E073259325BF002F1435 /* addedProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addedProductCell.swift; sourceTree = "<group>"; };
 		343C5A6125BFE98400C6A7CA /* CustomTabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarVC.swift; sourceTree = "<group>"; };
+		3443D61725C11E60001CFAFE /* RestaurantDetailsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsData.swift; sourceTree = "<group>"; };
+		3443D61825C11E60001CFAFE /* RestaurantDetailsResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsResModel.swift; sourceTree = "<group>"; };
+		3443D61925C11E61001CFAFE /* SubMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMenu.swift; sourceTree = "<group>"; };
+		3443D61A25C11E61001CFAFE /* FoodMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodMenu.swift; sourceTree = "<group>"; };
+		3443D61B25C11E61001CFAFE /* Restaurantinfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurantinfo.swift; sourceTree = "<group>"; };
+		3443D61C25C11E61001CFAFE /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		34525DFB25AED8A800406EB6 /* Sorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		34525DFC25AED8A800406EB6 /* sortingResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sortingResModel.swift; sourceTree = "<group>"; };
 		34525EB125AEF40800406EB6 /* RestaurantFavoriteReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFavoriteReqModel.swift; sourceTree = "<group>"; };
@@ -477,6 +489,12 @@
 		34D603C025A892EB00C82D63 /* RestaurantDetails */ = {
 			isa = PBXGroup;
 			children = (
+				3443D61725C11E60001CFAFE /* RestaurantDetailsData.swift */,
+				3443D61A25C11E61001CFAFE /* FoodMenu.swift */,
+				3443D61C25C11E61001CFAFE /* MenuItem.swift */,
+				3443D61B25C11E61001CFAFE /* Restaurantinfo.swift */,
+				3443D61825C11E60001CFAFE /* RestaurantDetailsResModel.swift */,
+				3443D61925C11E61001CFAFE /* SubMenu.swift */,
 			);
 			path = RestaurantDetails;
 			sourceTree = "<group>";
@@ -1078,6 +1096,7 @@
 				3431E05A25931DFF002F1435 /* RestaurantItemCell.swift in Sources */,
 				3431E05C25931EB3002F1435 /* paymentMethodCell1.swift in Sources */,
 				34D603A525A8643B00C82D63 /* RestaurantListReqModel.swift in Sources */,
+				3443D61D25C11E61001CFAFE /* RestaurantDetailsData.swift in Sources */,
 				343C5A6225BFE98400C6A7CA /* CustomTabBarVC.swift in Sources */,
 				345EA8F225B5477100A4E56D /* restaurantDetailsList.swift in Sources */,
 				3431E0682593224C002F1435 /* RestWithPageCell.swift in Sources */,
@@ -1085,6 +1104,7 @@
 				81CFFD872574C60D005AA86A /* customTextField.swift in Sources */,
 				3431E04A25931B70002F1435 /* MyOrdersCell.swift in Sources */,
 				81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */,
+				3443D62225C11E62001CFAFE /* MenuItem.swift in Sources */,
 				340A4C7225A3291F00FB6061 /* Profile.swift in Sources */,
 				81CFFD7E2574C60D005AA86A /* String+Extensions.swift in Sources */,
 				8105FDD325751289008D36D6 /* customButton.swift in Sources */,
@@ -1109,9 +1129,11 @@
 				8170CAF2257A10B500B24B7A /* NotificationVC.swift in Sources */,
 				81CFFD712574C60D005AA86A /* LoginReqModel.swift in Sources */,
 				347D955C25A71637000C64B5 /* DashBoardResModel.swift in Sources */,
+				3443D62125C11E62001CFAFE /* Restaurantinfo.swift in Sources */,
 				3431E05825931DC8002F1435 /* RestaurantDetailsCell.swift in Sources */,
 				8170CAEE257A10B500B24B7A /* ForgotPasswordVC.swift in Sources */,
 				34CF866625A81BC90040C188 /* SearchCell.swift in Sources */,
+				3443D61E25C11E62001CFAFE /* RestaurantDetailsResModel.swift in Sources */,
 				81E67216257E68BC00DCE9DA /* AddCardVC.swift in Sources */,
 				34CD681525B7DCAB0052F485 /* FavoriteReqModel.swift in Sources */,
 				8105FDC92574F101008D36D6 /* AppStoryboards.swift in Sources */,
@@ -1150,6 +1172,7 @@
 				8105FDCF2574F714008D36D6 /* SplashVC.swift in Sources */,
 				8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */,
 				81CFFD7D2574C60D005AA86A /* UILabel+Extension.swift in Sources */,
+				3443D61F25C11E62001CFAFE /* SubMenu.swift in Sources */,
 				34CF870F25A82A550040C188 /* SearchResModel.swift in Sources */,
 				18F369542580AE0000992FCD /* commonPopup.swift in Sources */,
 				8170CAF1257A10B500B24B7A /* RateReviewVC.swift in Sources */,
@@ -1178,6 +1201,7 @@
 				81CFFD6D2574C60D005AA86A /* ResposneInitClass.swift in Sources */,
 				3431E0642593209F002F1435 /* sortCell.swift in Sources */,
 				81CFFD752574C60D005AA86A /* ImagePicker.swift in Sources */,
+				3443D62025C11E62001CFAFE /* FoodMenu.swift in Sources */,
 				3431E04C25931C15002F1435 /* CategoryCell.swift in Sources */,
 				347D955B25A71637000C64B5 /* Category.swift in Sources */,
 				8170CAF6257A10B500B24B7A /* CommonWebViewVC.swift in Sources */,
@@ -1370,7 +1394,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
@@ -1396,7 +1420,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";

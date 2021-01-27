@@ -113,6 +113,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             navController.modalPresentationStyle = .overFullScreen
             navController.navigationController?.modalTransitionStyle = .crossDissolve
             navController.navigationBar.isHidden = true
+            SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
             var Select = arrRestaurantList[sender.tag].favourite ?? ""
@@ -166,7 +167,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID)
+        let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+        restDetailsVc.selectedRestaurantId = arrRestaurantList[indexPath.row].id
         self.navigationController?.pushViewController(restDetailsVc, animated: true)
     }
     

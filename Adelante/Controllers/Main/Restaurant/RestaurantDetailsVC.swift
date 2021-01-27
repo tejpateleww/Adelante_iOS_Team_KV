@@ -33,11 +33,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var customTabBarController: CustomTabBarVC?
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
     var selectedRestaurantId = ""
-//    var arrMenuitem = [MenuItem]()
-//    var arrResData = [DetailsData]()
-//    var arrReview = [Review]()
-//    var arrResDetail = [RestaurantDetailsData]()
+    var arrMenuitem = [MenuItem]()
+    var arrFoodMenu = [FoodMenu]()
+    var arrSubMenu = [SubMenu]()
+    var objRestaurant : Restaurantinfo!
     var SelectedCatId = ""
+    var pageNumber = "1"
     // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
@@ -51,6 +52,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var lblAddress: themeLabel!
     @IBOutlet weak var lblOpenTime: themeLabel!
     @IBOutlet weak var lblTime: themeLabel!
+    @IBOutlet weak var lblCompleteTime: themeLabel!
     @IBOutlet weak var lblTimeZone: themeLabel!
     @IBOutlet weak var lblEastern: themeLabel!
     @IBOutlet weak var lblAboutRestaurant: themeLabel!
@@ -59,10 +61,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var lblSign: themeLabel!
     @IBOutlet weak var lblPrice: themeLabel!
     @IBOutlet weak var lblViewCards: themeLabel!
+    @IBOutlet weak var stackPromocode: UIStackView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        let button = UIButton()
+        button.setTitle("", for: .normal)
+        button.addTarget(self, action: #selector(buttonAdd), for: .touchUpInside)
+        webservicePostRestaurantDetails()
         setUpLocalizedStrings()
         setup()
     }
@@ -80,8 +87,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         tblRestaurantDetails.dataSource = self
         tblRestaurantDetails.estimatedRowHeight = 20
         tblRestaurantDetails.reloadData()
-//        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
-//        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+        //        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
+        //        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
         
     }
     func setUpLocalizedStrings(){
@@ -103,26 +110,49 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         lblPrice.text = "$30"
         lblViewCards.text = "RestaurantDetailsVC_lblViewCart".Localized()
     }
+    func setData(){
+        if objRestaurant != nil{
+            self.lblRestaurantName.text = objRestaurant.name ?? ""
+            self.lblPrice.text = objRestaurant.name ?? ""
+            self.lblRating.text = objRestaurant.rating ?? ""
+            self.lblReviews.text = String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review)
+            //            self.lblTimeZone.text = objRestaurant.
+            self.lblDistance.text = String(format: "HomeVC_RestaurantCell_lblMiles".Localized(), objRestaurant.distance)
+            self.lblAddress.text = objRestaurant.address ?? ""
+            if objRestaurant.promocode == ""{
+                stackPromocode.isHidden = true
+            }else{
+                stackPromocode.isHidden = false
+            }
+            self.lblCode.text = objRestaurant.promocode ?? ""
+            self.lblTime.text = objRestaurant.fromTime ?? ""
+            self.lblCompleteTime.text = objRestaurant.toTime ?? ""
+            self.lblAboutRestaurant.text = objRestaurant.descriptionField ?? ""
+            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(objRestaurant.image ?? "")"
+            self.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            self.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+        }
+    }
     override func viewDidLayoutSubviews() {
-        heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height
+//         heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height + 50
     }
     
     // MARK: - IBActions
-//    @IBAction func buttonTapFavorite(_ sender: UIButton) {
-////        var Select = arrResDetail[].favourite ?? ""
-////        let restaurantId = arrResDetail[sender.tag].id ?? ""
-////        if Select == "1"{
-////            Select = "0"
-////        }else{
-////            Select = "1"
-////        }
-////        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
-//        if btnNavLike.isSelected{
-//            btnNavLike.isSelected = false
-//        }else{
-//            btnNavLike.isSelected = true
-//        }
-//    }
+    //    @IBAction func buttonTapFavorite(_ sender: UIButton) {
+    ////        var Select = arrResDetail[].favourite ?? ""
+    ////        let restaurantId = arrResDetail[sender.tag].id ?? ""
+    ////        if Select == "1"{
+    ////            Select = "0"
+    ////        }else{
+    ////            Select = "1"
+    ////        }
+    ////        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+    //        if btnNavLike.isSelected{
+    //            btnNavLike.isSelected = false
+    //        }else{
+    //            btnNavLike.isSelected = true
+    //        }
+    //    }
     @IBAction func btnViewPolicy(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
         controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
@@ -132,7 +162,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantReviewVC.storyboardID) as! RestaurantReviewVC
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    
+    @IBAction func buttonAdd(_ sender: UIButton) {
+        
+    }
     @IBAction func btnViewCart(_ sender: Any) {
         if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
@@ -142,6 +174,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             navController.modalPresentationStyle = .overFullScreen
             navController.navigationController?.modalTransitionStyle = .crossDissolve
             navController.navigationBar.isHidden = true
+            SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
@@ -170,27 +203,42 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     // MARK: - UITableViewDelegates And Datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.arrSections.count
+        //        return self.arrSections.count
+        return arrMenuitem.count > 0 ? arrFoodMenu.count + 1 : arrFoodMenu.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return arrSections[section].rowCount
+            return arrMenuitem.count
         }
-        return arrSections[section].isExpanded == true ? arrSections[section].rowCount : 0
+        return arrFoodMenu[section - 1].subMenu.count
+//        return arrSections[section].isExpanded == true ? arrSections[section].rowCount : 0
+//        if section == 0 {
+//            return arrSections[section].rowCount
+//        }
+//        return arrSections[section].isExpanded == true ? arrSections[section].rowCount : 0
     }
-    
+    func setRowCount(section : Int) -> Int{
+        var rowCount = 0
+        if section == 0{
+            if arrMenuitem.count > 0{
+                rowCount = arrMenuitem.count
+            }else{
+                rowCount = arrFoodMenu[section].subMenu.c
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
-//            cell.lblItemName.text = arrMenuitem[indexPath.row].name
-//            cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
-//            cell.lblAboutItem.text = arrMenuitem[indexPath.row].description
-//            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
-//            cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//            cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.lblItemName.text = arrMenuitem[indexPath.row].name
+            cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
+            cell.lblAboutItem.text = arrMenuitem[indexPath.row].descriptionField
+            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrMenuitem[indexPath.row].image ?? "")"
+            cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             cell.selectionStyle = .none
-//            cell.
+            //            cell.
             cell.customize = {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                 self.navigationController?.pushViewController(controller, animated: true)
@@ -199,6 +247,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             return cell
         } else {
             let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
+            cell.lblItem.text = arrFoodMenu[indexPath.row].categoryName
+            cell.lblItemPrice.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price
+            cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size
+            cell.btnAdd.addTarget(self, action: #selector(buttonAdd(_:)), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
         }
@@ -209,7 +261,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         let label = UILabel()
         label.frame = CGRect.init(x: 20, y: 14, width: headerView.frame.width-40, height: 20)
         label.center.y = headerView.frame.size.height / 2
-        label.text = arrSections[section].strTitle
+        
         label.font = CustomFont.NexaBold.returnFont(20)
         label.textColor = colors.black.value
         headerView.addSubview(label)
@@ -227,6 +279,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             expandButton.tag = section
             expandButton.addTarget(self, action: #selector(btnExpand(_:)), for: .touchUpInside)
             headerView.addSubview(expandButton)
+            label.text = arrFoodMenu[section - 1].categoryName
+            
+        }
+        else{
+            label.text = "RestaurantDetailsVC_arrSection".Localized()
         }
         return headerView
     }
@@ -250,25 +307,26 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func webservicePostRestaurantDetails(){
         let ResDetails = RestaurantDetailsReqModel()
         ResDetails.restaurant_id = selectedRestaurantId
+        ResDetails.page = "\(pageNumber)"
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
-//                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
-                
-//                self.arrResData = RestDetail.data
-//                self.arrReview = RestDetail.Review
-//                self.arrResDetail = RestDetail.RestaurantDetailsData
-//                self.arrMenuitem = RestDetail.MenuItem
-//                self.tblMainList.reloadData()
-//                self.colVwRestWthPage.reloadData()
+                let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
+                self.arrMenuitem = RestDetail.data.restaurant.menuItem
+                self.arrFoodMenu = RestDetail.data.restaurant.foodMenu
+//                self.arrSubMenu = RestDetail.data.restaurant.
+                self.objRestaurant = RestDetail.data.restaurant
+                self.tblRestaurantDetails.reloadData()
+                self.heightTblRestDetails.constant = self.tblRestaurantDetails.contentSize.height + 150
+                self.setData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-//            if self.arr.count > 0{
-//                self.tblRestaurantDetails.restore()
-//            }else {
-//                self.tblRestaurantDetails.setEmptyMessage("emptyMsg_Restaurant".Localized())
-//            }
+            //            if self.arrMenuitem.count > 0{
+            //                self.tblRestaurantDetails.restore()
+            //            }else {
+            //                self.tblRestaurantDetails.setEmptyMessage("emptyMsg_Restaurant".Localized())
+            //            }
         })
     }
     func webwerviceFavorite(strRestaurantId:String,Status:String){
@@ -277,7 +335,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
-//            self.hideHUD()
+            //            self.hideHUD()
             if status{
                 self.webservicePostRestaurantDetails()
             }else{

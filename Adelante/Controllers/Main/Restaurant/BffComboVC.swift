@@ -151,6 +151,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             navController.modalPresentationStyle = .overFullScreen
             navController.navigationController?.modalTransitionStyle = .crossDissolve
             navController.navigationBar.isHidden = true
+            SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC

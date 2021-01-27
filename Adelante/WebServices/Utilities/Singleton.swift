@@ -20,7 +20,7 @@ class SingletonClass: NSObject
     var arrSorting = [Sorting]()
     var userCurrentLocation = CLLocation()
     var topSellingId : String = ""
-    var isFromCustomTab = false
+    var isPresented = false
     
 //    var currentLat = Double()
 //    var currentLong = Double()

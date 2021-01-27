@@ -459,8 +459,8 @@ class BaseViewController: UIViewController {
     
     @objc func btnBackAction() {
         if self.navigationController?.children.count == 1 {
-            if SingletonClass.sharedInstance.isFromCustomTab  {
-                SingletonClass.sharedInstance.isFromCustomTab = false
+            if SingletonClass.sharedInstance.isPresented  {
+                SingletonClass.sharedInstance.isPresented = false
                 self.navigationController?.dismiss(animated: true, completion: nil)
             } else {
                 appDel.navigateToMainLogin()

@@ -318,6 +318,8 @@ super.awakeFromNib()
         self.font = CustomFont.NexaBold.returnFont(15)
     } else if isAddress{
         self.font = CustomFont.NexaRegular.returnFont(14)
+        self.numberOfLines = 0
+        self.lineBreakMode = .byTruncatingTail
     } else if isdescription{
         self.font = CustomFont.NexaRegular.returnFont(12)
     } else if isYourFavTitle{

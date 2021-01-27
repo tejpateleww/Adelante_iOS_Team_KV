@@ -154,7 +154,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             self.LblTotlaPrice.text = "$37"
             self.tblOrderDetails.reloadData()
         }
-        self.present(controller, animated: true, completion: nil)
+//        self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func placeOrderBtn(_ sender: submitButton) {

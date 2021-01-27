@@ -122,6 +122,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             navController.modalPresentationStyle = .overFullScreen
             navController.navigationController?.modalTransitionStyle = .crossDissolve
             navController.navigationBar.isHidden = true
+            SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
             var Select = arrRestaurant[sender.tag].favourite ?? ""
