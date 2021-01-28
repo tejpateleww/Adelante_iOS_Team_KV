@@ -185,7 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         print(userInfo)
         print(appDel.window?.rootViewController?.navigationController?.children.first as Any)
         
-        NotificationCenter.default.post(name: refreshfav, object: content)
+//        NotificationCenter.default.post(name: refreshfav, object: content)
         completionHandler([.alert, .sound])
         
     }

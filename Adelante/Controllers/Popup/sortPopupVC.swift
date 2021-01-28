@@ -75,15 +75,15 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
     @IBAction func btnActionHide(_ sender: UIButton) {
         self.dismiss(animated: true, completion: {
-            NotificationCenter.default.post(name: deSelectFilterHome, object: nil)
-            NotificationCenter.default.post(name: deSelectFilterRestaurant, object: nil)
+            NotificationCenter.default.post(name: notifDeSelectFilterHome, object: nil)
+            NotificationCenter.default.post(name: notifDeSelectFilterRestaurant, object: nil)
         })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.dismiss(animated: true, completion: {
-            NotificationCenter.default.post(name: deSelectFilterHome, object: nil)
-            NotificationCenter.default.post(name: deSelectFilterRestaurant, object: nil)
+            NotificationCenter.default.post(name: notifDeSelectFilterHome, object: nil)
+            NotificationCenter.default.post(name: notifDeSelectFilterRestaurant, object: nil)
         })
     }
     
@@ -91,9 +91,11 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayForSort.count
     }
+    
     func setUpLocalizedStrings(){
         lblSort.text = "sortPopupVC_lblSort".Localized()
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tblSorting.dequeueReusableCell(withIdentifier: sortCell.reuseIdentifier, for: indexPath) as! sortCell

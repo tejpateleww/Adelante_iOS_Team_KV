@@ -71,12 +71,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
-        NotificationCenter.default.removeObserver(self, name: refreshfav, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshListing), name: refreshfav, object: nil)
         setup()
-        
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,11 +88,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         lblNavAddressHome.text = "30 Memorial Drive, Avon MA 2322"
         btnNavAddressHome.addTarget(self, action: #selector(btnNavAddressHomeClicked(_:)), for: .touchUpInside)
         
-        NotificationCenter.default.removeObserver(self, name: deSelectFilterHome, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: deSelectFilterHome, object: nil)
+        NotificationCenter.default.removeObserver(self, name: notifDeSelectFilterHome, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: notifDeSelectFilterHome, object: nil)
         
-        NotificationCenter.default.removeObserver(self, name: refreshDashboardList, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshListing), name: refreshDashboardList, object: nil)
+        NotificationCenter.default.removeObserver(self, name: notifRefreshDashboardList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshListing), name: notifRefreshDashboardList, object: nil)
         
         colVwRestWthPage.delegate = self
         colVwRestWthPage.dataSource = self
@@ -382,6 +378,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
 //                self.webserviceGetDashboard()
                 self.arrRestaurant.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 self.tblMainList.reloadData()
+                NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

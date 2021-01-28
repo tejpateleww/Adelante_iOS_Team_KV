@@ -19,11 +19,11 @@ let AppURL = "itms-apps://itunes.apple.com/app/id1488928328"
 let ReqDeviceType = "ios"
 let Headerkey = "adelante123*#*"
 
-let refreshfav = NSNotification.Name(rawValue:"RefreshList")
-let deSelectFilterHome = NSNotification.Name(rawValue: "deselectFilterOptionHome")
-let deSelectFilterRestaurant = NSNotification.Name("deselectFilterOptionRest")
-let refreshDashboardList = NSNotification.Name("refreshDashboard")
-let refreshRestaurantList = NSNotification.Name("refreshRestaurantList")
+let notifDeSelectFilterHome = NSNotification.Name(rawValue: "deselectFilterOptionHome")
+let notifDeSelectFilterRestaurant = NSNotification.Name("deselectFilterOptionRest")
+let notifRefreshDashboardList = NSNotification.Name("refreshDashboard")
+let notifRefreshRestaurantList = NSNotification.Name("refreshRestaurantList")
+let notifRefreshFavouriteList = NSNotification.Name("refreshFavouriteList")
  
 enum DateFormatterString : String{
     case timeWithDate = "yyyy-MM-dd HH:mm:ss"

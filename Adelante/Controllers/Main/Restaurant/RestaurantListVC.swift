@@ -42,11 +42,9 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
 //        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesVC
-        NotificationCenter.default.removeObserver(self, name: refreshfav, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: refreshfav, object: nil)
         
-        NotificationCenter.default.removeObserver(self, name: refreshRestaurantList, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: refreshRestaurantList, object: nil)
+        NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshRestaurantList, object: nil)
         
         
         setup()
@@ -68,8 +66,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.restaurantList.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        NotificationCenter.default.removeObserver(self, name: deSelectFilterRestaurant, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: deSelectFilterRestaurant, object: nil)
+        NotificationCenter.default.removeObserver(self, name: notifDeSelectFilterRestaurant, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: notifDeSelectFilterRestaurant, object: nil)
         
         btnFilterOptions.isSelected = false
         self.changeLayoutOfFilterButton()
@@ -228,6 +226,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             if status{
                 self.arrRestaurantList.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 self.tblMainList.reloadData()
+                NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
+                NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

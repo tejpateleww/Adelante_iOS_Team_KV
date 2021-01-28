@@ -54,7 +54,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
-        pageNumber = 1
+//        pageNumber = 1
         webservicePostRestaurantFav(strSearch: "")
     }
     
@@ -67,6 +67,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         tblMainList.delegate = self
         tblMainList.dataSource = self
         tblMainList.reloadData()
+        NotificationCenter.default.removeObserver(self, name: notifRefreshFavouriteList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshFavouriteList, object: nil)
     }
     @objc func refreshFavList() {
         self.pageNumber = 1
@@ -177,8 +179,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             if status{
                 self.webservicePostRestaurantFav(strSearch: "")
 //                self.arrFavoriteRest.first(where: { $0.id == strRestaurantId })?.favourite = Status
-                NotificationCenter.default.post(name: refreshfav, object: nil)
-                NotificationCenter.default.post(name: refreshDashboardList, object: nil)
+                NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
+                NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

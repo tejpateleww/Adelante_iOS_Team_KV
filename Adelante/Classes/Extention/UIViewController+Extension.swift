@@ -173,8 +173,8 @@ extension UIViewController {
             if touchPoint.y - initialTouchPoint.y > 100 {
                 print(">100",touchPoint)
                 self.dismiss(animated: true, completion: {
-                    NotificationCenter.default.post(name: deSelectFilterHome, object: nil)
-                    NotificationCenter.default.post(name: deSelectFilterRestaurant, object: nil)
+                    NotificationCenter.default.post(name: notifDeSelectFilterHome, object: nil)
+                    NotificationCenter.default.post(name: notifDeSelectFilterRestaurant, object: nil)
                 })
             } else {
                 UIView.animate(withDuration: 0.3, animations: {

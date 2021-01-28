@@ -518,10 +518,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 } else {
                     self.btnNavLike.isSelected = false
                 }
-                NotificationCenter.default.post(name: refreshDashboardList, object: nil)
-                NotificationCenter.default.post(name: refreshfav, object: nil)
-                NotificationCenter.default.post(name: NSNotification.Name("refreshDashboard"), object: nil)
-                    
+                NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
+                NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
+                NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
