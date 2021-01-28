@@ -45,7 +45,7 @@ open class ImagePicker: NSObject {
         
         return UIAlertAction(title: title, style: .default) { [unowned self] _ in
             if type == .camera {
-               // checkCameraAccess()//self.checkCamera()
+                checkCameraAccess()//self.checkCamera()
             } else {
                 self.pickerController.sourceType = type
 //                self.pickerController.modalPresentationStyle = .overCurrentContext

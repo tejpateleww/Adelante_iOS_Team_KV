@@ -10,4 +10,5 @@ import Foundation
 class RestaurantDetailsReqModel:RequestModel{
     var restaurant_id : String = ""
     var page : String = ""
+    var user_id : String = ""
 }

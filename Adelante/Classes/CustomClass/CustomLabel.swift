@@ -407,7 +407,6 @@ class colVwRestaurantLabel: UILabel {
     
     @IBInspectable var isRestaurantTitle:Bool = false
     @IBInspectable var isRestaurantDesc:Bool = false
-    
     @IBInspectable var topInset: CGFloat = 0.0
     @IBInspectable var bottomInset: CGFloat = 0.0
     @IBInspectable var leftInset: CGFloat = 4.0
@@ -420,7 +419,8 @@ class colVwRestaurantLabel: UILabel {
             self.font = CustomFont.NexaBold.returnFont(23)
             self.backgroundColor = colors.appOrangeColor.value.withAlphaComponent(0.78)
             self.layer.cornerRadius = 5
-           // self.roundCorners(corners: [.topRight, .bottomRight, .bottomLeft , .topLeft], radius: 5)
+            self.clipsToBounds = true
+//            self.roundCorners(corners: [.topRight, .bottomRight, .bottomLeft , .topLeft], radius: 5)
             self.textColor = colors.white.value
             self.numberOfLines = 1
             self.lineBreakMode = .byTruncatingTail
@@ -428,7 +428,8 @@ class colVwRestaurantLabel: UILabel {
             self.font = CustomFont.NexaRegular.returnFont(14)
             self.backgroundColor = UIColor(hexString: "#1C1C1C").withAlphaComponent(0.78)
             self.layer.cornerRadius = 5
-          //  self.roundCorners(corners: [.topRight, .bottomRight, .bottomLeft , .topLeft], radius: 5)
+            self.clipsToBounds = true
+//            self.roundCorners(corners: [.topRight, .bottomRight, .bottomLeft , .topLeft], radius: 5)
             self.textColor = colors.white.value
             self.numberOfLines = 1
             self.lineBreakMode = .byTruncatingTail
@@ -595,7 +596,7 @@ class orderDetailsLabel:UILabel {
         } else if isRestName {
             self.font = CustomFont.NexaBold.returnFont(24)
         } else if isLocation {
-            self.font = CustomFont.NexaRegular.returnFont(14)
+            self.font = CustomFont.NexaBold.returnFont(14)
         } else if isAddress {
             self.font = CustomFont.NexaRegular.returnFont(13)
         } else if isTblItem {

@@ -9,8 +9,15 @@
 import UIKit
 import SDWebImage
 
+protocol favoriteDelegate{
+    func refreshFavoriteScreen()
+}
 
 class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+    
+    
+    
+    
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -21,6 +28,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var isNeedToReload = true
     var pageLimit = 5
     var selectedRestaurantId = ""
+    var delegateFav : favoriteDelegate!
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
@@ -38,7 +46,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         setup()
-        
+//        webservicePostRestaurantFav(strSearch: "")
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
     }
@@ -46,6 +54,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
+        pageNumber = 1
         webservicePostRestaurantFav(strSearch: "")
     }
     
@@ -60,7 +69,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         tblMainList.reloadData()
     }
     @objc func refreshFavList() {
-        pageNumber = 1
+        self.pageNumber = 1
+        self.isNeedToReload = true
         self.webservicePostRestaurantFav(strSearch: "")
     }
     func setUpLocalizedStrings() {
@@ -84,7 +94,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     func stoppedScrolling() {
         if isNeedToReload {
-            pageNumber = pageNumber + 1
+            self.pageNumber = self.pageNumber + 1
             webservicePostRestaurantFav(strSearch: "")
         }
         // done, do whatever
@@ -114,6 +124,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
         controller.selectedRestaurantId = arrFavoriteRest[indexPath.row].restaurantId
+        controller.selectedIndex = "\(indexPath.row)"
+        controller.isFromFavoriteList = true
         self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
@@ -121,7 +133,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         let RestaurantFavorite = RestaurantFavoriteReqModel()
         RestaurantFavorite.name = strSearch
         RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
-        RestaurantFavorite.page = "\(pageNumber)"
+        RestaurantFavorite.page = "\(self.pageNumber)"
         WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
@@ -163,9 +175,10 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             //            self.hideHUD()
             if status{
-//                self.webservicePostRestaurantFav(strSearch: "")
-                self.arrFavoriteRest.first(where: { $0.id == strRestaurantId })?.favourite = Status
+                self.webservicePostRestaurantFav(strSearch: "")
+//                self.arrFavoriteRest.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 NotificationCenter.default.post(name: refreshfav, object: nil)
+                NotificationCenter.default.post(name: refreshDashboardList, object: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

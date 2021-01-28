@@ -20,8 +20,11 @@ let ReqDeviceType = "ios"
 let Headerkey = "adelante123*#*"
 
 let refreshfav = NSNotification.Name(rawValue:"RefreshList")
-
-
+let deSelectFilterHome = NSNotification.Name(rawValue: "deselectFilterOptionHome")
+let deSelectFilterRestaurant = NSNotification.Name("deselectFilterOptionRest")
+let refreshDashboardList = NSNotification.Name("refreshDashboard")
+let refreshRestaurantList = NSNotification.Name("refreshRestaurantList")
+ 
 enum DateFormatterString : String{
     case timeWithDate = "yyyy-MM-dd HH:mm:ss"
     case onlyDate = "yyyy-MM-dd"
@@ -55,4 +58,18 @@ struct DeviceType {
 
 enum GlobalStrings : String{
     case Alert_logout = "Are you sure you want to logout..!"
+}
+
+struct selectedOrderItems{
+    var restaurant_item_id : String = ""
+    var quantity : String = ""
+    var price : String = ""
+    var variants_id : [String] = []
+    
+    init(restaurant_item_id:String,quantity:String,price:String,variants_id:[String]) {
+        self.restaurant_item_id = restaurant_item_id
+        self.price = price
+        self.quantity = quantity
+        self.variants_id = variants_id
+    }
 }

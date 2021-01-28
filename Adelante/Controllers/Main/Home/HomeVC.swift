@@ -22,7 +22,10 @@ struct structFilter {
     }
 }
 
-class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate{
+class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
+   
+    
+    
     
     
     //    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
@@ -64,12 +67,12 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         setUpLocalizedStrings()
         webserviceGetDashboard()
         tblMainList.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceGetDashboard), for: .valueChanged)
+        refreshList.addTarget(self, action: #selector(refreshListing), for: .valueChanged)
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         NotificationCenter.default.removeObserver(self, name: refreshfav, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(webserviceGetDashboard), name: refreshfav, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshListing), name: refreshfav, object: nil)
         setup()
         
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -89,8 +92,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         lblNavAddressHome.text = "30 Memorial Drive, Avon MA 2322"
         btnNavAddressHome.addTarget(self, action: #selector(btnNavAddressHomeClicked(_:)), for: .touchUpInside)
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "deselectFilterOptionHome"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: NSNotification.Name(rawValue: "deselectFilterOptionHome"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: deSelectFilterHome, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: deSelectFilterHome, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: refreshDashboardList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshListing), name: refreshDashboardList, object: nil)
         
         colVwRestWthPage.delegate = self
         colVwRestWthPage.dataSource = self
@@ -106,7 +112,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         
         pageControl.hidesForSinglePage = true
     }
-    
+    @objc func refreshListing(){
+        pageNumber = 1
+        self.isNeedToReload = true
+        webserviceGetDashboard()
+    }
     @objc func deSelectFilterAndRefresh() {
         selectedSortTypedIndexFromcolVwFilter = -1
         colVwFilterOptions.reloadData()
@@ -277,7 +287,9 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         if indexPath.row != 0
         {
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
-            controller.selectedRestaurantId = arrRestaurant[indexPath.row].id
+            controller.selectedRestaurantId = arrRestaurant[indexPath.row - 1].id
+            controller.selectedIndex = "\(indexPath.row - 1)"
+            controller.isFromDeshboard = true
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
@@ -369,10 +381,24 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             if status{
 //                self.webserviceGetDashboard()
                 self.arrRestaurant.first(where: { $0.id == strRestaurantId })?.favourite = Status
+                self.tblMainList.reloadData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
     }
+    func refreshDeshboardList(strStatus: String, selectedIndex: String) {
+        pageNumber = 1
+        self.isNeedToReload = true
+        webserviceGetDashboard()
+//        if selectedIndex != ""{
+//            let i = Int(selectedIndex) ?? 0
+//            arrRestaurant[i].favourite = strStatus
+//            tblMainList.reloadRows(at: [IndexPath(row: i + 1, section: 0)], with: .automatic)
+//        }
+    }
     
+    func refreshFavoriteScreen() {
+        webserviceGetDashboard()
+    }
 }

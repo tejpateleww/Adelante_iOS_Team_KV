@@ -267,17 +267,17 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="YourFavouriteCell" id="Hg6-hk-628" customClass="YourFavouriteCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="286"/>
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="297"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hg6-hk-628" id="dYu-Rs-9cw">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="286"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCX-tZ-9rm">
-                                                                    <rect key="frame" x="18" y="0.0" width="378" height="279"/>
+                                                                    <rect key="frame" x="18" y="0.0" width="378" height="290"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="J9y-7D-a4v">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="279"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="290"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXK-cB-eHY" customClass="customImagewithShadow" customModule="Adelante" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="184"/>
@@ -317,10 +317,10 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4p-I2-8uH">
-                                                                                    <rect key="frame" x="0.0" y="179" width="378" height="100"/>
+                                                                                    <rect key="frame" x="0.0" y="179" width="378" height="111"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7hE-xa-ofU">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="100"/>
+                                                                                            <rect key="frame" x="0.0" y="11" width="378" height="100"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qtn-Gd-m5E">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="100"/>
@@ -417,7 +417,7 @@
                                                                                         <constraint firstItem="7hE-xa-ofU" firstAttribute="leading" secondItem="E4p-I2-8uH" secondAttribute="leading" id="FMn-7z-yZU"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="7hE-xa-ofU" secondAttribute="trailing" id="JMX-Pd-erY"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="7hE-xa-ofU" secondAttribute="bottom" id="vRu-6S-ykK"/>
-                                                                                        <constraint firstItem="7hE-xa-ofU" firstAttribute="top" secondItem="E4p-I2-8uH" secondAttribute="top" id="zLV-Qw-2lD"/>
+                                                                                        <constraint firstItem="7hE-xa-ofU" firstAttribute="top" secondItem="E4p-I2-8uH" secondAttribute="top" constant="11" id="zLV-Qw-2lD"/>
                                                                                     </constraints>
                                                                                 </view>
                                                                             </subviews>
@@ -573,7 +573,7 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="45c-lV-znp">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="254" height="77"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -582,7 +582,7 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="23.5" width="254" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -591,10 +591,10 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isLocation" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
+                                                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
                                                                                                                     <rect key="frame" x="0.0" y="47" width="254" height="30"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="3" width="254" height="27"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
@@ -3963,19 +3963,19 @@
                                                                                     <rect key="frame" x="0.0" y="174" width="378" height="47"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zxU-sT-8t4">
-                                                                                            <rect key="frame" x="0.0" y="10" width="378" height="37"/>
+                                                                                            <rect key="frame" x="0.0" y="11" width="378" height="36"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIP-Ct-RmX">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="37"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="36"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="x29-Y6-bud">
-                                                                                                            <rect key="frame" x="0.0" y="0.5" width="378" height="36.5"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="36"/>
                                                                                                             <subviews>
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="et0-vs-LJ2">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="20"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="19.5"/>
                                                                                                                     <subviews>
                                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kangkung siram sambel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSX-KQ-9Bx" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="338.5" height="20"/>
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="338.5" height="19.5"/>
                                                                                                                             <constraints>
                                                                                                                                 <constraint firstAttribute="height" constant="20" id="HZ6-Tq-nsx"/>
                                                                                                                             </constraints>
@@ -3990,13 +3990,13 @@
                                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                                         </label>
                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oR0-ML-Vd2" customClass="viewRestorentRatingView" customModule="Adelante" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="338.5" y="0.0" width="39.5" height="20"/>
+                                                                                                                            <rect key="frame" x="338.5" y="0.0" width="39.5" height="19.5"/>
                                                                                                                             <subviews>
                                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="R9A-mg-UVp">
-                                                                                                                                    <rect key="frame" x="5" y="1" width="29.5" height="18"/>
+                                                                                                                                    <rect key="frame" x="5" y="1" width="29.5" height="17.5"/>
                                                                                                                                     <subviews>
                                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYi-uR-jnK">
-                                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="11.5" height="18"/>
+                                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="11.5" height="17.5"/>
                                                                                                                                             <subviews>
                                                                                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="jhq-rU-Y9i">
                                                                                                                                                     <rect key="frame" x="0.5" y="3.5" width="10.5" height="10.5"/>
@@ -4013,7 +4013,7 @@
                                                                                                                                             </constraints>
                                                                                                                                         </view>
                                                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFM-AF-FmY" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
-                                                                                                                                            <rect key="frame" x="14.5" y="0.0" width="15" height="18"/>
+                                                                                                                                            <rect key="frame" x="14.5" y="0.0" width="15" height="17.5"/>
                                                                                                                                             <constraints>
                                                                                                                                                 <constraint firstAttribute="width" constant="15" id="n8q-mD-eXz"/>
                                                                                                                                             </constraints>
@@ -4041,7 +4041,7 @@
                                                                                                                     </subviews>
                                                                                                                 </stackView>
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YvI-bc-XU3">
-                                                                                                                    <rect key="frame" x="0.0" y="23" width="378" height="13.5"/>
+                                                                                                                    <rect key="frame" x="0.0" y="22.5" width="378" height="13.5"/>
                                                                                                                     <subviews>
                                                                                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$25.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-OZ-6gg" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="13.5"/>
@@ -4091,7 +4091,7 @@
                                                                                         <constraint firstAttribute="bottom" secondItem="zxU-sT-8t4" secondAttribute="bottom" id="XuS-zc-pmY"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="zxU-sT-8t4" secondAttribute="trailing" id="cnV-x5-dIb"/>
                                                                                         <constraint firstItem="zxU-sT-8t4" firstAttribute="leading" secondItem="mff-aO-Ufa" secondAttribute="leading" id="uj8-gj-iqz"/>
-                                                                                        <constraint firstItem="zxU-sT-8t4" firstAttribute="top" secondItem="mff-aO-Ufa" secondAttribute="top" constant="10" id="uqQ-XP-eBG"/>
+                                                                                        <constraint firstItem="zxU-sT-8t4" firstAttribute="top" secondItem="mff-aO-Ufa" secondAttribute="top" constant="11" id="uqQ-XP-eBG"/>
                                                                                     </constraints>
                                                                                 </view>
                                                                             </subviews>
@@ -6526,7 +6526,7 @@
                                                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </imageView>
-                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgb-0C-ueJ">
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgb-0C-ueJ" customClass="customImagewithShadow" customModule="Adelante" customModuleProvider="target">
                                                                                                         <rect key="frame" x="0.0" y="45" width="378" height="35"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ztc-Td-o3k" customClass="colVwRestaurantLabel" customModule="Adelante" customModuleProvider="target">
@@ -6536,12 +6536,6 @@
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                                 <userDefinedRuntimeAttributes>
                                                                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRestaurantTitle" value="YES"/>
-                                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                                                                                                                        <real key="value" value="5"/>
-                                                                                                                    </userDefinedRuntimeAttribute>
-                                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                                                                                                                        <real key="value" value="5"/>
-                                                                                                                    </userDefinedRuntimeAttribute>
                                                                                                                 </userDefinedRuntimeAttributes>
                                                                                                             </label>
                                                                                                         </subviews>
@@ -6553,8 +6547,11 @@
                                                                                                             <constraint firstItem="Ztc-Td-o3k" firstAttribute="top" secondItem="rgb-0C-ueJ" secondAttribute="top" id="nvH-10-1NB"/>
                                                                                                             <constraint firstAttribute="bottom" secondItem="Ztc-Td-o3k" secondAttribute="bottom" id="uBz-36-XpM"/>
                                                                                                         </constraints>
+                                                                                                        <userDefinedRuntimeAttributes>
+                                                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
+                                                                                                        </userDefinedRuntimeAttributes>
                                                                                                     </view>
-                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-vj-HU9">
+                                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-vj-HU9" customClass="customImagewithShadow" customModule="Adelante" customModuleProvider="target">
                                                                                                         <rect key="frame" x="0.0" y="87" width="378" height="35"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eu-Jo-iGS" customClass="colVwRestaurantLabel" customModule="Adelante" customModuleProvider="target">
@@ -6564,23 +6561,20 @@
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                                 <userDefinedRuntimeAttributes>
                                                                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRestaurantDesc" value="YES"/>
-                                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                                                                                                                        <real key="value" value="5"/>
-                                                                                                                    </userDefinedRuntimeAttribute>
-                                                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                                                                                                                        <real key="value" value="5"/>
-                                                                                                                    </userDefinedRuntimeAttribute>
                                                                                                                 </userDefinedRuntimeAttributes>
                                                                                                             </label>
                                                                                                         </subviews>
                                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <constraints>
-                                                                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1eu-Jo-iGS" secondAttribute="trailing" id="5v2-uK-oc1"/>
+                                                                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1eu-Jo-iGS" secondAttribute="trailing" constant="10" id="5v2-uK-oc1"/>
                                                                                                             <constraint firstAttribute="bottom" secondItem="1eu-Jo-iGS" secondAttribute="bottom" id="An1-KU-xRK"/>
                                                                                                             <constraint firstItem="1eu-Jo-iGS" firstAttribute="leading" secondItem="hwo-vj-HU9" secondAttribute="leading" id="Nae-nB-ZoL"/>
                                                                                                             <constraint firstAttribute="height" constant="35" id="cuh-iY-KHX"/>
                                                                                                             <constraint firstItem="1eu-Jo-iGS" firstAttribute="top" secondItem="hwo-vj-HU9" secondAttribute="top" id="s9k-IW-ka0"/>
                                                                                                         </constraints>
+                                                                                                        <userDefinedRuntimeAttributes>
+                                                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
+                                                                                                        </userDefinedRuntimeAttributes>
                                                                                                     </view>
                                                                                                 </subviews>
                                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -6826,19 +6820,19 @@
                                                                                     <rect key="frame" x="0.0" y="174" width="378" height="47"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VA3-7v-qnn">
-                                                                                            <rect key="frame" x="0.0" y="10" width="378" height="37"/>
+                                                                                            <rect key="frame" x="0.0" y="11" width="378" height="36"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBM-44-wkE">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="37"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="36"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="V7Y-cd-zD3">
-                                                                                                            <rect key="frame" x="0.0" y="0.5" width="378" height="36.5"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="36"/>
                                                                                                             <subviews>
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPH-Ra-kXc">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="20"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="19.5"/>
                                                                                                                     <subviews>
                                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJ4-wJ-tbB" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="338.5" height="20"/>
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="338.5" height="19.5"/>
                                                                                                                             <constraints>
                                                                                                                                 <constraint firstAttribute="height" constant="20" id="ldy-Bh-es9"/>
                                                                                                                             </constraints>
@@ -6853,13 +6847,13 @@
                                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                                         </label>
                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uih-b7-u1A" customClass="viewRestorentRatingView" customModule="Adelante" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="338.5" y="0.0" width="39.5" height="20"/>
+                                                                                                                            <rect key="frame" x="338.5" y="0.0" width="39.5" height="19.5"/>
                                                                                                                             <subviews>
                                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rxl-KW-RZd">
-                                                                                                                                    <rect key="frame" x="5" y="1" width="29.5" height="18"/>
+                                                                                                                                    <rect key="frame" x="5" y="1" width="29.5" height="17.5"/>
                                                                                                                                     <subviews>
                                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pl1-9H-aoF">
-                                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="11.5" height="18"/>
+                                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="11.5" height="17.5"/>
                                                                                                                                             <subviews>
                                                                                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="100-Xn-w0T">
                                                                                                                                                     <rect key="frame" x="0.5" y="3.5" width="10.5" height="10.5"/>
@@ -6876,7 +6870,7 @@
                                                                                                                                             </constraints>
                                                                                                                                         </view>
                                                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMk-sf-Zgu" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
-                                                                                                                                            <rect key="frame" x="14.5" y="0.0" width="15" height="18"/>
+                                                                                                                                            <rect key="frame" x="14.5" y="0.0" width="15" height="17.5"/>
                                                                                                                                             <constraints>
                                                                                                                                                 <constraint firstAttribute="width" constant="15" id="73W-F6-Yc7"/>
                                                                                                                                             </constraints>
@@ -6904,7 +6898,7 @@
                                                                                                                     </subviews>
                                                                                                                 </stackView>
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="arX-B0-cWp">
-                                                                                                                    <rect key="frame" x="0.0" y="23" width="378" height="13.5"/>
+                                                                                                                    <rect key="frame" x="0.0" y="22.5" width="378" height="13.5"/>
                                                                                                                     <subviews>
                                                                                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$25.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0i-n9-PIi" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="13.5"/>
@@ -6953,7 +6947,7 @@
                                                                                         <constraint firstAttribute="bottom" secondItem="VA3-7v-qnn" secondAttribute="bottom" id="Bg4-XK-xPp"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="VA3-7v-qnn" secondAttribute="trailing" id="U86-IF-iSD"/>
                                                                                         <constraint firstAttribute="height" constant="47" id="W0J-FE-QyF"/>
-                                                                                        <constraint firstItem="VA3-7v-qnn" firstAttribute="top" secondItem="Q19-SZ-Fxf" secondAttribute="top" constant="10" id="dU7-GY-j07"/>
+                                                                                        <constraint firstItem="VA3-7v-qnn" firstAttribute="top" secondItem="Q19-SZ-Fxf" secondAttribute="top" constant="11" id="dU7-GY-j07"/>
                                                                                         <constraint firstItem="VA3-7v-qnn" firstAttribute="leading" secondItem="Q19-SZ-Fxf" secondAttribute="leading" id="jJ6-i3-8Dz"/>
                                                                                     </constraints>
                                                                                 </view>
@@ -7697,47 +7691,8 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
-        <designable name="0t8-U3-ebv">
-            <size key="intrinsicContentSize" width="97" height="34"/>
-        </designable>
-        <designable name="2Ut-AC-9Qr">
-            <size key="intrinsicContentSize" width="178" height="34"/>
-        </designable>
-        <designable name="4rN-z1-ohE">
-            <size key="intrinsicContentSize" width="98" height="34"/>
-        </designable>
         <designable name="G78-jH-dfh">
             <size key="intrinsicContentSize" width="195" height="32"/>
-        </designable>
-        <designable name="IOt-oG-ldn">
-            <size key="intrinsicContentSize" width="4" height="18.5"/>
-        </designable>
-        <designable name="M00-EB-i9S">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="QPd-3g-SxC">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="cc0-dj-TGl">
-            <size key="intrinsicContentSize" width="149" height="34"/>
-        </designable>
-        <designable name="cpW-fr-cqC">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="lWD-a0-7KT">
-            <size key="intrinsicContentSize" width="90.5" height="34"/>
-        </designable>
-        <designable name="mJ2-zK-PS6">
-            <size key="intrinsicContentSize" width="208.5" height="34"/>
-        </designable>
-        <designable name="pGH-j9-vWm">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="ypJ-aF-6Y5">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="zNM-X4-rQ4">
-            <size key="intrinsicContentSize" width="34.5" height="18.5"/>
         </designable>
     </designables>
     <resources>

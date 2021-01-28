@@ -22,23 +22,26 @@ struct structSections {
         self.rowCount = rowCount
     }
 }
-protocol FavoriteUpdateDelegate {
-    func refreshRestaurantFavorite()
-}
+
 
 class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
     
     // MARK: - Properties
-    var delegateFavoprite : FavoriteUpdateDelegate!
     var customTabBarController: CustomTabBarVC?
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)] //["Menu","Sandwiches","Salad"]
     var selectedRestaurantId = ""
     var arrMenuitem = [MenuItem]()
     var arrFoodMenu = [FoodMenu]()
     var arrSubMenu = [SubMenu]()
+    var arrSelectedOrder = [selectedOrderItems]()
     var objRestaurant : Restaurantinfo!
     var SelectedCatId = ""
     var pageNumber = "1"
+    var selectedIndex = ""
+    
+    var isFromDeshboard : Bool = false
+    var isFromRestaurantList : Bool = false
+    var isFromFavoriteList : Bool = false
     // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
@@ -84,9 +87,17 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         tblRestaurantDetails.dataSource = self
         tblRestaurantDetails.estimatedRowHeight = 20
         tblRestaurantDetails.reloadData()
-        //        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
-        //        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+        btnNavLike.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
         
+    }
+    func dateFormat(){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        let item = "7:00 PM"
+        let date = dateFormatter.date(from: item)
+        print("Start: \(date)") // Start: Optional(2000-01-01 19:00:00 +0000)
     }
     func setUpLocalizedStrings(){
         lblRestaurantName.text = "RestaurantDetailsVC_lblRestaurantName".Localized()
@@ -128,6 +139,36 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             let strUrl = "\(APIEnvironment.profileBu.rawValue)\(objRestaurant.image ?? "")"
             self.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
             self.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            if objRestaurant.favourite == "1"{
+                btnNavLike.isSelected = true
+            } else {
+                btnNavLike.isSelected = false
+            }
+        }
+    }
+    func checkOrderItems(objOrder:selectedOrderItems){
+        let CurrentitemId = objOrder.restaurant_item_id
+        if arrSelectedOrder.count > 0 {
+            for i in 0..<arrSelectedOrder.count{
+                var itemFound = false
+                let itemId = arrSelectedOrder[i].restaurant_item_id
+                if itemId == CurrentitemId{
+                    if objOrder.quantity != ""{
+                        arrSelectedOrder[i] = objOrder
+                        itemFound = true
+                        break
+                    }else{
+                        arrSelectedOrder.remove(at: i)
+                        itemFound = true
+                        break
+                    }
+                }
+                if itemFound == false{
+                    arrSelectedOrder.append(objOrder)
+                }
+            }
+        }else{
+            arrSelectedOrder.append(objOrder)
         }
     }
     override func viewDidLayoutSubviews() {
@@ -135,21 +176,27 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     // MARK: - IBActions
-    //    @IBAction func buttonTapFavorite(_ sender: UIButton) {
-    ////        var Select = arrResDetail[].favourite ?? ""
-    ////        let restaurantId = arrResDetail[sender.tag].id ?? ""
-    ////        if Select == "1"{
-    ////            Select = "0"
-    ////        }else{
-    ////            Select = "1"
-    ////        }
-    ////        webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
-    //        if btnNavLike.isSelected{
-    //            btnNavLike.isSelected = false
-    //        }else{
-    //            btnNavLike.isSelected = true
-    //        }
-    //    }
+    @IBAction func buttonTapFavorite(_ sender: UIButton) {
+        
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+            let navController = UINavigationController.init(rootViewController: vc)
+            navController.modalPresentationStyle = .overFullScreen
+            navController.navigationController?.modalTransitionStyle = .crossDissolve
+            navController.navigationBar.isHidden = true
+            SingletonClass.sharedInstance.isPresented = true
+            self.present(navController, animated: true, completion: nil)
+        }else{
+            var Select = objRestaurant.favourite ?? ""
+            let restaurantId = objRestaurant.id ?? ""
+            if Select == "1"{
+                Select = "0"
+            }else{
+                Select = "1"
+            }
+            webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+        }
+    }
     @IBAction func btnViewPolicy(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
         controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
@@ -158,9 +205,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantReviewVC.storyboardID) as! RestaurantReviewVC
         self.navigationController?.pushViewController(controller, animated: true)
-    }
-    @IBAction func buttonAdd(_ sender: UIButton) {
-        
     }
     @IBAction func btnViewCart(_ sender: Any) {
         if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
@@ -237,27 +281,38 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 cell.decreaseData = {
+                    var strQty = ""
                     if cell.lblNoOfItem.text != ""{
                         var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                         if value == 1{
+                            strQty = ""
                             cell.btnAddItem.isHidden = false
                             cell.vwStapper.isHidden = true
                         }else if value > 1{
                             value = value - 1
                             cell.lblNoOfItem.text = String(value)
+                            strQty = "\(value)"
                         }
                     }
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                    self.checkOrderItems(objOrder: objItem)
                 }
                 cell.IncreseData = {
+                    var strQty = ""
                     if cell.lblNoOfItem.text != ""{
                         var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                             value = value + 1
                             cell.lblNoOfItem.text = String(value)
+                        strQty = "\(value)"
                     }
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                    self.checkOrderItems(objOrder: objItem)
                 }
                 cell.btnAddAction = {
                     cell.btnAddItem.isHidden = true
                     cell.vwStapper.isHidden = false
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: "", price: "", variants_id: [])
+                    self.checkOrderItems(objOrder: objItem)
                 }
                 cell.selectionStyle = .none
                 cell.customize = {
@@ -271,11 +326,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 cell.lblItem.text = arrFoodMenu[indexPath.section - 1].categoryName
                 cell.lblItemPrice.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price
                 cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size
-//                if arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant == "1"{
-//                    cell.btnCustomize.isHidden = false
-//                }else{
-//                    cell.btnCustomize.isHidden = true
-//                }
+                if arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant == "1"{
+                    cell.btnCustomize.isHidden = false
+                }else{
+                    cell.btnCustomize.isHidden = true
+                }
                 cell.decreaseData = {
                     if cell.lblNoOfItem.text != ""{
                         var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
@@ -311,11 +366,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 cell.lblItem.text = arrFoodMenu[indexPath.section].categoryName
                 cell.lblItemPrice.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].price
                 cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].size
-//            if arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant == "1"{
-//                cell.btnCustomize.isHidden = false
-//            }else{
-//                cell.btnCustomize.isHidden = true
-//            }
+            if arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant == "1"{
+                cell.btnCustomize.isHidden = false
+            }else{
+                cell.btnCustomize.isHidden = true
+            }
             cell.decreaseData = {
                 if cell.lblNoOfItem.text != ""{
                     var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
@@ -427,6 +482,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         let ResDetails = RestaurantDetailsReqModel()
         ResDetails.restaurant_id = selectedRestaurantId
         ResDetails.page = "\(pageNumber)"
+        ResDetails.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status {
@@ -456,7 +512,16 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             //            self.hideHUD()
             if status {
-                self.webservicePostRestaurantDetails()
+                self.objRestaurant.favourite = Status
+                if self.objRestaurant.favourite == "1"{
+                    self.btnNavLike.isSelected = true
+                } else {
+                    self.btnNavLike.isSelected = false
+                }
+                NotificationCenter.default.post(name: refreshDashboardList, object: nil)
+                NotificationCenter.default.post(name: refreshfav, object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name("refreshDashboard"), object: nil)
+                    
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

@@ -9,13 +9,9 @@
 import UIKit
 import SDWebImage
 
-class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,FavoriteUpdateDelegate {
+class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,favoriteDelegate{
     
-    func refreshRestaurantFavorite() {
-        webwerviceFavorite(strRestaurantId: "", Status: "")
-    }
-    
-    
+  
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrRestaurantList = [RestaurantList]()
@@ -39,7 +35,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         setUpLocalizedStrings()
-        webserviceGetRestaurantList(strSearch: "", strFilter: "")
+//        webserviceGetRestaurantList(strSearch: "", strFilter: "")
         txtSearch.backgroundImage = UIImage()
         let button = UIButton()
         //        button.backgroundColor = .green
@@ -48,16 +44,23 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
 //        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesVC
         NotificationCenter.default.removeObserver(self, name: refreshfav, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: refreshfav, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: refreshRestaurantList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: refreshRestaurantList, object: nil)
+        
+        
         setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        webserviceGetRestaurantList(strSearch: "", strFilter: "")
         self.customTabBarController?.hideTabBar()
     }
     
     // MARK: - Other Methods
     @objc func refreshFavList() {
         pageNumber = 1
+        self.isNeedToReload = true
         self.webserviceGetRestaurantList(strSearch: "", strFilter: "")
     }
     
@@ -65,8 +68,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.restaurantList.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "deselectFilterOptionRest"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: NSNotification.Name(rawValue: "deselectFilterOptionRest"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: deSelectFilterRestaurant, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: deSelectFilterRestaurant, object: nil)
         
         btnFilterOptions.isSelected = false
         self.changeLayoutOfFilterButton()
@@ -169,6 +172,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
         restDetailsVc.selectedRestaurantId = arrRestaurantList[indexPath.row].id
+        restDetailsVc.isFromRestaurantList = true
+        restDetailsVc.selectedIndex = "\(indexPath.row)"
         self.navigationController?.pushViewController(restDetailsVc, animated: true)
     }
     
@@ -223,19 +228,14 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             if status{
                 self.arrRestaurantList.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 self.tblMainList.reloadData()
-                //self.arrRestaurantList.filter ({ $0.id == strRestaurantId }) //as [RestaurantList]
-                // if arrSelCities.count > 0 {
-                // for i in 0..<arrSelCities.count {
-                //
-                // }
-                // }
-                // self.webserviceGetRestaurantList(strSearch: "", strFilter: "")
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
     }
-    
+    func refreshFavoriteScreen() {
+        webserviceGetRestaurantList(strSearch: "", strFilter: "")
+    }
 }
 extension RestaurantListVC:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

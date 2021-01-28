@@ -122,7 +122,6 @@ class customImageView: UIImageView {
 class customImagewithShadow: UIImageView {
     @IBInspectable var isViewRadius : Bool = false
     @IBInspectable var isShadow : Bool = false
-    @IBInspectable var isLeftBottomShadow : Bool = false
     override func awakeFromNib() {
         if isViewRadius{
             self.layer.cornerRadius = 8

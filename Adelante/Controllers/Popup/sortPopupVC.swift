@@ -75,15 +75,15 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     
     @IBAction func btnActionHide(_ sender: UIButton) {
         self.dismiss(animated: true, completion: {
-            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionHome"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionRest"), object: nil)
+            NotificationCenter.default.post(name: deSelectFilterHome, object: nil)
+            NotificationCenter.default.post(name: deSelectFilterRestaurant, object: nil)
         })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.dismiss(animated: true, completion: {
-            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionHome"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name("deselectFilterOptionRest"), object: nil)
+            NotificationCenter.default.post(name: deSelectFilterHome, object: nil)
+            NotificationCenter.default.post(name: deSelectFilterRestaurant, object: nil)
         })
     }
     
