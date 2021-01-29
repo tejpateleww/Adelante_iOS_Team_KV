@@ -28,7 +28,8 @@ class MenuItem : NSObject, NSCoding{
     var variant : String!
     var vegNonveg : String!
     var viewCount : String!
-
+    var selectedQuantity : String! = ""
+    
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
