@@ -106,14 +106,40 @@ Back</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5W8-2G-Rat">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-d2-yLt" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7BG-fI-9LQ">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <subviews>
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-d2-yLt" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="height" constant="47" id="gmm-cf-TDd"/>
+                                                                                        </constraints>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                                    </textField>
+                                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyD-ST-cZr">
+                                                                                        <rect key="frame" x="340" y="16" width="30" height="30"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="30" id="9BR-fh-y06"/>
+                                                                                            <constraint firstAttribute="width" secondItem="kyD-ST-cZr" secondAttribute="height" multiplier="1:1" id="dkf-iu-rBc"/>
+                                                                                        </constraints>
+                                                                                        <state key="normal" image="privatePassword"/>
+                                                                                        <state key="selected" image="viewPassword"/>
+                                                                                        <connections>
+                                                                                            <action selector="btnShowPasswordTap:" destination="Ikq-oA-ebF" eventType="touchUpInside" id="EOF-is-5UF"/>
+                                                                                        </connections>
+                                                                                    </button>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="47" id="gmm-cf-TDd"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="B7K-d2-yLt" secondAttribute="bottom" id="2sK-TI-CXD"/>
+                                                                                    <constraint firstItem="B7K-d2-yLt" firstAttribute="top" secondItem="7BG-fI-9LQ" secondAttribute="top" id="8Ae-Ua-lHP"/>
+                                                                                    <constraint firstItem="kyD-ST-cZr" firstAttribute="top" secondItem="7BG-fI-9LQ" secondAttribute="top" constant="16" id="Ant-xU-weO"/>
+                                                                                    <constraint firstItem="B7K-d2-yLt" firstAttribute="leading" secondItem="7BG-fI-9LQ" secondAttribute="leading" id="F52-Uc-4Hy"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="B7K-d2-yLt" secondAttribute="trailing" id="Fh4-7X-9kf"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="kyD-ST-cZr" secondAttribute="trailing" constant="8" id="G0I-LQ-w3z"/>
                                                                                 </constraints>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                                                            </textField>
+                                                                            </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9MG-18-zb5" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -237,7 +263,7 @@ Back</string>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12.6" translatesAutoresizingMaskIntoConstraints="NO" id="rwS-jo-Y0e">
-                                                        <rect key="frame" x="56" y="340.5" width="302" height="16"/>
+                                                        <rect key="frame" x="53" y="340.5" width="308" height="16"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWm-7i-pZb" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="170.5" height="16"/>
@@ -251,7 +277,7 @@ Back</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-IO-Syi" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="183" y="0.0" width="119" height="16"/>
+                                                                <rect key="frame" x="183" y="0.0" width="125" height="16"/>
                                                                 <fontDescription key="fontDescription" name="NexaBold" family="Nexa Bold" pointSize="17"/>
                                                                 <state key="normal" title="Create Account"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -330,6 +356,7 @@ Back</string>
                     <connections>
                         <outlet property="btnCreateAccount" destination="pg1-IO-Syi" id="p5z-o0-d6n"/>
                         <outlet property="btnForgotPassword" destination="DAA-cC-sBU" id="9KC-jV-aAU"/>
+                        <outlet property="btnPasswordVisible" destination="kyD-ST-cZr" id="seC-aU-Qw2"/>
                         <outlet property="lblDontHave" destination="yWm-7i-pZb" id="N48-ab-1w1"/>
                         <outlet property="lblSignin" destination="WUB-dV-8E1" id="uNB-2C-nhz"/>
                         <outlet property="lblTitle" destination="T1r-ZK-cpC" id="eSf-ah-pTk"/>
@@ -660,14 +687,40 @@ Adelante</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Bae-gL-y8N">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fzc-oY-XVq" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcU-lW-19G">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <subviews>
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fzc-oY-XVq" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="height" constant="47" id="RHo-cn-rlu"/>
+                                                                                        </constraints>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                                    </textField>
+                                                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EF-Af-x5I">
+                                                                                        <rect key="frame" x="340" y="16" width="30" height="30"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="30" id="Bvv-dl-Fnt"/>
+                                                                                            <constraint firstAttribute="width" secondItem="4EF-Af-x5I" secondAttribute="height" multiplier="1:1" id="ldp-4U-hRy"/>
+                                                                                        </constraints>
+                                                                                        <state key="normal" image="privatePassword"/>
+                                                                                        <state key="selected" image="viewPassword"/>
+                                                                                        <connections>
+                                                                                            <action selector="btnShowPasswordTap:" destination="DzT-iL-uKF" eventType="touchUpInside" id="zpw-0N-OXx"/>
+                                                                                        </connections>
+                                                                                    </button>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="47" id="RHo-cn-rlu"/>
+                                                                                    <constraint firstItem="Fzc-oY-XVq" firstAttribute="leading" secondItem="tcU-lW-19G" secondAttribute="leading" id="4PV-n0-n5Y"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="Fzc-oY-XVq" secondAttribute="trailing" id="OkM-eh-hEk"/>
+                                                                                    <constraint firstItem="4EF-Af-x5I" firstAttribute="top" secondItem="tcU-lW-19G" secondAttribute="top" constant="16" id="QNk-j3-7UD"/>
+                                                                                    <constraint firstItem="Fzc-oY-XVq" firstAttribute="top" secondItem="tcU-lW-19G" secondAttribute="top" id="Qdb-51-ygy"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="Fzc-oY-XVq" secondAttribute="bottom" id="abT-tz-dVW"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="4EF-Af-x5I" secondAttribute="trailing" constant="8" id="tp0-JM-jsT"/>
                                                                                 </constraints>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                                                            </textField>
+                                                                            </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHu-Oz-d0w" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -692,14 +745,40 @@ Adelante</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="32w-Qq-LRL">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uln-Rl-AH4" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgp-Vc-YqK">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                <subviews>
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uln-Rl-AH4" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="height" constant="47" id="vNb-2e-qOw"/>
+                                                                                        </constraints>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                                    </textField>
+                                                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="see-yl-UPK">
+                                                                                        <rect key="frame" x="340" y="16" width="30" height="30"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="30" id="5LL-1F-bgC"/>
+                                                                                            <constraint firstAttribute="width" secondItem="see-yl-UPK" secondAttribute="height" multiplier="1:1" id="Vwz-Y8-bGq"/>
+                                                                                        </constraints>
+                                                                                        <state key="normal" image="privatePassword"/>
+                                                                                        <state key="selected" image="viewPassword"/>
+                                                                                        <connections>
+                                                                                            <action selector="btnShowPasswordTap:" destination="DzT-iL-uKF" eventType="touchUpInside" id="rIb-Cn-w20"/>
+                                                                                        </connections>
+                                                                                    </button>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="47" id="vNb-2e-qOw"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="uln-Rl-AH4" secondAttribute="bottom" id="3rr-dO-RyP"/>
+                                                                                    <constraint firstItem="uln-Rl-AH4" firstAttribute="leading" secondItem="pgp-Vc-YqK" secondAttribute="leading" id="8Bn-BA-NTB"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="uln-Rl-AH4" secondAttribute="trailing" id="8tU-hc-GxU"/>
+                                                                                    <constraint firstItem="uln-Rl-AH4" firstAttribute="top" secondItem="pgp-Vc-YqK" secondAttribute="top" id="NUP-R3-gV4"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="see-yl-UPK" secondAttribute="trailing" constant="8" id="QOZ-ei-Me0"/>
+                                                                                    <constraint firstItem="see-yl-UPK" firstAttribute="top" secondItem="pgp-Vc-YqK" secondAttribute="top" constant="16" id="xqF-7r-38o"/>
                                                                                 </constraints>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                                                            </textField>
+                                                                            </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUe-zu-Eyu" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -830,6 +909,8 @@ Adelante</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnPasswordShow" destination="see-yl-UPK" id="5uq-G1-L08"/>
+                        <outlet property="btnPasswordVisible" destination="4EF-Af-x5I" id="lZ4-6S-lex"/>
                         <outlet property="btnSignin" destination="iBK-qV-OHW" id="WE1-Vv-4m8"/>
                         <outlet property="btnSignup" destination="GML-Cw-jvs" id="7HX-9v-H72"/>
                         <outlet property="lblAlreadyHave" destination="oLy-vP-WB6" id="eqe-2X-Ul8"/>
@@ -929,8 +1010,10 @@ Adelante</string>
         <image name="adelanteLogo" width="127" height="125"/>
         <image name="adlanteLoginLogo" width="287" height="75"/>
         <image name="mainLoginBg" width="375" height="812"/>
+        <image name="privatePassword" width="20" height="20"/>
         <image name="signInArrow" width="63.5" height="63.5"/>
         <image name="splashBg" width="375" height="812"/>
+        <image name="viewPassword" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

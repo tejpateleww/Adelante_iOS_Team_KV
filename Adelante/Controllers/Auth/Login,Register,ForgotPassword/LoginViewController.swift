@@ -17,6 +17,7 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var lblSignin: themeLabel!
     @IBOutlet weak var lblDontHave: themeLabel!
     @IBOutlet weak var btnCreateAccount: submitButton!
+    @IBOutlet weak var btnPasswordVisible: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,13 @@ class LoginViewController: BaseViewController {
        
     }
     
+    @IBAction func btnShowPasswordTap(_ sender: UIButton) {
+        let isvisible = txtPassword.isSecureTextEntry
+        txtPassword.isSecureTextEntry = !isvisible
+//        let img = isvisible ? "privatePassword" : "viewPassword"
+//        btnPasswordVisible.setImage(UIImage(named: img), for: .normal)
+        btnPasswordVisible.isSelected =  !btnPasswordVisible.isSelected
+    }
     @IBAction func btnCreateAccountClicked(_ sender: Any) {
         let registerVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: RegisterViewController.storyboardID)
         self.navigationController?.pushViewController(registerVC, animated: true)

@@ -25,6 +25,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var lblAlreadyHave: themeLabel!
     @IBOutlet weak var btnSignup: UIButton!
     @IBOutlet weak var btnSignin: submitButton!
+    @IBOutlet weak var btnPasswordVisible: UIButton!
+    @IBOutlet weak var btnPasswordShow: UIButton!
     
     
     //MARK:- View Life Cycle
@@ -71,6 +73,23 @@ class RegisterViewController: UIViewController {
         //        appDel.navigateToHome()
     }
     
+    @IBAction func btnShowPasswordTap(_ sender: UIButton) {
+        
+        if sender.tag == 1{
+            let isvisible = txtPassword.isSecureTextEntry
+            txtPassword.isSecureTextEntry = !isvisible
+            btnPasswordVisible.isSelected = !btnPasswordVisible.isSelected
+        }else if sender.tag == 2{
+            let isvisible = txtConPassword.isSecureTextEntry
+            txtConPassword.isSecureTextEntry = !isvisible
+            btnPasswordShow.isSelected = !btnPasswordShow.isSelected
+        }
+        
+//        let img = isvisible ? "privatePassword" : "viewPassword"
+//        btnPasswordVisible.setImage(UIImage(named: img), for: .normal)
+        
+        
+    }
     @IBAction func btnBackLogin(sender:UIButton){
         self.navigationController?.popViewController(animated: true)//dismiss(animated: true, completion: nil)
     }

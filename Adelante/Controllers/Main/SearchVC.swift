@@ -43,7 +43,6 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.SearchVC.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        txtSearch.backgroundImage = UIImage()
         //        let padding = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.txtSearch.frame.height))
         //               txtSearch.leftView = padding
         //               txtSearch.leftViewMode = UITextField.ViewMode.always

@@ -19,6 +19,9 @@ class ChangePasswordVC: BaseViewController {
     @IBOutlet weak var txtNewPassword: floatTextField!
     @IBOutlet weak var txtConfirmPassword: floatTextField!
     @IBOutlet weak var btnSave: submitButton!
+    @IBOutlet weak var btnVisibleOldPassword: UIButton!
+    @IBOutlet weak var btnVisiblePassword: UIButton!
+    @IBOutlet weak var btnVisibleNewPassword: UIButton!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -49,6 +52,21 @@ class ChangePasswordVC: BaseViewController {
     @IBAction func btnSaveTap(_ sender: UIButton) {
         if validations(){
             webservice_ChangePW()
+        }
+    }
+    @IBAction func btnShowPasswordTap(_ sender: UIButton) {
+        if sender.tag == 1{
+            let isvisible = txtOldPassword.isSecureTextEntry
+            txtOldPassword.isSecureTextEntry = !isvisible
+            btnVisibleOldPassword.isSelected = !btnVisibleOldPassword.isSelected
+        }else if sender.tag == 2{
+            let isvisible = txtNewPassword.isSecureTextEntry
+            txtNewPassword.isSecureTextEntry = !isvisible
+            btnVisiblePassword.isSelected = !btnVisiblePassword.isSelected
+        }else if sender.tag == 3{
+            let isvisible = txtConfirmPassword.isSecureTextEntry
+            txtConfirmPassword.isSecureTextEntry = !isvisible
+            btnVisibleNewPassword.isSelected = !btnVisibleNewPassword.isSelected
         }
     }
     

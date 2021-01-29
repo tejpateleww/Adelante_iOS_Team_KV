@@ -149,8 +149,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func checkOrderItems(objOrder:selectedOrderItems){
         let CurrentitemId = objOrder.restaurant_item_id
         if arrSelectedOrder.count > 0 {
+            var itemFound = false
             for i in 0..<arrSelectedOrder.count{
-                var itemFound = false
                 let itemId = arrSelectedOrder[i].restaurant_item_id
                 if itemId == CurrentitemId{
                     if objOrder.quantity != ""{
@@ -163,9 +163,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         break
                     }
                 }
-                if itemFound == false{
-                    arrSelectedOrder.append(objOrder)
-                }
+                
+            }
+            if itemFound == false{
+                arrSelectedOrder.append(objOrder)
             }
         }else{
             arrSelectedOrder.append(objOrder)
@@ -311,7 +312,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 cell.btnAddAction = {
                     cell.btnAddItem.isHidden = true
                     cell.vwStapper.isHidden = false
-                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: "", price: "", variants_id: [])
+                    let strQty = "1"
+                    cell.lblNoOfItem.text = strQty
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
                     self.checkOrderItems(objOrder: objItem)
                 }
                 cell.selectionStyle = .none
@@ -332,6 +335,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.btnCustomize.isHidden = true
                 }
                 cell.decreaseData = {
+                    var strQty = ""
                     if cell.lblNoOfItem.text != ""{
                         var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                         if value == 1{
@@ -340,19 +344,30 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }else if value > 1{
                             value = value - 1
                             cell.lblNoOfItem.text = String(value)
+                            strQty = "\(value)"
                         }
                     }
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                    self.checkOrderItems(objOrder: objItem)
                 }
                 cell.IncreseData = {
+                    var strQty = ""
                     if cell.lblNoOfItem.text != ""{
                         var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                             value = value + 1
                             cell.lblNoOfItem.text = String(value)
+                        strQty = "\(value)"
                     }
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                    self.checkOrderItems(objOrder: objItem)
                 }
                 cell.btnAddAction = {
                     cell.btnAdd.isHidden = true
                     cell.vwStapper.isHidden = false
+                    let strQty = "1"
+                    cell.lblNoOfItem.text = strQty
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                    self.checkOrderItems(objOrder: objItem)
                 }
                 cell.customize = {
                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
@@ -372,6 +387,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 cell.btnCustomize.isHidden = true
             }
             cell.decreaseData = {
+                var strQty = ""
                 if cell.lblNoOfItem.text != ""{
                     var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                     if value == 1{
@@ -380,19 +396,30 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }else if value > 1{
                         value = value - 1
                         cell.lblNoOfItem.text = String(value)
+                        strQty = "\(value)"
                     }
                 }
+                let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                self.checkOrderItems(objOrder: objItem)
             }
             cell.IncreseData = {
+                var strQty = ""
                 if cell.lblNoOfItem.text != ""{
                     var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                         value = value + 1
                         cell.lblNoOfItem.text = String(value)
+                    strQty = "\(value)"
                 }
+                let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                self.checkOrderItems(objOrder: objItem)
             }
             cell.btnAddAction = {
                 cell.btnAdd.isHidden = true
                 cell.vwStapper.isHidden = false
+                let strQty = "1"
+                cell.lblNoOfItem.text = strQty
+                let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
+                self.checkOrderItems(objOrder: objItem)
             }
             cell.customize = {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC

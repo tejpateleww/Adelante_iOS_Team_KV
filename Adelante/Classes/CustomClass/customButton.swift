@@ -134,7 +134,7 @@ class myOrdersBtn: UIButton {
         } else if isReorder {
             self.setTitleColor(colors.appGreenColor.value, for: .normal)
         }
-        self.titleLabel?.font = CustomFont.NexaBold.returnFont(11)
+        self.titleLabel?.font = CustomFont.NexaBold.returnFont(16)
     }
 }
 

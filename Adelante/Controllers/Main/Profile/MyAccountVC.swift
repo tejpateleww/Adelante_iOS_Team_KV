@@ -28,32 +28,31 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         //addNavBarImage(isLeft: true, isRight: true)
         
         allDetails = [
-//            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
-                      
+            //            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
+            
             myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "MyAccountVC_title1".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "MyAccountVC_title2".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
-            myAccountDetails(icon: UIImage(named: "ic_SelectedSettings")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_C".Localized())], selectedIcon: UIImage(named: "ic_Settings")!),
-            myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "MyAccountVC_title4".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title4_A".Localized())], selectedIcon: UIImage(named: "ic_HelpSelected")!),
-            myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "MyAccountVC_title5".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
-            myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "MyAccountVC_title6".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
-          ]
+            myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "MyAccountVC_title4".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_C".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_D".Localized())], selectedIcon: UIImage(named: "ic_HelpSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "MyAccountVC_title5".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
+        ]
         webserviceGetSettings()
-          setup()
-      
-      self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-
-      }
+        setup()
+        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+    }
     
-      override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         lblName.text = SingletonClass.sharedInstance.LoginRegisterUpdateData?.fullName
         let strUrl = "\(APIEnvironment.profileBu.rawValue)\(SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture ?? "")"
-            imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
-          
+        imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
         
-      }
+        
+    }
     
     // MARK: - Other Methods
     func setup() {
@@ -72,8 +71,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel))
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleLogout".Localized(), style: .default){ _ in
             appDel.performLogout()
-//            userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
-//            appDel.navigateToLogin()
+            //            userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+            //            appDel.navigateToLogin()
         })
         
         DispatchQueue.main.async {
@@ -81,54 +80,49 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         }
     }
     @objc  func btnExpand(_ sender : UIButton) {
-           switch sender.tag {
-//           case 0:
-//               print(sender.tag)
-//               customTabBarController?.selectedIndex = 2
-           //
-           case 0:
-               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-               self.navigationController?.pushViewController(controller, animated: true)
+        switch sender.tag {
+        //           case 0:
+        //               print(sender.tag)
+        //               customTabBarController?.selectedIndex = 2
+        //
+        case 0:
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+            self.navigationController?.pushViewController(controller, animated: true)
             
-               print(sender.tag)
-           case 1:
-               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyFoodlistVC.storyboardID) as! MyFoodlistVC
-               self.navigationController?.pushViewController(controller, animated: true)
+            print(sender.tag)
+        case 1:
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyFoodlistVC.storyboardID) as! MyFoodlistVC
+            self.navigationController?.pushViewController(controller, animated: true)
             
-               print(sender.tag)
-           case 2:
-//               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-//               controller.strNavTitle = "About Us"
-//               self.navigationController?.pushViewController(controller, animated: true)
-               print(sender.tag)
-           case 3:
-               print(sender.tag)
-           case 4:
-               let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ChangePasswordVC.storyboardID) as! ChangePasswordVC
-               self.navigationController?.pushViewController(controller, animated: true)
-               print(sender.tag)
-           case 5:
+            print(sender.tag)
+        case 2:
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ChangePasswordVC.storyboardID) as! ChangePasswordVC
+            self.navigationController?.pushViewController(controller, animated: true)
+            print(sender.tag)
+        case 3:
+            print(sender.tag)
+        case 4:
             showLogout()
-               print(sender.tag)
-           default:
-               print(sender.tag)
-           }
-           if expendedCell == sender.tag
-           {
-               expendedCell = -1
-               DispatchQueue.main.async {
-                   self.tblAcountDetails.reloadData()
-               }
-               
-           }
-           else
-           {
-               expendedCell = sender.tag
-               DispatchQueue.main.async {
-                   self.tblAcountDetails.reloadData()
-               }
-           }
-       }
+            print(sender.tag)
+        default:
+            print(sender.tag)
+        }
+        if expendedCell == sender.tag
+        {
+            expendedCell = -1
+            DispatchQueue.main.async {
+                self.tblAcountDetails.reloadData()
+            }
+            
+        }
+        else
+        {
+            expendedCell = sender.tag
+            DispatchQueue.main.async {
+                self.tblAcountDetails.reloadData()
+            }
+        }
+    }
     
     //MARK: -IBActions
     @IBAction func btnMyprofile(_ sender: UIButton)
@@ -202,7 +196,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         return headerView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
@@ -219,22 +213,16 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                 controller.strNavTitle = "MyAccountVC_title3_C".Localized()
                 controller.strUrl = SettingsData.aboutUs
                 self.navigationController?.pushViewController(controller, animated: true)
-            default:
-                print(indexPath.row)
-            }
-        } else if indexPath.section == 3 {
-            switch indexPath.row {
-            case 0:
-                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: FeedbackVC.storyboardID) as! FeedbackVC
-                
+            case 3:
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+                controller.strNavTitle = "MyAccountVC_title3_D".Localized()
+                controller.strUrl = SettingsData.aboutUs
                 self.navigationController?.pushViewController(controller, animated: true)
-                
             default:
                 print(indexPath.row)
             }
-        }
-    }
-   
+        }}
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 43.5
     }

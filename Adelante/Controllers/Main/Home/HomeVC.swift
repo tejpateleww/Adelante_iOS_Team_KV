@@ -41,7 +41,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                      structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title3".Localized())] //["","Mobile Pickup", "Recently Viewed", "Top Rated"]
     var arrImagesForPage = ["dummyRest1", "dummyRest2" , "dummyRest1"]
     var arrImages = ["dummyRest1", "dummyRest2" , "dummyRest1", "dummyRest1", "dummyRest2" , "dummyRest1"]
-    var selectedSortTypedIndexFromcolVwFilter = -1
+    var selectedSortTypedIndexFromcolVwFilter = 1
     var refresher = UIRefreshControl()
     var arrCategories = [Category]()
     var arrRestaurant  = [Restaurant]()
@@ -72,6 +72,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         setup()
+        pageControl.numberOfPages = arrBanner.count
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
@@ -90,7 +91,6 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         
         NotificationCenter.default.removeObserver(self, name: notifDeSelectFilterHome, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: notifDeSelectFilterHome, object: nil)
-        
         NotificationCenter.default.removeObserver(self, name: notifRefreshDashboardList, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshListing), name: notifRefreshDashboardList, object: nil)
         
@@ -163,9 +163,10 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
             }
             else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
-                self.selectedSortTypedIndexFromcolVwFilter = -1
-                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+                self.selectedSortTypedIndexFromcolVwFilter = 1
+//                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+                self.colVwFilterOptions.reloadData()
             } else {
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
                 self.colVwFilterOptions.reloadData()
@@ -198,6 +199,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         if collectionView == self.colVwFilterOptions{
             let cell = colVwFilterOptions.dequeueReusableCell(withReuseIdentifier: FilterOptionsCell.reuseIdentifier, for: indexPath) as! FilterOptionsCell
             cell.btnFilterOptions.setTitle(arrFilter[indexPath.row].strTitle, for: .normal)
+            
             if selectedSortTypedIndexFromcolVwFilter != -1 && selectedSortTypedIndexFromcolVwFilter == indexPath.row {
                 cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
                 cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
@@ -338,6 +340,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 let Homedata = DashBoardResModel.init(fromJson: response)
                 self.arrCategories = Homedata.category
                 self.arrBanner = Homedata.banner
+                self.pageControl.numberOfPages = self.arrBanner.count
                 if self.pageNumber == 1 {
                     self.arrRestaurant = Homedata.restaurant
                 } else {
