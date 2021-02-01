@@ -80,6 +80,10 @@ class WebServiceSubClass
         let  params : [String:String] = RestaurantDetailsmodel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .RestaurantDetails, httpMethod: .post, showHud: false, parameters: params, completion: completion)
     }
+    class func RestaurantVariants( RestaurantVariantsmodel : RestaurantVariantsReqModel,showHud : Bool = false , completion : @escaping CompletionResponse ){
+        let params : [String:String] = RestaurantVariantsmodel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .RestaurantVariants, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+    }
     class func Feedback( Feedbackmodel : FeedbackReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = Feedbackmodel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Feedback, httpMethod: .post, showHud: false, parameters: params, completion: completion)

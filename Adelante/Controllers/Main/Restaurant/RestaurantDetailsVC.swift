@@ -35,6 +35,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var arrSubMenu = [SubMenu]()
     var arrSelectedOrder = [selectedOrderItems]()
     var objRestaurant : Restaurantinfo!
+    var objCurrentOrder : currentOrder!
     var SelectedCatId = ""
     var pageNumber = "1"
     var selectedIndex = ""
@@ -65,6 +66,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var lblPrice: themeLabel!
     @IBOutlet weak var lblViewCards: themeLabel!
     @IBOutlet weak var stackPromocode: UIStackView!
+    @IBOutlet weak var viewFooter: UIView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -73,7 +75,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         setUpLocalizedStrings()
         setup()
     }
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
@@ -88,7 +90,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         tblRestaurantDetails.estimatedRowHeight = 20
         tblRestaurantDetails.reloadData()
         btnNavLike.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
-        
+        if arrSelectedOrder.count > 0{
+            viewFooter.isHidden = false
+            lblSign.isHidden = false
+        }else{
+            viewFooter.isHidden = true
+            lblPrice.text = ""
+            lblNoOfItem.text = ""
+            lblSign.isHidden = true
+        }
     }
     func dateFormat(){
         let dateFormatter = DateFormatter()
@@ -113,15 +123,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         lblEastern.text = "RestaurantDetailsVC_lblEastern".Localized()
         lblAboutRestaurant.text = "RestaurantDetailsVC_lblAboutRestaurant".Localized()
         btnViewPolicy.setTitle("RestaurantDetailsVC_btnViewPolicy".Localized(), for: .normal)
-        lblNoOfItem.text = String(format: "RestaurantDetailsVC_lblNoOfItem".Localized(), "1")
+//        lblNoOfItem.text = String(format: "RestaurantDetailsVC_lblNoOfItem".Localized(), "1")
         lblSign.text = "RestaurantDetailsVC_lblSign".Localized()
-        lblPrice.text = "$30"
+//        lblPrice.text = "$30"
         lblViewCards.text = "RestaurantDetailsVC_lblViewCart".Localized()
     }
     func setData(){
         if objRestaurant != nil{
             self.lblRestaurantName.text = objRestaurant.name ?? ""
-            self.lblPrice.text = objRestaurant.name ?? ""
+//            self.lblPrice.text = objRestaurant. ?? ""
             self.lblRating.text = objRestaurant.rating ?? ""
             self.lblReviews.text = String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review)
             //            self.lblTimeZone.text = objRestaurant.
@@ -170,6 +180,40 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             }
         }else{
             arrSelectedOrder.append(objOrder)
+        }
+        checkItemsAndUpdateFooter()
+    }
+    func checkItemsAndUpdateFooter(){
+        var total = 0
+        if arrSelectedOrder.count > 0{
+            var subTotal = 0
+                for i in 0..<arrSelectedOrder.count{
+                    let quantity : Int = Int(arrSelectedOrder[i].quantity) ?? 0
+                    let price : Int = Int(arrSelectedOrder[i].price) ?? 0
+                    let T = quantity * price
+                    subTotal = subTotal + T
+                }
+//            var total : Int = Int(subTotal) + Int(objRestaurant.serviceFee)
+//            total = total + Int(objRestaurant.tax)
+            total = Int(subTotal) + objRestaurant.serviceFee.toInt() + objRestaurant.tax.toInt()
+            let dicTemp = currentOrder.init(userId: SingletonClass.sharedInstance.UserId, restautaurantId: objRestaurant.id, rating: "", comment: "", subTotal: "\(subTotal)", serviceFee: objRestaurant.serviceFee, tax: objRestaurant.tax, total: "\(total)", order: arrSelectedOrder)
+            objCurrentOrder = dicTemp
+        }
+        if arrSelectedOrder.count > 1{
+            self.lblNoOfItem.text = "\(arrSelectedOrder.count) items"
+        }else{
+            self.lblNoOfItem.text = "\(arrSelectedOrder.count) item"
+        }
+        
+        self.lblPrice.text = "$\(total)"
+        if arrSelectedOrder.count > 0{
+            viewFooter.isHidden = false
+            lblSign.isHidden = false
+        }else{
+            viewFooter.isHidden = true
+            lblPrice.text = ""
+            lblNoOfItem.text = ""
+            lblSign.isHidden = true
         }
     }
     override func viewDidLayoutSubviews() {
@@ -322,9 +366,16 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: strQty, price: self.arrMenuitem[indexPath.row].price, variants_id: [])
                     self.checkOrderItems(objOrder: objItem)
                 }
+                let variantValue = arrMenuitem[indexPath.row].variant.toInt()
+                if variantValue > 0{
+                    cell.btnCustomize.isHidden = false
+                }else{
+                    cell.btnCustomize.isHidden = true
+                }
                 cell.selectionStyle = .none
                 cell.customize = {
                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                    controller.selectedRestaurantId = self.arrMenuitem[indexPath.row].id
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
                 cell.selectionStyle = .none
@@ -386,8 +437,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, quantity: strQty, price: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price, variants_id: [])
                     self.checkOrderItems(objOrder: objItem)
                 }
+                let variantValue = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant.toInt()
+                if variantValue > 0{
+                    cell.btnCustomize.isHidden = false
+                }else{
+                    cell.btnCustomize.isHidden = true
+                }
                 cell.customize = {
                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                    controller.selectedRestaurantId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
                 cell.selectionStyle = .none
@@ -450,8 +508,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, quantity: strQty, price: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price, variants_id: [])
                 self.checkOrderItems(objOrder: objItem)
             }
+            let variantValue = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant.toInt()
+            if variantValue > 0{
+                cell.btnCustomize.isHidden = false
+            }else{
+                cell.btnCustomize.isHidden = true
+            }
             cell.customize = {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                controller.selectedRestaurantId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                 self.navigationController?.pushViewController(controller, animated: true)
             }
                 cell.selectionStyle = .none

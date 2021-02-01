@@ -100,8 +100,20 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
-        self.isSharedOrder = true
-        setUpOrderDetails()
+//        self.isSharedOrder = true
+        let text = ""
+
+               // set up activity view controller
+               let textToShare = [ text ]
+               let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+               activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+
+               // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+
+               // present the view controller
+               self.present(activityViewController, animated: true, completion: nil)
+//        setUpOrderDetails()
     }
     
     // MARK: - UITableView Delegates & Datasource
@@ -111,7 +123,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
-        if selectedSegmentTag == 1 && isSharedOrder {
+        if selectedSegmentTag == 1 && isSharedOrder{
             cell.lblSharedFrom.isHidden = false
         } else {
             cell.lblSharedFrom.isHidden = true

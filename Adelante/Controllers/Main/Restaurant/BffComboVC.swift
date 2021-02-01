@@ -14,7 +14,9 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var selectedcategory = 0
     var selectedSection = 0
     var expendedCell = -1
+    var selectedRestaurantId = ""
     var refreshList = UIRefreshControl()
+    var arrVariants = [Variant]()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblBFFCombo: UITableView!
@@ -46,6 +48,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         footerView.backgroundColor = .white
         footerView.frame = CGRect.init(x: 0, y: 0, width: tblBFFCombo.frame.size.width, height: 31)
         tblBFFCombo.tableFooterView = footerView
+        webservicePostCombo()
         // Do any additional setup after loading the view.
     }
     
@@ -56,40 +59,66 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (bffComboData[section].isExpanded == true) ? bffComboData[section].subCombo.count : 0
+        return (arrVariants[section].isExpanded == true) ? arrVariants[section].option.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: bffComboCell.reuseIdentifier, for: indexPath) as! bffComboCell
-        cell.lblbffComboTitle.text = bffComboData[indexPath.section].subCombo[indexPath.row].subComboName
-        cell.lblBffComboPrice.isHidden = (bffComboData[indexPath.section].subCombo[indexPath.row].subComboPrice != "") ? false : true
-        cell.lblBffComboPrice.text = bffComboData[indexPath.section].subCombo[indexPath.row].subComboPrice
-        
-        //cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
-        if bffComboData[indexPath.section].subCombo[indexPath.row].isSelected! {
-            cell.selectButton.isSelected = true
-        } else {
-            cell.selectButton.isSelected = false
+        cell.lblbffComboTitle.text = arrVariants[indexPath.section].option[indexPath.row].name
+        cell.lblBffComboPrice.isHidden = (arrVariants[indexPath.section].option[indexPath.row].price != "") ? false : true
+        cell.lblBffComboPrice.text = arrVariants[indexPath.section].option[indexPath.row].price
+        let selectOne = arrVariants[indexPath.section].option[indexPath.row].menuChoice.toInt()
+        if arrVariants[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0{
+            cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
+        }else if arrVariants[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0{
+            cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
+        }else if arrVariants[indexPath.section].option[indexPath.row].isSelected == true && selectOne != 0{
+            cell.selectButton.setImage(UIImage(named: "ic_paymentSelected"), for: .normal)
+        }else{
+            cell.selectButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
         }
         
+//        cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
+//        if arrVariants[indexPath.section].option[indexPath.row]! {
+//            cell.selectButton.isSelected = true
+//        } else {
+//            cell.selectButton.isSelected = false
+//        }
+        
         cell.selectedBtn = {
-            for i in 0...self.bffComboData[indexPath.section].subCombo.count
-            {
-                if i == self.bffComboData[indexPath.section].subCombo.count {
-                    self.bffComboData[indexPath.section].subCombo[indexPath.row].isSelected = true
-                    self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
-                }
-                else
-                {
-                    self.bffComboData[indexPath.section].subCombo[i].isSelected = false
+            if selectOne == 0{
+                self.arrVariants[indexPath.section].option.forEach { $0.isSelected = false}
+                    if self.arrVariants[indexPath.section].option[indexPath.row].isSelected == true{
+                        self.arrVariants[indexPath.section].option[indexPath.row].isSelected = false
+                    } else{
+                        self.arrVariants[indexPath.section].option[indexPath.row].isSelected = true
+                    }
+                  
+            }else{
+                if self.arrVariants[indexPath.section].option[indexPath.row].isSelected == true{
+                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = false
+                } else{
+                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = true
                 }
             }
+            self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
+//            for i in 0...self.arrVariants[indexPath.section].option.count
+//            {
+//                if i == self.arrVariants[indexPath.section].option.count {
+////                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = true
+//                    self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
+//                }
+//                else
+//                {
+////                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = false
+//                }
+//            }
         }
         cell.selectionStyle = .none
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return bffComboData.count
+        return arrVariants.count
     }
     
     
@@ -102,7 +131,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         let label = UILabel()
         label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width - 118, height: 19)
         label.center.y = headerView.frame.size.height / 2
-        label.text = bffComboData[section].comboName
+        label.text = arrVariants[section].groupName
         label.font = CustomFont.NexaBold.returnFont(17)
         label.textColor = colors.black.value// colors.black.value
         //headerView.backgroundColor = colors.white.value
@@ -124,10 +153,10 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         return headerView
     }
     @objc  func btnExpand(_ sender : UIButton) {
-        if bffComboData[sender.tag].isExpanded! {
-            bffComboData[sender.tag].isExpanded = false
+        if arrVariants[sender.tag].isExpanded {
+            arrVariants[sender.tag].isExpanded = false
         } else {
-            bffComboData[sender.tag].isExpanded = true
+            arrVariants[sender.tag].isExpanded = true
         }
         DispatchQueue.main.async {
             self.tblBFFCombo.reloadData()
@@ -160,6 +189,18 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     // MARK: - Api Calls
     @objc func webservicePostCombo(){
+        let ResVariants = RestaurantVariantsReqModel()
+        ResVariants.restaurant_item_id = selectedRestaurantId
+        WebServiceSubClass.RestaurantVariants(RestaurantVariantsmodel: ResVariants, showHud: true, completion: { (response, status, error) in
+            //self.hideHUD()
+            if status {
+                let resVariant = RestaurantVariantResModel.init(fromJson: response)
+                self.arrVariants = resVariant.variants
+                self.tblBFFCombo.reloadData()
+            } else {
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }

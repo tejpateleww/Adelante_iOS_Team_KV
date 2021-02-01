@@ -73,3 +73,27 @@ struct selectedOrderItems{
         self.variants_id = variants_id
     }
 }
+
+struct currentOrder {
+    var user_id : String = ""
+    var restaurant_id : String = ""
+    var rating : String = ""
+    var comment : String = ""
+    var sub_total : String = ""
+    var service_fee : String = ""
+    var tax : String = ""
+    var total : String = ""
+    var order : [selectedOrderItems] = []
+    
+    init(userId:String,restautaurantId:String,rating:String,comment:String,subTotal:String,serviceFee:String,tax:String,total:String,order:[selectedOrderItems]){
+        self.user_id = userId
+        self.restaurant_id = restautaurantId
+        self.rating = rating
+        self.comment = comment
+        self.sub_total = subTotal
+        self.service_fee = serviceFee
+        self.tax = tax
+        self.total = total
+        self.order = order
+    }
+}

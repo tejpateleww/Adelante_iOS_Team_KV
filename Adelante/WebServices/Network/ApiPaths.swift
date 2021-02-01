@@ -81,5 +81,6 @@ enum ApiKey: String {
     case Feedback = "feedback"
     case RestaurantList = "restaurant"
     case RestaurantDetails = "restaurant_detail"
+    case RestaurantVariants = "restaurant_variant"
 }
 

@@ -10,6 +10,10 @@
 		18F369532580AE0000992FCD /* BffComboVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369502580ADFE00992FCD /* BffComboVC.swift */; };
 		18F369542580AE0000992FCD /* commonPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369512580ADFE00992FCD /* commonPopup.swift */; };
 		18F369552580AE0000992FCD /* sortPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369522580ADFF00992FCD /* sortPopupVC.swift */; };
+		3400019625C7EB8E00C584DE /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3400019325C7EB8E00C584DE /* Option.swift */; };
+		3400019725C7EB8E00C584DE /* RestaurantVariantResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3400019425C7EB8E00C584DE /* RestaurantVariantResModel.swift */; };
+		3400019825C7EB8E00C584DE /* Variant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3400019525C7EB8E00C584DE /* Variant.swift */; };
+		3400019B25C7ED0400C584DE /* RestaurantVariantsReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3400019A25C7ED0400C584DE /* RestaurantVariantsReqModel.swift */; };
 		340A4C7225A3291F00FB6061 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A4C7125A3291F00FB6061 /* Profile.swift */; };
 		342ADF3D25B717820097B5AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 342ADF3C25B717820097B5AD /* GoogleService-Info.plist */; };
 		34317B8525A5DF8E0086154A /* userDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34317B8425A5DF8D0086154A /* userDefaults+Extension.swift */; };
@@ -193,6 +197,10 @@
 		18F369502580ADFE00992FCD /* BffComboVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BffComboVC.swift; sourceTree = "<group>"; };
 		18F369512580ADFE00992FCD /* commonPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonPopup.swift; sourceTree = "<group>"; };
 		18F369522580ADFF00992FCD /* sortPopupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sortPopupVC.swift; sourceTree = "<group>"; };
+		3400019325C7EB8E00C584DE /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		3400019425C7EB8E00C584DE /* RestaurantVariantResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantVariantResModel.swift; sourceTree = "<group>"; };
+		3400019525C7EB8E00C584DE /* Variant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variant.swift; sourceTree = "<group>"; };
+		3400019A25C7ED0400C584DE /* RestaurantVariantsReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVariantsReqModel.swift; sourceTree = "<group>"; };
 		340A4C7125A3291F00FB6061 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		342ADF3A25B70A170097B5AD /* Adelante.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Adelante.entitlements; sourceTree = "<group>"; };
 		342ADF3C25B717820097B5AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -395,6 +403,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3400017A25C7CBB400C584DE /* RestaurantVariant */ = {
+			isa = PBXGroup;
+			children = (
+				3400019325C7EB8E00C584DE /* Option.swift */,
+				3400019425C7EB8E00C584DE /* RestaurantVariantResModel.swift */,
+				3400019525C7EB8E00C584DE /* Variant.swift */,
+			);
+			path = RestaurantVariant;
+			sourceTree = "<group>";
+		};
 		34317B2D25A57B2A0086154A /* DashBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +509,7 @@
 		34D603C025A892EB00C82D63 /* RestaurantDetails */ = {
 			isa = PBXGroup;
 			children = (
+				3400017A25C7CBB400C584DE /* RestaurantVariant */,
 				3443D61725C11E60001CFAFE /* RestaurantDetailsData.swift */,
 				3443D61A25C11E61001CFAFE /* FoodMenu.swift */,
 				3443D61C25C11E61001CFAFE /* MenuItem.swift */,
@@ -800,6 +819,7 @@
 				34525EB125AEF40800406EB6 /* RestaurantFavoriteReqModel.swift */,
 				34CD681425B7DCAB0052F485 /* FavoriteReqModel.swift */,
 				3498BA8525C155C2007CD695 /* FeedbackReqModel.swift */,
+				3400019A25C7ED0400C584DE /* RestaurantVariantsReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1166,6 +1186,7 @@
 				3431E06A25932287002F1435 /* RestaurantCategoryCell.swift in Sources */,
 				81CFFD702574C60D005AA86A /* RequestModel.swift in Sources */,
 				345EA8F025B5477100A4E56D /* RestaurantFavResModel.swift in Sources */,
+				3400019625C7EB8E00C584DE /* Option.swift in Sources */,
 				81CFFD742574C60D005AA86A /* Singleton.swift in Sources */,
 				3431E06025931FF3002F1435 /* myAccountSubDetails.swift in Sources */,
 				34525EB225AEF40800406EB6 /* RestaurantFavoriteReqModel.swift in Sources */,
@@ -1183,8 +1204,10 @@
 				8105FDB62574D014008D36D6 /* BaseViewController.swift in Sources */,
 				81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */,
 				34525DFE25AED8A900406EB6 /* sortingResModel.swift in Sources */,
+				3400019725C7EB8E00C584DE /* RestaurantVariantResModel.swift in Sources */,
 				8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */,
 				347D953E25A70A23000C64B5 /* Dashboard.swift in Sources */,
+				3400019B25C7ED0400C584DE /* RestaurantVariantsReqModel.swift in Sources */,
 				3431E05625931D79002F1435 /* RestaurantListCell.swift in Sources */,
 				81CFFD8A2574C60D005AA86A /* AppInfo.swift in Sources */,
 				3431E05025931CC1002F1435 /* ReViewDiscCell.swift in Sources */,
@@ -1197,6 +1220,7 @@
 				81CFFD862574C60D005AA86A /* CustomSlider.swift in Sources */,
 				81E67217257E68BC00DCE9DA /* addPaymentVC.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,
+				3400019825C7EB8E00C584DE /* Variant.swift in Sources */,
 				819B0C94257E101700289BBF /* MyOrderDetailsVC.swift in Sources */,
 				81CFFD822574C60D005AA86A /* UIStoryboard+Extension.swift in Sources */,
 				81B447F725763C3700A0724E /* UICollectionViewCell+Extension.swift in Sources */,
@@ -1398,7 +1422,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.3;
+				CURRENT_PROJECT_VERSION = 1.0.4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
@@ -1424,7 +1448,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.3;
+				CURRENT_PROJECT_VERSION = 1.0.4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
