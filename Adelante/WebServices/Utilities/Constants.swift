@@ -65,12 +65,13 @@ struct selectedOrderItems{
     var restaurant_item_id : String = ""
     var quantity : String = ""
     var price : String = ""
-    var variants_id : [String] = []
+    var variants_id : [selectedVariants] = []
     var name : String = ""
     var originalPrice : String = ""
     var size : String = ""
+    var selectedQuantity : String = ""
     
-    init(restaurant_item_id:String,quantity:String,price:String,variants_id:[String],name:String,originalPrice:String,size:String) {
+    init(restaurant_item_id:String,quantity:String,price:String,variants_id:[selectedVariants],name:String,originalPrice:String,size:String, selectedQuantity:String) {
         self.restaurant_item_id = restaurant_item_id
         self.price = price
         self.quantity = quantity
@@ -78,6 +79,7 @@ struct selectedOrderItems{
         self.name = name
         self.originalPrice = originalPrice
         self.size = size
+        self.selectedQuantity = selectedQuantity
     }
 }
 
@@ -104,5 +106,18 @@ struct currentOrder {
         self.total = total
         self.order = order
         self.currentRestaurantDetail = currentRestaurantDetail
+    }
+}
+struct selectedVariants {
+    var variant_id : String = ""
+    var variant_name : String = ""
+    var variant_SubName : String = ""
+    var variant_price : String = ""
+    
+    init(variant_id: String, variant_name: String, variant_SubName: String, variant_price: String) {
+        self.variant_id = variant_id
+        self.variant_name = variant_name
+        self.variant_SubName = variant_SubName
+        self.variant_price = variant_price
     }
 }

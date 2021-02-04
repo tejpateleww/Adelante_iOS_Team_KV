@@ -269,7 +269,9 @@
 //Message
 "MessageTitle" = "Something went wrong";
 "MessagePassword" = "Password do not match";
- 
+//"MessageQtyNotAvailable" = "The item %@ has only %@ quantities.";
+"MessageQtyNotAvailable" = "No stock available for this item";
+
 //Empty Messages
 "emptyMsg_Common" = "No Records Found.";
 "emptyMsg_Restaurant" = "No Restaurant Found";

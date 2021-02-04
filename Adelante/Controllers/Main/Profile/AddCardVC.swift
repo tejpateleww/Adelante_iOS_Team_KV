@@ -10,17 +10,14 @@ import UIKit
 import FormTextField
 class AddCardVC: BaseViewController,FormTextFieldDelegate {
     // MARK: - Properties
-    var strSelectedDate = ""
-    let monthPicker = MonthYearPickerView()
     var isCreditCardValid = Bool()
-    var selectedCardType = ""
-    var cardTypeLabel = String()
-    var validation = Validation()
     var pickerView = UIPickerView()
     var aryMonth = [String]()
     var aryYear = [String]()
     var strMonth = ""
     var strYear = ""
+    var cardTypeLabel = String()
+    var validation = Validation()
     var inputValidator = InputValidator()
     var creditCardValidator: CreditCardValidator!
     // MARK: - IBOutlets
@@ -40,14 +37,14 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
-        setValue()
         addNavBarImage(isLeft: true, isRight: true)
         txtDate.delegate = self
         pickerView.delegate = self
         pickerSetup()
+        
+        creditCardValidator = CreditCardValidator()
         cardNum()
         SetValidation()
-        creditCardValidator = CreditCardValidator()
 //        txtCardNumber.enabledTextColor = UIColor.red
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.AddCardVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         // Do any additional setup after loading the view.
@@ -56,11 +53,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     // MARK: - Other Methods
     
     // MARK: - IBActions
-    @IBAction func placeOrderBtn(_ sender: submitButton) {
-        self.navigationController?.popViewController(animated: true)
-        //             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID)
-        //             self.navigationController?.pushViewController(controller, animated: true)
-    }
     @IBAction func txtCardNumberEditingChange(_ sender: UITextField) {
         if let number = sender.text {
             if number.isEmpty {
@@ -92,13 +84,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     aryMonth = ["01","02","03","04","05","06","07","08","09","10","11","12"]
 
     }
-    func setValue(){
-        //        setUpDatePicker()
-        txtDate.inputView = pickerView
-        //        let doneButton = UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(self.btnDoneDatePickerClicked(_:)))
-        let toolBar = UIToolbar.init(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 44))
-        //        toolBar.setItems([UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil), doneButton], animated: true)
-    }
+    
     func setUpDatePicker() {
         if "\(userDefault.value(forKey: UserDefaultsKey.selLanguage.rawValue) ?? "")" == "ar" {
             Dtpicker.calendar = Calendar(identifier: .islamicTabular)
@@ -113,7 +99,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         self.txtCardNumber.text = ""
         self.txtDate.text = ""
         self.txtCvv.text = ""
-        self.selectedCardType = ""
         isCreditCardValid = false
         //        self.cardTypeLabel = ""
     }
@@ -136,10 +121,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
             isValidate = false
             ValidatorMessage = "Your card number is invalid"
         }
-        // else if txtCardNumber.text?.count != 19 {
-        // isValidate = false
-        // ValidatorMessage = "Please enter valid card number."
-        // }
         else if txtDate.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).count == 0 {
             isValidate = false
             ValidatorMessage = "Please enter expiry date"
@@ -199,26 +180,26 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         txtCvv.inputValidator = inputValidator
     }
     func cardNum() {
-        txtCardNumber.inputType = .integer
-        txtCardNumber.textFieldDelegate = self
-        txtCardNumber.formatter = CardNumberFormatter()
-        txtCardNumber.leftMargin = 0
-        txtCardNumber.layer.cornerRadius = 5
-        validation.maximumLength = 19
-        validation.minimumLength = 14
-        let characterSet = NSMutableCharacterSet.decimalDigit()
-        characterSet.addCharacters(in: " ")
-        validation.characterSet = characterSet as CharacterSet
-        // inputValidator = InputValidator(validation: validation)
-        // txtCardNumber.inputValidator = inputValidator
-    }
-    @IBAction func btnAddCardClicked(_ sender: Any) {
+            txtCardNumber.inputType = .integer
+           txtCardNumber.textFieldDelegate = self
+            txtCardNumber.formatter = CardNumberFormatter()
+//            txtCardNumber.setValue(UIColor.black , forKeyPath: "placeholderLabel.textColor")
+            txtCardNumber.placeholder = "Card Number"
+    //        txtCardNumber.font = UIFont.regular(ofSize: 13.0)
+            txtCardNumber.textColor = UIColor.black
+            txtCardNumber.leftMargin = 0
+            txtCardNumber.layer.cornerRadius = 5
+            validation.maximumLength = 19
+            validation.minimumLength = 14
+            let characterSet = NSMutableCharacterSet.decimalDigit()
+            characterSet.addCharacters(in: " ")
+            validation.characterSet = characterSet as CharacterSet
+    //        inputValidator = InputValidator(validation: validation)
+    //        txtCardNumber.inputValidator = inputValidator
+        }
+    @IBAction func btnSaveClick(_ sender: Any) {
         if isValidatePaymentDetail().0 {
-//            if self.selectedCardType == "" {
-//                Utilities.showAlert(AppName, message: "paymentMethods_validation_undefinedCardType".Localized(), vc: self)
-//            } else {
                 self.webserviceForAddCard()
-//            }
         } else {
             Utilities.showAlert(AppName, message: isValidatePaymentDetail().1, vc: self)
         }

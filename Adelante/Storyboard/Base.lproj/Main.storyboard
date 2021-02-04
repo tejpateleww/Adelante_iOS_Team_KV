@@ -573,7 +573,7 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="45c-lV-znp">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="77"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -582,7 +582,7 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="23.5" width="240" height="20.5"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
@@ -591,10 +591,10 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isLocation" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
+                                                                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
                                                                                                                     <rect key="frame" x="0.0" y="47" width="240" height="30"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="3" width="240" height="27"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
@@ -5313,6 +5313,13 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isWallet" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6F-TF-QSg">
+                                                                    <rect key="frame" x="332" y="25.5" width="34" height="34"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="34" id="jOU-WF-XaN"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="ic_paymentSelected"/>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
@@ -5320,11 +5327,14 @@
                                                                 <constraint firstItem="qNX-WM-MiQ" firstAttribute="centerY" secondItem="5ca-R8-ZNB" secondAttribute="centerY" id="Cu1-GH-Xz3"/>
                                                                 <constraint firstAttribute="trailing" secondItem="8gN-eU-dN8" secondAttribute="trailing" id="JOC-PS-Snh"/>
                                                                 <constraint firstItem="8gN-eU-dN8" firstAttribute="leading" secondItem="qNX-WM-MiQ" secondAttribute="trailing" constant="28.600000000000001" id="NuL-qw-ikT"/>
+                                                                <constraint firstAttribute="trailing" secondItem="c6F-TF-QSg" secondAttribute="trailing" constant="16" id="ULE-5k-yvb"/>
                                                                 <constraint firstItem="8gN-eU-dN8" firstAttribute="top" secondItem="5ca-R8-ZNB" secondAttribute="top" constant="17" id="YF7-db-m0J"/>
                                                                 <constraint firstItem="fOe-RJ-RyA" firstAttribute="top" secondItem="8gN-eU-dN8" secondAttribute="bottom" constant="11" id="brg-GJ-bkQ"/>
+                                                                <constraint firstItem="c6F-TF-QSg" firstAttribute="centerY" secondItem="5ca-R8-ZNB" secondAttribute="centerY" id="igD-o3-m6i"/>
                                                                 <constraint firstAttribute="trailing" secondItem="fOe-RJ-RyA" secondAttribute="trailing" id="kod-ij-s3t"/>
                                                                 <constraint firstAttribute="bottom" secondItem="fOe-RJ-RyA" secondAttribute="bottom" constant="17" id="mga-Vr-RtH"/>
                                                                 <constraint firstItem="fOe-RJ-RyA" firstAttribute="leading" secondItem="8gN-eU-dN8" secondAttribute="leading" id="qy7-ok-ALW"/>
+                                                                <constraint firstItem="c6F-TF-QSg" firstAttribute="width" secondItem="qNX-WM-MiQ" secondAttribute="height" multiplier="1:1" id="rsT-9V-6Iz"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -5339,6 +5349,7 @@
                                                     <outlet property="lblWallet" destination="8gN-eU-dN8" id="3vD-72-N60"/>
                                                     <outlet property="lblwalletBalance" destination="fOe-RJ-RyA" id="Kke-Fn-snT"/>
                                                     <outlet property="paymentImageView" destination="qNX-WM-MiQ" id="5yG-PY-Gjh"/>
+                                                    <outlet property="selectPaymentMethodButton" destination="c6F-TF-QSg" id="lS5-O8-Ze6"/>
                                                     <outlet property="vWMain" destination="5ca-R8-ZNB" id="a4E-v6-Iac"/>
                                                 </connections>
                                             </tableViewCell>
@@ -5446,7 +5457,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isRoundCorner" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="placeOrderBtn:" destination="Ye3-Fq-7yi" eventType="touchUpInside" id="TG6-EV-Zc2"/>
+                                            <action selector="btnAddcardClick:" destination="Ye3-Fq-7yi" eventType="touchUpInside" id="CdE-d1-2ew"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -6095,6 +6106,9 @@
                                                                                 <rect key="frame" x="16" y="0.0" width="350" height="48"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
+                                                                                <connections>
+                                                                                    <action selector="txtCardNumberEditingChange:" destination="Ver-fO-aHy" eventType="editingChanged" id="Cxa-Uc-8PI"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -6300,8 +6314,7 @@
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRoundCorner" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="btnAddCardClicked:" destination="Ver-fO-aHy" eventType="touchUpInside" id="J6J-RM-SiK"/>
-                                                                    <action selector="placeOrderBtn:" destination="Ver-fO-aHy" eventType="touchUpInside" id="YBz-l6-9ML"/>
+                                                                    <action selector="btnSaveClick:" destination="Ver-fO-aHy" eventType="touchUpInside" id="60J-Wm-k5M"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -6377,7 +6390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WzZ-Ft-Rw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4774" y="892"/>
+            <point key="canvasLocation" x="4688" y="892"/>
         </scene>
         <!--HomeVC-->
         <scene sceneID="2VC-RD-8gD">

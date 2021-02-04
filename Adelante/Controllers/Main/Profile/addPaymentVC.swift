@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource {
     // MARK: - Properties
@@ -14,10 +15,13 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var customTabBarController: CustomTabBarVC?
     var selectedPaymentMethods = 1
     var refreshList = UIRefreshControl()
+    var arrCard = [CardList]()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
+    
+    //MARK: - Other Methods
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -28,6 +32,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        webserviceGetAddPayment()
         // Do any additional setup after loading the view.
     }
     
@@ -36,10 +41,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     //MARK: -tblViewMethods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+//        return arrCard.count
         switch section {
         case 0:
-            return 3
+            return arrCard.count + 1
         case 1:
             return 1
         default:
@@ -59,36 +64,32 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
                 cell1.lblwalletBalance.text = "$250.00"
                 cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-                if indexPath.row == selectedPaymentMethods {
-                    cell1.vWMain.layer.borderWidth = 1
-                } else {
-                     cell1.vWMain.layer.borderWidth = 0
-                }
+//                if indexPath.row == selectedPaymentMethods {
+//                    cell1.vWMain.layer.borderWidth = 1
+//                } else {
+//                    cell1.vWMain.layer.borderWidth = 0
+//                }
+                cell1.selectPaymentMethodButton.isHidden = true
                 
                 cell = cell1
             } else {
                 let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
                 cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-                if indexPath.row == selectedPaymentMethods {
-                    cell2.vWMain.layer.borderWidth = 1
-                } else {
-                     cell2.vWMain.layer.borderWidth = 0
-                }
-                if indexPath.row == 1
-                {
-                    cell2.paymentMethodImageView.image = UIImage(named: "ic_masterCard")
-                    cell2.lblcardDetails.text = "addPaymentVC_lblcardDetails".Localized()
-                    cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), "09/25")
-                    cell2.selectPaymentMethodButton.isHidden = true
-                } else if indexPath.row == 2 {
-                    cell2.paymentMethodImageView.image = UIImage(named: "ic_visa")
-                    cell2.lblcardDetails.text = "**** **** **** 3802"
-                    cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), "10/27")
-                    cell2.selectPaymentMethodButton.isHidden = true
-                }
+//                if indexPath.row == selectedPaymentMethods {
+//                    cell2.vWMain.layer.borderWidth = 1
+//                } else {
+//                    cell2.vWMain.layer.borderWidth = 0
+//                }
+                //                cell2.paymentMethodImageView.image = self.getCardImageFromCardType(objSelectedCard: self.arrCard[indexPath.row])
+                let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrCard[indexPath.row - 1].cardImage ?? "")"
+                cell2.paymentMethodImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell2.paymentMethodImageView.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                cell2.lblcardDetails.text = arrCard[indexPath.row - 1].formatedCardNo
+                cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), arrCard[indexPath.row - 1].expDateMonthYear)
+                cell2.selectPaymentMethodButton.isHidden = true
+                
                 cell = cell2
             }
-            
             cell.selectionStyle = .none
             return cell
         case 1:
@@ -96,7 +97,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.paymentMethodImageView.image = UIImage(named: "ic_paypal")
             cell.lblcardDetails.text = "Paypal"
             cell.lblExpiresDate.text = "Default method"
-            cell.selectPaymentMethodButton.isHidden = false
+            cell.selectPaymentMethodButton.isHidden = true
             cell.selectionStyle = .none
             return cell
         default:
@@ -173,12 +174,24 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     
     //MARK: -btnAction
-    @IBAction func placeOrderBtn(_ sender: submitButton) {
+    @IBAction func btnAddcardClick(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID)
         self.navigationController?.pushViewController(controller, animated: true)
     }
     // MARK: - Api Calls
     @objc func webserviceGetAddPayment(){
+        var addpayment = AddPaymentReqModel()
+        addpayment.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.addPayment(addpaymentmodel: addpayment, showHud: true, completion: { (json, status, error) in
+            // self.hideHUD()
+             if(status) {
+                 let cardListRes = AddPaymentResModel.init(fromJson: json)
+                 self.arrCard = cardListRes.cards
+                 self.tblPaymentMethod.reloadData()
+             } else {
+                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong!")
+             }
+         })
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }

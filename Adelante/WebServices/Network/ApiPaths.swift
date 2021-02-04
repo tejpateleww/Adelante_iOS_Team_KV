@@ -83,5 +83,6 @@ enum ApiKey: String {
     case RestaurantDetails = "restaurant_detail"
     case RestaurantVariants = "restaurant_variant"
     case AddCard = "add_card"
+    case AddPayment = "card_list"
 }
 

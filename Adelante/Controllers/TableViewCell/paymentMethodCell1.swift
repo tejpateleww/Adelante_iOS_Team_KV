@@ -13,6 +13,7 @@ class paymentMethodCell1: UITableViewCell {
     @IBOutlet weak var lblWallet: addPaymentlable!
     @IBOutlet weak var lblwalletBalance: addPaymentlable!
     @IBOutlet weak var paymentImageView: UIImageView!
+    @IBOutlet weak var selectPaymentMethodButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -126,6 +126,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         btnAddFoodlist.setTitle("checkOutVC_btnAddFoodlist".Localized(), for: .normal)
         btnPlaceOrder.setTitle("checkOutVC_btnPlaceOrder".Localized(), for: .normal)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case tblAddedProduct:
@@ -153,7 +154,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 cell.lblItem.text = self.objCurrentorder?.order[indexPath.row].name
             }
             cell.lblPrice.text = self.objCurrentorder?.order[indexPath.row].price
-            cell.lbltotalCount.text = self.objCurrentorder?.order[indexPath.row].quantity
+            cell.lbltotalCount.text = self.objCurrentorder?.order[indexPath.row].selectedQuantity
             let value : Int = (cell.lbltotalCount.text! as NSString).integerValue
             cell.decreaseClick = {
                 if value >= 1{
@@ -168,7 +169,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                         self.reloadAddproductTableAndResize()
                     }else{
                         self.objCurrentorder?.order[indexPath.row].price = "\(T)"
-                        self.objCurrentorder?.order[indexPath.row].quantity = "\(quantity)"
+                        self.objCurrentorder?.order[indexPath.row].selectedQuantity = "\(quantity)"
                     }
                 }else{
                     
@@ -178,15 +179,22 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             cell.increaseClick = {
                 var quantity = cell.lbltotalCount.text?.toInt() ?? 0
+                if self.objCurrentorder?.order[indexPath.row].quantity.toInt() ?? 0 > quantity {
+                
                 let Price = self.objCurrentorder?.order[indexPath.row].originalPrice.toInt() ?? 0
                 quantity = quantity + 1
                 let T = quantity * Price
                 cell.lblPrice.text = "\(T)"
                 cell.lbltotalCount.text = "\(quantity)"
                 self.objCurrentorder?.order[indexPath.row].price = "\(T)"
-                self.objCurrentorder?.order[indexPath.row].quantity = "\(quantity)"
+                self.objCurrentorder?.order[indexPath.row].selectedQuantity = "\(quantity)"
                 
                 self.calculateTotalAndSubtotal()
+                }
+                        else {
+//                           Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.objCurrentorder?.order[indexPath.row].name ?? "")","\(self.objCurrentorder?.order[indexPath.row].quantity ?? "")"]), vc: self)
+                            Utilities.showAlert(AppName, message: "MessageQtyNotAvailable".Localized(), vc: self)
+                       }
             }
             
             

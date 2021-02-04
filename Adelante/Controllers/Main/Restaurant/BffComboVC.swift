@@ -17,12 +17,13 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var selectedRestaurantId = ""
     var refreshList = UIRefreshControl()
     var arrVariants = [Variant]()
-    
+    var objCurrentOrder : currentOrder!
+    var arrSelectedVariants = [selectedVariants]()
     // MARK: - IBOutlets
     @IBOutlet weak var tblBFFCombo: UITableView!
     @IBOutlet weak var lblItem: bffComboLabel!
     @IBOutlet weak var lblViewCart: bffComboLabel!
-    var bffComboData = [bffCombo]()
+
     var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)]
     // MARK: - ViewController Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -38,12 +39,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.BffComboVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        bffComboData.append(bffCombo(name: "bffComboData_name1".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo_name2".Localized(), price: "", selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo_name3".Localized(), price: "", selected: false)], expanded: true))
-        bffComboData.append(bffCombo(name: "bffComboData_name2".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name2".Localized(), price: "", selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name3".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name4".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo2_name5".Localized(), price: "", selected: false)], expanded: true))
-        
-        bffComboData.append(bffCombo(name: "bffComboData_name3".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name2".Localized(), price: "", selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name3".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo3_name4".Localized(), price: "", selected: false)], expanded: true))
-        bffComboData.append(bffCombo(name: "bffComboData_name4".Localized(), subComboArray: [subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name1".Localized(), price: "", selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name2".Localized(), price: "bffComboData_subComboArray_subBFFCombo4_price1".Localized(), selected: true),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name3".Localized(), price: "bffComboData_subComboArray_subBFFCombo4_price2".Localized(), selected: false),subBFFCombo(name: "bffComboData_subComboArray_subBFFCombo4_name4".Localized(), price: "", selected: false)], expanded: true))
-        
+        objCurrentOrder = SingletonClass.sharedInstance.restCurrentOrder
         let footerView = UIView()
         footerView.backgroundColor = .white
         footerView.frame = CGRect.init(x: 0, y: 0, width: tblBFFCombo.frame.size.width, height: 31)
@@ -77,14 +73,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         }else{
             cell.selectButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
         }
-        
-//        cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
-//        if arrVariants[indexPath.section].option[indexPath.row]! {
-//            cell.selectButton.isSelected = true
-//        } else {
-//            cell.selectButton.isSelected = false
-//        }
-        
         cell.selectedBtn = {
             if selectOne == 0{
                 self.arrVariants[indexPath.section].option.forEach { $0.isSelected = false}
@@ -102,17 +90,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 }
             }
             self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
-//            for i in 0...self.arrVariants[indexPath.section].option.count
-//            {
-//                if i == self.arrVariants[indexPath.section].option.count {
-////                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = true
-//                    self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
-//                }
-//                else
-//                {
-////                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = false
-//                }
-//            }
         }
         cell.selectionStyle = .none
         return cell
@@ -204,25 +181,5 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }
-    }
-}
-class bffCombo {
-    var comboName : String?
-    var subCombo : [subBFFCombo]
-    var isExpanded : Bool?
-    init(name:String,subComboArray:[subBFFCombo],expanded:Bool) {
-        self.isExpanded = expanded
-        self.comboName = name
-        self.subCombo = subComboArray
-    }
-}
-class subBFFCombo {
-    var subComboName : String?
-    var subComboPrice : String?
-    var isSelected : Bool?
-    init(name:String,price:String,selected:Bool) {
-        self.subComboName = name
-        self.subComboPrice = price
-        self.isSelected = selected
     }
 }
