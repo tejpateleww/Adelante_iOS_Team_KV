@@ -8,8 +8,14 @@
 
 import UIKit
 import FormTextField
+
+protocol AddPaymentDelegate {
+    func refreshAddPaymentScreen()
+}
+
 class AddCardVC: BaseViewController,FormTextFieldDelegate {
     // MARK: - Properties
+    var delegatePayment : AddPaymentDelegate!
     var isCreditCardValid = Bool()
     var pickerView = UIPickerView()
     var aryMonth = [String]()
@@ -219,6 +225,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
             if(status)
             {
                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                self.delegatePayment.refreshAddPaymentScreen()
                 self.clearAllTextFieldsAndSetDefaults()
             }
             else

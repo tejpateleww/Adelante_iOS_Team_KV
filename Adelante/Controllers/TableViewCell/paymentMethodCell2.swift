@@ -14,6 +14,7 @@ class paymentMethodCell2: UITableViewCell {
     @IBOutlet weak var paymentMethodImageView: UIImageView!
     @IBOutlet weak var lblExpiresDate: addPaymentlable!
     @IBOutlet weak var lblcardDetails: addPaymentlable!
+    @IBOutlet weak var btnDelete: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

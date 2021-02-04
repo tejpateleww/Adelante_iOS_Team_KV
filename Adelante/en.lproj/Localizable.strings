@@ -275,3 +275,7 @@
 //Empty Messages
 "emptyMsg_Common" = "No Records Found.";
 "emptyMsg_Restaurant" = "No Restaurant Found";
+
+
+//Alert Message
+"alertMsg_DeletePaymentCard" = "Are you sure want to delete this card?";

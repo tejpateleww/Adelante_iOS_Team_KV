@@ -14,6 +14,7 @@ class paymentMethodCell1: UITableViewCell {
     @IBOutlet weak var lblwalletBalance: addPaymentlable!
     @IBOutlet weak var paymentImageView: UIImageView!
     @IBOutlet weak var selectPaymentMethodButton: UIButton!
+    @IBOutlet weak var btnDelete: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

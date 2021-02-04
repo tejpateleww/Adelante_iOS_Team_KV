@@ -1485,7 +1485,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="215"/>
+                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1531,10 +1531,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                <rect key="frame" x="0.0" y="166" width="378" height="49"/>
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="79" id="GZk-3S-lMA"/>
@@ -1550,7 +1550,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="48" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -5313,13 +5313,19 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isWallet" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6F-TF-QSg">
-                                                                    <rect key="frame" x="332" y="25.5" width="34" height="34"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="34" id="jOU-WF-XaN"/>
-                                                                    </constraints>
-                                                                    <state key="normal" image="ic_paymentSelected"/>
-                                                                </button>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ul9-1y-Oux">
+                                                                    <rect key="frame" x="308" y="30.5" width="58" height="24"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6F-TF-QSg">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                                            <state key="normal" image="ic_paymentSelected"/>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiu-fq-C1B">
+                                                                            <rect key="frame" x="34" y="0.0" width="24" height="24"/>
+                                                                            <state key="normal" image="trash"/>
+                                                                        </button>
+                                                                    </subviews>
+                                                                </stackView>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
@@ -5327,14 +5333,13 @@
                                                                 <constraint firstItem="qNX-WM-MiQ" firstAttribute="centerY" secondItem="5ca-R8-ZNB" secondAttribute="centerY" id="Cu1-GH-Xz3"/>
                                                                 <constraint firstAttribute="trailing" secondItem="8gN-eU-dN8" secondAttribute="trailing" id="JOC-PS-Snh"/>
                                                                 <constraint firstItem="8gN-eU-dN8" firstAttribute="leading" secondItem="qNX-WM-MiQ" secondAttribute="trailing" constant="28.600000000000001" id="NuL-qw-ikT"/>
-                                                                <constraint firstAttribute="trailing" secondItem="c6F-TF-QSg" secondAttribute="trailing" constant="16" id="ULE-5k-yvb"/>
                                                                 <constraint firstItem="8gN-eU-dN8" firstAttribute="top" secondItem="5ca-R8-ZNB" secondAttribute="top" constant="17" id="YF7-db-m0J"/>
                                                                 <constraint firstItem="fOe-RJ-RyA" firstAttribute="top" secondItem="8gN-eU-dN8" secondAttribute="bottom" constant="11" id="brg-GJ-bkQ"/>
-                                                                <constraint firstItem="c6F-TF-QSg" firstAttribute="centerY" secondItem="5ca-R8-ZNB" secondAttribute="centerY" id="igD-o3-m6i"/>
                                                                 <constraint firstAttribute="trailing" secondItem="fOe-RJ-RyA" secondAttribute="trailing" id="kod-ij-s3t"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ul9-1y-Oux" secondAttribute="trailing" constant="16" id="mPo-wq-3Z6"/>
                                                                 <constraint firstAttribute="bottom" secondItem="fOe-RJ-RyA" secondAttribute="bottom" constant="17" id="mga-Vr-RtH"/>
                                                                 <constraint firstItem="fOe-RJ-RyA" firstAttribute="leading" secondItem="8gN-eU-dN8" secondAttribute="leading" id="qy7-ok-ALW"/>
-                                                                <constraint firstItem="c6F-TF-QSg" firstAttribute="width" secondItem="qNX-WM-MiQ" secondAttribute="height" multiplier="1:1" id="rsT-9V-6Iz"/>
+                                                                <constraint firstItem="ul9-1y-Oux" firstAttribute="centerY" secondItem="5ca-R8-ZNB" secondAttribute="centerY" id="vw3-i8-4f5"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -5346,6 +5351,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="btnDelete" destination="eiu-fq-C1B" id="qRt-O2-k23"/>
                                                     <outlet property="lblWallet" destination="8gN-eU-dN8" id="3vD-72-N60"/>
                                                     <outlet property="lblwalletBalance" destination="fOe-RJ-RyA" id="Kke-Fn-snT"/>
                                                     <outlet property="paymentImageView" destination="qNX-WM-MiQ" id="5yG-PY-Gjh"/>
@@ -5371,7 +5377,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mi5-Jq-Sq9" customClass="addPaymentlable" customModule="Adelante" customModuleProvider="target">
-                                                                    <rect key="frame" x="84.5" y="17" width="42" height="20"/>
+                                                                    <rect key="frame" x="84.5" y="17" width="41.5" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="kTD-2u-j7l"/>
                                                                     </constraints>
@@ -5383,7 +5389,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh7-6B-lgL" customClass="addPaymentlable" customModule="Adelante" customModuleProvider="target">
-                                                                    <rect key="frame" x="84.5" y="48" width="42" height="20"/>
+                                                                    <rect key="frame" x="84.5" y="48" width="41.5" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="Zhs-pK-ylK"/>
                                                                     </constraints>
@@ -5394,21 +5400,26 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isExpires" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vp-hu-Q4V">
-                                                                    <rect key="frame" x="332" y="25.5" width="34" height="34"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="7Vp-hu-Q4V" secondAttribute="height" multiplier="1:1" id="bo8-Jm-xmX"/>
-                                                                    </constraints>
-                                                                    <state key="normal" image="ic_paymentSelected"/>
-                                                                </button>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SQN-jx-Ers">
+                                                                    <rect key="frame" x="308" y="30.5" width="58" height="24"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vp-hu-Q4V">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                                            <state key="normal" image="ic_paymentSelected"/>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpR-Ri-p2I">
+                                                                            <rect key="frame" x="34" y="0.0" width="24" height="24"/>
+                                                                            <state key="normal" image="trash"/>
+                                                                        </button>
+                                                                    </subviews>
+                                                                </stackView>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
+                                                                <constraint firstItem="SQN-jx-Ers" firstAttribute="centerY" secondItem="n9X-DA-swm" secondAttribute="centerY" id="3hh-S9-FnT"/>
                                                                 <constraint firstItem="9zr-2z-obl" firstAttribute="leading" secondItem="n9X-DA-swm" secondAttribute="leading" constant="22" id="6II-u1-Swf"/>
-                                                                <constraint firstItem="7Vp-hu-Q4V" firstAttribute="bottom" secondItem="9zr-2z-obl" secondAttribute="bottom" id="D4z-Rk-bIN"/>
                                                                 <constraint firstItem="hh7-6B-lgL" firstAttribute="leading" secondItem="mi5-Jq-Sq9" secondAttribute="leading" id="GIG-3s-RmC"/>
-                                                                <constraint firstItem="7Vp-hu-Q4V" firstAttribute="top" secondItem="9zr-2z-obl" secondAttribute="top" id="SXZ-ed-iml"/>
-                                                                <constraint firstAttribute="trailing" secondItem="7Vp-hu-Q4V" secondAttribute="trailing" constant="16" id="UDv-f9-BJ8"/>
+                                                                <constraint firstAttribute="trailing" secondItem="SQN-jx-Ers" secondAttribute="trailing" constant="16" id="R9h-ch-jSy"/>
                                                                 <constraint firstItem="9zr-2z-obl" firstAttribute="centerY" secondItem="n9X-DA-swm" secondAttribute="centerY" id="WIS-aD-N05"/>
                                                                 <constraint firstAttribute="bottom" secondItem="hh7-6B-lgL" secondAttribute="bottom" constant="17" id="X3x-5g-ahz"/>
                                                                 <constraint firstItem="hh7-6B-lgL" firstAttribute="top" secondItem="mi5-Jq-Sq9" secondAttribute="bottom" constant="11" id="gMO-Q0-nQa"/>
@@ -5425,6 +5436,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="btnDelete" destination="gpR-Ri-p2I" id="lyi-tl-5fa"/>
                                                     <outlet property="lblExpiresDate" destination="hh7-6B-lgL" id="ant-Zu-iIe"/>
                                                     <outlet property="lblcardDetails" destination="mi5-Jq-Sq9" id="mLf-Lj-RhP"/>
                                                     <outlet property="paymentMethodImageView" destination="9zr-2z-obl" id="EVu-nj-Snb"/>
@@ -7828,56 +7840,6 @@ avoid cancellations </string>
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="0t8-U3-ebv">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="2Ut-AC-9Qr">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="4rN-z1-ohE">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="G78-jH-dfh">
-            <size key="intrinsicContentSize" width="195" height="32"/>
-        </designable>
-        <designable name="IOt-oG-ldn">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="M00-EB-i9S">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="QPd-3g-SxC">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="Tme-wR-K6Z">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-        <designable name="cc0-dj-TGl">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="cpW-fr-cqC">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="lWD-a0-7KT">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="mJ2-zK-PS6">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="oP7-OM-AFy">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-        <designable name="pGH-j9-vWm">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="ypJ-aF-6Y5">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="zNM-X4-rQ4">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
         <image name="DetailsFood" width="161" height="158"/>
@@ -7930,6 +7892,7 @@ avoid cancellations </string>
         <image name="tabProfileUnselected" width="16.5" height="19.5"/>
         <image name="tabSearchSelected" width="19.5" height="19.5"/>
         <image name="tabSearchUnselected" width="19.5" height="19.5"/>
+        <image name="trash" width="24" height="24"/>
         <image name="user (4)" width="42" height="42"/>
         <image name="viewPassword" width="20" height="20"/>
         <systemColor name="labelColor">

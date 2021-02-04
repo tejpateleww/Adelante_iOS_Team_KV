@@ -81,6 +81,7 @@
 		34D603BE25A8923100C82D63 /* RestaurantDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D603BD25A8923100C82D63 /* RestaurantDetails.swift */; };
 		34EBD2A225C96FA600EC643A /* AddCardReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EBD2A125C96FA600EC643A /* AddCardReqModel.swift */; };
 		34EBD2A625C9728400EC643A /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EBD2A525C9728400EC643A /* MonthYearPickerView.swift */; };
+		34EE68E925CC15E300056D62 /* AddPaymentDeleteReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EE68E825CC15E300056D62 /* AddPaymentDeleteReqModel.swift */; };
 		4BD05A891D199EA6A88DAFB6 /* Pods_Adelante.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5F2D505CEAA7CF6129117F /* Pods_Adelante.framework */; };
 		8105FDA92574C9A2008D36D6 /* ProfileUpdateReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105FDA72574C9A2008D36D6 /* ProfileUpdateReqModel.swift */; };
 		8105FDAA2574C9A2008D36D6 /* RegisterReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105FDA82574C9A2008D36D6 /* RegisterReqModel.swift */; };
@@ -278,6 +279,7 @@
 		34D603BD25A8923100C82D63 /* RestaurantDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetails.swift; sourceTree = "<group>"; };
 		34EBD2A125C96FA600EC643A /* AddCardReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardReqModel.swift; sourceTree = "<group>"; };
 		34EBD2A525C9728400EC643A /* MonthYearPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
+		34EE68E825CC15E300056D62 /* AddPaymentDeleteReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentDeleteReqModel.swift; sourceTree = "<group>"; };
 		4C5F2D505CEAA7CF6129117F /* Pods_Adelante.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adelante.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3EEF10A4484D80DEFA8759 /* Pods-Adelante.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adelante.debug.xcconfig"; path = "Target Support Files/Pods-Adelante/Pods-Adelante.debug.xcconfig"; sourceTree = "<group>"; };
 		64C68ADE241BBB2900B97B25 /* Adelante.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Adelante.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -850,6 +852,7 @@
 				3400019A25C7ED0400C584DE /* RestaurantVariantsReqModel.swift */,
 				34EBD2A125C96FA600EC643A /* AddCardReqModel.swift */,
 				342C545925CBB2E80098F573 /* AddPaymentReqModel.swift */,
+				34EE68E825CC15E300056D62 /* AddPaymentDeleteReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1176,6 +1179,7 @@
 				81CFFD872574C60D005AA86A /* customTextField.swift in Sources */,
 				3431E04A25931B70002F1435 /* MyOrdersCell.swift in Sources */,
 				81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */,
+				34EE68E925CC15E300056D62 /* AddPaymentDeleteReqModel.swift in Sources */,
 				3443D62225C11E62001CFAFE /* MenuItem.swift in Sources */,
 				340A4C7225A3291F00FB6061 /* Profile.swift in Sources */,
 				81CFFD7E2574C60D005AA86A /* String+Extensions.swift in Sources */,

@@ -25,7 +25,7 @@ class WebServiceSubClass
         WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
     }
     class func Settings( showHud : Bool = false ,completion: @escaping CompletionResponse ) {
-        WebService.shared.getMethod(api: .SettingsLink, parameterString: "", httpMethod: .get, showHud: false, completion: completion)
+        WebService.shared.getMethod(api: .SettingsLink, parameterString: "", httpMethod: .get, showHud: showHud, completion: completion)
     }
     //Change Password
     class func ChangePassword( changepassModel : ChangePasswordReqModel,showHud : Bool = false  ,completion: @escaping CompletionResponse ) {
@@ -40,7 +40,7 @@ class WebServiceSubClass
     //Update Profile
     class func UpdateProfileInfo( editProfileModel : EditProfileReqModel  ,img : UIImage,isRemoveImage: Bool ,showHud : Bool = false , completion: @escaping CompletionResponse ) {
         let  params : [String:String] = editProfileModel.generatPostParams() as! [String : String]
-        WebService.shared.postDataWithImage(api: .EditProfile, isRemoveimage: isRemoveImage, showHud: false, parameter: params, image: img, imageParamName: "profile_picture", completion: completion)
+        WebService.shared.postDataWithImage(api: .EditProfile, isRemoveimage: isRemoveImage, showHud: showHud, parameter: params, image: img, imageParamName: "profile_picture", completion: completion)
     }
     //Logout
     class func Logout( logoutModel : LogoutReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
@@ -49,7 +49,7 @@ class WebServiceSubClass
     }
     class func deshboard( DashboardModel : DashboardReqModel ,showHud : Bool = false, completion: @escaping CompletionResponse ) {
         let params : [String:String] = DashboardModel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .Dashboard, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .Dashboard, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     //Profile
     class func profile(strURL : String  ,showHud : Bool = false, completion: @escaping CompletionResponse ) {
@@ -58,43 +58,47 @@ class WebServiceSubClass
     //sorting
     class func sorting(showHud : Bool = false, completion: @escaping CompletionResponse ){
 //        WebService.shared.getMethod(url: URL.init(string: strURL)!, httpMethod: .get, completion: completion)
-        WebService.shared.getMethod(api: .Sorting, parameterString: "", httpMethod: .get, showHud: false, completion: completion)
+        WebService.shared.getMethod(api: .Sorting, parameterString: "", httpMethod: .get, showHud: showHud, completion: completion)
     }
     class func search( Searchmodel : SearchReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = Searchmodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .Search, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .Search, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func RestaurantFavorite( RestaurantFavoritemodel : RestaurantFavoriteReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = RestaurantFavoritemodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .FavoriteList, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .FavoriteList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func Favorite( Favoritemodel : FavoriteReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = Favoritemodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .favorite, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .favorite, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func RestaurantList( RestaurantListmodel : RestaurantListReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = RestaurantListmodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .RestaurantList, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .RestaurantList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func RestaurantDetails( RestaurantDetailsmodel : RestaurantDetailsReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = RestaurantDetailsmodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .RestaurantDetails, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .RestaurantDetails, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func RestaurantVariants( RestaurantVariantsmodel : RestaurantVariantsReqModel,showHud : Bool = false , completion : @escaping CompletionResponse ){
         let params : [String:String] = RestaurantVariantsmodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .RestaurantVariants, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .RestaurantVariants, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func Feedback( Feedbackmodel : FeedbackReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = Feedbackmodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .Feedback, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .Feedback, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func addCard( addcardsmodel : AddCardReqModel,showHud : Bool = false , completion : @escaping CompletionResponse ){
         let params : [String:String] = addcardsmodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .AddCard, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .AddCard, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     class func addPayment( addpaymentmodel : AddPaymentReqModel,showHud : Bool = false , completion : @escaping CompletionResponse ){
         let params : [String:String] = addpaymentmodel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .AddPayment, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .AddPayment, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
+    class func removePaymentList(removePaymentList : AddPaymentDeleteReqModel,showHud : Bool = false,completion : @escaping CompletionResponse){
+        let params : [String:String] = removePaymentList.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .RemovePaymentList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
 }
 

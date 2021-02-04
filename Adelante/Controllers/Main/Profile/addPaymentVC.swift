@@ -9,7 +9,9 @@
 import UIKit
 import SDWebImage
 
-class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource {
+class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource,AddPaymentDelegate {
+    
+    
     // MARK: - Properties
     var cardDetails : [String] = []
     var customTabBarController: CustomTabBarVC?
@@ -69,6 +71,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
 //                } else {
 //                    cell1.vWMain.layer.borderWidth = 0
 //                }
+                cell1.btnDelete.isHidden = true
                 cell1.selectPaymentMethodButton.isHidden = true
                 
                 cell = cell1
@@ -87,7 +90,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell2.lblcardDetails.text = arrCard[indexPath.row - 1].formatedCardNo
                 cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), arrCard[indexPath.row - 1].expDateMonthYear)
                 cell2.selectPaymentMethodButton.isHidden = true
-                
+                cell2.btnDelete.isHidden = false
+                cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
                 cell = cell2
             }
             cell.selectionStyle = .none
@@ -97,6 +101,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.paymentMethodImageView.image = UIImage(named: "ic_paypal")
             cell.lblcardDetails.text = "Paypal"
             cell.lblExpiresDate.text = "Default method"
+            cell.btnDelete.isHidden = true
+//            cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
             cell.selectPaymentMethodButton.isHidden = true
             cell.selectionStyle = .none
             return cell
@@ -170,13 +176,27 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPaymentMethods = indexPath.row
         tblPaymentMethod.reloadData()
-        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appGreenColor, viewController: self)
+//        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appGreenColor, viewController: self)
     }
     
     //MARK: -btnAction
     @IBAction func btnAddcardClick(_ sender: submitButton) {
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID)
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID) as! AddCardVC
+        controller.delegatePayment = self
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    @IBAction func btnDeleteCardClicked(_ sender: UIButton) {
+        let alertController = UIAlertController(title: AppName,
+                                                message: "alertMsg_DeletePaymentCard".Localized(),
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel".Localized(), style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Delete".Localized(), style: .default){ _ in
+            self.webServiceDeletePaymentCard(strCardId: self.arrCard[sender.tag].id)
+        })
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
     }
     // MARK: - Api Calls
     @objc func webserviceGetAddPayment(){
@@ -195,5 +215,22 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }
+    }
+    func refreshAddPaymentScreen() {
+        webserviceGetAddPayment()
+    }
+    func webServiceDeletePaymentCard(strCardId: String){
+        let deleteCardModel = AddPaymentDeleteReqModel()
+        deleteCardModel.card_id = strCardId
+        deleteCardModel.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.removePaymentList(removePaymentList: deleteCardModel, showHud: true, completion: { (json, status, error) in
+            // self.hideHUD()
+             if(status) {
+                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                 self.webserviceGetAddPayment()
+             } else {
+                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong!")
+             }
+         })
     }
 }
