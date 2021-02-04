@@ -173,7 +173,7 @@ class checkoutButton : UIButton {
     override func awakeFromNib() {
         if isChangeLocation {
             let yourAttributes: [NSAttributedString.Key: Any] = [
-                .font: CustomFont.NexaBold.returnFont(10),
+                .font: CustomFont.NexaBold.returnFont(14),
                 .foregroundColor: UIColor(hexString: "#E34A25"),
                 .underlineStyle: NSUnderlineStyle.single.rawValue]
             let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text)!,
@@ -185,7 +185,7 @@ class checkoutButton : UIButton {
             
         } else if isSeeMenu {
             let yourAttributes: [NSAttributedString.Key: Any] = [
-                .font: CustomFont.NexaBold.returnFont(12),
+                .font: CustomFont.NexaBold.returnFont(14),
                 .foregroundColor: UIColor(hexString: "#E34A25"),
                 .underlineStyle: NSUnderlineStyle.single.rawValue]
             let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text)!,

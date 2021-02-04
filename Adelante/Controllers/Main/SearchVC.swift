@@ -24,6 +24,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         tblSearch.delegate = self
         tblSearch.dataSource = self
         tblSearch.refreshControl = refreshList
+        txtSearch.backgroundImage = UIImage()
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         setUpLocalizedStrings()
         setup()
@@ -100,7 +101,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
 }
 extension SearchVC:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if lastSearchTxt.isEmpty {
+        if lastSearchTxt.isEmpty{
             lastSearchTxt = searchText
         }
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.makeNetworkCall), object: lastSearchTxt)
@@ -116,7 +117,9 @@ extension SearchVC:UISearchBarDelegate{
             arrSearchResult.removeAll()
             tblSearch.reloadData()
         }else{
-            webserviceSearchModel(strSearch: query)
+            if query.count > 2{
+                webserviceSearchModel(strSearch: query)
+            }
         }
     }
 }

@@ -24,6 +24,7 @@ let notifDeSelectFilterRestaurant = NSNotification.Name("deselectFilterOptionRes
 let notifRefreshDashboardList = NSNotification.Name("refreshDashboard")
 let notifRefreshRestaurantList = NSNotification.Name("refreshRestaurantList")
 let notifRefreshFavouriteList = NSNotification.Name("refreshFavouriteList")
+let notifRefreshRestaurantDetails = NSNotification.Name("refreshRestaurantDetails")
  
 enum DateFormatterString : String{
     case timeWithDate = "yyyy-MM-dd HH:mm:ss"
@@ -65,12 +66,18 @@ struct selectedOrderItems{
     var quantity : String = ""
     var price : String = ""
     var variants_id : [String] = []
+    var name : String = ""
+    var originalPrice : String = ""
+    var size : String = ""
     
-    init(restaurant_item_id:String,quantity:String,price:String,variants_id:[String]) {
+    init(restaurant_item_id:String,quantity:String,price:String,variants_id:[String],name:String,originalPrice:String,size:String) {
         self.restaurant_item_id = restaurant_item_id
         self.price = price
         self.quantity = quantity
         self.variants_id = variants_id
+        self.name = name
+        self.originalPrice = originalPrice
+        self.size = size
     }
 }
 
@@ -84,8 +91,9 @@ struct currentOrder {
     var tax : String = ""
     var total : String = ""
     var order : [selectedOrderItems] = []
+    var currentRestaurantDetail : Restaurantinfo
     
-    init(userId:String,restautaurantId:String,rating:String,comment:String,subTotal:String,serviceFee:String,tax:String,total:String,order:[selectedOrderItems]){
+    init(userId:String,restautaurantId:String,rating:String,comment:String,subTotal:String,serviceFee:String,tax:String,total:String,order:[selectedOrderItems],currentRestaurantDetail:Restaurantinfo){
         self.user_id = userId
         self.restaurant_id = restautaurantId
         self.rating = rating
@@ -95,5 +103,6 @@ struct currentOrder {
         self.tax = tax
         self.total = total
         self.order = order
+        self.currentRestaurantDetail = currentRestaurantDetail
     }
 }

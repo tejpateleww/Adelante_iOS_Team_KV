@@ -88,6 +88,10 @@ class WebServiceSubClass
         let  params : [String:String] = Feedbackmodel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Feedback, httpMethod: .post, showHud: false, parameters: params, completion: completion)
     }
+    class func addCard( addcardsmodel : AddCardReqModel,showHud : Bool = false , completion : @escaping CompletionResponse ){
+        let params : [String:String] = addcardsmodel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .AddCard, httpMethod: .post, showHud: false, parameters: params, completion: completion)
+    }
 }
 
 

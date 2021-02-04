@@ -251,6 +251,8 @@ extension RestaurantListVC:UISearchBarDelegate{
     }
     @objc private func makeNetworkCall(_ query: String)
     {
-        webserviceGetRestaurantList(strSearch: query, strFilter: "")
+        if query.count > 2{
+            webserviceGetRestaurantList(strSearch: query, strFilter: "")
+        }
     }
 }

@@ -16,4 +16,5 @@ target 'Adelante' do
     pod 'FormTextField'
     pod 'MKProgress', '~> 1.1.0'
     pod 'GooglePlaces'
+    pod 'FormTextField'
 end

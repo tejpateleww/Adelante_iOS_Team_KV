@@ -45,7 +45,10 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     // MARK: - IBActions
-
+//    @IBAction func btnRepeatNew(_ sender: Any){
+//        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
+//        self.navigationController?.pushViewController(controller, animated: true)
+//    }
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
         selectedSegmentTag = sender.index
         self.tblOrders.reloadData()
@@ -83,10 +86,10 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             cell.vwRepeatOrder.isHidden = true
         }
         cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
-       // cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeatNew), for: .touchUpInside)
+//        cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeatNew), for: .touchUpInside)
         cell.Repeat = {
-//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
-//            self.navigationController?.pushViewController(controller, animated: true)
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
+            self.navigationController?.pushViewController(controller, animated: true)
         }
         cell.cancel = {
             

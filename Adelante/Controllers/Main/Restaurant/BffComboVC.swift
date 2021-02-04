@@ -23,7 +23,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var lblItem: bffComboLabel!
     @IBOutlet weak var lblViewCart: bffComboLabel!
     var bffComboData = [bffCombo]()
-    
+    var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)]
     // MARK: - ViewController Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()

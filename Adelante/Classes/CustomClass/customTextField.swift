@@ -147,3 +147,34 @@ class floatTextField: SkyFloatingLabelTextField {
         }
     }
 }
+class EditProfileTextField: SkyFloatingLabelTextField {
+    @IBInspectable var isEditProfile:Bool = false
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+//        self.lineColor = colors.forgotpassGreyColor.value
+//        self.titleColor = colors.textFieldColor.value
+//
+//        self.selectedTitleColor = colors.textFieldColor.value
+//        self.selectedLineColor = colors.textFieldColor.value
+//
+//        self.textColor = colors.black.value
+//        self.titleFormatter = { $0 }
+        self.titleColor = colors.black.value
+        self.lineHeight = 0.0
+        self.selectedLineHeight = 0.0
+        self.selectedTitleColor = colors.black.value
+        self.lineColor = colors.forgotpassGreyColor.value
+        self.selectedLineColor = colors.forgotpassGreyColor.value
+        self.textColor = colors.textFieldColor.value
+        self.titleFormatter = { $0 }
+        
+        self.titleFont = CustomFont.NexaRegular.returnFont(12)
+        self.font = CustomFont.NexaRegular.returnFont(16)
+        
+        if isEditProfile {
+            self.titleFont = CustomFont.NexaBold.returnFont(18)
+            self.font = CustomFont.NexaRegular.returnFont(16)
+        }
+    }
+}

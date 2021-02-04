@@ -186,6 +186,12 @@
 "AddCardVC_txtCvv" = "Cvv Code";
 "AddCardVC_lblDebitcardDetail" = "Debit cards are accepted at some locations and for some categories.";
 "AddCardVC_btnSave" = "Save";
+"paymentMethods_validation_cardHolderName" = "Please enter card holder name.";
+"paymentMethods_validation_emptycardNo" = "Please enter card number.";
+"paymentMethods_validation_invalidCardNo" = "Please enter valid card number.";
+"paymentMethods_validation_expirtDt" = "Please enter expiry date.";
+"paymentMethods_validation_cvv" = "Please enter cvv.";
+"paymentMethods_validation_undefinedCardType" = "Undefined card";
 
 //HomeVC
 "HomeVC_lblMylocation" = "My Location";
@@ -266,4 +272,4 @@
  
 //Empty Messages
 "emptyMsg_Common" = "No Records Found.";
-"emptyMsg_Restaurant" = "No Restauraurants Found";
+"emptyMsg_Restaurant" = "No Restaurant Found";

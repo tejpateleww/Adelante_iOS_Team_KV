@@ -37,6 +37,9 @@ PODS:
   - FormTextField (3.0.0)
   - GoogleDataTransport (7.3.0):
     - nanopb (~> 1.30906.0)
+  - GoogleMaps/Base (4.1.0)
+  - GooglePlaces (4.1.0):
+    - GoogleMaps/Base (= 4.1.0)
   - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -76,6 +79,7 @@ DEPENDENCIES:
   - Cosmos
   - Firebase/Messaging
   - FormTextField
+  - GooglePlaces
   - GrowingTextView (= 0.7.2)
   - IQKeyboardManagerSwift (= 6.3.0)
   - MKProgress (~> 1.1.0)
@@ -96,6 +100,8 @@ SPEC REPOS:
     - FirebaseMessaging
     - FormTextField
     - GoogleDataTransport
+    - GoogleMaps
+    - GooglePlaces
     - GoogleUtilities
     - GrowingTextView
     - IQKeyboardManagerSwift
@@ -119,6 +125,8 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 82d75b3770a78bbce470769a6980429608b4c407
   FormTextField: fd5dc441ad40ba12d08ef66aeb0453ee9bf55e6d
   GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
+  GoogleMaps: 008e2c80e38605b56b560e8deb73d4194ff30bef
+  GooglePlaces: a058b776259c13e1323c9ff135549cb1b13ad8e7
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GrowingTextView: 876bf42005b5e4a4fd740597db12caaf41f0fe6c
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
@@ -130,6 +138,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 7eaee59b976378cacac3771ba435e1cd3dd5753e
+PODFILE CHECKSUM: 76aaa753da845667b87628da2f9c54fc199ca5bf
 
 COCOAPODS: 1.10.0

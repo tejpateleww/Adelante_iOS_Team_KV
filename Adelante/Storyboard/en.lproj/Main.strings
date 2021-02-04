@@ -312,7 +312,7 @@
 "bqS-tq-tSZ.text" = "View Cart";
 
 /* Class = "UILabel"; text = "Chicken Burger"; ObjectID = "cE9-zM-f6m"; */
-"cE9-zM-f6m.text" = "Chicken Burger";
+//"cE9-zM-f6m.text" = "Chicken Burger";
 
 /* Class = "UILabel"; text = "2.5 miles"; ObjectID = "cMB-Yr-Kpi"; */
 "cMB-Yr-Kpi.text" = "2.5 miles";
@@ -375,7 +375,7 @@
 "g31-CE-GWs.text" = "$7";
 
 /* Class = "UILabel"; text = "Chicken Burger"; ObjectID = "g9C-Mq-hVt"; */
-"g9C-Mq-hVt.text" = "Chicken Burger";
+//"g9C-Mq-hVt.text" = "Chicken Burger";
 
 /* Class = "UIButton"; normalTitle = "View Store Policy"; ObjectID = "gB5-SD-PGD"; */
 "gB5-SD-PGD.normalTitle" = "View Store Policy";
@@ -498,7 +498,7 @@
 "qqz-NS-JK1.text" = "9 am To 9 pm";
 
 /* Class = "UILabel"; text = "Chicken Burger"; ObjectID = "rPU-09-8do"; */
-"rPU-09-8do.text" = "Chicken Burger";
+//"rPU-09-8do.text" = "Chicken Burger";
 
 /* Class = "UITextField"; text = "**** - **** -  **** - **85"; ObjectID = "rWw-Xa-v9T"; */
 "rWw-Xa-v9T.text" = "**** - **** -  **** - **85";

@@ -7,19 +7,31 @@
 //
 
 import UIKit
-
-class AddCardVC: BaseViewController {
+import FormTextField
+class AddCardVC: BaseViewController,FormTextFieldDelegate {
     // MARK: - Properties
     var strSelectedDate = ""
+    let monthPicker = MonthYearPickerView()
+    var isCreditCardValid = Bool()
+    var selectedCardType = ""
+    var cardTypeLabel = String()
+    var validation = Validation()
+    var pickerView = UIPickerView()
+    var aryMonth = [String]()
+    var aryYear = [String]()
+    var strMonth = ""
+    var strYear = ""
+    var inputValidator = InputValidator()
+    var creditCardValidator: CreditCardValidator!
     // MARK: - IBOutlets
     @IBOutlet weak var lblName: addCardLabel!
     @IBOutlet weak var txtName: addCarddetailsTextField!
     @IBOutlet weak var lblCardNumber: addCardLabel!
-    @IBOutlet weak var txtCardNumber: addCarddetailsTextField!
+    @IBOutlet weak var txtCardNumber: FormTextField!
     @IBOutlet weak var lblExpires: addCardLabel!
-    @IBOutlet weak var txtDate: addCarddetailsTextField!
+    @IBOutlet weak var txtDate: FormTextField!
     @IBOutlet weak var lblCvv: addCardLabel!
-    @IBOutlet weak var txtCvv: addCarddetailsTextField!
+    @IBOutlet weak var txtCvv: FormTextField!
     @IBOutlet weak var lblDebitcardDetail: addCardLabel!
     @IBOutlet weak var btnSave: submitButton!
     @IBOutlet weak var Dtpicker: UIDatePicker!
@@ -30,6 +42,13 @@ class AddCardVC: BaseViewController {
         setUpLocalizedStrings()
         setValue()
         addNavBarImage(isLeft: true, isRight: true)
+        txtDate.delegate = self
+        pickerView.delegate = self
+        pickerSetup()
+        cardNum()
+        SetValidation()
+        creditCardValidator = CreditCardValidator()
+//        txtCardNumber.enabledTextColor = UIColor.red
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.AddCardVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         // Do any additional setup after loading the view.
     }
@@ -37,11 +56,23 @@ class AddCardVC: BaseViewController {
     // MARK: - Other Methods
     
     // MARK: - IBActions
-  @IBAction func placeOrderBtn(_ sender: submitButton) {
-    self.navigationController?.popViewController(animated: true)
-//             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID)
-//             self.navigationController?.pushViewController(controller, animated: true)
-         }
+    @IBAction func placeOrderBtn(_ sender: submitButton) {
+        self.navigationController?.popViewController(animated: true)
+        //             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID)
+        //             self.navigationController?.pushViewController(controller, animated: true)
+    }
+    @IBAction func txtCardNumberEditingChange(_ sender: UITextField) {
+        if let number = sender.text {
+            if number.isEmpty {
+                isCreditCardValid = false
+                self.txtCardNumber.textColor = UIColor(hexString: "#222B45")
+            } else {
+                validateCardNumber(number: number)
+                detectCardNumberType(number: number)
+            }
+        }
+    }
+    
     func setUpLocalizedStrings(){
         lblName.text = "AddCardVC_lblName".Localized()
         txtName.placeholder = "AddCardVC_txtName".Localized()
@@ -54,16 +85,19 @@ class AddCardVC: BaseViewController {
         lblDebitcardDetail.text = "AddCardVC_lblDebitcardDetail".Localized()
         btnSave.setTitle("AddCardVC_btnSave".Localized(), for: .normal)
     }
+    func pickerSetup() {
+    let calendar = Calendar.current
+    let currentYear = calendar.component(.year, from: Date())
+    aryYear = (currentYear...(currentYear + 15)).map { String($0) }
+    aryMonth = ["01","02","03","04","05","06","07","08","09","10","11","12"]
+
+    }
     func setValue(){
-        setUpDatePicker()
-        txtDate.inputView = Dtpicker
-        let doneButton = UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(self.btnDoneDatePickerClicked(_:)))
+        //        setUpDatePicker()
+        txtDate.inputView = pickerView
+        //        let doneButton = UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(self.btnDoneDatePickerClicked(_:)))
         let toolBar = UIToolbar.init(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 44))
-        toolBar.setItems([UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil), doneButton], animated: true)
-        txtDate.inputAccessoryView = toolBar
-        if #available(iOS 14, *) {
-            Dtpicker.preferredDatePickerStyle = .wheels
-        }
+        //        toolBar.setItems([UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil), doneButton], animated: true)
     }
     func setUpDatePicker() {
         if "\(userDefault.value(forKey: UserDefaultsKey.selLanguage.rawValue) ?? "")" == "ar" {
@@ -74,16 +108,328 @@ class AddCardVC: BaseViewController {
         Dtpicker.datePickerMode = .date
         Dtpicker.date = Date()
     }
-    //MARK: - IBActions
-    @IBAction func btnDoneDatePickerClicked(_ sender: UIButton) {
-        let dt = Dtpicker.date
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        let resultString = inputFormatter.string(from: dt)
-        txtDate.text = resultString
-        strSelectedDate = resultString
-        self.txtDate.resignFirstResponder()
-//        vwDtPicker.isHidden = true
+    func clearAllTextFieldsAndSetDefaults () {
+        self.txtName.text = ""
+        self.txtCardNumber.text = ""
+        self.txtDate.text = ""
+        self.txtCvv.text = ""
+        self.selectedCardType = ""
+        isCreditCardValid = false
+        //        self.cardTypeLabel = ""
+    }
+    
+    //MARK: - Validation
+    func isValidatePaymentDetail() -> (Bool,String) {
+        var isValidate:Bool = true
+        var ValidatorMessage:String = ""
+        let holder = txtName.validatedText(validationType: ValidatorType.username(field: "card holder name") )//ValidatorType.requiredField(field: "first name"))
+        
+        if (!holder.0) {
+            isValidate = false
+            ValidatorMessage = holder.1
+            
+        }else if (txtCardNumber.text!.isEmptyOrWhitespace()) {
+            isValidate = false
+            ValidatorMessage = "Please enter card number"
+            
+        }else if !isCreditCardValid {
+            isValidate = false
+            ValidatorMessage = "Your card number is invalid"
+        }
+        // else if txtCardNumber.text?.count != 19 {
+        // isValidate = false
+        // ValidatorMessage = "Please enter valid card number."
+        // }
+        else if txtDate.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).count == 0 {
+            isValidate = false
+            ValidatorMessage = "Please enter expiry date"
+            
+        } else if txtCvv.text!.isEmptyOrWhitespace() {
+            isValidate = false
+            ValidatorMessage = "Please enter cvv"
+        }
+        
+        return (isValidate,ValidatorMessage)
+    }
+    
+    func detectCardNumberType(number: String) {
+        if let type = creditCardValidator.type(from: number) {
+            isCreditCardValid = true
+            self.cardTypeLabel = type.name.lowercased()
+            print(type.name.lowercased())
+            
+            self.txtCardNumber.textColor = UIColor(hexString: "#222B45")
+            self.CvvValidation()
+        } else {
+            isCreditCardValid = false
+            self.cardTypeLabel = "Undefined"
+        }
+    }
+    func validateCardNumber(number: String) {
+        if creditCardValidator.validate(string: number) {
+            isCreditCardValid = true
+        } else {
+            isCreditCardValid = false
+        }
+    }
+    func SetValidation () {
+        //card number
+        txtCardNumber.inputType = .integer
+        txtCardNumber.formatter = CardNumberFormatter()
+        validation.maximumLength = 19
+        validation.minimumLength = 14
+        let characterSet = NSMutableCharacterSet.decimalDigit()
+        characterSet.addCharacters(in: " ")
+        validation.characterSet = characterSet as CharacterSet
+        inputValidator = InputValidator(validation: validation)
+        txtCardNumber.inputValidator = inputValidator
+        validation.minimumLength = 1
+        self.CvvValidation()
+    }
+    
+    func CvvValidation() {
+        
+        txtCvv.inputType = .integer
+        
+        self.validation.maximumLength = 3
+        self.validation.minimumLength = 3
+        
+        validation.characterSet = NSCharacterSet.decimalDigits
+        let inputValidator = InputValidator(validation: validation)
+        txtCvv.inputValidator = inputValidator
+    }
+    func cardNum() {
+        txtCardNumber.inputType = .integer
+        txtCardNumber.textFieldDelegate = self
+        txtCardNumber.formatter = CardNumberFormatter()
+        txtCardNumber.leftMargin = 0
+        txtCardNumber.layer.cornerRadius = 5
+        validation.maximumLength = 19
+        validation.minimumLength = 14
+        let characterSet = NSMutableCharacterSet.decimalDigit()
+        characterSet.addCharacters(in: " ")
+        validation.characterSet = characterSet as CharacterSet
+        // inputValidator = InputValidator(validation: validation)
+        // txtCardNumber.inputValidator = inputValidator
+    }
+    @IBAction func btnAddCardClicked(_ sender: Any) {
+        if isValidatePaymentDetail().0 {
+//            if self.selectedCardType == "" {
+//                Utilities.showAlert(AppName, message: "paymentMethods_validation_undefinedCardType".Localized(), vc: self)
+//            } else {
+                self.webserviceForAddCard()
+//            }
+        } else {
+            Utilities.showAlert(AppName, message: isValidatePaymentDetail().1, vc: self)
+        }
     }
     // MARK: - Api Calls
+    func webserviceForAddCard(){
+        let addcard = AddCardReqModel()
+        addcard.card_holder_name = txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        addcard.card_num = txtCardNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//        if let txtnum = txtCardNumber.text?.filter({ !" \n\t\r".contains($0) }){
+//            addcard.card_num = txtnum
+//        }
+        addcard.exp_date_month_year = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        addcard.cvv = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        addcard.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.addCard(addcardsmodel: addcard, showHud: true, completion: { (json, status, response) in
+            if(status)
+            {
+                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                self.clearAllTextFieldsAndSetDefaults()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "MessageTitle".Localized())
+            }
+        })
+    }
+}
+public class CreditCardValidator {
+    
+    public lazy var types: [CreditCardValidationType] = {
+        var types = [CreditCardValidationType]()
+        for object in CreditCardValidator.types {
+            types.append(CreditCardValidationType(dict: object))
+        }
+        return types
+    }()
+    
+    public init() { }
+    
+    public func type(from string: String) -> CreditCardValidationType? {
+        for type in types {
+            let predicate = NSPredicate(format: "SELF MATCHES %@", type.regex)
+            let numbersString = self.onlyNumbers(string: string)
+            if predicate.evaluate(with: numbersString) {
+                return type
+            }
+        }
+        return nil
+    }
+    
+    /**
+     Validate card number
+     
+     - parameter string: card number string
+     
+     - returns: true or false
+     */
+    public func validate(string: String) -> Bool {
+        let numbers = self.onlyNumbers(string: string)
+        if numbers.count < 9 {
+            return false
+        }
+        
+        var reversedString = ""
+        let range: Range<String.Index> = numbers.startIndex..<numbers.endIndex
+        
+        numbers.enumerateSubstrings(in: range, options: [.reverse, .byComposedCharacterSequences]) { (substring, substringRange, enclosingRange, stop) -> () in
+            reversedString += substring!
+        }
+        
+        var oddSum = 0, evenSum = 0
+        let reversedArray = reversedString
+        
+        for (i, s) in reversedArray.enumerated() {
+            
+            let digit = Int(String(s))!
+            
+            if i % 2 == 0 {
+                evenSum += digit
+            } else {
+                oddSum += digit / 5 + (2 * digit) % 10
+            }
+        }
+        return (oddSum + evenSum) % 10 == 0
+    }
+    public func validate(string: String, forType type: CreditCardValidationType) -> Bool {
+        return self.type(from: string) == type
+    }
+    
+    public func onlyNumbers(string: String) -> String {
+        let set = CharacterSet.decimalDigits.inverted
+        let numbers = string.components(separatedBy: set)
+        return numbers.joined(separator: "")
+    }
+    
+    // MARK: - Loading data
+    
+    private static let types = [
+        [
+            "name": "Amex",
+            "regex": "^3[47][0-9]{5,}$"
+        ], [
+            "name": "Visa",
+            "regex": "^4\\d{0,}$"
+        ], [
+            "name": "MasterCard",
+            "regex": "^5[1-5]\\d{0,14}$"
+        ], [
+            "name": "Maestro",
+            "regex": "^(?:5[0678]\\d\\d|6304|6390|67\\d\\d)\\d{8,15}$"
+        ], [
+            "name": "Diners Club",
+            "regex": "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$"
+        ], [
+            "name": "JCB",
+            "regex": "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$"
+        ], [
+            "name": "Discover",
+            "regex": "^6(?:011|5[0-9]{2})[0-9]{3,}$"
+        ], [
+            "name": "UnionPay",
+            "regex": "^62[0-5]\\d{13,16}$"
+        ], [
+            "name": "Mir",
+            "regex": "^22[0-9]{1,14}$"
+        ]
+    ]
+    
+}
+
+public func ==(lhs: CreditCardValidationType, rhs: CreditCardValidationType) -> Bool {
+    return lhs.name == rhs.name
+}
+
+public struct CreditCardValidationType: Equatable {
+    
+    public var name: String
+    
+    public var regex: String
+    
+    public init(dict: [String: Any]) {
+        if let name = dict["name"] as? String {
+            self.name = name
+        } else {
+            self.name = ""
+        }
+        
+        if let regex = dict["regex"] as? String {
+            self.regex = regex
+        } else {
+            self.regex = ""
+        }
+    }
+    
+}
+//extension AddCardVC : UITextFieldDelegate {
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if(textField == txtDate) {
+//            var strMonth = "\(monthPicker.month)" as String
+//            if(monthPicker.month <= 9)
+//            {
+//                strMonth = "0\(monthPicker.month)"
+//            }
+//
+//            txtDate.text = "\(strMonth)/\(monthPicker.year)"
+//        }
+//    }
+//}
+extension AddCardVC : UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+
+        if textField == txtDate {
+            txtDate.inputView = pickerView
+            // return false
+        }
+        return true
+    }
+}
+extension AddCardVC : UIPickerViewDelegate,UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return aryMonth.count
+        }
+        else {
+            return aryYear.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return aryMonth[row]
+        }
+        else {
+            return aryYear[row]
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            strMonth = aryMonth[row]
+        }else {
+            strYear = aryYear[row]
+            
+        }
+        if strYear.isEmpty {
+            strYear = aryYear[0]
+        }
+        txtDate.text = "\(strMonth) / \(strYear)"
+    }
 }

@@ -126,7 +126,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         if selectedSegmentTag == 1 && isSharedOrder{
             cell.lblSharedFrom.isHidden = false
         } else {
-            cell.lblSharedFrom.isHidden = true
+            if indexPath.row == 1{
+                cell.lblSharedFrom.isHidden = true
+            }
         }
         cell.selectionStyle = .none
         return cell
