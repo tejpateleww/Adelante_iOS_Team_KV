@@ -19,12 +19,12 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var arrVariants = [Variant]()
     var objCurrentOrder : currentOrder!
     var arrSelectedVariants = [selectedVariants]()
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblBFFCombo: UITableView!
     @IBOutlet weak var lblItem: bffComboLabel!
     @IBOutlet weak var lblViewCart: bffComboLabel!
-
-    var arrSections = [structSections(strTitle:"RestaurantDetailsVC_arrSection".Localized(),isExpanded:false, rowCount: 3), structSections(strTitle:"RestaurantDetailsVC_arrSection1".Localized(),isExpanded:true, rowCount: 5), structSections(strTitle:"RestaurantDetailsVC_arrSection2".Localized(),isExpanded:false, rowCount: 2)]
+    
     // MARK: - ViewController Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
@@ -53,6 +53,26 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         lblItem.text = "BffComboVC_lblItem".Localized()
         lblViewCart.text = "BffComboVC_lblViewCart".Localized()
     }
+    
+    func checkandUpdateVariants() {
+        self.arrSelectedVariants.removeAll()
+        if self.arrVariants.count > 0 {
+            for i in 0..<self.arrVariants.count {
+                for j in 0..<self.arrVariants[i].option.count {
+                    if self.arrVariants[i].option[j].isSelected {
+                        let dicTemp = selectedVariants.init(variant_id: self.arrVariants[i].option[j].variantId, variant_option_id: self.arrVariants[i].option[j].id, variant_name: self.arrVariants[i].option[j].variantName, variant_SubName: self.arrVariants[i].option[j].name, variant_price: self.arrVariants[i].option[j].price, isMultiSelect: self.arrVariants[i].option[j].menuChoice == "0" ? false : true)
+                        self.arrSelectedVariants.append(dicTemp)
+                    }
+                }
+            }
+        }
+        print("\(self.arrSelectedVariants.count)")
+        if self.arrSelectedVariants.count > 0 {
+            for i in 0..<arrSelectedVariants.count {
+                print("\(self.arrSelectedVariants[i].variant_SubName)")
+            }
+        }
+    }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (arrVariants[section].isExpanded == true) ? arrVariants[section].option.count : 0
@@ -64,30 +84,33 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         cell.lblBffComboPrice.isHidden = (arrVariants[indexPath.section].option[indexPath.row].price != "") ? false : true
         cell.lblBffComboPrice.text = arrVariants[indexPath.section].option[indexPath.row].price
         let selectOne = arrVariants[indexPath.section].option[indexPath.row].menuChoice.toInt()
-        if arrVariants[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0{
+        if arrVariants[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 {
             cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
-        }else if arrVariants[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0{
+        } else if arrVariants[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0 {
             cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
-        }else if arrVariants[indexPath.section].option[indexPath.row].isSelected == true && selectOne != 0{
+        } else if arrVariants[indexPath.section].option[indexPath.row].isSelected == true && selectOne != 0 {
             cell.selectButton.setImage(UIImage(named: "ic_paymentSelected"), for: .normal)
-        }else{
+        } else {
             cell.selectButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
         }
         cell.selectedBtn = {
-            if selectOne == 0{
-                self.arrVariants[indexPath.section].option.forEach { $0.isSelected = false}
-                    if self.arrVariants[indexPath.section].option[indexPath.row].isSelected == true{
-                        self.arrVariants[indexPath.section].option[indexPath.row].isSelected = false
-                    } else{
-                        self.arrVariants[indexPath.section].option[indexPath.row].isSelected = true
-                    }
-                  
-            }else{
-                if self.arrVariants[indexPath.section].option[indexPath.row].isSelected == true{
+            if selectOne == 0 {
+                self.arrVariants[indexPath.section].option.forEach { $0.isSelected = false }
+                if self.arrVariants[indexPath.section].option[indexPath.row].isSelected == true {
                     self.arrVariants[indexPath.section].option[indexPath.row].isSelected = false
-                } else{
+                } else {
                     self.arrVariants[indexPath.section].option[indexPath.row].isSelected = true
                 }
+//                let dicTemp = selectedVariants(variant_id: self.arrVariants[indexPath.section].option[indexPath.row].variantId, variant_option_id: self.arrVariants[indexPath.section].option[indexPath.row].id, variant_name: self.arrVariants[indexPath.section].option[indexPath.row].variantName, variant_SubName: self.arrVariants[indexPath.section].option[indexPath.row].name, variant_price: self.arrVariants[indexPath.section].option[indexPath.row].price, isMultiSelect: false)
+                self.checkandUpdateVariants()
+            } else {
+                if self.arrVariants[indexPath.section].option[indexPath.row].isSelected == true {
+                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = false
+                } else {
+                    self.arrVariants[indexPath.section].option[indexPath.row].isSelected = true
+                }
+//                let dicTemp = selectedVariants(variant_id: self.arrVariants[indexPath.section].option[indexPath.row].variantId, variant_option_id: self.arrVariants[indexPath.section].option[indexPath.row].id, variant_name: self.arrVariants[indexPath.section].option[indexPath.row].variantName, variant_SubName: self.arrVariants[indexPath.section].option[indexPath.row].name, variant_price: self.arrVariants[indexPath.section].option[indexPath.row].price, isMultiSelect: true)
+                self.checkandUpdateVariants()
             }
             self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
         }

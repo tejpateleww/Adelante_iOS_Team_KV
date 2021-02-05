@@ -14,9 +14,13 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var customTabBarController: CustomTabBarVC?
     var selectedSegmentTag = 0
     var isSharedOrder = false
+    var orderId = ""
+    var objOrderDetailsData : MainOrder!
+    var arrItem = [Item]()
     
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
+    @IBOutlet weak var lblId: orderDetailsLabel!
     @IBOutlet weak var lblNoOfItems: UILabel!
     @IBOutlet weak var vwBarCode: UIView!
     @IBOutlet weak var imgBarCode: UIImageView!
@@ -45,6 +49,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocalizedStrings()
+        webserviceOrderDetails()
+        tblItems.delegate = self
+        tblItems.dataSource = self
+        tblItems.reloadData()
+//        setData()
         setup()
         
     }
@@ -64,7 +73,21 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
         setUpOrderDetails()
     }
-    
+    func setData(){
+        if objOrderDetailsData != nil{
+            lblId.text = objOrderDetailsData.orderId
+            lblNoOfItems.text = objOrderDetailsData.itemQuantity + "items"
+            lblRestName.text = objOrderDetailsData.restaurantName
+            lblTotal.text = "$" + objOrderDetailsData.total
+            lblAddress.text = objOrderDetailsData.address
+            lblTaxes.text = "$" + objOrderDetailsData.tax
+            lblServiceFee.text = "$" + objOrderDetailsData.serviceFee
+            lblSubTotal.text = "$" + objOrderDetailsData.sub_total
+            lblLocation.text = objOrderDetailsData.street
+        }
+        tblItems.reloadData()
+        self.heightTblItems.constant = tblItems.contentSize.height
+    }
     func setUpOrderDetails() {
         if selectedSegmentTag == 0 {
             self.vwCancel.isHidden = true
@@ -118,18 +141,25 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - UITableView Delegates & Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return arrItem.count
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
-        if selectedSegmentTag == 1 && isSharedOrder{
-            cell.lblSharedFrom.isHidden = false
-        } else {
-            if indexPath.row == 1{
-                cell.lblSharedFrom.isHidden = true
-            }
-        }
+        cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
+        cell.lblDateTime.text = arrItem[indexPath.row].date
+        cell.lblSharedFrom.isHidden = true
+//        if selectedSegmentTag == 1 && isSharedOrder{
+//            cell.lblSharedFrom.isHidden = false
+//            cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
+//            cell.lblDateTime.text = arrItem[indexPath.row].date
+//        } else {
+//            if indexPath.row == 1{
+//
+//                cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
+//                cell.lblDateTime.text = arrItem[indexPath.row].date
+//            }
+//        }
         cell.selectionStyle = .none
         return cell
     }
@@ -158,5 +188,23 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         btnShareOrder.setTitle("MyOrderDetailsVC_btnShareOrder".Localized(), for: .normal)
     }
     // MARK: - Api Calls
-    
+    func webserviceOrderDetails(){
+        let orderDetails = MyorderDetailsReqModel()
+        orderDetails.order_id = orderId
+        orderDetails.user_id = SingletonClass.sharedInstance.UserId
+        orderDetails.type = "past"
+        WebServiceSubClass.orderDetailList(orderDetails: orderDetails, showHud: true, completion: { (response, status, error) in
+            if status{
+                let orderData = MyorderDetailsResModel.init(fromJson: response)
+                self.objOrderDetailsData = orderData.data.mainOrder
+                self.arrItem = self.objOrderDetailsData.item
+                self.setData()
+                Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
+                    self.navigationController?.popViewController(animated: true)
+                }, otherTitles: nil)
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
 }

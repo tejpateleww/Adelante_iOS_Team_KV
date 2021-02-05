@@ -17,6 +17,8 @@ class orderListingData : NSObject, NSCoding{
     var restaurantName : String!
     var total : String!
     var username : String!
+    var address : String!
+    var street : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -33,6 +35,8 @@ class orderListingData : NSObject, NSCoding{
         restaurantName = json["restaurant_name"].stringValue
         total = json["total"].stringValue
         username = json["username"].stringValue
+        address = json["address"].stringValue
+        street = json["street"].stringValue
 	}
 
 	/**
@@ -65,6 +69,12 @@ class orderListingData : NSObject, NSCoding{
         if username != nil{
         	dictionary["username"] = username
         }
+        if address != nil{
+            dictionary["address"] = address
+        }
+        if street != nil{
+            dictionary["street"] = street
+        }
 		return dictionary
 	}
 
@@ -82,6 +92,8 @@ class orderListingData : NSObject, NSCoding{
 		restaurantName = aDecoder.decodeObject(forKey: "restaurant_name") as? String
 		total = aDecoder.decodeObject(forKey: "total") as? String
 		username = aDecoder.decodeObject(forKey: "username") as? String
+        address = aDecoder.decodeObject(forKey: "address") as? String
+        street = aDecoder.decodeObject(forKey: "street") as? String
 	}
 
     /**
@@ -114,7 +126,12 @@ class orderListingData : NSObject, NSCoding{
 		if username != nil{
 			aCoder.encode(username, forKey: "username")
 		}
-
+        if address != nil{
+            aCoder.encode(address, forKey: "address")
+        }
+        if street != nil{
+            aCoder.encode(street, forKey: "street")
+        }
 	}
 
 }

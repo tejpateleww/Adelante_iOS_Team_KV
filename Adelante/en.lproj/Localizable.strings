@@ -89,7 +89,7 @@
 "RateReviewVC_btnSubmit" = "Submit";
 
 //MyOrderDetailsVC
-"MyOrderDetailsVC_lblOrderId" = "Order Id : 258112548";
+"MyOrderDetailsVC_lblOrderId" = "Order Id : ";
 "MyOrderDetailsVC_lblNoOfItems" = "%@ Items";
 "MyOrderDetailsVC_lblRestName" = "El Meson";
 "MyOrderDetailsVC_lblLocation" = "Santa Rosa";

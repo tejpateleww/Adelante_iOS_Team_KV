@@ -10,7 +10,6 @@ import SwiftyJSON
 class MyorderDetailsResModel : NSObject, NSCoding{
 
     var data : orderDetailsData!
-    var share : String!
     var status : Bool!
 
 	/**
@@ -24,7 +23,6 @@ class MyorderDetailsResModel : NSObject, NSCoding{
         if !dataJson.isEmpty{
             data = orderDetailsData(fromJson: dataJson)
         }
-        share = json["share"].stringValue
         status = json["status"].boolValue
 	}
 
@@ -36,9 +34,6 @@ class MyorderDetailsResModel : NSObject, NSCoding{
 		var dictionary = [String:Any]()
         if data != nil{
         	dictionary["data"] = data.toDictionary()
-        }
-        if share != nil{
-        	dictionary["share"] = share
         }
         if status != nil{
         	dictionary["status"] = status
@@ -53,7 +48,6 @@ class MyorderDetailsResModel : NSObject, NSCoding{
     @objc required init(coder aDecoder: NSCoder)
 	{
 		data = aDecoder.decodeObject(forKey: "data") as? orderDetailsData
-		share = aDecoder.decodeObject(forKey: "share") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
 
@@ -65,9 +59,6 @@ class MyorderDetailsResModel : NSObject, NSCoding{
 	{
 		if data != nil{
 			aCoder.encode(data, forKey: "data")
-		}
-		if share != nil{
-			aCoder.encode(share, forKey: "share")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

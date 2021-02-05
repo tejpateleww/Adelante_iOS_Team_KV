@@ -110,14 +110,18 @@ struct currentOrder {
 }
 struct selectedVariants {
     var variant_id : String = ""
+    var variant_option_id : String = ""
     var variant_name : String = ""
     var variant_SubName : String = ""
     var variant_price : String = ""
+    var isMultiSelect : Bool = false
     
-    init(variant_id: String, variant_name: String, variant_SubName: String, variant_price: String) {
+    init(variant_id: String, variant_option_id: String, variant_name: String, variant_SubName: String, variant_price: String, isMultiSelect: Bool) {
         self.variant_id = variant_id
+        self.variant_option_id = variant_option_id
         self.variant_name = variant_name
         self.variant_SubName = variant_SubName
         self.variant_price = variant_price
+        self.isMultiSelect = isMultiSelect
     }
 }

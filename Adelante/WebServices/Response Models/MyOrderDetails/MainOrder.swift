@@ -9,15 +9,20 @@ import SwiftyJSON
 
 class MainOrder : NSObject, NSCoding{
 
+    var address : String!
     var createdAt : String!
-    var id : String!
-    var image : String!
-    var price : String!
+    var date : String!
+    var item : [Item]!
+    var itemQuantity : String!
+    var orderId : String!
     var restaurantItemName : String!
     var restaurantName : String!
-    var subOrder : [SubOrder]!
+    var serviceFee : String!
+    var tax : String!
     var total : String!
     var username : String!
+    var sub_total : String!
+    var street : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -26,20 +31,25 @@ class MainOrder : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
+        address = json["address"].stringValue
         createdAt = json["created_at"].stringValue
-        id = json["id"].stringValue
-        image = json["image"].stringValue
-        price = json["price"].stringValue
+        date = json["date"].stringValue
+        item = [Item]()
+        let itemArray = json["item"].arrayValue
+        for itemJson in itemArray{
+            let value = Item(fromJson: itemJson)
+            item.append(value)
+        }
+        itemQuantity = json["item_quantity"].stringValue
+        orderId = json["order_id"].stringValue
         restaurantItemName = json["restaurant_item_name"].stringValue
         restaurantName = json["restaurant_name"].stringValue
-        subOrder = [SubOrder]()
-        let subOrderArray = json["sub_order"].arrayValue
-        for subOrderJson in subOrderArray{
-            let value = SubOrder(fromJson: subOrderJson)
-            subOrder.append(value)
-        }
+        serviceFee = json["service_fee"].stringValue
+        tax = json["tax"].stringValue
         total = json["total"].stringValue
         username = json["username"].stringValue
+        sub_total = json["sub_total"].stringValue
+        street = json["street"].stringValue
 	}
 
 	/**
@@ -48,17 +58,27 @@ class MainOrder : NSObject, NSCoding{
 	func toDictionary() -> [String:Any]
 	{
 		var dictionary = [String:Any]()
+        if address != nil{
+        	dictionary["address"] = address
+        }
         if createdAt != nil{
         	dictionary["created_at"] = createdAt
         }
-        if id != nil{
-        	dictionary["id"] = id
+        if date != nil{
+        	dictionary["date"] = date
         }
-        if image != nil{
-        	dictionary["image"] = image
+        if item != nil{
+        var dictionaryElements = [[String:Any]]()
+        for itemElement in item {
+        	dictionaryElements.append(itemElement.toDictionary())
         }
-        if price != nil{
-        	dictionary["price"] = price
+        dictionary["item"] = dictionaryElements
+        }
+        if itemQuantity != nil{
+        	dictionary["item_quantity"] = itemQuantity
+        }
+        if orderId != nil{
+        	dictionary["order_id"] = orderId
         }
         if restaurantItemName != nil{
         	dictionary["restaurant_item_name"] = restaurantItemName
@@ -66,18 +86,23 @@ class MainOrder : NSObject, NSCoding{
         if restaurantName != nil{
         	dictionary["restaurant_name"] = restaurantName
         }
-        if subOrder != nil{
-        var dictionaryElements = [[String:Any]]()
-        for subOrderElement in subOrder {
-        	dictionaryElements.append(subOrderElement.toDictionary())
+        if serviceFee != nil{
+        	dictionary["service_fee"] = serviceFee
         }
-        dictionary["subOrder"] = dictionaryElements
+        if tax != nil{
+        	dictionary["tax"] = tax
         }
         if total != nil{
         	dictionary["total"] = total
         }
         if username != nil{
         	dictionary["username"] = username
+        }
+        if sub_total != nil{
+            dictionary["sub_total"] = sub_total
+        }
+        if street != nil{
+            dictionary["street"] = street
         }
 		return dictionary
 	}
@@ -88,15 +113,20 @@ class MainOrder : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
+		address = aDecoder.decodeObject(forKey: "address") as? String
 		createdAt = aDecoder.decodeObject(forKey: "created_at") as? String
-		id = aDecoder.decodeObject(forKey: "id") as? String
-		image = aDecoder.decodeObject(forKey: "image") as? String
-		price = aDecoder.decodeObject(forKey: "price") as? String
+		date = aDecoder.decodeObject(forKey: "date") as? String
+		item = aDecoder.decodeObject(forKey: "item") as? [Item]
+		itemQuantity = aDecoder.decodeObject(forKey: "item_quantity") as? String
+		orderId = aDecoder.decodeObject(forKey: "order_id") as? String
 		restaurantItemName = aDecoder.decodeObject(forKey: "restaurant_item_name") as? String
 		restaurantName = aDecoder.decodeObject(forKey: "restaurant_name") as? String
-		subOrder = aDecoder.decodeObject(forKey: "sub_order") as? [SubOrder]
+		serviceFee = aDecoder.decodeObject(forKey: "service_fee") as? String
+		tax = aDecoder.decodeObject(forKey: "tax") as? String
 		total = aDecoder.decodeObject(forKey: "total") as? String
 		username = aDecoder.decodeObject(forKey: "username") as? String
+        sub_total = aDecoder.decodeObject(forKey: "sub_total") as? String
+        street = aDecoder.decodeObject(forKey: "street") as? String
 	}
 
     /**
@@ -105,17 +135,23 @@ class MainOrder : NSObject, NSCoding{
     */
     func encode(with aCoder: NSCoder)
 	{
+		if address != nil{
+			aCoder.encode(address, forKey: "address")
+		}
 		if createdAt != nil{
 			aCoder.encode(createdAt, forKey: "created_at")
 		}
-		if id != nil{
-			aCoder.encode(id, forKey: "id")
+		if date != nil{
+			aCoder.encode(date, forKey: "date")
 		}
-		if image != nil{
-			aCoder.encode(image, forKey: "image")
+		if item != nil{
+			aCoder.encode(item, forKey: "item")
 		}
-		if price != nil{
-			aCoder.encode(price, forKey: "price")
+		if itemQuantity != nil{
+			aCoder.encode(itemQuantity, forKey: "item_quantity")
+		}
+		if orderId != nil{
+			aCoder.encode(orderId, forKey: "order_id")
 		}
 		if restaurantItemName != nil{
 			aCoder.encode(restaurantItemName, forKey: "restaurant_item_name")
@@ -123,8 +159,11 @@ class MainOrder : NSObject, NSCoding{
 		if restaurantName != nil{
 			aCoder.encode(restaurantName, forKey: "restaurant_name")
 		}
-		if subOrder != nil{
-			aCoder.encode(subOrder, forKey: "sub_order")
+		if serviceFee != nil{
+			aCoder.encode(serviceFee, forKey: "service_fee")
+		}
+		if tax != nil{
+			aCoder.encode(tax, forKey: "tax")
 		}
 		if total != nil{
 			aCoder.encode(total, forKey: "total")
@@ -132,7 +171,12 @@ class MainOrder : NSObject, NSCoding{
 		if username != nil{
 			aCoder.encode(username, forKey: "username")
 		}
-
+        if sub_total != nil{
+            aCoder.encode(sub_total, forKey: "sub_total")
+        }
+        if street != nil{
+            aCoder.encode(street, forKey: "street")
+        }
 	}
 
 }

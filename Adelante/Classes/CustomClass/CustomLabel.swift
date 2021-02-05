@@ -177,6 +177,7 @@ class addCardLabel : UILabel {
 
 class bffComboLabel : UILabel {
     @IBInspectable var isDetailsTitle : Bool = false
+    @IBInspectable var isPrice : Bool = false
     override func awakeFromNib() {
         self.textColor = colors.white.value
         self.font = CustomFont.NexaRegular.returnFont(16)
@@ -184,6 +185,11 @@ class bffComboLabel : UILabel {
         if isDetailsTitle {
             self.textColor = colors.black.value
             self.font = CustomFont.NexaRegular.returnFont(15)
+        }
+        if isPrice {
+            self.textColor = colors.black.value
+            self.font = CustomFont.NexaRegular.returnFont(15)
+            self.textAlignment = .right
         }
        
     }

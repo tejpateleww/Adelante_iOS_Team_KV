@@ -102,12 +102,12 @@ class WebServiceSubClass
     }
     class func orderList(orderListModel: OrderListReqModel,showHud : Bool = false, completion: @escaping CompletionResponse ){
         let params : [String:String] = orderListModel.generatPostParams() as! [String:String]
-        WebService.shared.getMethod(api: .Sorting, parameterString: "\(params)", httpMethod: .get, showHud: showHud, completion: completion)
+        WebService.shared.requestMethod(api: .OrderList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
-//    class func MyorderList( myorderDetails : MyorderDetailsReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
-//        let  params : [String:String] = myorderDetails.generatPostParams() as! [String:String]
-//        WebService.shared.requestMethod(api: .OrderDetails, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
-//    }
+    class func orderDetailList( orderDetails : MyorderDetailsReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = orderDetails.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .OrderDetails, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
 }
 
 

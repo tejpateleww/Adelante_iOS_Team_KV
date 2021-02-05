@@ -72,7 +72,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         webservicePostRestaurantDetails()
         setUpLocalizedStrings()
         NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantDetails, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshrefreshRestaurantDetail), name: notifRefreshRestaurantDetails, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshRestaurantDetail), name: notifRefreshRestaurantDetails, object: nil)
         setup()
     }
     
@@ -94,39 +94,51 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         if arrSelectedOrder.count > 0{
             viewFooter.isHidden = false
             lblSign.isHidden = false
-        }else{
+        } else {
             viewFooter.isHidden = true
             lblPrice.text = ""
             lblNoOfItem.text = ""
             lblSign.isHidden = true
         }
     }
-    @objc func refreshrefreshRestaurantDetail(){
+    
+    @objc func refreshRestaurantDetail() {
         setData()
         self.objCurrentOrder = SingletonClass.sharedInstance.restCurrentOrder
-        for i in 0..<arrMenuitem.count {
-            for j in 0..<self.objCurrentOrder.order.count {
-                let id = self.objCurrentOrder.order[j].restaurant_item_id
-                if arrMenuitem[i].id == id {
-                    arrMenuitem[i].selectedQuantity = self.objCurrentOrder.order[j].selectedQuantity
-                } else {
-                    arrMenuitem[i].selectedQuantity = ""
-                }
-            }
-        }
-        
-        for i in 0..<arrFoodMenu.count {
-            for k in 0..<arrFoodMenu[i].subMenu.count {
+        if self.objCurrentOrder != nil {
+            for i in 0..<arrMenuitem.count {
                 for j in 0..<self.objCurrentOrder.order.count {
                     let id = self.objCurrentOrder.order[j].restaurant_item_id
-                    if arrFoodMenu[i].subMenu[k].id == id {
-                        arrFoodMenu[i].subMenu[k].selectedQuantity = self.objCurrentOrder.order[j].selectedQuantity
+                    if arrMenuitem[i].id == id {
+                        arrMenuitem[i].selectedQuantity = self.objCurrentOrder.order[j].selectedQuantity
                     } else {
-                        arrFoodMenu[i].subMenu[k].selectedQuantity = ""
+                        arrMenuitem[i].selectedQuantity = ""
                     }
                 }
             }
             
+            for i in 0..<arrFoodMenu.count {
+                for k in 0..<arrFoodMenu[i].subMenu.count {
+                    for j in 0..<self.objCurrentOrder.order.count {
+                        let id = self.objCurrentOrder.order[j].restaurant_item_id
+                        if arrFoodMenu[i].subMenu[k].id == id {
+                            arrFoodMenu[i].subMenu[k].selectedQuantity = self.objCurrentOrder.order[j].selectedQuantity
+                        } else {
+                            arrFoodMenu[i].subMenu[k].selectedQuantity = ""
+                        }
+                    }
+                }
+            }
+        } else {
+            for i in 0..<arrMenuitem.count {
+                arrMenuitem[i].selectedQuantity = ""
+            }
+            
+            for i in 0..<arrFoodMenu.count {
+                for k in 0..<arrFoodMenu[i].subMenu.count {
+                    arrFoodMenu[i].subMenu[k].selectedQuantity = ""
+                }
+            }
         }
         self.tblRestaurantDetails.reloadData()
         self.checkItemsAndUpdateFooter()
