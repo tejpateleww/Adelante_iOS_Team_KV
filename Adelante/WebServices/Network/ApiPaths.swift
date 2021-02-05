@@ -85,5 +85,7 @@ enum ApiKey: String {
     case AddCard = "add_card"
     case AddPayment = "card_list"
     case RemovePaymentList = "remove_card"
+//    case OrderDetails = "order_details"
+    case OrderList = "order_list"
 }
 

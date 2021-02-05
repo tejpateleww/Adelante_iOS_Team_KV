@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 
+
 class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource,AddPaymentDelegate {
     
     
@@ -17,8 +18,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var customTabBarController: CustomTabBarVC?
     var selectedPaymentMethods = 1
     var refreshList = UIRefreshControl()
-    var arrCard = [CardList]()
-    
+    var arrCard = [CardList]()    
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
@@ -200,7 +200,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     // MARK: - Api Calls
     @objc func webserviceGetAddPayment(){
-        var addpayment = AddPaymentReqModel()
+        let addpayment = AddPaymentReqModel()
         addpayment.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.addPayment(addpaymentmodel: addpayment, showHud: true, completion: { (json, status, error) in
             // self.hideHUD()

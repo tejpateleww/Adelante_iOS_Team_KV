@@ -15,6 +15,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var customTabBarController: CustomTabBarVC?
     var selectedSegmentTag = 0
     var refreshList = UIRefreshControl()
+    var arrOrderListing = [orderListingData]()
     // MARK: - IBOutlets
     @IBOutlet weak var tblOrders: UITableView!
     
@@ -71,7 +72,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
     // MARK: - UITableView Delegates & Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return arrOrderListing.count
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,6 +86,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             cell.vwCancelOrder.isHidden = false
             cell.vwRepeatOrder.isHidden = true
         }
+//        cell.lblItem.text =
         cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
 //        cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeatNew), for: .touchUpInside)
         cell.Repeat = {
@@ -108,6 +110,20 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     
     // MARK: - Api Calls
     @objc func webserviceGetOrderDetail(){
+        let orderList = OrderListReqModel()
+        orderList.user_id = SingletonClass.sharedInstance.UserId
+        orderList.type = "upcoming"
+        WebServiceSubClass.orderList(orderListModel: orderList, showHud: true, completion: { (response, status, error) in
+            if status{
+                let orderListData = orderListingResModel.init(fromJson: response)
+                self.arrOrderListing = orderListData.data
+                Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
+                    self.navigationController?.popViewController(animated: true)
+                }, otherTitles: nil)
+            }else{
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }

@@ -206,6 +206,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     @IBAction func btnSaveClick(_ sender: Any) {
         if isValidatePaymentDetail().0 {
                 self.webserviceForAddCard()
+//            self.navigationController?.popViewController(animated: true)
         } else {
             Utilities.showAlert(AppName, message: isValidatePaymentDetail().1, vc: self)
         }
@@ -225,6 +226,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
             if(status)
             {
                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                self.navigationController?.popViewController(animated: true)
                 self.delegatePayment.refreshAddPaymentScreen()
                 self.clearAllTextFieldsAndSetDefaults()
             }
