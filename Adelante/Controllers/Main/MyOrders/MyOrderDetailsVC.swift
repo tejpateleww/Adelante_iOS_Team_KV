@@ -7,17 +7,23 @@
 //
 
 import UIKit
+import SDWebImage
 
+protocol orderCancelDelegate {
+    func refreshOrderDetailsScreen()
+}
 class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Properties
+    var delegateCancelOrder : orderCancelDelegate!
     var customTabBarController: CustomTabBarVC?
     var selectedSegmentTag = 0
     var isSharedOrder = false
     var orderId = ""
     var objOrderDetailsData : MainOrder!
     var arrItem = [Item]()
-    
+    var orderType = ""
+    var strRestaurantId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
     @IBOutlet weak var lblId: orderDetailsLabel!
@@ -50,10 +56,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         setUpLocalizedStrings()
         webserviceOrderDetails()
-        tblItems.delegate = self
-        tblItems.dataSource = self
-        tblItems.reloadData()
-//        setData()
+        tblItems.rowHeight = UITableView.automaticDimension
+        tblItems.estimatedRowHeight = 66.5
+//        self.heightTblItems.constant = tblItems.contentSize.height
         setup()
         
     }
@@ -84,6 +89,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             lblServiceFee.text = "$" + objOrderDetailsData.serviceFee
             lblSubTotal.text = "$" + objOrderDetailsData.sub_total
             lblLocation.text = objOrderDetailsData.street
+            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(objOrderDetailsData.qrcode ?? "")"
+            imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         }
         tblItems.reloadData()
         self.heightTblItems.constant = tblItems.contentSize.height
@@ -113,19 +121,21 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
 
-        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appRedColor, cancelBtnColor: colors.appRedColor, viewController: self)
+//        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appRedColor, cancelBtnColor: colors.appRedColor, viewController: self)
+        webserviceCancelOrder()
 //        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor.value, cancelBtnColor: colors.appOrangeColor.value ,viewController: self)
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID)
-                   self.navigationController?.pushViewController(controller, animated: true)
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID) as! RateReviewVC
+        controller.strRestaurantId = strRestaurantId
+        controller.strOrderId = orderId
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
 //        self.isSharedOrder = true
         let text = ""
-
                // set up activity view controller
                let textToShare = [ text ]
                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
@@ -164,9 +174,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     func setUpLocalizedStrings()
     {
         lblOrderId.text = "MyOrderDetailsVC_lblOrderId".Localized()
@@ -192,7 +202,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         let orderDetails = MyorderDetailsReqModel()
         orderDetails.order_id = orderId
         orderDetails.user_id = SingletonClass.sharedInstance.UserId
-        orderDetails.type = "past"
+        orderDetails.type = orderType
+        orderDetails.restaurant_id = strRestaurantId
         WebServiceSubClass.orderDetailList(orderDetails: orderDetails, showHud: true, completion: { (response, status, error) in
             if status{
                 let orderData = MyorderDetailsResModel.init(fromJson: response)
@@ -204,6 +215,23 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        })
+    }
+    func webserviceCancelOrder(){
+        let cancelOrder = CancelOrderReqModel()
+        cancelOrder.user_id = SingletonClass.sharedInstance.UserId
+        cancelOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
+        WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
+            //            self.hideHUD()
+            if(status)
+            {
+                Utilities.displayAlert(json["message"].string ?? "")
+                self.delegateCancelOrder.refreshOrderDetailsScreen()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }

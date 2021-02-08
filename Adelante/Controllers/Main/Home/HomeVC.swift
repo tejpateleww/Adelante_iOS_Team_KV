@@ -219,6 +219,16 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrBanner[indexPath.row].image ?? "")"
             cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            if cell.lblRestName.text == ""{
+                cell.vwRestName.isHidden = true
+            }else{
+                cell.vwRestName.isHidden = false
+            }
+            if cell.lblRestDesc.text == ""{
+                cell.vwRestDesc.isHidden = true
+            }else{
+                cell.vwRestDesc.isHidden = false
+            }
             cell.lblRestName.text = arrBanner[indexPath.row].name
             cell.lblRestDesc.text = arrBanner[indexPath.row].descriptionField
             return cell
@@ -264,7 +274,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         } else {
             let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
             cell.lblItemName.text = arrRestaurant[indexPath.row - 1].name
-            cell.lblMiles.text = String(format: "HomeVC_RestaurantCell_lblMiles".Localized(), arrRestaurant[indexPath.row - 1].distance)//arrRestaurant[indexPath.row - 1].distance
+            cell.lblMiles.text = arrRestaurant[indexPath.row - 1].distance//arrRestaurant[indexPath.row - 1].distance
             cell.lblRating.text = arrRestaurant[indexPath.row - 1].review
             let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
             cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -284,10 +294,10 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row != 0
         {
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
-            controller.selectedRestaurantId = arrRestaurant[indexPath.row - 1].id
-            controller.selectedIndex = "\(indexPath.row - 1)"
-            controller.isFromDeshboard = true
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
+//            controller.selectedRestaurantId = arrRestaurant[indexPath.row - 1].id
+//            controller.selectedIndex = "\(indexPath.row - 1)"
+//            controller.isFromDeshboard = true
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

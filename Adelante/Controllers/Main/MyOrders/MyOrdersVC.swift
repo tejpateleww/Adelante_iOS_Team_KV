@@ -10,7 +10,9 @@ import UIKit
 import BetterSegmentedControl
 import SDWebImage
 
-class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate,orderCancelDelegate {
+    
+    
 
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -24,7 +26,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
      override func viewDidLoad() {
           super.viewDidLoad()
         tblOrders.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceGetOrderDetail), for: .valueChanged)
+        refreshList.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
           setup()
       
@@ -46,7 +48,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         tblOrders.dataSource = self
         tblOrders.reloadData()
     }
-    
+    @objc func refreshData(){
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
+    }
     // MARK: - IBActions
 //    @IBAction func btnRepeatNew(_ sender: Any){
 //        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
@@ -94,6 +98,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         cell.lblRestLocation.text = arrOrderListing[indexPath.row].street
         cell.lblPrice.text = "$" + arrOrderListing[indexPath.row].price
         cell.lblItem.text = arrOrderListing[indexPath.row].restaurantItemName
+        cell.lblDtTime.text = arrOrderListing[indexPath.row].date
         let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrOrderListing[indexPath.row].image ?? "")"
         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -115,12 +120,15 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
         orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
         orderDetailsVC.orderId = arrOrderListing[indexPath.row].id
+        orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "upcoming"
+        orderDetailsVC.strRestaurantId = arrOrderListing[indexPath.row].restaurant_id
+        orderDetailsVC.delegateCancelOrder = self
         self.navigationController?.pushViewController(orderDetailsVC, animated: true)
     }
     
     
     // MARK: - Api Calls
-    @objc func webserviceGetOrderDetail(selectedOrder:String){
+   func webserviceGetOrderDetail(selectedOrder:String){
         let orderList = OrderListReqModel()
         orderList.user_id = SingletonClass.sharedInstance.UserId
         orderList.type = selectedOrder
@@ -139,5 +147,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }
+    }
+    func refreshOrderDetailsScreen() {
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
     }
 }

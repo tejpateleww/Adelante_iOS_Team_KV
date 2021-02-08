@@ -10,7 +10,9 @@ import UIKit
 
 class RestWithPageCell: UICollectionViewCell {
     @IBOutlet weak var imgRestaurant: customImageView!
+    @IBOutlet weak var vwRestName: customImagewithShadow!
     @IBOutlet weak var lblRestName: colVwRestaurantLabel!
+    @IBOutlet weak var vwRestDesc: customImagewithShadow!
     @IBOutlet weak var lblRestDesc: colVwRestaurantLabel!
     
     override func awakeFromNib() {

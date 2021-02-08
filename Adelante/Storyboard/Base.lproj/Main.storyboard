@@ -328,8 +328,8 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rdj-Nb-2M3">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="378" height="100"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kangkung siram sambel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acU-oZ-3jH" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="40" width="318" height="20.5"/>
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acU-oZ-3jH" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                    <rect key="frame" x="0.0" y="25" width="318" height="50"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
                                                                                                                     <nil key="highlightedColor"/>
@@ -350,7 +350,7 @@
                                                                                                                                         <constraint firstAttribute="width" constant="10.35" id="zR2-6g-gFv"/>
                                                                                                                                     </constraints>
                                                                                                                                 </imageView>
-                                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7x-hk-get" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7x-hk-get" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
                                                                                                                                     <rect key="frame" x="18.5" y="5" width="16.5" height="9"/>
                                                                                                                                     <constraints>
                                                                                                                                         <constraint firstAttribute="height" constant="9" id="8TB-c7-erP"/>
@@ -573,8 +573,8 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="45c-lV-znp">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="77"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El Meson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="20.5"/>
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi1-WL-BMk" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
                                                                                                                     <nil key="highlightedColor"/>
@@ -582,8 +582,8 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isTitle" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santa Rosa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="23.5" width="240" height="20.5"/>
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-cO-jXz" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                    <rect key="frame" x="0.0" y="53" width="240" height="18"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
                                                                                                                     <nil key="highlightedColor"/>
@@ -592,10 +592,10 @@
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
                                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efX-vZ-odi">
-                                                                                                                    <rect key="frame" x="0.0" y="47" width="240" height="30"/>
+                                                                                                                    <rect key="frame" x="0.0" y="74" width="240" height="3"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="0.0" y="3" width="240" height="27"/>
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-jC-vUD" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                            <rect key="frame" x="0.0" y="3" width="240" height="0.0"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
                                                                                                                             <nil key="highlightedColor"/>
@@ -680,7 +680,7 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isItem" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 6, 20  4:22 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFR-Ze-2LN" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFR-Ze-2LN" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                                     <rect key="frame" x="0.0" y="20" width="88" height="11"/>
                                                                                                                     <constraints>
                                                                                                                         <constraint firstAttribute="height" constant="11" id="dS3-LX-VXE"/>
@@ -1225,7 +1225,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ho2-Ag-MoL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rN-z1-ohE" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rN-z1-ohE" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="47" id="y2l-nw-pKB"/>
@@ -1248,7 +1248,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="T9D-1L-onG">
                                                                 <rect key="frame" x="0.0" y="83" width="378" height="63"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Smith" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-U3-ebv" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-U3-ebv" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="47" id="VwD-7K-XZG"/>
@@ -1274,7 +1274,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-f8-XtO">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="johansmith@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ut-AC-9Qr" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ut-AC-9Qr" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -1324,7 +1324,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb9-AB-RJI">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1 6532 6565 265" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cc0-dj-TGl" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cc0-dj-TGl" customClass="EditProfileTextField" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -1485,7 +1485,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
+                                                        <rect key="frame" x="18" y="55" width="378" height="215"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1517,9 +1517,6 @@
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
-                                                                        </userDefinedRuntimeAttributes>
                                                                     </textField>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orp-MA-zsB" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -1531,10 +1528,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="49"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="33"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="79" id="GZk-3S-lMA"/>
@@ -1550,7 +1547,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="48" width="378" height="1"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -1978,7 +1975,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zHo-4a-EjV">
                                                         <rect key="frame" x="18" y="331" width="378" height="63"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Email / Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJ2-zK-PS6" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJ2-zK-PS6" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="47" id="i07-2O-CQF"/>
@@ -2751,12 +2748,36 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RatingImage-1" translatesAutoresizingMaskIntoConstraints="NO" id="rXo-Cj-iru">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGY-kw-5YU" customClass="CosmosView" customModule="Cosmos">
                                                         <rect key="frame" x="80" y="327" width="254" height="31"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="31.07" id="aps-TZ-Urg"/>
+                                                            <constraint firstAttribute="height" constant="31.07" id="yYt-Ex-Vey"/>
                                                         </constraints>
-                                                    </imageView>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Selected_star"/>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="Deselect_star"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                                <real key="value" value="30"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="minTouchRating">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                                                <integer key="value" value="0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                                                <real key="value" value="15"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hG-y8-dvI" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                         <rect key="frame" x="32" y="576.5" width="350" height="47"/>
                                                         <constraints>
@@ -2767,6 +2788,9 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isCornerRadius" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnSubmitClick:" destination="RRv-xk-5YE" eventType="touchUpInside" id="cCs-gT-rbW"/>
+                                                        </connections>
                                                     </button>
                                                     <textView clipsSubviews="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oP7-OM-AFy" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
                                                         <rect key="frame" x="18" y="393.5" width="378" height="134"/>
@@ -2791,20 +2815,20 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="rXo-Cj-iru" secondAttribute="trailing" constant="80" id="1Hv-X3-XKG"/>
                                                     <constraint firstItem="rXD-Ll-V5V" firstAttribute="top" secondItem="aKq-76-BOb" secondAttribute="top" id="6Tc-CH-w0K"/>
-                                                    <constraint firstItem="oP7-OM-AFy" firstAttribute="top" secondItem="rXo-Cj-iru" secondAttribute="bottom" constant="35.5" id="9KY-hy-wJY"/>
                                                     <constraint firstItem="rXD-Ll-V5V" firstAttribute="leading" secondItem="aKq-76-BOb" secondAttribute="leading" id="CUB-pU-r57"/>
                                                     <constraint firstItem="5hG-y8-dvI" firstAttribute="leading" secondItem="aKq-76-BOb" secondAttribute="leading" constant="32" id="DNb-aC-8aZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="oP7-OM-AFy" secondAttribute="trailing" constant="18" id="FFH-l2-r34"/>
-                                                    <constraint firstItem="rXo-Cj-iru" firstAttribute="leading" secondItem="aKq-76-BOb" secondAttribute="leading" constant="80" id="Fov-Ov-tUi"/>
                                                     <constraint firstItem="mZC-5g-sUL" firstAttribute="centerX" secondItem="rXD-Ll-V5V" secondAttribute="centerX" id="IOg-v2-YIZ"/>
+                                                    <constraint firstItem="HGY-kw-5YU" firstAttribute="leading" secondItem="aKq-76-BOb" secondAttribute="leading" constant="80" id="JIU-uK-hul"/>
                                                     <constraint firstItem="mZC-5g-sUL" firstAttribute="top" secondItem="rXD-Ll-V5V" secondAttribute="bottom" constant="33.899999999999999" id="MUM-TS-IJr"/>
-                                                    <constraint firstItem="rXo-Cj-iru" firstAttribute="centerX" secondItem="mZC-5g-sUL" secondAttribute="centerX" id="SPw-2o-GM9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HGY-kw-5YU" secondAttribute="trailing" constant="80" id="ShZ-el-OD7"/>
+                                                    <constraint firstItem="oP7-OM-AFy" firstAttribute="top" secondItem="HGY-kw-5YU" secondAttribute="bottom" constant="35.5" id="Vxl-rL-tYT"/>
                                                     <constraint firstItem="5hG-y8-dvI" firstAttribute="top" secondItem="oP7-OM-AFy" secondAttribute="bottom" constant="49" id="WbP-Gy-uuS"/>
                                                     <constraint firstAttribute="bottom" secondItem="5hG-y8-dvI" secondAttribute="bottom" constant="20" id="cXH-Yr-WvP"/>
                                                     <constraint firstItem="oP7-OM-AFy" firstAttribute="leading" secondItem="aKq-76-BOb" secondAttribute="leading" constant="18" id="fNs-yp-3bu"/>
-                                                    <constraint firstItem="rXo-Cj-iru" firstAttribute="top" secondItem="mZC-5g-sUL" secondAttribute="bottom" constant="21.5" id="tx7-Qy-6HZ"/>
+                                                    <constraint firstItem="HGY-kw-5YU" firstAttribute="top" secondItem="mZC-5g-sUL" secondAttribute="bottom" constant="21.5" id="lsu-NB-cEg"/>
+                                                    <constraint firstItem="HGY-kw-5YU" firstAttribute="centerX" secondItem="aKq-76-BOb" secondAttribute="centerX" id="n23-6u-RVV"/>
                                                     <constraint firstAttribute="trailing" secondItem="rXD-Ll-V5V" secondAttribute="trailing" id="vYJ-yk-gPD"/>
                                                     <constraint firstAttribute="trailing" secondItem="5hG-y8-dvI" secondAttribute="trailing" constant="32" id="wPH-qe-xtE"/>
                                                 </constraints>
@@ -2841,6 +2865,7 @@
                         <outlet property="btnSubmit" destination="5hG-y8-dvI" id="IrR-IS-0dZ"/>
                         <outlet property="lblRateRestaurant" destination="mZC-5g-sUL" id="8GG-ID-srg"/>
                         <outlet property="tvRateReview" destination="oP7-OM-AFy" id="Ukp-Ip-pdR"/>
+                        <outlet property="vwRating" destination="HGY-kw-5YU" id="LAo-Pt-Wyh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G3F-qS-a3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2899,7 +2924,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sOM-cT-P2H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="857" y="161"/>
+            <point key="canvasLocation" x="522" y="161"/>
         </scene>
         <!--My FoodlistVC-->
         <scene sceneID="vbw-IN-awZ">
@@ -4098,7 +4123,7 @@
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="et0-vs-LJ2">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="19.5"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kangkung siram sambel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSX-KQ-9Bx" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSX-KQ-9Bx" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="338.5" height="19.5"/>
                                                                                                                             <constraints>
                                                                                                                                 <constraint firstAttribute="height" constant="20" id="HZ6-Tq-nsx"/>
@@ -4136,7 +4161,7 @@
                                                                                                                                                 <constraint firstItem="jhq-rU-Y9i" firstAttribute="centerX" secondItem="PYi-uR-jnK" secondAttribute="centerX" id="hL2-pX-Cqw"/>
                                                                                                                                             </constraints>
                                                                                                                                         </view>
-                                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFM-AF-FmY" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFM-AF-FmY" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
                                                                                                                                             <rect key="frame" x="14.5" y="0.0" width="15" height="17.5"/>
                                                                                                                                             <constraints>
                                                                                                                                                 <constraint firstAttribute="width" constant="15" id="n8q-mD-eXz"/>
@@ -4167,7 +4192,7 @@
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YvI-bc-XU3">
                                                                                                                     <rect key="frame" x="0.0" y="22.5" width="378" height="13.5"/>
                                                                                                                     <subviews>
-                                                                                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$25.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-OZ-6gg" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHm-OZ-6gg" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="13.5"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
@@ -4176,7 +4201,7 @@
                                                                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isPrice" value="YES"/>
                                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                                         </label>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.5 miles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSm-qC-mXw" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSm-qC-mXw" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="378" height="13.5"/>
                                                                                                                             <constraints>
                                                                                                                                 <constraint firstAttribute="height" constant="13.5" id="RIN-OH-zf5"/>
@@ -4278,7 +4303,330 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vkf-9j-rzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6610" y="-1223"/>
+            <point key="canvasLocation" x="6006" y="-1215"/>
+        </scene>
+        <!--Restaurant OutletVC-->
+        <scene sceneID="G0O-ON-1FZ">
+            <objects>
+                <viewController storyboardIdentifier="RestaurantOutletVC" id="wVL-Cr-ihp" customClass="RestaurantOutletVC" customModule="Adelante" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zhe-ff-OyX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpg-Ja-ofz">
+                                <rect key="frame" x="0.0" y="72" width="414" height="790"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7dg-kQ-qgp">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="790"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-RP-0TI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jzl-W9-BES">
+                                                        <rect key="frame" x="18" y="0.0" width="378" height="50"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zid-lV-TG7" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="338" height="50"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isYourFavTitle" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSO-U1-WyQ">
+                                                                <rect key="frame" x="343" y="0.0" width="35" height="50"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ij1-Q8-38y" customClass="collectionVwFilterBtns" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="7.5" width="35" height="35"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="35" id="Te4-6G-Rbv"/>
+                                                                            <constraint firstAttribute="height" constant="35" id="dqc-LQ-NYq"/>
+                                                                        </constraints>
+                                                                        <state key="normal" image="filterImage">
+                                                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <state key="selected" image="filterImageSelected"/>
+                                                                        <state key="highlighted" image="filterImageSelected"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCornerRadius" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="btnFilterClick:" destination="wVL-Cr-ihp" eventType="touchUpInside" id="VZl-ID-9Nt"/>
+                                                                            <action selector="btnFilterClicked:" destination="0Bo-0R-ju0" eventType="touchUpInside" id="F1Q-2S-aIM"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="Ij1-Q8-38y" firstAttribute="leading" secondItem="hSO-U1-WyQ" secondAttribute="leading" id="Wzh-Zs-QbS"/>
+                                                                    <constraint firstItem="Ij1-Q8-38y" firstAttribute="centerX" secondItem="hSO-U1-WyQ" secondAttribute="centerX" id="gf6-8Q-wQe"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Ij1-Q8-38y" secondAttribute="trailing" id="mm0-XG-R8r"/>
+                                                                    <constraint firstItem="Ij1-Q8-38y" firstAttribute="centerY" secondItem="hSO-U1-WyQ" secondAttribute="centerY" id="qJf-ru-3mg"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="jzl-W9-BES" secondAttribute="bottom" id="FYK-Wa-aRr"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jzl-W9-BES" secondAttribute="trailing" constant="18" id="HtV-1T-Ewd"/>
+                                                    <constraint firstItem="jzl-W9-BES" firstAttribute="top" secondItem="bm3-RP-0TI" secondAttribute="top" id="IEd-Lp-QTj"/>
+                                                    <constraint firstAttribute="height" constant="50" id="fcG-uE-La1"/>
+                                                    <constraint firstItem="jzl-W9-BES" firstAttribute="leading" secondItem="bm3-RP-0TI" secondAttribute="leading" constant="18" id="mn5-cI-dIM"/>
+                                                </constraints>
+                                            </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="raS-py-Wm5">
+                                                <rect key="frame" x="0.0" y="50" width="414" height="740"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantOutletListCell" id="g7E-bU-pcB" customClass="RestaurantOutletListCell" customModule="Adelante" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="221"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g7E-bU-pcB" id="lI8-hK-Hbp">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="221"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVJ-Yo-LlA">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="221"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="jl0-RG-8AF">
+                                                                            <rect key="frame" x="18" y="0.0" width="378" height="221"/>
+                                                                            <subviews>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ude-ZO-VJL" customClass="customImagewithShadow" customModule="Adelante" customModuleProvider="target">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="184"/>
+                                                                                    <subviews>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummyRest1" translatesAutoresizingMaskIntoConstraints="NO" id="XVa-rj-pdn" customClass="customImagewithShadow" customModule="Adelante" customModuleProvider="target">
+                                                                                            <rect key="frame" x="0.0" y="10" width="378" height="164"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="height" constant="164" id="Q7o-G7-995"/>
+                                                                                            </constraints>
+                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
+                                                                                            </userDefinedRuntimeAttributes>
+                                                                                        </imageView>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agn-W6-Ovh">
+                                                                                            <rect key="frame" x="346" y="142" width="27" height="27"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="27" id="HdZ-Vf-G4e"/>
+                                                                                                <constraint firstAttribute="height" constant="27" id="Oik-5q-f13"/>
+                                                                                            </constraints>
+                                                                                            <state key="normal" image="ic_dislike"/>
+                                                                                            <state key="selected" image="ic_favouriteSelected"/>
+                                                                                            <connections>
+                                                                                                <action selector="BtnLikeDislike:" destination="g7E-bU-pcB" eventType="touchUpInside" id="hgW-bP-0TK"/>
+                                                                                            </connections>
+                                                                                        </button>
+                                                                                    </subviews>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="XVa-rj-pdn" firstAttribute="leading" secondItem="ude-ZO-VJL" secondAttribute="leading" id="OZK-PG-rDt"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="Agn-W6-Ovh" secondAttribute="bottom" constant="15" id="Q8m-yE-kXI"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="XVa-rj-pdn" secondAttribute="trailing" id="aBF-JW-1Jb"/>
+                                                                                        <constraint firstItem="XVa-rj-pdn" firstAttribute="top" secondItem="ude-ZO-VJL" secondAttribute="top" constant="10" id="dCr-do-Uob"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="XVa-rj-pdn" secondAttribute="bottom" constant="10" id="dq2-Ag-Omj"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="Agn-W6-Ovh" secondAttribute="trailing" constant="5" id="oeD-hn-SH1"/>
+                                                                                    </constraints>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </view>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4a-Rw-XpR">
+                                                                                    <rect key="frame" x="0.0" y="174" width="378" height="47"/>
+                                                                                    <subviews>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9wl-46-tnH">
+                                                                                            <rect key="frame" x="0.0" y="11" width="378" height="36"/>
+                                                                                            <subviews>
+                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3Z-Mh-1mu">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="36"/>
+                                                                                                    <subviews>
+                                                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="fox-e4-8Ua">
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="36"/>
+                                                                                                            <subviews>
+                                                                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMw-LS-KBG">
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="19.5"/>
+                                                                                                                    <subviews>
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Area Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQS-0Y-4l3" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="338.5" height="19.5"/>
+                                                                                                                            <constraints>
+                                                                                                                                <constraint firstAttribute="height" constant="20" id="B8y-nA-WmQ"/>
+                                                                                                                            </constraints>
+                                                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                                            <nil key="textColor"/>
+                                                                                                                            <nil key="highlightedColor"/>
+                                                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isRestaurantName" value="YES"/>
+                                                                                                                                <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                                                                                                    <real key="value" value="3"/>
+                                                                                                                                </userDefinedRuntimeAttribute>
+                                                                                                                            </userDefinedRuntimeAttributes>
+                                                                                                                        </label>
+                                                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8j9-VA-QuG" customClass="viewRestorentRatingView" customModule="Adelante" customModuleProvider="target">
+                                                                                                                            <rect key="frame" x="338.5" y="0.0" width="39.5" height="19.5"/>
+                                                                                                                            <subviews>
+                                                                                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Fpl-NB-IVi">
+                                                                                                                                    <rect key="frame" x="5" y="1" width="29.5" height="17.5"/>
+                                                                                                                                    <subviews>
+                                                                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pF-j0-Gac">
+                                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="11.5" height="17.5"/>
+                                                                                                                                            <subviews>
+                                                                                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="KPS-sD-gMc">
+                                                                                                                                                    <rect key="frame" x="0.5" y="3.5" width="10.5" height="10.5"/>
+                                                                                                                                                    <constraints>
+                                                                                                                                                        <constraint firstAttribute="width" secondItem="KPS-sD-gMc" secondAttribute="height" multiplier="1:1" id="fKJ-6w-JMg"/>
+                                                                                                                                                    </constraints>
+                                                                                                                                                </imageView>
+                                                                                                                                            </subviews>
+                                                                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                                            <constraints>
+                                                                                                                                                <constraint firstAttribute="width" constant="11.5" id="LzB-Th-u0j"/>
+                                                                                                                                                <constraint firstItem="KPS-sD-gMc" firstAttribute="centerY" secondItem="3pF-j0-Gac" secondAttribute="centerY" id="QQC-Da-ueH"/>
+                                                                                                                                                <constraint firstItem="KPS-sD-gMc" firstAttribute="centerX" secondItem="3pF-j0-Gac" secondAttribute="centerX" id="t4q-T5-5m9"/>
+                                                                                                                                            </constraints>
+                                                                                                                                        </view>
+                                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8F-aD-Slx" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                                            <rect key="frame" x="14.5" y="0.0" width="15" height="17.5"/>
+                                                                                                                                            <constraints>
+                                                                                                                                                <constraint firstAttribute="width" constant="15" id="o9C-Tl-Iwu"/>
+                                                                                                                                            </constraints>
+                                                                                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                                                                                            <nil key="textColor"/>
+                                                                                                                                            <nil key="highlightedColor"/>
+                                                                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isRating" value="YES"/>
+                                                                                                                                            </userDefinedRuntimeAttributes>
+                                                                                                                                        </label>
+                                                                                                                                    </subviews>
+                                                                                                                                    <constraints>
+                                                                                                                                        <constraint firstAttribute="trailing" secondItem="x8F-aD-Slx" secondAttribute="trailing" id="hyk-kD-ZNx"/>
+                                                                                                                                    </constraints>
+                                                                                                                                </stackView>
+                                                                                                                            </subviews>
+                                                                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                                            <constraints>
+                                                                                                                                <constraint firstItem="Fpl-NB-IVi" firstAttribute="centerY" secondItem="8j9-VA-QuG" secondAttribute="centerY" id="27F-k9-km2"/>
+                                                                                                                                <constraint firstItem="Fpl-NB-IVi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8j9-VA-QuG" secondAttribute="top" constant="1" id="3vK-Xg-bYk"/>
+                                                                                                                                <constraint firstItem="Fpl-NB-IVi" firstAttribute="leading" secondItem="8j9-VA-QuG" secondAttribute="leading" constant="5" id="Gf9-HM-zzR"/>
+                                                                                                                                <constraint firstAttribute="trailing" secondItem="Fpl-NB-IVi" secondAttribute="trailing" constant="5" id="ZNL-k7-KQD"/>
+                                                                                                                            </constraints>
+                                                                                                                        </view>
+                                                                                                                    </subviews>
+                                                                                                                </stackView>
+                                                                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iPU-hT-bJA">
+                                                                                                                    <rect key="frame" x="0.0" y="22.5" width="378" height="13.5"/>
+                                                                                                                    <subviews>
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blt-ei-O9a" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="174.5" height="13.5"/>
+                                                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                                            <nil key="textColor"/>
+                                                                                                                            <nil key="highlightedColor"/>
+                                                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrice" value="YES"/>
+                                                                                                                            </userDefinedRuntimeAttributes>
+                                                                                                                        </label>
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.5 miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gZ-Pe-zJg" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
+                                                                                                                            <rect key="frame" x="174.5" y="0.0" width="203.5" height="13.5"/>
+                                                                                                                            <constraints>
+                                                                                                                                <constraint firstAttribute="height" constant="13.5" id="ami-GQ-cDb"/>
+                                                                                                                            </constraints>
+                                                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                                            <nil key="textColor"/>
+                                                                                                                            <nil key="highlightedColor"/>
+                                                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isDistance" value="YES"/>
+                                                                                                                            </userDefinedRuntimeAttributes>
+                                                                                                                        </label>
+                                                                                                                    </subviews>
+                                                                                                                    <constraints>
+                                                                                                                        <constraint firstAttribute="trailing" secondItem="3gZ-Pe-zJg" secondAttribute="trailing" id="52z-eI-B1E"/>
+                                                                                                                        <constraint firstAttribute="bottom" secondItem="3gZ-Pe-zJg" secondAttribute="bottom" id="XVw-q5-4vQ"/>
+                                                                                                                        <constraint firstItem="3gZ-Pe-zJg" firstAttribute="top" secondItem="iPU-hT-bJA" secondAttribute="top" id="YRT-gV-ckz"/>
+                                                                                                                        <constraint firstItem="3gZ-Pe-zJg" firstAttribute="leading" secondItem="blt-ei-O9a" secondAttribute="trailing" id="tbO-nx-Dgq"/>
+                                                                                                                    </constraints>
+                                                                                                                </stackView>
+                                                                                                            </subviews>
+                                                                                                        </stackView>
+                                                                                                    </subviews>
+                                                                                                    <constraints>
+                                                                                                        <constraint firstItem="fox-e4-8Ua" firstAttribute="centerY" secondItem="o3Z-Mh-1mu" secondAttribute="centerY" id="4T9-iI-gov"/>
+                                                                                                        <constraint firstItem="fox-e4-8Ua" firstAttribute="leading" secondItem="o3Z-Mh-1mu" secondAttribute="leading" id="9DV-vb-SH6"/>
+                                                                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fox-e4-8Ua" secondAttribute="bottom" id="GaA-fk-GNM"/>
+                                                                                                        <constraint firstItem="fox-e4-8Ua" firstAttribute="top" relation="greaterThanOrEqual" secondItem="o3Z-Mh-1mu" secondAttribute="top" id="gyI-HT-JpQ"/>
+                                                                                                        <constraint firstAttribute="trailing" secondItem="fox-e4-8Ua" secondAttribute="trailing" id="jRe-ba-Rhr"/>
+                                                                                                    </constraints>
+                                                                                                </view>
+                                                                                            </subviews>
+                                                                                        </stackView>
+                                                                                    </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="9wl-46-tnH" firstAttribute="leading" secondItem="O4a-Rw-XpR" secondAttribute="leading" id="4fl-9P-psA"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="9wl-46-tnH" secondAttribute="bottom" id="9k1-0D-Xre"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="9wl-46-tnH" secondAttribute="trailing" id="KUf-wM-XrG"/>
+                                                                                        <constraint firstItem="9wl-46-tnH" firstAttribute="top" secondItem="O4a-Rw-XpR" secondAttribute="top" constant="11" id="gwP-4J-1ch"/>
+                                                                                        <constraint firstAttribute="height" constant="47" id="ljq-bK-DrK"/>
+                                                                                    </constraints>
+                                                                                </view>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="jl0-RG-8AF" secondAttribute="bottom" id="8Yg-mZ-nfC"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="jl0-RG-8AF" secondAttribute="trailing" constant="18" id="9sv-50-dar"/>
+                                                                        <constraint firstItem="jl0-RG-8AF" firstAttribute="top" secondItem="XVJ-Yo-LlA" secondAttribute="top" id="IyR-Gz-P8v"/>
+                                                                        <constraint firstItem="jl0-RG-8AF" firstAttribute="leading" secondItem="XVJ-Yo-LlA" secondAttribute="leading" constant="18" id="f6g-Nf-1JY"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="XVJ-Yo-LlA" firstAttribute="top" secondItem="lI8-hK-Hbp" secondAttribute="top" id="Et3-mj-mAm"/>
+                                                                <constraint firstAttribute="trailing" secondItem="XVJ-Yo-LlA" secondAttribute="trailing" id="Z0M-4A-7WC"/>
+                                                                <constraint firstAttribute="bottom" secondItem="XVJ-Yo-LlA" secondAttribute="bottom" id="wbk-ey-czD"/>
+                                                                <constraint firstItem="XVJ-Yo-LlA" firstAttribute="leading" secondItem="lI8-hK-Hbp" secondAttribute="leading" id="xcH-ci-ke2"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="btnFavorite" destination="Agn-W6-Ovh" id="uyo-CV-W1d"/>
+                                                            <outlet property="imgRestaurant" destination="XVa-rj-pdn" id="Y0c-g4-LPW"/>
+                                                            <outlet property="lblAddress" destination="blt-ei-O9a" id="Kqb-5h-8LN"/>
+                                                            <outlet property="lblAreaName" destination="nQS-0Y-4l3" id="e7J-kO-Zre"/>
+                                                            <outlet property="lblMiles" destination="3gZ-Pe-zJg" id="29h-qZ-erZ"/>
+                                                            <outlet property="lblRating" destination="x8F-aD-Slx" id="Ph6-O1-akm"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="7dg-kQ-qgp" firstAttribute="top" secondItem="wpg-Ja-ofz" secondAttribute="top" id="NKg-Dq-5Va"/>
+                                    <constraint firstAttribute="bottom" secondItem="7dg-kQ-qgp" secondAttribute="bottom" id="sgt-ab-or1"/>
+                                    <constraint firstAttribute="trailing" secondItem="7dg-kQ-qgp" secondAttribute="trailing" id="vVi-WW-TKb"/>
+                                    <constraint firstItem="7dg-kQ-qgp" firstAttribute="leading" secondItem="wpg-Ja-ofz" secondAttribute="leading" id="zvJ-mo-fT2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UKn-fX-xJx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wpg-Ja-ofz" firstAttribute="leading" secondItem="UKn-fX-xJx" secondAttribute="leading" id="Gc6-IF-50D"/>
+                            <constraint firstItem="wpg-Ja-ofz" firstAttribute="top" secondItem="UKn-fX-xJx" secondAttribute="top" constant="28" id="QIU-m3-0hU"/>
+                            <constraint firstItem="wpg-Ja-ofz" firstAttribute="trailing" secondItem="UKn-fX-xJx" secondAttribute="trailing" id="ZVK-E5-xNx"/>
+                            <constraint firstItem="UKn-fX-xJx" firstAttribute="bottom" secondItem="wpg-Ja-ofz" secondAttribute="bottom" id="b6B-39-cSa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnFilter" destination="Ij1-Q8-38y" id="OdS-qC-rGj"/>
+                        <outlet property="lblRestaurantName" destination="Zid-lV-TG7" id="HxO-Mq-jDR"/>
+                        <outlet property="tblRestaurantList" destination="raS-py-Wm5" id="0VA-Wo-IhX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KKK-Wl-mHt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6806" y="-1203"/>
         </scene>
         <!--Restaurant DetailsVC-->
         <scene sceneID="pfY-Li-lNE">
@@ -4363,7 +4711,7 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xyb-XP-9ui">
                                                                                 <rect key="frame" x="20.5" y="0.0" width="24" height="15"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cit-Kb-TV4" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cit-Kb-TV4" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="15"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <nil key="textColor"/>
@@ -4388,7 +4736,7 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daw-IZ-cBW">
                                                                                 <rect key="frame" x="50" y="0.0" width="100" height="15"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="53 Reviews" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfh-di-FA0" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfh-di-FA0" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="15"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                         <nil key="textColor"/>
@@ -4694,8 +5042,8 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="2b0-G9-mmM">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="194" height="97"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BFF COMBO MEAL (L)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdh-Yc-sO5" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="17"/>
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdh-Yc-sO5" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="41"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                                                     <nil key="textColor"/>
                                                                                                                     <nil key="highlightedColor"/>
@@ -4703,8 +5051,8 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isPrice" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$19.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vc-2l-J1v" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="26" width="194" height="15.5"/>
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vc-2l-J1v" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                    <rect key="frame" x="0.0" y="50" width="194" height="38"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                                     <nil key="textColor"/>
                                                                                                                     <nil key="highlightedColor"/>
@@ -4712,8 +5060,8 @@
                                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isItem" value="YES"/>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gx-w0-JvE" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="50.5" width="194" height="46.5"/>
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gx-w0-JvE" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                                    <rect key="frame" x="0.0" y="97" width="194" height="0.0"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                                     <nil key="textColor"/>
                                                                                                                     <nil key="highlightedColor"/>
@@ -4891,20 +5239,20 @@
                                                                         </connections>
                                                                     </tableViewCell>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantItemCell" id="oHS-bR-V3a" customClass="RestaurantItemCell" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="139" width="414" height="95.5"/>
+                                                                        <rect key="frame" x="0.0" y="139" width="414" height="117"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oHS-bR-V3a" id="9aZ-0H-pcc">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0CZ-Wd-kYs">
-                                                                                    <rect key="frame" x="18" y="0.0" width="378" height="83.5"/>
+                                                                                    <rect key="frame" x="18" y="0.0" width="378" height="105"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TSn-Qb-UZl">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="83.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="105"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vegetable Sandwich " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d20-J3-Mbd" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="312" height="39.5"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d20-J3-Mbd" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="312" height="50"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -4912,8 +5260,8 @@
                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isItemName" value="YES"/>
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </label>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Small Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAd-2M-Ynn" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="44.5" width="312" height="39"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAd-2M-Ynn" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                    <rect key="frame" x="0.0" y="55" width="312" height="50"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -4924,7 +5272,7 @@
                                                                                             </subviews>
                                                                                         </stackView>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PaS-cT-vc9">
-                                                                                            <rect key="frame" x="312" y="0.0" width="66" height="83.5"/>
+                                                                                            <rect key="frame" x="312" y="0.0" width="66" height="105"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$10.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9U7-VY-4KF" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="66" height="20.5"/>
@@ -5034,7 +5382,7 @@
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </view>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhS-jx-Kzf" customClass="underLineButton" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="53.5" width="66" height="30"/>
+                                                                                                    <rect key="frame" x="0.0" y="53.5" width="66" height="51.5"/>
                                                                                                     <state key="normal" title="Customize"/>
                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isUnderline" value="YES"/>
@@ -6760,6 +7108,8 @@
                                                                                         <outlet property="imgRestaurant" destination="TI1-7g-N7B" id="p3V-ve-RWZ"/>
                                                                                         <outlet property="lblRestDesc" destination="1eu-Jo-iGS" id="lmm-YE-Xdy"/>
                                                                                         <outlet property="lblRestName" destination="Ztc-Td-o3k" id="4kN-q9-ewX"/>
+                                                                                        <outlet property="vwRestDesc" destination="hwo-vj-HU9" id="B3t-ge-XLZ"/>
+                                                                                        <outlet property="vwRestName" destination="rgb-0C-ueJ" id="vQz-yf-vIq"/>
                                                                                     </connections>
                                                                                 </collectionViewCell>
                                                                             </cells>
@@ -7859,8 +8209,62 @@ avoid cancellations </string>
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="G78-jH-dfh">
+            <size key="intrinsicContentSize" width="195" height="32"/>
+        </designable>
+        <designable name="HGY-kw-5YU">
+            <size key="intrinsicContentSize" width="210" height="30"/>
+        </designable>
+        <designable name="IOt-oG-ldn">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="Tme-wR-K6Z">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="oP7-OM-AFy">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="zNM-X4-rQ4">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
+        <image name="Deselect_star" width="32.5" height="31.5"/>
         <image name="DetailsFood" width="161" height="158"/>
         <image name="Dummy-RightShape" width="24" height="24"/>
         <image name="Dummy-Sandwich" width="164" height="120"/>
@@ -7869,6 +8273,7 @@ avoid cancellations </string>
         <image name="RatingImage" width="382" height="231"/>
         <image name="RatingImage-1" width="215.5" height="31.5"/>
         <image name="Review" width="13.5" height="13"/>
+        <image name="Selected_star" width="32.5" height="31.5"/>
         <image name="Shop-1" width="19" height="18"/>
         <image name="adelanteLogo" width="127" height="125"/>
         <image name="dummyPizza" width="20" height="20"/>

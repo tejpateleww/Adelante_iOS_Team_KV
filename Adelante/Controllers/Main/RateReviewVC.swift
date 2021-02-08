@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import Cosmos
 
 class RateReviewVC: BaseViewController {
 
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    
+    var strRestaurantId = ""
+    var strOrderId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var lblRateRestaurant: UILabel!
     @IBOutlet weak var tvRateReview: themeTextView!
     @IBOutlet weak var btnSubmit: submitButton!
+    @IBOutlet weak var vwRating: CosmosView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -40,6 +43,30 @@ class RateReviewVC: BaseViewController {
         btnSubmit.setTitle("RateReviewVC_btnSubmit".Localized(), for: .normal)
     }
     // MARK: - IBActions
+    @IBAction func btnSubmitClick(_ sender: Any) {
+        webserviceReviewRating()
+    }
     
     // MARK: - Api Calls
+    func webserviceReviewRating(){
+        let Rating = RateOrderReqModel()
+        Rating.user_id = SingletonClass.sharedInstance.UserId
+        Rating.order_id = strOrderId
+        Rating.restaurant_id = strRestaurantId
+        Rating.review_count = "\(vwRating.rating)"
+        Rating.feedback = tvRateReview.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        WebServiceSubClass.RateOrder(rateOrder: Rating, showHud: true, completion: { (json, status, response) in
+            //            self.hideHUD()
+            if(status)
+            {
+                Utilities.displayAlert(json["message"].string ?? "")
+                self.tvRateReview.text = ""
+                self.vwRating.rating = 0
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
+    }
 }

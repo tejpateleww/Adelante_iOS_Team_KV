@@ -155,12 +155,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     func setUpLocalizedStrings(){
         lblRestaurantName.text = "RestaurantDetailsVC_lblRestaurantName".Localized()
-        lblRating.text = "4.2"
         lblReviews.text = String(format: "RestaurantDetailsVC_lblReviews".Localized(), "53")
         lblPromoCode.text = "RestaurantDetailsVC_lblPromoCode".Localized()
         lblCode.text = "RestaurantDetailsVC_lblCode".Localized()
         lblDistance.text = String(format: "RestaurantDetailsVC_lblDistance".Localized(), "1.7")
-        lblAddress.text = "43369 Ellsworth St, remont,CA";
         lblOpenTime.text = "RestaurantDetailsVC_lblOpenTime".Localized()
         lblTime.text = "RestaurantDetailsVC_lblTime".Localized()
         lblTimeZone.text = "RestaurantDetailsVC_lblTimeZone".Localized()
@@ -190,6 +188,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             self.lblTime.text = objRestaurant.fromTime ?? ""
             self.lblCompleteTime.text = objRestaurant.toTime ?? ""
             self.lblAboutRestaurant.text = objRestaurant.descriptionField ?? ""
+            self.lblEastern.text = objRestaurant.timezone ?? ""
             let strUrl = "\(APIEnvironment.profileBu.rawValue)\(objRestaurant.image ?? "")"
             self.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
             self.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())

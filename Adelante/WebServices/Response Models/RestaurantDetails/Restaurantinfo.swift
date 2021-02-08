@@ -34,7 +34,7 @@ class Restaurantinfo : NSObject, NSCoding{
     var updatedAt : String!
     var userId : String!
     var zipCode : String!
-
+    var timezone : String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -77,6 +77,7 @@ class Restaurantinfo : NSObject, NSCoding{
         updatedAt = json["updated_at"].stringValue
         userId = json["user_id"].stringValue
         zipCode = json["zip_code"].stringValue
+        timezone = json["timezone"].stringValue
 	}
 
 	/**
@@ -168,6 +169,9 @@ class Restaurantinfo : NSObject, NSCoding{
         if zipCode != nil{
         	dictionary["zip_code"] = zipCode
         }
+        if timezone != nil{
+            dictionary["timezone"] = timezone
+        }
 		return dictionary
 	}
 
@@ -202,6 +206,7 @@ class Restaurantinfo : NSObject, NSCoding{
 		updatedAt = aDecoder.decodeObject(forKey: "updated_at") as? String
 		userId = aDecoder.decodeObject(forKey: "user_id") as? String
 		zipCode = aDecoder.decodeObject(forKey: "zip_code") as? String
+        timezone = aDecoder.decodeObject(forKey: "timezone") as? String
 	}
 
     /**
@@ -285,6 +290,9 @@ class Restaurantinfo : NSObject, NSCoding{
 		if zipCode != nil{
 			aCoder.encode(zipCode, forKey: "zip_code")
 		}
+        if timezone != nil{
+            aCoder.encode(timezone, forKey: "timezone")
+        }
 
 	}
 

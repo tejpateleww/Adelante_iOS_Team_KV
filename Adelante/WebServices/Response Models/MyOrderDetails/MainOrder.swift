@@ -23,7 +23,9 @@ class MainOrder : NSObject, NSCoding{
     var username : String!
     var sub_total : String!
     var street : String!
-
+    var qrcode : String!
+    var restaurant_id : String!
+    var main_order_id : String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -50,6 +52,9 @@ class MainOrder : NSObject, NSCoding{
         username = json["username"].stringValue
         sub_total = json["sub_total"].stringValue
         street = json["street"].stringValue
+        qrcode = json["qrcode"].stringValue
+        restaurant_id = json["restaurant_id"].stringValue
+        main_order_id = json["main_order_id"].stringValue
 	}
 
 	/**
@@ -104,6 +109,15 @@ class MainOrder : NSObject, NSCoding{
         if street != nil{
             dictionary["street"] = street
         }
+        if qrcode != nil{
+            dictionary["qrcode"] = qrcode
+        }
+        if restaurant_id != nil{
+            dictionary["restaurant_id"] = restaurant_id
+        }
+        if main_order_id != nil{
+            dictionary["main_order_id"] = main_order_id
+        }
 		return dictionary
 	}
 
@@ -127,6 +141,9 @@ class MainOrder : NSObject, NSCoding{
 		username = aDecoder.decodeObject(forKey: "username") as? String
         sub_total = aDecoder.decodeObject(forKey: "sub_total") as? String
         street = aDecoder.decodeObject(forKey: "street") as? String
+        qrcode = aDecoder.decodeObject(forKey: "qrcode") as? String
+        restaurant_id = aDecoder.decodeObject(forKey: "restaurant_id") as? String
+        main_order_id = aDecoder.decodeObject(forKey: "main_order_id") as? String
 	}
 
     /**
@@ -176,6 +193,15 @@ class MainOrder : NSObject, NSCoding{
         }
         if street != nil{
             aCoder.encode(street, forKey: "street")
+        }
+        if qrcode != nil{
+            aCoder.encode(qrcode, forKey: "qrcode")
+        }
+        if restaurant_id != nil{
+            aCoder.encode(restaurant_id, forKey: "restaurant_id")
+        }
+        if main_order_id != nil{
+            aCoder.encode(main_order_id, forKey: "main_order_id")
         }
 	}
 

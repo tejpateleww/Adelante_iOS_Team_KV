@@ -66,6 +66,10 @@
 		347D955C25A71637000C64B5 /* DashBoardResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347D955825A71637000C64B5 /* DashBoardResModel.swift */; };
 		347D955D25A71637000C64B5 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347D955925A71637000C64B5 /* Banner.swift */; };
 		347D955E25A71637000C64B5 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347D955A25A71637000C64B5 /* Restaurant.swift */; };
+		349347B325D10EEB006366B4 /* RestaurantOutletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349347B225D10EEB006366B4 /* RestaurantOutletVC.swift */; };
+		349347BA25D11562006366B4 /* RestaurantOutletListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349347B925D11562006366B4 /* RestaurantOutletListCell.swift */; };
+		349347BD25D13FBF006366B4 /* RateOrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349347BC25D13FBE006366B4 /* RateOrderReqModel.swift */; };
+		349347C025D1530E006366B4 /* CancelOrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349347BF25D1530D006366B4 /* CancelOrderReqModel.swift */; };
 		3498BA8625C155C3007CD695 /* FeedbackReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498BA8525C155C2007CD695 /* FeedbackReqModel.swift */; };
 		34A5382D25A6D46E000037C5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5382C25A6D46E000037C5 /* UIImage+Extension.swift */; };
 		34A9003F25947A8500EAD2FF /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34A9004125947A8500EAD2FF /* Auth.storyboard */; };
@@ -268,6 +272,10 @@
 		347D955825A71637000C64B5 /* DashBoardResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardResModel.swift; sourceTree = "<group>"; };
 		347D955925A71637000C64B5 /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		347D955A25A71637000C64B5 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		349347B225D10EEB006366B4 /* RestaurantOutletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantOutletVC.swift; sourceTree = "<group>"; };
+		349347B925D11562006366B4 /* RestaurantOutletListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantOutletListCell.swift; sourceTree = "<group>"; };
+		349347BC25D13FBE006366B4 /* RateOrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateOrderReqModel.swift; sourceTree = "<group>"; };
+		349347BF25D1530D006366B4 /* CancelOrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOrderReqModel.swift; sourceTree = "<group>"; };
 		3498BA8525C155C2007CD695 /* FeedbackReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackReqModel.swift; sourceTree = "<group>"; };
 		34A5382C25A6D46E000037C5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		34A9004025947A8500EAD2FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
@@ -483,6 +491,7 @@
 				3431E07125932587002F1435 /* orderDetailsCell.swift */,
 				3431E073259325BF002F1435 /* addedProductCell.swift */,
 				34CF866525A81BC90040C188 /* SearchCell.swift */,
+				349347B925D11562006366B4 /* RestaurantOutletListCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -737,6 +746,7 @@
 				81E6720E257E506100DCE9DA /* RestaurantListVC.swift */,
 				81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */,
 				18F369502580ADFE00992FCD /* BffComboVC.swift */,
+				349347B225D10EEB006366B4 /* RestaurantOutletVC.swift */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -893,6 +903,8 @@
 				34EE68E825CC15E300056D62 /* AddPaymentDeleteReqModel.swift */,
 				34D3755825CD005800B48A80 /* MyOrderDetailsReqModel.swift */,
 				347AA2D525CD10620010BCF2 /* OrderListReqModel.swift */,
+				349347BC25D13FBE006366B4 /* RateOrderReqModel.swift */,
+				349347BF25D1530D006366B4 /* CancelOrderReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1228,6 +1240,7 @@
 				81CFFD842574C60D005AA86A /* UISearchbar+Extension.swift in Sources */,
 				347AA2D625CD10620010BCF2 /* OrderListReqModel.swift in Sources */,
 				81CFFD7C2574C60D005AA86A /* UIColor+Extension.swift in Sources */,
+				349347C025D1530E006366B4 /* CancelOrderReqModel.swift in Sources */,
 				817A171A2583ABF900C11BB2 /* applyPromoCodeVC.swift in Sources */,
 				34D603A025A8630300C82D63 /* RestaurantList.swift in Sources */,
 				34EBD2A625C9728400EC643A /* MonthYearPickerView.swift in Sources */,
@@ -1292,12 +1305,14 @@
 				3431E06025931FF3002F1435 /* myAccountSubDetails.swift in Sources */,
 				34525EB225AEF40800406EB6 /* RestaurantFavoriteReqModel.swift in Sources */,
 				345FC23F25BEB0B300795BE7 /* EditLocationVC.swift in Sources */,
+				349347B325D10EEB006366B4 /* RestaurantOutletVC.swift in Sources */,
 				34CF870E25A82A550040C188 /* Datum.swift in Sources */,
 				81CFFD782574C60D005AA86A /* Validators.swift in Sources */,
 				34C3756525CD41970049289A /* Item.swift in Sources */,
 				8170CAF7257A10B500B24B7A /* ChangePasswordVC.swift in Sources */,
 				8105FDCF2574F714008D36D6 /* SplashVC.swift in Sources */,
 				8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */,
+				349347BD25D13FBF006366B4 /* RateOrderReqModel.swift in Sources */,
 				81CFFD7D2574C60D005AA86A /* UILabel+Extension.swift in Sources */,
 				3443D61F25C11E62001CFAFE /* SubMenu.swift in Sources */,
 				34CF870F25A82A550040C188 /* SearchResModel.swift in Sources */,
@@ -1351,6 +1366,7 @@
 				34C3756225CD41970049289A /* MainOrder.swift in Sources */,
 				8170CAEF257A10B500B24B7A /* RestaurantReviewVC.swift in Sources */,
 				3431E070259324CA002F1435 /* RestaurantCatListCell.swift in Sources */,
+				349347BA25D11562006366B4 /* RestaurantOutletListCell.swift in Sources */,
 				8105FDC52574D659008D36D6 /* NavigationItems.swift in Sources */,
 				81CFFD722574C60D005AA86A /* Constants.swift in Sources */,
 			);

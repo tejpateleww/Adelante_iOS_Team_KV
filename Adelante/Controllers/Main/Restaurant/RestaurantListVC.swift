@@ -152,7 +152,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantListCell.reuseIdentifier, for: indexPath) as! RestaurantListCell
         cell.lblName.text = arrRestaurantList[indexPath.row].name
         cell.lblRating.text = arrRestaurantList[indexPath.row].review
-        cell.lblMiles.text = String(format: "HomeVC_RestaurantCell_lblMiles".Localized(), arrRestaurantList[indexPath.row].distance)
+        cell.lblMiles.text = arrRestaurantList[indexPath.row].distance
         let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurantList[indexPath.row].image ?? "")"
         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
