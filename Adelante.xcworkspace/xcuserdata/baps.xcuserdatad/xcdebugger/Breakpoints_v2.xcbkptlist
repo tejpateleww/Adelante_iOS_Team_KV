@@ -7,16 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D3D85F27-D80C-4AF5-819B-F55DFB41AD37"
+            uuid = "21FFDBBC-FE71-48D2-917B-0E264298E183"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/MyOrders/MyOrderDetailsVC.swift"
+            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantOutletVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "webserviceCancelOrder()"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "webwerviceFavorite(strRestaurantId:Status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB02C917-FB53-4228-AE93-49D192F4F38F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantOutletVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "webserviceGetRestaurantOutlet(strFilter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "88F7BA1C-4C40-4AC6-9AD9-86E824DF16E7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantOutletVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "btnTapFavorite(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

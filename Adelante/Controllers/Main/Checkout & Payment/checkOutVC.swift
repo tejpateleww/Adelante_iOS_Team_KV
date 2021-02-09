@@ -13,6 +13,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var objCurrentorder : currentOrder?
+    var strOrderId = ""
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
@@ -51,6 +52,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 //        tblAddProductHeight.constant = CGFloat(arrayForTitle.count * 60)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        webserviceRepeatOrder()
         setData()
         addMapView()
         // Do any additional setup after loading the view.
@@ -295,4 +297,23 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "checkOutVC_strSubmit_title".Localized(), strCancelButtonTitle: "checkOutVC_strCancel_title".Localized(), strDescription: "checkOutVC_strDescription_title2".Localized(), strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
     }
     // MARK: - Api Calls
+    func webserviceRepeatOrder(){
+        let repeatOrder = RepeatOrderReqModel()
+        repeatOrder.user_id = SingletonClass.sharedInstance.UserId
+        repeatOrder.main_order_id = strOrderId
+        repeatOrder.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+        repeatOrder.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        WebServiceSubClass.RepeatOrder(repeatOrder: repeatOrder, showHud: true, completion: { (json, status, response) in
+            if(status)
+            {
+                let repeatOrderData = RepeatOrderResModel.init(fromJson: json)
+//                self.objOrderData = repeatOrderData.data
+                Utilities.displayAlert(json["message"].string ?? "")
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
+    }
 }

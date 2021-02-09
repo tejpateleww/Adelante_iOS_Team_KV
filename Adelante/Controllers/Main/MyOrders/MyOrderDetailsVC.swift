@@ -13,7 +13,7 @@ protocol orderCancelDelegate {
     func refreshOrderDetailsScreen()
 }
 class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Properties
     var delegateCancelOrder : orderCancelDelegate!
     var customTabBarController: CustomTabBarVC?
@@ -58,11 +58,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         webserviceOrderDetails()
         tblItems.rowHeight = UITableView.automaticDimension
         tblItems.estimatedRowHeight = 66.5
-//        self.heightTblItems.constant = tblItems.contentSize.height
+        //        self.heightTblItems.constant = tblItems.contentSize.height
         setup()
         
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
@@ -120,10 +120,10 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-
-//        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appRedColor, cancelBtnColor: colors.appRedColor, viewController: self)
+        
+        //        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appRedColor, cancelBtnColor: colors.appRedColor, viewController: self)
         webserviceCancelOrder()
-//        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor.value, cancelBtnColor: colors.appOrangeColor.value ,viewController: self)
+        //        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor.value, cancelBtnColor: colors.appOrangeColor.value ,viewController: self)
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {
@@ -134,49 +134,49 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
-//        self.isSharedOrder = true
+        //        self.isSharedOrder = true
         let text = ""
-               // set up activity view controller
-               let textToShare = [ text ]
-               let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-               activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-
-               // exclude some activity types from the list (optional)
+        // set up activity view controller
+        let textToShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-
-               // present the view controller
-               self.present(activityViewController, animated: true, completion: nil)
-//        setUpOrderDetails()
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+        //        setUpOrderDetails()
     }
     
     // MARK: - UITableView Delegates & Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrItem.count
     }
-        
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
         cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
         cell.lblDateTime.text = arrItem[indexPath.row].date
         cell.lblSharedFrom.isHidden = true
-//        if selectedSegmentTag == 1 && isSharedOrder{
-//            cell.lblSharedFrom.isHidden = false
-//            cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
-//            cell.lblDateTime.text = arrItem[indexPath.row].date
-//        } else {
-//            if indexPath.row == 1{
-//
-//                cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
-//                cell.lblDateTime.text = arrItem[indexPath.row].date
-//            }
-//        }
+        //        if selectedSegmentTag == 1 && isSharedOrder{
+        //            cell.lblSharedFrom.isHidden = false
+        //            cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
+        //            cell.lblDateTime.text = arrItem[indexPath.row].date
+        //        } else {
+        //            if indexPath.row == 1{
+        //
+        //                cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
+        //                cell.lblDateTime.text = arrItem[indexPath.row].date
+        //            }
+        //        }
         cell.selectionStyle = .none
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        return UITableView.automaticDimension
+    //    }
     func setUpLocalizedStrings()
     {
         lblOrderId.text = "MyOrderDetailsVC_lblOrderId".Localized()
@@ -223,11 +223,25 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         cancelOrder.user_id = SingletonClass.sharedInstance.UserId
         cancelOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
-            //            self.hideHUD()
             if(status)
             {
                 Utilities.displayAlert(json["message"].string ?? "")
                 self.delegateCancelOrder.refreshOrderDetailsScreen()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
+    }
+    func webserviceShareOrder(){
+        let shareOrder = shareOrderReqModel()
+        shareOrder.user_type = ""
+        shareOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
+        WebServiceSubClass.ShareOrder(shareOrder: shareOrder, showHud: true, completion: { (json, status, response) in
+            if(status)
+            {
+                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {

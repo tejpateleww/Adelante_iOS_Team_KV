@@ -116,6 +116,18 @@ class WebServiceSubClass
         let  params : [String:String] = cancelOrder.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .CancelOrder, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    class func ShareOrder( shareOrder : shareOrderReqModel, showHud : Bool = false , completion:@escaping CompletionResponse ){
+        let params : [String:String] = shareOrder.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .ShareOrder, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
+    class func RepeatOrder( repeatOrder : RepeatOrderReqModel, showHud : Bool = false , completion:@escaping CompletionResponse ){
+        let params : [String:String] = repeatOrder.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .RepeatOrder, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
+    class func RestaurantOutlet( OutletModel : RestaurantOutletReqModel, showHud : Bool = false , completion:@escaping CompletionResponse ){
+        let params : [String:String] = OutletModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Outlets, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
 }
 
 

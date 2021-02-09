@@ -1,19 +1,18 @@
 //
-//  RestaurantListReqModel.swift
+//  RestaurantOutletReqModel.swift
 //  Adelante
 //
-//  Created by baps on 08/01/21.
+//  Created by baps on 09/02/21.
 //  Copyright © 2021 EWW071. All rights reserved.
 //
 
 import Foundation
-class RestaurantListReqModel:RequestModel{
+class RestaurantOutletReqModel:RequestModel{
     var user_id : String = ""
     var filter : String = ""
     var item : String = ""
     var page : String = ""
-    var item_id : String = ""
-    var item_type : String = ""
+    var restaurant_id : String = ""
     var lat : String = ""
     var lng : String = ""
 }

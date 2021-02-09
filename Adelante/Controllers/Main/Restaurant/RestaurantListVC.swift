@@ -35,18 +35,13 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         setUpLocalizedStrings()
-//        webserviceGetRestaurantList(strSearch: "", strFilter: "")
         txtSearch.backgroundImage = UIImage()
         let button = UIButton()
         //        button.backgroundColor = .green
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
-//        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesVC
-        
         NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantList, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshRestaurantList, object: nil)
-        
-        
         setup()
     }
     
@@ -124,7 +119,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }else{
                 Select = "1"
             }
-            webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+            webserviceFavorite(strRestaurantId: restaurantId, Status: Select)
         }
     }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
@@ -185,7 +180,9 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         RestaurantList.item_id = strItemId
         RestaurantList.item_type = strItemType
         RestaurantList.page = "\(pageNumber)"
-        WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: false, completion: { (response, status, error) in
+        RestaurantList.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+        RestaurantList.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantListResModel.init(fromJson: response)
@@ -216,7 +213,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
-    func webwerviceFavorite(strRestaurantId:String,Status:String){
+    func webserviceFavorite(strRestaurantId:String,Status:String){
         let favorite = FavoriteReqModel()
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status

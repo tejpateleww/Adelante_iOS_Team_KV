@@ -1,16 +1,15 @@
 //
-//  RestaurantDetails.swift
+//  RepeatOrderReqModel.swift
 //  Adelante
 //
-//  Created by baps on 08/01/21.
+//  Created by baps on 09/02/21.
 //  Copyright © 2021 EWW071. All rights reserved.
 //
 
 import Foundation
-class RestaurantDetailsReqModel:RequestModel{
-    var restaurant_id : String = ""
-    var page : String = ""
+class RepeatOrderReqModel:RequestModel{
     var user_id : String = ""
+    var main_order_id : String = ""
     var lat : String = ""
     var lng : String = ""
 }

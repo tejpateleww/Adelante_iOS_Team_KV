@@ -41,6 +41,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var isFromDeshboard : Bool = false
     var isFromRestaurantList : Bool = false
     var isFromFavoriteList : Bool = false
+    var isFromRestaurantOutlets : Bool = false
     // MARK: - IBOutlets
     @IBOutlet weak var tblRestaurantDetails: UITableView!
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
@@ -702,6 +703,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         ResDetails.restaurant_id = selectedRestaurantId
         ResDetails.page = "\(pageNumber)"
         ResDetails.user_id = SingletonClass.sharedInstance.UserId
+        ResDetails.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+        ResDetails.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status {

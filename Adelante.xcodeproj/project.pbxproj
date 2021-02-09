@@ -15,6 +15,15 @@
 		3400019825C7EB8E00C584DE /* Variant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3400019525C7EB8E00C584DE /* Variant.swift */; };
 		3400019B25C7ED0400C584DE /* RestaurantVariantsReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3400019A25C7ED0400C584DE /* RestaurantVariantsReqModel.swift */; };
 		340A4C7225A3291F00FB6061 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A4C7125A3291F00FB6061 /* Profile.swift */; };
+		340D4AEC25D23A84007CC54B /* shareOrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4AEB25D23A84007CC54B /* shareOrderReqModel.swift */; };
+		340D4AEF25D241CB007CC54B /* RepeatOrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4AEE25D241CB007CC54B /* RepeatOrderReqModel.swift */; };
+		340D4AF625D25CB8007CC54B /* SubOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4AF225D25CB7007CC54B /* SubOrder.swift */; };
+		340D4AF725D25CB8007CC54B /* orderVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4AF325D25CB7007CC54B /* orderVariant.swift */; };
+		340D4AF825D25CB8007CC54B /* RepeatOrderResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4AF425D25CB7007CC54B /* RepeatOrderResModel.swift */; };
+		340D4AF925D25CB8007CC54B /* orderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4AF525D25CB8007CC54B /* orderData.swift */; };
+		340D4AFE25D26DFA007CC54B /* RestaurantOutletReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4AFD25D26DFA007CC54B /* RestaurantOutletReqModel.swift */; };
+		340D4B0325D273D3007CC54B /* OutletData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4B0125D273D3007CC54B /* OutletData.swift */; };
+		340D4B0425D273D3007CC54B /* RestaurantOutletsResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340D4B0225D273D3007CC54B /* RestaurantOutletsResModel.swift */; };
 		342ADF3D25B717820097B5AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 342ADF3C25B717820097B5AD /* GoogleService-Info.plist */; };
 		342C545A25CBB2E80098F573 /* AddPaymentReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C545925CBB2E80098F573 /* AddPaymentReqModel.swift */; };
 		342C579F25CBC94D0098F573 /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C579D25CBC94D0098F573 /* CardList.swift */; };
@@ -220,6 +229,15 @@
 		3400019525C7EB8E00C584DE /* Variant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variant.swift; sourceTree = "<group>"; };
 		3400019A25C7ED0400C584DE /* RestaurantVariantsReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVariantsReqModel.swift; sourceTree = "<group>"; };
 		340A4C7125A3291F00FB6061 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		340D4AEB25D23A84007CC54B /* shareOrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shareOrderReqModel.swift; sourceTree = "<group>"; };
+		340D4AEE25D241CB007CC54B /* RepeatOrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatOrderReqModel.swift; sourceTree = "<group>"; };
+		340D4AF225D25CB7007CC54B /* SubOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubOrder.swift; sourceTree = "<group>"; };
+		340D4AF325D25CB7007CC54B /* orderVariant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = orderVariant.swift; sourceTree = "<group>"; };
+		340D4AF425D25CB7007CC54B /* RepeatOrderResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatOrderResModel.swift; sourceTree = "<group>"; };
+		340D4AF525D25CB8007CC54B /* orderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = orderData.swift; sourceTree = "<group>"; };
+		340D4AFD25D26DFA007CC54B /* RestaurantOutletReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantOutletReqModel.swift; sourceTree = "<group>"; };
+		340D4B0125D273D3007CC54B /* OutletData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutletData.swift; sourceTree = "<group>"; };
+		340D4B0225D273D3007CC54B /* RestaurantOutletsResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantOutletsResModel.swift; sourceTree = "<group>"; };
 		342ADF3A25B70A170097B5AD /* Adelante.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Adelante.entitlements; sourceTree = "<group>"; };
 		342ADF3C25B717820097B5AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		342C545925CBB2E80098F573 /* AddPaymentReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentReqModel.swift; sourceTree = "<group>"; };
@@ -447,6 +465,26 @@
 				3400019525C7EB8E00C584DE /* Variant.swift */,
 			);
 			path = RestaurantVariant;
+			sourceTree = "<group>";
+		};
+		340D4AF125D25C0F007CC54B /* RepeatOrder */ = {
+			isa = PBXGroup;
+			children = (
+				340D4AF525D25CB8007CC54B /* orderData.swift */,
+				340D4AF425D25CB7007CC54B /* RepeatOrderResModel.swift */,
+				340D4AF225D25CB7007CC54B /* SubOrder.swift */,
+				340D4AF325D25CB7007CC54B /* orderVariant.swift */,
+			);
+			path = RepeatOrder;
+			sourceTree = "<group>";
+		};
+		340D4B0025D2738E007CC54B /* RestaurantOutlets */ = {
+			isa = PBXGroup;
+			children = (
+				340D4B0125D273D3007CC54B /* OutletData.swift */,
+				340D4B0225D273D3007CC54B /* RestaurantOutletsResModel.swift */,
+			);
+			path = RestaurantOutlets;
 			sourceTree = "<group>";
 		};
 		342C545325CBB1A40098F573 /* AddPayment */ = {
@@ -850,6 +888,8 @@
 		81CFFD392574C60D005AA86A /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				340D4B0025D2738E007CC54B /* RestaurantOutlets */,
+				340D4AF125D25C0F007CC54B /* RepeatOrder */,
 				347AA2CE25CD0A440010BCF2 /* OrderListing */,
 				34D3755B25CD01F800B48A80 /* MyOrderDetails */,
 				342C545325CBB1A40098F573 /* AddPayment */,
@@ -905,6 +945,9 @@
 				347AA2D525CD10620010BCF2 /* OrderListReqModel.swift */,
 				349347BC25D13FBE006366B4 /* RateOrderReqModel.swift */,
 				349347BF25D1530D006366B4 /* CancelOrderReqModel.swift */,
+				340D4AEB25D23A84007CC54B /* shareOrderReqModel.swift */,
+				340D4AEE25D241CB007CC54B /* RepeatOrderReqModel.swift */,
+				340D4AFD25D26DFA007CC54B /* RestaurantOutletReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1225,10 +1268,13 @@
 				34D603A525A8643B00C82D63 /* RestaurantListReqModel.swift in Sources */,
 				3443D61D25C11E61001CFAFE /* RestaurantDetailsData.swift in Sources */,
 				343C5A6225BFE98400C6A7CA /* CustomTabBarVC.swift in Sources */,
+				340D4AF625D25CB8007CC54B /* SubOrder.swift in Sources */,
+				340D4AF825D25CB8007CC54B /* RepeatOrderResModel.swift in Sources */,
 				345EA8F225B5477100A4E56D /* restaurantDetailsList.swift in Sources */,
 				3431E0682593224C002F1435 /* RestWithPageCell.swift in Sources */,
 				81CFFD852574C60D005AA86A /* Data+Extensions.swift in Sources */,
 				81CFFD872574C60D005AA86A /* customTextField.swift in Sources */,
+				340D4AEC25D23A84007CC54B /* shareOrderReqModel.swift in Sources */,
 				3431E04A25931B70002F1435 /* MyOrdersCell.swift in Sources */,
 				81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */,
 				34EE68E925CC15E300056D62 /* AddPaymentDeleteReqModel.swift in Sources */,
@@ -1238,6 +1284,7 @@
 				8105FDD325751289008D36D6 /* customButton.swift in Sources */,
 				34C3756425CD41970049289A /* MyorderDetailsResModel.swift in Sources */,
 				81CFFD842574C60D005AA86A /* UISearchbar+Extension.swift in Sources */,
+				340D4AF925D25CB8007CC54B /* orderData.swift in Sources */,
 				347AA2D625CD10620010BCF2 /* OrderListReqModel.swift in Sources */,
 				81CFFD7C2574C60D005AA86A /* UIColor+Extension.swift in Sources */,
 				349347C025D1530E006366B4 /* CancelOrderReqModel.swift in Sources */,
@@ -1260,9 +1307,11 @@
 				8105FDC12574D0F9008D36D6 /* FavouritesVC.swift in Sources */,
 				3431E074259325BF002F1435 /* addedProductCell.swift in Sources */,
 				3498BA8625C155C3007CD695 /* FeedbackReqModel.swift in Sources */,
+				340D4AFE25D26DFA007CC54B /* RestaurantOutletReqModel.swift in Sources */,
 				8170CAF2257A10B500B24B7A /* NotificationVC.swift in Sources */,
 				81CFFD712574C60D005AA86A /* LoginReqModel.swift in Sources */,
 				347D955C25A71637000C64B5 /* DashBoardResModel.swift in Sources */,
+				340D4B0325D273D3007CC54B /* OutletData.swift in Sources */,
 				3443D62125C11E62001CFAFE /* Restaurantinfo.swift in Sources */,
 				347AA2D125CD0AD90010BCF2 /* orderListingResModel.swift in Sources */,
 				3431E05825931DC8002F1435 /* RestaurantDetailsCell.swift in Sources */,
@@ -1307,6 +1356,7 @@
 				345FC23F25BEB0B300795BE7 /* EditLocationVC.swift in Sources */,
 				349347B325D10EEB006366B4 /* RestaurantOutletVC.swift in Sources */,
 				34CF870E25A82A550040C188 /* Datum.swift in Sources */,
+				340D4AEF25D241CB007CC54B /* RepeatOrderReqModel.swift in Sources */,
 				81CFFD782574C60D005AA86A /* Validators.swift in Sources */,
 				34C3756525CD41970049289A /* Item.swift in Sources */,
 				8170CAF7257A10B500B24B7A /* ChangePasswordVC.swift in Sources */,
@@ -1353,6 +1403,7 @@
 				3431E04C25931C15002F1435 /* CategoryCell.swift in Sources */,
 				347D955B25A71637000C64B5 /* Category.swift in Sources */,
 				8170CAF6257A10B500B24B7A /* CommonWebViewVC.swift in Sources */,
+				340D4B0425D273D3007CC54B /* RestaurantOutletsResModel.swift in Sources */,
 				8170CAF0257A10B500B24B7A /* EditProfileVC.swift in Sources */,
 				3431E07225932587002F1435 /* orderDetailsCell.swift in Sources */,
 				34CF866F25A825120040C188 /* SearchReqModel.swift in Sources */,
@@ -1363,6 +1414,7 @@
 				81CFFD762574C60D005AA86A /* WebServicesSubClass.swift in Sources */,
 				81CFFD832574C60D005AA86A /* UITextField+Extension.swift in Sources */,
 				81CFFD732574C60D005AA86A /* Utilities.swift in Sources */,
+				340D4AF725D25CB8007CC54B /* orderVariant.swift in Sources */,
 				34C3756225CD41970049289A /* MainOrder.swift in Sources */,
 				8170CAEF257A10B500B24B7A /* RestaurantReviewVC.swift in Sources */,
 				3431E070259324CA002F1435 /* RestaurantCatListCell.swift in Sources */,

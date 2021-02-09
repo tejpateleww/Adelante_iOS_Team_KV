@@ -295,7 +295,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         if indexPath.row != 0
         {
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
-//            controller.selectedRestaurantId = arrRestaurant[indexPath.row - 1].id
+            controller.selectedRestaurantId = arrRestaurant[indexPath.row - 1].id
+            controller.strRestaurantName = arrRestaurant[indexPath.row - 1].name
 //            controller.selectedIndex = "\(indexPath.row - 1)"
 //            controller.isFromDeshboard = true
             self.navigationController?.pushViewController(controller, animated: true)

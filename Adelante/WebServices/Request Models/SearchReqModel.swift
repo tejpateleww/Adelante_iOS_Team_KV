@@ -9,4 +9,6 @@
 import Foundation
 class SearchReqModel:RequestModel {
     var item : String = ""
+    var lat : String = ""
+    var lng : String = ""
 }

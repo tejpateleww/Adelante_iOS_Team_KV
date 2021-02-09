@@ -19,6 +19,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var selectedSegmentTag = 0
     var refreshList = UIRefreshControl()
     var arrOrderListing = [orderListingData]()
+    var isRepeatFrom = false
+    var strOrderId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblOrders: UITableView!
     
@@ -104,12 +106,14 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
 //        cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeatNew), for: .touchUpInside)
+        strOrderId = arrOrderListing[indexPath.row].id
         cell.Repeat = {
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
+            controller.strOrderId = self.arrOrderListing[indexPath.row].id
             self.navigationController?.pushViewController(controller, animated: true)
         }
         cell.cancel = {
-            
+            self.webserviceCancelOrder()
         }
         
         cell.selectionStyle = .none
@@ -128,7 +132,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     
     
     // MARK: - Api Calls
-   func webserviceGetOrderDetail(selectedOrder:String){
+    func webserviceGetOrderDetail(selectedOrder:String){
         let orderList = OrderListReqModel()
         orderList.user_id = SingletonClass.sharedInstance.UserId
         orderList.type = selectedOrder
@@ -142,13 +146,35 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if self.arrOrderListing.count > 0{
+                    self.tblOrders.restore()
+                }else {
+                    self.tblOrders.setEmptyMessage("emptyMsg_Restaurant".Localized())
+                }
+            }
+            DispatchQueue.main.async {
+                self.refreshList.endRefreshing()
             }
         })
-        DispatchQueue.main.async {
-            self.refreshList.endRefreshing()
-        }
     }
     func refreshOrderDetailsScreen() {
         webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
+    }
+    func webserviceCancelOrder(){
+        let cancelOrder = CancelOrderReqModel()
+        cancelOrder.user_id = SingletonClass.sharedInstance.UserId
+        cancelOrder.main_order_id = strOrderId
+        WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
+            if(status)
+            {
+                Utilities.displayAlert("", message: json["message"].string ?? "", completion: {_ in
+                    self.refreshOrderDetailsScreen()
+                }, otherTitles: nil)
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+            }
+        })
     }
 }
