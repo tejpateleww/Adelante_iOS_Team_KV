@@ -134,19 +134,34 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
-        //        self.isSharedOrder = true
+        self.isSharedOrder = true
         let text = ""
-        // set up activity view controller
-        let textToShare = [ text ]
+        let textToShare = [ "Order share successfully." ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            
+//            switch activityType {
+//            case .message:
+//                self.webserviceShareOrder(strUsertype: SingletonClass.sharedInstance.LoginRegisterUpdateData?.phone)
+//            case .mail :
+//
+//            case .
+//            default:
+//                break
+//            }
+//
+//
+//            if !completed {
+//                // User canceled
+//                return
+//            }
+            // User completed activity
+        }
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-        
-        // present the view controller
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
         self.present(activityViewController, animated: true, completion: nil)
-        //        setUpOrderDetails()
+        
+      
     }
     
     // MARK: - UITableView Delegates & Datasource
@@ -234,9 +249,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
-    func webserviceShareOrder(){
+    func webserviceShareOrder(strUsertype:String){
         let shareOrder = shareOrderReqModel()
-        shareOrder.user_type = ""
+        shareOrder.user_type = strUsertype
         shareOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
         WebServiceSubClass.ShareOrder(shareOrder: shareOrder, showHud: true, completion: { (json, status, response) in
             if(status)

@@ -8,13 +8,11 @@
 
 import UIKit
 import SDWebImage
-class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,favoriteDelegate {
+class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewDataSource{
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
-    var strItemId = ""
-    var strItemType = ""
     var pageNumber = 1
     var isNeedToReload = true
     var pageLimit = 5
@@ -109,7 +107,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             }else{
                 Select = "1"
             }
-            webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+            webserviceFavorite(strRestaurantId: restaurantId, Status: Select)
         }
     }
     @IBAction func btnFilterClick(_ sender: UIButton) {
@@ -140,6 +138,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+        cell.btnFavorite.tag = indexPath.row
         cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
         if arrOutletList[indexPath.row].favourite == "1"{
             cell.btnFavorite.isSelected = true
@@ -149,13 +148,13 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         cell.selectionStyle = .none
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
             controller.selectedRestaurantId = arrOutletList[indexPath.row].id
-            controller.selectedIndex = "\(indexPath.row)"
-            controller.isFromRestaurantOutlets = true
             self.navigationController?.pushViewController(controller, animated: true)
     }
+    
     // MARK: - Api Calls
     func webserviceGetRestaurantOutlet(strFilter:String){
         let RestaurantOutletList = RestaurantOutletReqModel()
@@ -199,12 +198,9 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             }
         })
     }
-    func refreshFavoriteScreen() {
-        webserviceGetRestaurantOutlet(strFilter: "")
-    }
-    func webwerviceFavorite(strRestaurantId:String,Status:String){
+    func webserviceFavorite(strRestaurantId:String,Status:String){
         let favorite = FavoriteReqModel()
-        favorite.restaurant_id = selectedRestaurantId
+        favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in

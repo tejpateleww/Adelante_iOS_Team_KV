@@ -102,7 +102,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             lblSign.isHidden = true
         }
     }
-    
     @objc func refreshRestaurantDetail() {
         setData()
         self.objCurrentOrder = SingletonClass.sharedInstance.restCurrentOrder
@@ -294,6 +293,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantReviewVC.storyboardID) as! RestaurantReviewVC
+        controller.strRestaurantId = selectedRestaurantId
         self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func btnViewCart(_ sender: Any) {
@@ -539,7 +539,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             cell.lblItemPrice.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].price
             cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].size
             cell.lblNoOfItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].selectedQuantity
-            
             cell.btnAdd.isHidden = false
             cell.vwStapper.isHidden = true
             if Int(arrFoodMenu[indexPath.section].subMenu[indexPath.row].selectedQuantity) ?? 0 > 0 {

@@ -80,6 +80,10 @@
 		349347BD25D13FBF006366B4 /* RateOrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349347BC25D13FBE006366B4 /* RateOrderReqModel.swift */; };
 		349347C025D1530E006366B4 /* CancelOrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349347BF25D1530D006366B4 /* CancelOrderReqModel.swift */; };
 		3498BA8625C155C3007CD695 /* FeedbackReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498BA8525C155C2007CD695 /* FeedbackReqModel.swift */; };
+		34A260DF25D3B26000E24D73 /* ReviewListResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A260DC25D3B25F00E24D73 /* ReviewListResModel.swift */; };
+		34A260E025D3B26000E24D73 /* ReviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A260DD25D3B26000E24D73 /* ReviewData.swift */; };
+		34A260E125D3B26000E24D73 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A260DE25D3B26000E24D73 /* Detail.swift */; };
+		34A260E525D3B43800E24D73 /* ReviewListReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A260E425D3B43800E24D73 /* ReviewListReqModel.swift */; };
 		34A5382D25A6D46E000037C5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5382C25A6D46E000037C5 /* UIImage+Extension.swift */; };
 		34A9003F25947A8500EAD2FF /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34A9004125947A8500EAD2FF /* Auth.storyboard */; };
 		34A9004625947AB800EAD2FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34A9004825947AB800EAD2FF /* Main.storyboard */; };
@@ -295,6 +299,10 @@
 		349347BC25D13FBE006366B4 /* RateOrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateOrderReqModel.swift; sourceTree = "<group>"; };
 		349347BF25D1530D006366B4 /* CancelOrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOrderReqModel.swift; sourceTree = "<group>"; };
 		3498BA8525C155C2007CD695 /* FeedbackReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackReqModel.swift; sourceTree = "<group>"; };
+		34A260DC25D3B25F00E24D73 /* ReviewListResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewListResModel.swift; sourceTree = "<group>"; };
+		34A260DD25D3B26000E24D73 /* ReviewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewData.swift; sourceTree = "<group>"; };
+		34A260DE25D3B26000E24D73 /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		34A260E425D3B43800E24D73 /* ReviewListReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListReqModel.swift; sourceTree = "<group>"; };
 		34A5382C25A6D46E000037C5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		34A9004025947A8500EAD2FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		34A9004425947A9E00EAD2FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Auth.strings; sourceTree = "<group>"; };
@@ -579,6 +587,16 @@
 				347AA2CF25CD0AD90010BCF2 /* orderListingResModel.swift */,
 			);
 			path = OrderListing;
+			sourceTree = "<group>";
+		};
+		34A260DB25D3B1D900E24D73 /* RateReviewList */ = {
+			isa = PBXGroup;
+			children = (
+				34A260DD25D3B26000E24D73 /* ReviewData.swift */,
+				34A260DE25D3B26000E24D73 /* Detail.swift */,
+				34A260DC25D3B25F00E24D73 /* ReviewListResModel.swift */,
+			);
+			path = RateReviewList;
 			sourceTree = "<group>";
 		};
 		34CF866825A822F80040C188 /* Search */ = {
@@ -888,6 +906,7 @@
 		81CFFD392574C60D005AA86A /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				34A260DB25D3B1D900E24D73 /* RateReviewList */,
 				340D4B0025D2738E007CC54B /* RestaurantOutlets */,
 				340D4AF125D25C0F007CC54B /* RepeatOrder */,
 				347AA2CE25CD0A440010BCF2 /* OrderListing */,
@@ -948,6 +967,7 @@
 				340D4AEB25D23A84007CC54B /* shareOrderReqModel.swift */,
 				340D4AEE25D241CB007CC54B /* RepeatOrderReqModel.swift */,
 				340D4AFD25D26DFA007CC54B /* RestaurantOutletReqModel.swift */,
+				34A260E425D3B43800E24D73 /* ReviewListReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1302,6 +1322,7 @@
 				81CFFD7B2574C60D005AA86A /* Colors.swift in Sources */,
 				34D3755925CD005800B48A80 /* MyOrderDetailsReqModel.swift in Sources */,
 				345FC23C25BE81EB00795BE7 /* UITableview+Extension.swift in Sources */,
+				34A260DF25D3B26000E24D73 /* ReviewListResModel.swift in Sources */,
 				8170CAFF257A771000B24B7A /* MyFoodlistVC.swift in Sources */,
 				8170CAF4257A10B500B24B7A /* MyProfileVC.swift in Sources */,
 				8105FDC12574D0F9008D36D6 /* FavouritesVC.swift in Sources */,
@@ -1310,6 +1331,7 @@
 				340D4AFE25D26DFA007CC54B /* RestaurantOutletReqModel.swift in Sources */,
 				8170CAF2257A10B500B24B7A /* NotificationVC.swift in Sources */,
 				81CFFD712574C60D005AA86A /* LoginReqModel.swift in Sources */,
+				34A260E525D3B43800E24D73 /* ReviewListReqModel.swift in Sources */,
 				347D955C25A71637000C64B5 /* DashBoardResModel.swift in Sources */,
 				340D4B0325D273D3007CC54B /* OutletData.swift in Sources */,
 				3443D62125C11E62001CFAFE /* Restaurantinfo.swift in Sources */,
@@ -1320,6 +1342,7 @@
 				3443D61E25C11E62001CFAFE /* RestaurantDetailsResModel.swift in Sources */,
 				342C579F25CBC94D0098F573 /* CardList.swift in Sources */,
 				81E67216257E68BC00DCE9DA /* AddCardVC.swift in Sources */,
+				34A260E125D3B26000E24D73 /* Detail.swift in Sources */,
 				34CD681525B7DCAB0052F485 /* FavoriteReqModel.swift in Sources */,
 				8105FDC92574F101008D36D6 /* AppStoryboards.swift in Sources */,
 				345EA97E25B5861400A4E56D /* SettingsResModel.swift in Sources */,
@@ -1349,6 +1372,7 @@
 				3431E06A25932287002F1435 /* RestaurantCategoryCell.swift in Sources */,
 				81CFFD702574C60D005AA86A /* RequestModel.swift in Sources */,
 				345EA8F025B5477100A4E56D /* RestaurantFavResModel.swift in Sources */,
+				34A260E025D3B26000E24D73 /* ReviewData.swift in Sources */,
 				3400019625C7EB8E00C584DE /* Option.swift in Sources */,
 				81CFFD742574C60D005AA86A /* Singleton.swift in Sources */,
 				3431E06025931FF3002F1435 /* myAccountSubDetails.swift in Sources */,

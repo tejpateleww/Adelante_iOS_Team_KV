@@ -128,6 +128,10 @@ class WebServiceSubClass
         let params : [String:String] = OutletModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Outlets, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    class func ReviewList( reviewListModel : ReviewListReqModel, showHud : Bool = false , completion: @escaping CompletionResponse ) {
+        let params : [String:String] = reviewListModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .ReviewList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
 }
 
 

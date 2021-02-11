@@ -197,6 +197,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 let resVariant = RestaurantVariantResModel.init(fromJson: response)
                 self.arrVariants = resVariant.variants
                 self.tblBFFCombo.reloadData()
+                NotificationCenter.default.post(name: notifRefreshRestaurantDetails, object: nil)
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Cosmos
 
 class ReViewDiscCell: UITableViewCell {
     @IBOutlet weak var lblDescription: CustomLabel!
     @IBOutlet weak var lblName: themeLabel!
+    @IBOutlet weak var vwRating: CosmosView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

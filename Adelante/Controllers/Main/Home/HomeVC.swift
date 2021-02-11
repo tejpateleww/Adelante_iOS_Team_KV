@@ -23,11 +23,6 @@ struct structFilter {
 }
 
 class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
-   
-    
-    
-    
-    
     //    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
     //
     //        self.SelectedCatId = CategoryId
