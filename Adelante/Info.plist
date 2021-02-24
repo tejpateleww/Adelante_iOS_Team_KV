@@ -41,6 +41,8 @@
 	<string>$(PRODUCT_NAME) requires access to your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>$(PRODUCT_NAME) requires access to your location</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) camera use</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Aileron-UltraLightItalic.otf</string>

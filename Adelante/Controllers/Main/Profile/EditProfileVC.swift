@@ -93,8 +93,11 @@ class EditProfileVC: BaseViewController{
         //        self.navigationController?.popViewController(animated: true)
     }
     func validation()->Bool{
-        let firstName = txtFirstName.validatedText(validationType: ValidatorType.username(field: "first name") )//ValidatorType.requiredField(field: "first name"))
-        let lastname =  txtLastName.validatedText(validationType: ValidatorType.username(field: "last name"))
+        let txtTemp = UITextField()
+        txtTemp.text = txtFirstName.text?.replacingOccurrences(of: " ", with: "")
+        let firstName = txtTemp.validatedText(validationType: ValidatorType.username(field: "first name") )//ValidatorType.requiredField(field: "first name"))
+        txtTemp.text = txtLastName.text?.replacingOccurrences(of: " ", with: "")
+        let lastname =  txtTemp.validatedText(validationType: ValidatorType.username(field: "last name"))
         
         let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "contact number"))
         

@@ -9,11 +9,14 @@
 import UIKit
 import SDWebImage
 
-class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,favoriteDelegate{
+class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,favoriteDelegate, SortListDelegate{
+    
+    
     
   
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
+    var selectedSortTypedIndexFromcolVwFilter = 1
     var arrRestaurantList = [RestaurantList]()
     private var lastSearchTxt = ""
     var refreshList = UIRefreshControl()
@@ -22,6 +25,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     var pageLimit = 5
     var strItemId = ""
     var strItemType = ""
+    var SelectFilterId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
@@ -56,7 +60,20 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         self.isNeedToReload = true
         self.webserviceGetRestaurantList(strSearch: "", strFilter: "")
     }
-    
+    func SelectedSortList(_ SortId: String) {
+        DispatchQueue.main.async {
+            self.selectedSortTypedIndexFromcolVwFilter = -1
+            self.tblMainList.reloadData()
+        }
+        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
+            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            self.SelectFilterId = SortId
+            pageNumber = 1
+            webserviceGetRestaurantList(strSearch: "", strFilter: "")
+        }
+    }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
@@ -123,18 +140,31 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
     }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-            self.changeLayoutOfFilterButton()
-        } else {
-            sender.isSelected = true
-            self.changeLayoutOfFilterButton()
-            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID)
-            let navController = UINavigationController.init(rootViewController: vc)
-            navController.modalPresentationStyle = .overFullScreen
-            navController.navigationController?.modalTransitionStyle = .crossDissolve
-            navController.navigationBar.isHidden = true
-            self.present(navController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            if self.selectedSortTypedIndexFromcolVwFilter == -1 {
+                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+                let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
+                self.tblMainList.reloadData()
+            }
+            else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
+                self.selectedSortTypedIndexFromcolVwFilter = 1
+//                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+                self.tblMainList.reloadData()
+            } else {
+                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+                self.tblMainList.reloadData()
+            }
+            if self.selectedSortTypedIndexFromcolVwFilter == 0 {
+                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID) as! sortPopupVC
+                vc.delegateFilter = self
+                vc.selectedSortData = self.SelectFilterId
+                let navController = UINavigationController.init(rootViewController: vc)
+                navController.modalPresentationStyle = .overFullScreen
+                navController.navigationController?.modalTransitionStyle = .crossDissolve
+                navController.navigationBar.isHidden = true
+                self.present(navController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -248,8 +278,8 @@ extension RestaurantListVC:UISearchBarDelegate{
     }
     @objc private func makeNetworkCall(_ query: String)
     {
-        if query.count > 2{
-            webserviceGetRestaurantList(strSearch: query, strFilter: "")
-        }
+            if query.count > 2{
+                webserviceGetRestaurantList(strSearch: query, strFilter: "")
+            }
     }
 }

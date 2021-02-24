@@ -147,8 +147,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     @IBAction func btnEditClicked(_ sender: UIButton) {
-        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "EditLocationVC")
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "EditLocationVC")
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
         DispatchQueue.main.async {
@@ -366,11 +366,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 Utilities.displayErrorAlert(response["message"].string ?? "Something went wrong")
                 //                Utilities.showAlertOfAPIResponse(param: error ?? "Something went wrong", vc: self)
             }
-            if self.arrRestaurant.count > 0{
-                self.tblMainList.restore()
-            }else {
-                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-            }
+//            if self.arrRestaurant.count > 0{
+//                self.tblMainList.restore()
+//            }else {
+//                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
+//            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
@@ -381,7 +381,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
             //            self.hideHUD()
             if status{
 //                self.webserviceGetDashboard()

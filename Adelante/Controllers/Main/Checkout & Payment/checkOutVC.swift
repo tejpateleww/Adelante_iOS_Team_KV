@@ -52,7 +52,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 //        tblAddProductHeight.constant = CGFloat(arrayForTitle.count * 60)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        webserviceRepeatOrder()
+//        webserviceRepeatOrder()
         setData()
         addMapView()
         // Do any additional setup after loading the view.

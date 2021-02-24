@@ -22,8 +22,12 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblBFFCombo: UITableView!
-    @IBOutlet weak var lblItem: bffComboLabel!
-    @IBOutlet weak var lblViewCart: bffComboLabel!
+    @IBOutlet weak var lblItem: themeLabel!
+    @IBOutlet weak var lblTotal: themeLabel!
+    @IBOutlet weak var lblSign: themeLabel!
+    @IBOutlet weak var lblViewCart: themeLabel!
+    @IBOutlet weak var btnViewCart: UIButton!
+    @IBOutlet weak var viewFooter: UIView!
     
     // MARK: - ViewController Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +49,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         footerView.frame = CGRect.init(x: 0, y: 0, width: tblBFFCombo.frame.size.width, height: 31)
         tblBFFCombo.tableFooterView = footerView
         webservicePostCombo()
+        checkItemsAndUpdateFooter()
         // Do any additional setup after loading the view.
     }
     
@@ -72,6 +77,56 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 print("\(self.arrSelectedVariants[i].variant_SubName)")
             }
         }
+        checkItemsAndUpdateFooter()
+    }
+    func checkItemsAndUpdateFooter(){
+//        var total = 0
+//        if arrSelectedOrder.count > 0{
+//            var subTotal = 0
+//            for i in 0..<arrSelectedOrder.count{
+//                let price : Int = Int(arrSelectedOrder[i].price) ?? 0
+//                subTotal = subTotal + price
+//            }
+//            //            var total : Int = Int(subTotal) + Int(objRestaurant.serviceFee)
+//            //            total = total + Int(objRestaurant.tax)
+//            total = Int(subTotal) + objRestaurant.serviceFee.toInt() + objRestaurant.tax.toInt()
+//            let dicTemp = currentOrder.init(userId: SingletonClass.sharedInstance.UserId, restautaurantId: objRestaurant.id, rating: "", comment: "", subTotal: "\(subTotal)", serviceFee: objRestaurant.serviceFee, tax: objRestaurant.tax, total: "\(total)", order: arrSelectedOrder, currentRestaurantDetail: self.objRestaurant)
+//            objCurrentOrder = dicTemp
+//            SingletonClass.sharedInstance.restCurrentOrder = self.objCurrentOrder
+//            //            userDefault.setUserData(objProfile)
+//        }
+        if SingletonClass.sharedInstance.restCurrentOrder != nil{
+            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
+                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
+            } else {
+                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
+            }
+            
+            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
+                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
+            } else {
+                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
+            }
+            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0  > 0{
+                viewFooter.isHidden = false
+                lblSign.isHidden = false
+                lblTotal.isHidden = false
+                lblItem.isHidden = false
+            }else{
+                viewFooter.isHidden = true
+                lblTotal.text = ""
+                lblItem.text = ""
+            }
+        }else{
+            viewFooter.isHidden = true
+            lblTotal.text = ""
+            lblItem.text = ""
+            lblSign.isHidden = true
+        }
+        
+        
+        
+        
     }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,7 +187,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width - 118, height: 19)
         label.center.y = headerView.frame.size.height / 2
         label.text = arrVariants[section].groupName
-        label.font = CustomFont.NexaBold.returnFont(17)
+        label.font = CustomFont.NexaBold.returnFont(15)
         label.textColor = colors.black.value// colors.black.value
         //headerView.backgroundColor = colors.white.value
         headerView.addSubview(label)
@@ -183,8 +238,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
-            self.navigationController?.pushViewController(controller, animated: true)
+//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+//            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     // MARK: - Api Calls

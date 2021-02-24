@@ -107,11 +107,17 @@ class RegisterViewController: UIViewController {
     
     //MARK :- Validation
     func validation()->Bool{
-        let firstName = txtFirstName.validatedText(validationType: ValidatorType.username(field: "first name"))
-        let lastname =  txtLastName.validatedText(validationType: ValidatorType.username(field: "last name"))
-        let checkEmail = txtEmail.validatedText(validationType: ValidatorType.email)
-        let checkPassword = txtPassword.validatedText(validationType: ValidatorType.requiredField(field: "Password"))
-        let confirmPassword = txtConPassword.validatedText(validationType: ValidatorType.requiredField(field: "confirm Password"))
+        let txtTemp = UITextField()
+        txtTemp.text = txtFirstName.text?.replacingOccurrences(of: " ", with: "")
+        let firstName = txtTemp.validatedText(validationType: ValidatorType.username(field: "first name"))
+        txtTemp.text = txtLastName.text?.replacingOccurrences(of: " ", with: "")
+        let lastname =  txtTemp.validatedText(validationType: ValidatorType.username(field: "last name"))
+        txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
+        let checkEmail = txtTemp.validatedText(validationType: ValidatorType.email)
+        txtTemp.text = txtPassword.text?.replacingOccurrences(of: " ", with: "")
+        let checkPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "Password"))
+        txtTemp.text = txtConPassword.text?.replacingOccurrences(of: " ", with: "")
+        let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm Password"))
         let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "contact number"))
         
         if (!firstName.0){

@@ -46,7 +46,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         setup()
-//        webservicePostRestaurantFav(strSearch: "")
+        //        webservicePostRestaurantFav(strSearch: "")
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
     }
@@ -54,7 +54,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
-//        pageNumber = 1
+        //        pageNumber = 1
         webservicePostRestaurantFav(strSearch: "")
     }
     
@@ -174,11 +174,11 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
             //            self.hideHUD()
             if status{
                 self.webservicePostRestaurantFav(strSearch: "")
-//                self.arrFavoriteRest.first(where: { $0.id == strRestaurantId })?.favourite = Status
+                //                self.arrFavoriteRest.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
                 NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
             }else{
@@ -201,6 +201,13 @@ extension FavouritesVC:UISearchBarDelegate{
     }
     @objc private func makeNetworkCall(_ query: String)
     {
-        webservicePostRestaurantFav(strSearch: query)
+        if query == ""{
+            arrFavoriteRest.removeAll()
+            tblMainList.reloadData()
+        }else{
+            if query.count > 2{
+                webservicePostRestaurantFav(strSearch: query)
+            }
+        }
     }
 }

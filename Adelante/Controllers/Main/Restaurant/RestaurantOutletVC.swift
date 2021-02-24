@@ -8,7 +8,9 @@
 
 import UIKit
 import SDWebImage
-class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewDataSource{
+class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,favoriteDelegate, SortListDelegate{
+    
+    
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -19,6 +21,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     var selectedRestaurantId = ""
     var arrOutletList = [OutletData]()
     var strRestaurantName = ""
+    var selectedSortTypedIndexFromcolVwFilter = 1
+    var SelectFilterId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var lblRestaurantName: themeLabel!
     @IBOutlet weak var btnFilter: collectionVwFilterBtns!
@@ -111,18 +115,46 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         }
     }
     @IBAction func btnFilterClick(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-            self.changeLayoutOfFilterButton()
-        } else {
-            sender.isSelected = true
-            self.changeLayoutOfFilterButton()
-            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID)
-            let navController = UINavigationController.init(rootViewController: vc)
-            navController.modalPresentationStyle = .overFullScreen
-            navController.navigationController?.modalTransitionStyle = .crossDissolve
-            navController.navigationBar.isHidden = true
-            self.present(navController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            if self.selectedSortTypedIndexFromcolVwFilter == -1 {
+                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+                let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
+                self.tblRestaurantList.reloadData()
+            }
+            else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
+                self.selectedSortTypedIndexFromcolVwFilter = 1
+//                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+                self.tblRestaurantList.reloadData()
+            } else {
+                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+                self.tblRestaurantList.reloadData()
+            }
+            if self.selectedSortTypedIndexFromcolVwFilter == 0 {
+                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID) as! sortPopupVC
+                vc.delegateFilter = self
+                vc.selectedSortData = self.SelectFilterId
+                let navController = UINavigationController.init(rootViewController: vc)
+                navController.modalPresentationStyle = .overFullScreen
+                navController.navigationController?.modalTransitionStyle = .crossDissolve
+                navController.navigationBar.isHidden = true
+                self.present(navController, animated: true, completion: nil)
+            }
+        }
+    }
+    // MARK: - filterDelegate
+    func SelectedSortList(_ SortId: String) {
+        DispatchQueue.main.async {
+            self.selectedSortTypedIndexFromcolVwFilter = -1
+            self.tblRestaurantList.reloadData()
+        }
+        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
+            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            self.SelectFilterId = SortId
+            pageNumber = 1
+            webserviceGetRestaurantOutlet(strFilter: "")
         }
     }
     // MARK: - UITableViewDelegates And Datasource
@@ -203,7 +235,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             // self.hideHUD()
             if status{
                 self.arrOutletList.first(where: { $0.id == strRestaurantId })?.favourite = Status
@@ -212,5 +244,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
+    }
+    func refreshFavoriteScreen() {
+       webserviceGetRestaurantOutlet(strFilter: "")
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import WebKit
 struct structSections {
     
     
@@ -289,6 +290,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBAction func btnViewPolicy(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
         controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
+        controller.strStorePolicy = "http://18.208.18.170/assets/images/restaurant/banner/4832a33c4cc865f705753eb6c799f47e.pdf"
         self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {
@@ -730,7 +732,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
             //            self.hideHUD()
             if status {
                 self.objRestaurant.favourite = Status

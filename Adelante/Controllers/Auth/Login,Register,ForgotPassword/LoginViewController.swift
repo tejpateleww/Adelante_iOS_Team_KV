@@ -139,8 +139,11 @@ class LoginViewController: BaseViewController {
     //MARK:- Validation
     func validation() -> Bool
     {
-        let checkEmail = txtEmail.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
-        let checkPassword = txtPassword.validatedText(validationType: ValidatorType.password)
+        let txtTemp = UITextField()
+        txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
+        let checkEmail = txtTemp.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
+        txtTemp.text = txtPassword.text?.replacingOccurrences(of: " ", with: "")
+        let checkPassword = txtTemp.validatedText(validationType: ValidatorType.password)
          if(!checkEmail.0)
         {
             Utilities.ShowAlert(OfMessage: checkEmail.1)

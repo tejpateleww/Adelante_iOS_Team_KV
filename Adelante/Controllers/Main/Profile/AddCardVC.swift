@@ -221,7 +221,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
 //        }
         addcard.exp_date_month_year = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         addcard.cvv = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        addcard.user_id = SingletonClass.sharedInstance.UserId
+        addcard.user_id = SingletonClass.sharedInstance.UserId 
         WebServiceSubClass.addCard(addcardsmodel: addcard, showHud: true, completion: { (json, status, response) in
             if(status)
             {
@@ -417,8 +417,9 @@ extension AddCardVC : UIPickerViewDelegate,UIPickerViewDataSource {
             strYear = aryYear[row]
             
         }
-        if strYear.isEmpty {
+        if strYear.isEmpty || strMonth.isEmpty{
             strYear = aryYear[0]
+            strMonth = aryMonth[0]
         }
         txtDate.text = "\(strMonth) / \(strYear)"
     }

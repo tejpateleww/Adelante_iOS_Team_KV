@@ -107,11 +107,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
 //        cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeatNew), for: .touchUpInside)
         strOrderId = arrOrderListing[indexPath.row].id
-        cell.Repeat = {
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
-            controller.strOrderId = self.arrOrderListing[indexPath.row].id
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
+//        cell.Repeat = {
+//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
+//            controller.strOrderId = self.arrOrderListing[indexPath.row].id
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
         cell.cancel = {
             self.webserviceCancelOrder()
         }
