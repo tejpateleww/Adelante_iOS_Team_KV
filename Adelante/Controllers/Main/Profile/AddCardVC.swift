@@ -17,14 +17,12 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     // MARK: - Properties
     var delegatePayment : AddPaymentDelegate!
     var isCreditCardValid = Bool()
-    var pickerView = UIPickerView()
-    var aryMonth = [String]()
-    var aryYear = [String]()
     var strMonth = ""
     var strYear = ""
     var cardTypeLabel = String()
     var validation = Validation()
     var inputValidator = InputValidator()
+    let monthPicker = MonthYearPickerView()
     var creditCardValidator: CreditCardValidator!
     // MARK: - IBOutlets
     @IBOutlet weak var lblName: addCardLabel!
@@ -45,7 +43,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         setUpLocalizedStrings()
         addNavBarImage(isLeft: true, isRight: true)
         txtDate.delegate = self
-        pickerView.delegate = self
         pickerSetup()
         
         creditCardValidator = CreditCardValidator()
@@ -86,8 +83,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     func pickerSetup() {
     let calendar = Calendar.current
     let currentYear = calendar.component(.year, from: Date())
-    aryYear = (currentYear...(currentYear + 15)).map { String($0) }
-    aryMonth = ["01","02","03","04","05","06","07","08","09","10","11","12"]
 
     }
     
@@ -170,6 +165,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         validation.characterSet = characterSet as CharacterSet
         inputValidator = InputValidator(validation: validation)
         txtCardNumber.inputValidator = inputValidator
+        txtDate.inputView = monthPicker
         validation.minimumLength = 1
         self.CvvValidation()
     }
@@ -379,48 +375,15 @@ public struct CreditCardValidationType: Equatable {
 //    }
 //}
 extension AddCardVC : UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-
-        if textField == txtDate {
-            txtDate.inputView = pickerView
-            // return false
-        }
-        return true
-    }
-}
-extension AddCardVC : UIPickerViewDelegate,UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return aryMonth.count
-        }
-        else {
-            return aryYear.count
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return aryMonth[row]
-        }
-        else {
-            return aryYear[row]
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 0 {
-            strMonth = aryMonth[row]
-        }else {
-            strYear = aryYear[row]
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if(textField == txtDate) {
+            var strMonth = "\(monthPicker.month)" as String
+            if(monthPicker.month <= 9)
+            {
+                strMonth = "0\(monthPicker.month)"
+            }
             
+            txtDate.text = "\(strMonth)/\(monthPicker.year)"
         }
-        if strYear.isEmpty || strMonth.isEmpty{
-            strYear = aryYear[0]
-            strMonth = aryMonth[0]
-        }
-        txtDate.text = "\(strMonth) / \(strYear)"
     }
 }

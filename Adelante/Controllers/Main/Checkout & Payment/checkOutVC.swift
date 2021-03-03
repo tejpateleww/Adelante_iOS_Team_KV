@@ -312,7 +312,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         })
     }

@@ -182,7 +182,7 @@
 "AddCardVC_txtCardNumber" = "Card Number";
 "AddCardVC_lblExpires" = "Expires";
 "AddCardVC_txtDate" = "Expire Date";
-"AddCardVC_lblCvv" = "Cvv";
+"AddCardVC_lblCvv" = "CVV";
 "AddCardVC_txtCvv" = "Cvv Code";
 "AddCardVC_lblDebitcardDetail" = "Debit cards are accepted at some locations and for some categories.";
 "AddCardVC_btnSave" = "Save";
@@ -269,8 +269,9 @@
 "NavigationTitles_ChangePasswordVC" = "Change password";
 
 //Message
-"MessageTitle" = "Something went wrong";
+"MessageTitle" = "No internet connection";
 "MessagePassword" = "Password do not match";
+"MessageNoIntenet" = "No internet connection";
 //"MessageQtyNotAvailable" = "The item %@ has only %@ quantities.";
 "MessageQtyNotAvailable" = "No stock available for this item";
 

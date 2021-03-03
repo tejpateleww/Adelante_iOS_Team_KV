@@ -98,7 +98,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
             if self.arrSearchResult.count > 0{
                 self.tblSearch.restore()
             }else {
-                self.tblSearch.setEmptyMessage("No result found for ")
+                self.tblSearch.setEmptyMessage("No result found for \"\(self.txtSearch.text ?? "")\"")
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()

@@ -107,7 +107,8 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
     }
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let chosenImage = info[.originalImage] as! UIImage
+//        let chosenImage = info[.originalImage] as! UIImage
+        let chosenImage = info[.editedImage] as! UIImage
         self.pickerController(picker, didSelect: chosenImage)
     }
 }
@@ -173,6 +174,3 @@ extension ImagePicker {
         self.presentationController?.present(alert, animated: true)
     }
 }
-
-
-

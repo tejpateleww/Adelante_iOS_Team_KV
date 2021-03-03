@@ -26,8 +26,7 @@ class WebService{
     // MARK:- Method for Get, post..
     //-------------------------------------
     func requestMethod(api: ApiKey, httpMethod:Method, showHud : Bool = false,parameters: Any, completion: @escaping CompletionResponse){
-        
-        guard isConnected else { completion(JSON(), false, ""); return }
+        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
         
         var parameterString = "" // "/"
         if httpMethod == .get{
@@ -131,7 +130,7 @@ class WebService{
     }
     func getMethod(api: ApiKey,parameterString:String, httpMethod:Method,showHud : Bool = false, completion: @escaping CompletionResponse)
     {
-        guard isConnected else { completion(JSON(), false, ""); return }
+        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
         
         guard let url = URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
             completion(JSON(),false, "")
@@ -234,7 +233,7 @@ class WebService{
     
     func postDataWithImage(api: ApiKey, isRemoveimage: Bool, showHud : Bool, parameter dictParams: [String: Any], image: UIImage?, imageParamName: String, completion: @escaping CompletionResponse) {
         
-        guard isConnected else { completion(JSON(), false, ""); return }
+        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
         guard let url = URL(string: APIEnvironment.baseURL + api.rawValue) else { return }
         //        let request = URLRequest(url: url)
         print("the url is \(url) and the parameters are \n \(dictParams) and the headers are \(APIEnvironment.headers)")

@@ -26,12 +26,17 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     var strItemId = ""
     var strItemType = ""
     var SelectFilterId = ""
+    var isRefresh = false
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var btnFilterOptions: UIButton!
     @IBOutlet weak var lblAllRestaurants: themeLabel!
-    
+    @IBOutlet weak var imgEmptyRestaurant: UIImageView!
+
+
+
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +61,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Other Methods
     @objc func refreshFavList() {
-        pageNumber = 1
+        self.pageNumber = 1
+        self.isRefresh = true
         self.isNeedToReload = true
         self.webserviceGetRestaurantList(strSearch: "", strFilter: "")
     }
@@ -110,7 +116,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func stoppedScrolling() {
-        if isNeedToReload {
+        if self.isNeedToReload && self.isRefresh == false{
             pageNumber = pageNumber + 1
             webserviceGetRestaurantList(strSearch: "", strFilter: "")
         }
@@ -216,8 +222,15 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantListResModel.init(fromJson: response)
+                self.isRefresh = false
                 if self.pageNumber == 1 {
                     self.arrRestaurantList = restaurantData.data
+                    let arrTemp = restaurantData.data
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
+                    }
                 } else {
                     let arrTemp = restaurantData.data
 //                    if arrTemp!.count > 0 {
@@ -227,6 +240,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
 //                    }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
                     }
                 }
                 self.tblMainList.reloadData()
@@ -234,10 +249,15 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
             if self.arrRestaurantList.count > 0{
-                self.tblMainList.restore()
-            }else {
-                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-            }
+                            self.tblMainList.restore()
+                            self.imgEmptyRestaurant.isHidden = true
+                            self.tblMainList.isHidden = false
+                        }else {
+                            self.imgEmptyRestaurant.isHidden = false
+                            self.tblMainList.isHidden = true
+                        }
+
+
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }

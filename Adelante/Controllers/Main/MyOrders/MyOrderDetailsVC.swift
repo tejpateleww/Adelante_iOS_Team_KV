@@ -245,7 +245,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         })
     }
@@ -260,7 +260,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         })
     }

@@ -27,6 +27,7 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     @IBOutlet weak var lblAddress: themeLabel!
     @IBOutlet weak var lblRating: themeLabel!
     @IBOutlet weak var lblReviews: themeLabel!
+    @IBOutlet weak var imgRatingEmpty: UIImageView!
     
     // MARK: - ViewController Lifecycle
     
@@ -123,8 +124,12 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
             }
             if self.arrDetails.count > 0{
                 self.tbvReview.restore()
+                self.imgRatingEmpty.isHidden = true
+                self.tbvReview.isHidden = false
+               
             }else {
-                self.tbvReview.setEmptyMessage("emptyMsg_Restaurant".Localized())
+                self.tbvReview.isHidden = true
+                self.imgRatingEmpty.isHidden = false
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()

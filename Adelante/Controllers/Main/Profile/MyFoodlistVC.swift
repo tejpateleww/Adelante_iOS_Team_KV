@@ -15,6 +15,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var refreshList = UIRefreshControl()
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
+    @IBOutlet weak var imgMyFoodlistEmpty: UIImageView!
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
@@ -53,6 +54,14 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - Api Calls
     @objc func webservicePostMyFoodlist(){
+//        if self.arrOrderListing.count > 0{
+//            self.tblOrders.restore()
+//            self.imgOrderEmpty.isHidden = true
+//            self.tblOrders.isHidden = false
+//        }else {
+//            self.imgOrderEmpty.isHidden = false
+//            self.tblOrders.isHidden = true
+//        }
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }

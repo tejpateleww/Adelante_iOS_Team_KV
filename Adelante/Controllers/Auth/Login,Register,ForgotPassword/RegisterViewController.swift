@@ -85,8 +85,8 @@ class RegisterViewController: UIViewController {
             btnPasswordShow.isSelected = !btnPasswordShow.isSelected
         }
         
-//        let img = isvisible ? "privatePassword" : "viewPassword"
-//        btnPasswordVisible.setImage(UIImage(named: img), for: .normal)
+        //        let img = isvisible ? "privatePassword" : "viewPassword"
+        //        btnPasswordVisible.setImage(UIImage(named: img), for: .normal)
         
         
     }
@@ -113,7 +113,8 @@ class RegisterViewController: UIViewController {
         txtTemp.text = txtLastName.text?.replacingOccurrences(of: " ", with: "")
         let lastname =  txtTemp.validatedText(validationType: ValidatorType.username(field: "last name"))
         txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
-        let checkEmail = txtTemp.validatedText(validationType: ValidatorType.email)
+        let checkEmailRequired = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtEmail.placeholder?.lowercased() ?? ""))
+        let checkEmailValid = txtTemp.validatedText(validationType: ValidatorType.email)
         txtTemp.text = txtPassword.text?.replacingOccurrences(of: " ", with: "")
         let checkPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "Password"))
         txtTemp.text = txtConPassword.text?.replacingOccurrences(of: " ", with: "")
@@ -126,10 +127,15 @@ class RegisterViewController: UIViewController {
         }else if (!lastname.0){
             Utilities.ShowAlert(OfMessage: lastname.1)
             return lastname.0
-        }else if(!checkEmail.0)
+        }else if(!checkEmailRequired.0)
         {
-            Utilities.ShowAlert(OfMessage: checkEmail.1)
-            return checkEmail.0
+            Utilities.ShowAlert(OfMessage:checkEmailRequired.1)
+            return checkEmailRequired.0
+        }
+        else if(!checkEmailValid.0)
+        {
+            Utilities.ShowAlert(OfMessage:"Please enter valid email address")
+            return checkEmailValid.0
         }
         else if (txtPhoneNumber.text?.count ?? 0) < 9 {
             Utilities.ShowAlert(OfMessage: "Please enter valid contact number")
@@ -167,18 +173,18 @@ class RegisterViewController: UIViewController {
             {
                 let loginModel = Userinfo.init(fromJson: json)
                 let registerRespoDetails = loginModel.profile
-//                SingletonClass.sharedInstance.UserId = registerRespoDetails?.id ?? ""
-//                SingletonClass.sharedInstance.Api_Key = registerRespoDetails?.apiKey ?? ""
-//                SingletonClass.sharedInstance.LoginRegisterUpdateData = registerRespoDetails
-//                userDefault.setValue(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
-//                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-//                userDefault.setUserData(objProfile: registerRespoDetails!)
-//                appDel.navigateToHome()
+                //                SingletonClass.sharedInstance.UserId = registerRespoDetails?.id ?? ""
+                //                SingletonClass.sharedInstance.Api_Key = registerRespoDetails?.apiKey ?? ""
+                //                SingletonClass.sharedInstance.LoginRegisterUpdateData = registerRespoDetails
+                //                userDefault.setValue(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
+                //                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                //                userDefault.setUserData(objProfile: registerRespoDetails!)
+                //                appDel.navigateToHome()
                 appDel.navigateToLogin()
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "MessageTitle".Localized())
+                Utilities.displayErrorAlert(json["message"].string ?? "MessageNoIntenet".Localized())
             }
         })
     }

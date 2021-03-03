@@ -81,7 +81,7 @@ class FeedbackVC: BaseViewController {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         })
     }

@@ -29,9 +29,12 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var pageLimit = 5
     var selectedRestaurantId = ""
     var delegateFav : favoriteDelegate!
+    var isRefresh = false
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
+    @IBOutlet weak var imgFavorite: UIImageView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -73,6 +76,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     @objc func refreshFavList() {
         self.pageNumber = 1
         self.isNeedToReload = true
+        self.isRefresh = true
         self.webservicePostRestaurantFav(strSearch: "")
     }
     func setUpLocalizedStrings() {
@@ -95,7 +99,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func stoppedScrolling() {
-        if isNeedToReload {
+        if self.isNeedToReload && self.isRefresh == false{
             self.pageNumber = self.pageNumber + 1
             webservicePostRestaurantFav(strSearch: "")
         }
@@ -136,12 +140,19 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         RestaurantFavorite.name = strSearch
         RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
         RestaurantFavorite.page = "\(self.pageNumber)"
-        WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantFavResModel.init(fromJson: response)
                 if self.pageNumber == 1 {
                     self.arrFavoriteRest = restaurantData.data.restaurantDetails
+                    self.isRefresh = false
+                    let arrTemp = restaurantData.data.restaurantDetails
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
+                    }
                 } else {
                     let arrTemp = restaurantData.data.restaurantDetails
                     if arrTemp!.count > 0 {
@@ -151,19 +162,29 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
                     }
                 }
-                self.tblMainList.reloadData()
-            }else{
+                DispatchQueue.main.async {
+                    self.tblMainList.reloadData()
+                }
+            } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
             //            self.arrFavoriteRest.removeAll()
             //            self.tblMainList.reloadData()
-            if self.arrFavoriteRest.count > 0{
-                self.tblMainList.restore()
-            }else {
-                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-            }
+            if self.arrFavoriteRest.count > 0 {
+                            self.tblMainList.restore()
+                            self.imgFavorite.isHidden = true
+                            self.tblMainList.isHidden = false
+                           
+                        } else {
+                            self.tblMainList.isHidden = true
+                            self.imgFavorite.isHidden = false
+            //                self.view.bringSubviewToFront(self.imgFavorite)
+            //                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
+                        }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
@@ -174,9 +195,10 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             //            self.hideHUD()
             if status{
+                self.pageNumber = 1
                 self.webservicePostRestaurantFav(strSearch: "")
                 //                self.arrFavoriteRest.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)

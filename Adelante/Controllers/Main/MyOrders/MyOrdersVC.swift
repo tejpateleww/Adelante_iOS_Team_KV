@@ -23,6 +23,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var strOrderId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblOrders: UITableView!
+    @IBOutlet weak var imgOrderEmpty: UIImageView!
     
     // MARK: - ViewController Lifecycle
      override func viewDidLoad() {
@@ -146,11 +147,17 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
-                if self.arrOrderListing.count > 0{
-                    self.tblOrders.restore()
-                }else {
-                    self.tblOrders.setEmptyMessage("emptyMsg_Restaurant".Localized())
-                }
+            }
+            if self.arrOrderListing.count > 0{
+                self.tblOrders.restore()
+                self.imgOrderEmpty.isHidden = true
+                self.tblOrders.isHidden = false
+               
+            }else {
+                self.tblOrders.isHidden = true
+                self.imgOrderEmpty.isHidden = false
+//                self.view.bringSubviewToFront(self.imgFavorite)
+//                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
@@ -173,7 +180,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         })
     }

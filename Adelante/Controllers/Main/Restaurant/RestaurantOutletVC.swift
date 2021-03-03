@@ -23,10 +23,13 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     var strRestaurantName = ""
     var selectedSortTypedIndexFromcolVwFilter = 1
     var SelectFilterId = ""
+    var isRefresh = false
+    
     // MARK: - IBOutlets
     @IBOutlet weak var lblRestaurantName: themeLabel!
     @IBOutlet weak var btnFilter: collectionVwFilterBtns!
     @IBOutlet weak var tblRestaurantList: UITableView!
+    @IBOutlet weak var imgRestaurantEmpty: UIImageView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -40,10 +43,12 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshRestaurantList, object: nil)
         setup()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.webserviceGetRestaurantOutlet(strFilter: "")
         self.customTabBarController?.hideTabBar()
     }
+    
     // MARK: - Other Methods
     func setup(){
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -62,7 +67,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         lblRestaurantName.text = strRestaurantName
     }
     @objc func refreshFavList() {
-        pageNumber = 1
+        self.pageNumber = 1
+        self.isRefresh = true
         self.isNeedToReload = true
         self.webserviceGetRestaurantOutlet(strFilter: "")
     }
@@ -84,8 +90,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     func stoppedScrolling() {
-        if isNeedToReload {
-            pageNumber = pageNumber + 1
+        if self.isNeedToReload && self.isRefresh == false{
+            self.pageNumber = self.pageNumber + 1
             webserviceGetRestaurantOutlet(strFilter: "")
         }
         // done, do whatever
@@ -153,7 +159,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             self.SelectFilterId = SortId
-            pageNumber = 1
+            self.pageNumber = 1
             webserviceGetRestaurantOutlet(strFilter: "")
         }
     }
@@ -193,17 +199,24 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         RestaurantOutletList.user_id = SingletonClass.sharedInstance.UserId
         RestaurantOutletList.filter = strFilter
         RestaurantOutletList.item = ""
-        RestaurantOutletList.page = "\(pageNumber)"
-        RestaurantOutletList.restaurant_id = selectedRestaurantId
-        RestaurantOutletList.page = "\(pageNumber)"
+        RestaurantOutletList.page = "\(self.pageNumber)"
+        RestaurantOutletList.restaurant_id = self.selectedRestaurantId
+        RestaurantOutletList.page = "\(self.pageNumber)"
         RestaurantOutletList.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         RestaurantOutletList.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         WebServiceSubClass.RestaurantOutlet(OutletModel: RestaurantOutletList, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantOutletsResModel.init(fromJson: response)
+                self.isRefresh = false
                 if self.pageNumber == 1 {
                     self.arrOutletList = restaurantData.data
+                    let arrTemp = restaurantData.data
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
+                    }
                     self.setData()
                 } else {
                     let arrTemp = restaurantData.data
@@ -214,6 +227,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
 //                    }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
                     }
                 }
                 self.tblRestaurantList.reloadData()
@@ -221,10 +236,13 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
             if self.arrOutletList.count > 0{
-                self.tblRestaurantList.restore()
-            }else {
-                self.tblRestaurantList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-            }
+                            self.tblRestaurantList.restore()
+                            self.imgRestaurantEmpty.isHidden = true
+                            self.tblRestaurantList.isHidden = false
+                        }else {
+                            self.imgRestaurantEmpty.isHidden = false
+                            self.tblRestaurantList.isHidden = true
+                        }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
@@ -246,6 +264,9 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         })
     }
     func refreshFavoriteScreen() {
+        self.pageNumber = 1
+        self.isRefresh = true
+        self.isNeedToReload = true
        webserviceGetRestaurantOutlet(strFilter: "")
     }
 }

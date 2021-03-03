@@ -25,6 +25,7 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     var refreshList = UIRefreshControl()
     var arrNotification = [notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully Completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3")]
     // MARK: - IBOutlets
+    @IBOutlet weak var imgNotification: UIImageView!
     @IBOutlet weak var tbvNotification: UITableView!
     
     // MARK: - ViewController Lifecycle
@@ -63,6 +64,14 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     // MARK: - Api Calls
     @objc func webservicePostNotification(){
+//        if self.arrOrderListing.count > 0{
+//            self.tblOrders.restore()
+//            self.imgOrderEmpty.isHidden = true
+//            self.tblOrders.isHidden = false
+//        }else {
+//            self.imgOrderEmpty.isHidden = false
+//            self.tblOrders.isHidden = true
+//        }
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }

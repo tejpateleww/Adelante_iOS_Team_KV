@@ -21,6 +21,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var arrSelectedVariants = [selectedVariants]()
     
     // MARK: - IBOutlets
+    @IBOutlet weak var imgBffCombo: UIImageView!
     @IBOutlet weak var tblBFFCombo: UITableView!
     @IBOutlet weak var lblItem: themeLabel!
     @IBOutlet weak var lblTotal: themeLabel!
@@ -242,6 +243,14 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
+        if self.arrVariants.count > 0{
+            self.tblBFFCombo.restore()
+            imgBffCombo.isHidden = true
+            tblBFFCombo.isHidden = false
+        }else {
+            imgBffCombo.isHidden = false
+            tblBFFCombo.isHidden = true
+        }
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }

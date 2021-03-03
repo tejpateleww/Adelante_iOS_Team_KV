@@ -22,6 +22,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
+    @IBOutlet weak var imgEmptyCard: UIImageView!
     
     //MARK: - Other Methods
     
@@ -209,12 +210,22 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                  self.arrCard = cardListRes.cards
                  self.tblPaymentMethod.reloadData()
              } else {
-                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong!")
+                 Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                
              }
+            if self.arrCard.count > 0{
+                self.tblPaymentMethod.restore()
+                self.imgEmptyCard.isHidden = true
+                self.tblPaymentMethod.isHidden = false
+            }else {
+                self.imgEmptyCard.isHidden = false
+                self.tblPaymentMethod.isHidden = true
+            }
+            DispatchQueue.main.async {
+                self.refreshList.endRefreshing()
+            }
          })
-        DispatchQueue.main.async {
-            self.refreshList.endRefreshing()
-        }
+        
     }
     func refreshAddPaymentScreen() {
         webserviceGetAddPayment()
@@ -229,7 +240,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                  Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
                  self.webserviceGetAddPayment()
              } else {
-                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong!")
+                 Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
              }
          })
     }

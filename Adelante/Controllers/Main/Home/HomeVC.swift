@@ -45,9 +45,11 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     var SelectFilterId = ""
     var refreshList = UIRefreshControl()
     var pageNumber = 1
-    var isNeedToReload = true
+    var isNeedToReload = false
     var pageLimit = 5
     var selectedRestaurantId = ""
+    var isRefresh = false
+    
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -104,7 +106,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         pageControl.hidesForSinglePage = true
     }
     @objc func refreshListing(){
-        pageNumber = 1
+        self.pageNumber = 1
+        isRefresh = true
         self.isNeedToReload = true
         webserviceGetDashboard()
     }
@@ -301,7 +304,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func SelectedCategory(_ CategoryId: String) {
         self.SelectedCatId = CategoryId
         print("selectedcategoryid",SelectedCatId)
-        pageNumber = 1
+        self.pageNumber = 1
         self.webserviceGetDashboard()
     }
     // MARK: - filterDelegate
@@ -315,7 +318,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             self.SelectFilterId = SortId
-            pageNumber = 1
+            self.pageNumber = 1
             webserviceGetDashboard()
         }
     }
@@ -325,8 +328,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     func stoppedScrolling() {
-        if isNeedToReload {
-            pageNumber = pageNumber + 1
+        if isNeedToReload && isRefresh == false {
+            self.pageNumber = self.pageNumber + 1
             webserviceGetDashboard()
         }
         // done, do whatever
@@ -339,7 +342,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         Deshboard.filter = SelectFilterId
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        Deshboard.page = "\(pageNumber)"
+        Deshboard.page = "\(self.pageNumber)"
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
@@ -347,8 +350,16 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                 self.arrCategories = Homedata.category
                 self.arrBanner = Homedata.banner
                 self.pageControl.numberOfPages = self.arrBanner.count
+                self.isRefresh = false
                 if self.pageNumber == 1 {
                     self.arrRestaurant = Homedata.restaurant
+                    
+                    let arrTemp = Homedata.restaurant
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
+                    }
                 } else {
                     let arrTemp = Homedata.restaurant
                     if arrTemp!.count > 0 {
@@ -358,13 +369,15 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                     }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
                     }
                 }
                 self.tblMainList.reloadData()
                 self.colVwRestWthPage.reloadData()
             }else{
-                Utilities.displayErrorAlert(response["message"].string ?? "Something went wrong")
-                //                Utilities.showAlertOfAPIResponse(param: error ?? "Something went wrong", vc: self)
+                Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
+                //                Utilities.showAlertOfAPIResponse(param: error ?? "No internet connection", vc: self)
             }
 //            if self.arrRestaurant.count > 0{
 //                self.tblMainList.restore()
@@ -376,7 +389,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             }
         })
     }
-    func webwerviceFavorite(strRestaurantId:String,Status:String){
+    
+    func webwerviceFavorite(strRestaurantId:String,Status:String) {
         let favorite = FavoriteReqModel()
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
@@ -394,7 +408,8 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         })
     }
     func refreshDeshboardList(strStatus: String, selectedIndex: String) {
-        pageNumber = 1
+        self.pageNumber = 1
+        self.isRefresh = true
         self.isNeedToReload = true
         webserviceGetDashboard()
 //        if selectedIndex != ""{

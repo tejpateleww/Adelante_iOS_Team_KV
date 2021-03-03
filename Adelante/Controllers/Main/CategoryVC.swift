@@ -16,6 +16,7 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     // MARK: - IBOutlets
     @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var collectionCategory: UICollectionView!
+    @IBOutlet weak var imgCategory: UIImageView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -60,6 +61,14 @@ class CategoryVC: BaseViewController, UICollectionViewDelegate,UICollectionViewD
     // MARK: - Api Calls
     @objc func webservicePostCategoryDetail()
     {
+//        if self.arrOrderListing.count > 0{
+//            self.tblOrders.restore()
+//            self.imgOrderEmpty.isHidden = true
+//            self.tblOrders.isHidden = false
+//        }else {
+//            self.imgOrderEmpty.isHidden = false
+//            self.tblOrders.isHidden = true
+//        }
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
         }
