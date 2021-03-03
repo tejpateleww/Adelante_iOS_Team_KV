@@ -175,7 +175,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         if objRestaurant != nil{
             self.lblRestaurantName.text = objRestaurant.name ?? ""
             //            self.lblPrice.text = objRestaurant. ?? ""
-            self.lblRating.text = objRestaurant.rating ?? ""
+            self.lblRating.text = objRestaurant.rating
             self.lblReviews.text = String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review)
             //            self.lblTimeZone.text = objRestaurant.
             self.lblDistance.text = String(format: "HomeVC_RestaurantCell_lblMiles".Localized(), objRestaurant.distance)

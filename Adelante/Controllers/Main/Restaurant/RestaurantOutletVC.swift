@@ -101,8 +101,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     @IBAction func btnTapFavorite(_ sender: UIButton) {
         if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
-//             vc.delegateFilter = self
-//             vc.selectedSortData = self.SelectFilterId
+            //             vc.delegateFilter = self
+            //             vc.selectedSortData = self.SelectFilterId
             let navController = UINavigationController.init(rootViewController: vc)
             navController.modalPresentationStyle = .overFullScreen
             navController.navigationController?.modalTransitionStyle = .crossDissolve
@@ -129,8 +129,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             }
             else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
                 self.selectedSortTypedIndexFromcolVwFilter = 1
-//                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+                //                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+                //                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
                 self.tblRestaurantList.reloadData()
             } else {
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
@@ -188,9 +188,9 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
-            controller.selectedRestaurantId = arrOutletList[indexPath.row].id
-            self.navigationController?.pushViewController(controller, animated: true)
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+        controller.selectedRestaurantId = arrOutletList[indexPath.row].id
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Api Calls
@@ -220,11 +220,11 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                     self.setData()
                 } else {
                     let arrTemp = restaurantData.data
-//                    if arrTemp!.count > 0 {
-//                        for i in 0..<arrTemp!.count {
-//                            self.arrOutletList.append(arrTemp![i])
-//                        }
-//                    }
+                    //                    if arrTemp!.count > 0 {
+                    //                        for i in 0..<arrTemp!.count {
+                    //                            self.arrOutletList.append(arrTemp![i])
+                    //                        }
+                    //                    }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
                     } else {
@@ -236,13 +236,13 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
             if self.arrOutletList.count > 0{
-                            self.tblRestaurantList.restore()
-                            self.imgRestaurantEmpty.isHidden = true
-                            self.tblRestaurantList.isHidden = false
-                        }else {
-                            self.imgRestaurantEmpty.isHidden = false
-                            self.tblRestaurantList.isHidden = true
-                        }
+                self.tblRestaurantList.restore()
+                self.imgRestaurantEmpty.isHidden = true
+                self.tblRestaurantList.isHidden = false
+            }else {
+                self.imgRestaurantEmpty.isHidden = false
+                self.tblRestaurantList.isHidden = true
+            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
@@ -267,6 +267,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true
-       webserviceGetRestaurantOutlet(strFilter: "")
+        webserviceGetRestaurantOutlet(strFilter: "")
     }
 }
