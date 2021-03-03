@@ -175,16 +175,16 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             //            self.arrFavoriteRest.removeAll()
             //            self.tblMainList.reloadData()
             if self.arrFavoriteRest.count > 0 {
-                            self.tblMainList.restore()
-                            self.imgFavorite.isHidden = true
-                            self.tblMainList.isHidden = false
-                           
-                        } else {
-                            self.tblMainList.isHidden = true
-                            self.imgFavorite.isHidden = false
-            //                self.view.bringSubviewToFront(self.imgFavorite)
-            //                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-                        }
+                self.tblMainList.restore()
+                self.imgFavorite.isHidden = true
+                self.tblMainList.isHidden = false
+                
+            } else {
+                self.tblMainList.isHidden = true
+                self.imgFavorite.isHidden = false
+                //                self.view.bringSubviewToFront(self.imgFavorite)
+                //                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
+            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
@@ -195,7 +195,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
             //            self.hideHUD()
             if status{
                 self.pageNumber = 1
@@ -224,8 +224,10 @@ extension FavouritesVC:UISearchBarDelegate{
     @objc private func makeNetworkCall(_ query: String)
     {
         if query == ""{
-            arrFavoriteRest.removeAll()
-            tblMainList.reloadData()
+            txtSearch.resignFirstResponder()
+            webservicePostRestaurantFav(strSearch: "")
+            // arrFavoriteRest.removeAll()
+            // tblMainList.reloadData()
         }else{
             if query.count > 2{
                 webservicePostRestaurantFav(strSearch: query)

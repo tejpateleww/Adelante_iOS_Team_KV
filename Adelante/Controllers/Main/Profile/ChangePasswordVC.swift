@@ -9,7 +9,7 @@
 import UIKit
 
 class ChangePasswordVC: BaseViewController {
-
+    
     //MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     
@@ -31,18 +31,18 @@ class ChangePasswordVC: BaseViewController {
         setUpLocalizedStrings()
         setup()
     }
-
+    
     // MARK: - Other Methods
     func setup() {
         self.navigationController?.navigationBar.isHidden = false
-
+        
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.changePassword.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     override func viewWillAppear(_ animated: Bool) {
-           self.customTabBarController?.hideTabBar()
-       }
+        self.customTabBarController?.hideTabBar()
+    }
     func setUpLocalizedStrings(){
         lblTitle.text = "ChangePasswordVC_lblTitle".Localized()
         txtOldPassword.placeholder = "ChangePasswordVC_txtOldPassword".Localized()
@@ -77,7 +77,7 @@ class ChangePasswordVC: BaseViewController {
         }
     }
     
-   
+    
     // MARK: - Api Calls
     func webservice_ChangePW(){
         let changePWReqModel = ChangePasswordReqModel()
@@ -90,7 +90,7 @@ class ChangePasswordVC: BaseViewController {
             if status{
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
                     if index == 0{
-//                        self.navigationController?.popViewController(animated: true)
+                        //                        self.navigationController?.popViewController(animated: true)
                         appDel.navigateToLogin()
                     }
                 }
@@ -101,13 +101,13 @@ class ChangePasswordVC: BaseViewController {
     }
     func validations()->Bool{
         let txtTemp = UITextField()
-//        ValidatorType.requiredField(field: "Your password can’t start or end with a blank space")
+        //        ValidatorType.requiredField(field: "Your password can’t start or end with a blank space")
         txtTemp.text = txtOldPassword.text?.replacingOccurrences(of: " ", with: "")
         let currentPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "current password"))
         txtTemp.text = txtNewPassword.text?.replacingOccurrences(of: " ", with: "")
         let newPW =  txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "new password"))
         txtTemp.text = txtConfirmPassword.text?.replacingOccurrences(of: " ", with: "")
-         let confirmPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm password"))
+        let confirmPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm password"))
         if (!currentPW.0){
             Utilities.ShowAlert(OfMessage: currentPW.1)
             return currentPW.0
@@ -147,14 +147,14 @@ class ChangePasswordVC: BaseViewController {
 }
 
 extension ChangePasswordVC:UITextFieldDelegate{
-//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-//        guard range.location == 0 else {
-//        return true
-//        }
-//
-//        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: "") as NSString
-//        return newString.rangeOfCharacter(from: NSCharacterSet.whitespacesAndNewlines).location != 0
-//    }
+    //    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    //        guard range.location == 0 else {
+    //        return true
+    //        }
+    //
+    //        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: "") as NSString
+    //        return newString.rangeOfCharacter(from: NSCharacterSet.whitespacesAndNewlines).location != 0
+    //    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var validate = true
         if textField.text?.count ?? 0 > 0{
@@ -174,8 +174,10 @@ extension ChangePasswordVC:UITextFieldDelegate{
         return validate
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let validate = self.isShowValidateAlert && textField.text?.last != " "
-        !validate ? Utilities.ShowAlert(OfMessage: "Your password can’t start or end with a blank space") : Void()
+        if textField.text != "" {
+            let validate = self.isShowValidateAlert && textField.text?.last != " "
+            !validate ? Utilities.ShowAlert(OfMessage: "Your password can’t start or end with a blank space") : Void()
+        }
     }
 }
- 
+

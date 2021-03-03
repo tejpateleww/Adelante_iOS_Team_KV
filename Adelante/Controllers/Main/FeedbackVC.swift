@@ -46,11 +46,17 @@ class FeedbackVC: BaseViewController {
     {
         let txtTemp = UITextField()
         txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
-        let checkEmail = txtTemp.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
-         if(!checkEmail.0)
+        let checkEmail = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
+        let checkEmailValid = txtTemp.validatedText(validationType: ValidatorType.email)
+        if(!checkEmail.0)
         {
             Utilities.ShowAlert(OfMessage: checkEmail.1)
             return checkEmail.0
+        }
+        else if(!checkEmailValid.0)
+        {
+            Utilities.ShowAlert(OfMessage:"Please enter valid email address")
+            return checkEmailValid.0
         }
         return true
     }

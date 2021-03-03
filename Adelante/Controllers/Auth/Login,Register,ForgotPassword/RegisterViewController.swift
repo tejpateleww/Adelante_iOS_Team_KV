@@ -116,9 +116,9 @@ class RegisterViewController: UIViewController {
         let checkEmailRequired = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtEmail.placeholder?.lowercased() ?? ""))
         let checkEmailValid = txtTemp.validatedText(validationType: ValidatorType.email)
         txtTemp.text = txtPassword.text?.replacingOccurrences(of: " ", with: "")
-        let checkPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "Password"))
+        let checkPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "password"))
         txtTemp.text = txtConPassword.text?.replacingOccurrences(of: " ", with: "")
-        let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm Password"))
+        let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm password"))
         let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "phone number"))
         
         if (!firstName.0){
@@ -137,8 +137,13 @@ class RegisterViewController: UIViewController {
             Utilities.ShowAlert(OfMessage:"Please enter valid email address")
             return checkEmailValid.0
         }
+        else if(!phone.0)
+        {
+            Utilities.ShowAlert(OfMessage:phone.1)
+            return phone.0
+        }
         else if (txtPhoneNumber.text?.count ?? 0) < 9 {
-            Utilities.ShowAlert(OfMessage: "Please enter valid contact number")
+            Utilities.ShowAlert(OfMessage: "Please enter valid phone number")
             return false
         }
         else  if(!checkPassword.0) && !isSocialLogin
@@ -180,7 +185,10 @@ class RegisterViewController: UIViewController {
                 //                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 //                userDefault.setUserData(objProfile: registerRespoDetails!)
                 //                appDel.navigateToHome()
-                appDel.navigateToLogin()
+                Utilities.displayAlert("", message: "Registered successfully! Email verification link has been sent to your registered email", completion: {_ in
+                    appDel.navigateToLogin()
+                }, otherTitles: nil)
+                
             }
             else
             {

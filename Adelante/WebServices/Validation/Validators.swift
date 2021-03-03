@@ -72,7 +72,7 @@ struct UserNameValidator: ValidatorConvertible {
             return (false , ValidationError("\(fieldName) must contain more than three characters").message)
 //            ValidationError("Username must contain more than three characters" )
         }
-        guard value.count < 18 else {
+        guard value.count < 15 else {
             return (false , ValidationError("\(fieldName) shoudn't conain more than 18 characters").message)
 //            throw ValidationError("Username shoudn't conain more than 18 characters" )
         }

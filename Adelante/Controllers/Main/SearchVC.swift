@@ -86,7 +86,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         search.item = strSearch
         search.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.search(Searchmodel: search, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let result = SearchResModel(fromJson: response)
