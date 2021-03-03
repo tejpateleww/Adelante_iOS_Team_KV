@@ -41,10 +41,25 @@ class FeedbackVC: BaseViewController {
         tvFeedback.placeholder = "FeedbackVC_tvFeedback".Localized()
         btnSubmit.setTitle("FeedbackVC_btnSubmit".Localized(), for: .normal)
     }
+    //Mark : Validation
+    func validation() -> Bool
+    {
+        let txtTemp = UITextField()
+        txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
+        let checkEmail = txtTemp.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
+         if(!checkEmail.0)
+        {
+            Utilities.ShowAlert(OfMessage: checkEmail.1)
+            return checkEmail.0
+        }
+        return true
+    }
     // MARK: - IBActions
     
     @IBAction func btnSubmitClick(_ sender: submitButton) {
-        webserviceForFeedback()
+        if validation(){
+            webserviceForFeedback()
+        }
     }
     // MARK: - Api Calls
     func webserviceForFeedback()

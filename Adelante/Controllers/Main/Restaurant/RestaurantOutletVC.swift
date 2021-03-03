@@ -207,11 +207,11 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                     self.setData()
                 } else {
                     let arrTemp = restaurantData.data
-                    if arrTemp!.count > 0 {
-                        for i in 0..<arrTemp!.count {
-                            self.arrOutletList.append(arrTemp![i])
-                        }
-                    }
+//                    if arrTemp!.count > 0 {
+//                        for i in 0..<arrTemp!.count {
+//                            self.arrOutletList.append(arrTemp![i])
+//                        }
+//                    }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
                     }
@@ -235,7 +235,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
             // self.hideHUD()
             if status{
                 self.arrOutletList.first(where: { $0.id == strRestaurantId })?.favourite = Status

@@ -80,21 +80,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         checkItemsAndUpdateFooter()
     }
     func checkItemsAndUpdateFooter(){
-//        var total = 0
-//        if arrSelectedOrder.count > 0{
-//            var subTotal = 0
-//            for i in 0..<arrSelectedOrder.count{
-//                let price : Int = Int(arrSelectedOrder[i].price) ?? 0
-//                subTotal = subTotal + price
-//            }
-//            //            var total : Int = Int(subTotal) + Int(objRestaurant.serviceFee)
-//            //            total = total + Int(objRestaurant.tax)
-//            total = Int(subTotal) + objRestaurant.serviceFee.toInt() + objRestaurant.tax.toInt()
-//            let dicTemp = currentOrder.init(userId: SingletonClass.sharedInstance.UserId, restautaurantId: objRestaurant.id, rating: "", comment: "", subTotal: "\(subTotal)", serviceFee: objRestaurant.serviceFee, tax: objRestaurant.tax, total: "\(total)", order: arrSelectedOrder, currentRestaurantDetail: self.objRestaurant)
-//            objCurrentOrder = dicTemp
-//            SingletonClass.sharedInstance.restCurrentOrder = self.objCurrentOrder
-//            //            userDefault.setUserData(objProfile)
-//        }
         if SingletonClass.sharedInstance.restCurrentOrder != nil{
             if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
                 self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"

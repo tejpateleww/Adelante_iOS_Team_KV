@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,favoriteDelegate, SortListDelegate{
+class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, SortListDelegate{
     
     
     
@@ -212,7 +212,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         RestaurantList.page = "\(pageNumber)"
         RestaurantList.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         RestaurantList.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantListResModel.init(fromJson: response)
@@ -220,11 +220,11 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                     self.arrRestaurantList = restaurantData.data
                 } else {
                     let arrTemp = restaurantData.data
-                    if arrTemp!.count > 0 {
-                        for i in 0..<arrTemp!.count {
-                            self.arrRestaurantList.append(arrTemp![i])
-                        }
-                    }
+//                    if arrTemp!.count > 0 {
+//                        for i in 0..<arrTemp!.count {
+//                            self.arrRestaurantList.append(arrTemp![i])
+//                        }
+//                    }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
                     }
@@ -260,9 +260,9 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
-    func refreshFavoriteScreen() {
-        webserviceGetRestaurantList(strSearch: "", strFilter: "")
-    }
+//    func refreshFavoriteScreen() {
+//        webserviceGetRestaurantList(strSearch: "", strFilter: "")
+//    }
 }
 extension RestaurantListVC:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

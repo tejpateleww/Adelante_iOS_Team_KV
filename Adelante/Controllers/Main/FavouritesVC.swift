@@ -136,7 +136,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         RestaurantFavorite.name = strSearch
         RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
         RestaurantFavorite.page = "\(self.pageNumber)"
-        WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let restaurantData = RestaurantFavResModel.init(fromJson: response)

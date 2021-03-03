@@ -214,9 +214,9 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                 controller.strUrl = SettingsData.aboutUs
                 self.navigationController?.pushViewController(controller, animated: true)
             case 3:
-                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-                controller.strNavTitle = "MyAccountVC_title3_D".Localized()
-                controller.strUrl = SettingsData.aboutUs
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: FeedbackVC.storyboardID) as! FeedbackVC
+//                controller.strNavTitle = "MyAccountVC_title3_D".Localized()
+//                controller.strUrl = SettingsData.aboutUs
                 self.navigationController?.pushViewController(controller, animated: true)
             default:
                 print(indexPath.row)

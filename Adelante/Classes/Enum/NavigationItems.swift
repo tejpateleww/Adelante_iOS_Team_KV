@@ -46,7 +46,7 @@ enum NavItemsRight {
 }
 
 enum NavTitles {
-    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites , addPaymentVC , AddCardVC , bffComboVC , FeedbackVC ,checkOutVC ,BffComboVC , SearchVC ,EditLocationVC,RestaurantOutletVC
+    case none, myOrders, pastOrderDetails, upcomingOrderDetails, checkout, addPayment, addCard, myAccount, myProfile, editProfile, ratingAndReviews, restaurantList, restaurantDetails, myFoodlist, termsAndConditions, privacyPolicy, aboutUs, feedback, topCategories, bffCombo, notifications, favourites , addPaymentVC , AddCardVC , bffComboVC , FeedbackVC ,checkOutVC ,BffComboVC , SearchVC ,EditLocationVC,RestaurantOutletVC,changePassword
     
     var value:String {
         switch self {
@@ -113,6 +113,8 @@ enum NavTitles {
             return "NavigationTitles_searchLocation".Localized()
         case .RestaurantOutletVC:
             return "NavigationTitles_RestaurantOutletVC".Localized()
+        case .changePassword:
+            return "NavigationTitles_ChangePasswordVC".Localized()
         }
     }
 }

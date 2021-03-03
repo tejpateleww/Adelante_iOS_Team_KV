@@ -118,7 +118,7 @@ class RegisterViewController: UIViewController {
         let checkPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "Password"))
         txtTemp.text = txtConPassword.text?.replacingOccurrences(of: " ", with: "")
         let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm Password"))
-        let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "contact number"))
+        let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "phone number"))
         
         if (!firstName.0){
             Utilities.ShowAlert(OfMessage: firstName.1)
@@ -167,13 +167,14 @@ class RegisterViewController: UIViewController {
             {
                 let loginModel = Userinfo.init(fromJson: json)
                 let registerRespoDetails = loginModel.profile
-                SingletonClass.sharedInstance.UserId = registerRespoDetails?.id ?? ""
-                SingletonClass.sharedInstance.Api_Key = registerRespoDetails?.apiKey ?? ""
-                SingletonClass.sharedInstance.LoginRegisterUpdateData = registerRespoDetails
-                userDefault.setValue(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
-                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-                userDefault.setUserData(objProfile: registerRespoDetails!)
-                appDel.navigateToHome()
+//                SingletonClass.sharedInstance.UserId = registerRespoDetails?.id ?? ""
+//                SingletonClass.sharedInstance.Api_Key = registerRespoDetails?.apiKey ?? ""
+//                SingletonClass.sharedInstance.LoginRegisterUpdateData = registerRespoDetails
+//                userDefault.setValue(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
+//                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+//                userDefault.setUserData(objProfile: registerRespoDetails!)
+//                appDel.navigateToHome()
+                appDel.navigateToLogin()
             }
             else
             {

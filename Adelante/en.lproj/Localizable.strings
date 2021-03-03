@@ -266,6 +266,7 @@
 "NavigationTitles_searchLocation" = "Search Location";
 "NavigationTitles_NavItemsLeft_skip" = "SKIP";
 "NavigationTitles_RestaurantOutletVC" = "Outlets";
+"NavigationTitles_ChangePasswordVC" = "Change password";
 
 //Message
 "MessageTitle" = "Something went wrong";

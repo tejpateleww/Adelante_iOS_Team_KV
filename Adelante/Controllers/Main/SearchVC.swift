@@ -86,7 +86,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         search.item = strSearch
         search.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.search(Searchmodel: search, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let result = SearchResModel(fromJson: response)
@@ -94,6 +94,11 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                 self.tblSearch.reloadData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: response, vc: self)
+            }
+            if self.arrSearchResult.count > 0{
+                self.tblSearch.restore()
+            }else {
+                self.tblSearch.setEmptyMessage("No result found for ")
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()

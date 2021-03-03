@@ -53,8 +53,7 @@ class CommonWebViewVC: BaseViewController, WKNavigationDelegate {
         }
         if strStorePolicy == "http://18.208.18.170/assets/images/restaurant/banner/4832a33c4cc865f705753eb6c799f47e.pdf"{
             let url: URL! = URL(string: "http://18.208.18.170/assets/images/restaurant/banner/4832a33c4cc865f705753eb6c799f47e.pdf")
-            let targetURL = NSURL(string: "https://www.example.com/document.pdf")! // This value is force-unwrapped for the sake of a compact example, do not do this in your code
-            let request = NSURLRequest(url: targetURL as URL)
+            let request = NSURLRequest(url: url as URL)
             webView.load(URLRequest(url: url))
         }
         //        Utilities.showHud()
