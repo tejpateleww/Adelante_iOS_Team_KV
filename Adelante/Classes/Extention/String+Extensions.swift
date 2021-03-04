@@ -232,4 +232,11 @@ extension String{
         let bundle = Bundle(path: path!)!
         return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
     }
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).localizedUppercase + dropFirst()
+    }
+    
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
 }

@@ -48,8 +48,9 @@ class RegisterViewController: UIViewController {
     
     //MARK:- Other Methods
     func setUp(){
-        
-        
+        txtLastName.delegate = self
+        txtFirstName.delegate = self
+        txtPhoneNumber.delegate = self
     }
     func setUpLocalizedStrings() {
         lblTitle.text = "RegisterViewController_lblTitle".Localized()
@@ -116,11 +117,11 @@ class RegisterViewController: UIViewController {
         let checkEmailRequired = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtEmail.placeholder?.lowercased() ?? ""))
         let checkEmailValid = txtTemp.validatedText(validationType: ValidatorType.email)
         txtTemp.text = txtPassword.text?.replacingOccurrences(of: " ", with: "")
-        let checkPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "password"))
+        let checkPassword = txtTemp.validatedText(validationType: ValidatorType.password(field: txtPassword.placeholder ?? ""))
         txtTemp.text = txtConPassword.text?.replacingOccurrences(of: " ", with: "")
-        let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm password"))
-        let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "phone number"))
-        
+        let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.password(field: txtConPassword.placeholder ?? ""))
+     //   let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "phone number"))
+        let invalidPhone =  txtPhoneNumber.validatedText(validationType: ValidatorType.phoneNo)
         if (!firstName.0){
             Utilities.ShowAlert(OfMessage: firstName.1)
             return firstName.0
@@ -134,14 +135,13 @@ class RegisterViewController: UIViewController {
         }
         else if(!checkEmailValid.0)
         {
-            Utilities.ShowAlert(OfMessage:"Please enter valid email address")
+            Utilities.ShowAlert(OfMessage:"Please enter a valid email")
             return checkEmailValid.0
         }
-        else if(!phone.0)
-        {
-            Utilities.ShowAlert(OfMessage:phone.1)
-            return phone.0
-        }
+        else if (!invalidPhone.0) {
+                    Utilities.ShowAlert(OfMessage: invalidPhone.1)
+                    return invalidPhone.0
+                }
         else if (txtPhoneNumber.text?.count ?? 0) < 9 {
             Utilities.ShowAlert(OfMessage: "Please enter valid phone number")
             return false
@@ -154,7 +154,7 @@ class RegisterViewController: UIViewController {
             Utilities.ShowAlert(OfMessage: confirmPassword.1)
             return confirmPassword.0
         }else if txtPassword.text?.lowercased() != txtConPassword.text?.lowercased(){
-            Utilities .ShowAlert(OfMessage: "New password and confirm password must be same")
+            Utilities .ShowAlert(OfMessage: "Password and confirm password must be same")
             return false
         }
         return true
@@ -202,16 +202,24 @@ extension RegisterViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
-        let newText = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
-        let numberOfChars = newText.count
-        if textField.tag == 3 || textField.tag == 4{
-            return numberOfChars < 15
-        }else{
-            return numberOfChars < 50
+        if textField == txtFirstName || textField == txtLastName {
+            let maxLength = 15
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+        } else if textField == txtPhoneNumber{
+            let maxLength = 15
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
         }
+        return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
+

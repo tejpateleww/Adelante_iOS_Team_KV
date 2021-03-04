@@ -103,11 +103,11 @@ class ChangePasswordVC: BaseViewController {
         let txtTemp = UITextField()
         //        ValidatorType.requiredField(field: "Your password can’t start or end with a blank space")
         txtTemp.text = txtOldPassword.text?.replacingOccurrences(of: " ", with: "")
-        let currentPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "current password"))
+        let currentPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtOldPassword.placeholder ?? ""))
         txtTemp.text = txtNewPassword.text?.replacingOccurrences(of: " ", with: "")
-        let newPW =  txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "new password"))
+        let newPW =  txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtNewPassword.placeholder ?? ""))
         txtTemp.text = txtConfirmPassword.text?.replacingOccurrences(of: " ", with: "")
-        let confirmPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: "confirm password"))
+        let confirmPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtConfirmPassword.placeholder ?? ""))
         if (!currentPW.0){
             Utilities.ShowAlert(OfMessage: currentPW.1)
             return currentPW.0
