@@ -46,6 +46,8 @@ class EditProfileVC: BaseViewController{
     
     // MARK: - Other Methods
     func setUp() {
+        txtFirstName.delegate = self
+        txtLastName.delegate = self
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
@@ -174,5 +176,25 @@ extension EditProfileVC:ImagePickerDelegate {
         }else{
             return
         }
+    }
+}
+extension EditProfileVC:UITextFieldDelegate{
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField == txtFirstName || textField == txtLastName {
+            let maxLength = 15
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+        } else if textField == txtPhoneNumber{
+            let maxLength = 15
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+        }
+        return true
     }
 }

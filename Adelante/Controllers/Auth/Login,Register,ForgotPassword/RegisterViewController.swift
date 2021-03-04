@@ -12,7 +12,7 @@ class RegisterViewController: UIViewController {
     
     //MARK:- Properties
     var isSocialLogin : Bool = false
-    
+    var isShowValidateAlert = Bool()
     //MARK:- Outlet
     @IBOutlet weak var lblTitle: themeTitleLabel!
     @IBOutlet weak var txtFirstName:floatTextField!
@@ -32,6 +32,8 @@ class RegisterViewController: UIViewController {
     //MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtPassword.delegate = self
+        txtConPassword.delegate = self
         setUpLocalizedStrings()
         setUp()
     }
@@ -120,7 +122,7 @@ class RegisterViewController: UIViewController {
         let checkPassword = txtTemp.validatedText(validationType: ValidatorType.password(field: txtPassword.placeholder ?? ""))
         txtTemp.text = txtConPassword.text?.replacingOccurrences(of: " ", with: "")
         let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.password(field: txtConPassword.placeholder ?? ""))
-     //   let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "phone number"))
+        //   let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "phone number"))
         let invalidPhone =  txtPhoneNumber.validatedText(validationType: ValidatorType.phoneNo)
         if (!firstName.0){
             Utilities.ShowAlert(OfMessage: firstName.1)
@@ -139,9 +141,9 @@ class RegisterViewController: UIViewController {
             return checkEmailValid.0
         }
         else if (!invalidPhone.0) {
-                    Utilities.ShowAlert(OfMessage: invalidPhone.1)
-                    return invalidPhone.0
-                }
+            Utilities.ShowAlert(OfMessage: invalidPhone.1)
+            return invalidPhone.0
+        }
         else if (txtPhoneNumber.text?.count ?? 0) < 9 {
             Utilities.ShowAlert(OfMessage: "Please enter valid phone number")
             return false
@@ -215,11 +217,96 @@ extension RegisterViewController:UITextFieldDelegate{
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
         }
+        
+//        var validate = true
+//
+//        if range.location == 0 && string == " " {
+//            validate = false
+//        } else if range.location > 1 && textField.text?.last == " " && string == " " {
+//            validate = false
+//        } else {
+//            validate = true
+//        }
+//
+//        if !validate {
+//            Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
+//            self.isShowValidateAlert = true
+//        }
+        
+        
+        else if textField == txtPassword || textField == txtConPassword{
+            var validate = true
+//            var ValidateOne = true
+            if range.location == 0 && string == " " {
+                validate = false
+            } else if range.location > 1 && textField.text?.last == " " && string == " " {
+                validate = false
+//                ValidateOne = false
+            } else {
+                validate = true
+//                ValidateOne = true
+            }
+            
+            if !validate { //|| !ValidateOne{
+                Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
+                self.isShowValidateAlert = true
+            }
+            return validate
+        }
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //        if textField == txtPassword || textField == txtConPassword{
+        //        txtPassword.resignFirstResponder()
+        //        txtConPassword.resignFirstResponder()
         textField.resignFirstResponder()
         return true
     }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == txtPassword || textField == txtConPassword{
+            let validate = self.isShowValidateAlert && txtPassword.text?.last != " "
+            let validateOne = self.isShowValidateAlert && txtConPassword.text?.last != " "
+            //            !validate ? Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space") : Void()
+            if !validate || !validateOne
+            {
+                Utilities.displayAlert("", message: "\(textField.placeholder ?? "") can’t start or end with a blank space", completion: {_ in
+                    textField.becomeFirstResponder()
+                    self.isShowValidateAlert = true
+                }, otherTitles: nil)
+            }
+        }
+    }
 }
 
+//extension ChangePasswordVC:UITextFieldDelegate{
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        var validate = true
+//
+//        if range.location == 0 && string == " " {
+//            validate = false
+//        } else if range.location > 1 && textField.text?.last == " " && string == " " {
+//            validate = false
+//        } else {
+//            validate = true
+//        }
+//
+//        if !validate {
+//            Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
+//            self.isShowValidateAlert = true
+//        }
+//        return validate
+//    }
+//
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//
+//            let validate = self.isShowValidateAlert && textField.text?.last != " "
+////            !validate ? Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space") : Void()
+//        if !validate
+//        {
+//            Utilities.displayAlert("", message: "\(textField.placeholder ?? "") can’t start or end with a blank space", completion: {_ in
+//                textField.becomeFirstResponder()
+//                self.isShowValidateAlert = true
+//            }, otherTitles: nil)
+//        }
+//    }
+//}

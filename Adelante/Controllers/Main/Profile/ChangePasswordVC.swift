@@ -150,20 +150,6 @@ class ChangePasswordVC: BaseViewController {
 extension ChangePasswordVC:UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var validate = true
-        // if textField.text?.count ?? 0 > 0{
-        // if (String((textField.text?.first)!) == " " && string == " "){
-        // validate = false
-        // }
-        //
-        // }else{
-        // validate = string != " "
-        // }
-        //
-        // if !validate{
-        // Utilities.ShowAlert(OfMessage: textField.placeholder ?? "" + "can’t start or end with a blank space")
-        // }
-        // self.isShowValidateAlert = !validate
-        // return validate
         
         if range.location == 0 && string == " " {
             validate = false
