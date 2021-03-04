@@ -186,8 +186,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 stackPromocode.isHidden = false
             }
             self.lblCode.text = objRestaurant.promocode ?? ""
-            self.lblTime.text = objRestaurant.fromTime ?? ""
-            self.lblCompleteTime.text = objRestaurant.toTime ?? ""
+            self.lblTime.text = "\(objRestaurant.fromTime ?? "")"
+            self.lblCompleteTime.text = "\(objRestaurant.toTime ?? "")"
             self.lblAboutRestaurant.text = objRestaurant.descriptionField ?? ""
             self.lblEastern.text = objRestaurant.timezone ?? ""
             let strUrl = "\(APIEnvironment.profileBu.rawValue)\(objRestaurant.image ?? "")"

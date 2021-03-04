@@ -395,12 +395,12 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
      Attempt the control to resign being the first responder
      - returns: True when successfull resigning being the first responder
      */
-    @discardableResult
-    override open func resignFirstResponder() -> Bool {
-        let result = super.resignFirstResponder()
-        updateControl(true)
-        return result
-    }
+//    @discardableResult
+//    override open func resignFirstResponder() -> Bool {
+//        let result = super.resignFirstResponder()
+//        updateControl(true)
+//        return result
+//    }
 
     /// update colors when is enabled changed
     override open var isEnabled: Bool {
