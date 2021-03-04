@@ -28,6 +28,8 @@ class ChangePasswordVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         txtNewPassword.delegate = self
+        txtOldPassword.delegate = self
+        txtConfirmPassword.delegate = self
         setUpLocalizedStrings()
         setup()
     }
@@ -103,22 +105,21 @@ class ChangePasswordVC: BaseViewController {
         let txtTemp = UITextField()
         //        ValidatorType.requiredField(field: "Your password can’t start or end with a blank space")
         txtTemp.text = txtOldPassword.text?.replacingOccurrences(of: " ", with: "")
-        let currentPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtOldPassword.placeholder ?? ""))
+        let currentPW = txtTemp.validatedText(validationType: ValidatorType.password(field: txtOldPassword.placeholder ?? ""))
         txtTemp.text = txtNewPassword.text?.replacingOccurrences(of: " ", with: "")
-        let newPW =  txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtNewPassword.placeholder ?? ""))
+        let newPW =  txtTemp.validatedText(validationType: ValidatorType.password(field: txtNewPassword.placeholder ?? ""))
         txtTemp.text = txtConfirmPassword.text?.replacingOccurrences(of: " ", with: "")
-        let confirmPW = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtConfirmPassword.placeholder ?? ""))
+        let confirmPW = txtTemp.validatedText(validationType: ValidatorType.password(field: txtConfirmPassword.placeholder ?? ""))
         if (!currentPW.0){
             Utilities.ShowAlert(OfMessage: currentPW.1)
             return currentPW.0
         }else if (!newPW.0){
             Utilities.ShowAlert(OfMessage: newPW.1)
             return newPW.0
-        }else if (txtNewPassword.text?.count ?? 0) <= 7{
-            Utilities.ShowAlert(OfMessage: "New Password must contain at least 8 characters")
-            return false
-        }else if (!confirmPW.0){
-            Utilities.ShowAlert(OfMessage: "Please confirm the password")
+        }
+//        11
+        else if (!confirmPW.0){
+            Utilities.ShowAlert(OfMessage: confirmPW.1)
             return confirmPW.0
         } else if txtNewPassword.text?.lowercased() != txtConfirmPassword.text?.lowercased(){
             Utilities.ShowAlert(OfMessage: "New password and confirm password must be same")
@@ -167,17 +168,17 @@ extension ChangePasswordVC:UITextFieldDelegate{
         }
         
         if !validate{
-            
-            Utilities.ShowAlert(OfMessage: "Your password can’t start or end with a blank space")
+            Utilities.ShowAlert(OfMessage: textField.placeholder ?? "" + "can’t start or end with a blank space")
         }
         self.isShowValidateAlert = !validate
         return validate
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.text != "" {
-            let validate = self.isShowValidateAlert && textField.text?.last != " "
-            !validate ? Utilities.ShowAlert(OfMessage: "Your password can’t start or end with a blank space") : Void()
-        }
-    }
+    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if textField.text != "" {
+//            let validate = self.isShowValidateAlert && textField.text?.last != " "
+//            !validate ? Utilities.ShowAlert(OfMessage: textField.placeholder ?? "" + "can’t start or end with a blank space") : Void()
+//        }
+//    }
 }
 

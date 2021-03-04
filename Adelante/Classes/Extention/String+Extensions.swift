@@ -233,10 +233,10 @@ extension String{
         return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
     }
     func capitalizingFirstLetter() -> String {
-        return prefix(1).localizedUppercase + dropFirst()
+    return prefix(1).localizedUppercase + lowercased().dropFirst()
     }
-    
+
     mutating func capitalizeFirstLetter() {
-        self = self.capitalizingFirstLetter()
+    self = self.capitalizingFirstLetter()
     }
 }

@@ -68,11 +68,16 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         let alertController = UIAlertController(title: AppName,
                                                 message: GlobalStrings.Alert_logout.rawValue,
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel))
+        alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel){ _ in
+            self.expendedCell = -1
+            DispatchQueue.main.async {
+                self.tblAcountDetails.reloadData()
+            }
+        })
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleLogout".Localized(), style: .default){ _ in
             appDel.performLogout()
-            //            userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
-            //            appDel.navigateToLogin()
+            // userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
+            // appDel.navigateToLogin()
         })
         
         DispatchQueue.main.async {
@@ -215,8 +220,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                 self.navigationController?.pushViewController(controller, animated: true)
             case 3:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: FeedbackVC.storyboardID) as! FeedbackVC
-//                controller.strNavTitle = "MyAccountVC_title3_D".Localized()
-//                controller.strUrl = SettingsData.aboutUs
+                //                controller.strNavTitle = "MyAccountVC_title3_D".Localized()
+                //                controller.strUrl = SettingsData.aboutUs
                 self.navigationController?.pushViewController(controller, animated: true)
             default:
                 print(indexPath.row)

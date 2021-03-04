@@ -4894,9 +4894,6 @@
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqz-NS-JK1" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="21"/>
-                                                                                                <constraints>
-                                                                                                    <constraint firstAttribute="width" constant="30" id="0b2-Zo-LdF"/>
-                                                                                                </constraints>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <nil key="textColor"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -4916,7 +4913,7 @@
                                                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAddress" value="YES"/>
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </label>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ky-25-NRd" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ky-25-NRd" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                 <rect key="frame" x="60" y="0.0" width="218" height="21"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <nil key="textColor"/>
@@ -4929,7 +4926,7 @@
                                                                                     </stackView>
                                                                                 </subviews>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eKP-Cd-cHN" secondAttribute="trailing" id="rUs-p0-Cdm"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="eKP-Cd-cHN" secondAttribute="trailing" id="rUs-p0-Cdm"/>
                                                                                 </constraints>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Os5-ZF-ihD">
@@ -4965,7 +4962,7 @@
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="V0a-RJ-cCB" firstAttribute="bottom" secondItem="vbm-TX-nKm" secondAttribute="bottom" id="8sC-hW-B9d"/>
-                                                                    <constraint firstItem="V0a-RJ-cCB" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vbm-TX-nKm" secondAttribute="trailing" id="A87-Rg-1tW"/>
+                                                                    <constraint firstItem="V0a-RJ-cCB" firstAttribute="trailing" secondItem="vbm-TX-nKm" secondAttribute="trailing" id="A87-Rg-1tW"/>
                                                                     <constraint firstAttribute="height" constant="45" id="Vg0-fu-aoz"/>
                                                                     <constraint firstItem="vbm-TX-nKm" firstAttribute="leading" secondItem="V0a-RJ-cCB" secondAttribute="leading" id="exx-de-9Wg"/>
                                                                     <constraint firstItem="vbm-TX-nKm" firstAttribute="top" secondItem="V0a-RJ-cCB" secondAttribute="top" id="gQs-OH-585"/>
