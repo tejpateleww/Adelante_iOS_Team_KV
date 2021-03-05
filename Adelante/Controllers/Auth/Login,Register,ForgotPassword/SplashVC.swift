@@ -58,7 +58,7 @@ extension SplashVC{
         }
     }
     func webserviceSorting(){
-        WebServiceSubClass.sorting(showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.sorting(showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 let sortingModel = sortingResModel.init(fromJson: json)

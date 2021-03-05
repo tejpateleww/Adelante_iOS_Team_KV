@@ -142,9 +142,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 let orderListData = orderListingResModel.init(fromJson: response)
                 self.arrOrderListing = orderListData.data
                 self.tblOrders.reloadData()
-                Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
-                    self.navigationController?.popViewController(animated: true)
-                }, otherTitles: nil)
+//                Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
+////                    self.navigationController?.popViewController(animated: true)
+//                }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

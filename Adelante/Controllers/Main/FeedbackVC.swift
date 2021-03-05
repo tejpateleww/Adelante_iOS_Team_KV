@@ -55,7 +55,7 @@ class FeedbackVC: BaseViewController {
         }
         else if(!checkEmailValid.0)
         {
-            Utilities.ShowAlert(OfMessage:"Please enter valid a email")
+            Utilities.ShowAlert(OfMessage:"Please enter a valid email")
             return checkEmailValid.0
         }
         return true

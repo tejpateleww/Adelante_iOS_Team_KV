@@ -989,35 +989,6 @@ Adelante</string>
             <point key="canvasLocation" x="-1426.0869565217392" y="-536.38392857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="6J4-UA-qRl">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="6tv-ps-pmp">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="B7K-d2-yLt">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="C8x-B2-NSw">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="Fzc-oY-XVq">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="dUz-LN-60d">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="qFI-49-A7Q">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="uln-Rl-AH4">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="zgZ-JQ-I7N">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-    </designables>
     <resources>
         <image name="adelanteLogo" width="127" height="125"/>
         <image name="adlanteLoginLogo" width="287" height="75"/>
