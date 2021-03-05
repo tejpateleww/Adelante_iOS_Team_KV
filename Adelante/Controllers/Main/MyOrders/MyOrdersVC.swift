@@ -146,7 +146,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
 ////                    self.navigationController?.popViewController(animated: true)
 //                }, otherTitles: nil)
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+//                Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
             if self.arrOrderListing.count > 0{
                 self.tblOrders.restore()
