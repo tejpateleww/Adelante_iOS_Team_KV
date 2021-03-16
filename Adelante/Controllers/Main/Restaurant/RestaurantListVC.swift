@@ -233,11 +233,11 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                     }
                 } else {
                     let arrTemp = restaurantData.data
-//                    if arrTemp!.count > 0 {
-//                        for i in 0..<arrTemp!.count {
-//                            self.arrRestaurantList.append(arrTemp![i])
-//                        }
-//                    }
+                    if arrTemp!.count > 0 {
+                        for i in 0..<arrTemp!.count {
+                            self.arrRestaurantList.append(arrTemp![i])
+                        }
+                    }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
                     } else {
@@ -299,6 +299,8 @@ extension RestaurantListVC:UISearchBarDelegate{
     @objc private func makeNetworkCall(_ query: String)
     {
             if query.count > 2{
+                txtSearch.resignFirstResponder()
+                self.pageNumber = 1
                 webserviceGetRestaurantList(strSearch: query, strFilter: "")
             }
     }

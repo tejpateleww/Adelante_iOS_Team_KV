@@ -220,6 +220,7 @@ class Utilities:NSObject{
         let alert = UIAlertController(title: AppInfo.appName, message: OfMessage, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         appDel.window?.rootViewController!.present(alert, animated: true, completion: nil)
+        
     }
     
     

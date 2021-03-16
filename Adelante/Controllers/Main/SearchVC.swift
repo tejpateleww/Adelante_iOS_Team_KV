@@ -34,6 +34,9 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
+        if txtSearch.text!.isEmptyOrWhitespace(){
+        self.tblSearch.setEmptyMessage("")
+        }
     }
     
     // MARK: - Other Methods
@@ -125,7 +128,9 @@ extension SearchVC:UISearchBarDelegate{
             tblSearch.reloadData()
         }else{
             if query.count > 2{
+                txtSearch.resignFirstResponder()
                 webserviceSearchModel(strSearch: query)
+                
             }
         }
     }

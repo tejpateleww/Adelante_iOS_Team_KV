@@ -146,12 +146,13 @@ class LoginViewController: BaseViewController {
         let checkPassword = txtTemp.validatedText(validationType:  .password(field: txtPassword.placeholder ?? ""))
          if(!checkEmail.0)
         {
-            Utilities.ShowAlert(OfMessage: checkEmail.1)
+            Utilities.showAlert(AppInfo.appName, message: checkEmail.1, vc: self)//(OfMessage: checkEmail.1)
             return checkEmail.0
         }
         else  if(!checkPassword.0)
         {
-            Utilities.ShowAlert(OfMessage: checkPassword.1)
+//            Utilities.ShowAlert(OfMessage: checkPassword.1)
+            Utilities.showAlert(AppInfo.appName, message: checkPassword.1, vc: self)
             return checkPassword.0
         }
         return true

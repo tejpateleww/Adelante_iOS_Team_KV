@@ -156,7 +156,14 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     let arrTemp = restaurantData.data.restaurantDetails
                     if arrTemp!.count > 0 {
                         for i in 0..<arrTemp!.count {
-                            self.arrFavoriteRest.append(arrTemp![i])
+                            
+                            if self.arrFavoriteRest.contains(where: {$0.id == arrTemp![i].id}) {
+                             
+                            } else {
+                             
+                                self.arrFavoriteRest.append(arrTemp![i])
+                            }
+                            
                         }
                     }
                     if arrTemp!.count < self.pageLimit {
@@ -230,8 +237,10 @@ extension FavouritesVC:UISearchBarDelegate{
             // tblMainList.reloadData()
         }else{
             if query.count > 2{
-//                txtSearch.resignFirstResponder()
+                txtSearch.resignFirstResponder()
+                self.pageNumber = 1
                 webservicePostRestaurantFav(strSearch: query)
+                
             }
         }
     }
