@@ -16,7 +16,6 @@ import UIKit
     - font: Set your icon by setting the font of iconLabel
     - image: Set your icon by setting the image of iconImageView
  */
-
 public enum IconType: Int {
     case font
     case image

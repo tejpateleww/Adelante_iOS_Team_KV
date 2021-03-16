@@ -1112,8 +1112,8 @@
 				64C68ADA241BBB2900B97B25 /* Sources */,
 				64C68ADB241BBB2900B97B25 /* Frameworks */,
 				64C68ADC241BBB2900B97B25 /* Resources */,
-				D814ACE58B6F89F9406AC175 /* [CP] Embed Pods Frameworks */,
-				A07C8C3DA277DAEE3C20F613 /* [CP] Copy Pods Resources */,
+				2713D82D0D50CBD99ED9E9B7 /* [CP] Embed Pods Frameworks */,
+				B55405A1C6E32AF3332F7F3A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1218,6 +1218,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2713D82D0D50CBD99ED9E9B7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Adelante/Pods-Adelante-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Adelante/Pods-Adelante-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adelante/Pods-Adelante-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		826C7408859DE8DF250C142B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1240,7 +1257,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A07C8C3DA277DAEE3C20F613 /* [CP] Copy Pods Resources */ = {
+		B55405A1C6E32AF3332F7F3A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1255,23 +1272,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adelante/Pods-Adelante-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D814ACE58B6F89F9406AC175 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Adelante/Pods-Adelante-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Adelante/Pods-Adelante-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adelante/Pods-Adelante-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
