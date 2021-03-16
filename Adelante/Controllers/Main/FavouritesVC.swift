@@ -53,7 +53,6 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
@@ -218,18 +217,20 @@ extension FavouritesVC:UISearchBarDelegate{
         lastSearchTxt = searchText
         self.perform(#selector(self.makeNetworkCall), with: searchText, afterDelay: 0.7)
     }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        txtSearch.resignFirstResponder()
-    }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        txtSearch.resignFirstResponder()
+//    }
     @objc private func makeNetworkCall(_ query: String)
     {
+//        txtSearch.
         if query == ""{
-            txtSearch.resignFirstResponder()
+//            txtSearch.resignFirstResponder()
             webservicePostRestaurantFav(strSearch: "")
             // arrFavoriteRest.removeAll()
             // tblMainList.reloadData()
         }else{
             if query.count > 2{
+//                txtSearch.resignFirstResponder()
                 webservicePostRestaurantFav(strSearch: query)
             }
         }

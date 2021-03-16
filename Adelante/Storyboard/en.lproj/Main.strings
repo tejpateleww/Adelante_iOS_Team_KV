@@ -483,7 +483,7 @@
 "p2Y-CK-0q0.text" = "$25.00";
 
 /* Class = "UITextField"; placeholder = "Old Password"; ObjectID = "pGH-j9-vWm"; */
-"pGH-j9-vWm.placeholder" = "Old Password";
+"pGH-j9-vWm.placeholder" = "Current Password";
 
 /* Class = "UILabel"; text = "Kangkung siram sambel"; ObjectID = "qKQ-Hf-nO8"; */
 "qKQ-Hf-nO8.text" = "Kangkung siram sambel";

@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "926E59D6-B182-4823-97EB-325A91400B07"
+            uuid = "001A97E0-C432-4193-A375-46F59639EAEE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Auth/Login,Register,ForgotPassword/LoginViewController.swift"
+            filePath = "Adelante/Controllers/Main/Profile/ChangePasswordVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "btnlogin(_:)"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "textFieldDidEndEditing(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E5CC1E4E-A63A-469A-ADC8-5F7D4337ECDA"
+            uuid = "30D39041-C569-4D02-B048-D99A8BB15F1E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Auth/Login,Register,ForgotPassword/LoginViewController.swift"
+            filePath = "Adelante/Controllers/Main/FavouritesVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "validation()"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "refreshFavList()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

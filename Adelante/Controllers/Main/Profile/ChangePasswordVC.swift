@@ -23,7 +23,7 @@ class ChangePasswordVC: BaseViewController {
     @IBOutlet weak var btnVisiblePassword: UIButton!
     @IBOutlet weak var btnVisibleNewPassword: UIButton!
     
-    var isShowValidateAlert = Bool()
+    var isShowValidateAlert = true
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

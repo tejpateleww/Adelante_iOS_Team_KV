@@ -1620,7 +1620,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.4;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
@@ -1646,7 +1646,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.4;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
