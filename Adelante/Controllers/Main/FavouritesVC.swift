@@ -183,10 +183,10 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             if self.arrFavoriteRest.count > 0 {
                 self.tblMainList.restore()
                 self.imgFavorite.isHidden = true
-                self.tblMainList.isHidden = false
+//                self.tblMainList.isHidden = false
                 
             } else {
-                self.tblMainList.isHidden = true
+//                self.tblMainList.isHidden = true
                 self.imgFavorite.isHidden = false
                 //                self.view.bringSubviewToFront(self.imgFavorite)
                 //                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())

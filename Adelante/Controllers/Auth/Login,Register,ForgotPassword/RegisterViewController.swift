@@ -50,6 +50,7 @@ class RegisterViewController: UIViewController {
     
     //MARK:- Other Methods
     func setUp(){
+        self.navigationController?.navigationBar.isHidden = true
         txtLastName.delegate = self
         txtFirstName.delegate = self
         txtPhoneNumber.delegate = self

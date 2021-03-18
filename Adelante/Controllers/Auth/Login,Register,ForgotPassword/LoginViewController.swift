@@ -26,9 +26,11 @@ class LoginViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     func setup(){
-        self.navigationController?.navigationBar.isHidden = false
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
     }
     // MARK: - IBActions
     @IBAction func btnForgotPasswordClicked(_ sender: Any) {

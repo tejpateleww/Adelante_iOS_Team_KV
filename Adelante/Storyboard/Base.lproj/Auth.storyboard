@@ -115,7 +115,7 @@ Back</string>
                                                                                             <constraint firstAttribute="height" constant="47" id="gmm-cf-TDd"/>
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" secureTextEntry="YES"/>
                                                                                     </textField>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyD-ST-cZr">
                                                                                         <rect key="frame" x="340" y="16" width="30" height="30"/>
@@ -559,7 +559,7 @@ Adelante</string>
                                                     <constraint firstAttribute="bottom" secondItem="CpT-mS-Rcj" secondAttribute="bottom" id="lx5-SC-4k8"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPi-1e-xsK">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPi-1e-xsK" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
                                                 <rect key="frame" x="0.0" y="351" width="414" height="668.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TDM-Ur-Np6">
@@ -577,7 +577,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="gkh-XS-t0G"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qc-xL-nKe" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -609,7 +609,7 @@ Adelante</string>
                                                                                     <constraint firstAttribute="height" constant="47" id="HMo-6d-lnZ"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                                             </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lah-bJ-5Il" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="62" width="378" height="1"/>
@@ -635,7 +635,7 @@ Adelante</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1zj-bg-BGc">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgZ-JQ-I7N" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zgZ-JQ-I7N" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="47"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="47" id="ppg-rl-ifi"/>
@@ -708,7 +708,7 @@ Adelante</string>
                                                                                             <constraint firstAttribute="height" constant="47" id="RHo-cn-rlu"/>
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" secureTextEntry="YES"/>
                                                                                     </textField>
                                                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EF-Af-x5I">
                                                                                         <rect key="frame" x="340" y="16" width="30" height="30"/>
@@ -766,7 +766,7 @@ Adelante</string>
                                                                                             <constraint firstAttribute="height" constant="47" id="vNb-2e-qOw"/>
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" secureTextEntry="YES"/>
                                                                                     </textField>
                                                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="see-yl-UPK">
                                                                                         <rect key="frame" x="340" y="16" width="30" height="30"/>

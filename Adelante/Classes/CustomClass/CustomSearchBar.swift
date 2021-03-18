@@ -14,7 +14,7 @@ class searchBarHome : UISearchBar {
     @IBInspectable var IsLocationSearchBar: Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 30//self.frame.size.height / 2
+        self.layer.cornerRadius = self.frame.size.height / 2
         self.clipsToBounds = true
         if #available(iOS 13.0, *) {
                    // self.searchTextField.font = CustomFont.medium.returnFont(13)
