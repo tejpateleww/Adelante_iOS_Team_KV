@@ -17,8 +17,8 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     // MARK: - Properties
     var delegatePayment : AddPaymentDelegate!
     var isCreditCardValid = Bool()
-    var strMonth = ""
-    var strYear = ""
+//    var strMonth = ""
+//    var strYear = ""
     var cardTypeLabel = String()
     var validation = Validation()
     var inputValidator = InputValidator()
@@ -361,19 +361,6 @@ public struct CreditCardValidationType: Equatable {
     }
     
 }
-//extension AddCardVC : UITextFieldDelegate {
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if(textField == txtDate) {
-//            var strMonth = "\(monthPicker.month)" as String
-//            if(monthPicker.month <= 9)
-//            {
-//                strMonth = "0\(monthPicker.month)"
-//            }
-//
-//            txtDate.text = "\(strMonth)/\(monthPicker.year)"
-//        }
-//    }
-//}
 extension AddCardVC : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if(textField == txtDate) {

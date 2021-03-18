@@ -565,7 +565,7 @@ class tblMyOrdersLabel: UILabel {
         } else if isDateTime {
             self.font = CustomFont.NexaRegular.returnFont(10)
         } else if isDescription {
-            self.font = CustomFont.NexaRegular.returnFont(10)
+            self.font = CustomFont.NexaRegular.returnFont(12)
         } else if isItemName {
             self.font = CustomFont.NexaRegular.returnFont(14)
         } else if isItemSize {
