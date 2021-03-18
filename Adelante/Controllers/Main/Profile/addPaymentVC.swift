@@ -216,10 +216,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             if self.arrCard.count > 0{
                 self.tblPaymentMethod.restore()
                 self.imgEmptyCard.isHidden = true
-                self.tblPaymentMethod.isHidden = false
+//                self.tblPaymentMethod.isHidden = false
             }else {
-                self.imgEmptyCard.isHidden = false
-                self.tblPaymentMethod.isHidden = true
+                self.imgEmptyCard.isHidden = true
+//                self.tblPaymentMethod.isHidden = true
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()

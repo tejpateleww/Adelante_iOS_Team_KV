@@ -287,6 +287,7 @@ class themeLabel: UILabel {
     @IBInspectable var isVerified:Bool = false
     @IBInspectable var isItemName:Bool = false
     @IBInspectable var isReviewName:Bool = false
+    @IBInspectable var isRateName:Bool = false
     @IBInspectable var isAddress:Bool = false
     @IBInspectable var isdescription:Bool = false
     @IBInspectable var isYourFavTitle:Bool = false
@@ -342,6 +343,8 @@ super.awakeFromNib()
     } else if isNotificatioDescription {
         self.font = CustomFont.NexaRegular.returnFont(17)
                self.textColor = UIColor(hexString: "#242E42")
+    }else if isRateName{
+        self.font = CustomFont.NexaBold.returnFont(13)
     }
    
     

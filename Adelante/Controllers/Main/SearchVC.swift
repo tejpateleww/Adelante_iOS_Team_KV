@@ -89,7 +89,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         search.item = strSearch
         search.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.search(Searchmodel: search, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 let result = SearchResModel(fromJson: response)
@@ -119,7 +119,7 @@ extension SearchVC:UISearchBarDelegate{
         self.perform(#selector(self.makeNetworkCall), with: searchText, afterDelay: 0.7)
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        txtSearch.resignFirstResponder()
+//        txtSearch.resignFirstResponder()
     }
     @objc private func makeNetworkCall(_ query: String)
     {
@@ -128,7 +128,7 @@ extension SearchVC:UISearchBarDelegate{
             tblSearch.reloadData()
         }else{
             if query.count > 2{
-                txtSearch.resignFirstResponder()
+//                txtSearch.resignFirstResponder()
                 webserviceSearchModel(strSearch: query)
                 
             }

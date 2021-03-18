@@ -27,6 +27,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     // MARK: - IBOutlets
     @IBOutlet weak var lblRestaurantName: themeLabel!
+    @IBOutlet weak var vwFilter: UIView!
     @IBOutlet weak var btnFilter: collectionVwFilterBtns!
     @IBOutlet weak var tblRestaurantList: UITableView!
     @IBOutlet weak var imgRestaurantEmpty: UIImageView!
@@ -239,9 +240,11 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 self.tblRestaurantList.restore()
                 self.imgRestaurantEmpty.isHidden = true
                 self.tblRestaurantList.isHidden = false
+                self.vwFilter.isHidden = false
             }else {
                 self.imgRestaurantEmpty.isHidden = false
                 self.tblRestaurantList.isHidden = true
+                self.vwFilter.isHidden = true
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()

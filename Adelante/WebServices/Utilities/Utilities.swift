@@ -81,7 +81,49 @@ class Utilities:NSObject{
             AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
         }
     }
-    static func displayAlert(_ title: String, message: String, completion:((_ index: Int) -> Void)?, otherTitles: String? ...) {
+    static func displayAlert(_ title: String, message: String, vc: UIViewController, completion:((_ index: Int) -> Void)?, otherTitles: String? ...) {
+        
+        if message.trimmedString == "" {
+            return
+        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        if otherTitles.count > 0 {
+            var i = 0
+            for title in otherTitles {
+                
+                if let title = title {
+                    alert.addAction(UIAlertAction(title: title, style: .default, handler: { (UIAlertAction) in
+                        if (completion != nil) {
+                            i += 1
+                            completion!(i);
+                        }
+                    }))
+                }
+            }
+        }
+        if(vc.presentedViewController != nil)
+        {
+            vc.dismiss(animated: true, completion: nil)
+        }
+        //        else {
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (UIAlertAction) in
+            if (completion != nil) {
+                completion!(0);
+            }
+        }))
+        //        }
+        
+        DispatchQueue.main.async {
+            if vc.presentedViewController == nil {
+                vc.navigationController?.present(alert, animated: true, completion: nil)
+            } else {
+                //            vc.present(alert, animated: true, completion: nil)
+                AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
+                
+            }
+        }
+    }
+    static func displayAlert(_ title: String, message: String,  completion:((_ index: Int) -> Void)?, otherTitles: String? ...) {
         
         if message.trimmedString == "" {
             return
@@ -113,7 +155,6 @@ class Utilities:NSObject{
             AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
         }
     }
-    
     static func displayAlert(_ title: String, message: String, completion:((_ index: Int) -> Void)?, acceptTitle:String, otherTitles: String? ...) {
         if message.trimmedString == "" {
             return

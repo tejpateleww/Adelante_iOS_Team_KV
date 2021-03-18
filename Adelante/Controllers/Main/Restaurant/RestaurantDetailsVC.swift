@@ -159,7 +159,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         lblReviews.text = String(format: "RestaurantDetailsVC_lblReviews".Localized(), "53")
         lblPromoCode.text = "RestaurantDetailsVC_lblPromoCode".Localized()
         lblCode.text = "RestaurantDetailsVC_lblCode".Localized()
-        lblDistance.text = String(format: "RestaurantDetailsVC_lblDistance".Localized(), "1.7")
+//        lblDistance.text = String(format: "RestaurantDetailsVC_lblDistance".Localized(), "1.7")
         lblOpenTime.text = "RestaurantDetailsVC_lblOpenTime".Localized()
         lblTime.text = "RestaurantDetailsVC_lblTime".Localized()
         lblTimeZone.text = "RestaurantDetailsVC_lblTimeZone".Localized()
@@ -178,7 +178,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             self.lblRating.text = objRestaurant.rating
             self.lblReviews.text = String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review)
             //            self.lblTimeZone.text = objRestaurant.
-            self.lblDistance.text = String(format: "HomeVC_RestaurantCell_lblMiles".Localized(), objRestaurant.distance)
+            self.lblDistance.text =  objRestaurant.distance
             self.lblAddress.text = objRestaurant.address ?? ""
             if objRestaurant.promocode == ""{
                 stackPromocode.isHidden = true

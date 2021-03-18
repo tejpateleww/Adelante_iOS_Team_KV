@@ -34,7 +34,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var btnFilterOptions: UIButton!
     @IBOutlet weak var lblAllRestaurants: themeLabel!
     @IBOutlet weak var imgEmptyRestaurant: UIImageView!
-
+    @IBOutlet weak var vwFilter: UIView!
+    
 
 
     // MARK: - ViewController Lifecycle
@@ -249,13 +250,15 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
             if self.arrRestaurantList.count > 0{
-                            self.tblMainList.restore()
-                            self.imgEmptyRestaurant.isHidden = true
-                            self.tblMainList.isHidden = false
-                        }else {
-                            self.imgEmptyRestaurant.isHidden = false
-                            self.tblMainList.isHidden = true
-                        }
+                self.tblMainList.restore()
+                self.imgEmptyRestaurant.isHidden = true
+                self.tblMainList.isHidden = false
+                self.vwFilter.isHidden = false
+            }else {
+                self.imgEmptyRestaurant.isHidden = false
+                self.tblMainList.isHidden = true
+                self.vwFilter.isHidden = true
+            }
 
 
             DispatchQueue.main.async {
@@ -294,14 +297,18 @@ extension RestaurantListVC:UISearchBarDelegate{
         self.perform(#selector(self.makeNetworkCall), with: searchText, afterDelay: 0.7)
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        txtSearch.resignFirstResponder()
+//        txtSearch.resignFirstResponder()
     }
     @objc private func makeNetworkCall(_ query: String)
     {
+        if query == ""{
+            webserviceGetRestaurantList(strSearch: query, strFilter: "")
+        }else{
             if query.count > 2{
-                txtSearch.resignFirstResponder()
+//                txtSearch.resignFirstResponder()
                 self.pageNumber = 1
                 webserviceGetRestaurantList(strSearch: query, strFilter: "")
             }
+        }
     }
 }

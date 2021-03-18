@@ -196,7 +196,7 @@ class RegisterViewController: UIViewController {
                 //                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 //                userDefault.setUserData(objProfile: registerRespoDetails!)
                 //                appDel.navigateToHome()
-                Utilities.displayAlert("", message: "Registered successfully! Email verification link has been sent to your registered email", completion: {_ in
+                Utilities.displayAlert("", message: "Registered successfully! Email verification link has been sent to your registered email",vc: self, completion: {_ in
                     appDel.navigateToLogin()
                 }, otherTitles: nil)
                 
