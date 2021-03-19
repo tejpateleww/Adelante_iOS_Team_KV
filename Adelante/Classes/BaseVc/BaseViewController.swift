@@ -28,7 +28,7 @@ class BaseViewController: UIViewController {
     func setNavigationBarInViewController (controller : UIViewController,naviColor : UIColor, naviTitle : String, leftImage : String , rightImages : [String], isTranslucent : Bool, isShowHomeTopBar:Bool)
     {
         UIApplication.shared.statusBarStyle = .lightContent
-        controller.navigationController?.navigationBar.isHidden = false
+        controller.navigationController?.isNavigationBarHidden = false
         controller.navigationController?.navigationBar.isOpaque = false;
         
         controller.navigationController?.navigationBar.isTranslucent = isTranslucent
