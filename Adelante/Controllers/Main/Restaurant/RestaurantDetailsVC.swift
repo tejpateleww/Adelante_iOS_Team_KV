@@ -367,7 +367,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             if indexPath.section == 0 {
                 let cell:RestaurantDetailsCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath)as! RestaurantDetailsCell
                 cell.lblItemName.text = arrMenuitem[indexPath.row].name
-                cell.lblItemPrice.text = arrMenuitem[indexPath.row].price
+                cell.lblItemPrice.text = "$" + arrMenuitem[indexPath.row].price
                 cell.lblAboutItem.text = arrMenuitem[indexPath.row].descriptionField
                 let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrMenuitem[indexPath.row].image ?? "")"
                 cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray

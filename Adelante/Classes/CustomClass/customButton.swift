@@ -61,7 +61,7 @@ class submitButton: UIButton {
             self.setTitleColor(colors.forgotpassGreyColor.value, for: .normal)
         } else if isShareOrderDetails {
             self.backgroundColor = .clear
-            self.titleLabel?.font = CustomFont.NexaBold.returnFont(12)
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(8)
         }
         if isUnderline {
             self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
