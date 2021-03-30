@@ -40,7 +40,7 @@
 
 //MyOrderVC
 "MyOrderVC_lblPastOrders" = "Past orders";
-"MyOrderVC_lblUpcomingOrders" = "Upcoming";
+"MyOrderVC_lblUpcomingOrders" = "In-Process";
 "MyOrderVC_MyOrdersCess_btnRepeatOrder" = "Repeat Order";
 "MyOrderVC_MyOrdersCess_btnCancelOrder" = "Cancel Order";
 

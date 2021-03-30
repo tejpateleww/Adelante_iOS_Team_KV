@@ -30,7 +30,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
           super.viewDidLoad()
         tblOrders.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "Past" : "In-Process")
           setup()
       
       self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -52,7 +52,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         tblOrders.reloadData()
     }
     @objc func refreshData(){
-        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
     }
     // MARK: - IBActions
 //    @IBAction func btnRepeatNew(_ sender: Any){
@@ -61,7 +61,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
 //    }
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
         selectedSegmentTag = sender.index
-        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
         self.tblOrders.reloadData()
     }
     
@@ -125,7 +125,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
         orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
         orderDetailsVC.orderId = arrOrderListing[indexPath.row].id
-        orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "upcoming"
+        orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
         orderDetailsVC.strRestaurantId = arrOrderListing[indexPath.row].restaurant_id
         orderDetailsVC.delegateCancelOrder = self
         self.navigationController?.pushViewController(orderDetailsVC, animated: true)
@@ -165,7 +165,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         })
     }
     func refreshOrderDetailsScreen() {
-        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "upcoming")
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
     }
     func webserviceCancelOrder(){
         let cancelOrder = CancelOrderReqModel()

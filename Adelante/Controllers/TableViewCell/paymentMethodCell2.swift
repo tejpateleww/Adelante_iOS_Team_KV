@@ -9,6 +9,8 @@
 import UIKit
 
 class paymentMethodCell2: UITableViewCell {
+    var filterSelect = [0]
+
     @IBOutlet weak var vWMain: PaymentView!
     @IBOutlet weak var selectPaymentMethodButton: UIButton!
     @IBOutlet weak var paymentMethodImageView: UIImageView!
@@ -19,7 +21,13 @@ class paymentMethodCell2: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    var selectedBtn : (() -> ())?
+    @IBAction func btnSelectCheckClick(_ sender: Any) {
+        if let click = self.selectedBtn
+        {
+            click()
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

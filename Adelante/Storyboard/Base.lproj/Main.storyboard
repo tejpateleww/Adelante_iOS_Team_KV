@@ -1477,7 +1477,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
+                                                        <rect key="frame" x="18" y="55" width="378" height="215"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -1520,10 +1520,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="49"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="33"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="79" id="GZk-3S-lMA"/>
@@ -1539,7 +1539,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="48" width="378" height="1"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -4916,6 +4916,10 @@
                                                                                                     <subviews>
                                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FoodImage" translatesAutoresizingMaskIntoConstraints="NO" id="lMs-Tx-Dat" customClass="customImagewithShadow" customModule="Adelante" customModuleProvider="target">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="94" height="97"/>
+                                                                                                            <constraints>
+                                                                                                                <constraint firstAttribute="width" constant="94" id="szh-Oo-1Lb"/>
+                                                                                                                <constraint firstAttribute="height" constant="97" id="xtS-aZ-F66"/>
+                                                                                                            </constraints>
                                                                                                             <userDefinedRuntimeAttributes>
                                                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                     <real key="value" value="5"/>
@@ -4927,8 +4931,6 @@
                                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="trailing" secondItem="lMs-Tx-Dat" secondAttribute="trailing" id="HXh-MI-5e1"/>
-                                                                                                        <constraint firstAttribute="height" constant="97" id="HiS-RA-4jc"/>
-                                                                                                        <constraint firstAttribute="width" constant="94" id="Kwr-3A-Uwc"/>
                                                                                                         <constraint firstItem="lMs-Tx-Dat" firstAttribute="top" secondItem="pQW-bh-9SG" secondAttribute="top" id="MZH-AL-aER"/>
                                                                                                         <constraint firstAttribute="bottom" secondItem="lMs-Tx-Dat" secondAttribute="bottom" id="Ndf-AB-9b5"/>
                                                                                                         <constraint firstItem="lMs-Tx-Dat" firstAttribute="leading" secondItem="pQW-bh-9SG" secondAttribute="leading" id="xL5-kt-RhB"/>
@@ -5680,6 +5682,10 @@
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vp-hu-Q4V">
                                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                                             <state key="normal" image="ic_paymentSelected"/>
+                                                                            <state key="selected" image="ic_sortunSelected"/>
+                                                                            <connections>
+                                                                                <action selector="btnSelectCheckClick:" destination="uU2-ie-afK" eventType="touchUpInside" id="6bl-to-A1X"/>
+                                                                            </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpR-Ri-p2I">
                                                                             <rect key="frame" x="34" y="0.0" width="24" height="24"/>
@@ -8203,6 +8209,12 @@ avoid cancellations </string>
         </designable>
         <designable name="Q44-Lk-LSf">
             <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="Tme-wR-K6Z">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+        <designable name="oP7-OM-AFy">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
         </designable>
     </designables>
     <resources>

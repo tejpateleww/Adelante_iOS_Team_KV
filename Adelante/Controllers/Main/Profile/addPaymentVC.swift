@@ -18,7 +18,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var customTabBarController: CustomTabBarVC?
     var selectedPaymentMethods = 1
     var refreshList = UIRefreshControl()
-    var arrCard = [CardList]()    
+    var arrCard = [CardList]()
+    var filterSelect = [0]
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
@@ -35,6 +36,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        imgEmptyCard.isHidden = true
         webserviceGetAddPayment()
         // Do any additional setup after loading the view.
     }
@@ -104,7 +106,17 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.lblExpiresDate.text = "Default method"
             cell.btnDelete.isHidden = true
 //            cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
-            cell.selectPaymentMethodButton.isHidden = true
+            cell.selectPaymentMethodButton.isHidden = false
+            cell.selectedBtn = {
+                cell.selectPaymentMethodButton.isSelected = !cell.selectPaymentMethodButton.isSelected
+                if cell.selectPaymentMethodButton.isSelected == true {
+                    print("yes")
+                    cell.selectPaymentMethodButton.setImage(UIImage(named: "ic_paymentSelected"), for: .selected)
+                    
+                }else{
+                    cell.selectPaymentMethodButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
+                }
+            }
             cell.selectionStyle = .none
             return cell
         default:

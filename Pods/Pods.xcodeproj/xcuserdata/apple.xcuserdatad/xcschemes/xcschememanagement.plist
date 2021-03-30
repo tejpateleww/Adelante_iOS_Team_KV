@@ -14,12 +14,12 @@
 		<key>BetterSegmentedControl.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>22</integer>
+			<integer>21</integer>
 		</dict>
 		<key>Cosmos.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>23</integer>
+			<integer>16</integer>
 		</dict>
 		<key>Firebase.xcscheme</key>
 		<dict>
@@ -66,7 +66,7 @@
 		<key>FormTextField.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>23</integer>
 		</dict>
 		<key>GoogleDataTransport.xcscheme</key>
 		<dict>
@@ -78,12 +78,12 @@
 		<key>GoogleMaps.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>24</integer>
 		</dict>
 		<key>GooglePlaces.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>20</integer>
 		</dict>
 		<key>GoogleUtilities.xcscheme</key>
 		<dict>
@@ -107,12 +107,12 @@
 		<key>MKProgress.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>25</integer>
 		</dict>
 		<key>Pods-Adelante.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>24</integer>
+			<integer>18</integer>
 		</dict>
 		<key>Pods-ApiStructureModule.xcscheme</key>
 		<dict>
@@ -138,12 +138,12 @@
 		<key>SDWebImage.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>25</integer>
+			<integer>22</integer>
 		</dict>
 		<key>SkyFloatingLabelTextField.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>21</integer>
+			<integer>19</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
