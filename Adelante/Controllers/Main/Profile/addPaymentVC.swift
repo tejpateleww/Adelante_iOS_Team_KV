@@ -76,7 +76,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
 //                }
                 cell1.btnDelete.isHidden = true
                 cell1.selectPaymentMethodButton.isHidden = true
-                
+                cell1.selectionStyle = .none
                 cell = cell1
             } else {
                 let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
@@ -95,6 +95,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell2.selectPaymentMethodButton.isHidden = true
                 cell2.btnDelete.isHidden = false
                 cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
+                cell2.selectionStyle = .none
                 cell = cell2
             }
             cell.selectionStyle = .none

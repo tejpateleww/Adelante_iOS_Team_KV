@@ -226,25 +226,7 @@ extension RegisterViewController:UITextFieldDelegate{
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
-        }
-        
-//        var validate = true
-//
-//        if range.location == 0 && string == " " {
-//            validate = false
-//        } else if range.location > 1 && textField.text?.last == " " && string == " " {
-//            validate = false
-//        } else {
-//            validate = true
-//        }
-//
-//        if !validate {
-//            Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
-//            self.isShowValidateAlert = true
-//        }
-        
-        
-        else if textField == txtPassword || textField == txtConPassword{
+        }else if textField == txtPassword || textField == txtConPassword{
             var validate = true
 //            var ValidateOne = true
             if range.location == 0 && string == " " {
@@ -266,9 +248,6 @@ extension RegisterViewController:UITextFieldDelegate{
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //        if textField == txtPassword || textField == txtConPassword{
-        //        txtPassword.resignFirstResponder()
-        //        txtConPassword.resignFirstResponder()
         textField.resignFirstResponder()
         return true
     }
@@ -288,35 +267,3 @@ extension RegisterViewController:UITextFieldDelegate{
     }
 }
 
-//extension ChangePasswordVC:UITextFieldDelegate{
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        var validate = true
-//
-//        if range.location == 0 && string == " " {
-//            validate = false
-//        } else if range.location > 1 && textField.text?.last == " " && string == " " {
-//            validate = false
-//        } else {
-//            validate = true
-//        }
-//
-//        if !validate {
-//            Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
-//            self.isShowValidateAlert = true
-//        }
-//        return validate
-//    }
-//
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//
-//            let validate = self.isShowValidateAlert && textField.text?.last != " "
-////            !validate ? Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space") : Void()
-//        if !validate
-//        {
-//            Utilities.displayAlert("", message: "\(textField.placeholder ?? "") can’t start or end with a blank space", completion: {_ in
-//                textField.becomeFirstResponder()
-//                self.isShowValidateAlert = true
-//            }, otherTitles: nil)
-//        }
-//    }
-//}

@@ -50,8 +50,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         let strUrl = "\(APIEnvironment.profileBu.rawValue)\(SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture ?? "")"
         imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
-        
-        
     }
     
     // MARK: - Other Methods

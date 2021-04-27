@@ -169,7 +169,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         WebServiceSubClass.Logout(logoutModel: logout, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
-                
                 appDel.SetLogout()
             }else{
                

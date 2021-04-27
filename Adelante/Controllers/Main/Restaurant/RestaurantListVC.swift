@@ -283,9 +283,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
-//    func refreshFavoriteScreen() {
-//        webserviceGetRestaurantList(strSearch: "", strFilter: "")
-//    }
 }
 extension RestaurantListVC:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

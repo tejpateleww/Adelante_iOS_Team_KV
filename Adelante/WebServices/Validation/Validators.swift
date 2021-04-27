@@ -119,13 +119,7 @@ struct PasswordValidator: ValidatorConvertible {
         guard value != "" else {return (false,ValidationError("Please enter " + fieldName.lowercased()).message)}
         guard value.count >= 8 else { return (false,ValidationError( fieldName.capitalizingFirstLetter() + " must contain at least 8 characters").message)}
         
-        // do {
-        // if try NSRegularExpression(pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", options: .caseInsensitive).firstMatch(in: value, options: [], range: NSRange(location: 0, length: value.count)) == nil {
-        // return (false,ValidationError("Password must be more than 6 characters, with at least one character and one numeric character").message)
-        // }
-        // } catch {
-        // return (false,ValidationError("Password must be more than 6 characters, with at least one character and one numeric character").message)
-        // }
+        
         return (true, "")
     }
 }

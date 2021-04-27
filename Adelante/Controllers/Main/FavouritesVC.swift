@@ -49,7 +49,6 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         setup()
-        //        webservicePostRestaurantFav(strSearch: "")
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
     }

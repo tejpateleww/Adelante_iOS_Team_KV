@@ -196,8 +196,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
             let characterSet = NSMutableCharacterSet.decimalDigit()
             characterSet.addCharacters(in: " ")
             validation.characterSet = characterSet as CharacterSet
-    //        inputValidator = InputValidator(validation: validation)
-    //        txtCardNumber.inputValidator = inputValidator
         }
     @IBAction func btnSaveClick(_ sender: Any) {
         if isValidatePaymentDetail().0 {

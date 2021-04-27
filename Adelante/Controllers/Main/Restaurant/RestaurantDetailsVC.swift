@@ -235,8 +235,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 let price : Int = Int(arrSelectedOrder[i].price) ?? 0
                 subTotal = subTotal + price
             }
-            //            var total : Int = Int(subTotal) + Int(objRestaurant.serviceFee)
-            //            total = total + Int(objRestaurant.tax)
             total = Int(subTotal) + objRestaurant.serviceFee.toInt() + objRestaurant.tax.toInt()
             let dicTemp = currentOrder.init(userId: SingletonClass.sharedInstance.UserId, restautaurantId: objRestaurant.id, rating: "", comment: "", subTotal: "\(subTotal)", serviceFee: objRestaurant.serviceFee, tax: objRestaurant.tax, total: "\(total)", order: arrSelectedOrder, currentRestaurantDetail: self.objRestaurant)
             objCurrentOrder = dicTemp
@@ -440,7 +438,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }else{
                     cell.btnCustomize.isHidden = true
                 }
-                cell.selectionStyle = .none
                 cell.customize = {
                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                     controller.selectedRestaurantId = self.arrMenuitem[indexPath.row].id
@@ -719,11 +716,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-            //            if self.arrMenuitem.count > 0{
-            //                self.tblRestaurantDetails.restore()
-            //            }else {
-            //                self.tblRestaurantDetails.setEmptyMessage("emptyMsg_Restaurant".Localized())
-            //            }
         })
     }
     
