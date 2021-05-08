@@ -18,7 +18,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var customTabBarController: CustomTabBarVC?
     var selectedSegmentTag = 0
     var refreshList = UIRefreshControl()
-    var arrOrderListing = [orderListingData]()
+//    var arrOrderListing = [orderListingData]()
+    
+    var arrPastList =  [orderListingData]()
+    var arrInProcessList =  [orderListingData]()
+    
     var isRepeatFrom = false
     var strOrderId = ""
     // MARK: - IBOutlets
@@ -28,19 +32,17 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     // MARK: - ViewController Lifecycle
      override func viewDidLoad() {
           super.viewDidLoad()
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
         tblOrders.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "Past" : "In-Process")
           setup()
-      
       self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-
       }
     
       override func viewWillAppear(_ animated: Bool) {
           self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
           self.customTabBarController?.showTabBar()
-        
+//        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
       }
     // MARK: - Other Methods
     func setup() {
@@ -61,7 +63,15 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
 //    }
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
         selectedSegmentTag = sender.index
-        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
+        if selectedSegmentTag == 0{
+            if self.arrPastList.count == 0{
+                webserviceGetOrderDetail(selectedOrder:  "past" )
+            }
+        }else{
+            if self.arrInProcessList.count == 0{
+                webserviceGetOrderDetail(selectedOrder:  "In-Process")
+            }
+        }
         self.tblOrders.reloadData()
     }
     
@@ -82,7 +92,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
     // MARK: - UITableView Delegates & Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrOrderListing.count
+        return selectedSegmentTag == 0 ? self.arrPastList.count : self.arrInProcessList.count
     }
 //    func orderListShow(){
 //    }
@@ -97,17 +107,19 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             cell.vwCancelOrder.isHidden = false
             cell.vwRepeatOrder.isHidden = true
         }
-        cell.lblRestName.text = arrOrderListing[indexPath.row].restaurantName
-        cell.lblRestLocation.text = arrOrderListing[indexPath.row].street
-        cell.lblPrice.text = "$" + arrOrderListing[indexPath.row].price
-        cell.lblItem.text = arrOrderListing[indexPath.row].restaurantItemName
-        cell.lblDtTime.text = arrOrderListing[indexPath.row].date
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrOrderListing[indexPath.row].image ?? "")"
+        
+        let obj = selectedSegmentTag == 0 ? self.arrPastList[indexPath.row] : self.arrInProcessList[indexPath.row]
+        cell.lblRestName.text = obj.restaurantName
+        cell.lblRestLocation.text = obj.street
+        cell.lblPrice.text = "$" + obj.price
+        cell.lblItem.text = obj.restaurantItemName
+        cell.lblDtTime.text = obj.date
+        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(obj.image ?? "")"
         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
 //        cell.btnRepeatOrder.addTarget(self, action: #selector(btnRepeatNew), for: .touchUpInside)
-        strOrderId = arrOrderListing[indexPath.row].id
+        strOrderId = obj.id
 //        cell.Repeat = {
 //            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier:checkOutVC.storyboardID) as! checkOutVC
 //            controller.strOrderId = self.arrOrderListing[indexPath.row].id
@@ -123,10 +135,12 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
+        let obj = selectedSegmentTag == 0 ? self.arrPastList[indexPath.row] : self.arrInProcessList[indexPath.row]
+
         orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
-        orderDetailsVC.orderId = arrOrderListing[indexPath.row].id
+        orderDetailsVC.orderId = obj.id
         orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
-        orderDetailsVC.strRestaurantId = arrOrderListing[indexPath.row].restaurant_id
+        orderDetailsVC.strRestaurantId = obj.restaurant_id
         orderDetailsVC.delegateCancelOrder = self
         self.navigationController?.pushViewController(orderDetailsVC, animated: true)
     }
@@ -140,7 +154,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         WebServiceSubClass.orderList(orderListModel: orderList, showHud: true, completion: { (response, status, error) in
             if status{
                 let orderListData = orderListingResModel.init(fromJson: response)
-                self.arrOrderListing = orderListData.data
+                self.selectedSegmentTag == 0 ? (self.arrPastList.append(contentsOf: orderListData.data)) : (self.arrInProcessList.append(contentsOf: orderListData.data))
+//                self.arrOrderListing = orderListData.data
+//                print(self.arrOrderListing)
                 self.tblOrders.reloadData()
 //                Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
 ////                    self.navigationController?.popViewController(animated: true)
@@ -148,17 +164,28 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-            if self.arrOrderListing.count > 0{
+            if self.arrPastList.count > 0 || self.arrInProcessList.count > 0{
                 self.tblOrders.restore()
                 self.imgOrderEmpty.isHidden = true
                 self.tblOrders.isHidden = false
-               
-            }else {
+
+            }else{
                 self.tblOrders.isHidden = true
                 self.imgOrderEmpty.isHidden = false
 //                self.view.bringSubviewToFront(self.imgFavorite)
 //                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
             }
+//            if self.arrInProcessList.count > 0{
+//                self.tblOrders.restore()
+//                self.imgOrderEmpty.isHidden = true
+//                self.tblOrders.isHidden = false
+//
+//            }else{
+//                self.tblOrders.isHidden = true
+//                self.imgOrderEmpty.isHidden = false
+////                self.view.bringSubviewToFront(self.imgFavorite)
+////                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
+//            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }

@@ -242,21 +242,23 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
-        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: applyPromoCodeVC.storyboardID) as! applyPromoCodeVC
-        //controller.modalPresentationStyle = .fullScreen
-        controller.btnOk = {
-            self.dismiss(animated: true, completion: nil)
-            self.btnAppyPromoCode.isHidden = true
-            self.lblPromoCode.isHidden = false
-            self.btnCanclePromoCOde.isHidden = false
-            
-            self.lblPromoCode.text = "AD200"
-//            self.arrayForTitle.append("Promo Code")
-//            self.arrayForPrice.append("2")
-//            self.tblOrderDetailsHeight.constant = CGFloat(self.arrayForTitle.count * 43)
-//            self.LblTotlaPrice.text = "$37"
-            self.tblOrderDetails.reloadData()
-        }
+        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: PromocodeVC.storyboardID) as! PromocodeVC
+        self.navigationController?.pushViewController(vc, animated: true)
+//        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: applyPromoCodeVC.storyboardID) as! applyPromoCodeVC
+//        //controller.modalPresentationStyle = .fullScreen
+//        controller.btnOk = {
+//            self.dismiss(animated: true, completion: nil)
+//            self.btnAppyPromoCode.isHidden = true
+//            self.lblPromoCode.isHidden = false
+//            self.btnCanclePromoCOde.isHidden = false
+//
+//            self.lblPromoCode.text = "AD200"
+////            self.arrayForTitle.append("Promo Code")
+////            self.arrayForPrice.append("2")
+////            self.tblOrderDetailsHeight.constant = CGFloat(self.arrayForTitle.count * 43)
+////            self.LblTotlaPrice.text = "$37"
+//            self.tblOrderDetails.reloadData()
+//        }
 //        self.present(controller, animated: true, completion: nil)
     }
     

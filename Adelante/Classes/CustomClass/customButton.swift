@@ -61,7 +61,7 @@ class submitButton: UIButton {
             self.setTitleColor(colors.forgotpassGreyColor.value, for: .normal)
         } else if isShareOrderDetails {
             self.backgroundColor = .clear
-            self.titleLabel?.font = CustomFont.NexaBold.returnFont(8)
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(12)
         }
         if isUnderline {
             self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
@@ -230,6 +230,16 @@ class applyPromoCodeButtton : UIButton {
         self.backgroundColor = colors.appGreenColor.value
         if isCancle {
              self.backgroundColor = colors.appRedColor.value
+        }
+    }
+}
+class btnApply : UIButton {
+    @IBInspectable var isApply : Bool = false
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if isApply{
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(15)
+            self.setTitleColor(UIColor.init(hexString: "#E34A25"), for: .normal)
         }
     }
 }

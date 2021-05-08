@@ -138,7 +138,7 @@ class floatTextField: SkyFloatingLabelTextField {
         self.rightView = paddingView
         self.rightViewMode = .always
 
-        self.textColor = colors.textFieldColor.value
+        self.textColor = UIColor.black
         self.titleFormatter = { $0 }
         
         self.titleFont = CustomFont.NexaRegular.returnFont(12)

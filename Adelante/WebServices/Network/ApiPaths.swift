@@ -93,5 +93,6 @@ enum ApiKey: String {
     case RepeatOrder = "repeat_order"
     case Outlets = "outlet"
     case ReviewList = "review_list"
+    case Notification = "notification"
 }
 

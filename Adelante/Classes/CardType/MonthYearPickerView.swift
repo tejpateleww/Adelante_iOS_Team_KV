@@ -1,6 +1,6 @@
 //
 //  MonthPickerView.swift
-//  Qwnched-Customer
+//  Naqsa-Customer
 //
 //  Created by Hiral's iMac on 14/09/20.
 //  Copyright © 2020 Hiral's iMac. All rights reserved.
@@ -13,16 +13,21 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     
     var months: [Int]!
     var years: [Int]!
+    var allMonths: [Int]!
+    var currentMonth: String = ""
+    var currentYear: String = ""
+
     
     var month = Calendar.current.component(.month, from: Date()) {
         didSet {
-            selectRow(month-1, inComponent: 0, animated: false)
+            let index = months.index(of: month)
+            selectRow(index ?? 0, inComponent: 0, animated: false)
         }
     }
     
     var year = Calendar.current.component(.year, from: Date()) {
         didSet {
-            selectRow(years.index(of: year)!, inComponent: 1, animated: true)
+            selectRow(years.index(of: year) ?? 0, inComponent: 1, animated: true)
         }
     }
     
@@ -41,35 +46,37 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     func commonSetup() {
         // population years
         var years: [Int] = []
-        var currentYear = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.year, from: NSDate() as Date)
         if years.count == 0 {
+            var year = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.year, from: NSDate() as Date)
             for _ in 1...15 {
-                years.append(currentYear)
-                currentYear += 1
+                years.append(year)
+                year += 1
             }
         }
         self.years = years
-        currentYear = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.year, from: NSDate() as Date)
+        
         // population months with localized names
         var months: [Int] = []
         var month = 1
-        let currentMonth = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.month, from: NSDate() as Date)
-        if self.year == currentYear {
-            month = currentMonth
-        }
-        for _ in month...12 {
+        for _ in 1...12 {
             
-            //            months.append(DateFormatter().monthSymbols[month].capitalized) // for showing string
+//            months.append(DateFormatter().monthSymbols[month].capitalized) // for showing string
             months.append(month)
             month += 1
         }
         self.months = months
+        self.allMonths = months
         
         self.delegate = self
         self.dataSource = self
         
-        
-        self.selectRow(currentMonth - 1, inComponent: 0, animated: false)
+//        let currentMonth = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.month, from: NSDate() as Date)
+//        self.selectRow(months.index(of: currentMonth) ?? 0, inComponent: 0, animated: false)
+        self.findCurrentMonthAndYear()
+        self.updateMonthsArrayIfCurrentYearIsSelected(row: 0)
+        let index = self.months.index(of: month)
+        selectRow(index ?? 0, inComponent: 0, animated: false)
+
     }
     
     // Mark: UIPicker Delegate / Data Source
@@ -101,37 +108,66 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let month = self.selectedRow(inComponent: 0)+1
-        let year = years[self.selectedRow(inComponent: 1)]
+        //Updating months array, if current running year is selected
+        if component == 1 {
+            self.updateMonthsArrayIfCurrentYearIsSelected(row:row)
+        }
+        
+        //Selection
+        //Month component selection
+        if component == 0 {
+             print("month component has been changed")
+             let monthRow = self.selectedRow(inComponent: 0)
+             month = self.months[monthRow]
+             print("selected month \(month)")
+        }else {
+            //Component 1
+            //Year is changing
+            print("year component has changed")
+            year = years[self.selectedRow(inComponent: 1)]
+            //If current year is changed, months array is updated
+            let selectedMonthRow = self.selectedRow(inComponent: 0)
+            if selectedMonthRow <= self.months.count - 1 {
+                month = self.months[selectedMonthRow]
+                print("Normal selected month \(month)")
+            }else{
+                month = self.months.last ?? 0
+                print("Month boundary condition, selected month \(month)")
+            }
+        }
+
         if let block = onDateSelected {
             block(month, year)
         }
-        let currentMonth = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.month, from: NSDate() as Date)
-        
-        let currentYear = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.year, from: NSDate() as Date)
-        DispatchQueue.main.async {
-            if self.year == currentYear {
-                var months: [Int] = []
-                var cm = currentMonth
-                for _ in cm...12 {
-                    months.append(cm)
-                    cm += 1
-                }
-                self.months = months
-                self.reloadAllComponents()
+    }
+    
+    func updateMonthsArrayIfCurrentYearIsSelected(row: Int) {
+           if years[row] == Int(currentYear) {
+              //Current year
+                let currentMonthInt = Int(currentMonth) ?? 0
+                months.removeAll(where:{
+                  return Int($0) < currentMonthInt
+                })
+                self.reloadComponent(0)
             }
             else {
-                var months: [Int] = []
-                var cm = 1
-                for _ in cm...12 {
-                    months.append(cm)
-                    cm += 1
-                }
-                self.months = months
-                self.reloadAllComponents()
+                months = allMonths
+                self.reloadComponent(0)
             }
-        }
-        self.month = month
-        self.year = year
-    }
+     }
+    
+    func findCurrentMonthAndYear() {
+         let now = NSDate()
+         let monthFormatter = DateFormatter()
+         monthFormatter.dateFormat = "MM"
+         let curMonth = monthFormatter.string(from: now as Date)
+         print("currentMonth : \(curMonth)")
+         currentMonth = curMonth
+         let yearFormatter = DateFormatter()
+         yearFormatter.dateFormat = "yyyy"
+         let curYear = yearFormatter.string(from: now as Date)
+         print("currentYear : \(curYear)")
+         currentYear = curYear
+     }
+    
 }

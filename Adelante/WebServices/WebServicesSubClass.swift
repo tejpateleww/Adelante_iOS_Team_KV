@@ -132,6 +132,10 @@ class WebServiceSubClass
         let params : [String:String] = reviewListModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .ReviewList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    class func NotificationModel( notificationModel : NotificationReqModel,showHud : Bool = false , completion: @escaping CompletionResponse ){
+        let params : [String:String] = notificationModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Notification, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
 }
 
 

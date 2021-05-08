@@ -214,7 +214,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
 //            addcard.card_num = txtnum
 //        }
         addcard.exp_date_month_year = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        addcard.cvv = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        addcard.cvv = txtCvv.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         addcard.user_id = SingletonClass.sharedInstance.UserId 
         WebServiceSubClass.addCard(addcardsmodel: addcard, showHud: true, completion: { (json, status, response) in
             if(status)

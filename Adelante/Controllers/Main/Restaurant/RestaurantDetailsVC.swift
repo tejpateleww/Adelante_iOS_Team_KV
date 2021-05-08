@@ -180,12 +180,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             //            self.lblTimeZone.text = objRestaurant.
             self.lblDistance.text =  objRestaurant.distance
             self.lblAddress.text = objRestaurant.address ?? ""
-            if objRestaurant.promocode == ""{
-                stackPromocode.isHidden = true
-            }else{
-                stackPromocode.isHidden = false
-            }
-            self.lblCode.text = objRestaurant.promocode ?? ""
+//            if objRestaurant.promocode == ""{
+//                stackPromocode.isHidden = true
+//            }else{
+//                stackPromocode.isHidden = false
+//            }
+//            self.lblCode.text = objRestaurant.promocode ?? ""
             self.lblTime.text = "\(objRestaurant.fromTime ?? "")"
             self.lblCompleteTime.text = "\(objRestaurant.toTime ?? "")"
             self.lblAboutRestaurant.text = objRestaurant.descriptionField ?? ""
@@ -266,6 +266,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
+        if objRestaurant != nil{
         if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
             let navController = UINavigationController.init(rootViewController: vc)
@@ -283,6 +284,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 Select = "1"
             }
             webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+        }
         }
     }
     @IBAction func btnViewPolicy(_ sender: Any) {

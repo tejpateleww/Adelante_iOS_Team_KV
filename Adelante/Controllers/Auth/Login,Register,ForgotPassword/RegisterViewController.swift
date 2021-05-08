@@ -119,11 +119,8 @@ class RegisterViewController: UIViewController {
         txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
         let checkEmailRequired = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtEmail.placeholder?.lowercased() ?? ""))
         let checkEmailValid = txtTemp.validatedText(validationType: ValidatorType.email)
-        txtTemp.text = txtPassword.text?.replacingOccurrences(of: " ", with: "")
-        let checkPassword = txtTemp.validatedText(validationType: ValidatorType.password(field: txtPassword.placeholder ?? ""))
-        txtTemp.text = txtConPassword.text?.replacingOccurrences(of: " ", with: "")
-        let confirmPassword = txtTemp.validatedText(validationType: ValidatorType.password(field: txtConPassword.placeholder ?? ""))
-        //   let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "phone number"))
+        let newPW =  txtPassword.validatedText(validationType: ValidatorType.password(field: txtPassword.placeholder ?? ""))
+        let confirmPW = txtConPassword.validatedText(validationType: ValidatorType.password(field: txtConPassword.placeholder ?? ""))
         let invalidPhone =  txtPhoneNumber.validatedText(validationType: ValidatorType.phoneNo)
         if (!firstName.0){
 //            Utilities.ShowAlert(OfMessage: firstName.1)
@@ -154,16 +151,12 @@ class RegisterViewController: UIViewController {
 //            Utilities.ShowAlert(OfMessage: "Please enter valid phone number")
             Utilities.showAlert(AppInfo.appName, message: "Please enter valid phone number", vc: self)
             return false
-        }
-        else  if(!checkPassword.0) && !isSocialLogin
-        {
-//            Utilities.ShowAlert(OfMessage: checkPassword.1)
-            Utilities.showAlert(AppInfo.appName, message: checkPassword.1, vc: self)
-            return checkPassword.0
-        }else if(!confirmPassword.0){
-//            Utilities.ShowAlert(OfMessage: confirmPassword.1)
-            Utilities.showAlert(AppInfo.appName, message: confirmPassword.1, vc: self)
-            return confirmPassword.0
+        }else if !newPW.0{
+            Utilities.displayAlert(newPW.1)
+            return false
+        }else if !confirmPW.0{
+            Utilities.displayAlert(confirmPW.1)
+            return false
         }else if txtPassword.text?.lowercased() != txtConPassword.text?.lowercased(){
 //            Utilities .ShowAlert(OfMessage: "Password and confirm password must be same")
             Utilities.showAlert(AppInfo.appName, message: "Password and confirm password must be same", vc: self)
@@ -190,13 +183,6 @@ class RegisterViewController: UIViewController {
             {
                 let loginModel = Userinfo.init(fromJson: json)
                 let registerRespoDetails = loginModel.profile
-                //                SingletonClass.sharedInstance.UserId = registerRespoDetails?.id ?? ""
-                //                SingletonClass.sharedInstance.Api_Key = registerRespoDetails?.apiKey ?? ""
-                //                SingletonClass.sharedInstance.LoginRegisterUpdateData = registerRespoDetails
-                //                userDefault.setValue(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
-                //                userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-                //                userDefault.setUserData(objProfile: registerRespoDetails!)
-                //                appDel.navigateToHome()
                 Utilities.displayAlert("", message: "Registered successfully! Email verification link has been sent to your registered email",vc: self, completion: {_ in
                     appDel.navigateToLogin()
                 }, otherTitles: nil)
@@ -214,7 +200,11 @@ extension RegisterViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
-        if textField == txtFirstName || textField == txtLastName {
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        if newString.hasPrefix(" "){
+            textField.text = ""
+            return false
+        }else if textField == txtFirstName || textField == txtLastName {
             let maxLength = 15
             let currentString: NSString = textField.text! as NSString
             let newString: NSString =
@@ -226,44 +216,12 @@ extension RegisterViewController:UITextFieldDelegate{
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
-        }else if textField == txtPassword || textField == txtConPassword{
-            var validate = true
-//            var ValidateOne = true
-            if range.location == 0 && string == " " {
-                validate = false
-            } else if range.location > 1 && textField.text?.last == " " && string == " " {
-                validate = false
-//                ValidateOne = false
-            } else {
-                validate = true
-//                ValidateOne = true
-            }
-            
-            if !validate { //|| !ValidateOne{
-                Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
-                self.isShowValidateAlert = true
-            }
-            return validate
         }
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == txtPassword || textField == txtConPassword{
-            let validate = self.isShowValidateAlert && txtPassword.text?.last != " "
-            let validateOne = self.isShowValidateAlert && txtConPassword.text?.last != " "
-            //            !validate ? Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space") : Void()
-            if !validate || !validateOne
-            {
-                Utilities.displayAlert("", message: "\(textField.placeholder ?? "") can’t start or end with a blank space", completion: {_ in
-                    textField.becomeFirstResponder()
-                    self.isShowValidateAlert = true
-                }, otherTitles: nil)
-            }
-        }
     }
 }
 

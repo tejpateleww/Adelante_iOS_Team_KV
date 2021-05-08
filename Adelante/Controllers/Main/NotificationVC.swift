@@ -23,7 +23,8 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
-    var arrNotification = [notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully Completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3")]
+    var arrNotification = [NotificationDatum]()
+//        [notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully Completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3")]
     // MARK: - IBOutlets
     @IBOutlet weak var imgNotification: UIImageView!
     @IBOutlet weak var tbvNotification: UITableView!
@@ -31,11 +32,10 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tbvNotification.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webservicePostNotification), for: .valueChanged)
+        webservicePostNotification()
         setUp()
     }
-
+    
     // MARK: - Other Methods
     func setUp() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -55,25 +55,29 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:NotificationCell = tbvNotification.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath)as! NotificationCell
-        cell.lblNotificationName.text = arrNotification[indexPath.row].strTitle
-        cell.lblNotificationDetail.text = arrNotification[indexPath.row].strDetail
-        cell.imgNotificationIcon.image = UIImage(named: arrNotification[indexPath.row].imgNotif)
+        cell.lblNotificationName.text = arrNotification[indexPath.row].notificationTitle
+        cell.lblNotificationDetail.text = arrNotification[indexPath.row].descriptionField
+//        cell.imgNotificationIcon.image = UIImage(named: arrNotification[indexPath.row].imgNotif)
         cell.selectionStyle = .none
         return cell
     }
     
     // MARK: - Api Calls
-    @objc func webservicePostNotification(){
-//        if self.arrOrderListing.count > 0{
-//            self.tblOrders.restore()
-//            self.imgOrderEmpty.isHidden = true
-//            self.tblOrders.isHidden = false
-//        }else {
-//            self.imgOrderEmpty.isHidden = false
-//            self.tblOrders.isHidden = true
-//        }
-        DispatchQueue.main.async {
-            self.refreshList.endRefreshing()
-        }
+    func webservicePostNotification(){
+        let notification = NotificationReqModel()
+        notification.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.NotificationModel(notificationModel: notification, showHud: false, completion: { (response, status, error) in
+            //            self.hideHUD()
+            if(status)
+            {
+                let notificatiData = notificaationResModel.init(fromJson: response)
+                self.arrNotification = notificatiData.data
+                self.tbvNotification.reloadData()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
+            }
+        })
     }
 }

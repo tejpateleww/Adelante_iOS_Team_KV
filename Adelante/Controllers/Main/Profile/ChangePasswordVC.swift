@@ -27,9 +27,6 @@ class ChangePasswordVC: BaseViewController {
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        txtNewPassword.delegate = self
-        txtOldPassword.delegate = self
-        txtConfirmPassword.delegate = self
         setUpLocalizedStrings()
         setup()
     }
@@ -102,26 +99,20 @@ class ChangePasswordVC: BaseViewController {
         }
     }
     func validations()->Bool{
-        let txtTemp = UITextField()
-        //        ValidatorType.requiredField(field: "Your password can’t start or end with a blank space")
-        txtTemp.text = txtOldPassword.text?.replacingOccurrences(of: " ", with: "")
-        let currentPW = txtTemp.validatedText(validationType: ValidatorType.password(field: txtOldPassword.placeholder ?? ""))
-        txtTemp.text = txtNewPassword.text?.replacingOccurrences(of: " ", with: "")
-        let newPW =  txtTemp.validatedText(validationType: ValidatorType.password(field: txtNewPassword.placeholder ?? ""))
-        txtTemp.text = txtConfirmPassword.text?.replacingOccurrences(of: " ", with: "")
-        let confirmPW = txtTemp.validatedText(validationType: ValidatorType.password(field: txtConfirmPassword.placeholder ?? ""))
-        if (!currentPW.0){
-            Utilities.ShowAlert(OfMessage: currentPW.1)
-            return currentPW.0
-        }else if (!newPW.0){
-            Utilities.ShowAlert(OfMessage: newPW.1)
-            return newPW.0
+        let currentPW = txtOldPassword.validatedText(validationType: ValidatorType.password(field: txtOldPassword.placeholder ?? ""))
+        let newPW =  txtNewPassword.validatedText(validationType: ValidatorType.password(field: txtNewPassword.placeholder ?? ""))
+        let confirmPW = txtConfirmPassword.validatedText(validationType: ValidatorType.password(field: txtConfirmPassword.placeholder ?? ""))
+        if !currentPW.0{
+            Utilities.displayAlert(currentPW.1)
+            return false
         }
-        //        11
-        else if (!confirmPW.0){
-            Utilities.ShowAlert(OfMessage: confirmPW.1)
-            return confirmPW.0
-        } else if txtNewPassword.text?.lowercased() != txtConfirmPassword.text?.lowercased(){
+        else if !newPW.0{
+            Utilities.displayAlert(newPW.1)
+            return false
+        }else if !confirmPW.0{
+            Utilities.displayAlert(confirmPW.1)
+            return false
+        }else if txtNewPassword.text?.lowercased() != txtConfirmPassword.text?.lowercased(){
             Utilities.ShowAlert(OfMessage: "New password and confirm password must be same")
             return false
         }
@@ -144,43 +135,6 @@ class ChangePasswordVC: BaseViewController {
             alertController.addAction(OKAction)
         }
         self.present(alertController, animated: true, completion: nil)
-    }
-}
-
-extension ChangePasswordVC:UITextFieldDelegate{
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var validate = true
-        
-        if range.location == 0 && string == " " {
-            validate = false
-        } else if range.location > 1 && textField.text?.last == " " && string == " " {
-            validate = false
-        } else {
-            validate = true
-        }
-
-        if !validate {
-            Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
-            self.isShowValidateAlert = true
-        }
-        return validate
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-            let validate = self.isShowValidateAlert && textField.text?.last != " "
-//            !validate ? Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space") : Void()
-        if !validate
-        {
-            Utilities.displayAlert("", message: "\(textField.placeholder ?? "") can’t start or end with a blank space", completion: {_ in
-                textField.becomeFirstResponder()
-                self.isShowValidateAlert = true
-            }, otherTitles: nil)
-            
-//            Utilities.ShowAlert(OfMessage: "\(textField.placeholder ?? "") can’t start or end with a blank space")
-//            self.isShowValidateAlert = true
-//            textField.becomeFirstResponder()
-        }
     }
 }
 

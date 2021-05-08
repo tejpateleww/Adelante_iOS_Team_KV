@@ -182,7 +182,12 @@ extension EditProfileVC:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
-        if textField == txtFirstName || textField == txtLastName {
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if newString.hasPrefix(" "){
+            textField.text = ""
+            return false
+        }else if textField == txtFirstName || textField == txtLastName {
             let maxLength = 15
             let currentString: NSString = textField.text! as NSString
             let newString: NSString =

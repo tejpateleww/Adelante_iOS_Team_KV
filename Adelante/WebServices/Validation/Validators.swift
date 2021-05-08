@@ -114,13 +114,19 @@ struct PasswordValidator: ValidatorConvertible {
     init(_ field: String) {
         fieldName = field
     }
-    
-    func validated(_ value: String) -> (Bool,String) {
-        guard value != "" else {return (false,ValidationError("Please enter " + fieldName.lowercased()).message)}
-        guard value.count >= 8 else { return (false,ValidationError( fieldName.capitalizingFirstLetter() + " must contain at least 8 characters").message)}
-        
-        
+    func validated(_ value: String)  -> (Bool,String) {
+        guard value != "" else {return (false,ValidationError("Please enter \(fieldName)").message)}
+        guard value.count >= 8 else { return (false,ValidationError("Password must have at least 8 characters").message) }
+        return (CheckWhiteSpaceOnBeginToEnd(value: value))
         return (true, "")
+    }
+    func CheckWhiteSpaceOnBeginToEnd(value:String) -> (Bool,String)
+    {
+        if value.hasPrefix(" ") || value.hasSuffix(" ")
+        {
+            return (false,"Your password can’t start or end with a blank space")
+        }
+        return (true,"")
     }
 }
 

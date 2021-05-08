@@ -319,6 +319,7 @@ super.awakeFromNib()
         self.font = CustomFont.NexaBold.returnFont(26)
     } else if isVerified{
         self.font = CustomFont.NexaBold.returnFont(12)
+        self.textColor = UIColor.black
     } else if isItemName{
         self.font = CustomFont.NexaBold.returnFont(20)
     } else if isReviewName{
@@ -659,5 +660,29 @@ class navigationTitleLabel : UILabel {
         self.textColor = colors.black.value
         self.font = CustomFont.NexaBold.returnFont(20)
         self.textAlignment = .center
+    }
+}
+class promocodeLabel : UILabel{
+    @IBInspectable var OrderNAme : Bool = false
+    @IBInspectable var Discount : Bool = false
+    @IBInspectable var PriceLimit : Bool = false
+    @IBInspectable var Promocode : Bool = false
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if OrderNAme{
+            self.font = CustomFont.NexaBold.returnFont(23)
+            self.textColor = UIColor.init(hexString: "#E34A25")
+        }else if Discount{
+            self.font = CustomFont.NexaBold.returnFont(18)
+            self.textColor = UIColor.black
+        }else if PriceLimit{
+            self.font = CustomFont.NexaRegular.returnFont(16)
+            self.textColor = UIColor.init(hexString: "#9A9A9A")
+            self.numberOfLines = 0
+            self.lineBreakMode = .byTruncatingTail
+        }else if Promocode{
+            self.font = CustomFont.NexaRegular.returnFont(23)
+            self.textColor = UIColor.black
+        }
     }
 }

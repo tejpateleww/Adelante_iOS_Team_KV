@@ -144,19 +144,17 @@ class LoginViewController: BaseViewController {
         let txtTemp = UITextField()
         txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
         let checkEmail = txtTemp.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
-        txtTemp.text = txtPassword.text?.replacingOccurrences(of: " ", with: "")
-        let checkPassword = txtTemp.validatedText(validationType:  .password(field: txtPassword.placeholder ?? ""))
+        let StrPassWord = txtPassword.validatedText(validationType: .password(field: "password"))
+//        let checkPassword = txtPassword.validatedText(validationType:  .password(field: txtPassword.placeholder ?? ""))
          if(!checkEmail.0)
         {
             Utilities.showAlert(AppInfo.appName, message: checkEmail.1, vc: self)//(OfMessage: checkEmail.1)
             return checkEmail.0
         }
-        else  if(!checkPassword.0)
-        {
-//            Utilities.ShowAlert(OfMessage: checkPassword.1)
-            Utilities.showAlert(AppInfo.appName, message: checkPassword.1, vc: self)
-            return checkPassword.0
-        }
+         else if !StrPassWord.0{
+             Utilities.showAlert(AppInfo.appName, message: StrPassWord.1, vc: self)
+             return StrPassWord.0
+         }
         return true
     }
 }

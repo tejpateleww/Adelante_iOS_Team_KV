@@ -267,7 +267,7 @@
 "NavigationTitles_NavItemsLeft_skip" = "SKIP";
 "NavigationTitles_RestaurantOutletVC" = "Outlets";
 "NavigationTitles_ChangePasswordVC" = "Change password";
-
+"NavigationTitles_PromoCodeVC" = "Promocode";
 //Message
 "MessageTitle" = "No internet connection";
 "MessagePassword" = "Password do not match";
