@@ -35,6 +35,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.webserviceGetRestaurantOutlet(strFilter: "")
         tblRestaurantList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         let button = UIButton()
@@ -46,7 +47,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.webserviceGetRestaurantOutlet(strFilter: "")
         self.customTabBarController?.hideTabBar()
     }
     

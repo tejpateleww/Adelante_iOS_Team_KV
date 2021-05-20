@@ -29,16 +29,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bq4-09-wwK">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="313"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="238"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adelanteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="XUu-y7-WlW">
-                                                        <rect key="frame" x="18" y="30" width="127" height="125"/>
+                                                        <rect key="frame" x="18" y="0.0" width="127" height="125"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="XUu-y7-WlW" secondAttribute="height" multiplier="127:125" id="9R5-vL-ZgP"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1r-ZK-cpC" customClass="themeTitleLabel" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="18" y="200" width="241" height="113"/>
+                                                        <rect key="frame" x="18" y="125" width="241" height="113"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="113" id="bRY-Pw-9X3"/>
                                                             <constraint firstAttribute="width" constant="241" id="iX0-ZG-NAw"/>
@@ -56,17 +56,17 @@ Back</string>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="XUu-y7-WlW" firstAttribute="leading" secondItem="bq4-09-wwK" secondAttribute="leading" constant="18" id="GmA-vS-cfd"/>
-                                                    <constraint firstItem="XUu-y7-WlW" firstAttribute="top" secondItem="bq4-09-wwK" secondAttribute="top" constant="30" id="IqB-co-KVF"/>
+                                                    <constraint firstItem="XUu-y7-WlW" firstAttribute="top" secondItem="bq4-09-wwK" secondAttribute="top" id="IqB-co-KVF"/>
                                                     <constraint firstItem="T1r-ZK-cpC" firstAttribute="leading" secondItem="XUu-y7-WlW" secondAttribute="leading" id="NGS-Bd-gKm"/>
-                                                    <constraint firstItem="T1r-ZK-cpC" firstAttribute="top" secondItem="XUu-y7-WlW" secondAttribute="bottom" constant="45" id="TSZ-2b-REg"/>
+                                                    <constraint firstItem="T1r-ZK-cpC" firstAttribute="top" secondItem="XUu-y7-WlW" secondAttribute="bottom" id="TSZ-2b-REg"/>
                                                     <constraint firstAttribute="bottom" secondItem="T1r-ZK-cpC" secondAttribute="bottom" id="s3S-lw-yD0"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJt-GQ-bW9">
-                                                <rect key="frame" x="0.0" y="313" width="414" height="373"/>
+                                                <rect key="frame" x="0.0" y="238" width="414" height="346"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9HV-kr-gTV">
-                                                        <rect key="frame" x="18" y="37" width="378" height="146"/>
+                                                        <rect key="frame" x="18" y="10" width="378" height="146"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4or-Q6-WI7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -161,7 +161,7 @@ Back</string>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DAA-cC-sBU" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="305" y="196.5" width="91" height="26"/>
+                                                        <rect key="frame" x="305" y="169.5" width="91" height="26"/>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="Forgot Password">
@@ -226,7 +226,7 @@ Back</string>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kds-T1-Ct7">
-                                                        <rect key="frame" x="18" y="247.5" width="378" height="63"/>
+                                                        <rect key="frame" x="18" y="220.5" width="378" height="63"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUB-dV-8E1" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="14" width="52" height="35"/>
@@ -263,7 +263,7 @@ Back</string>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12.6" translatesAutoresizingMaskIntoConstraints="NO" id="rwS-jo-Y0e">
-                                                        <rect key="frame" x="56" y="340.5" width="302" height="16"/>
+                                                        <rect key="frame" x="56" y="313.5" width="302" height="16"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWm-7i-pZb" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="170.5" height="16"/>
@@ -311,7 +311,7 @@ Back</string>
                                                     <constraint firstAttribute="trailing" secondItem="DAA-cC-sBU" secondAttribute="trailing" constant="18" id="uXM-wG-p7n"/>
                                                     <constraint firstItem="Kds-T1-Ct7" firstAttribute="leading" secondItem="fJt-GQ-bW9" secondAttribute="leading" constant="18" id="xze-VG-bCe"/>
                                                     <constraint firstItem="rwS-jo-Y0e" firstAttribute="top" secondItem="Kds-T1-Ct7" secondAttribute="bottom" constant="30" id="zat-ol-K7g"/>
-                                                    <constraint firstItem="9HV-kr-gTV" firstAttribute="top" secondItem="fJt-GQ-bW9" secondAttribute="top" constant="37" id="zfX-d1-bC4"/>
+                                                    <constraint firstItem="9HV-kr-gTV" firstAttribute="top" secondItem="fJt-GQ-bW9" secondAttribute="top" constant="10" id="zfX-d1-bC4"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -525,16 +525,16 @@ Back</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qep-kU-lAb">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="351"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adelanteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Yvq-R5-5mN">
-                                                        <rect key="frame" x="18" y="88" width="106.5" height="105"/>
+                                                        <rect key="frame" x="18" y="0.0" width="127" height="127"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" secondItem="Yvq-R5-5mN" secondAttribute="height" multiplier="127:125" id="1hf-0J-a7G"/>
+                                                            <constraint firstAttribute="width" secondItem="Yvq-R5-5mN" secondAttribute="height" multiplier="1:1" id="1hf-0J-a7G"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpT-mS-Rcj" customClass="themeTitleLabel" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="18" y="238" width="241" height="113"/>
+                                                        <rect key="frame" x="18" y="127" width="241" height="113"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="113" id="Q0G-0h-Vmu"/>
                                                             <constraint firstAttribute="width" constant="241" id="sMl-Ls-4fX"/>
@@ -552,18 +552,17 @@ Adelante</string>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="Yvq-R5-5mN" firstAttribute="leading" secondItem="Qep-kU-lAb" secondAttribute="leading" constant="18" id="6ja-2W-NOH"/>
-                                                    <constraint firstItem="CpT-mS-Rcj" firstAttribute="top" secondItem="Yvq-R5-5mN" secondAttribute="bottom" constant="45" id="LOR-I7-NqZ"/>
-                                                    <constraint firstItem="Yvq-R5-5mN" firstAttribute="top" secondItem="Qep-kU-lAb" secondAttribute="top" constant="88" id="TYm-9b-LVy"/>
-                                                    <constraint firstAttribute="height" constant="351" id="U2h-ie-KIz"/>
+                                                    <constraint firstItem="Yvq-R5-5mN" firstAttribute="top" secondItem="Qep-kU-lAb" secondAttribute="top" id="TYm-9b-LVy"/>
                                                     <constraint firstItem="CpT-mS-Rcj" firstAttribute="leading" secondItem="Yvq-R5-5mN" secondAttribute="leading" id="WDw-MX-75a"/>
                                                     <constraint firstAttribute="bottom" secondItem="CpT-mS-Rcj" secondAttribute="bottom" id="lx5-SC-4k8"/>
+                                                    <constraint firstItem="CpT-mS-Rcj" firstAttribute="top" secondItem="Yvq-R5-5mN" secondAttribute="bottom" id="mrM-A5-eiK"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPi-1e-xsK" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
-                                                <rect key="frame" x="0.0" y="351" width="414" height="668.5"/>
+                                                <rect key="frame" x="0.0" y="240" width="414" height="638.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TDM-Ur-Np6">
-                                                        <rect key="frame" x="18" y="30" width="378" height="478"/>
+                                                        <rect key="frame" x="18" y="0.0" width="378" height="478"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kad-eD-h8J">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -812,7 +811,7 @@ Adelante</string>
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9g-c5-ppY">
-                                                        <rect key="frame" x="18" y="538" width="378" height="63"/>
+                                                        <rect key="frame" x="18" y="508" width="378" height="63"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ab-4f-f8g" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="1" y="21" width="118.5" height="20.5"/>
@@ -846,7 +845,7 @@ Adelante</string>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IZJ-l9-Yu9">
-                                                        <rect key="frame" x="86" y="628.5" width="242" height="30"/>
+                                                        <rect key="frame" x="86" y="598.5" width="242" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLy-vP-WB6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="30"/>
@@ -879,7 +878,7 @@ Adelante</string>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="IZJ-l9-Yu9" firstAttribute="top" secondItem="D9g-c5-ppY" secondAttribute="bottom" constant="27.699999999999999" id="2gp-zz-YCi"/>
-                                                    <constraint firstItem="TDM-Ur-Np6" firstAttribute="top" secondItem="QPi-1e-xsK" secondAttribute="top" constant="30" id="7vJ-ze-yYc"/>
+                                                    <constraint firstItem="TDM-Ur-Np6" firstAttribute="top" secondItem="QPi-1e-xsK" secondAttribute="top" id="7vJ-ze-yYc"/>
                                                     <constraint firstItem="D9g-c5-ppY" firstAttribute="leading" secondItem="QPi-1e-xsK" secondAttribute="leading" constant="18" id="Fjm-wj-bej"/>
                                                     <constraint firstItem="IZJ-l9-Yu9" firstAttribute="centerX" secondItem="QPi-1e-xsK" secondAttribute="centerX" id="IGd-nX-sfY"/>
                                                     <constraint firstItem="TDM-Ur-Np6" firstAttribute="leading" secondItem="QPi-1e-xsK" secondAttribute="leading" constant="18" id="L8I-kN-E2a"/>
@@ -991,7 +990,7 @@ Adelante</string>
     </scenes>
     <designables>
         <designable name="6J4-UA-qRl">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="143" height="18.5"/>
         </designable>
         <designable name="6tv-ps-pmp">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>

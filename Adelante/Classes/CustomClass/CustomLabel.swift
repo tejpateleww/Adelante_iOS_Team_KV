@@ -345,7 +345,7 @@ super.awakeFromNib()
         self.font = CustomFont.NexaRegular.returnFont(17)
                self.textColor = UIColor(hexString: "#242E42")
     }else if isRateName{
-        self.font = CustomFont.NexaBold.returnFont(13)
+        self.font = CustomFont.NexaBold.returnFont(15)
     }
    
     

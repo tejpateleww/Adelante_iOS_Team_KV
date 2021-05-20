@@ -163,21 +163,45 @@ class EditProfileVC: BaseViewController{
 extension EditProfileVC:ImagePickerDelegate {
     
     func didSelect(image: UIImage?, SelectedTag:Int) {
-        //        isRemovePhoto = false
-        if(image == nil && SelectedTag == 101){
-            self.selectedImage = UIImage()
-            self.isRemovePhoto = true
-            self.imgProfile.image = UIImage.init(named: "Default_user")
-            //webservice_RemoveProfilePicture()
-        }else if image != nil{
-            let fixedOrientedImage = image?.fixOrientation()
-            self.imgProfile.image = fixedOrientedImage
-            self.selectedImage = self.imgProfile.image
-        }else{
-            return
-        }
+
+            if(image == nil && SelectedTag == 101){
+                self.selectedImage = UIImage()
+                self.isRemovePhoto = true
+                self.imgProfile.image = UIImage.init(named: "Default_user")
+            }else if image != nil{
+                DispatchQueue.main.async {
+                    let fixedOrientedImage = image?.fixOrientation()
+                   self.imgProfile.image = fixedOrientedImage
+                    self.imgProfile.setNeedsDisplay()
+                    self.selectedImage = fixedOrientedImage
+                }
+                self.isRemovePhoto = false
+                self.imgProfile.layoutSubviews()
+                self.imgProfile.layoutIfNeeded()
+            }else{
+                return
+            }
     }
 }
+
+//extension EditProfileVC:ImagePickerDelegate {
+//
+//    func didSelect(image: UIImage?, SelectedTag:Int) {
+//        //        isRemovePhoto = false
+//        if(image == nil && SelectedTag == 101){
+//            self.selectedImage = UIImage()
+//            self.isRemovePhoto = true
+//            self.imgProfile.image = UIImage.init(named: "Default_user")
+//            //webservice_RemoveProfilePicture()
+//        }else if image != nil{
+//            let fixedOrientedImage = image?.fixOrientation()
+//            self.imgProfile.image = fixedOrientedImage
+//            self.selectedImage = self.imgProfile.image
+//        }else{
+//            return
+//        }
+//    }
+//}
 extension EditProfileVC:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool

@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import WebKit
+import Cosmos
 struct structSections {
     
     
@@ -48,7 +49,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
     @IBOutlet weak var imgFoodDetails: UIImageView!
     @IBOutlet weak var lblRestaurantName: themeLabel!
-    @IBOutlet weak var lblRating: themeLabel!
+    @IBOutlet weak var vwRating: CosmosView!
     @IBOutlet weak var lblReviews: themeLabel!
     @IBOutlet weak var lblPromoCode: themeLabel!
     @IBOutlet weak var lblCode: themeLabel!
@@ -155,16 +156,16 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         print("Start: \(date)") // Start: Optional(2000-01-01 19:00:00 +0000)
     }
     func setUpLocalizedStrings(){
-        lblRestaurantName.text = "RestaurantDetailsVC_lblRestaurantName".Localized()
-        lblReviews.text = String(format: "RestaurantDetailsVC_lblReviews".Localized(), "53")
+//        lblRestaurantName.text = "RestaurantDetailsVC_lblRestaurantName".Localized()
+//        lblReviews.text = String(format: "RestaurantDetailsVC_lblReviews".Localized(), "53")
         lblPromoCode.text = "RestaurantDetailsVC_lblPromoCode".Localized()
         lblCode.text = "RestaurantDetailsVC_lblCode".Localized()
 //        lblDistance.text = String(format: "RestaurantDetailsVC_lblDistance".Localized(), "1.7")
         lblOpenTime.text = "RestaurantDetailsVC_lblOpenTime".Localized()
-        lblTime.text = "RestaurantDetailsVC_lblTime".Localized()
+//        lblTime.text = "RestaurantDetailsVC_lblTime".Localized()
         lblTimeZone.text = "RestaurantDetailsVC_lblTimeZone".Localized()
         lblEastern.text = "RestaurantDetailsVC_lblEastern".Localized()
-        lblAboutRestaurant.text = "RestaurantDetailsVC_lblAboutRestaurant".Localized()
+//        lblAboutRestaurant.text = "RestaurantDetailsVC_lblAboutRestaurant".Localized()
         btnViewPolicy.setTitle("RestaurantDetailsVC_btnViewPolicy".Localized(), for: .normal)
         //        lblNoOfItem.text = String(format: "RestaurantDetailsVC_lblNoOfItem".Localized(), "1")
         lblSign.text = "RestaurantDetailsVC_lblSign".Localized()
@@ -174,9 +175,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func setData(){
         if objRestaurant != nil{
             self.lblRestaurantName.text = objRestaurant.name ?? ""
-            //            self.lblPrice.text = objRestaurant. ?? ""
-            self.lblRating.text = objRestaurant.rating
-            self.lblReviews.text = String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review)
+            self.vwRating.rating = Double(objRestaurant.rating) ?? 0
+            self.lblReviews.text = "(" + String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review) + ")"
             //            self.lblTimeZone.text = objRestaurant.
             self.lblDistance.text =  objRestaurant.distance
             self.lblAddress.text = objRestaurant.address ?? ""
