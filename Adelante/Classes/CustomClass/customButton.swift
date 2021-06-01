@@ -81,7 +81,14 @@ class submitButton: UIButton {
         }
     }
 }
-
+class PayButton:UIButton{
+    override func awakeFromNib() {
+        self.layer.cornerRadius = 8
+        self.backgroundColor = colors.appOrangeColor.value
+        self.setTitleColor(colors.white.value, for: .normal)
+        self.titleLabel?.font = CustomFont.NexaBold.returnFont(17)
+    }
+}
 class collectionVwFilterBtns: UIButton {
     
     @IBInspectable var isCornerRadius:Bool = false

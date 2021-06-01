@@ -136,6 +136,25 @@ class WebServiceSubClass
         let params : [String:String] = notificationModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Notification, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    //PromoCodeList
+    class func PromoCodeList( PromocodeModel : PromocodeListReqModel,showHud : Bool = false , completion: @escaping CompletionResponse ){
+        let params : [String:String] = PromocodeModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .fetch_promocode, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
+    //ApplyPromoCode
+    class func ApplyPromoCode( PromocodeModel : PromocodeApplyReqModel,showHud : Bool = false , completion: @escaping CompletionResponse ){
+        let params : [String:String] = PromocodeModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .apply_promocode, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
+    //Order
+    class func PlaceOrder( OrderModel : OrderReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
+        let params : [String:String] = OrderModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .order, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+
+    }
+    
+   
+    
 }
 
 

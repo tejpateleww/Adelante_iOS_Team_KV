@@ -75,15 +75,21 @@ class FeedbackVC: BaseViewController {
         feedback.title = txtTitle.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         feedback.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         feedback.message = tvFeedback.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        //        self.showHUD()
         WebServiceSubClass.Feedback(Feedbackmodel: feedback, showHud: true, completion: { (json, status, response) in
-            //            self.hideHUD()
             if(status)
             {
-                Utilities.displayAlert(json["message"].string ?? "")
-                self.txtEmail.text = ""
-                self.txtTitle.text = ""
-                self.tvFeedback.text = ""
+                let alertController = UIAlertController(title: AppName,
+                                                        message: json["message"].string ?? "",
+                                                        preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK".Localized(), style: .default){ _ in
+                    self.navigationController?.popViewController(animated: true)
+                    self.txtEmail.text = ""
+                    self.txtTitle.text = ""
+                    self.tvFeedback.text = ""
+                })
+                
+                self.present(alertController, animated: true)
+                
             }
             else
             {

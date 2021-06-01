@@ -147,7 +147,7 @@
         <scene sceneID="wMk-AS-kRj">
             <objects>
                 <viewController storyboardIdentifier="commonPopup" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="CIm-KZ-oyR" customClass="commonPopup" customModule="Adelante" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SoQ-ot-HFy" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="SoQ-ot-HFy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -264,7 +264,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="bdf-L8-f2T" firstAttribute="leading" secondItem="iU3-Yz-Yug" secondAttribute="leading" constant="18" id="IQy-KR-Joa"/>
                                     <constraint firstAttribute="trailing" secondItem="bdf-L8-f2T" secondAttribute="trailing" constant="18" id="j0k-LD-jXF"/>
@@ -274,7 +273,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WUV-Mh-5eQ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="iU3-Yz-Yug" firstAttribute="top" secondItem="WUV-Mh-5eQ" secondAttribute="top" id="62A-tT-oqj"/>
                             <constraint firstItem="WUV-Mh-5eQ" firstAttribute="bottom" secondItem="iU3-Yz-Yug" secondAttribute="bottom" id="T4E-KI-zds"/>
@@ -296,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whY-cs-lhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8198" y="883"/>
+            <point key="canvasLocation" x="248" y="768"/>
         </scene>
     </scenes>
     <resources>

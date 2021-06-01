@@ -16,7 +16,15 @@ class viewWithClearBG : UIView {
         
     }
 }
-
+class BorderView : UIView {
+    override func awakeFromNib() {
+        self.backgroundColor = .clear
+        self.layer.cornerRadius = 8
+        self.layer.borderWidth = 1
+        self.layer.borderColor = colors.black.value.withAlphaComponent(0.30).cgColor
+        self.clipsToBounds = true
+    }
+}
 
 class myAccountView : UIView {
     @IBInspectable var isProfile : Bool = false

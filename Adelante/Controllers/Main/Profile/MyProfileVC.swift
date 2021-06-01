@@ -43,7 +43,7 @@ class MyProfileVC: BaseViewController,EditProfileDelegate {
         txtEmail.text = loginModelDetails?.email
         txtPhoneNumber.text = loginModelDetails?.phone
         lblName.text = loginModelDetails?.fullName
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(loginModelDetails?.profilePicture ?? "")"
+        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(loginModelDetails?.profilePicture ?? "")"
             imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
             imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
         

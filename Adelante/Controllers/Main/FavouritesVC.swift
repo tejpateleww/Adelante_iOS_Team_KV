@@ -34,11 +34,13 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!
     @IBOutlet weak var txtSearch: UISearchBar!
-    @IBOutlet weak var imgFavorite: UIImageView!
+   
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tblMainList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        
         txtSearch.delegate = self
         setUpLocalizedStrings()
         tblMainList.refreshControl = refreshList
@@ -105,25 +107,46 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrFavoriteRest.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tblMainList.dequeueReusableCell(withIdentifier: YourFavouriteCell.reuseIdentifier, for: indexPath) as! YourFavouriteCell
-        cell.lblItemName.text = arrFavoriteRest[indexPath.row].name
-        cell.lblRating.text = arrFavoriteRest[indexPath.row].review
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrFavoriteRest[indexPath.row].image ?? "")"
-        cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-        cell.btnFavorite.tag = indexPath.row
-        cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
-        if arrFavoriteRest[indexPath.row].favourite == "1"{
-            cell.btnFavorite.isSelected = true
-        }else{
-            cell.btnFavorite.isSelected = false
+        if arrFavoriteRest.count == 0 {
+            return 1
+        } else {
+            return arrFavoriteRest.count
         }
-        cell.selectionStyle = .none
-        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if arrFavoriteRest.count == 0 {
+            return tableView.frame.size.height
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if arrFavoriteRest.count != 0 {
+            let cell = tblMainList.dequeueReusableCell(withIdentifier: YourFavouriteCell.reuseIdentifier, for: indexPath) as! YourFavouriteCell
+            cell.lblItemName.text = arrFavoriteRest[indexPath.row].name
+            cell.lblRating.text = arrFavoriteRest[indexPath.row].review
+            
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrFavoriteRest[indexPath.row].image ?? "")"
+            cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.btnFavorite.tag = indexPath.row
+            cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+            if arrFavoriteRest[indexPath.row].favourite == "1"{
+                cell.btnFavorite.isSelected = true
+            }else{
+                cell.btnFavorite.isSelected = false
+            }
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+            
+            NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
+            NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+        
+            return NoDatacell
+        }
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
@@ -140,6 +163,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         RestaurantFavorite.page = "\(self.pageNumber)"
         WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
+            self.refreshList.endRefreshing()
             if status{
                 let restaurantData = RestaurantFavResModel.init(fromJson: response)
                 if self.pageNumber == 1 {
@@ -153,7 +177,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     }
                 } else {
                     let arrTemp = restaurantData.data.restaurantDetails
-                    if arrTemp!.count > 0 {
+                    if (arrTemp?.count ?? 0) > 0 {
                         for i in 0..<arrTemp!.count {
                             
                             if self.arrFavoriteRest.contains(where: {$0.id == arrTemp![i].id}) {
@@ -165,34 +189,19 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                             
                         }
                     }
-                    if arrTemp!.count < self.pageLimit {
+                    if (arrTemp?.count ?? 0) < self.pageLimit {
                         self.isNeedToReload = false
                     } else {
                         self.isNeedToReload = true
                     }
                 }
-                DispatchQueue.main.async {
-                    self.tblMainList.reloadData()
-                }
+                self.tblMainList.reloadData()
+               
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-            //            self.arrFavoriteRest.removeAll()
-            //            self.tblMainList.reloadData()
-            if self.arrFavoriteRest.count > 0 {
-                self.tblMainList.restore()
-                self.imgFavorite.isHidden = true
-//                self.tblMainList.isHidden = false
-                
-            } else {
-//                self.tblMainList.isHidden = true
-                self.imgFavorite.isHidden = false
-                //                self.view.bringSubviewToFront(self.imgFavorite)
-                //                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-            }
-            DispatchQueue.main.async {
-                self.refreshList.endRefreshing()
-            }
+
+            
         })
     }
     func webwerviceFavorite(strRestaurantId:String,Status:String){

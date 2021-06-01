@@ -83,13 +83,13 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             lblId.text = objOrderDetailsData.orderId
             lblNoOfItems.text = objOrderDetailsData.itemQuantity + "items"
             lblRestName.text = objOrderDetailsData.restaurantName
-            lblTotal.text = "$" + objOrderDetailsData.total
+            lblTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.total.ConvertToTwoDecimal()
             lblAddress.text = objOrderDetailsData.address
-            lblTaxes.text = "$" + objOrderDetailsData.tax
-            lblServiceFee.text = "$" + objOrderDetailsData.serviceFee
-            lblSubTotal.text = "$" + objOrderDetailsData.sub_total
+            lblTaxes.text = "\(CurrencySymbol)" + objOrderDetailsData.tax.ConvertToTwoDecimal()
+            lblServiceFee.text = "\(CurrencySymbol)" + objOrderDetailsData.serviceFee.ConvertToTwoDecimal()
+            lblSubTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.sub_total.ConvertToTwoDecimal()
             lblLocation.text = objOrderDetailsData.street
-            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(objOrderDetailsData.qrcode ?? "")"
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objOrderDetailsData.qrcode ?? "")"
             imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
             imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         }
@@ -201,13 +201,13 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         lblAddress.text = "43369 Ellsworth St, remont,CA"
         lblYourOrder.text = "MyOrderDetailsVC_lblYourOrder".Localized()
         lblSubTotalTitle.text = "MyOrderDetailsVC_lblSubTotalTitle".Localized()
-        lblSubTotal.text = "$30"
+       
         lblServiceFeeTitle.text = "MyOrderDetailsVC_lblServiceFeeTitle".Localized()
-        lblServiceFee.text = "$2"
+        
         lblTaxesTitle.text = "MyOrderDetailsVC_lblTaxesTitle".Localized()
-        lblTaxes.text = "$7"
+       
         lblTotalTitle.text = "MyOrderDetailsVC_lblTotalTitle".Localized()
-        lblTotal.text = "$39"
+       
         btnCancel.setTitle("MyOrderDetailsVC_btnCancel".Localized(), for: .normal)
         btnRateOrder.setTitle("MyOrderDetailsVC_btnRateOrder".Localized(), for: .normal)
         btnShareOrder.setTitle("MyOrderDetailsVC_btnShareOrder".Localized(), for: .normal)

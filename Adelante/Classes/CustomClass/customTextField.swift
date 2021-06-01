@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import FormTextField
 class addCarddetailsTextField : UITextField {
     override func awakeFromNib() {
        
@@ -16,6 +17,21 @@ class addCarddetailsTextField : UITextField {
         self.textAlignment = .left
         
         
+    }
+}
+class EnterCVVTextField: FormTextField {
+    
+   
+    var dropDownClick:(()->())?
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        
+        self.textAlignment = .left
+        self.textColor = colors.black.value
+        self.font = CustomFont.NexaRegular.returnFont(12)
+        
+//        apply()
     }
 }
 class customTextField: UITextField {

@@ -47,7 +47,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         lblName.text = SingletonClass.sharedInstance.LoginRegisterUpdateData?.fullName
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture ?? "")"
+        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture ?? "")"
         imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
     }

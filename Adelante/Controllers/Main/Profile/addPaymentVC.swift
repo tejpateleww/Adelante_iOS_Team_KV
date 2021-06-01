@@ -8,7 +8,9 @@
 
 import UIKit
 import SDWebImage
-
+import FormTextField
+import Alamofire
+import SwiftyJSON
 
 class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource,AddPaymentDelegate {
     
@@ -20,13 +22,32 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var refreshList = UIRefreshControl()
     var arrCard = [CardList]()
     var filterSelect = [0]
+    
+    var direction:CGFloat = 1
+    var shakes = 0
+    
+    var OrderDetails : String?
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
     @IBOutlet weak var imgEmptyCard: UIImageView!
     
     //MARK: - Other Methods
-    
+    func shake(_ theOneYouWannaShake: UIView?) {
+        UIView.animate(withDuration: 0.06, animations: {
+            theOneYouWannaShake?.transform = CGAffineTransform(translationX: 5 * self.direction, y: 0)
+        }) { [self] finished in
+            
+            if shakes >= 10 {
+                theOneYouWannaShake?.transform = CGAffineTransform.identity
+                return
+            }
+            shakes += 1
+            direction = direction * -1
+            shake(theOneYouWannaShake)
+        }
+    }
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,13 +102,15 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             } else {
                 let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
                 cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-//                if indexPath.row == selectedPaymentMethods {
+                if indexPath.row == selectedPaymentMethods {
 //                    cell2.vWMain.layer.borderWidth = 1
-//                } else {
+                    cell2.vwCvv.isHidden = false
+                } else {
 //                    cell2.vWMain.layer.borderWidth = 0
-//                }
+                    cell2.vwCvv.isHidden = true
+                }
                 //                cell2.paymentMethodImageView.image = self.getCardImageFromCardType(objSelectedCard: self.arrCard[indexPath.row])
-                let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrCard[indexPath.row - 1].cardImage ?? "")"
+                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrCard[indexPath.row - 1].cardImage ?? "")"
                 cell2.paymentMethodImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell2.paymentMethodImageView.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 cell2.lblcardDetails.text = arrCard[indexPath.row - 1].formatedCardNo
@@ -96,6 +119,21 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell2.btnDelete.isHidden = false
                 cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
                 cell2.selectionStyle = .none
+                cell2.PayButton = {
+                    if cell2.textFieldEnterCVV.text?.trim() != self.arrCard[indexPath.row - 1].cardCvv {
+                        self.direction = 1
+                        self.shakes = 0
+                        cell2.textFieldEnterCVV.text = ""
+                        self.shake(cell2.textFieldEnterCVV)
+                       
+                    }
+                    else {
+                        self.WebServiceCallForOrder(OrderJson: self.OrderDetails ?? "")
+//                        self.AddAmountDetails(cardID: self.cardDetailsData?.cards?[indexPath.row].id ?? "")
+                    }
+                }
+                
+                
                 cell = cell2
             }
             cell.selectionStyle = .none
@@ -106,6 +144,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.lblcardDetails.text = "Paypal"
             cell.lblExpiresDate.text = "Default method"
             cell.btnDelete.isHidden = true
+            cell.vwCvv.isHidden = true
 //            cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
             cell.selectPaymentMethodButton.isHidden = false
             cell.selectedBtn = {
@@ -127,16 +166,16 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 100
-        case 1:
-            return 100
-        default:
-            return 0
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        switch indexPath.section {
+//        case 0:
+//            return 100
+//        case 1:
+//            return 100
+//        default:
+//            return 0
+//        }
+//    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch section {
@@ -184,15 +223,21 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             return headerView
         }
     }
+    
     func setUpLocalizedStrings(){
         btnAddCart.setTitle("addPaymentVC_btnAddCart".Localized(), for: .normal)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPaymentMethods = indexPath.row
         tblPaymentMethod.reloadData()
-//        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "OK", strCancelButtonTitle: "", strDescription: "Your order has been placed.", strTitle: "Payment Successful", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appGreenColor, viewController: self)
     }
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            webServiceDeletePaymentCard(strCardId: self.arrCard[indexPath.row - 1].id)
+            
+            // handle delete (by removing the data from your array and updating the tableview)
+        }
+    }
     //MARK: -btnAction
     @IBAction func btnAddcardClick(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID) as! AddCardVC
@@ -218,25 +263,28 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         addpayment.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.addPayment(addpaymentmodel: addpayment, showHud: true, completion: { (json, status, error) in
             // self.hideHUD()
+            self.refreshList.endRefreshing()
              if(status) {
                  let cardListRes = AddPaymentResModel.init(fromJson: json)
                  self.arrCard = cardListRes.cards
                  self.tblPaymentMethod.reloadData()
+                self.imgEmptyCard.isHidden = true
              } else {
+                self.imgEmptyCard.isHidden = false
                  Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
                 
              }
-            if self.arrCard.count > 0{
-                self.tblPaymentMethod.restore()
-                self.imgEmptyCard.isHidden = true
-//                self.tblPaymentMethod.isHidden = false
-            }else {
-                self.imgEmptyCard.isHidden = true
-//                self.tblPaymentMethod.isHidden = true
-            }
-            DispatchQueue.main.async {
-                self.refreshList.endRefreshing()
-            }
+//            if self.arrCard.count > 0{
+//                self.tblPaymentMethod.restore()
+//                self.imgEmptyCard.isHidden = true
+////                self.tblPaymentMethod.isHidden = false
+//            }else {
+//                self.imgEmptyCard.isHidden = true
+////                self.tblPaymentMethod.isHidden = true
+//            }
+//            DispatchQueue.main.async {
+//                self.refreshList.endRefreshing()
+//            }
          })
         
     }
@@ -257,4 +305,71 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
              }
          })
     }
+    func apply() {
+           let enabledBackgroundColor = UIColor.clear
+       let enabledBorderColor = UIColor(hexString: "FFFFFF")
+       let enabledTextColor = UIColor(hexString: "FFFFFF")
+       let activeBorderColor = UIColor(hexString: "FFFFFF")
+
+        FormTextField.appearance().clearButtonMode = .never
+        
+           FormTextField.appearance().borderWidth = 0
+       FormTextField.appearance().placeHolderColor = enabledBorderColor
+           FormTextField.appearance().clearButtonColor = activeBorderColor
+           FormTextField.appearance().font = CustomFont.NexaRegular.returnFont(15)
+
+           FormTextField.appearance().enabledBackgroundColor = enabledBackgroundColor
+           FormTextField.appearance().enabledBorderColor = enabledBorderColor
+           FormTextField.appearance().enabledTextColor = enabledTextColor
+
+           FormTextField.appearance().validBackgroundColor = enabledBackgroundColor
+           FormTextField.appearance().validBorderColor = enabledBorderColor
+           FormTextField.appearance().validTextColor = enabledTextColor
+
+           FormTextField.appearance().activeBackgroundColor = enabledBackgroundColor
+           FormTextField.appearance().activeBorderColor = activeBorderColor
+           FormTextField.appearance().activeTextColor = enabledTextColor
+
+           FormTextField.appearance().inactiveBackgroundColor = enabledBackgroundColor
+           FormTextField.appearance().inactiveBorderColor = enabledBorderColor
+           FormTextField.appearance().inactiveTextColor = enabledTextColor
+
+       FormTextField.appearance().disabledBackgroundColor = UIColor(hexString: "DFDFDF")
+           FormTextField.appearance().disabledBorderColor = UIColor(hexString: "DFDFDF")
+           FormTextField.appearance().disabledTextColor = UIColor.white
+
+           FormTextField.appearance().invalidBackgroundColor = UIColor(hexString: "FFC9C8")
+           FormTextField.appearance().invalidBorderColor = UIColor(hexString: "FF4B47")
+           FormTextField.appearance().invalidTextColor = UIColor(hexString: "FF4B47")
+       }
+}
+extension addPaymentVC {
+    func WebServiceCallForOrder(OrderJson:String){
+   
+      let ReqModel = OrderReqModel()
+        ReqModel.order_data = OrderJson
+        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: true, completion: { (json, status, response) in
+            if(status)
+            {
+                let alertController = UIAlertController(title: AppName,
+                                                        message: json["data"].string ?? "",
+                                                        preferredStyle: .alert)
+              
+                alertController.addAction(UIAlertAction(title: "OK".Localized(), style: .default){ _ in
+                    appDel.navigateToHome()
+                })
+                self.present(alertController, animated: true)
+               
+                //Utilities.ShowAlert(OfMessage: json["data"].string ?? "")
+                
+                //Utilities.displayAlert(json["message"].string ?? "")
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        })
+        
+    }
+   
 }

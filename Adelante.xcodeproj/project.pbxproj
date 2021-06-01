@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180A9E7E265CDB3700AC7A22 /* PromocodeApplyReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A9E7D265CDB3700AC7A22 /* PromocodeApplyReqModel.swift */; };
+		180A9F06265D0A4500AC7A22 /* PromocodeAppliedResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A9F05265D0A4500AC7A22 /* PromocodeAppliedResModel.swift */; };
+		180F19DF265B81EC00150966 /* Promocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F19DD265B81EB00150966 /* Promocode.swift */; };
+		180F19E0265B81EC00150966 /* PromoCodeResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F19DE265B81EB00150966 /* PromoCodeResModel.swift */; };
+		18550403265F66F800D73B2B /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18550402265F66F800D73B2B /* NotificationType.swift */; };
+		1855042B265F955400D73B2B /* OrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1855042A265F955400D73B2B /* OrderReqModel.swift */; };
+		189E57BB2664BDA9008AECA6 /* NoDataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189E57B72664BDA9008AECA6 /* NoDataCollectionViewCell.xib */; };
+		189E57BC2664BDA9008AECA6 /* NoDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E57B82664BDA9008AECA6 /* NoDataTableViewCell.swift */; };
+		189E57BD2664BDA9008AECA6 /* NoDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189E57B92664BDA9008AECA6 /* NoDataTableViewCell.xib */; };
+		189E57BE2664BDA9008AECA6 /* NoDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E57BA2664BDA9008AECA6 /* NoDataCollectionViewCell.swift */; };
+		189E57C12664BEDC008AECA6 /* NoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E57C02664BEDC008AECA6 /* NoData.swift */; };
+		18E0B578265790F90016AFE9 /* PromocodeListReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0B577265790F90016AFE9 /* PromocodeListReqModel.swift */; };
 		18F369532580AE0000992FCD /* BffComboVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369502580ADFE00992FCD /* BffComboVC.swift */; };
 		18F369542580AE0000992FCD /* commonPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369512580ADFE00992FCD /* commonPopup.swift */; };
 		18F369552580AE0000992FCD /* sortPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369522580ADFF00992FCD /* sortPopupVC.swift */; };
@@ -231,6 +243,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		180A9E7D265CDB3700AC7A22 /* PromocodeApplyReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeApplyReqModel.swift; sourceTree = "<group>"; };
+		180A9F05265D0A4500AC7A22 /* PromocodeAppliedResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromocodeAppliedResModel.swift; sourceTree = "<group>"; };
+		180F19DD265B81EB00150966 /* Promocode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promocode.swift; sourceTree = "<group>"; };
+		180F19DE265B81EB00150966 /* PromoCodeResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCodeResModel.swift; sourceTree = "<group>"; };
+		18550402265F66F800D73B2B /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		1855042A265F955400D73B2B /* OrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReqModel.swift; sourceTree = "<group>"; };
+		189E57B72664BDA9008AECA6 /* NoDataCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataCollectionViewCell.xib; sourceTree = "<group>"; };
+		189E57B82664BDA9008AECA6 /* NoDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataTableViewCell.swift; sourceTree = "<group>"; };
+		189E57B92664BDA9008AECA6 /* NoDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataTableViewCell.xib; sourceTree = "<group>"; };
+		189E57BA2664BDA9008AECA6 /* NoDataCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataCollectionViewCell.swift; sourceTree = "<group>"; };
+		189E57C02664BEDC008AECA6 /* NoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoData.swift; sourceTree = "<group>"; };
+		18E0B577265790F90016AFE9 /* PromocodeListReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeListReqModel.swift; sourceTree = "<group>"; };
 		18F369502580ADFE00992FCD /* BffComboVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BffComboVC.swift; sourceTree = "<group>"; };
 		18F369512580ADFE00992FCD /* commonPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonPopup.swift; sourceTree = "<group>"; };
 		18F369522580ADFF00992FCD /* sortPopupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sortPopupVC.swift; sourceTree = "<group>"; };
@@ -477,6 +501,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		180F19DC265B81EB00150966 /* PromoCodeResModel */ = {
+			isa = PBXGroup;
+			children = (
+				180F19DD265B81EB00150966 /* Promocode.swift */,
+				180A9F05265D0A4500AC7A22 /* PromocodeAppliedResModel.swift */,
+				180F19DE265B81EB00150966 /* PromoCodeResModel.swift */,
+			);
+			path = PromoCodeResModel;
+			sourceTree = "<group>";
+		};
+		189E57B62664BDA9008AECA6 /* NodataCell */ = {
+			isa = PBXGroup;
+			children = (
+				189E57B72664BDA9008AECA6 /* NoDataCollectionViewCell.xib */,
+				189E57B82664BDA9008AECA6 /* NoDataTableViewCell.swift */,
+				189E57B92664BDA9008AECA6 /* NoDataTableViewCell.xib */,
+				189E57BA2664BDA9008AECA6 /* NoDataCollectionViewCell.swift */,
+			);
+			path = NodataCell;
+			sourceTree = "<group>";
+		};
 		3400017A25C7CBB400C584DE /* RestaurantVariant */ = {
 			isa = PBXGroup;
 			children = (
@@ -877,6 +922,7 @@
 		81CFFD332574C60D005AA86A /* Adelante */ = {
 			isa = PBXGroup;
 			children = (
+				189E57B62664BDA9008AECA6 /* NodataCell */,
 				342ADF3A25B70A170097B5AD /* Adelante.entitlements */,
 				81CFFD682574C60D005AA86A /* AppDelegate.swift */,
 				342ADF3C25B717820097B5AD /* GoogleService-Info.plist */,
@@ -920,6 +966,7 @@
 		81CFFD392574C60D005AA86A /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				180F19DC265B81EB00150966 /* PromoCodeResModel */,
 				84C5F6A82643C00A000B2DDE /* Notification */,
 				34A260DB25D3B1D900E24D73 /* RateReviewList */,
 				340D4B0025D2738E007CC54B /* RestaurantOutlets */,
@@ -984,6 +1031,9 @@
 				340D4AFD25D26DFA007CC54B /* RestaurantOutletReqModel.swift */,
 				34A260E425D3B43800E24D73 /* ReviewListReqModel.swift */,
 				84C5F68D2643BCAF000B2DDE /* NotificationReqModel.swift */,
+				18E0B577265790F90016AFE9 /* PromocodeListReqModel.swift */,
+				180A9E7D265CDB3700AC7A22 /* PromocodeApplyReqModel.swift */,
+				1855042A265F955400D73B2B /* OrderReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1027,6 +1077,8 @@
 				81CFFD4D2574C60D005AA86A /* Fonts.swift */,
 				81CFFD4E2574C60D005AA86A /* AuthenticationToken.swift */,
 				81CFFD4F2574C60D005AA86A /* Colors.swift */,
+				18550402265F66F800D73B2B /* NotificationType.swift */,
+				189E57C02664BEDC008AECA6 /* NoData.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1140,6 +1192,7 @@
 				64C68ADC241BBB2900B97B25 /* Resources */,
 				2713D82D0D50CBD99ED9E9B7 /* [CP] Embed Pods Frameworks */,
 				B55405A1C6E32AF3332F7F3A /* [CP] Copy Pods Resources */,
+				18F7CC722664D05F00A4335C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1228,11 +1281,13 @@
 				817A16FC25839D7100C11BB2 /* Nunito-BlackItalic.ttf in Resources */,
 				81CFFD892574C60D005AA86A /* Assets.xcassets in Resources */,
 				34A9004625947AB800EAD2FF /* Main.storyboard in Resources */,
+				189E57BB2664BDA9008AECA6 /* NoDataCollectionViewCell.xib in Resources */,
 				817A16F425839D7100C11BB2 /* Nunito-ExtraBold.ttf in Resources */,
 				8105FE0625751644008D36D6 /* NexaBlack.otf in Resources */,
 				8105FE0F25751644008D36D6 /* NexaBook.otf in Resources */,
 				8105FDFD25751644008D36D6 /* Aileron-SemiBoldItalic.otf in Resources */,
 				8105FDFF25751644008D36D6 /* Aileron-Bold.otf in Resources */,
+				189E57BD2664BDA9008AECA6 /* NoDataTableViewCell.xib in Resources */,
 				8105FE0325751644008D36D6 /* Aileron-Regular.otf in Resources */,
 				8105FE0B25751644008D36D6 /* NexaThin.otf in Resources */,
 				8105FE0425751644008D36D6 /* NexaBlackItalic.otf in Resources */,
@@ -1244,6 +1299,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		18F7CC722664D05F00A4335C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		2713D82D0D50CBD99ED9E9B7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1307,6 +1381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189E57BE2664BDA9008AECA6 /* NoDataCollectionViewCell.swift in Sources */,
 				81CFFD792574C60D005AA86A /* Fonts.swift in Sources */,
 				3431E05425931D1F002F1435 /* MyOrderDetailsCell.swift in Sources */,
 				3431E05A25931DFF002F1435 /* RestaurantItemCell.swift in Sources */,
@@ -1327,6 +1402,7 @@
 				34EE68E925CC15E300056D62 /* AddPaymentDeleteReqModel.swift in Sources */,
 				3443D62225C11E62001CFAFE /* MenuItem.swift in Sources */,
 				340A4C7225A3291F00FB6061 /* Profile.swift in Sources */,
+				180A9E7E265CDB3700AC7A22 /* PromocodeApplyReqModel.swift in Sources */,
 				81CFFD7E2574C60D005AA86A /* String+Extensions.swift in Sources */,
 				8105FDD325751289008D36D6 /* customButton.swift in Sources */,
 				34C3756425CD41970049289A /* MyorderDetailsResModel.swift in Sources */,
@@ -1343,11 +1419,13 @@
 				34525DFD25AED8A900406EB6 /* Sorting.swift in Sources */,
 				3431E04825931AAE002F1435 /* YourFavouriteCell.swift in Sources */,
 				347D955D25A71637000C64B5 /* Banner.swift in Sources */,
+				189E57C12664BEDC008AECA6 /* NoData.swift in Sources */,
 				81CFFD882574C60D005AA86A /* GradientButton.swift in Sources */,
 				34D603A125A8630300C82D63 /* RestaurantListResModel.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,
 				81CFFD7B2574C60D005AA86A /* Colors.swift in Sources */,
 				34D3755925CD005800B48A80 /* MyOrderDetailsReqModel.swift in Sources */,
+				18550403265F66F800D73B2B /* NotificationType.swift in Sources */,
 				345FC23C25BE81EB00795BE7 /* UITableview+Extension.swift in Sources */,
 				34A260DF25D3B26000E24D73 /* ReviewListResModel.swift in Sources */,
 				8170CAFF257A771000B24B7A /* MyFoodlistVC.swift in Sources */,
@@ -1366,18 +1444,21 @@
 				3431E05825931DC8002F1435 /* RestaurantDetailsCell.swift in Sources */,
 				8170CAEE257A10B500B24B7A /* ForgotPasswordVC.swift in Sources */,
 				34CF866625A81BC90040C188 /* SearchCell.swift in Sources */,
+				180A9F06265D0A4500AC7A22 /* PromocodeAppliedResModel.swift in Sources */,
 				3443D61E25C11E62001CFAFE /* RestaurantDetailsResModel.swift in Sources */,
 				342C579F25CBC94D0098F573 /* CardList.swift in Sources */,
 				81E67216257E68BC00DCE9DA /* AddCardVC.swift in Sources */,
 				34A260E125D3B26000E24D73 /* Detail.swift in Sources */,
 				34CD681525B7DCAB0052F485 /* FavoriteReqModel.swift in Sources */,
 				8105FDC92574F101008D36D6 /* AppStoryboards.swift in Sources */,
+				189E57BC2664BDA9008AECA6 /* NoDataTableViewCell.swift in Sources */,
 				345EA97E25B5861400A4E56D /* SettingsResModel.swift in Sources */,
 				84C5F68B2643A91C000B2DDE /* PromocodeCell.swift in Sources */,
 				81CFFD772574C60D005AA86A /* WebServices.swift in Sources */,
 				8105FDBD2574D0B7008D36D6 /* MyOrdersVC.swift in Sources */,
 				81CFFD812574C60D005AA86A /* extension+String.swift in Sources */,
 				81CFFD8E2574C60D005AA86A /* RegisterViewController.swift in Sources */,
+				1855042B265F955400D73B2B /* OrderReqModel.swift in Sources */,
 				81E67211257E62DC00DCE9DA /* RestaurantDetailsVC.swift in Sources */,
 				345EA8F125B5477100A4E56D /* RestaurantFavorite.swift in Sources */,
 				18F369532580AE0000992FCD /* BffComboVC.swift in Sources */,
@@ -1416,6 +1497,7 @@
 				8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */,
 				349347BD25D13FBF006366B4 /* RateOrderReqModel.swift in Sources */,
 				81CFFD7D2574C60D005AA86A /* UILabel+Extension.swift in Sources */,
+				18E0B578265790F90016AFE9 /* PromocodeListReqModel.swift in Sources */,
 				3443D61F25C11E62001CFAFE /* SubMenu.swift in Sources */,
 				34CF870F25A82A550040C188 /* SearchResModel.swift in Sources */,
 				18F369542580AE0000992FCD /* commonPopup.swift in Sources */,
@@ -1448,6 +1530,7 @@
 				81CFFD822574C60D005AA86A /* UIStoryboard+Extension.swift in Sources */,
 				84C5F6AC2643C05A000B2DDE /* NotificationDatum.swift in Sources */,
 				81B447F725763C3700A0724E /* UICollectionViewCell+Extension.swift in Sources */,
+				180F19DF265B81EC00150966 /* Promocode.swift in Sources */,
 				8170CAF3257A10B500B24B7A /* FeedbackVC.swift in Sources */,
 				8105FDB82574D08E008D36D6 /* HomeVC.swift in Sources */,
 				81CFFD6D2574C60D005AA86A /* ResposneInitClass.swift in Sources */,
@@ -1465,6 +1548,7 @@
 				8105FDD1257501C4008D36D6 /* customView.swift in Sources */,
 				345E7DFE260238150047DC94 /* CustomSearchBar.swift in Sources */,
 				3431E06E25932409002F1435 /* FilterOptionsCell.swift in Sources */,
+				180F19E0265B81EC00150966 /* PromoCodeResModel.swift in Sources */,
 				81E6720F257E506100DCE9DA /* RestaurantListVC.swift in Sources */,
 				81CFFD762574C60D005AA86A /* WebServicesSubClass.swift in Sources */,
 				81CFFD832574C60D005AA86A /* UITextField+Extension.swift in Sources */,
@@ -1652,7 +1736,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
@@ -1678,7 +1762,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";

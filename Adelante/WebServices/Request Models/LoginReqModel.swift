@@ -12,7 +12,7 @@ class LoginReqModel : RequestModel {
     var user_name : String = ""
     var password : String = ""
     var phone : String = ""
-    var device_token : String = "abc123"
+    var device_token : String = ""
     var device_type : String = ReqDeviceType
     var lat : String = ""
     var lng : String = ""

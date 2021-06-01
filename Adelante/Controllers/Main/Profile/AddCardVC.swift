@@ -219,10 +219,11 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         WebServiceSubClass.addCard(addcardsmodel: addcard, showHud: true, completion: { (json, status, response) in
             if(status)
             {
-                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
                 self.navigationController?.popViewController(animated: true)
+                
                 self.delegatePayment.refreshAddPaymentScreen()
                 self.clearAllTextFieldsAndSetDefaults()
+                
             }
             else
             {

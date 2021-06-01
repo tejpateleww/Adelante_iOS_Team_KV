@@ -59,7 +59,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         let cell:SearchCell = tblSearch.dequeueReusableCell(withIdentifier: SearchCell.reuseIdentifier, for: indexPath)as! SearchCell
         cell.lblItem.text = arrSearchResult[indexPath.row].name
         cell.lblItemType.text = arrSearchResult[indexPath.row].type
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrSearchResult[indexPath.row].image ?? "")"
+        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchResult[indexPath.row].image ?? "")"
         cell.imgFoodandres.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgFoodandres.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         cell.selectionStyle = .none

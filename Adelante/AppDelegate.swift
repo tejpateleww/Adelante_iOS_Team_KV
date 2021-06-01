@@ -28,12 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 //        FirebaseApp.configure()
-        registerForPushNotifications()
+       
         checkAndSetDefaultLanguage()
         navigateToSplash()
         
 //        printAppFonts()
         setUpLocationServices()
+        
+        FirebaseApp.configure()
+        
+        registerForPushNotifications()
         return true
     }
     func setUpLocationServices() {
@@ -184,8 +188,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         print(userInfo)
         print(appDel.window?.rootViewController?.navigationController?.children.first as Any)
         
-//        NotificationCenter.default.post(name: refreshfav, object: content)
+        NotificationCenter.default.post(name: NotificationBadges, object: content)
         completionHandler([.alert, .sound])
+        
+        let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type")
+
+        if key as? String ?? "" == PushNotifications.logout.Name {
+            self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
+        } else {
+         //   self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
+        }
         
     }
     
@@ -199,22 +211,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        
-        print("Firebase registration token: \(fcmToken)")
-        SingletonClass.sharedInstance.DeviceToken = fcmToken!
+        let token = fcmToken ?? "No Token found"
+        print("Firebase registration token: \(fcmToken ?? "No Token found")")
+        SingletonClass.sharedInstance.DeviceToken = token
         userDefault.set(fcmToken, forKey: UserDefaultsKey.DeviceToken.rawValue)
         
         
-        let dataDict:[String: String] = ["token": fcmToken!]
+        let dataDict:[String: String] = ["token": token]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
-        
-        InstanceID.instanceID().instanceID { (result, error) in
+        Messaging.messaging().token { token, error in
+            // Check for error. Otherwise do what you will with token here
             if let error = error {
                 print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
+            } else if let result = token {
+                print("Remote instance ID token: \(result)")
                 // self.instanceIDTokenMessage.text  = "Remote InstanceID token: \(result.token)"
                 UserDefaults.standard.set(SingletonClass.sharedInstance.DeviceToken, forKey: UserDefaultsKey.DeviceToken.rawValue)
             }
@@ -250,7 +262,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         SingletonClass.sharedInstance.userCurrentLocation = location
-        print(location.coordinate.latitude)
+        //print(location.coordinate.latitude)
     }
     
     // Handle authorization for the location manager.
@@ -260,13 +272,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             print("Location access was restricted.")
         case .denied:
             print("User denied access to location.")
-            // Display the map using the default location.
-           
+        // Display the map using the default location.
+        
         case .notDetermined:
             print("Location status not determined.")
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
             print("Location status is OK.")
+            
         }
     }
     
@@ -281,3 +294,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
 }
 
+extension AppDelegate {
+    func handlePushnotifications(NotificationType:String , userData : [AnyHashable : Any]) {
+        print(userData)
+        
+        switch NotificationType {
+        case PushNotifications.logout.Name:
+            Utilities.hideHud()
+            appDel.SetLogout()
+        default:
+            break
+        }
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register: \(error)")
+        
+        let currentDate = Date()
+        print("currentDate : \(currentDate)")
+        
+    }
+    
+  
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type")!
+        if(application.applicationState == .inactive)
+        {
+            
+        }
+        else
+        if(application.applicationState == .active)
+        {
+            self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
+            /*
+             # App is currently active, can update badges count here
+             */
+        }
+        else if(application.applicationState == .background)
+        {
+            
+            //self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
+            /* # App is in background, if content-available key of your notification is set to 1, poll to your backend to retrieve data and update your interface here */
+        }
+        
+        print(userInfo)
+        
+        
+        
+        
+        
+        // Let FCM know about the message for analytics etc.
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        // handle your message
+        
+        // Print message ID.
+        //        if let messageID = userInfo[gcmMessageIDKey] {
+        //            print("Message ID: \(messageID)")
+        //        }
+        
+        // Print full message.
+        print(#function)
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+        
+    }
+    
+    
+    
+}

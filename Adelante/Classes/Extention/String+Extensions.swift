@@ -224,6 +224,16 @@ extension String{
         }
     }
     //MARK: - ================================
+    //MARK: Convert to Intger
+    //MARK: ==================================
+    func ToDouble() -> Double {
+        if let num = NumberFormatter().number(from: self) {
+            return num.doubleValue
+        } else {
+            return 0
+        }
+    }
+    //MARK: - ================================
     //MARK: Localization
     //MARK: ==================================
     func Localized() -> String {
@@ -239,4 +249,19 @@ extension String{
     mutating func capitalizeFirstLetter() {
     self = self.capitalizingFirstLetter()
     }
+    
+    //MARK: - ================================
+    //MARK: RemoveCurrencySymbol
+    //MARK: ==================================
+    func RemoveCurrencySymbol() -> String {
+    return self.replacingOccurrences(of: "\(CurrencySymbol)", with: "")
+    }
+    
+    //MARK: - ================================
+    //MARK: ConvertToTwoDecimal
+    //MARK: ==================================
+    func ConvertToTwoDecimal() -> String {
+        return String(format: "%.2f", ((self.replacingOccurrences(of: "\(CurrencySymbol)", with: "") as NSString?)?.floatValue) ?? 0.00)
+    }
 }
+

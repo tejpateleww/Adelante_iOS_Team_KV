@@ -25,7 +25,11 @@ let notifRefreshDashboardList = NSNotification.Name("refreshDashboard")
 let notifRefreshRestaurantList = NSNotification.Name("refreshRestaurantList")
 let notifRefreshFavouriteList = NSNotification.Name("refreshFavouriteList")
 let notifRefreshRestaurantDetails = NSNotification.Name("refreshRestaurantDetails")
+
+let NotificationBadges = NSNotification.Name(rawValue:"NotificationBadges")
  
+let CurrencySymbol = "$"
+
 enum DateFormatterString : String{
     case timeWithDate = "yyyy-MM-dd HH:mm:ss"
     case onlyDate = "yyyy-MM-dd"

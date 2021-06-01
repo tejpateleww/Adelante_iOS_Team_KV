@@ -13,7 +13,7 @@ class Variant : NSObject, NSCoding{
     var groupName : String!
     var menuChoice : String!
     var option : [Option]!
-    var isExpanded : Bool = false
+    var isExpanded : Bool = true
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */

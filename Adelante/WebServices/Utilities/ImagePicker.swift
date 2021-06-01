@@ -69,7 +69,7 @@ open class ImagePicker: NSObject {
             alertController.addAction(action)
         }
         let api_vector = UIImageView()
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)assets/images/user.png"
+        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)assets/images/user.png"
         api_vector.sd_setImage(with: URL(string: strUrl))
         if let sourceImage = (sourceView as! UIImageView).image {
             if let defaultImage = UIImage(named: "Default_user") {

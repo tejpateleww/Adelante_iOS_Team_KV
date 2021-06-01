@@ -74,8 +74,14 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+        print("homeVc \(#function)")
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+        print("homeVc \(#function)")
     }
     
     // MARK: - Other Methods
@@ -214,7 +220,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             return cell
         }else {
             let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: RestWithPageCell.reuseIdentifier, for: indexPath) as! RestWithPageCell
-            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrBanner[indexPath.row].image ?? "")"
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrBanner[indexPath.row].image ?? "")"
             cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             if cell.lblRestName.text == ""{
@@ -253,8 +259,9 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView != self.colVwFilterOptions{
-            let restListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID)
-            self.navigationController?.pushViewController(restListVc, animated: true)
+            let restaurantListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID) as! RestaurantListVC
+            //restaurantListVc.strItemId = arrBanner[indexPath.row].id
+            self.navigationController?.pushViewController(restaurantListVc, animated: true)
         }
     }
     // MARK: - UITableViewDelegates And Datasource
@@ -274,7 +281,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             cell.lblItemName.text = arrRestaurant[indexPath.row - 1].name
             cell.lblMiles.text = arrRestaurant[indexPath.row - 1].distance//arrRestaurant[indexPath.row - 1].distance
             cell.lblRating.text = arrRestaurant[indexPath.row - 1].review
-            let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
             cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             cell.btnFavorite.tag = indexPath.row - 1
@@ -292,6 +299,7 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row != 0
         {
+          
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
             controller.selectedRestaurantId = arrRestaurant[indexPath.row - 1].id
             controller.strRestaurantName = arrRestaurant[indexPath.row - 1].name
@@ -309,10 +317,12 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
+        
         DispatchQueue.main.async {
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.colVwFilterOptions.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
+        
         if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
             let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
             self.navigationController?.pushViewController(vc, animated: true)

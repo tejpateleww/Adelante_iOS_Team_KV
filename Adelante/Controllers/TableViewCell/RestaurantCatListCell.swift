@@ -57,7 +57,7 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
            let cell = colRestaurantCatList.dequeueReusableCell(withReuseIdentifier: RestaurantCategoryCell.reuseIdentifier, for: indexPath) as! RestaurantCategoryCell
        // cell.btnCategory.setTitle(arrCategories[indexPath.row].name, for: .normal)
         cell.lblCategory.text = arrCategories[indexPath.row].name
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrCategories[indexPath.row].image ?? "")"
+        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrCategories[indexPath.row].image ?? "")"
         cell.imgCategory.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgCategory.sd_setImage(with: URL(string: strUrl), placeholderImage: UIImage())
 //           cell.btnCategory.setImage(image, for: .normal)

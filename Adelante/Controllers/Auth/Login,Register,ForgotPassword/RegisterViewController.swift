@@ -174,7 +174,7 @@ class RegisterViewController: UIViewController {
         register.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         register.phone = txtPhoneNumber.text ?? ""
         register.password = txtPassword.text ?? ""
-        register.device_token = "123456"
+        register.device_token = SingletonClass.sharedInstance.DeviceToken
         register.device_type = ReqDeviceType
         register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"

@@ -15,7 +15,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var refreshList = UIRefreshControl()
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
-    @IBOutlet weak var imgMyFoodlistEmpty: UIImageView!
+
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {

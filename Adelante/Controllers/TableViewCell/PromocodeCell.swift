@@ -9,7 +9,16 @@
 import UIKit
 
 class PromocodeCell: UITableViewCell {
-
+    var ApplyClickClosour : (() -> ())?
+    @IBOutlet weak var lblOfferDescription: promocodeLabel!
+    @IBOutlet weak var lblValidOn: promocodeLabel!
+    @IBAction func btnApplyClick(_ sender: UIButton) {
+        if let click = self.ApplyClickClosour {
+            click()
+        }
+    }
+    @IBOutlet weak var lblPromoCode: promocodeLabel!
+    @IBOutlet weak var lblAdelante: promocodeLabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

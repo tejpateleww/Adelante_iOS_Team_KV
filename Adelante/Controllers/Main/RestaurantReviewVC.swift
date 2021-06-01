@@ -18,7 +18,7 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     var isNeedToReload = true
     var pageLimit = 5
     var objReviewData : ReviewData!
-    var arrDetails = [Detail]()
+    var arrDetails : [Detail]?
     
     // MARK: - IBOutlets
     
@@ -27,12 +27,13 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     @IBOutlet weak var lblAddress: themeLabel!
     @IBOutlet weak var lblRating: themeLabel!
     @IBOutlet weak var lblReviews: themeLabel!
-    @IBOutlet weak var imgRatingEmpty: UIImageView!
+  
     
     // MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tbvReview.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
         webservicePostReview()
         tbvReview.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
@@ -81,16 +82,42 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrDetails.count
+        print("ATDebug :: \(#function)")
+        if arrDetails?.count == 0 {
+            return 1
+           
+        } else {
+            return arrDetails?.count ?? 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:ReViewDiscCell = tbvReview.dequeueReusableCell(withIdentifier: "ReViewDiscCell", for: indexPath)as! ReViewDiscCell
-        cell.lblName.text = arrDetails[indexPath.row].fullName
-        cell.lblDescription.text = arrDetails[indexPath.row].feedback
-        cell.vwRating.rating = Double(arrDetails[indexPath.row].rating) ?? 0
-        cell.selectionStyle = .none
-        return cell
+        print("ATDebug :: \(#function)")
+        if arrDetails?.count == 0 {
+            let NoDatacell = tbvReview.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+            
+            NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
+            NoDatacell.lblNoDataTitle.text = "Be The First to Rate This Store".Localized()
+            
+            return NoDatacell
+        } else {
+            let cell:ReViewDiscCell = tbvReview.dequeueReusableCell(withIdentifier: "ReViewDiscCell", for: indexPath)as! ReViewDiscCell
+            cell.lblName.text = arrDetails?[indexPath.row].fullName
+            cell.lblDescription.text = arrDetails?[indexPath.row].feedback
+            cell.vwRating.rating = Double(arrDetails?[indexPath.row].rating ?? "0.0") ?? 0.0
+            cell.selectionStyle = .none
+            return cell
+        }
+       
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        print("ATDebug :: \(#function)")
+        if arrDetails?.count == 0 {
+            return tableView.frame.size.height
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     // MARK: - Api Calls
@@ -101,39 +128,37 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         reviewList.page = "\(pageNumber)"
         WebServiceSubClass.ReviewList(reviewListModel: reviewList, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
+            self.refreshList.endRefreshing()
             if status{
                 let reviewData = ReviewListResModel.init(fromJson: response)
                 if self.pageNumber == 1 {
                     self.objReviewData = reviewData.data
-                    self.arrDetails = reviewData.data.details
+                    if reviewData.data.details.count == 0 {
+                        self.arrDetails = []
+                    } else {
+                        self.arrDetails = reviewData.data.details
+                    }
+                    print("ATDebug :: \(self.arrDetails?.count)")
                 } else {
                     let arrTemp = reviewData.data.details
-                    if arrTemp!.count > 0 {
-                        for i in 0..<arrTemp!.count {
-                            self.arrDetails.append(arrTemp![i])
-                        }
-                    }
-                    if arrTemp!.count < self.pageLimit {
+                    arrTemp?.forEach({ (element) in
+                        self.arrDetails?.append(element)
+                    })
+                    
+                    
+                    if (arrTemp?.count ?? 0) < self.pageLimit {
                         self.isNeedToReload = false
                     }
                 }
                 self.setData()
-                self.tbvReview.reloadData()
+                DispatchQueue.main.async {
+                    self.tbvReview.reloadData()
+                }
+                
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-            if self.arrDetails.count > 0{
-                self.tbvReview.restore()
-                self.imgRatingEmpty.isHidden = true
-                self.tbvReview.isHidden = false
-               
-            }else {
-                self.tbvReview.isHidden = true
-                self.imgRatingEmpty.isHidden = false
-            }
-            DispatchQueue.main.async {
-                self.refreshList.endRefreshing()
-            }
+           
         })
     }
 }

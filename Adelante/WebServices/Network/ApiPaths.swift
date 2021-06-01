@@ -23,14 +23,14 @@ enum APIEnvironment : String{
     
 //    case bu = "http://adelante.excellentwebworld.in/api/User/"
 //    case profileBu = "http://adelante.excellentwebworld.in/"
-    case bu = "http://18.208.18.170/api/User/"
-    case profileBu = "http://18.208.18.170/"
+    case BaseURL = "http://18.208.18.170/api/User/"
+    case profileBaseURL = "http://18.208.18.170/"
     static var baseURL: String{
         return APIEnvironment.environment.rawValue
     }
     
     static var environment: APIEnvironment{
-        return .bu
+        return .BaseURL
         
     }
     
@@ -64,6 +64,7 @@ enum APIEnvironment : String{
 
 }
 enum ApiKey: String {
+  
     case Init = "init"
     case Register = "register"
     case login = "login"
@@ -94,5 +95,8 @@ enum ApiKey: String {
     case Outlets = "outlet"
     case ReviewList = "review_list"
     case Notification = "notification"
+    case fetch_promocode = "fetch_promocode"
+    case apply_promocode = "apply_promocode"
+    case order = "order"
 }
 

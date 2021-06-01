@@ -7,21 +7,43 @@
 //
 
 import UIKit
+import FormTextField
 
 class paymentMethodCell2: UITableViewCell {
     var filterSelect = [0]
-
+    var validation = Validation()
+    var inputValidator = InputValidator()
+    @IBOutlet weak var vwCvv: UIView!
     @IBOutlet weak var vWMain: PaymentView!
     @IBOutlet weak var selectPaymentMethodButton: UIButton!
     @IBOutlet weak var paymentMethodImageView: UIImageView!
     @IBOutlet weak var lblExpiresDate: addPaymentlable!
     @IBOutlet weak var lblcardDetails: addPaymentlable!
     @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var textFieldEnterCVV: EnterCVVTextField!
+    
+    var PayButton : (() -> ())?
+    var selectedBtn : (() -> ())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        textFieldEnterCVV.placeholder = "Enter CVV"
+        textFieldEnterCVV.text = ""
+        CvvValidation()
         // Initialization code
     }
-    var selectedBtn : (() -> ())?
+    func CvvValidation() {
+        textFieldEnterCVV.isSecureTextEntry = true
+        textFieldEnterCVV.inputType = .integer
+        
+        self.validation.maximumLength = 4
+        self.validation.minimumLength = 3
+        
+        validation.characterSet = NSCharacterSet.decimalDigits
+        let inputValidator = InputValidator(validation: validation)
+        textFieldEnterCVV.inputValidator = inputValidator
+    }
+    
     @IBAction func btnSelectCheckClick(_ sender: Any) {
         if let click = self.selectedBtn
         {
@@ -34,4 +56,10 @@ class paymentMethodCell2: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func btnPayClick(_ sender: UIButton) {
+        if let click = self.PayButton
+        {
+            click()
+        }
+    }
 }

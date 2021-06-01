@@ -28,6 +28,13 @@ class LoginViewController: BaseViewController {
     func setup(){
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        
+        
+        if UIDevice.current.name == "iPhone 016" || UIDevice.current.name == "iPhone 013" {
+            txtEmail.text = "harsh.dave@excellentwebworld.in"
+            txtPassword.text = "11111111"
+            
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -77,7 +84,7 @@ class LoginViewController: BaseViewController {
         login.user_name = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         login.password = txtPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         login.phone = ""
-        login.device_token = "123456"
+        login.device_token = SingletonClass.sharedInstance.DeviceToken
         login.device_type = ReqDeviceType
         login.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         login.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"

@@ -174,7 +174,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         cell.lblAddress.text = arrOutletList[indexPath.row].address
         cell.lblMiles.text = arrOutletList[indexPath.row].distance
         cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
-        let strUrl = "\(APIEnvironment.profileBu.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
+        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
         cell.btnFavorite.tag = indexPath.row

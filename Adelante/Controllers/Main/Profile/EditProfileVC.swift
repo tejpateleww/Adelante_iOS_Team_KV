@@ -61,7 +61,7 @@ class EditProfileVC: BaseViewController{
             txtEmail.text = userdata.email ?? ""
             txtPhoneNumber.text = userdata.phone
             if SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture != ""{
-                let strUrl = "\(APIEnvironment.profileBu.rawValue)\(userdata.profilePicture ?? "")"
+                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(userdata.profilePicture ?? "")"
                 imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 selectedImage = imgProfile.image

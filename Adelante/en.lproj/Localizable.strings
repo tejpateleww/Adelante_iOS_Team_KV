@@ -215,6 +215,7 @@
 "checkOutVC_arrayForTitle_title" = "Subtotal";
 "checkOutVC_arrayForTitle_title1" = "Service Fee";
 "checkOutVC_arrayForTitle_title2" = "Taxes";
+"checkOutVC_arrayForTitle_title3" = "Discount";
 "checkOutVC_strCancel_title" = "No";
 "checkOutVC_strSubmit_title" = "Yes";
 "checkOutVC_strDescription_title1" = "Are you sure you want to choose another location for this restaurant chain or franchise?";
@@ -282,3 +283,19 @@
 
 //Alert Message
 "alertMsg_DeletePaymentCard" = "Are you sure want to delete this card?";
+
+
+//No data found
+
+"No_data_favorite" = "No Favorites Listed";
+"No past order found" = "No past order found";
+"No in-progress order found" = "No in-progress order found";
+"No varient available" = "No varient available";
+"No promocode found" = "No promocode found";
+"Be The First to Rate This Store" = "Be The First to Rate This Store";
+"No notification found" = "No notification found";
+
+
+//Cancel order
+"Are you sure you want to cancel order" = "Are you sure you want to cancel order";
+

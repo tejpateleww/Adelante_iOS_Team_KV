@@ -23,15 +23,16 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
-    var arrNotification = [NotificationDatum]()
-//        [notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully Completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3"),notificationDetail(strTitle: "System", strDetail: "Your Order #1234 has been successfully completed", imgNotif: "Dummy_notif1"),notificationDetail(strTitle: "System", strDetail: "Your Order #1205 has been cancelled successfully", imgNotif: "Dummy_notif2"),notificationDetail(strTitle: "System", strDetail: "Thank you! Your transaction is successfully completed", imgNotif: "Dummy_notif3")]
+    var arrNotification : [NotificationDatum]?
+
     // MARK: - IBOutlets
-    @IBOutlet weak var imgNotification: UIImageView!
+   
     @IBOutlet weak var tbvNotification: UITableView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tbvNotification.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
         webservicePostNotification()
         setUp()
     }
@@ -50,16 +51,37 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrNotification.count
+        if arrNotification?.count == 0 {
+            return 1
+        } else {
+            return arrNotification?.count ?? 0
+        }
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if arrNotification?.count == 0 {
+            return tableView.frame.size.height
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+  
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:NotificationCell = tbvNotification.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath)as! NotificationCell
-        cell.lblNotificationName.text = arrNotification[indexPath.row].notificationTitle
-        cell.lblNotificationDetail.text = arrNotification[indexPath.row].descriptionField
-//        cell.imgNotificationIcon.image = UIImage(named: arrNotification[indexPath.row].imgNotif)
-        cell.selectionStyle = .none
-        return cell
+        if arrNotification?.count != 0 {
+            let cell:NotificationCell = tbvNotification.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath)as! NotificationCell
+            cell.lblNotificationName.text = arrNotification?[indexPath.row].notificationTitle
+            cell.lblNotificationDetail.text = arrNotification?[indexPath.row].descriptionField
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let NoDatacell = tbvNotification.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+            
+            NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
+            NoDatacell.lblNoDataTitle.text = "No notification found".Localized()
+        
+            return NoDatacell
+        }
+       
     }
     
     // MARK: - Api Calls

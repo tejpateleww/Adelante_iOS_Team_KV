@@ -198,6 +198,7 @@ class Utilities:NSObject{
         Utilities.displayAlert("Error", message: message, completion: nil)
     }
     
+    
     //MARK: - ================================
     //MARK: randomString
     //MARK: ==================================
