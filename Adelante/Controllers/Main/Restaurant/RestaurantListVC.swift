@@ -44,12 +44,15 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         registerNIB()
         txtSearch.delegate = self
         tblMainList.stopSkeletonAnimation()
+        webserviceGetRestaurantList(strSearch: "", strFilter: "")
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         setUpLocalizedStrings()
+        setup()
         txtSearch.backgroundImage = UIImage()
         let button = UIButton()
         //        button.backgroundColor = .green
@@ -57,7 +60,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantList, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshRestaurantList, object: nil)
-        setup()
     }
     func registerNIB(){
         tblMainList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
@@ -188,7 +190,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.responseStatus == .gotData{
-            return 5
+            return 0
         }
         return 3
     }
@@ -228,8 +230,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             {
                 let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
                 
-                NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
-                NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+                NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
+                NoDatacell.lblNoDataTitle.isHidden = true
                 
                 return NoDatacell
             }
@@ -253,7 +255,15 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.responseStatus == .gotData ?  230 : 131
+        if responseStatus == .gotData{
+            if arrRestaurantList.count != 0 {
+                return 230
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return self.responseStatus == .gotData ?  230 : 131
+        }
     }
     
     // MARK: - Api Calls
@@ -305,18 +315,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-//            if self.arrRestaurantList.count > 0{
-//                self.tblMainList.restore()
-//                self.imgEmptyRestaurant.isHidden = true
-//                self.tblMainList.isHidden = false
-//                self.vwFilter.isHidden = false
-//            }else {
-//                self.imgEmptyRestaurant.isHidden = false
-//                self.tblMainList.isHidden = true
-//                self.vwFilter.isHidden = true
-//            }
-
-
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }

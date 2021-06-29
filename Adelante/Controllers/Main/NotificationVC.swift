@@ -78,21 +78,17 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if arrNotification.count == 0{
-            return 1
+        if responseStatus == .gotData{
+            if arrNotification.count != 0 {
+                return self.arrNotification.count
+            }else{
+                return 1
+            }
         }else{
-            return arrNotification.count
+            return 5
         }
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if arrNotification.count == 0 {
-//            return tableView.frame.size.height
-//        } else {
-//            return UITableView.automaticDimension
-//        }
-//    }
   
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.responseStatus == .gotData{
             if arrNotification.count != 0 {
@@ -104,8 +100,8 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             } else {
                 let NoDatacell = tbvNotification.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
                 
-                NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
-                NoDatacell.lblNoDataTitle.text = "No notification found".Localized()
+                NoDatacell.imgNoData.image = UIImage(named: "Notification List")
+                NoDatacell.lblNoDataTitle.isHidden = true
                 
                 return NoDatacell
             }
@@ -115,7 +111,15 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return responseStatus == .gotData ?  116 : 131
+        if responseStatus == .gotData{
+            if arrNotification.count != 0 {
+                return 100
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return self.responseStatus == .gotData ?  230 : 131
+        }
     }
     // MARK: - Api Calls
     func webservicePostNotification(){

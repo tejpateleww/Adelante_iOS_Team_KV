@@ -120,10 +120,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-        
-        //        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appRedColor, cancelBtnColor: colors.appRedColor, viewController: self)
         webserviceCancelOrder()
-        //        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "Cancel Order", strCancelButtonTitle: "", strDescription: "Do you really want to cancel the order?", strTitle: "Are you Sure?", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor.value, cancelBtnColor: colors.appOrangeColor.value ,viewController: self)
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {
@@ -139,23 +136,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         let textToShare = [ "Order share successfully." ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            
-//            switch activityType {
-//            case .message:
-//                self.webserviceShareOrder(strUsertype: SingletonClass.sharedInstance.LoginRegisterUpdateData?.phone)
-//            case .mail :
-//
-//            case .
-//            default:
-//                break
-//            }
-//
-//
-//            if !completed {
-//                // User canceled
-//                return
-//            }
-            // User completed activity
         }
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
@@ -174,17 +154,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
         cell.lblDateTime.text = arrItem[indexPath.row].date
         cell.lblSharedFrom.isHidden = true
-        //        if selectedSegmentTag == 1 && isSharedOrder{
-        //            cell.lblSharedFrom.isHidden = false
-        //            cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
-        //            cell.lblDateTime.text = arrItem[indexPath.row].date
-        //        } else {
-        //            if indexPath.row == 1{
-        //
-        //                cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
-        //                cell.lblDateTime.text = arrItem[indexPath.row].date
-        //            }
-        //        }
         cell.selectionStyle = .none
         return cell
     }
@@ -219,7 +188,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         orderDetails.user_id = SingletonClass.sharedInstance.UserId
         orderDetails.type = orderType
         orderDetails.restaurant_id = strRestaurantId
-        WebServiceSubClass.orderDetailList(orderDetails: orderDetails, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.orderDetailList(orderDetails: orderDetails, showHud: false, completion: { (response, status, error) in
             if status{
                 let orderData = MyorderDetailsResModel.init(fromJson: response)
                 self.objOrderDetailsData = orderData.data.mainOrder

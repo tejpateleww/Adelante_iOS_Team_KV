@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import SkeletonView
 
 class RateReviewVC: BaseViewController {
 
