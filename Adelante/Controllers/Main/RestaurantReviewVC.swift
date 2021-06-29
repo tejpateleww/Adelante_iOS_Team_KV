@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SkeletonView
 
-class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,SkeletonTableViewDataSource {
     
     // MARK: - Properties
+    var responseStatus : webserviceResponse = .initial
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
     var strRestaurantId = ""
@@ -22,7 +24,11 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tbvReview: UITableView!
+    @IBOutlet weak var tbvReview: UITableView!{
+        didSet{
+            tbvReview.isSkeletonable = true
+        }
+    }
     @IBOutlet weak var lblRestaurantName: themeLabel!
     @IBOutlet weak var lblAddress: themeLabel!
     @IBOutlet weak var lblRating: themeLabel!
@@ -33,7 +39,8 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tbvReview.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        registerNIB()
+        tbvReview.showAnimatedSkeleton()
         webservicePostReview()
         tbvReview.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
@@ -42,8 +49,11 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         setUpLocalizedStrings()
         setUp()
     }
-    
     // MARK: - Other Methods
+    func registerNIB(){
+        tbvReview.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        tbvReview.register(UINib(nibName: "ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
+    }
     func setUp() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
@@ -80,6 +90,16 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     // MARK: - IBActions
     
+    //MARK: - skeletonTableview Datasource
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return self.responseStatus == .gotData ? (self.arrDetails?.count ?? 0 > 0 ? ReViewDiscCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+    }
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.responseStatus == .gotData{
+            return 0
+        }
+        return 5
+    }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("ATDebug :: \(#function)")
@@ -94,29 +114,38 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("ATDebug :: \(#function)")
-        if arrDetails?.count == 0 {
-            let NoDatacell = tbvReview.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-            
-            NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
-            NoDatacell.lblNoDataTitle.text = "Be The First to Rate This Store".Localized()
-            
-            return NoDatacell
-        } else {
-            let cell:ReViewDiscCell = tbvReview.dequeueReusableCell(withIdentifier: "ReViewDiscCell", for: indexPath)as! ReViewDiscCell
-            cell.lblName.text = arrDetails?[indexPath.row].fullName
-            cell.lblDescription.text = arrDetails?[indexPath.row].feedback
-            cell.vwRating.rating = Double(arrDetails?[indexPath.row].rating ?? "0.0") ?? 0.0
-            cell.selectionStyle = .none
+        if responseStatus == .gotData{
+            if arrDetails?.count != 0 {
+                let cell:ReViewDiscCell = tbvReview.dequeueReusableCell(withIdentifier: "ReViewDiscCell", for: indexPath)as! ReViewDiscCell
+                cell.lblName.text = arrDetails?[indexPath.row].fullName
+                cell.lblDescription.text = arrDetails?[indexPath.row].feedback
+                cell.vwRating.rating = Double(arrDetails?[indexPath.row].rating ?? "0.0") ?? 0.0
+                cell.selectionStyle = .none
+                return cell
+                
+            } else {
+                let NoDatacell = tbvReview.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+                
+                NoDatacell.imgNoData.image = UIImage(named: "Rating List")
+                NoDatacell.lblNoDataTitle.isHidden = true//text = "Be The First to Rate This Store".Localized()
+                
+                return NoDatacell
+            }
+        }else{
+            let cell = tbvReview.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
             return cell
         }
-       
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        print("ATDebug :: \(#function)")
-        if arrDetails?.count == 0 {
-            return tableView.frame.size.height
-        } else {
-            return UITableView.automaticDimension
+        if responseStatus == .gotData{
+            if arrDetails?.count != 0 {
+                return 230
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return self.responseStatus == .gotData ?  230 : 131
         }
     }
     
@@ -126,11 +155,15 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         reviewList.restaurant_id = strRestaurantId
         reviewList.user_id = SingletonClass.sharedInstance.UserId
         reviewList.page = "\(pageNumber)"
-        WebServiceSubClass.ReviewList(reviewListModel: reviewList, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.ReviewList(reviewListModel: reviewList, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             self.refreshList.endRefreshing()
+            self.responseStatus = .gotData
             if status{
                 let reviewData = ReviewListResModel.init(fromJson: response)
+                let cell = self.tbvReview.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
+                cell.stopShimmering()
+                self.tbvReview.stopSkeletonAnimation()
                 if self.pageNumber == 1 {
                     self.objReviewData = reviewData.data
                     if reviewData.data.details.count == 0 {
@@ -151,9 +184,12 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
                     }
                 }
                 self.setData()
-                DispatchQueue.main.async {
-                    self.tbvReview.reloadData()
-                }
+//                DispatchQueue.main.async {
+                self.tbvReview.dataSource = self
+                self.tbvReview.isScrollEnabled = true
+                self.tbvReview.isUserInteractionEnabled = true
+                self.tbvReview.reloadData()
+//                }
                 
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)

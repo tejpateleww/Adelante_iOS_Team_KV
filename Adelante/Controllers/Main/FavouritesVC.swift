@@ -134,7 +134,15 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.responseStatus == .gotData ?  230 : 131
+        if responseStatus == .gotData{
+            if arrFavoriteRest.count != 0 {
+                return 230
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return self.responseStatus == .gotData ?  230 : 131
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if responseStatus == .gotData{
@@ -158,8 +166,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
             else {
                 let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
                 
-                NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
-                NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+                NoDatacell.imgNoData.image = UIImage(named: "Favorite LIst")
+                NoDatacell.lblNoDataTitle.isHidden = true
                 
                 return NoDatacell
             }

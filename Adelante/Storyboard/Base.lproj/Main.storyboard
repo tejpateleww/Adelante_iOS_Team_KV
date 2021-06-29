@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yvt-Nf-udP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yvt-Nf-udP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -25,7 +25,7 @@
                                 <rect key="frame" x="16" y="116" width="382" height="50"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUq-9x-IMW" customClass="searchBarHome" customModule="Adelante" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-3" width="382" height="56"/>
+                                        <rect key="frame" x="0.0" y="-0.5" width="382" height="51"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <scopeButtonTitles>
@@ -80,7 +80,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantOutletListCell" rowHeight="244" id="Q83-lV-x3x" customClass="RestaurantOutletListCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="244"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="244"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q83-lV-x3x" id="fX5-c7-UGY">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="244"/>
@@ -296,7 +296,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyFoodlistCell" rowHeight="169" id="hvK-Qu-0qe" customClass="MyFoodlistCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="169"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="169"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hvK-Qu-0qe" id="5ss-Qo-Wac">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="169"/>
@@ -729,7 +729,7 @@
                                                         <rect key="frame" x="16" y="0.0" width="382" height="50"/>
                                                         <subviews>
                                                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Dzj-qS-eIp" customClass="searchBarHome" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="-3" width="382" height="56"/>
+                                                                <rect key="frame" x="0.0" y="-0.5" width="382" height="51"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </searchBar>
                                                         </subviews>
@@ -761,7 +761,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="YourFavouriteCell" id="Hg6-hk-628" customClass="YourFavouriteCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="297"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="297"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hg6-hk-628" id="dYu-Rs-9cw">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
@@ -1016,7 +1016,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyOrdersCell" id="P1a-5w-hzn" customClass="MyOrdersCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="156.5"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="156.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P1a-5w-hzn" id="KJN-U9-g50">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="156.5"/>
@@ -2782,7 +2782,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationCell" id="C3a-up-Y81" customClass="NotificationCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="116"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="116"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C3a-up-Y81" id="agx-LQ-OVk">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="116"/>
@@ -3074,7 +3074,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReViewDiscCell" id="zYv-cy-nYb" customClass="ReViewDiscCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="109"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="109"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zYv-cy-nYb" id="F95-Xz-0AW">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
@@ -3482,7 +3482,7 @@
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PromocodeCell" rowHeight="197" id="pKt-lh-62Z" customClass="PromocodeCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="197"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="197"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pKt-lh-62Z" id="DA8-z5-mab">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="197"/>
@@ -3749,7 +3749,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyFoodlistCell" id="OHv-lI-MER" customClass="MyFoodlistCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="114"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="114"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHv-lI-MER" id="bbI-iX-kJI">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
@@ -4157,7 +4157,7 @@
                                                                                 </constraints>
                                                                                 <prototypes>
                                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyOrderDetailsCell" id="bsJ-Of-dKQ" customClass="MyOrderDetailsCell" customModule="Adelante" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="28" width="378" height="66.5"/>
+                                                                                        <rect key="frame" x="0.0" y="24.5" width="378" height="66.5"/>
                                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bsJ-Of-dKQ" id="GAh-Wf-pq6">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="378" height="66.5"/>
@@ -4650,7 +4650,7 @@
                                                 <rect key="frame" x="16" y="0.0" width="382" height="50"/>
                                                 <subviews>
                                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jEM-3l-Wit" customClass="searchBarHome" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="-3" width="382" height="56"/>
+                                                        <rect key="frame" x="0.0" y="-0.5" width="382" height="51"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </searchBar>
                                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qQW-G4-gaz" customClass="customTextField" customModule="Adelante" customModuleProvider="target">
@@ -4753,7 +4753,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantListCell" id="hu2-bj-dns" customClass="RestaurantListCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="234"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="234"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hu2-bj-dns" id="hYG-F2-WYJ">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
@@ -4965,13 +4965,9 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Restaurant" translatesAutoresizingMaskIntoConstraints="NO" id="uag-TN-Vyj">
-                                        <rect key="frame" x="124" y="312" width="166" height="166"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="uag-TN-Vyj" firstAttribute="centerX" secondItem="hJA-b3-rHQ" secondAttribute="centerX" id="6qc-Q2-Pdc"/>
                                     <constraint firstAttribute="trailing" secondItem="dor-LU-Qhv" secondAttribute="trailing" id="9ME-f9-geh"/>
                                     <constraint firstItem="ZOg-Hw-JBM" firstAttribute="top" secondItem="Exe-HS-fXw" secondAttribute="bottom" constant="5" id="DuL-wJ-f2L"/>
                                     <constraint firstItem="ZOg-Hw-JBM" firstAttribute="leading" secondItem="hJA-b3-rHQ" secondAttribute="leading" id="Msl-qv-qWj"/>
@@ -4979,7 +4975,6 @@
                                     <constraint firstAttribute="bottom" secondItem="dor-LU-Qhv" secondAttribute="bottom" id="R9R-Tv-NJ8"/>
                                     <constraint firstItem="Exe-HS-fXw" firstAttribute="leading" secondItem="hJA-b3-rHQ" secondAttribute="leading" id="X4b-pa-8cj"/>
                                     <constraint firstAttribute="trailing" secondItem="ZOg-Hw-JBM" secondAttribute="trailing" id="YZh-so-fIu"/>
-                                    <constraint firstItem="uag-TN-Vyj" firstAttribute="centerY" secondItem="hJA-b3-rHQ" secondAttribute="centerY" id="dM9-Wt-cFO"/>
                                     <constraint firstItem="Exe-HS-fXw" firstAttribute="top" secondItem="hJA-b3-rHQ" secondAttribute="top" id="fGa-9S-cf7"/>
                                     <constraint firstItem="dor-LU-Qhv" firstAttribute="top" secondItem="ZOg-Hw-JBM" secondAttribute="bottom" id="jZ3-tl-3fX"/>
                                     <constraint firstAttribute="trailing" secondItem="Exe-HS-fXw" secondAttribute="trailing" id="skH-aF-r1N"/>
@@ -4997,7 +4992,6 @@
                     </view>
                     <connections>
                         <outlet property="btnFilterOptions" destination="vZo-hA-acL" id="md2-e7-Dn2"/>
-                        <outlet property="imgEmptyRestaurant" destination="uag-TN-Vyj" id="kPM-Cv-f3S"/>
                         <outlet property="lblAllRestaurants" destination="yiQ-n2-fIK" id="nyG-5u-kkJ"/>
                         <outlet property="tblMainList" destination="dor-LU-Qhv" id="1ml-3n-tmB"/>
                         <outlet property="txtSearch" destination="jEM-3l-Wit" id="t1x-GG-oK5"/>
@@ -5082,7 +5076,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantOutletListCell" id="g7E-bU-pcB" customClass="RestaurantOutletListCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="244"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="244"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g7E-bU-pcB" id="lI8-hK-Hbp">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="244"/>
@@ -5305,24 +5299,18 @@
                                     <constraint firstItem="3Ec-kX-uPa" firstAttribute="leading" secondItem="wpg-Ja-ofz" secondAttribute="leading" id="vb3-fy-s4E"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Restaurant" translatesAutoresizingMaskIntoConstraints="NO" id="tTh-NG-iF9">
-                                <rect key="frame" x="124" y="365" width="166" height="166"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UKn-fX-xJx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="wpg-Ja-ofz" firstAttribute="leading" secondItem="UKn-fX-xJx" secondAttribute="leading" id="Gc6-IF-50D"/>
                             <constraint firstItem="wpg-Ja-ofz" firstAttribute="top" secondItem="UKn-fX-xJx" secondAttribute="top" constant="28" id="QIU-m3-0hU"/>
-                            <constraint firstItem="tTh-NG-iF9" firstAttribute="centerY" secondItem="Zhe-ff-OyX" secondAttribute="centerY" id="T4y-oF-yiS"/>
                             <constraint firstItem="wpg-Ja-ofz" firstAttribute="trailing" secondItem="UKn-fX-xJx" secondAttribute="trailing" id="ZVK-E5-xNx"/>
                             <constraint firstItem="UKn-fX-xJx" firstAttribute="bottom" secondItem="wpg-Ja-ofz" secondAttribute="bottom" id="b6B-39-cSa"/>
-                            <constraint firstItem="tTh-NG-iF9" firstAttribute="centerX" secondItem="Zhe-ff-OyX" secondAttribute="centerX" id="xbf-XG-ZoV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnFilter" destination="Ij1-Q8-38y" id="OdS-qC-rGj"/>
-                        <outlet property="imgRestaurantEmpty" destination="tTh-NG-iF9" id="Moz-8a-huv"/>
                         <outlet property="lblRestaurantName" destination="Zid-lV-TG7" id="HxO-Mq-jDR"/>
                         <outlet property="tblRestaurantList" destination="3Ec-kX-uPa" id="VY0-j1-5J1"/>
                         <outlet property="vwFilter" destination="bm3-RP-0TI" id="gw4-uc-obh"/>
@@ -5691,7 +5679,7 @@
                                                                 </constraints>
                                                                 <prototypes>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailsCell" id="fuw-0l-8aI" customClass="RestaurantDetailsCell" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="28" width="414" height="132"/>
+                                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="132"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fuw-0l-8aI" id="TDc-YZ-epj">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
@@ -5946,7 +5934,7 @@
                                                                         </connections>
                                                                     </tableViewCell>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantItemCell" id="oHS-bR-V3a" customClass="RestaurantItemCell" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="160" width="414" height="117"/>
+                                                                        <rect key="frame" x="0.0" y="156.5" width="414" height="117"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oHS-bR-V3a" id="9aZ-0H-pcc">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
@@ -6350,7 +6338,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentMethodCell1" id="iUP-Oz-FpZ" customClass="paymentMethodCell1" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="101"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="101"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iUP-Oz-FpZ" id="sdj-nM-rKn">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="101"/>
@@ -6437,7 +6425,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentMethodCell2" id="vSG-CH-VIh" customClass="paymentMethodCell2" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="129" width="414" height="143"/>
+                                                <rect key="frame" x="0.0" y="125.5" width="414" height="143"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vSG-CH-VIh" id="9od-mu-Ky3">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
@@ -6746,7 +6734,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="myAccountSubDetails" rowHeight="49" id="hyL-Es-54P" customClass="myAccountSubDetails" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="378" height="49"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="378" height="49"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hyL-Es-54P" id="MTS-ta-Q4X">
                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="49"/>
@@ -6840,7 +6828,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bffComboCell" id="0IO-E0-Zcf" customClass="bffComboCell" customModule="Adelante" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="36"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0IO-E0-Zcf" id="lk3-cb-8M1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
@@ -7147,7 +7135,7 @@
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sortCell" id="dTh-bd-yra" customClass="sortCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="42.5"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="42.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dTh-bd-yra" id="hYf-L5-md7">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="42.5"/>
@@ -8012,7 +8000,7 @@
                                                 </view>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantCatListCell" id="f9n-wp-Ncb" customClass="RestaurantCatListCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="289" width="414" height="43"/>
+                                                        <rect key="frame" x="0.0" y="285.5" width="414" height="43"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f9n-wp-Ncb" id="jKw-gS-6nZ">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
@@ -8136,7 +8124,7 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantCell" id="YVw-po-u7R" customClass="RestaurantCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="332" width="414" height="234"/>
+                                                        <rect key="frame" x="0.0" y="328.5" width="414" height="234"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YVw-po-u7R" id="KeW-sZ-WoR">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
@@ -8483,7 +8471,7 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addedProductCell" id="SoL-Y3-stF" customClass="addedProductCell" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="378" height="61"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="378" height="61"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SoL-Y3-stF" id="qxs-jW-5YR">
                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="61"/>
@@ -8731,7 +8719,7 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="orderDetailsCell" id="QEb-v2-0vC" customClass="orderDetailsCell" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="378" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="378" height="20.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QEb-v2-0vC" id="evR-Uj-87o">
                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="20.5"/>
@@ -9081,9 +9069,6 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
-        <designable name="0kK-8b-MA7">
-            <size key="intrinsicContentSize" width="195" height="32"/>
-        </designable>
         <designable name="0t8-U3-ebv">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>

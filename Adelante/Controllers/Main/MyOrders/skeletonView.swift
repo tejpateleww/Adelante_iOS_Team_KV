@@ -1,14 +1,14 @@
 //
-//  ShimmerCell.swift
+//  skeletonView.swift
 //  Adelante
 //
-//  Created by Ankur on 25/06/21.
+//  Created by Ankur on 29/06/21.
 //  Copyright © 2021 EWW071. All rights reserved.
 //
 
 import UIKit
 
-class ShimmerCell: UITableViewCell {
+class skeletonView: UIView {
     @IBOutlet weak var lblShimmerText: UILabel!
     @IBOutlet weak var viewShimmer: UIView!
     @IBOutlet weak var viewContainer: UIView!
@@ -18,12 +18,6 @@ class ShimmerCell: UITableViewCell {
         lblShimmerText.clipsToBounds = true
         startShimmering()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     func startShimmering(){
         self.isSkeletonable = true
@@ -39,4 +33,5 @@ class ShimmerCell: UITableViewCell {
         lblShimmerText.hideSkeleton()
         viewShimmer.hideSkeleton()
     }
+
 }
