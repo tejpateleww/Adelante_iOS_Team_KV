@@ -1,4 +1,4 @@
-//
+ //
 //  HomeVC.swift
 //  Adelante
 //
@@ -9,7 +9,8 @@
 import UIKit
 import SDWebImage
 import CoreLocation
-
+import SkeletonView
+ 
 struct structFilter {
     
     var strselectedImage : UIImage
@@ -22,20 +23,13 @@ struct structFilter {
     }
 }
 
-class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
-    //    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
-    //
-    //        self.SelectedCatId = CategoryId
-    //        self.webserviceGetDashboard()
-    //    }
+class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrFilter = [structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: ""),
                      structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title1".Localized()),
                      structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title2".Localized()),
                      structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title3".Localized())] //["","Mobile Pickup", "Recently Viewed", "Top Rated"]
-    var arrImagesForPage = ["dummyRest1", "dummyRest2" , "dummyRest1"]
-    var arrImages = ["dummyRest1", "dummyRest2" , "dummyRest1", "dummyRest1", "dummyRest2" , "dummyRest1"]
     var selectedSortTypedIndexFromcolVwFilter = 1
     var refresher = UIRefreshControl()
     var arrCategories = [Category]()
@@ -49,19 +43,29 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     var pageLimit = 5
     var selectedRestaurantId = ""
     var isRefresh = false
-    
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
-    @IBOutlet weak var colVwRestWthPage: UICollectionView!
+    @IBOutlet weak var colVwRestWthPage: UICollectionView!{
+        didSet{
+            colVwRestWthPage.isSkeletonable = true
+        }
+    }
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var tblMainList: UITableView!
+    @IBOutlet weak var tblMainList: UITableView!{
+        didSet{
+            tblMainList.isSkeletonable = true
+        }
+    }
     @IBOutlet weak var colVwFilterOptions: UICollectionView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerNIB()
         setUpLocalizedStrings()
+        self.colVwRestWthPage.showAnimatedSkeleton()
+        self.tblMainList.showAnimatedSkeleton()
         webserviceGetDashboard()
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshListing), for: .valueChanged)
@@ -71,20 +75,24 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         setup()
         pageControl.numberOfPages = arrBanner.count
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.tblMainList.reloadData()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        print("homeVc \(#function)")
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
-        print("homeVc \(#function)")
     }
     
     // MARK: - Other Methods
+    func registerNIB(){
+        tblMainList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        tblMainList.register(UINib(nibName:"HomeSkeletonCell", bundle: nil), forCellReuseIdentifier: "HomeSkeletonCell")
+        colVwRestWthPage.register(UINib(nibName:"NoDataCollectionview", bundle: nil), forCellWithReuseIdentifier: "NoDataCollectionview")
+        colVwRestWthPage.register(UINib(nibName:"ShimmarCollectionCell", bundle: nil), forCellWithReuseIdentifier: "ShimmarCollectionCell")
+    }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: false, isRight: false)
@@ -103,12 +111,9 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         tblMainList.delegate = self
         tblMainList.dataSource = self
         tblMainList.reloadData()
-        
-        
         colVwFilterOptions.delegate = self
         colVwFilterOptions.dataSource = self
         colVwFilterOptions.reloadData()
-        
         pageControl.hidesForSinglePage = true
     }
     @objc func refreshListing(){
@@ -187,13 +192,28 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
             }
         }
     }
-    
+}
+ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,SkeletonTableViewDataSource,SkeletonCollectionViewDataSource{
+    // MARK: - SkeletonCollectionview Datasource
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if responseStatus == .gotData{
+            return 0
+        }
+        return 3
+    }
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+//        if responseStatus == .gotData{
+//            return responseStatus == .gotData ? (self.arrFilter.count > 0 ? FilterOptionsCell.reuseIdentifier : NoDataCollectionview.reuseIdentifier) :  ShimmarCollectionCell.reuseIdentifier
+//        }else{
+            return responseStatus == .gotData ? (self.arrBanner.count > 0 ? RestWithPageCell.reuseIdentifier : NoDataCollectionview.reuseIdentifier) :  ShimmarCollectionCell.reuseIdentifier
+//        }
+    }
     // MARK: - UICollectionView Delegates And Datasource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.colVwFilterOptions{
             return arrFilter.count
         } else if collectionView == self.colVwRestWthPage {
-            return arrBanner.count
+            return arrBanner.count > 0 ? arrBanner.count : 5
         }
         return arrRestaurant.count
     }
@@ -201,43 +221,68 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == self.colVwFilterOptions{
-            let cell = colVwFilterOptions.dequeueReusableCell(withReuseIdentifier: FilterOptionsCell.reuseIdentifier, for: indexPath) as! FilterOptionsCell
-            cell.btnFilterOptions.setTitle(arrFilter[indexPath.row].strTitle, for: .normal)
-            
-            if selectedSortTypedIndexFromcolVwFilter != -1 && selectedSortTypedIndexFromcolVwFilter == indexPath.row {
-                cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
-                cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
-                cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-            }
-            else {
-                cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
-                cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strDeselectedImage, for: .normal)
-                cell.btnFilterOptions.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
-            }
-            cell.btnFilterOptions.isUserInteractionEnabled = true
-            cell.btnFilterOptions.tag = indexPath.row
-            cell.btnFilterOptions.addTarget(self, action: #selector(btnFilterClicked(_:)), for: .touchUpInside)
-            return cell
+//            if responseStatus == .gotData{
+//                if arrFilter.count != 0 {
+                    let cell = colVwFilterOptions.dequeueReusableCell(withReuseIdentifier: FilterOptionsCell.reuseIdentifier, for: indexPath) as! FilterOptionsCell
+                    cell.btnFilterOptions.setTitle(arrFilter[indexPath.row].strTitle, for: .normal)
+                    
+                    if selectedSortTypedIndexFromcolVwFilter != -1 && selectedSortTypedIndexFromcolVwFilter == indexPath.row {
+                        cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
+                        cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
+                        cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
+                    }
+                    else {
+                        cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
+                        cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strDeselectedImage, for: .normal)
+                        cell.btnFilterOptions.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
+                    }
+                    cell.btnFilterOptions.isUserInteractionEnabled = true
+                    cell.btnFilterOptions.tag = indexPath.row
+                    cell.btnFilterOptions.addTarget(self, action: #selector(btnFilterClicked(_:)), for: .touchUpInside)
+                    return cell
+//
+//                }else{
+//                    let NoDatacell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: "NoDataCollectionview", for: indexPath) as! NoDataCollectionview
+//                    NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
+//                    NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+//                    return NoDatacell
+//                }
+//            }else{
+//                let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
+//                return cell
+//            }
         }else {
-            let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: RestWithPageCell.reuseIdentifier, for: indexPath) as! RestWithPageCell
-            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrBanner[indexPath.row].image ?? "")"
-            cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-            if cell.lblRestName.text == ""{
-                cell.vwRestName.isHidden = true
+            if responseStatus == .gotData{
+                if arrFilter.count != 0 {
+                    let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: RestWithPageCell.reuseIdentifier, for: indexPath) as! RestWithPageCell
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrBanner[indexPath.row].image ?? "")"
+                    cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    if cell.lblRestName.text == ""{
+                        cell.vwRestName.isHidden = true
+                    }else{
+                        cell.vwRestName.isHidden = false
+                    }
+                    if cell.lblRestDesc.text == ""{
+                        cell.vwRestDesc.isHidden = true
+                    }else{
+                        cell.vwRestDesc.isHidden = false
+                    }
+                    cell.lblRestName.text = arrBanner[indexPath.row].name
+                    cell.lblRestDesc.text = arrBanner[indexPath.row].descriptionField
+                    return cell
+                }else{
+                    let NoDatacell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: "NoDataCollectionview", for: indexPath) as! NoDataCollectionview
+                    NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
+                    NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+                    return NoDatacell
+                }
             }else{
-                cell.vwRestName.isHidden = false
+                    let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
+                    return cell
+                }
             }
-            if cell.lblRestDesc.text == ""{
-                cell.vwRestDesc.isHidden = true
-            }else{
-                cell.vwRestDesc.isHidden = false
-            }
-            cell.lblRestName.text = arrBanner[indexPath.row].name
-            cell.lblRestDesc.text = arrBanner[indexPath.row].descriptionField
-            return cell
         }
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.colVwFilterOptions{
@@ -260,51 +305,103 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView != self.colVwFilterOptions{
             let restaurantListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID) as! RestaurantListVC
-            //restaurantListVc.strItemId = arrBanner[indexPath.row].id
             self.navigationController?.pushViewController(restaurantListVc, animated: true)
         }
     }
+    // MARK: - Skeleton Datasource
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if responseStatus == .gotData{
+            return 0
+        }
+        return 3
+    }
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        if indexPath.row == 0{
+            return responseStatus == .gotData ? (self.arrCategories.count > 0 ? RestaurantCatListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
+        }
+        return responseStatus == .gotData ? (self.arrRestaurant.count > 0 ? RestaurantCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
+    }
     // MARK: - UITableViewDelegates And Datasource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrRestaurant.count + 1    }
+//            return arrRestaurant.count + 3 //> 0 ? arrRestaurant.count + 1 : 1
+        if responseStatus == .gotData{
+            return arrRestaurant.count
+        }
+        return 3
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier, for: indexPath) as! RestaurantCatListCell
-            cell.arrCategories = self.arrCategories
-            cell.delegateResCatCell = self
-            cell.colRestaurantCatList.reloadData()
-            cell.selectionStyle = .none
-            return cell
-        } else {
-            let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
-            cell.lblItemName.text = arrRestaurant[indexPath.row - 1].name
-            cell.lblMiles.text = arrRestaurant[indexPath.row - 1].distance//arrRestaurant[indexPath.row - 1].distance
-            cell.lblRating.text = arrRestaurant[indexPath.row - 1].review
-            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
-            cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-            cell.btnFavorite.tag = indexPath.row - 1
-            cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
-            if arrRestaurant[indexPath.row - 1].favourite == "1"{
-                cell.btnFavorite.isSelected = true
-            }else{
-                cell.btnFavorite.isSelected = false
-            }
-            cell.selectionStyle = .none
-            return cell
+//            if responseStatus == .gotData{
+//                if arrRestaurant.count != 0 {
+                    let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier, for: indexPath) as! RestaurantCatListCell
+                    cell.arrCategories = self.arrCategories
+                    cell.delegateResCatCell = self
+                    cell.colRestaurantCatList.reloadData()
+                    cell.selectionStyle = .none
+                    return cell
+                    
+//                }else{
+//                    let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+//
+//                    NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
+//                    NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+//
+//                    return NoDatacell
+//                }
+//            }else{
+//                let cell = tblMainList.dequeueReusableCell(withIdentifier: HomeSkeletonCell.reuseIdentifier, for: indexPath) as! HomeSkeletonCell
+//                print("Shimmer category cell loaded")
+//                return cell
+//            }
+//        }
         }
-        
+                else {
+            if responseStatus == .gotData{
+                if arrRestaurant.count != 0 {
+                    let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
+                    cell.lblItemName.text = arrRestaurant[indexPath.row - 1].name
+                    cell.lblMiles.text = arrRestaurant[indexPath.row - 1].distance//arrRestaurant[indexPath.row - 1].distance
+                    cell.lblRating.text = arrRestaurant[indexPath.row - 1].review
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row - 1].image ?? "")"
+                    cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    cell.btnFavorite.tag = indexPath.row - 1
+                    cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+                    if arrRestaurant[indexPath.row - 1].favourite == "1"{
+                        cell.btnFavorite.isSelected = true
+                    }else{
+                        cell.btnFavorite.isSelected = false
+                    }
+                    cell.selectionStyle = .none
+                    return cell
+                }else{
+                    let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+                    
+                    NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
+                    NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+                    
+                    return NoDatacell
+                }
+            }else{
+                let cell = tblMainList.dequeueReusableCell(withIdentifier: HomeSkeletonCell.reuseIdentifier, for: indexPath) as! HomeSkeletonCell
+                print("Shimmer RestaurantCell  loaded")
+                cell.selectionStyle = .none
+                return cell
+            }
+        }
+    }
+   
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.row == 0 ? 40 : 200
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row != 0
         {
-          
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
             controller.selectedRestaurantId = arrRestaurant[indexPath.row - 1].id
             controller.strRestaurantName = arrRestaurant[indexPath.row - 1].name
-//            controller.selectedIndex = "\(indexPath.row - 1)"
-//            controller.isFromDeshboard = true
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
@@ -353,10 +450,17 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         Deshboard.page = "\(self.pageNumber)"
-        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: true, completion: { (response, status, error) in
-            //self.hideHUD()
+        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error)in
+            responseStatus = .gotData
             if status{
                 let Homedata = DashBoardResModel.init(fromJson: response)
+                let cell = self.tblMainList.dequeueReusableCell(withIdentifier: HomeSkeletonCell.reuseIdentifier) as! HomeSkeletonCell
+                cell.stopShimmering()
+                self.tblMainList.stopSkeletonAnimation()
+                let indexPath = IndexPath.init(row: 0, section: 0)
+                let Bannercell = self.colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
+                Bannercell.stopShimmering()
+                self.colVwRestWthPage.stopSkeletonAnimation()
                 self.arrCategories = Homedata.category
                 self.arrBanner = Homedata.banner
                 self.pageControl.numberOfPages = self.arrBanner.count
@@ -383,17 +487,18 @@ class HomeVC: BaseViewController, UICollectionViewDelegate, UICollectionViewData
                         self.isNeedToReload = true
                     }
                 }
+                self.tblMainList.dataSource = self
+                self.tblMainList.isScrollEnabled = true
+                self.tblMainList.isUserInteractionEnabled = true
                 self.tblMainList.reloadData()
+                self.colVwRestWthPage.dataSource = self
+                self.colVwRestWthPage.isScrollEnabled = true
+                self.colVwRestWthPage.isUserInteractionEnabled = true
                 self.colVwRestWthPage.reloadData()
             }else{
                 Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
                 //                Utilities.showAlertOfAPIResponse(param: error ?? "No internet connection", vc: self)
             }
-//            if self.arrRestaurant.count > 0{
-//                self.tblMainList.restore()
-//            }else {
-//                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-//            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }

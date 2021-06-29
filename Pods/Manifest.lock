@@ -77,6 +77,7 @@ PODS:
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
+  - SkeletonView (1.19.0)
   - SkyFloatingLabelTextField (4.0.0)
   - SwiftyJSON (4.0.0)
 
@@ -92,11 +93,12 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (= 6.3.0)
   - MKProgress (~> 1.1.0)
   - SDWebImage
+  - SkeletonView
   - SkyFloatingLabelTextField
   - SwiftyJSON (= 4.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
     - BetterSegmentedControl
     - Cosmos
@@ -118,6 +120,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SDWebImage
+    - SkeletonView
     - SkyFloatingLabelTextField
     - SwiftyJSON
 
@@ -143,9 +146,10 @@ SPEC CHECKSUMS:
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
+  SkeletonView: 2ebf2f23c341f55ef2d12072a149857eabee8218
   SkyFloatingLabelTextField: 79ddc40e4ad59707fedbb48d605417aee48bb78a
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: dcd95487ffa5ff25e912d8f5dba9f8c42cafa9d3
+PODFILE CHECKSUM: 9d183edcf09883ede9b4d6ac0b8c90c47521745f
 
 COCOAPODS: 1.10.1

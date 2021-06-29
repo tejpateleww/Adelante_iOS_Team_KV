@@ -170,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func performLogout(){
         let logout = LogoutReqModel()
         logout.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Logout(logoutModel: logout, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.Logout(logoutModel: logout, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{
                 appDel.SetLogout()

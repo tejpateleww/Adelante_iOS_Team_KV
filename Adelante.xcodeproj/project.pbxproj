@@ -240,6 +240,14 @@
 		84C5F68E2643BCAF000B2DDE /* NotificationReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F68D2643BCAF000B2DDE /* NotificationReqModel.swift */; };
 		84C5F6AB2643C05A000B2DDE /* notificaationResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */; };
 		84C5F6AC2643C05A000B2DDE /* NotificationDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */; };
+		9275D5B32689E0F700339877 /* HomeSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275D5B12689E0F700339877 /* HomeSkeletonCell.swift */; };
+		9275D5B42689E0F700339877 /* HomeSkeletonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275D5B22689E0F700339877 /* HomeSkeletonCell.xib */; };
+		9282D2F22685ABA20084D0A3 /* ShimmerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282D2F02685ABA20084D0A3 /* ShimmerCell.swift */; };
+		9282D2F32685ABA20084D0A3 /* ShimmerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9282D2F12685ABA20084D0A3 /* ShimmerCell.xib */; };
+		9282D2F62685DA5B0084D0A3 /* ShimmarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282D2F42685DA5B0084D0A3 /* ShimmarCollectionCell.swift */; };
+		9282D2F72685DA5B0084D0A3 /* ShimmarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9282D2F52685DA5B0084D0A3 /* ShimmarCollectionCell.xib */; };
+		9282D2FA2685E46E0084D0A3 /* NoDataCollectionview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282D2F82685E46E0084D0A3 /* NoDataCollectionview.swift */; };
+		9282D2FB2685E46E0084D0A3 /* NoDataCollectionview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9282D2F92685E46E0084D0A3 /* NoDataCollectionview.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -485,6 +493,14 @@
 		84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificaationResModel.swift; sourceTree = "<group>"; };
 		84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDatum.swift; sourceTree = "<group>"; };
 		86784D51C37BBA35E10C918A /* Pods-ApiStructureModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.release.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.release.xcconfig"; sourceTree = "<group>"; };
+		9275D5B12689E0F700339877 /* HomeSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCell.swift; sourceTree = "<group>"; };
+		9275D5B22689E0F700339877 /* HomeSkeletonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSkeletonCell.xib; sourceTree = "<group>"; };
+		9282D2F02685ABA20084D0A3 /* ShimmerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerCell.swift; sourceTree = "<group>"; };
+		9282D2F12685ABA20084D0A3 /* ShimmerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShimmerCell.xib; sourceTree = "<group>"; };
+		9282D2F42685DA5B0084D0A3 /* ShimmarCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmarCollectionCell.swift; sourceTree = "<group>"; };
+		9282D2F52685DA5B0084D0A3 /* ShimmarCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShimmarCollectionCell.xib; sourceTree = "<group>"; };
+		9282D2F82685E46E0084D0A3 /* NoDataCollectionview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataCollectionview.swift; sourceTree = "<group>"; };
+		9282D2F92685E46E0084D0A3 /* NoDataCollectionview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoDataCollectionview.xib; sourceTree = "<group>"; };
 		A149B2D0075A5FCD377E0D23 /* Pods-Adelante.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adelante.release.xcconfig"; path = "Target Support Files/Pods-Adelante/Pods-Adelante.release.xcconfig"; sourceTree = "<group>"; };
 		CD772C2DF1828C83DDDD515E /* Pods-ApiStructureModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.debug.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -596,6 +612,8 @@
 				34CF866525A81BC90040C188 /* SearchCell.swift */,
 				349347B925D11562006366B4 /* RestaurantOutletListCell.swift */,
 				84C5F68A2643A91C000B2DDE /* PromocodeCell.swift */,
+				9282D2F02685ABA20084D0A3 /* ShimmerCell.swift */,
+				9282D2F12685ABA20084D0A3 /* ShimmerCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -607,6 +625,10 @@
 				3431E0672593224C002F1435 /* RestWithPageCell.swift */,
 				3431E06925932287002F1435 /* RestaurantCategoryCell.swift */,
 				3431E06D25932409002F1435 /* FilterOptionsCell.swift */,
+				9282D2F42685DA5B0084D0A3 /* ShimmarCollectionCell.swift */,
+				9282D2F52685DA5B0084D0A3 /* ShimmarCollectionCell.xib */,
+				9282D2F82685E46E0084D0A3 /* NoDataCollectionview.swift */,
+				9282D2F92685E46E0084D0A3 /* NoDataCollectionview.xib */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -1145,6 +1167,7 @@
 		81E6720D257E502100DCE9DA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9275D5B02689E09C00339877 /* Skeleton */,
 				8105FDB72574D08E008D36D6 /* HomeVC.swift */,
 				345FC23E25BEB0B300795BE7 /* EditLocationVC.swift */,
 			);
@@ -1158,6 +1181,15 @@
 				84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		9275D5B02689E09C00339877 /* Skeleton */ = {
+			isa = PBXGroup;
+			children = (
+				9275D5B12689E0F700339877 /* HomeSkeletonCell.swift */,
+				9275D5B22689E0F700339877 /* HomeSkeletonCell.xib */,
+			);
+			path = Skeleton;
 			sourceTree = "<group>";
 		};
 		B7F05C3E06CAA5224C293454 /* Frameworks */ = {
@@ -1241,6 +1273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9282D2F32685ABA20084D0A3 /* ShimmerCell.xib in Resources */,
 				8105FE0E25751644008D36D6 /* NexaLight.otf in Resources */,
 				817A16FE25839D7100C11BB2 /* Nunito-Italic.ttf in Resources */,
 				34A9003F25947A8500EAD2FF /* Auth.storyboard in Resources */,
@@ -1267,6 +1300,7 @@
 				817A16FB25839D7100C11BB2 /* Nunito-Regular.ttf in Resources */,
 				817A16FF25839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				8105FDF725751644008D36D6 /* Aileron-UltraLight.otf in Resources */,
+				9282D2FB2685E46E0084D0A3 /* NoDataCollectionview.xib in Resources */,
 				8105FDFB25751644008D36D6 /* Aileron-Thin.otf in Resources */,
 				342ADF3D25B717820097B5AD /* GoogleService-Info.plist in Resources */,
 				8105FE0025751644008D36D6 /* Aileron-Italic.otf in Resources */,
@@ -1281,6 +1315,8 @@
 				817A16FC25839D7100C11BB2 /* Nunito-BlackItalic.ttf in Resources */,
 				81CFFD892574C60D005AA86A /* Assets.xcassets in Resources */,
 				34A9004625947AB800EAD2FF /* Main.storyboard in Resources */,
+				9282D2F72685DA5B0084D0A3 /* ShimmarCollectionCell.xib in Resources */,
+				9275D5B42689E0F700339877 /* HomeSkeletonCell.xib in Resources */,
 				189E57BB2664BDA9008AECA6 /* NoDataCollectionViewCell.xib in Resources */,
 				817A16F425839D7100C11BB2 /* Nunito-ExtraBold.ttf in Resources */,
 				8105FE0625751644008D36D6 /* NexaBlack.otf in Resources */,
@@ -1420,6 +1456,7 @@
 				3431E04825931AAE002F1435 /* YourFavouriteCell.swift in Sources */,
 				347D955D25A71637000C64B5 /* Banner.swift in Sources */,
 				189E57C12664BEDC008AECA6 /* NoData.swift in Sources */,
+				9275D5B32689E0F700339877 /* HomeSkeletonCell.swift in Sources */,
 				81CFFD882574C60D005AA86A /* GradientButton.swift in Sources */,
 				34D603A125A8630300C82D63 /* RestaurantListResModel.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,
@@ -1463,11 +1500,13 @@
 				345EA8F125B5477100A4E56D /* RestaurantFavorite.swift in Sources */,
 				18F369532580AE0000992FCD /* BffComboVC.swift in Sources */,
 				81CFFD6B2574C60D005AA86A /* ApiPaths.swift in Sources */,
+				9282D2FA2685E46E0084D0A3 /* NoDataCollectionview.swift in Sources */,
 				81CFFD802574C60D005AA86A /* UIView+Extension.swift in Sources */,
 				8105FDC72574F07C008D36D6 /* UIViewController+Extension.swift in Sources */,
 				34A5382D25A6D46E000037C5 /* UIImage+Extension.swift in Sources */,
 				34317B8525A5DF8E0086154A /* userDefaults+Extension.swift in Sources */,
 				81B447F325760D2300A0724E /* CustomLabel.swift in Sources */,
+				9282D2F22685ABA20084D0A3 /* ShimmerCell.swift in Sources */,
 				3431E05E25931EF0002F1435 /* paymentMethodCell2.swift in Sources */,
 				8105FDBB2574D0A9008D36D6 /* SearchVC.swift in Sources */,
 				81CFFD6C2574C60D005AA86A /* Method.swift in Sources */,
@@ -1503,6 +1542,7 @@
 				18F369542580AE0000992FCD /* commonPopup.swift in Sources */,
 				8170CAF1257A10B500B24B7A /* RateReviewVC.swift in Sources */,
 				84C5F6AB2643C05A000B2DDE /* notificaationResModel.swift in Sources */,
+				9282D2F62685DA5B0084D0A3 /* ShimmarCollectionCell.swift in Sources */,
 				8105FDB62574D014008D36D6 /* BaseViewController.swift in Sources */,
 				81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */,
 				34525DFE25AED8A900406EB6 /* sortingResModel.swift in Sources */,

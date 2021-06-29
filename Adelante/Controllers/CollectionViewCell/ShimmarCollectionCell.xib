@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ShimmarCollectionCell" customModule="Adelante" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="353" height="263"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="353" height="263"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHW-wB-Uw4">
+                        <rect key="frame" x="0.0" y="0.0" width="353" height="263"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yb2-HO-nhf">
+                                <rect key="frame" x="0.0" y="39.5" width="353" height="184"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="184" id="Pqw-iK-NMP"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Yb2-HO-nhf" firstAttribute="centerY" secondItem="QHW-wB-Uw4" secondAttribute="centerY" id="7XF-hR-HdG"/>
+                            <constraint firstItem="Yb2-HO-nhf" firstAttribute="leading" secondItem="QHW-wB-Uw4" secondAttribute="leading" id="LFF-9M-34S"/>
+                            <constraint firstItem="Yb2-HO-nhf" firstAttribute="centerX" secondItem="QHW-wB-Uw4" secondAttribute="centerX" id="M4q-2X-jzs"/>
+                            <constraint firstAttribute="trailing" secondItem="Yb2-HO-nhf" secondAttribute="trailing" id="hLW-z6-Yx3"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="QHW-wB-Uw4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5GB-we-yTW"/>
+                <constraint firstAttribute="bottom" secondItem="QHW-wB-Uw4" secondAttribute="bottom" id="fDM-5f-Etc"/>
+                <constraint firstAttribute="trailing" secondItem="QHW-wB-Uw4" secondAttribute="trailing" id="yqY-fj-pPL"/>
+                <constraint firstItem="QHW-wB-Uw4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zeT-9B-tj0"/>
+            </constraints>
+            <size key="customSize" width="353" height="263"/>
+            <connections>
+                <outlet property="viewShimmer" destination="Yb2-HO-nhf" id="ikA-yZ-LHu"/>
+            </connections>
+            <point key="canvasLocation" x="222.46376811594206" y="142.96875"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

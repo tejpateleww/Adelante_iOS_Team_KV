@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SkeletonView
 
 let keywindow = UIApplication.shared.keyWindow
 
@@ -29,6 +29,10 @@ let notifRefreshRestaurantDetails = NSNotification.Name("refreshRestaurantDetail
 let NotificationBadges = NSNotification.Name(rawValue:"NotificationBadges")
  
 let CurrencySymbol = "$"
+
+let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
+let skeletonGradient = SkeletonGradient(baseColor: UIColor.lightGray.withAlphaComponent(0.6))
+var responseStatus : webserviceResponse = .initial
 
 enum DateFormatterString : String{
     case timeWithDate = "yyyy-MM-dd HH:mm:ss"
@@ -128,4 +132,7 @@ struct selectedVariants {
         self.variant_price = variant_price
         self.isMultiSelect = isMultiSelect
     }
+}
+enum webserviceResponse {
+    case gotData , initial
 }
