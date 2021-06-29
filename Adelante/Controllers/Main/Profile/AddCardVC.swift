@@ -129,6 +129,9 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         } else if txtCvv.text!.isEmptyOrWhitespace() {
             isValidate = false
             ValidatorMessage = "Please enter cvv"
+        }else if txtCvv.text!.count < 3 {
+            isValidate = false
+            ValidatorMessage = "Please enter valid CVV"
         }
         
         return (isValidate,ValidatorMessage)

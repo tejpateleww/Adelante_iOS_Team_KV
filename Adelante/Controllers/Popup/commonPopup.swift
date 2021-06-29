@@ -120,6 +120,9 @@ class commonPopup: UIViewController {
 //            btnCancel.backgroundColor = UIColor(hexString: "#FF172F")
 //        }
         
+        self.vwCancel.isHidden = isHideCancelButton
+        self.vwSubmit.isHidden = isHideSubmitButton
+        
         submitButton.setTitle(submitBtnTitle, for: .normal)
         btnCancel.setTitle(cancelBtnTitle, for: .normal)
         lblDescription.text = strDescription
@@ -141,8 +144,7 @@ class commonPopup: UIViewController {
         submitButton.backgroundColor = self.submitBtnColor.value
         btnCancel.backgroundColor = self.cancelBtnColor.value
         
-        self.vwCancel.isHidden = isHideCancelButton
-        self.vwSubmit.isHidden = isHideSubmitButton
+        
     }
     
     class func customAlert(isHideCancelButton: Bool,isHideSubmitButton : Bool,strSubmitTitle : String = "Yes",strCancelButtonTitle : String = "No",strDescription : String, strTitle:String, isShowImage:Bool, strImage:String, isCancleOrder : Bool = false, submitBtnColor: colors, cancelBtnColor: colors , viewController : UIViewController) {

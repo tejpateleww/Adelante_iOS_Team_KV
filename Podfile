@@ -19,7 +19,7 @@ pod 'Alamofire', '5.0'
     pod 'MKProgress', '~> 1.1.0'
     pod 'GooglePlaces'
     pod 'FormTextField'
- pod 'Firebase/Crashlytics'
-
+    pod 'Firebase/Crashlytics'
     
 end
+

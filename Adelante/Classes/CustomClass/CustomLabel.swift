@@ -158,7 +158,6 @@ class addPaymentlable : UILabel {
 }
 
 
-
 class addCardLabel : UILabel {
     @IBInspectable var isDetailsTitle : Bool = false
     override func awakeFromNib() {
@@ -228,6 +227,7 @@ class commonPopupButton : UIButton {
         self.setTitleColor(colors.white.value, for: .normal)
         self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
         self.titleLabel?.textAlignment = .center
+        self.titleLabel?.lineBreakMode = .byClipping
         self.cornerRadius = self.frame.size.height / 2
         self.clipsToBounds = true
         

@@ -89,6 +89,16 @@ class PayButton:UIButton{
         self.titleLabel?.font = CustomFont.NexaBold.returnFont(17)
     }
 }
+
+class OtpButton:UIButton{
+    override func awakeFromNib() {
+        self.layer.cornerRadius = self.frame.height / 2
+        self.backgroundColor = colors.appOrangeColor.value
+        self.setTitleColor(colors.white.value, for: .normal)
+        self.titleLabel?.font = CustomFont.NexaBold.returnFont(17)
+    }
+}
+
 class collectionVwFilterBtns: UIButton {
     
     @IBInspectable var isCornerRadius:Bool = false
@@ -247,6 +257,35 @@ class btnApply : UIButton {
         if isApply{
             self.titleLabel?.font = CustomFont.NexaBold.returnFont(15)
             self.setTitleColor(UIColor.init(hexString: "#E34A25"), for: .normal)
+        }
+    }
+}
+
+class btnOTP: UIButton {
+    @IBInspectable var isResendOTP:Bool = false
+    @IBInspectable var isCreateAccount: Bool = false
+    @IBInspectable var isUnderline: Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.backgroundColor = .clear
+        if isResendOTP {
+            self.setTitleColor(colors.appOrangeColor.value, for: .normal)
+            self.titleLabel?.font = CustomFont.AileronBold.returnFont(15)
+            if isUnderline {
+                self.setunderline(title: self.titleLabel?.text ?? "", color: colors.appOrangeColor, font: self.titleLabel?.font ?? CustomFont.AileronBold.returnFont(15))
+            }
+        } else if isCreateAccount {
+            self.setTitleColor(colors.appOrangeColor.value, for: .normal)
+            self.titleLabel?.font = CustomFont.AileronBlack.returnFont(14)
+            self.setTitle("login_btnCreateAccount".Localized(), for: .normal)
+            if isUnderline {
+                    self.setunderline(title: self.titleLabel?.text ?? "", color: colors.appOrangeColor, font: self.titleLabel?.font ?? CustomFont.AileronBold.returnFont(14))
+            }
+        }  else {
+            self.isUserInteractionEnabled = false
+            self.setTitleColor(colors.forgotpassGreyColor.value, for: .normal)
+            self.titleLabel?.font = CustomFont.AileronRegular.returnFont(15)
         }
     }
 }

@@ -29,6 +29,20 @@ class Restaurant : NSObject, NSCoding{
     var distance : String!
     var review : String!
     var restaurant_id : String!
+    var tax : String!
+    var is_outlet : String!
+    var is_qsr : String!
+    var street : String!
+    var delivery_type : String!
+    var descriptionss : String!
+    var rating_count : String!
+    var lat : String!
+    var service_fee : String!
+    var is_kitchen : String!
+    var store_policy : String!
+    var parking_slot : String!
+    
+    
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -56,6 +70,19 @@ class Restaurant : NSObject, NSCoding{
         distance = json["distance"].stringValue
         review = json["review"].stringValue
         restaurant_id = json["restaurant_id"].stringValue
+        tax =  json["tax"].stringValue
+        is_outlet =  json["is_outlet"].stringValue
+        is_qsr =  json["is_qsr"].stringValue
+        street =  json["street"].stringValue
+        delivery_type =  json["delivery_type"].stringValue
+        descriptionss =  json["description"].stringValue
+        rating_count =  json["rating_count"].stringValue
+        lat =  json["lat"].stringValue
+        service_fee =  json["service_fee"].stringValue
+        is_kitchen =  json["is_kitchen"].stringValue
+        store_policy =  json["store_policy"].stringValue
+        parking_slot =  json["parking_slot"].stringValue
+        
 	}
 
 	/**
@@ -124,6 +151,43 @@ class Restaurant : NSObject, NSCoding{
         if restaurant_id != nil{
             dictionary["restaurant_id"] = restaurant_id
         }
+        if tax != nil {
+            dictionary["tax"] = tax
+        }
+        if is_outlet != nil {
+            dictionary["is_outlet"] = is_outlet
+        }
+        if is_qsr != nil {
+            dictionary["is_qsr"] = is_qsr
+        }
+        if street != nil {
+            dictionary["street"] = street
+        }
+        if delivery_type != nil {
+            dictionary["delivery_type"] = delivery_type
+        }
+        if descriptionss != nil {
+            dictionary["description"] = descriptionss
+        }
+        if rating_count != nil {
+            dictionary["rating_count"] = rating_count
+        }
+        if lat != nil {
+            dictionary["lat"] = lat
+        }
+        if service_fee != nil {
+            dictionary["service_fee"] = service_fee
+        }
+        if is_kitchen != nil {
+            dictionary["is_kitchen"] = is_kitchen
+        }
+        if store_policy != nil {
+            dictionary["store_policy"] = store_policy
+        }
+        if parking_slot != nil {
+            dictionary["parking_slot"] = parking_slot
+        }
+        
 		return dictionary
 	}
 
@@ -153,6 +217,19 @@ class Restaurant : NSObject, NSCoding{
         distance = aDecoder.decodeObject(forKey: "distance") as? String
         review = aDecoder.decodeObject(forKey: "review") as? String
         restaurant_id = aDecoder.decodeObject(forKey: "restaurant_id") as? String
+        tax = aDecoder.decodeObject(forKey: "tax") as? String
+        is_outlet = aDecoder.decodeObject(forKey: "is_outlet") as? String
+        is_qsr = aDecoder.decodeObject(forKey: "is_qsr") as? String
+        street = aDecoder.decodeObject(forKey: "street") as? String
+        delivery_type = aDecoder.decodeObject(forKey: "delivery_type") as? String
+        descriptionss = aDecoder.decodeObject(forKey: "descriptionss") as? String
+        rating_count = aDecoder.decodeObject(forKey: "rating_count") as? String
+        lat = aDecoder.decodeObject(forKey: "lat") as? String
+        service_fee = aDecoder.decodeObject(forKey: "service_fee") as? String
+        is_kitchen = aDecoder.decodeObject(forKey: "is_kitchen") as? String
+        store_policy = aDecoder.decodeObject(forKey: "store_policy") as? String
+        parking_slot = aDecoder.decodeObject(forKey: "parking_slot") as? String
+        
 	}
 
     /**
@@ -221,6 +298,41 @@ class Restaurant : NSObject, NSCoding{
         if restaurant_id != nil{
             aCoder.encode(restaurant_id, forKey: "restaurant_id")
         }
+        if tax != nil {
+            aCoder.encode(tax, forKey: "tax")
+        }
+        if is_outlet != nil {
+            aCoder.encode(is_outlet, forKey: "is_outlet")
+        }
+        if is_qsr != nil {
+            aCoder.encode(is_qsr, forKey: "is_qsr")
+        }
+        if street != nil {
+            aCoder.encode(street, forKey: "street")
+        }
+        if delivery_type != nil {
+            aCoder.encode(delivery_type, forKey: "delivery_type")
+        }
+        if descriptionss != nil {
+            aCoder.encode(descriptionss, forKey: "descriptionss")
+        }
+        if rating_count != nil {
+            aCoder.encode(rating_count, forKey: "rating_count")
+        }
+        if lat != nil {
+            aCoder.encode(lat, forKey: "lat")
+        }
+        if service_fee != nil {
+            aCoder.encode(service_fee, forKey: "service_fee")
+        }
+        if is_kitchen != nil {
+            aCoder.encode(is_kitchen, forKey: "is_kitchen")
+        }
+        if store_policy != nil {
+            aCoder.encode(store_policy, forKey: "store_policy")
+        }
+        if parking_slot != nil {
+            aCoder.encode(parking_slot, forKey: "parking_slot")
+        }
 	}
-
 }

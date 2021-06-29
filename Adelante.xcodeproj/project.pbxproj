@@ -240,6 +240,8 @@
 		84C5F68E2643BCAF000B2DDE /* NotificationReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F68D2643BCAF000B2DDE /* NotificationReqModel.swift */; };
 		84C5F6AB2643C05A000B2DDE /* notificaationResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */; };
 		84C5F6AC2643C05A000B2DDE /* NotificationDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */; };
+		881715E9267B12A300F821AA /* VerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881715E8267B12A300F821AA /* VerifyVC.swift */; };
+		884B350326844F8B0019BB4F /* otpReceive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884B350226844F8B0019BB4F /* otpReceive.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -485,6 +487,8 @@
 		84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificaationResModel.swift; sourceTree = "<group>"; };
 		84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDatum.swift; sourceTree = "<group>"; };
 		86784D51C37BBA35E10C918A /* Pods-ApiStructureModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.release.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.release.xcconfig"; sourceTree = "<group>"; };
+		881715E8267B12A300F821AA /* VerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyVC.swift; sourceTree = "<group>"; };
+		884B350226844F8B0019BB4F /* otpReceive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpReceive.swift; sourceTree = "<group>"; };
 		A149B2D0075A5FCD377E0D23 /* Pods-Adelante.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adelante.release.xcconfig"; path = "Target Support Files/Pods-Adelante/Pods-Adelante.release.xcconfig"; sourceTree = "<group>"; };
 		CD772C2DF1828C83DDDD515E /* Pods-ApiStructureModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.debug.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1000,6 +1004,7 @@
 			children = (
 				340A4C7125A3291F00FB6061 /* Profile.swift */,
 				81CFFD3D2574C60D005AA86A /* UserInfo.swift */,
+				884B350226844F8B0019BB4F /* otpReceive.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -1128,6 +1133,7 @@
 				8105FDCA2574F13B008D36D6 /* MainLoginVC.swift */,
 				81CFFD662574C60D005AA86A /* LoginViewController.swift */,
 				81CFFD672574C60D005AA86A /* RegisterViewController.swift */,
+				881715E8267B12A300F821AA /* VerifyVC.swift */,
 			);
 			path = "Login,Register,ForgotPassword";
 			sourceTree = "<group>";
@@ -1500,6 +1506,7 @@
 				18E0B578265790F90016AFE9 /* PromocodeListReqModel.swift in Sources */,
 				3443D61F25C11E62001CFAFE /* SubMenu.swift in Sources */,
 				34CF870F25A82A550040C188 /* SearchResModel.swift in Sources */,
+				884B350326844F8B0019BB4F /* otpReceive.swift in Sources */,
 				18F369542580AE0000992FCD /* commonPopup.swift in Sources */,
 				8170CAF1257A10B500B24B7A /* RateReviewVC.swift in Sources */,
 				84C5F6AB2643C05A000B2DDE /* notificaationResModel.swift in Sources */,
@@ -1524,6 +1531,7 @@
 				81CFFD862574C60D005AA86A /* CustomSlider.swift in Sources */,
 				34C3756325CD41970049289A /* orderDetailsData.swift in Sources */,
 				81E67217257E68BC00DCE9DA /* addPaymentVC.swift in Sources */,
+				881715E9267B12A300F821AA /* VerifyVC.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,
 				3400019825C7EB8E00C584DE /* Variant.swift in Sources */,
 				819B0C94257E101700289BBF /* MyOrderDetailsVC.swift in Sources */,

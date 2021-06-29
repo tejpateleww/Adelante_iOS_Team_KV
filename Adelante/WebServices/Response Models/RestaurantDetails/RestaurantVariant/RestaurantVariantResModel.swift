@@ -23,7 +23,7 @@ class RestaurantVariantResModel : NSObject, NSCoding{
         message = json["message"].stringValue
         status = json["status"].boolValue
         variants = [Variant]()
-        let variantsArray = json["variants"].arrayValue
+        let variantsArray = json["data"].arrayValue
         for variantsJson in variantsArray{
             let value = Variant(fromJson: variantsJson)
             variants.append(value)
@@ -47,7 +47,7 @@ class RestaurantVariantResModel : NSObject, NSCoding{
         for variantsElement in variants {
         	dictionaryElements.append(variantsElement.toDictionary())
         }
-        dictionary["variants"] = dictionaryElements
+        dictionary["data"] = dictionaryElements
         }
 		return dictionary
 	}
@@ -60,7 +60,7 @@ class RestaurantVariantResModel : NSObject, NSCoding{
 	{
 		message = aDecoder.decodeObject(forKey: "message") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
-		variants = aDecoder.decodeObject(forKey: "variants") as? [Variant]
+		variants = aDecoder.decodeObject(forKey: "data") as? [Variant]
 	}
 
     /**
@@ -76,7 +76,7 @@ class RestaurantVariantResModel : NSObject, NSCoding{
 			aCoder.encode(status, forKey: "status")
 		}
 		if variants != nil{
-			aCoder.encode(variants, forKey: "variants")
+			aCoder.encode(variants, forKey: "data")
 		}
 
 	}

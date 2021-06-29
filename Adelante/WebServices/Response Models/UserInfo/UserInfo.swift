@@ -22,8 +22,11 @@ class Userinfo : Codable{
         }
         message = json["message"].stringValue
         let profileJson = json["profile"]
+        let profileData = json["data"]
         if !profileJson.isEmpty{
             profile = Profile(fromJson: profileJson)
+        }else{
+            profile = Profile(fromJson: profileData)
         }
         status = json["status"].boolValue
     }
@@ -35,7 +38,12 @@ class Userinfo : Codable{
         status = dictionary["status"] as? Bool
         if let userData = dictionary["profile"] as? [String:Any]{
             profile = Profile(fromDictionary: userData)
+        }else{
+            if let userData = dictionary["data"] as? [String:Any]{
+                profile = Profile(fromDictionary: userData)
+            }
         }
+        
     }
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property

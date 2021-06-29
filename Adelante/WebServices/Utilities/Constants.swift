@@ -62,7 +62,7 @@ struct DeviceType {
 }
 
 enum GlobalStrings : String{
-    case Alert_logout = "Are you sure you want to logout..!"
+    case Alert_logout = "Are you sure you want to logout ?"
 }
 
 struct selectedOrderItems{

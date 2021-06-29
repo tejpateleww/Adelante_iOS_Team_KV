@@ -9,6 +9,7 @@
 import UIKit
 import SkyFloatingLabelTextField
 import FormTextField
+
 class addCarddetailsTextField : UITextField {
     override func awakeFromNib() {
        
@@ -34,6 +35,32 @@ class EnterCVVTextField: FormTextField {
 //        apply()
     }
 }
+
+
+protocol OTPTextFieldDelegate   {
+    func textFieldDidDelete(currentTextField: OTPTextField)
+}
+class OTPTextField: UITextField {
+    
+    var myDelegate: OTPTextFieldDelegate?
+
+    override func deleteBackward() {
+        super.deleteBackward()
+        myDelegate?.textFieldDidDelete(currentTextField: self)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.backgroundColor = .clear
+        self.textAlignment = .center
+        self.layer.cornerRadius = 9
+        self.clipsToBounds = true
+        self.layer.borderColor = colors.appOrangeColor.value.cgColor
+        self.layer.borderWidth = 1
+        self.font = CustomFont.AileronBold.returnFont(27)
+    }
+}
+
 class customTextField: UITextField {
     
     private let defaultUnderlineColor = UIColor.gray

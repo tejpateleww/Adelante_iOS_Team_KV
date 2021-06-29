@@ -170,7 +170,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblRestaurantList.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
-        cell.lblAreaName.text = arrOutletList[indexPath.row].street
+        cell.lblAreaName.text = arrOutletList[indexPath.row].name
         cell.lblAddress.text = arrOutletList[indexPath.row].address
         cell.lblMiles.text = arrOutletList[indexPath.row].distance
         cell.lblRating.text = arrOutletList[indexPath.row].ratingCount

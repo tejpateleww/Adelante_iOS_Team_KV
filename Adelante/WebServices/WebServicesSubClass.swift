@@ -24,6 +24,17 @@ class WebServiceSubClass
         let  params : [String:String] = loginModel.generatPostParams() as! [String : String]
         WebService.shared.requestMethod(api: .login, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
     }
+    //OTP Send
+    class func sendOTP( optModel : sendOtpReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = optModel.generatPostParams() as! [String : String]
+        WebService.shared.requestMethod(api: .sendOtp, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    //Edit profile EMail Verify
+    class func sendEmail( optModel : sendEmailVerifyReqModel  ,showHud : Bool = false,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = optModel.generatPostParams() as! [String : String]
+        WebService.shared.requestMethod(api: .Email_verify, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    //Setting
     class func Settings( showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         WebService.shared.getMethod(api: .SettingsLink, parameterString: "", httpMethod: .get, showHud: showHud, completion: completion)
     }

@@ -195,6 +195,18 @@ class myOrdersSegmentControl: BetterSegmentedControl {
     }
 }
 
+
+class searchRestauntSegmentControl: BetterSegmentedControl {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.segments = LabelSegment.segments(withTitles: ["SearchVC_lblrestaurant".Localized(), "SearchVC_lblfooditem".Localized()], numberOfLines: 1, normalBackgroundColor: colors.segmentDeselectedColor.value, normalFont: CustomFont.NexaRegular.returnFont(16), normalTextColor: colors.black.value.withAlphaComponent(0.29), selectedBackgroundColor: colors.segmentSelectedColor.value, selectedFont: CustomFont.NexaRegular.returnFont(16), selectedTextColor: colors.black.value)
+        self.indicatorViewBorderColor = colors.segmentSelectedColor.value
+        self.indicatorViewBackgroundColor = colors.segmentSelectedColor.value
+        self.backgroundColor = colors.segmentDeselectedColor.value
+        self.animationSpringDamping = 1.0
+    }
+}
+
 class seperatorView: UIView {
     @IBInspectable var isDarkLine:Bool = false
     

@@ -182,18 +182,18 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8i-2G-srw">
                                                 <rect key="frame" x="0.0" y="213" width="378" height="64"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vBw-pM-FmQ">
-                                                        <rect key="frame" x="48" y="0.0" width="282" height="64"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="vBw-pM-FmQ">
+                                                        <rect key="frame" x="36" y="0.0" width="306" height="64"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZv-Qb-IGd">
                                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="64"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukE-SO-3WD" customClass="commonPopupButton" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="5" y="0.0" width="126" height="38"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="136" height="38"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="126" id="F0S-N0-VTK"/>
                                                                             <constraint firstAttribute="height" constant="38" id="IYt-Rx-MUc"/>
                                                                         </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <connections>
                                                                             <action selector="btnCancelAction:" destination="CIm-KZ-oyR" eventType="touchUpInside" id="ypL-lM-tDa"/>
@@ -202,22 +202,22 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="ukE-SO-3WD" firstAttribute="leading" secondItem="LZv-Qb-IGd" secondAttribute="leading" constant="5" id="82r-9C-Dlh"/>
+                                                                    <constraint firstItem="ukE-SO-3WD" firstAttribute="leading" secondItem="LZv-Qb-IGd" secondAttribute="leading" id="82r-9C-Dlh"/>
                                                                     <constraint firstItem="ukE-SO-3WD" firstAttribute="top" secondItem="LZv-Qb-IGd" secondAttribute="top" id="jbt-0D-4hJ"/>
                                                                     <constraint firstAttribute="bottom" secondItem="ukE-SO-3WD" secondAttribute="bottom" constant="26" id="lfx-W2-x6P"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="ukE-SO-3WD" secondAttribute="trailing" constant="5" id="mFh-BA-OYd"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="ukE-SO-3WD" secondAttribute="trailing" id="mFh-BA-OYd"/>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-S9-qiL">
-                                                                <rect key="frame" x="146" y="0.0" width="136" height="64"/>
+                                                                <rect key="frame" x="170" y="0.0" width="136" height="64"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VL9-zG-g4p" customClass="commonPopupButton" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="5" y="0.0" width="126" height="38"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="VL9-zG-g4p" customClass="commonPopupButton" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="136" height="38"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="126" id="YVM-I3-fly"/>
                                                                             <constraint firstAttribute="height" constant="38" id="wPa-Xe-Zrt"/>
                                                                         </constraints>
-                                                                        <state key="normal" title="Button"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <state key="normal" title="Payment Sucess"/>
                                                                         <connections>
                                                                             <action selector="submitButtonAction:" destination="CIm-KZ-oyR" eventType="touchUpInside" id="KXO-fi-968"/>
                                                                         </connections>
@@ -225,8 +225,8 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="VL9-zG-g4p" secondAttribute="trailing" constant="5" id="WPf-dw-crd"/>
-                                                                    <constraint firstItem="VL9-zG-g4p" firstAttribute="leading" secondItem="ETJ-S9-qiL" secondAttribute="leading" constant="5" id="nah-xc-jum"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="VL9-zG-g4p" secondAttribute="trailing" id="WPf-dw-crd"/>
+                                                                    <constraint firstItem="VL9-zG-g4p" firstAttribute="leading" secondItem="ETJ-S9-qiL" secondAttribute="leading" id="nah-xc-jum"/>
                                                                     <constraint firstItem="VL9-zG-g4p" firstAttribute="top" secondItem="ETJ-S9-qiL" secondAttribute="top" id="qSv-MV-7qJ"/>
                                                                     <constraint firstAttribute="bottom" secondItem="VL9-zG-g4p" secondAttribute="bottom" constant="26" id="xEV-rd-Jtc"/>
                                                                 </constraints>
@@ -295,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whY-cs-lhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="248" y="768"/>
+            <point key="canvasLocation" x="247.82608695652175" y="767.41071428571422"/>
         </scene>
     </scenes>
     <resources>

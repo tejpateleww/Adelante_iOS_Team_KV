@@ -68,6 +68,7 @@ enum ApiKey: String {
     case Init = "init"
     case Register = "register"
     case login = "login"
+    case sendOtp = "otp_send"
     case ForgotPassword = "forgot_password"
     case changePassword = "change_password"
     case Logout = "logout"
@@ -98,5 +99,6 @@ enum ApiKey: String {
     case fetch_promocode = "fetch_promocode"
     case apply_promocode = "apply_promocode"
     case order = "order"
+    case Email_verify = "resend_link"
 }
 

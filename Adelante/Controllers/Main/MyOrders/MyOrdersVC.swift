@@ -148,7 +148,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 cell.cancel = {
                     
                     let alertController = UIAlertController(title: AppName,
-                                                            message: "Are you sure you want to cancel order".Localized(),
+                                                            message: "Are you sure you want to cancel order ?".Localized(),
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                     alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
@@ -200,7 +200,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 cell.cancel = {
                     
                     let alertController = UIAlertController(title: AppName,
-                                                            message: "Are you sure you want to cancel order".Localized(),
+                                                            message: "Are you sure you want to cancel order ?".Localized(),
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                     alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
