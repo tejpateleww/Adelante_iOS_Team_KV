@@ -76,7 +76,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         webservicePostRestaurantDetails()
         setUpLocalizedStrings()
         NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantDetails, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshRestaurantDetail), name: notifRefreshRestaurantDetails, object: nil)
+  //      NotificationCenter.default.addObserver(self, selector: #selector(refreshRestaurantDetail), name: notifRefreshRestaurantDetails, object: nil)
         setup()
     }
     
@@ -89,8 +89,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     let id = self.objCurrentOrder.order[j].restaurant_item_id
                     if arrMenuitem[i].id == id {
                         arrMenuitem[i].selectedQuantity = self.objCurrentOrder.order[j].selectedQuantity
-                    } else {
-                        arrMenuitem[i].selectedQuantity = ""
                     }
                 }
             }

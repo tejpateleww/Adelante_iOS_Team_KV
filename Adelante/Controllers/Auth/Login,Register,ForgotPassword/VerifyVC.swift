@@ -254,7 +254,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                     userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                     userDefault.setUserData(objProfile: registerRespoDetails!)
                     appDel.navigateToLogin()
-                   // appDel.navigateToHome()
+                    appDel.clearData()
                 }, otherTitles: nil)
             }
             else
@@ -288,7 +288,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                 userDefault.setUserData(objProfile: updatedData.profile)
                 self.isRemovePhoto = false
                 Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
-                    appDel.navigateToLogin()
+                    appDel.SetLogout()
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)

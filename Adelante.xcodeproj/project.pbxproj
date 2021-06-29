@@ -240,6 +240,14 @@
 		84C5F68E2643BCAF000B2DDE /* NotificationReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F68D2643BCAF000B2DDE /* NotificationReqModel.swift */; };
 		84C5F6AB2643C05A000B2DDE /* notificaationResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */; };
 		84C5F6AC2643C05A000B2DDE /* NotificationDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */; };
+		88073168268AFA4A00430E07 /* ShimmerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88073166268AFA4A00430E07 /* ShimmerCell.swift */; };
+		88073169268AFA4A00430E07 /* ShimmerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88073167268AFA4A00430E07 /* ShimmerCell.xib */; };
+		88073172268B4E2F00430E07 /* HomeSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88073170268B4E2F00430E07 /* HomeSkeletonCell.swift */; };
+		88073173268B4E2F00430E07 /* HomeSkeletonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88073171268B4E2F00430E07 /* HomeSkeletonCell.xib */; };
+		88073179268B4ED800430E07 /* NoDataCollectionview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88073175268B4ED800430E07 /* NoDataCollectionview.xib */; };
+		8807317A268B4ED800430E07 /* ShimmarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88073176268B4ED800430E07 /* ShimmarCollectionCell.swift */; };
+		8807317B268B4ED800430E07 /* ShimmarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88073177268B4ED800430E07 /* ShimmarCollectionCell.xib */; };
+		8807317C268B4ED800430E07 /* NoDataCollectionview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88073178268B4ED800430E07 /* NoDataCollectionview.swift */; };
 		881715E9267B12A300F821AA /* VerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881715E8267B12A300F821AA /* VerifyVC.swift */; };
 		884B350326844F8B0019BB4F /* otpReceive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884B350226844F8B0019BB4F /* otpReceive.swift */; };
 /* End PBXBuildFile section */
@@ -487,6 +495,14 @@
 		84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificaationResModel.swift; sourceTree = "<group>"; };
 		84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDatum.swift; sourceTree = "<group>"; };
 		86784D51C37BBA35E10C918A /* Pods-ApiStructureModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.release.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.release.xcconfig"; sourceTree = "<group>"; };
+		88073166268AFA4A00430E07 /* ShimmerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShimmerCell.swift; path = ../../../../../../../../../Downloads/ShimmerCell.swift; sourceTree = "<group>"; };
+		88073167268AFA4A00430E07 /* ShimmerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShimmerCell.xib; path = ../../../../../../../../../Downloads/ShimmerCell.xib; sourceTree = "<group>"; };
+		88073170268B4E2F00430E07 /* HomeSkeletonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCell.swift; sourceTree = "<group>"; };
+		88073171268B4E2F00430E07 /* HomeSkeletonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSkeletonCell.xib; sourceTree = "<group>"; };
+		88073175268B4ED800430E07 /* NoDataCollectionview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataCollectionview.xib; sourceTree = "<group>"; };
+		88073176268B4ED800430E07 /* ShimmarCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmarCollectionCell.swift; sourceTree = "<group>"; };
+		88073177268B4ED800430E07 /* ShimmarCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShimmarCollectionCell.xib; sourceTree = "<group>"; };
+		88073178268B4ED800430E07 /* NoDataCollectionview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataCollectionview.swift; sourceTree = "<group>"; };
 		881715E8267B12A300F821AA /* VerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyVC.swift; sourceTree = "<group>"; };
 		884B350226844F8B0019BB4F /* otpReceive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpReceive.swift; sourceTree = "<group>"; };
 		A149B2D0075A5FCD377E0D23 /* Pods-Adelante.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adelante.release.xcconfig"; path = "Target Support Files/Pods-Adelante/Pods-Adelante.release.xcconfig"; sourceTree = "<group>"; };
@@ -600,6 +616,8 @@
 				34CF866525A81BC90040C188 /* SearchCell.swift */,
 				349347B925D11562006366B4 /* RestaurantOutletListCell.swift */,
 				84C5F68A2643A91C000B2DDE /* PromocodeCell.swift */,
+				88073166268AFA4A00430E07 /* ShimmerCell.swift */,
+				88073167268AFA4A00430E07 /* ShimmerCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1151,6 +1169,7 @@
 		81E6720D257E502100DCE9DA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8807316F268B4E2F00430E07 /* Skeleton */,
 				8105FDB72574D08E008D36D6 /* HomeVC.swift */,
 				345FC23E25BEB0B300795BE7 /* EditLocationVC.swift */,
 			);
@@ -1164,6 +1183,20 @@
 				84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		8807316F268B4E2F00430E07 /* Skeleton */ = {
+			isa = PBXGroup;
+			children = (
+				88073178268B4ED800430E07 /* NoDataCollectionview.swift */,
+				88073175268B4ED800430E07 /* NoDataCollectionview.xib */,
+				88073176268B4ED800430E07 /* ShimmarCollectionCell.swift */,
+				88073177268B4ED800430E07 /* ShimmarCollectionCell.xib */,
+				88073170268B4E2F00430E07 /* HomeSkeletonCell.swift */,
+				88073171268B4E2F00430E07 /* HomeSkeletonCell.xib */,
+			);
+			name = Skeleton;
+			path = ../../../../../../../../../../Desktop/Skeleton;
 			sourceTree = "<group>";
 		};
 		B7F05C3E06CAA5224C293454 /* Frameworks */ = {
@@ -1247,6 +1280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88073169268AFA4A00430E07 /* ShimmerCell.xib in Resources */,
 				8105FE0E25751644008D36D6 /* NexaLight.otf in Resources */,
 				817A16FE25839D7100C11BB2 /* Nunito-Italic.ttf in Resources */,
 				34A9003F25947A8500EAD2FF /* Auth.storyboard in Resources */,
@@ -1273,6 +1307,7 @@
 				817A16FB25839D7100C11BB2 /* Nunito-Regular.ttf in Resources */,
 				817A16FF25839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				8105FDF725751644008D36D6 /* Aileron-UltraLight.otf in Resources */,
+				88073179268B4ED800430E07 /* NoDataCollectionview.xib in Resources */,
 				8105FDFB25751644008D36D6 /* Aileron-Thin.otf in Resources */,
 				342ADF3D25B717820097B5AD /* GoogleService-Info.plist in Resources */,
 				8105FE0025751644008D36D6 /* Aileron-Italic.otf in Resources */,
@@ -1281,6 +1316,7 @@
 				817A16F625839D7100C11BB2 /* Nunito-SemiBoldItalic.ttf in Resources */,
 				8105FDF925751644008D36D6 /* Aileron-UltraLightItalic.otf in Resources */,
 				8105FE0125751644008D36D6 /* Aileron-BlackItalic.otf in Resources */,
+				88073173268B4E2F00430E07 /* HomeSkeletonCell.xib in Resources */,
 				817A16FA25839D7100C11BB2 /* Nunito-Bold.ttf in Resources */,
 				8105FE0D25751644008D36D6 /* NexaBold.otf in Resources */,
 				8105FDF825751644008D36D6 /* Aileron-Heavy.otf in Resources */,
@@ -1299,6 +1335,7 @@
 				8105FE0425751644008D36D6 /* NexaBlackItalic.otf in Resources */,
 				817A16F725839D7100C11BB2 /* Nunito-LightItalic.ttf in Resources */,
 				817A16F525839D7100C11BB2 /* Nunito-Black.ttf in Resources */,
+				8807317B268B4ED800430E07 /* ShimmarCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,6 +1463,7 @@
 				3431E04825931AAE002F1435 /* YourFavouriteCell.swift in Sources */,
 				347D955D25A71637000C64B5 /* Banner.swift in Sources */,
 				189E57C12664BEDC008AECA6 /* NoData.swift in Sources */,
+				88073172268B4E2F00430E07 /* HomeSkeletonCell.swift in Sources */,
 				81CFFD882574C60D005AA86A /* GradientButton.swift in Sources */,
 				34D603A125A8630300C82D63 /* RestaurantListResModel.swift in Sources */,
 				8105FDCB2574F13B008D36D6 /* MainLoginVC.swift in Sources */,
@@ -1453,6 +1491,7 @@
 				180A9F06265D0A4500AC7A22 /* PromocodeAppliedResModel.swift in Sources */,
 				3443D61E25C11E62001CFAFE /* RestaurantDetailsResModel.swift in Sources */,
 				342C579F25CBC94D0098F573 /* CardList.swift in Sources */,
+				8807317C268B4ED800430E07 /* NoDataCollectionview.swift in Sources */,
 				81E67216257E68BC00DCE9DA /* AddCardVC.swift in Sources */,
 				34A260E125D3B26000E24D73 /* Detail.swift in Sources */,
 				34CD681525B7DCAB0052F485 /* FavoriteReqModel.swift in Sources */,
@@ -1482,6 +1521,7 @@
 				342C545A25CBB2E80098F573 /* AddPaymentReqModel.swift in Sources */,
 				3431E05225931CE4002F1435 /* MyFoodlistCell.swift in Sources */,
 				8105FDAA2574C9A2008D36D6 /* RegisterReqModel.swift in Sources */,
+				88073168268AFA4A00430E07 /* ShimmerCell.swift in Sources */,
 				347AA2D225CD0AD90010BCF2 /* orderListingData.swift in Sources */,
 				347D955E25A71637000C64B5 /* Restaurant.swift in Sources */,
 				3431E06A25932287002F1435 /* RestaurantCategoryCell.swift in Sources */,
@@ -1502,6 +1542,7 @@
 				8105FDCF2574F714008D36D6 /* SplashVC.swift in Sources */,
 				8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */,
 				349347BD25D13FBF006366B4 /* RateOrderReqModel.swift in Sources */,
+				8807317A268B4ED800430E07 /* ShimmarCollectionCell.swift in Sources */,
 				81CFFD7D2574C60D005AA86A /* UILabel+Extension.swift in Sources */,
 				18E0B578265790F90016AFE9 /* PromocodeListReqModel.swift in Sources */,
 				3443D61F25C11E62001CFAFE /* SubMenu.swift in Sources */,

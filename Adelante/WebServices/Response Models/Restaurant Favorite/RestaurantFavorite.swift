@@ -20,7 +20,11 @@ class RestaurantFavorite : NSObject, NSCoding{
     var subCategoryId : String!
     var userId : String!
     var favourite : String!
-
+    var rating_count : String!
+    var lat : String!
+    var lng : String!
+    var type : String!
+    
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -39,6 +43,12 @@ class RestaurantFavorite : NSObject, NSCoding{
         subCategoryId = json["sub_category_id"].stringValue
         userId = json["user_id"].stringValue
         favourite = json["favourite"].stringValue
+        rating_count = json["rating_count"].stringValue
+        lat = json["lat"].stringValue
+        lng = json["lng"].stringValue
+        type = json["type"].stringValue
+        
+        
 	}
 
 	/**
@@ -80,6 +90,20 @@ class RestaurantFavorite : NSObject, NSCoding{
         if favourite != nil{
             dictionary["favourite"] = favourite
         }
+        if rating_count != nil{
+            dictionary["rating_count"] = rating_count
+        }
+        if lat != nil{
+            dictionary["lat"] = lat
+        }
+        if lng != nil{
+            dictionary["lng"] = lng
+        }
+        if type != nil{
+            dictionary["type"] = type
+        }
+    
+        
 		return dictionary
 	}
 
@@ -100,6 +124,11 @@ class RestaurantFavorite : NSObject, NSCoding{
 		subCategoryId = aDecoder.decodeObject(forKey: "sub_category_id") as? String
 		userId = aDecoder.decodeObject(forKey: "user_id") as? String
         favourite = aDecoder.decodeObject(forKey: "favourite") as? String
+        rating_count = aDecoder.decodeObject(forKey: "rating_count") as? String
+        lat = aDecoder.decodeObject(forKey: "lat") as? String
+        lng = aDecoder.decodeObject(forKey: "lng") as? String
+        type = aDecoder.decodeObject(forKey: "type") as? String
+        
 	}
 
     /**
@@ -140,6 +169,18 @@ class RestaurantFavorite : NSObject, NSCoding{
 		}
         if favourite != nil{
             aCoder.encode(userId, forKey: "favourite")
+        }
+        if rating_count != nil{
+            aCoder.encode(rating_count, forKey: "rating_count")
+        }
+        if lat != nil{
+            aCoder.encode(lat, forKey: "lat")
+        }
+        if lng != nil{
+            aCoder.encode(lng, forKey: "lng")
+        }
+        if type != nil{
+            aCoder.encode(type, forKey: "type")
         }
 
 	}

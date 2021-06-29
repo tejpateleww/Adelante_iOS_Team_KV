@@ -166,7 +166,7 @@ class EditProfileVC: BaseViewController{
                 userDefault.setUserData(objProfile: updatedData.profile)
                 self.isRemovePhoto = false
                 Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
-                    appDel.navigateToLogin()
+                    appDel.SetLogout()
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
@@ -201,22 +201,6 @@ class EditProfileVC: BaseViewController{
             }
         }
     }
-    
-    func webserviceForSendEmailVerify()
-    {
-        let email = sendEmailVerifyReqModel()
-        email.user_name = txtEmail.text ?? ""
-        
-        // self.showHUD()
-        WebServiceSubClass.sendEmail(optModel: email, showHud: true) { [self] (json, status, response) in
-            self.hideHUD()
-            if(status){
-                print(json)
-            }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
-            }
-        }
-    }   
 }
 
 

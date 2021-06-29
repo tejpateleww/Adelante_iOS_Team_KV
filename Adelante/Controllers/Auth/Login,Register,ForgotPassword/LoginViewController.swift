@@ -109,7 +109,15 @@ class LoginViewController: BaseViewController {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                if json["message"].string == "Your account is not activated yet!" {
+                    self.showAlertWithTwoButtonCompletion(title: AppName, Message: "To login, you must have to activate your account.To activate account, you have to click on activation link, which has been sent to your email.", defaultButtonTitle: "OK", cancelButtonTitle: "Resend Email") { [self] (index) in
+                        if index == 1{
+                            self.webserviceForSendEmailVerify()
+                        }
+                    }
+                }else{
+                    Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                }
             }
         })
     }
@@ -130,7 +138,23 @@ class LoginViewController: BaseViewController {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
+    }
+    
+    func webserviceForSendEmailVerify()
+    {
+        let email = sendEmailVerifyReqModel()
+        email.user_name = txtEmail.text ?? ""
         
+        // self.showHUD()
+        WebServiceSubClass.sendEmail(optModel: email, showHud: true) { [self] (json, status, response) in
+            self.hideHUD()
+            if(status){
+                print(json)
+                Utilities.displayErrorAlert(json["message"].string!)
+            }else {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
     }
     
     func showAlertWithTwoButtonCompletion(title:String, Message:String, defaultButtonTitle:String, cancelButtonTitle:String ,  Completion:@escaping ((Int) -> ())) {
