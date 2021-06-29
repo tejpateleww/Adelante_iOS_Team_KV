@@ -8,7 +8,7 @@
 
 //MainLoginVC
 "MainLoginVC_btnSkip" = "SKIP";
-"MainLoginVC_btnSignin" = "Sign In";
+"MainLoginVC_btnSignin" = "Sign in";
 "MainLoginVC_btnCreateAccount" = "Create Account";
 
 //LoginViewController
@@ -16,7 +16,7 @@
 "LoginViewController_txtEmail" = "Email / Phone Number";
 "LoginViewController_txtPassword" = "Password";
 "LoginViewController_btnForgotPassword" = "Forgot Password";
-"LoginViewController_lblSignin" = "Sign In";
+"LoginViewController_lblSignin" = "Sign in";
 "LoginViewController_lblDontHave" = "Don't have an account";
 "LoginViewController_btnCreateAccount" = "Create Account";
 
@@ -30,16 +30,27 @@
 "RegisterViewController_txtConPassword" = "Confirm Password";
 "RegisterViewController_lblCreateAccount" = "Create Account";
 "RegisterViewController_lblAlreadyHave" = "Already have an account";
-"RegisterViewController_btnSignin" = "Sign In";
+"RegisterViewController_btnSignin" = "Sign in";
 
 //SearchVC
 "SearchVC_txtSearch" = "Search For Food and Restaurant";
+"SearchVC_lblrestaurant" = "Restaurants";
+"SearchVC_lblfooditem" = "Food Items";
 
 //FavouritesVC
 "FavouritesVC_txtSearch" = "Search for Food and Restaurant";
 
+//VerifyVC
+"verify_lblVerify" = "Verify";
+"verify_lblCodeInstruction" = "A Code has been Sent to your phone";
+"verify_btnDontRecOtp" = "Don't receive the OTP? ";
+"verify_btnResendOtp" = "RESEND OTP";
+"verify_btnVerify" = "Verify";
+"validMsg_RequiredOtp" = "Please enter OTP";
+"validMsg_InvalidOtp" = "Please enter valid OTP";
+
 //MyOrderVC
-"MyOrderVC_lblPastOrders" = "Past orders";
+"MyOrderVC_lblPastOrders" = "Past";
 "MyOrderVC_lblUpcomingOrders" = "In-Process";
 "MyOrderVC_MyOrdersCess_btnRepeatOrder" = "Repeat Order";
 "MyOrderVC_MyOrdersCess_btnCancelOrder" = "Cancel Order";
@@ -57,6 +68,9 @@
 "EditProfileVC_txtPhoneNumber" = "Phone Number";
 "EditProfileVC_lblUnverified" = "Unverified";
 "EditProfileVC_btnSave" = "Save";
+"EditProfileVC_EmailChange" = "Are you sure you want to change email id? if you change your email id then you will be logout from application you have to verify that email then you will able to do login in application.";
+"EditProfileVC_PhoneChange" = "Are you sure you want to change phone number? if you change your number then you will be logout from application you have to do login again.";
+
 
 //FeedbackVC
 "FeedbackVC_txtTitle" = "Title";
@@ -84,7 +98,7 @@
 "RestaurantReviewVC_lblReviews" = "%@ Reviews";
 
 //RateReviewVC
-"RateReviewVC_lblRateRestaurant" = "How Would You Rate\nyour Experience?";
+"RateReviewVC_lblRateRestaurant" = "How would you rate\nyour experience?";
 "RateReviewVC_tvRateReview" = "Comments";
 "RateReviewVC_btnSubmit" = "Submit";
 
@@ -140,7 +154,7 @@
 
 
 //sortPopupVC
-"sortPopupVC_lblSort" = "Sort";
+"sortPopupVC_lblSort" = "Filter";
 
 //"MyAccountVC
 "MyAccountVC_title1" = "Payment";
@@ -218,7 +232,7 @@
 "checkOutVC_arrayForTitle_title3" = "Discount";
 "checkOutVC_strCancel_title" = "No";
 "checkOutVC_strSubmit_title" = "Yes";
-"checkOutVC_strDescription_title1" = "Are you sure you want to choose another location for this restaurant chain or franchise?";
+"checkOutVC_strDescription_title1" = "Are you sure you want to choose another location? Then your cart item will discard.";
 "checkOutVC_strDescription_title2" = "Changing restaurants will empty your cart. Are you sure you want to continue?";
 
 
@@ -297,5 +311,5 @@
 
 
 //Cancel order
-"Are you sure you want to cancel order" = "Are you sure you want to cancel order";
+"Are you sure you want to cancel order ?" = "Are you sure you want to cancel order ?";
 

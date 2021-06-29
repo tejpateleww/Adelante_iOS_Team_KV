@@ -52,6 +52,8 @@ class EditProfileVC: BaseViewController{
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         
+        lblVerified.textColor = colors.appGreenColor.value
+        lblUnverified.textColor = colors.appGreenColor.value
     }
     
     func showUserData(){
@@ -89,11 +91,25 @@ class EditProfileVC: BaseViewController{
             (sender as AnyObject).setImage(#imageLiteral(resourceName: "imgUpdateDone"), for: .normal)
         }else{
             if validation(){
-                webserviceForEditprofile()
+                if let userdata = SingletonClass.sharedInstance.LoginRegisterUpdateData{
+                    if userdata.email != txtEmail.text {
+                        Utilities.displayAlert("", message:"EditProfileVC_EmailChange".Localized(), completion: { [self]_ in
+                            webserviceForEditprofile()
+                        }, otherTitles: nil)
+                    }else if userdata.phone != txtPhoneNumber.text {
+                        Utilities.displayAlert("", message: "EditProfileVC_PhoneChange".Localized(), completion: { [self]_ in
+                            self.webserviceForSendOTP()
+                        }, otherTitles: nil)
+                    }else{
+                        webserviceForEditprofile()
+                    }
+                }else{
+                    webserviceForEditprofile()
+                }
             }
         }
-        //        self.navigationController?.popViewController(animated: true)
     }
+    
     func validation()->Bool{
         let txtTemp = UITextField()
         txtTemp.text = txtFirstName.text?.replacingOccurrences(of: " ", with: "")
@@ -117,13 +133,14 @@ class EditProfileVC: BaseViewController{
         
         return true
     }
+    
     func setUpLocalizedStrings() {
         txtFirstName.placeholder = "EditProfileVC_txtFirstName".Localized()
         txtLastName.placeholder = "EditProfileVC_txtLastName".Localized()
         txtEmail.placeholder = "EditProfileVC_txtEmail".Localized()
         lblVerified.text = "EditProfileVC_lblVerified".Localized()
         txtPhoneNumber.placeholder = "EditProfileVC_txtPhoneNumber".Localized()
-        lblUnverified.text = "EditProfileVC_lblUnverified".Localized()
+        lblUnverified.text = "EditProfileVC_lblVerified".Localized()
         btnSave.setTitle("EditProfileVC_btnSave".Localized(), for: .normal)
     }
     
@@ -149,15 +166,61 @@ class EditProfileVC: BaseViewController{
                 userDefault.setUserData(objProfile: updatedData.profile)
                 self.isRemovePhoto = false
                 Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
-                    self.navigationController?.popViewController(animated: true)
-                    self.delegateEdit.refereshProfileScreen()
+                    appDel.navigateToLogin()
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
     }
+    
+    //OTP SEND API CALL
+    func webserviceForSendOTP()
+    {
+        let otp = sendOtpReqModel()
+        otp.user_name = txtEmail.text ?? ""
+        
+       // self.showHUD()
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: true) { [self] (json, status, response) in
+            self.hideHUD()
+            if(status){
+                print(json)
+                let otpModel = otpReceive.init(fromJson: json)
+                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID) as! VerifyVC
+                OTPVC.isFromEditProfile = true
+                OTPVC.strfirst = self.txtFirstName.text!
+                OTPVC.strLast = self.txtLastName.text!
+                OTPVC.strEmail = self.txtEmail.text!
+                OTPVC.strphoneNo = self.txtPhoneNumber.text!
+                OTPVC.strOTP = otpModel.code
+                OTPVC.isRemovePhoto = isRemovePhoto
+                OTPVC.selectedImage = selectedImage
+                self.navigationController?.pushViewController(OTPVC, animated: true)
+            }else {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
+    }
+    
+    func webserviceForSendEmailVerify()
+    {
+        let email = sendEmailVerifyReqModel()
+        email.user_name = txtEmail.text ?? ""
+        
+        // self.showHUD()
+        WebServiceSubClass.sendEmail(optModel: email, showHud: true) { [self] (json, status, response) in
+            self.hideHUD()
+            if(status){
+                print(json)
+            }else {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
+    }   
 }
+
+
+
 
 // MARK: - ImagePickerDelegate
 extension EditProfileVC:ImagePickerDelegate {

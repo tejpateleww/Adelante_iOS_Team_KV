@@ -90,11 +90,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
                 cell1.lblwalletBalance.text = "$250.00"
                 cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-//                if indexPath.row == selectedPaymentMethods {
-//                    cell1.vWMain.layer.borderWidth = 1
-//                } else {
-//                    cell1.vWMain.layer.borderWidth = 0
-//                }
+                if indexPath.row == selectedPaymentMethods {
+                    cell1.vWMain.layer.borderWidth = 1
+                } else {
+                    cell1.vWMain.layer.borderWidth = 0
+                }
                 cell1.btnDelete.isHidden = true
                 cell1.selectPaymentMethodButton.isHidden = true
                 cell1.selectionStyle = .none
@@ -103,10 +103,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
                 cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
                 if indexPath.row == selectedPaymentMethods {
-//                    cell2.vWMain.layer.borderWidth = 1
+                    cell2.vWMain.layer.borderWidth = 1
                     cell2.vwCvv.isHidden = false
                 } else {
-//                    cell2.vWMain.layer.borderWidth = 0
+                    cell2.vWMain.layer.borderWidth = 0
                     cell2.vwCvv.isHidden = true
                 }
                 //                cell2.paymentMethodImageView.image = self.getCardImageFromCardType(objSelectedCard: self.arrCard[indexPath.row])
@@ -125,7 +125,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                         self.shakes = 0
                         cell2.textFieldEnterCVV.text = ""
                         self.shake(cell2.textFieldEnterCVV)
-                       
                     }
                     else {
                         self.WebServiceCallForOrder(OrderJson: self.OrderDetails ?? "")
@@ -228,6 +227,21 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         btnAddCart.setTitle("addPaymentVC_btnAddCart".Localized(), for: .normal)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
+                cell1.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+            } else {
+                let cell2 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
+                cell2.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+            }
+        case 1:
+            let cell = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
+        default:
+            return
+        }
         selectedPaymentMethods = indexPath.row
         tblPaymentMethod.reloadData()
     }
@@ -351,15 +365,17 @@ extension addPaymentVC {
         WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: true, completion: { (json, status, response) in
             if(status)
             {
-                let alertController = UIAlertController(title: AppName,
-                                                        message: json["data"].string ?? "",
-                                                        preferredStyle: .alert)
-              
-                alertController.addAction(UIAlertAction(title: "OK".Localized(), style: .default){ _ in
-                    appDel.navigateToHome()
-                })
-                self.present(alertController, animated: true)
-               
+                        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
+                
+//                let alertController = UIAlertController(title: AppName,
+//                                                        message: json["data"].string ?? "",
+//                                                        preferredStyle: .alert)
+//
+//                alertController.addAction(UIAlertAction(title: "OK".Localized(), style: .default){ _ in
+//                    appDel.navigateToHome()
+//                })
+//                self.present(alertController, animated: true)
+//
                 //Utilities.ShowAlert(OfMessage: json["data"].string ?? "")
                 
                 //Utilities.displayAlert(json["message"].string ?? "")

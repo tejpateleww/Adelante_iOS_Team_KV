@@ -69,9 +69,12 @@ class RegisterViewController: UIViewController {
     }
     //MARK:- Button action
     @IBAction func btnSignUp(sender:Any){
+        
+//        let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID)
+//        self.navigationController?.pushViewController(OTPVC, animated: true)
         if(validation())
         {
-            webserviceForRegister()
+            webserviceForSendOTP()
         }
         //        userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
         //        appDel.navigateToHome()
@@ -151,13 +154,15 @@ class RegisterViewController: UIViewController {
 //            Utilities.ShowAlert(OfMessage: "Please enter valid phone number")
             Utilities.showAlert(AppInfo.appName, message: "Please enter valid phone number", vc: self)
             return false
-        }else if !newPW.0{
+        }
+        else if !newPW.0{
             Utilities.displayAlert(newPW.1)
             return false
         }else if !confirmPW.0{
             Utilities.displayAlert(confirmPW.1)
             return false
-        }else if txtPassword.text?.lowercased() != txtConPassword.text?.lowercased(){
+        }
+        else if txtPassword.text?.lowercased() != txtConPassword.text?.lowercased(){
 //            Utilities .ShowAlert(OfMessage: "Password and confirm password must be same")
             Utilities.showAlert(AppInfo.appName, message: "Password and confirm password must be same", vc: self)
             return false
@@ -166,36 +171,68 @@ class RegisterViewController: UIViewController {
     }
     
     //MARK:- Webservice
-    func webserviceForRegister()
+    
+    
+    func webserviceForSendOTP()
     {
-        let register = RegisterReqModel()
-        register.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        register.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        register.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        register.phone = txtPhoneNumber.text ?? ""
-        register.password = txtPassword.text ?? ""
-        register.device_token = SingletonClass.sharedInstance.DeviceToken
-        register.device_type = ReqDeviceType
-        register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.register(registerModel: register,showHud: true, completion: { (json, status, response) in
-            if(status)
-            {
-                let loginModel = Userinfo.init(fromJson: json)
-                let registerRespoDetails = loginModel.profile
-                Utilities.displayAlert("", message: "Registered successfully! Email verification link has been sent to your registered email",vc: self, completion: {_ in
-                    appDel.navigateToLogin()
-                }, otherTitles: nil)
-                
+        let otp = sendOtpReqModel()
+        otp.user_name = txtEmail.text ?? ""
+        
+       // self.showHUD()
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: true) { [self] (json, status, response) in
+            self.hideHUD()
+            if(status){
+                print(json)
+                let otpModel = otpReceive.init(fromJson: json)
+                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID) as! VerifyVC
+                OTPVC.isFromRegister = true
+                OTPVC.strfirst = self.txtFirstName.text!
+                OTPVC.strLast = self.txtLastName.text!
+                OTPVC.strEmail = self.txtEmail.text!
+                OTPVC.strphoneNo = self.txtPhoneNumber.text!
+                OTPVC.strPassword = self.txtPassword.text!
+                OTPVC.strOTP = otpModel.code
+                self.navigationController?.pushViewController(OTPVC, animated: true)
+            }else {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
-            else
-            {
-                Utilities.displayErrorAlert(json["message"].string ?? "MessageNoIntenet".Localized())
-            }
-        })
+        }
     }
     
+//    func webserviceForRegister()
+//    {
+//        let register = RegisterReqModel()
+//        register.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//        register.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//        register.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//        register.phone = txtPhoneNumber.text ?? ""
+//        register.password = txtPassword.text ?? ""
+//        register.device_token = SingletonClass.sharedInstance.DeviceToken
+//        register.device_type = ReqDeviceType
+//        register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+//        register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+//        WebServiceSubClass.register(registerModel: register,showHud: true, completion: { (json, status, response) in
+//            if(status)
+//            {
+//                print(json)
+//                let loginModel = Userinfo.init(fromJson: json)
+//                let registerRespoDetails = loginModel.profile
+//               // Utilities.displayAlert("", message: "Registered successfully! Email verification link has been sent to your registered email",vc: self, completion: {_ in
+////                    appDel.navigateToLogin()
+////                }, otherTitles: nil)
+//                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID)
+//                self.navigationController?.pushViewController(OTPVC, animated: true)
+//            }
+//            else
+//            {
+//                Utilities.displayErrorAlert(json["message"].string ?? "MessageNoIntenet".Localized())
+//            }
+//        })
+//    }
+    
 }
+
+
 extension RegisterViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool

@@ -16,7 +16,7 @@ class RateReviewVC: BaseViewController {
     var strRestaurantId = ""
     var strOrderId = ""
     // MARK: - IBOutlets
-    @IBOutlet weak var lblRateRestaurant: UILabel!
+    @IBOutlet weak var lblRateRestaurant: themeLabel!
     @IBOutlet weak var tvRateReview: themeTextView!
     @IBOutlet weak var btnSubmit: submitButton!
     @IBOutlet weak var vwRating: CosmosView!

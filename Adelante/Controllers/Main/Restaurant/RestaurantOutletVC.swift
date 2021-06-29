@@ -8,9 +8,7 @@
 
 import UIKit
 import SDWebImage
-import SkeletonView
-
-class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,favoriteDelegate, SortListDelegate,SkeletonTableViewDataSource{
+class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,favoriteDelegate, SortListDelegate{
     
     
     
@@ -26,23 +24,17 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     var selectedSortTypedIndexFromcolVwFilter = 1
     var SelectFilterId = ""
     var isRefresh = false
-    var responseStatus : webserviceResponse = .initial
+    
     // MARK: - IBOutlets
     @IBOutlet weak var lblRestaurantName: themeLabel!
     @IBOutlet weak var vwFilter: UIView!
     @IBOutlet weak var btnFilter: collectionVwFilterBtns!
-    @IBOutlet weak var tblRestaurantList: UITableView!{
-        didSet{
-            tblRestaurantList.isSkeletonable = true
-        }
-    }
+    @IBOutlet weak var tblRestaurantList: UITableView!
     @IBOutlet weak var imgRestaurantEmpty: UIImageView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerNIB()
-        tblRestaurantList.showAnimatedSkeleton()
         self.webserviceGetRestaurantOutlet(strFilter: "")
         tblRestaurantList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
@@ -59,10 +51,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     
     // MARK: - Other Methods
-    func registerNIB(){
-        tblRestaurantList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
-        tblRestaurantList.register(UINib(nibName:"ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
-    }
     func setup(){
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
@@ -176,60 +164,28 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             webserviceGetRestaurantOutlet(strFilter: "")
         }
     }
-    // MAQRK:- Skeletontableview Datasource
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return self.responseStatus == .gotData ? (self.arrOutletList.count > 0 ? RestaurantOutletListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
-    }
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.responseStatus == .gotData{
-            return 5
-        }
-        return 3
-    }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if responseStatus == .gotData{
-            if arrOutletList.count != 0 {
-                return self.arrOutletList.count
-            }else{
-                return 1
-            }
-        }else{
-            return 5
-        }
+        return arrOutletList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if responseStatus == .gotData{
-            if arrOutletList.count != 0{
-                let cell = tblRestaurantList.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
-                cell.lblAreaName.text = arrOutletList[indexPath.row].street
-                cell.lblAddress.text = arrOutletList[indexPath.row].address
-                cell.lblMiles.text = arrOutletList[indexPath.row].distance
-                cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
-                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
-                cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                cell.btnFavorite.tag = indexPath.row
-                cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
-                if arrOutletList[indexPath.row].favourite == "1"{
-                    cell.btnFavorite.isSelected = true
-                }else{
-                    cell.btnFavorite.isSelected = false
-                }
-                cell.selectionStyle = .none
-                return cell
-            }else{
-                let NoDatacell = tblRestaurantList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-                
-                NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
-                NoDatacell.lblNoDataTitle.isHidden = true
-                return NoDatacell
-            }
+        let cell = tblRestaurantList.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
+        cell.lblAreaName.text = arrOutletList[indexPath.row].name
+        cell.lblAddress.text = arrOutletList[indexPath.row].address
+        cell.lblMiles.text = arrOutletList[indexPath.row].distance
+        cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
+        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
+        cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+        cell.btnFavorite.tag = indexPath.row
+        cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
+        if arrOutletList[indexPath.row].favourite == "1"{
+            cell.btnFavorite.isSelected = true
         }else{
-            let cell = tblRestaurantList.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
-            cell.selectionStyle = .none
-            return cell
+            cell.btnFavorite.isSelected = false
         }
+        cell.selectionStyle = .none
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -237,17 +193,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         controller.selectedRestaurantId = arrOutletList[indexPath.row].id
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if responseStatus == .gotData{
-            if arrOutletList.count != 0 {
-                return 230
-            }else{
-                return tableView.frame.height
-            }
-        }else {
-            return self.responseStatus == .gotData ?  230 : 131
-        }
-    }
+    
     // MARK: - Api Calls
     func webserviceGetRestaurantOutlet(strFilter:String){
         let RestaurantOutletList = RestaurantOutletReqModel()
@@ -259,14 +205,10 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         RestaurantOutletList.page = "\(self.pageNumber)"
         RestaurantOutletList.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         RestaurantOutletList.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.RestaurantOutlet(OutletModel: RestaurantOutletList, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantOutlet(OutletModel: RestaurantOutletList, showHud: true, completion: { (response, status, error) in
             //self.hideHUD()
-            self.responseStatus = .gotData
             if status{
                 let restaurantData = RestaurantOutletsResModel.init(fromJson: response)
-                let cell = self.tblRestaurantList.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
-                cell.stopShimmering()
-                self.tblRestaurantList.stopSkeletonAnimation()
                 self.isRefresh = false
                 if self.pageNumber == 1 {
                     self.arrOutletList = restaurantData.data
@@ -290,23 +232,20 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                         self.isNeedToReload = true
                     }
                 }
-                self.tblRestaurantList.dataSource = self
-                self.tblRestaurantList.isScrollEnabled = true
-                self.tblRestaurantList.isUserInteractionEnabled = true
                 self.tblRestaurantList.reloadData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-//            if self.arrOutletList.count > 0{
-//                self.tblRestaurantList.restore()
-//                self.imgRestaurantEmpty.isHidden = true
-//                self.tblRestaurantList.isHidden = false
-//                self.vwFilter.isHidden = false
-//            }else {
-//                self.imgRestaurantEmpty.isHidden = false
-//                self.tblRestaurantList.isHidden = true
-//                self.vwFilter.isHidden = true
-//            }
+            if self.arrOutletList.count > 0{
+                self.tblRestaurantList.restore()
+                self.imgRestaurantEmpty.isHidden = true
+                self.tblRestaurantList.isHidden = false
+                self.vwFilter.isHidden = false
+            }else {
+                self.imgRestaurantEmpty.isHidden = false
+                self.tblRestaurantList.isHidden = true
+                self.vwFilter.isHidden = true
+            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }

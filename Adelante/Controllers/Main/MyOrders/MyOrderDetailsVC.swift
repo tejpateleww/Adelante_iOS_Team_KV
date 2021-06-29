@@ -81,7 +81,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     func setData(){
         if objOrderDetailsData != nil{
             lblId.text = objOrderDetailsData.orderId
-            lblNoOfItems.text = objOrderDetailsData.itemQuantity + "items"
+            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
             lblRestName.text = objOrderDetailsData.restaurantName
             lblTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.total.ConvertToTwoDecimal()
             lblAddress.text = objOrderDetailsData.address

@@ -33,19 +33,19 @@
 "T1r-ZK-cpC.text" = "Welcome \nBack";
 
 /* Class = "UILabel"; text = "Sign In"; ObjectID = "WUB-dV-8E1"; */
-"WUB-dV-8E1.text" = "Sign In";
+"WUB-dV-8E1.text" = "Sign in";
 
 /* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "dUz-LN-60d"; */
 "dUz-LN-60d.placeholder" = "Phone Number";
 
 /* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "iBK-qV-OHW"; */
-"iBK-qV-OHW.normalTitle" = "Sign In";
+"iBK-qV-OHW.normalTitle" = "Sign in";
 
 /* Class = "UILabel"; text = "Already have an account"; ObjectID = "oLy-vP-WB6"; */
 "oLy-vP-WB6.text" = "Already have an account";
 
 /* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "oaj-xH-qVR"; */
-"oaj-xH-qVR.normalTitle" = "Sign In";
+"oaj-xH-qVR.normalTitle" = "Sign in";
 
 /* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "pg1-IO-Syi"; */
 "pg1-IO-Syi.normalTitle" = "Create Account";

@@ -88,12 +88,12 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             } else {
                 self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
             }
-            
-            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
-                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
-            } else {
-                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
-            }
+            //Note :- Unnecessary code
+//            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
+//                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
+//            } else {
+//                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
+//            }
             if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0  > 0{
                 viewFooter.isHidden = false
                 lblSign.isHidden = false
@@ -111,10 +111,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             lblSign.isHidden = true
         }
         
-        
-        
-        
     }
+    
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if arrVariants?[section].isExpanded == true {
@@ -132,7 +130,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: bffComboCell.reuseIdentifier, for: indexPath) as! bffComboCell
         cell.lblbffComboTitle.text = arrVariants?[indexPath.section].option[indexPath.row].name
         cell.lblBffComboPrice.isHidden = (arrVariants?[indexPath.section].option[indexPath.row].price != "") ? false : true
-        cell.lblBffComboPrice.text = arrVariants?[indexPath.section].option[indexPath.row].price
+        cell.lblBffComboPrice.text = "$" + (arrVariants?[indexPath.section].option[indexPath.row].price)!
         let selectOne = arrVariants?[indexPath.section].option[indexPath.row].menuChoice.toInt()
         if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 {
             cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
@@ -160,9 +158,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             
             self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
         }
-        
-        
-        
         
         cell.selectionStyle = .none
         return cell
@@ -217,6 +212,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         }
         
     }
+    
     @objc  func btnExpand(_ sender : UIButton) {
         if arrVariants?[sender.tag].isExpanded == true {
             arrVariants?[sender.tag].isExpanded = false

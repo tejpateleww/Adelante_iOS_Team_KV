@@ -134,7 +134,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     func addMapView()
     {
-        
         MapViewForShowRastaurantLocation.frame = CGRect(x: 0, y: 0, width: restaurantLocationView.frame.size.width, height: restaurantLocationView.frame.size.height)
         
         restaurantLocationView.addSubview(MapViewForShowRastaurantLocation)
@@ -357,7 +356,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     //MARK: - IBActions
     @objc func btnSubmitCommonPopupClicked() {
-        
+        print("hellloo")
     }
     @IBAction func BtnCancelPromocodeClick(_ sender: Any) {
         btnAppyPromoCode.isHidden = false
@@ -396,7 +395,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 ForPassVarientIdData.append(varientElement.variant_id.toInt())
             }
             
-            ForPassOrderData.append(Order(OrderPirce: element.price, OrderQuantity: element.quantity, OrderRestaurantItemID: element.restaurant_item_id, OrderVariantsId: ForPassVarientIdData))
+            ForPassOrderData.append(Order(OrderPirce: element.price, OrderQuantity: element.selectedQuantity, OrderRestaurantItemID: element.restaurant_item_id, OrderVariantsId: ForPassVarientIdData))
         })
         var PromoCodeID = ""
         if AppliedPromocode != nil {
@@ -433,7 +432,25 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func btnChangeLocationClicked(_ sender: Any) {
-        commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "checkOutVC_strSubmit_title".Localized(), strCancelButtonTitle: "checkOutVC_strCancel_title".Localized(), strDescription: "checkOutVC_strDescription_title1".Localized(), strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
+        //commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "checkOutVC_strSubmit_title".Localized(), strCancelButtonTitle: "checkOutVC_strCancel_title".Localized(), strDescription: "checkOutVC_strDescription_title1".Localized(), strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
+        
+        
+        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        //controller.modalPresentationStyle = .fullScreen
+        controller.isHideCancelButton = false
+        controller.isHideSubmitButton = false
+        controller.submitBtnTitle = "checkOutVC_strSubmit_title".Localized()
+        controller.cancelBtnTitle = "checkOutVC_strCancel_title".Localized()
+        controller.strDescription = "checkOutVC_strDescription_title1".Localized()
+        controller.strPopupTitle = ""
+        controller.submitBtnColor = colors.appGreenColor
+        controller.cancelBtnColor = colors.appRedColor
+        controller.strPopupImage = "ic_popupCancleOrder"
+        controller.isCancleOrder = true
+        controller.btnSubmit = {
+            appDel.navigateToHome()
+        }
+        self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func btnAddFoodlistClicked(_ sender: Any) {

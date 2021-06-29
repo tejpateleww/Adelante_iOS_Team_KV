@@ -43,7 +43,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var isFromRestaurantList : Bool = false
     var isFromFavoriteList : Bool = false
     var isFromRestaurantOutlets : Bool = false
+    
     // MARK: - IBOutlets
+    @IBOutlet weak var lblrating: themeLabel!
     @IBOutlet weak var tblRestaurantDetails: UITableView!
     @IBOutlet weak var heightTblRestDetails: NSLayoutConstraint!
     @IBOutlet weak var imgFoodDetails: UIImageView!
@@ -80,6 +82,20 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
+        self.objCurrentOrder = SingletonClass.sharedInstance.restCurrentOrder
+        if self.objCurrentOrder != nil {
+            for i in 0..<arrMenuitem.count {
+                for j in 0..<self.objCurrentOrder.order.count {
+                    let id = self.objCurrentOrder.order[j].restaurant_item_id
+                    if arrMenuitem[i].id == id {
+                        arrMenuitem[i].selectedQuantity = self.objCurrentOrder.order[j].selectedQuantity
+                    } else {
+                        arrMenuitem[i].selectedQuantity = ""
+                    }
+                }
+            }
+            tblRestaurantDetails.reloadData()
+        }
     }
     
     // MARK: - Other Methods
@@ -176,7 +192,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func setData(){
         if objRestaurant != nil{
             self.lblRestaurantName.text = objRestaurant.name ?? ""
-            self.vwRating.rating = Double(objRestaurant.rating) ?? 0
+            self.lblrating.text = objRestaurant.rating
+            //self.vwRating.rating = 1
             self.lblReviews.text = "(" + String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review) + ")"
             //            self.lblTimeZone.text = objRestaurant.
             self.lblDistance.text =  objRestaurant.distance
@@ -232,9 +249,21 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         var total = 0.0
         if arrSelectedOrder.count > 0 {
             var subTotal = 0.0
+            var totalitem = 0
             for i in 0..<arrSelectedOrder.count{
                 let price : Double = Double(arrSelectedOrder[i].price) ?? 0.0
                 subTotal = subTotal + price
+                
+                let item = Int(arrSelectedOrder[i].selectedQuantity) ?? 0
+                totalitem = totalitem + item
+                
+                
+                if totalitem > 1 {
+                    self.lblNoOfItem.text = "\(totalitem) items"
+                } else {
+                    self.lblNoOfItem.text = "\(totalitem) item"
+                }
+                
             }
            // let CalculateTax = ((Double(subTotal) * (self.objRestaurant.tax.ToDouble()) / 100))
 //            total = Double(subTotal) + objRestaurant.serviceFee.ToDouble() + CalculateTax
@@ -245,11 +274,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             //            userDefault.setUserData(objProfile)
         }
         
-        if arrSelectedOrder.count > 1 {
-            self.lblNoOfItem.text = "\(arrSelectedOrder.count) items"
-        } else {
-            self.lblNoOfItem.text = "\(arrSelectedOrder.count) item"
-        }
+//        if arrSelectedOrder.count > 1 {
+//            self.lblNoOfItem.text = "\(arrSelectedOrder.count) items"
+//        } else {
+//            self.lblNoOfItem.text = "\(arrSelectedOrder.count) item"
+//        }
         
         self.lblPrice.text = "\(CurrencySymbol)" + "\(total)".ConvertToTwoDecimal()
         if arrSelectedOrder.count > 0{
@@ -328,6 +357,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     break
                 } else {
                     arrFoodMenu[i].isExpanded = true
+                    
                 }
             } else {
                 arrFoodMenu[i].isExpanded = false
@@ -454,7 +484,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 return cell
             } else {
                 let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
-                cell.lblItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name
+                cell.lblItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name.trimmingCharacters(in: .whitespacesAndNewlines)
                 cell.lblItemPrice.text = "\(CurrencySymbol)" + arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.ConvertToTwoDecimal()
                 cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size
                 cell.lblNoOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].selectedQuantity
@@ -485,14 +515,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }
                     self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].selectedQuantity = strQty
-                    var pr = 0.0
-                    pr = strQty.ToDouble() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.ToDouble()
+                    var pr = 0
+                    pr = strQty.toInt() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.toInt()
                     let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price, size: arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size, selectedQuantity: "\(strQty)")
                     self.checkOrderItems(objOrder: objItem)
                 }
                 cell.IncreseData = {
-                    var value : Double = (cell.lblNoOfItem.text! as NSString).doubleValue
-                    if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.ToDouble() > value {
+                    var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                    if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.toInt() > value {
                         var strQty = ""
                         if cell.lblNoOfItem.text != "" {
                             value = value + 1
@@ -500,8 +530,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             strQty = "\(value)"
                         }
                         self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].selectedQuantity = strQty
-                        var pr = 0.0
-                        pr = strQty.ToDouble() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.ToDouble()
+                        var pr = 0
+                        pr = strQty.toInt() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.toInt()
                         let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size, selectedQuantity: strQty)
                         self.checkOrderItems(objOrder: objItem)
                     }
@@ -527,8 +557,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             let strQty = "1"
                             cell.lblNoOfItem.text = strQty
                             self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].selectedQuantity = strQty
-                            var pr = 0.0
-                            pr = strQty.ToDouble() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.ToDouble()
+                            var pr = 0
+                            pr = strQty.toInt() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.toInt()
                             let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size, selectedQuantity: strQty)
                             self.checkOrderItems(objOrder: objItem)
                         }
@@ -584,14 +614,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                 }
                 self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].selectedQuantity = strQty
-                var pr = 0.0
-                pr = strQty.ToDouble() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.ToDouble()
+                var pr = 0
+                pr = strQty.toInt() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.toInt()
                 let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].size, selectedQuantity: strQty)
                 self.checkOrderItems(objOrder: objItem)
             }
             cell.IncreseData = {
-                var value : Double = (cell.lblNoOfItem.text! as NSString).doubleValue
-                if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.ToDouble() > value {
+                var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.toInt() > value {
                     var strQty = ""
                     if cell.lblNoOfItem.text != ""{
                         
@@ -600,8 +630,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         strQty = "\(value)"
                     }
                     self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].selectedQuantity = strQty
-                    var pr = 0.0
-                    pr = strQty.ToDouble() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.ToDouble()
+                    var pr = 0
+                    pr = strQty.toInt() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.toInt()
                     let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].size, selectedQuantity: strQty)
                     self.checkOrderItems(objOrder: objItem)
                 }
@@ -616,8 +646,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     let strQty = "1"
                     cell.lblNoOfItem.text = strQty
                     self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].selectedQuantity = strQty
-                    var pr = 0.0
-                    pr = strQty.ToDouble() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.ToDouble()
+                    var pr = 0
+                    pr = strQty.toInt() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.toInt()
                     let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].size, selectedQuantity: strQty)
                     self.checkOrderItems(objOrder: objItem)
                 }

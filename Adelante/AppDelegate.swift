@@ -11,6 +11,7 @@ import IQKeyboardManagerSwift
 import Firebase
 import UserNotifications
 import CoreLocation
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
@@ -38,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         FirebaseApp.configure()
         
         registerForPushNotifications()
+        
+        GMSPlacesClient.provideAPIKey("AIzaSyAHoxA9mAOwiilUUwLfauECc7SrJSNwywM")
         return true
     }
     func setUpLocationServices() {

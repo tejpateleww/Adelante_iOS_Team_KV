@@ -39,3 +39,9 @@ class ChangePasswordReqModel: RequestModel {
 class LogoutReqModel: RequestModel{
     var user_id : String = ""
 }
+class sendOtpReqModel: RequestModel{
+    var user_name : String = ""
+}
+class sendEmailVerifyReqModel: RequestModel{
+    var user_name : String = ""
+}
