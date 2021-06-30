@@ -8,13 +8,20 @@
 
 import UIKit
 import SDWebImage
+import SkeletonView
 
 protocol orderCancelDelegate {
     func refreshOrderDetailsScreen()
 }
+extension UIView {
+    class func fromNib<T: UIView>() -> T {
+        return Bundle(for: T.self).loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+}
 class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Properties
+    var responseStatus : webserviceResponse = .initial
     var delegateCancelOrder : orderCancelDelegate!
     var customTabBarController: CustomTabBarVC?
     var selectedSegmentTag = 0
@@ -24,6 +31,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var arrItem = [Item]()
     var orderType = ""
     var strRestaurantId = ""
+    lazy var skeletonViewData : skeletonView = skeletonView.fromNib()
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
     @IBOutlet weak var lblId: orderDetailsLabel!
@@ -50,15 +58,14 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var vwRateOrder: UIView!
     @IBOutlet weak var vwShareOrder: UIView!
     @IBOutlet weak var heightTblItems: NSLayoutConstraint!
-    
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        skeletonViewData.showAnimatedSkeleton()
         setUpLocalizedStrings()
         webserviceOrderDetails()
         tblItems.rowHeight = UITableView.automaticDimension
         tblItems.estimatedRowHeight = 66.5
-        //        self.heightTblItems.constant = tblItems.contentSize.height
         setup()
         
     }
@@ -132,7 +139,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
         self.isSharedOrder = true
-        let text = ""
         let textToShare = [ "Order share successfully." ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
@@ -188,9 +194,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         orderDetails.user_id = SingletonClass.sharedInstance.UserId
         orderDetails.type = orderType
         orderDetails.restaurant_id = strRestaurantId
+        responseStatus = .gotData
         WebServiceSubClass.orderDetailList(orderDetails: orderDetails, showHud: false, completion: { (response, status, error) in
             if status{
                 let orderData = MyorderDetailsResModel.init(fromJson: response)
+                self.skeletonViewData.stopShimmering()
+                self.skeletonViewData.stopSkeletonAnimation()
                 self.objOrderDetailsData = orderData.data.mainOrder
                 self.arrItem = self.objOrderDetailsData.item
                 self.setData()

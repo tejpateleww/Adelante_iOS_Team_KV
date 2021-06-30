@@ -240,7 +240,15 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         if collectionView == self.colVwFilterOptions{
             return arrFilter.count
         } else if collectionView == self.colVwRestWthPage {
-            return arrBanner.count > 0 ? arrBanner.count : 5
+            if responseStatus == .gotData{
+                if arrBanner.count != 0 {
+                    return self.arrBanner.count
+                }else{
+                    return 1
+                }
+            }else{
+                return 5
+            }
         }
         return arrRestaurant.count
     }
@@ -288,7 +296,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 }else{
                     let NoDatacell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: "NoDataCollectionview", for: indexPath) as! NoDataCollectionview
                     NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
-                    NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+                    NoDatacell.lblNoDataTitle.text = "No Data Found"
                     return NoDatacell
                 }
             }else{

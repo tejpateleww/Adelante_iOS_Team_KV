@@ -14,15 +14,12 @@ class skeletonView: UIView {
     @IBOutlet weak var viewContainer: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        viewContainer.clipsToBounds = true
-        lblShimmerText.clipsToBounds = true
+        
         startShimmering()
-        // Initialization code
     }
     func startShimmering(){
         self.isSkeletonable = true
         viewContainer.layer.cornerRadius = 20
-        
         viewContainer.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
         lblShimmerText.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
         viewShimmer.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
@@ -33,5 +30,4 @@ class skeletonView: UIView {
         lblShimmerText.hideSkeleton()
         viewShimmer.hideSkeleton()
     }
-
 }
