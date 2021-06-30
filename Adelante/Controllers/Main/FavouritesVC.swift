@@ -181,13 +181,21 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         if arrFavoriteRest.count == 0{
             print("No Data Found")
         }else{
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
-            controller.selectedRestaurantId = arrFavoriteRest[indexPath.row].restaurantId
-            controller.selectedIndex = "\(indexPath.row)"
-            controller.isFromFavoriteList = true
-            self.navigationController?.pushViewController(controller, animated: true)
+            if arrFavoriteRest[indexPath.row].type == "restaurant" {
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
+                controller.selectedRestaurantId = arrFavoriteRest[indexPath.row].restaurantId
+                controller.strRestaurantName = arrFavoriteRest[indexPath.row].name
+                self.navigationController?.pushViewController(controller, animated: true)
+            }else{
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+                controller.selectedRestaurantId = arrFavoriteRest[indexPath.row].restaurantId
+                controller.selectedIndex = "\(indexPath.row)"
+                controller.isFromFavoriteList = true
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
         }
     }
+    
     // MARK: - Api Calls
     @objc func webservicePostRestaurantFav(strSearch : String){
         let RestaurantFavorite = RestaurantFavoriteReqModel()

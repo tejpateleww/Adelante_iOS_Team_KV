@@ -8,7 +8,9 @@
 
 import Foundation
 class SearchReqModel:RequestModel {
-    var item : String = ""
+    var name : String = ""
     var lat : String = ""
     var lng : String = ""
+    var page : String = ""
+    var user_id : String = ""
 }

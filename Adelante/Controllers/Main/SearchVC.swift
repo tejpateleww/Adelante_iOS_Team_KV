@@ -17,6 +17,9 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     private var lastSearchTxt = ""
     var refreshList = UIRefreshControl()
     var selectedSegmentTag = 0
+    var pageNumber = 1
+    var isNeedToReload = true
+    var pageLimit = 5
     // MARK: - IBOutlets
     @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var tblRestaurant: UITableView!
@@ -159,9 +162,11 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     // MARK: - Api Calls
     @objc func webserviceSearchModel(strSearch:String){
         let search = SearchReqModel()
-        search.item = strSearch
+        search.name = strSearch
         search.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        search.user_id = SingletonClass.sharedInstance.UserId
+        search.page = "\(pageNumber)"
         WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status{

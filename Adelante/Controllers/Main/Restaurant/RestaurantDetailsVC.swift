@@ -43,6 +43,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var isFromRestaurantList : Bool = false
     var isFromFavoriteList : Bool = false
     var isFromRestaurantOutlets : Bool = false
+    var expandviewheight = 0
     
     // MARK: - IBOutlets
     @IBOutlet weak var lblrating: themeLabel!
@@ -352,17 +353,21 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             if sender.tag == i {
                 if arrFoodMenu[i].isExpanded == true {
                     arrFoodMenu[i].isExpanded = false
+                    let count = arrFoodMenu[i].subMenu.count * 80
+                    expandviewheight = expandviewheight - count
                     break
                 } else {
                     arrFoodMenu[i].isExpanded = true
-                    
+                    let count = arrFoodMenu[i].subMenu.count * 80
+                    expandviewheight = expandviewheight + count
                 }
             } else {
-                arrFoodMenu[i].isExpanded = false
+               // arrFoodMenu[i].isExpanded = false
             }
         }
         
         DispatchQueue.main.async {
+            self.calculateTableHeight()
             self.tblRestaurantDetails.reloadData()
         }
     }
@@ -449,7 +454,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: self.arrMenuitem[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrMenuitem[indexPath.row].name, originalPrice: self.arrMenuitem[indexPath.row].price, size: "", selectedQuantity: "\(strQty)")
                         self.checkOrderItems(objOrder: objItem)
                     } else {
-                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                      //  Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
                     }
                 }
                 cell.btnAddAction = {
@@ -464,7 +470,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: self.arrMenuitem[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrMenuitem[indexPath.row].name, originalPrice: self.arrMenuitem[indexPath.row].price, size: "", selectedQuantity: "\(strQty)")
                         self.checkOrderItems(objOrder: objItem)
                     } else {
-                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                        //Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
                     }
                 }
                 let variantValue = arrMenuitem[indexPath.row].variant.ToDouble()
@@ -534,7 +541,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         self.checkOrderItems(objOrder: objItem)
                     }
                     else {
-                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+                        //showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
                     }
                 }
                 cell.btnAddAction = {
@@ -563,7 +571,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         
                     }
                     else {
-                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                        //Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
                     }
                 }
                 let variantValue = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant.ToDouble()
@@ -634,7 +643,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     self.checkOrderItems(objOrder: objItem)
                 }
                 else {
-                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                   // Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name ?? "")","\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity ?? "")"]), vc: self)
+                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
                 }
             }
             cell.btnAddAction = {
@@ -650,7 +660,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     self.checkOrderItems(objOrder: objItem)
                 }
                 else {
-                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                   // Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
                 }
             }
             let variantValue = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant.ToDouble()
@@ -732,14 +743,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func calculateTableHeight() {
         var extraHeight = 0
         if self.arrMenuitem.count > 0 {
-            extraHeight = extraHeight + 45
+            extraHeight = self.arrMenuitem.count * 132
             if self.arrFoodMenu.count > 0 {
-                extraHeight = extraHeight + (self.arrFoodMenu.count * 45)
+                extraHeight = extraHeight + (self.arrFoodMenu.count * 49)
             }
         } else {
-            extraHeight = self.arrFoodMenu.count * 45
+            extraHeight = self.arrFoodMenu.count * 49
         }
-        self.heightTblRestDetails.constant = self.tblRestaurantDetails.contentSize.height + CGFloat(extraHeight)
+        self.heightTblRestDetails.constant = CGFloat(extraHeight) + CGFloat(expandviewheight) //self.tblRestaurantDetails.contentSize.height + CGFloat(extraHeight)
         self.tblRestaurantDetails.layoutIfNeeded()
     }
     

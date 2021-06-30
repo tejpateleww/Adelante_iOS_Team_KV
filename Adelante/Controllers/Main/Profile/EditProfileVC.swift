@@ -51,7 +51,7 @@ class EditProfileVC: BaseViewController{
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.editProfile.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        
+        txtEmail.isUserInteractionEnabled = false
         lblVerified.textColor = colors.appGreenColor.value
         lblUnverified.textColor = colors.appGreenColor.value
     }
@@ -165,8 +165,13 @@ class EditProfileVC: BaseViewController{
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
                 userDefault.setUserData(objProfile: updatedData.profile)
                 self.isRemovePhoto = false
-                Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
-                    appDel.SetLogout()
+                Utilities.displayAlert("", message: response["message"].string ?? "", completion: { [self]_ in
+                    if updatedData.profile == nil {
+                        appDel.SetLogout()
+                    }else{
+                        self.navigationController?.popViewController(animated: true)
+                        self.delegateEdit.refereshProfileScreen()
+                    }
                 }, otherTitles: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)

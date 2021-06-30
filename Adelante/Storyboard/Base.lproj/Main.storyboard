@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yvt-Nf-udP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yvt-Nf-udP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -25,7 +25,7 @@
                                 <rect key="frame" x="16" y="116" width="382" height="50"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUq-9x-IMW" customClass="searchBarHome" customModule="Adelante" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-0.5" width="382" height="51"/>
+                                        <rect key="frame" x="0.0" y="-3" width="382" height="56"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <scopeButtonTitles>
@@ -80,7 +80,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantOutletListCell" rowHeight="244" id="Q83-lV-x3x" customClass="RestaurantOutletListCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="244"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="244"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q83-lV-x3x" id="fX5-c7-UGY">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="244"/>
@@ -296,7 +296,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyFoodlistCell" rowHeight="169" id="hvK-Qu-0qe" customClass="MyFoodlistCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="169"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="169"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hvK-Qu-0qe" id="5ss-Qo-Wac">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="169"/>
@@ -348,16 +348,16 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZW-vV-0P4" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
-                                                                            <rect key="frame" x="106" y="0.0" width="192.5" height="102"/>
+                                                                            <rect key="frame" x="106" y="0.0" width="192" height="102"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="4pD-ph-M8t">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="102"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="102"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ec-Gu-OTA">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="192.5" height="17"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="192" height="17"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bff Combo Meal(L)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kqc-OZ-TAe" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="17"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="17"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -374,10 +374,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gw6-Sm-gsP">
-                                                                                            <rect key="frame" x="0.0" y="26" width="192.5" height="14.5"/>
+                                                                                            <rect key="frame" x="0.0" y="26" width="192" height="14.5"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$19.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzo-RQ-5vU" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="14.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="14.5"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -394,10 +394,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pd-yH-15Z">
-                                                                                            <rect key="frame" x="0.0" y="49.5" width="192.5" height="52.5"/>
+                                                                                            <rect key="frame" x="0.0" y="49.5" width="192" height="52.5"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47U-0Y-jpi">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="52.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192" height="52.5"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -425,43 +425,104 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8n-kT-yDO">
-                                                                            <rect key="frame" x="310.5" y="0.0" width="65.5" height="102"/>
+                                                                            <rect key="frame" x="310" y="0.0" width="66" height="102"/>
                                                                             <subviews>
-                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73M-6y-ze4" customClass="CustomView" customModule="Adelante" customModuleProvider="target">
-                                                                                    <rect key="frame" x="-0.5" y="0.0" width="66" height="23"/>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5f-vp-Kxa" customClass="CustomView" customModule="Adelante" customModuleProvider="target">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="66" height="23"/>
                                                                                     <subviews>
-                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoM-D7-F1P">
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6F2-8E-jNm">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="66" height="23"/>
-                                                                                            <state key="normal" image="Add  +"/>
-                                                                                        </button>
+                                                                                            <subviews>
+                                                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfk-LA-A3n">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="41" height="23"/>
+                                                                                                    <subviews>
+                                                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Q8-vl-dWc">
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="41" height="23"/>
+                                                                                                            <subviews>
+                                                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ic-K0-4JU">
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="23"/>
+                                                                                                                    <constraints>
+                                                                                                                        <constraint firstAttribute="width" constant="20" id="H9h-4O-B8c"/>
+                                                                                                                    </constraints>
+                                                                                                                    <state key="normal" title="-">
+                                                                                                                        <color key="titleColor" red="0.89019607840000003" green="0.2901960784" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                                    </state>
+                                                                                                                </button>
+                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJL-a1-glh">
+                                                                                                                    <rect key="frame" x="20" y="0.0" width="0.5" height="23"/>
+                                                                                                                    <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                                                                                                    <constraints>
+                                                                                                                        <constraint firstAttribute="width" constant="0.5" id="Ne6-Lx-M5H"/>
+                                                                                                                    </constraints>
+                                                                                                                </view>
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTC-70-7eY">
+                                                                                                                    <rect key="frame" x="20.5" y="0.0" width="0.0" height="23"/>
+                                                                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                    <nil key="highlightedColor"/>
+                                                                                                                </label>
+                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBL-ca-FfZ">
+                                                                                                                    <rect key="frame" x="20.5" y="0.0" width="0.5" height="23"/>
+                                                                                                                    <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                                                                                                    <constraints>
+                                                                                                                        <constraint firstAttribute="width" constant="0.5" id="YcL-cI-sVH"/>
+                                                                                                                    </constraints>
+                                                                                                                </view>
+                                                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXL-PF-fhk">
+                                                                                                                    <rect key="frame" x="21" y="0.0" width="20" height="23"/>
+                                                                                                                    <constraints>
+                                                                                                                        <constraint firstAttribute="width" constant="20" id="dhF-NH-HVw"/>
+                                                                                                                    </constraints>
+                                                                                                                    <state key="normal" title="+">
+                                                                                                                        <color key="titleColor" red="0.89019607840000003" green="0.2901960784" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                                    </state>
+                                                                                                                </button>
+                                                                                                            </subviews>
+                                                                                                        </stackView>
+                                                                                                    </subviews>
+                                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                                    <constraints>
+                                                                                                        <constraint firstAttribute="bottom" secondItem="5Q8-vl-dWc" secondAttribute="bottom" id="BNI-s5-hnc"/>
+                                                                                                        <constraint firstItem="5Q8-vl-dWc" firstAttribute="top" secondItem="Lfk-LA-A3n" secondAttribute="top" id="Nkw-pu-RxU"/>
+                                                                                                        <constraint firstAttribute="trailing" secondItem="5Q8-vl-dWc" secondAttribute="trailing" id="ZFJ-jm-iOT"/>
+                                                                                                        <constraint firstItem="5Q8-vl-dWc" firstAttribute="leading" secondItem="Lfk-LA-A3n" secondAttribute="leading" id="dQV-zG-hJ5"/>
+                                                                                                    </constraints>
+                                                                                                </view>
+                                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdI-tb-e4V">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="66" height="23"/>
+                                                                                                    <state key="normal" image="Add  +"/>
+                                                                                                </button>
+                                                                                            </subviews>
+                                                                                        </stackView>
                                                                                     </subviews>
-                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <constraints>
-                                                                                        <constraint firstItem="MoM-D7-F1P" firstAttribute="leading" secondItem="73M-6y-ze4" secondAttribute="leading" id="H7T-ph-qjl"/>
-                                                                                        <constraint firstAttribute="trailing" secondItem="MoM-D7-F1P" secondAttribute="trailing" id="KZ0-eA-97B"/>
-                                                                                        <constraint firstAttribute="width" constant="66" id="eU3-gY-2zY"/>
-                                                                                        <constraint firstAttribute="height" constant="23" id="nL5-4P-ud0"/>
-                                                                                        <constraint firstItem="MoM-D7-F1P" firstAttribute="top" secondItem="73M-6y-ze4" secondAttribute="top" id="pcp-f0-dPo"/>
-                                                                                        <constraint firstAttribute="bottom" secondItem="MoM-D7-F1P" secondAttribute="bottom" id="xLz-kE-9Zr"/>
+                                                                                        <constraint firstItem="6F2-8E-jNm" firstAttribute="leading" secondItem="N5f-vp-Kxa" secondAttribute="leading" id="9sG-Vh-FGj"/>
+                                                                                        <constraint firstAttribute="height" constant="23" id="Rcz-RP-hLB"/>
+                                                                                        <constraint firstItem="6F2-8E-jNm" firstAttribute="top" secondItem="N5f-vp-Kxa" secondAttribute="top" id="h5W-HU-Gjz"/>
+                                                                                        <constraint firstAttribute="width" constant="66" id="mlM-iU-Fkx"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="6F2-8E-jNm" secondAttribute="bottom" id="o7z-BT-NjG"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="6F2-8E-jNm" secondAttribute="trailing" id="y4Z-58-0Rh"/>
                                                                                     </constraints>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                                             <real key="value" value="1"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                            <color key="value" red="0.81569421289999999" green="0.81966179610000001" blue="0.81567931179999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                            <color key="value" red="0.81961566210000003" green="0.8195977807" blue="0.81960135700000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                            <real key="value" value="3"/>
+                                                                                            <real key="value" value="5"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </view>
                                                                             </subviews>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
-                                                                                <constraint firstItem="73M-6y-ze4" firstAttribute="top" secondItem="e8n-kT-yDO" secondAttribute="top" id="1rl-ij-SQx"/>
-                                                                                <constraint firstAttribute="width" constant="65.5" id="45f-VD-KpI"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="73M-6y-ze4" secondAttribute="trailing" id="aVK-PW-GLc"/>
+                                                                                <constraint firstAttribute="width" constant="66" id="45f-VD-KpI"/>
+                                                                                <constraint firstItem="N5f-vp-Kxa" firstAttribute="leading" secondItem="e8n-kT-yDO" secondAttribute="leading" id="Uj2-p4-3aL"/>
+                                                                                <constraint firstItem="N5f-vp-Kxa" firstAttribute="top" secondItem="e8n-kT-yDO" secondAttribute="top" id="YKv-xU-95R"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="N5f-vp-Kxa" secondAttribute="trailing" id="n6M-HE-eOa"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -579,7 +640,7 @@
                                                                                                         <constraint firstAttribute="height" constant="20" id="fvM-cq-fjX"/>
                                                                                                     </constraints>
                                                                                                 </view>
-                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fI-hX-w88" customClass="CosmosView" customModule="Cosmos">
+                                                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fI-hX-w88" customClass="CosmosView" customModule="Cosmos">
                                                                                                     <rect key="frame" x="46" y="0.0" width="120" height="20"/>
                                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                     <constraints>
@@ -597,7 +658,7 @@
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </view>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upv-UE-FZt" customClass="tblHomeLabels" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="171" y="0.0" width="207" height="20"/>
+                                                                                                    <rect key="frame" x="46" y="0.0" width="332" height="20"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -729,7 +790,7 @@
                                                         <rect key="frame" x="16" y="0.0" width="382" height="50"/>
                                                         <subviews>
                                                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Dzj-qS-eIp" customClass="searchBarHome" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="-0.5" width="382" height="51"/>
+                                                                <rect key="frame" x="0.0" y="-3" width="382" height="56"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </searchBar>
                                                         </subviews>
@@ -761,7 +822,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="YourFavouriteCell" id="Hg6-hk-628" customClass="YourFavouriteCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="297"/>
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="297"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hg6-hk-628" id="dYu-Rs-9cw">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
@@ -1016,7 +1077,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyOrdersCell" id="P1a-5w-hzn" customClass="MyOrdersCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="156.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="156.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P1a-5w-hzn" id="KJN-U9-g50">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="156.5"/>
@@ -1978,7 +2039,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                        <rect key="frame" x="18" y="55" width="378" height="215"/>
+                                                        <rect key="frame" x="18" y="55" width="378" height="261"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -2021,10 +2082,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                <rect key="frame" x="0.0" y="166" width="378" height="49"/>
+                                                                <rect key="frame" x="0.0" y="166" width="378" height="95"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="79"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="79" id="GZk-3S-lMA"/>
@@ -2040,7 +2101,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="48" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="94" width="378" height="1"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -2782,7 +2843,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationCell" id="C3a-up-Y81" customClass="NotificationCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="116"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="116"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C3a-up-Y81" id="agx-LQ-OVk">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="116"/>
@@ -3074,7 +3135,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReViewDiscCell" id="zYv-cy-nYb" customClass="ReViewDiscCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="109"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="109"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zYv-cy-nYb" id="F95-Xz-0AW">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
@@ -3482,7 +3543,7 @@
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PromocodeCell" rowHeight="197" id="pKt-lh-62Z" customClass="PromocodeCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="197"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="197"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pKt-lh-62Z" id="DA8-z5-mab">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="197"/>
@@ -3749,7 +3810,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyFoodlistCell" id="OHv-lI-MER" customClass="MyFoodlistCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="114"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="114"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHv-lI-MER" id="bbI-iX-kJI">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
@@ -4157,7 +4218,7 @@
                                                                                 </constraints>
                                                                                 <prototypes>
                                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyOrderDetailsCell" id="bsJ-Of-dKQ" customClass="MyOrderDetailsCell" customModule="Adelante" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="24.5" width="378" height="66.5"/>
+                                                                                        <rect key="frame" x="0.0" y="28" width="378" height="66.5"/>
                                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bsJ-Of-dKQ" id="GAh-Wf-pq6">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="378" height="66.5"/>
@@ -4650,7 +4711,7 @@
                                                 <rect key="frame" x="16" y="0.0" width="382" height="50"/>
                                                 <subviews>
                                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jEM-3l-Wit" customClass="searchBarHome" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="-0.5" width="382" height="51"/>
+                                                        <rect key="frame" x="0.0" y="-3" width="382" height="56"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </searchBar>
                                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qQW-G4-gaz" customClass="customTextField" customModule="Adelante" customModuleProvider="target">
@@ -4753,7 +4814,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantListCell" id="hu2-bj-dns" customClass="RestaurantListCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="234"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="234"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hu2-bj-dns" id="hYG-F2-WYJ">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
@@ -5076,7 +5137,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantOutletListCell" id="g7E-bU-pcB" customClass="RestaurantOutletListCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="244"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="244"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g7E-bU-pcB" id="lI8-hK-Hbp">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="244"/>
@@ -5338,7 +5399,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="733"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJc-dG-moh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="828.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="815.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjY-OZ-8e2" customClass="CustomviewRadius" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="138.5" y="10" width="137" height="134"/>
@@ -5489,13 +5550,16 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcT-MY-Egu">
-                                                                <rect key="frame" x="18" y="253.5" width="378" height="45"/>
+                                                                <rect key="frame" x="18" y="253.5" width="378" height="32"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="J4X-ho-1YX">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="45"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="J4X-ho-1YX">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="32"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlZ-Il-jiR" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="16.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="20" id="EXE-js-SZz"/>
+                                                                                </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -5504,7 +5568,7 @@
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIH-7Y-rOG" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="28.5" width="378" height="16.5"/>
+                                                                                <rect key="frame" x="0.0" y="32" width="378" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -5517,7 +5581,6 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="45" id="0h3-NN-OcL"/>
                                                                     <constraint firstAttribute="trailing" secondItem="J4X-ho-1YX" secondAttribute="trailing" id="BO0-7C-iAa"/>
                                                                     <constraint firstAttribute="bottom" secondItem="J4X-ho-1YX" secondAttribute="bottom" id="HgH-rg-1sN"/>
                                                                     <constraint firstItem="J4X-ho-1YX" firstAttribute="leading" secondItem="mcT-MY-Egu" secondAttribute="leading" id="Iw6-zg-uwf"/>
@@ -5525,7 +5588,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bw-h0-HXA">
-                                                                <rect key="frame" x="18" y="319.5" width="378" height="45"/>
+                                                                <rect key="frame" x="18" y="306.5" width="378" height="45"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vbm-TX-nKm">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="45"/>
@@ -5625,7 +5688,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZr-L2-N6w" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="18" y="382.5" width="378" height="25"/>
+                                                                <rect key="frame" x="18" y="369.5" width="378" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="xcd-5h-tEf"/>
                                                                 </constraints>
@@ -5637,7 +5700,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gB5-SD-PGD" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="161.5" y="422.5" width="91" height="25"/>
+                                                                <rect key="frame" x="161.5" y="409.5" width="91" height="25"/>
                                                                 <state key="normal">
                                                                     <attributedString key="attributedTitle">
                                                                         <fragment content="View Store Policy">
@@ -5662,7 +5725,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMh-eM-Vy2">
-                                                                <rect key="frame" x="0.0" y="467" width="414" height="2"/>
+                                                                <rect key="frame" x="0.0" y="454" width="414" height="2"/>
                                                                 <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685523750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="2" id="Iow-L3-u7k"/>
@@ -5672,14 +5735,14 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-1E-0fr">
-                                                                <rect key="frame" x="0.0" y="478.5" width="414" height="350"/>
+                                                                <rect key="frame" x="0.0" y="465.5" width="414" height="350"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="350" id="xrq-KQ-F7y"/>
                                                                 </constraints>
                                                                 <prototypes>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailsCell" id="fuw-0l-8aI" customClass="RestaurantDetailsCell" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="132"/>
+                                                                        <rect key="frame" x="0.0" y="28" width="414" height="132"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fuw-0l-8aI" id="TDc-YZ-epj">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
@@ -5934,7 +5997,7 @@
                                                                         </connections>
                                                                     </tableViewCell>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantItemCell" id="oHS-bR-V3a" customClass="RestaurantItemCell" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="156.5" width="414" height="117"/>
+                                                                        <rect key="frame" x="0.0" y="160" width="414" height="117"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oHS-bR-V3a" id="9aZ-0H-pcc">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
@@ -5965,9 +6028,6 @@
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </label>
                                                                                             </subviews>
-                                                                                            <constraints>
-                                                                                                <constraint firstAttribute="width" constant="312" id="DIF-2O-VGR"/>
-                                                                                            </constraints>
                                                                                         </stackView>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PaS-cT-vc9">
                                                                                             <rect key="frame" x="312" y="0.0" width="66" height="105"/>
@@ -6093,6 +6153,9 @@
                                                                                                     </connections>
                                                                                                 </button>
                                                                                             </subviews>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="66" id="cQE-Zb-Lzw"/>
+                                                                                            </constraints>
                                                                                         </stackView>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -6338,7 +6401,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentMethodCell1" id="iUP-Oz-FpZ" customClass="paymentMethodCell1" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="101"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="101"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iUP-Oz-FpZ" id="sdj-nM-rKn">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="101"/>
@@ -6425,7 +6488,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paymentMethodCell2" id="vSG-CH-VIh" customClass="paymentMethodCell2" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="125.5" width="414" height="143"/>
+                                                <rect key="frame" x="0.0" y="129" width="414" height="143"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vSG-CH-VIh" id="9od-mu-Ky3">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
@@ -6734,7 +6797,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="myAccountSubDetails" rowHeight="49" id="hyL-Es-54P" customClass="myAccountSubDetails" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="378" height="49"/>
+                                                <rect key="frame" x="0.0" y="28" width="378" height="49"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hyL-Es-54P" id="MTS-ta-Q4X">
                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="49"/>
@@ -6828,7 +6891,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bffComboCell" id="0IO-E0-Zcf" customClass="bffComboCell" customModule="Adelante" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="36"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0IO-E0-Zcf" id="lk3-cb-8M1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
@@ -7135,7 +7198,7 @@
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sortCell" id="dTh-bd-yra" customClass="sortCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="42.5"/>
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="42.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dTh-bd-yra" id="hYf-L5-md7">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="42.5"/>
@@ -8000,7 +8063,7 @@
                                                 </view>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantCatListCell" id="f9n-wp-Ncb" customClass="RestaurantCatListCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="285.5" width="414" height="43"/>
+                                                        <rect key="frame" x="0.0" y="289" width="414" height="43"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f9n-wp-Ncb" id="jKw-gS-6nZ">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
@@ -8124,7 +8187,7 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantCell" id="YVw-po-u7R" customClass="RestaurantCell" customModule="Adelante" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="328.5" width="414" height="234"/>
+                                                        <rect key="frame" x="0.0" y="332" width="414" height="234"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YVw-po-u7R" id="KeW-sZ-WoR">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="234"/>
@@ -8471,7 +8534,7 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addedProductCell" id="SoL-Y3-stF" customClass="addedProductCell" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="24.5" width="378" height="61"/>
+                                                                <rect key="frame" x="0.0" y="28" width="378" height="61"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SoL-Y3-stF" id="qxs-jW-5YR">
                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="61"/>
@@ -8719,7 +8782,7 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="orderDetailsCell" id="QEb-v2-0vC" customClass="orderDetailsCell" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="24.5" width="378" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="28" width="378" height="20.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QEb-v2-0vC" id="evR-Uj-87o">
                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="20.5"/>
@@ -9069,6 +9132,9 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
+        <designable name="0kK-8b-MA7">
+            <size key="intrinsicContentSize" width="195" height="32"/>
+        </designable>
         <designable name="0t8-U3-ebv">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
@@ -9099,9 +9165,6 @@ avoid cancellations </string>
         <designable name="QPd-3g-SxC">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
-        <designable name="Tme-wR-K6Z">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
         <designable name="cc0-dj-TGl">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
@@ -9113,9 +9176,6 @@ avoid cancellations </string>
         </designable>
         <designable name="mJ2-zK-PS6">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="oP7-OM-AFy">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
         </designable>
         <designable name="pGH-j9-vWm">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
