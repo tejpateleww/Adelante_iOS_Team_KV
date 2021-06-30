@@ -30,8 +30,8 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qka-2v-VK1">
-                            <rect key="frame" x="15" y="155" width="384" height="420.5"/>
-                            <mutableString key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</mutableString>
+                            <rect key="frame" x="15" y="170" width="384" height="420.5"/>
+                            <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                         <constraint firstItem="qka-2v-VK1" firstAttribute="leading" secondItem="pVa-K5-vpA" secondAttribute="leading" constant="15" id="20t-wd-rUn"/>
                         <constraint firstItem="zTS-SO-PED" firstAttribute="centerX" secondItem="pVa-K5-vpA" secondAttribute="centerX" id="5VM-MU-Tdg"/>
                         <constraint firstItem="zTS-SO-PED" firstAttribute="top" secondItem="pVa-K5-vpA" secondAttribute="top" constant="20" id="acT-vK-huK"/>
-                        <constraint firstItem="qka-2v-VK1" firstAttribute="top" secondItem="zTS-SO-PED" secondAttribute="bottom" constant="15" id="hm9-Iq-aqh"/>
+                        <constraint firstItem="qka-2v-VK1" firstAttribute="top" secondItem="zTS-SO-PED" secondAttribute="bottom" constant="30" id="hm9-Iq-aqh"/>
                         <constraint firstAttribute="trailing" secondItem="qka-2v-VK1" secondAttribute="trailing" constant="15" id="u8z-Dv-6LE"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>

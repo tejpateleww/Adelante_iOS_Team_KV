@@ -9069,6 +9069,9 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
+        <designable name="0kK-8b-MA7">
+            <size key="intrinsicContentSize" width="195" height="32"/>
+        </designable>
         <designable name="0t8-U3-ebv">
             <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>

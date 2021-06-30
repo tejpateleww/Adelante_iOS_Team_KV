@@ -240,7 +240,15 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         if collectionView == self.colVwFilterOptions{
             return arrFilter.count
         } else if collectionView == self.colVwRestWthPage {
-            return arrBanner.count > 0 ? arrBanner.count : 5
+            if responseStatus == .gotData{
+                if arrBanner.count != 0 {
+                    return self.arrBanner.count
+                }else{
+                    return 1
+                }
+            }else{
+                return 5
+            }
         }
         return arrRestaurant.count
     }
@@ -267,7 +275,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return cell
         }else {
             if responseStatus == .gotData{
-                if arrFilter.count != 0 {
+                if arrBanner.count != 0 {
                     let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: RestWithPageCell.reuseIdentifier, for: indexPath) as! RestWithPageCell
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrBanner[indexPath.row].image ?? "")"
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -288,7 +296,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 }else{
                     let NoDatacell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: "NoDataCollectionview", for: indexPath) as! NoDataCollectionview
                     NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
-                    NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
+                    NoDatacell.lblNoDataTitle.text = "No Data Found"
                     return NoDatacell
                 }
             }else{
