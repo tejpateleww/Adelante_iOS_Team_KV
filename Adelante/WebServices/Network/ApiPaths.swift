@@ -100,5 +100,7 @@ enum ApiKey: String {
     case apply_promocode = "apply_promocode"
     case order = "order"
     case Email_verify = "resend_link"
+    case Add_Foodlist = "foodlist"
+    case Add_to_Card = "add_to_cart"
 }
 

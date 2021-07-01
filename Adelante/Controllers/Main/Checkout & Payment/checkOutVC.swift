@@ -50,6 +50,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var btnAddFoodlist: checkoutButton!
     @IBOutlet weak var btnPlaceOrder: submitButton!
     
+    var arritem = [String]()
+
     // MARK: - ViewController Lifecycle
     
     // handle notification
@@ -454,8 +456,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func btnAddFoodlistClicked(_ sender: Any) {
-        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
-        self.navigationController?.pushViewController(vc, animated: true)
+       // let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
+       // self.navigationController?.pushViewController(vc, animated: true)
+        for i in 0...(objCurrentorder?.order.count)! - 1 {
+            arritem.append((objCurrentorder?.order[i].restaurant_item_id)!)
+        }
+        print(arritem.joined(separator: ","))
+        webserviceAddToFoodlist()
     }
     
     @IBAction func btnChangeRestaurantClicked(_ sender: Any) {
@@ -482,7 +489,32 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
         })
     }
+    
+    
+    func webserviceAddToFoodlist(){
+        let foodList = AddToFoodlistReqModel()
+        foodList.user_id = SingletonClass.sharedInstance.UserId
+        foodList.item_id = "\(arritem.joined(separator: ","))"
+        foodList.restaurant_id = objCurrentorder!.restaurant_id
+        foodList.cart_id = "1"
+        WebServiceSubClass.AddToFoodList(FoodListModel: foodList, showHud: true) { (json, status, response) in
+            if(status)
+            {
+                print(json)
+                // let AddtoFoodlistData = AddToFoodlistReqModel.init()
+                //                self.objOrderData = repeatOrderData.data
+                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
+                self.navigationController?.pushViewController(vc, animated: true)
+                Utilities.displayAlert(json["message"].string ?? "")
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
+    }
 }
+
 class PlacerOrderData {
     
     var comment : String!

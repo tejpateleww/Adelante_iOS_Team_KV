@@ -14,3 +14,11 @@ class RestaurantDetailsReqModel:RequestModel{
     var lat : String = ""
     var lng : String = ""
 }
+
+
+class AddToCartReqModel:RequestModel{
+    var restaurant_id : String = ""
+    var item_id : String = ""
+    var user_id : String = ""
+    var qty : String = ""
+}

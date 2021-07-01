@@ -1,7 +1,7 @@
 //
 //  SearchResModel.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 8, 2021
+//  Created on July 1, 2021
 
 import Foundation
 import SwiftyJSON
@@ -9,7 +9,8 @@ import SwiftyJSON
 
 class SearchResModel : NSObject, NSCoding{
 
-    var data : [Datum]!
+    var data : SearchDatum!
+    var message : String!
     var status : Bool!
 
 	/**
@@ -19,12 +20,11 @@ class SearchResModel : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
-        data = [Datum]()
-        let dataArray = json["data"].arrayValue
-        for dataJson in dataArray{
-            let value = Datum(fromJson: dataJson)
-            data.append(value)
+        let dataJson = json["data"]
+        if !dataJson.isEmpty{
+            data = SearchDatum(fromJson: dataJson)
         }
+        message = json["message"].stringValue
         status = json["status"].boolValue
 	}
 
@@ -35,11 +35,10 @@ class SearchResModel : NSObject, NSCoding{
 	{
 		var dictionary = [String:Any]()
         if data != nil{
-        var dictionaryElements = [[String:Any]]()
-        for dataElement in data {
-        	dictionaryElements.append(dataElement.toDictionary())
+        	dictionary["data"] = data.toDictionary()
         }
-        dictionary["data"] = dictionaryElements
+        if message != nil{
+        	dictionary["message"] = message
         }
         if status != nil{
         	dictionary["status"] = status
@@ -53,7 +52,8 @@ class SearchResModel : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		data = aDecoder.decodeObject(forKey: "data") as? [Datum]
+		data = aDecoder.decodeObject(forKey: "data") as? SearchDatum
+		message = aDecoder.decodeObject(forKey: "message") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
 
@@ -65,6 +65,9 @@ class SearchResModel : NSObject, NSCoding{
 	{
 		if data != nil{
 			aCoder.encode(data, forKey: "data")
+		}
+		if message != nil{
+			aCoder.encode(message, forKey: "message")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

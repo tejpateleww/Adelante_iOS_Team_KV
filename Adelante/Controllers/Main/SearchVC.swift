@@ -13,13 +13,15 @@ import BetterSegmentedControl
 class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource {
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrSearchResult = [Datum]()
+    var arrSearchRestList = [SearchRestaurant]()
+    var arrSearchRestItemList = [SearchRestaurantItem]()
     private var lastSearchTxt = ""
     var refreshList = UIRefreshControl()
     var selectedSegmentTag = 0
     var pageNumber = 1
     var isNeedToReload = true
     var pageLimit = 5
+    
     // MARK: - IBOutlets
     @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var tblRestaurant: UITableView!
@@ -41,6 +43,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         setup()
         tblRestaurant.isHidden = false
         tblFoodList.isHidden = true
+        tblFoodList.tableFooterView = UIView()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
@@ -48,7 +51,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         if txtSearch.text!.isEmptyOrWhitespace(){
-        self.tblRestaurant.setEmptyMessage("")
+            self.tblRestaurant.setEmptyMessage("Search something")
+            self.tblFoodList.setEmptyMessage("Search something")
         }
     }
     
@@ -66,32 +70,101 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblRestaurant {
-            return 5
+            return arrSearchRestList.count
         }else{
-            return 5
+            return arrSearchRestItemList.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tblRestaurant {
             let cell = tblRestaurant.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
-            cell.lblAreaName.text = "Kingkung sirm Samabel"//arrSearchResult[indexPath.row].name
-            cell.lblAddress.text =  "$23.45"//arrSearchResult[indexPath.row].address
-            cell.lblMiles.text = "2.5 mile" //arrSearchResult[indexPath.row].distance
-          //  let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
-           //cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-           // cell.btnFavorite.tag = indexPath.row
+            cell.lblAreaName.text = arrSearchRestList[indexPath.row].name
+            cell.lblAddress.text = arrSearchRestList[indexPath.row].address
+            cell.lblMiles.text = arrSearchRestList[indexPath.row].distance
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestList[indexPath.row].image ?? "")"
+           cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.btnFavorite.tag = indexPath.row
             cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
-    //        if arrOutletList[indexPath.row].favourite == "1"{
-    //            cell.btnFavorite.isSelected = true
-    //        }else{
-    //            cell.btnFavorite.isSelected = false
-    //        }
+            if arrSearchRestList[indexPath.row].favourite == "1"{
+                cell.btnFavorite.isSelected = true
+            }else{
+                cell.btnFavorite.isSelected = false
+            }
             cell.selectionStyle = .none
             return cell
         }else{
             let cell:MyFoodlistCell = tblFoodList.dequeueReusableCell(withIdentifier: "MyFoodlistCell", for: indexPath) as! MyFoodlistCell
+            cell.lblComboTitle.text = arrSearchRestItemList[indexPath.row].name
+            cell.lblPrice.text = "$" + arrSearchRestItemList[indexPath.row].price
+            cell.lblDisc.text = arrSearchRestItemList[indexPath.row].descriptionField
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestItemList[indexPath.row].image ?? "")"
+            cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.lblRating.text = "\(arrSearchRestItemList[indexPath.row].ratingCount!)"
+            cell.lblRestaurant.text = arrSearchRestItemList[indexPath.row].restaurantName.trimmingCharacters(in: .whitespaces)
+            cell.lblMiles.text = arrSearchRestItemList[indexPath.row].distance
             cell.selectionStyle = .none
+            
+            cell.decreaseData = {
+                var strQty = ""
+                if cell.lblNoOfItem.text != ""{
+                    var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                    if value == 1{
+                        cell.btnAdd.isHidden = false
+                        cell.vwStapper.isHidden = true
+                    }else if value > 1{
+                        value = value - 1
+                        cell.lblNoOfItem.text = String(value)
+                        strQty = "\(value)"
+                    }
+                }
+                self.arrSearchRestItemList[indexPath.row].quantity = strQty
+                var pr = 0
+                pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
+                let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
+                print(objItem)
+            }
+            cell.IncreseData = { [self] in
+                var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                if self.arrSearchRestItemList[indexPath.row].quantity.toInt() > value {
+                    var strQty = ""
+                    if cell.lblNoOfItem.text != ""{
+
+                        value = value + 1
+                        cell.lblNoOfItem.text = String(value)
+                        strQty = "\(value)"
+                    }
+                    self.arrSearchRestItemList[indexPath.row].quantity = strQty
+                    var pr = 0
+                    pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
+                    print(objItem)
+                  //  self.checkOrderItems(objOrder: objItem)
+                    //self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, strqty: strQty)
+                }
+                else {
+                   // Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name ?? "")","\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity ?? "")"]), vc: self)
+                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+                }
+            }
+            cell.btnAddAction = {
+                if self.arrSearchRestItemList[indexPath.row].quantity.ToDouble() >= 1 {
+                    cell.btnAdd.isHidden = true
+                    cell.vwStapper.isHidden = false
+                    let strQty = "1"
+                    cell.lblNoOfItem.text = strQty
+                    self.arrSearchRestItemList[indexPath.row].quantity = strQty
+                    var pr = 0
+                    pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
+                    print(objItem)
+                  //  self.checkOrderItems(objOrder: objItem)
+                }
+                else {
+                   // Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+                }
+            }
             return cell
         }
        
@@ -102,11 +175,37 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
 //            vc.strItemId = arrSearchResult[indexPath.row].id
 //            vc.strItemType = arrSearchResult[indexPath.row].type
 //            self.navigationController?.pushViewController(vc, animated: true)
-//        }else if arrSearchResult[indexPath.row].type.caseInsensitiveCompare("restaurant") == .orderedSame{
+//        }else if arrSearchRestItemList[indexPath.row].type.caseInsensitiveCompare("restaurant") == .orderedSame{
 //            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantDetailsVC") as! RestaurantDetailsVC
 //            vc.selectedRestaurantId = arrSearchResult[indexPath.row].id
 //            self.navigationController?.pushViewController(vc, animated: true)
 //        }
+        if tableView == tblRestaurant {
+            if arrSearchRestList[indexPath.row].type == "restaurant" {
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
+                controller.selectedRestaurantId = arrSearchRestList[indexPath.row].id
+                controller.strRestaurantName = arrSearchRestList[indexPath.row].name
+                self.navigationController?.pushViewController(controller, animated: true)
+            }else{
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+                controller.selectedRestaurantId = arrSearchRestList[indexPath.row].id
+                controller.selectedIndex = "\(indexPath.row)"
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        }else{
+            if arrSearchRestItemList[indexPath.row].type == "restaurant" {
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
+                controller.selectedRestaurantId = arrSearchRestItemList[indexPath.row].id
+                controller.strRestaurantName = arrSearchRestItemList[indexPath.row].name
+                self.navigationController?.pushViewController(controller, animated: true)
+            }else{
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+                controller.selectedRestaurantId = arrSearchRestItemList[indexPath.row].id
+                controller.selectedIndex = "\(indexPath.row)"
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
+        
     }
     func setUpLocalizedStrings() {
         txtSearch.placeholder = "SearchVC_txtSearch".Localized()
@@ -167,19 +266,28 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         search.user_id = SingletonClass.sharedInstance.UserId
         search.page = "\(pageNumber)"
+        self.showHUD()
         WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
-            //self.hideHUD()
+            self.hideHUD()
             if status{
                 let result = SearchResModel(fromJson: response)
-                self.arrSearchResult = result.data
+                self.arrSearchRestList = result.data.restaurant
+                self.arrSearchRestItemList = result.data.restaurantItem
                 self.tblRestaurant.reloadData()
+                self.tblFoodList.reloadData()
             }else{
                 Utilities.showAlertOfAPIResponse(param: response, vc: self)
             }
-            if self.arrSearchResult.count > 0{
+            if self.arrSearchRestList.count > 0{
                 self.tblRestaurant.restore()
             }else {
                 self.tblRestaurant.setEmptyMessage("No result found for \"\(self.txtSearch.text ?? "")\"")
+            }
+            
+            if self.arrSearchRestItemList.count > 0{
+                self.tblFoodList.restore()
+            }else {
+                self.tblFoodList.setEmptyMessage("No result found for \"\(self.txtSearch.text ?? "")\"")
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
@@ -202,13 +310,14 @@ extension SearchVC:UISearchBarDelegate{
     @objc private func makeNetworkCall(_ query: String)
     {
         if query == ""{
-            arrSearchResult.removeAll()
+            arrSearchRestList.removeAll()
+            arrSearchRestItemList.removeAll()
             tblRestaurant.reloadData()
+            tblFoodList.reloadData()
         }else{
             if query.count > 2{
 //                txtSearch.resignFirstResponder()
                 webserviceSearchModel(strSearch: query)
-                
             }
         }
     }

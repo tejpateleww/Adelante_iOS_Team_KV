@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SkeletonView
 
-class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,SkeletonTableViewDataSource {
     // MARK: - Properties
-    //var customTabBarController: CustomTabBarVC?
+    var customTabBarController: CustomTabBarVC?
+    var responseStatus : webserviceResponse = .initial
     var selectedcategory = 0
     var selectedSection = 0
     var expendedCell = -1
@@ -22,7 +24,11 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     // MARK: - IBOutlets
    
-    @IBOutlet weak var tblBFFCombo: UITableView!
+    @IBOutlet weak var tblBFFCombo: UITableView!{
+        didSet{
+            tblBFFCombo.isSkeletonable = true
+        }
+    }
     @IBOutlet weak var lblItem: themeLabel!
     @IBOutlet weak var lblTotal: themeLabel!
     @IBOutlet weak var lblSign: themeLabel!
@@ -37,14 +43,11 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tblBFFCombo.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        registerNIB()
+        tblBFFCombo.showAnimatedSkeleton()
         tblBFFCombo.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(webservicePostCombo), for: .valueChanged)
         setUpLocalizedStrings()
-        addNavBarImage(isLeft: true, isRight: true)
-        //self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
-        addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.BffComboVC.value, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         objCurrentOrder = SingletonClass.sharedInstance.restCurrentOrder
         let footerView = UIView()
         footerView.backgroundColor = .white
@@ -52,15 +55,24 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         tblBFFCombo.tableFooterView = footerView
         webservicePostCombo()
         checkItemsAndUpdateFooter()
+        setup()
         // Do any additional setup after loading the view.
     }
     
     // MARK: - Other Methods
+    func setup() {
+        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
+        addNavBarImage(isLeft: true, isRight: true)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.BffComboVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+    }
     func setUpLocalizedStrings(){
         lblItem.text = "BffComboVC_lblItem".Localized()
         lblViewCart.text = "BffComboVC_lblViewCart".Localized()
     }
-    
+    func registerNIB(){
+        tblBFFCombo.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        tblBFFCombo.register(UINib(nibName:"ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
+    }
     func checkandUpdateVariants() {
         self.arrSelectedVariants.removeAll()
         if (self.arrVariants?.count ?? 0) > 0 {
@@ -112,61 +124,88 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         }
         
     }
-    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return self.responseStatus == .gotData ? (self.arrVariants?.count ?? 0 > 0 ? bffComboCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+    }
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.responseStatus == .gotData{
+            return 0
+        }
+        return 3
+    }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if arrVariants?[section].isExpanded == true {
-            return arrVariants?[section].option.count ?? 0
-        } else {
-            return 0
+        if responseStatus == .gotData{
+            if arrVariants?.count != 0 {
+                return (arrVariants?[section].isExpanded == false) ?  arrVariants?[section].option.count ?? 0 : 0
+            }else{
+                return 1
+            }
+        }else{
+            return 5
         }
        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
-            
-        
-        let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: bffComboCell.reuseIdentifier, for: indexPath) as! bffComboCell
-        cell.lblbffComboTitle.text = arrVariants?[indexPath.section].option[indexPath.row].name
-        cell.lblBffComboPrice.isHidden = (arrVariants?[indexPath.section].option[indexPath.row].price != "") ? false : true
-        cell.lblBffComboPrice.text = "$" + (arrVariants?[indexPath.section].option[indexPath.row].price)!
-        let selectOne = arrVariants?[indexPath.section].option[indexPath.row].menuChoice.toInt()
-        if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 {
-            cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
-        } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0 {
-            cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
-        } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne != 0 {
-            cell.selectButton.setImage(UIImage(named: "ic_paymentSelected"), for: .normal)
-        } else {
-            cell.selectButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
-        }
-        cell.selectedBtn = {
-            let tempIndex = indexPath.row
-            if self.arrVariants?[indexPath.section].option[tempIndex].isSelected == true {
-                self.arrVariants?[indexPath.section].option[tempIndex].isSelected = false
-            } else {
-                self.arrVariants?[indexPath.section].option.forEach { $0.isSelected = false }
-                if self.arrVariants?[indexPath.section].option[indexPath.row].isSelected == true {
-                    self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = false
+        if responseStatus == .gotData{
+            if arrVariants?.count != 0 {
+                let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: bffComboCell.reuseIdentifier, for: indexPath) as! bffComboCell
+                cell.lblbffComboTitle.text = arrVariants?[indexPath.section].option[indexPath.row].name
+                cell.lblBffComboPrice.isHidden = (arrVariants?[indexPath.section].option[indexPath.row].price != "") ? false : true
+                cell.lblBffComboPrice.text = "$" + (arrVariants?[indexPath.section].option[indexPath.row].price)!
+                let selectOne = arrVariants?[indexPath.section].option[indexPath.row].menuChoice.toInt()
+                if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 {
+                    cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
+                } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0 {
+                    cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
+                } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne != 0 {
+                    cell.selectButton.setImage(UIImage(named: "ic_paymentSelected"), for: .normal)
                 } else {
-                    self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = true
+                    cell.selectButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
+                }
+                cell.selectedBtn = {
+                    let tempIndex = indexPath.row
+                    if self.arrVariants?[indexPath.section].option[tempIndex].isSelected == true {
+                        self.arrVariants?[indexPath.section].option[tempIndex].isSelected = false
+                    } else {
+                        self.arrVariants?[indexPath.section].option.forEach { $0.isSelected = false }
+                        if self.arrVariants?[indexPath.section].option[indexPath.row].isSelected == true {
+                            self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = false
+                        } else {
+                            self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = true
+                        }
+                        
+                    }
+                    self.checkandUpdateVariants()
+                    
+                    self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
                 }
                 
+                cell.selectionStyle = .none
+                return cell
+            }else{
+                let NoDatacell = tblBFFCombo.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+                NoDatacell.imgNoData.image = UIImage(named: "Orders")
+                NoDatacell.lblNoDataTitle.isHidden = true
+                NoDatacell.selectionStyle = .none
+                return NoDatacell
             }
-            self.checkandUpdateVariants()
-            
-            self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
+        }else{
+            let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
+            cell.selectionStyle = .none
+            return cell
         }
-        
-        cell.selectionStyle = .none
-        return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        if arrVariants?.count == 0 {
-            return 1
-        } else {
-            return arrVariants?.count ?? 0
+        if responseStatus == .gotData{
+            if arrVariants?.count != 0 {
+                return self.arrVariants?.count ?? 0
+            }else{
+                return 1
+            }
+        }else{
+            return 5
         }
         
     }
@@ -174,43 +213,47 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if arrVariants?.count != 0 {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width , height: 47))
-        headerView.backgroundColor = .white
-        
-        
-        let label = UILabel()
-        label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width - 118, height: 19)
-        label.center.y = headerView.frame.size.height / 2
-        label.text = arrVariants?[section].groupName
-        label.font = CustomFont.NexaBold.returnFont(15)
-        label.textColor = colors.black.value// colors.black.value
-        //headerView.backgroundColor = colors.white.value
-        headerView.addSubview(label)
-        
-        let expandImageView = UIImageView()
-        expandImageView.frame = CGRect.init(x: headerView.frame.width - 35.66, y: 34.31, width: 16.66, height: 8.38)
-        expandImageView.center.y = headerView.frame.size.height / 2
-        expandImageView.image = UIImage(named: "ic_expand")
-            headerView.addSubview(expandImageView)
-            
-            let expandButton = UIButton()
-            expandButton.frame = CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
-            
-            expandButton.tag = section
-            expandButton.addTarget(self, action: #selector(btnExpand(_:)), for: .touchUpInside)
-            headerView.addSubview(expandButton)
-            
-            return headerView
-        } else {
-            let NoDatacell = tblBFFCombo.dequeueReusableCell(withIdentifier: "NoDataTableViewCell") as! NoDataTableViewCell
-            
-            NoDatacell.imgNoData.image = UIImage(named: NoData.varient.ImageName)
-            NoDatacell.lblNoDataTitle.text = "No varient available".Localized()
-            
-            return NoDatacell
+        if responseStatus == .gotData{
+            if arrVariants?.count != 0 {
+                let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width , height: 47))
+                headerView.backgroundColor = .white
+                
+                let label = UILabel()
+                label.frame = CGRect.init(x: 19, y: 0, width: headerView.frame.width - 118, height: 19)
+                label.center.y = headerView.frame.size.height / 2
+                label.text = arrVariants?[section].groupName
+                label.font = CustomFont.NexaBold.returnFont(15)
+                label.textColor = colors.black.value// colors.black.value
+                //headerView.backgroundColor = colors.white.value
+                headerView.addSubview(label)
+                
+                let expandImageView = UIImageView()
+                expandImageView.frame = CGRect.init(x: headerView.frame.width - 35.66, y: 34.31, width: 16.66, height: 8.38)
+                expandImageView.center.y = headerView.frame.size.height / 2
+                expandImageView.image = UIImage(named: "ic_expand")
+                headerView.addSubview(expandImageView)
+                
+                let expandButton = UIButton()
+                expandButton.frame = CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+                
+                expandButton.tag = section
+                expandButton.addTarget(self, action: #selector(btnExpand(_:)), for: .touchUpInside)
+                headerView.addSubview(expandButton)
+                
+                return headerView
+            } else {
+                let NoDatacell = tblBFFCombo.dequeueReusableCell(withIdentifier: "NoDataTableViewCell") as! NoDataTableViewCell
+                
+                NoDatacell.imgNoData.image = UIImage(named: NoData.varient.ImageName)
+                NoDatacell.lblNoDataTitle.text = "No varient available".Localized()
+                
+                return NoDatacell
+            }
+        }else{
+            let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
+            cell.selectionStyle = .none
+            return cell
         }
-        
     }
     
     @objc  func btnExpand(_ sender : UIButton) {
@@ -219,19 +262,38 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         } else {
             arrVariants?[sender.tag].isExpanded = true
         }
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.tblBFFCombo.reloadData()
+//        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if responseStatus == .gotData{
+            if arrVariants?.count != 0 {
+                return UITableView.automaticDimension
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return self.responseStatus == .gotData ?  230 : 131
         }
     }
     
     
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if arrVariants?.count != 0 {
-            return 47
-        } else {
-            return tableView.frame.size.height
+        if responseStatus == .gotData{
+            if arrVariants?.count != 0 {
+                return 47
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return self.responseStatus == .gotData ?  230 : 131
         }
+//        if arrVariants?.count != 0 {
+//            return 47
+//        } else {
+//            return tableView.frame.size.height
+//        }
         
     }
     
@@ -257,14 +319,19 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @objc func webservicePostCombo(){
         let ResVariants = RestaurantVariantsReqModel()
         ResVariants.restaurant_item_id = selectedRestaurantId
-        WebServiceSubClass.RestaurantVariants(RestaurantVariantsmodel: ResVariants, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantVariants(RestaurantVariantsmodel: ResVariants, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             self.refreshList.endRefreshing()
+            self.responseStatus = .gotData
             if status {
                 let resVariant = RestaurantVariantResModel.init(fromJson: response)
+                let cell = self.tblBFFCombo.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
+                cell.stopShimmering()
+                self.tblBFFCombo.stopSkeletonAnimation()
                 self.arrVariants = resVariant.variants
-             
-                
+                self.tblBFFCombo.dataSource = self
+                self.tblBFFCombo.isScrollEnabled = true
+                self.tblBFFCombo.isUserInteractionEnabled = true
                 self.tblBFFCombo.reloadData()
                 NotificationCenter.default.post(name: notifRefreshRestaurantDetails, object: nil)
             } else {

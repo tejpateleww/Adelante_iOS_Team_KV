@@ -135,6 +135,7 @@ class WebServiceSubClass
         let params : [String:String] = repeatOrder.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .RepeatOrder, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+
     class func RestaurantOutlet( OutletModel : RestaurantOutletReqModel, showHud : Bool = false , completion:@escaping CompletionResponse ){
         let params : [String:String] = OutletModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Outlets, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
@@ -163,9 +164,15 @@ class WebServiceSubClass
         WebService.shared.requestMethod(api: .order, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
 
     }
+    class func AddToFoodList( FoodListModel : AddToFoodlistReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
+        let params : [String:String] = FoodListModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Add_Foodlist, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
     
-   
-    
+    class func AddToCart( AddToCartModel : AddToCartReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
+        let params : [String:String] = AddToCartModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Add_to_Card, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
 }
 
 

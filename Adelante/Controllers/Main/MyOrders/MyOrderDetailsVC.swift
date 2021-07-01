@@ -31,7 +31,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var arrItem = [Item]()
     var orderType = ""
     var strRestaurantId = ""
-    lazy var skeletonViewData : skeletonView = skeletonView.fromNib()
+    lazy var skeletonViewData : SkeletonOrderDetails = SkeletonOrderDetails.fromNib()
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
     @IBOutlet weak var lblId: orderDetailsLabel!
@@ -58,10 +58,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var vwRateOrder: UIView!
     @IBOutlet weak var vwShareOrder: UIView!
     @IBOutlet weak var heightTblItems: NSLayoutConstraint!
+//    @IBOutlet weak var viewSkeleton: skeletonView!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         skeletonViewData.showAnimatedSkeleton()
+        self.view.addSubview(skeletonViewData)
         setUpLocalizedStrings()
         webserviceOrderDetails()
         tblItems.rowHeight = UITableView.automaticDimension
@@ -198,6 +200,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         WebServiceSubClass.orderDetailList(orderDetails: orderDetails, showHud: false, completion: { (response, status, error) in
             if status{
                 let orderData = MyorderDetailsResModel.init(fromJson: response)
+                self.skeletonViewData.removeFromSuperview()
                 self.skeletonViewData.stopShimmering()
                 self.skeletonViewData.stopSkeletonAnimation()
                 self.objOrderDetailsData = orderData.data.mainOrder
