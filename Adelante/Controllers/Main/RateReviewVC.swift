@@ -56,7 +56,7 @@ class RateReviewVC: BaseViewController {
         Rating.restaurant_id = strRestaurantId
         Rating.review_count = "\(vwRating.rating)"
         Rating.feedback = tvRateReview.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        WebServiceSubClass.RateOrder(rateOrder: Rating, showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.RateOrder(rateOrder: Rating, showHud: false, completion: { (json, status, response) in
             //            self.hideHUD()
             if(status)
             {

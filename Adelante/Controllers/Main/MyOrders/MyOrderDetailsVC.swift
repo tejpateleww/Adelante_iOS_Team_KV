@@ -218,7 +218,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         let cancelOrder = CancelOrderReqModel()
         cancelOrder.user_id = SingletonClass.sharedInstance.UserId
         cancelOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
-        WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 Utilities.displayAlert(json["message"].string ?? "")
@@ -234,7 +234,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         let shareOrder = shareOrderReqModel()
         shareOrder.user_type = strUsertype
         shareOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
-        WebServiceSubClass.ShareOrder(shareOrder: shareOrder, showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.ShareOrder(shareOrder: shareOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 Utilities.displayAlert(json["message"].string ?? "")

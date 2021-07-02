@@ -766,7 +766,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         ResDetails.user_id = SingletonClass.sharedInstance.UserId
         ResDetails.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         ResDetails.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status {
                 let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
@@ -815,7 +815,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         addToCart.user_id = SingletonClass.sharedInstance.UserId
         addToCart.qty = strqty
         addToCart.item_id = strItemId
-        WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: true) { (response, status, error) in
+        WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { (response, status, error) in
             if status {
                 print(response)
 //                self.objRestaurant.favourite = response

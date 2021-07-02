@@ -93,7 +93,7 @@ class LoginViewController: BaseViewController {
         login.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         login.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
 //        self.showHUD()
-        WebServiceSubClass.login(loginModel: login,showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.login(loginModel: login,showHud: false, completion: { (json, status, response) in
 //            self.hideHUD()
             if(status)
             {
@@ -126,7 +126,7 @@ class LoginViewController: BaseViewController {
         let forgot = ForgotPasswordReqModel()
        //forgot.user_name = txtEmailOrPhone.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         self.showHUD()
-        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: false, completion: { (response, status, error) in
             self.hideHUD()
             if (status){
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
@@ -146,7 +146,7 @@ class LoginViewController: BaseViewController {
         email.user_name = txtEmail.text ?? ""
         
         // self.showHUD()
-        WebServiceSubClass.sendEmail(optModel: email, showHud: true) { [self] (json, status, response) in
+        WebServiceSubClass.sendEmail(optModel: email, showHud: false) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 print(json)

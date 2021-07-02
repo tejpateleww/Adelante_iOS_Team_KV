@@ -110,7 +110,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
             webservicePostRestaurantFav(strSearch: "")
         }
     }
-    // MARK: - UITableViewDelegates And Datasource
+    // MARK: - SkeletonTableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return self.responseStatus == .gotData ? (self.arrFavoriteRest.count > 0 ? YourFavouriteCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
     }
@@ -120,7 +120,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         }
         return 3
     }
-    
+    // MARK: - UITableViewDelegates And Datasource
     @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if responseStatus == .gotData{
             if arrFavoriteRest.count != 0 {
@@ -165,14 +165,14 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
             }
             else {
                 let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-                
                 NoDatacell.imgNoData.image = UIImage(named: "Favorite LIst")
                 NoDatacell.lblNoDataTitle.isHidden = true
-                
+                NoDatacell.selectionStyle = .none
                 return NoDatacell
             }
         }else{
             let cell = tblMainList.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
+            cell.selectionStyle = .none
             return cell
         }
     }

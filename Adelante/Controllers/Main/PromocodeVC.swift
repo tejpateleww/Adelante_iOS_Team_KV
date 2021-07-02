@@ -121,7 +121,7 @@ extension PromocodeVC {
         let PromocodeList = PromocodeListReqModel()
         PromocodeList.restaurant_id = restaurant_id
         PromocodeList.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.PromoCodeList(PromocodeModel: PromocodeList, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.PromoCodeList(PromocodeModel: PromocodeList, showHud: false, completion: { (response, status, error) in
             
             if status{
                 let ResModel = PromoCodeResModel.init(fromJson: response)
@@ -138,7 +138,7 @@ extension PromocodeVC {
         let ApplyPromoCode = PromocodeApplyReqModel()
         ApplyPromoCode.promocode = Promocode
         ApplyPromoCode.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.ApplyPromoCode(PromocodeModel: ApplyPromoCode, showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.ApplyPromoCode(PromocodeModel: ApplyPromoCode, showHud: false, completion: { (response, status, error) in
             
             if status{
                 self.navigationController?.popViewController(animated: true)

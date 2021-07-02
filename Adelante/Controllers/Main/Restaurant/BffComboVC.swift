@@ -71,7 +71,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     }
     func registerNIB(){
         tblBFFCombo.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
-        tblBFFCombo.register(UINib(nibName:"ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
+        tblBFFCombo.register(UINib(nibName:"BffComboShimmerCell", bundle: nil), forCellReuseIdentifier: "BffComboShimmerCell")
     }
     func checkandUpdateVariants() {
         self.arrSelectedVariants.removeAll()
@@ -125,7 +125,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         
     }
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return self.responseStatus == .gotData ? (self.arrVariants?.count ?? 0 > 0 ? bffComboCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+        return self.responseStatus == .gotData ? (self.arrVariants?.count ?? 0 > 0 ? bffComboCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  BffComboShimmerCell.reuseIdentifier
     }
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.responseStatus == .gotData{
@@ -192,7 +192,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 return NoDatacell
             }
         }else{
-            let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
+            let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: BffComboShimmerCell.reuseIdentifier, for: indexPath) as! BffComboShimmerCell
             cell.selectionStyle = .none
             return cell
         }
@@ -250,7 +250,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 return NoDatacell
             }
         }else{
-            let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
+            let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: BffComboShimmerCell.reuseIdentifier) as! BffComboShimmerCell
             cell.selectionStyle = .none
             return cell
         }
@@ -274,7 +274,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 return tableView.frame.height
             }
         }else {
-            return self.responseStatus == .gotData ?  230 : 131
+            return self.responseStatus == .gotData ?  40 : 70
         }
     }
     
@@ -287,7 +287,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 return tableView.frame.height
             }
         }else {
-            return self.responseStatus == .gotData ?  230 : 131
+            return self.responseStatus == .gotData ?  40 : 70
         }
 //        if arrVariants?.count != 0 {
 //            return 47
@@ -325,7 +325,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             self.responseStatus = .gotData
             if status {
                 let resVariant = RestaurantVariantResModel.init(fromJson: response)
-                let cell = self.tblBFFCombo.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
+                let cell = self.tblBFFCombo.dequeueReusableCell(withIdentifier: BffComboShimmerCell.reuseIdentifier) as! BffComboShimmerCell
                 cell.stopShimmering()
                 self.tblBFFCombo.stopSkeletonAnimation()
                 self.arrVariants = resVariant.variants

@@ -179,7 +179,7 @@ class RegisterViewController: UIViewController {
         otp.user_name = txtEmail.text ?? ""
         
        // self.showHUD()
-        WebServiceSubClass.sendOTP(optModel: otp, showHud: true) { [self] (json, status, response) in
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 print(json)

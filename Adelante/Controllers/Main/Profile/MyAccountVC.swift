@@ -235,7 +235,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     // MARK: - Api Calls
     func webserviceGetSettings(){
         
-        WebServiceSubClass.Settings(showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.Settings(showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 self.SettingsData = SettingsResModel.init(fromJson: json)            }

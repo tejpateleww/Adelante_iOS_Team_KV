@@ -352,7 +352,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         let cancelOrder = CancelOrderReqModel()
         cancelOrder.user_id = SingletonClass.sharedInstance.UserId
         cancelOrder.main_order_id = strOrderId
-        WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 Utilities.displayAlert("", message: json["message"].string ?? "", completion: {_ in

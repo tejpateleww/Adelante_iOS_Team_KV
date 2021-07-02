@@ -219,7 +219,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         addcard.exp_date_month_year = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         addcard.cvv = txtCvv.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         addcard.user_id = SingletonClass.sharedInstance.UserId 
-        WebServiceSubClass.addCard(addcardsmodel: addcard, showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.addCard(addcardsmodel: addcard, showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 self.navigationController?.popViewController(animated: true)

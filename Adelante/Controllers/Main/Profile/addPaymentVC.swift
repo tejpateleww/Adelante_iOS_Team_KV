@@ -51,8 +51,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tblPaymentMethod.refreshControl = refreshList
-//        refreshList.addTarget(self, action: #selector(webserviceGetAddPayment), for: .valueChanged)
+        //        tblPaymentMethod.refreshControl = refreshList
+        //        refreshList.addTarget(self, action: #selector(webserviceGetAddPayment), for: .valueChanged)
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
@@ -67,7 +67,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     //MARK: -tblViewMethods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return arrCard.count
+        //        return arrCard.count
         switch section {
         case 0:
             return arrCard.count + 1
@@ -128,7 +128,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     }
                     else {
                         self.WebServiceCallForOrder(OrderJson: self.OrderDetails ?? "")
-//                        self.AddAmountDetails(cardID: self.cardDetailsData?.cards?[indexPath.row].id ?? "")
+                        //                        self.AddAmountDetails(cardID: self.cardDetailsData?.cards?[indexPath.row].id ?? "")
                     }
                 }
                 
@@ -144,7 +144,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.lblExpiresDate.text = "Default method"
             cell.btnDelete.isHidden = true
             cell.vwCvv.isHidden = true
-//            cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
+            //            cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
             cell.selectPaymentMethodButton.isHidden = false
             cell.selectedBtn = {
                 cell.selectPaymentMethodButton.isSelected = !cell.selectPaymentMethodButton.isSelected
@@ -165,16 +165,16 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        switch indexPath.section {
-//        case 0:
-//            return 100
-//        case 1:
-//            return 100
-//        default:
-//            return 0
-//        }
-//    }
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        switch indexPath.section {
+    //        case 0:
+    //            return 100
+    //        case 1:
+    //            return 100
+    //        default:
+    //            return 0
+    //        }
+    //    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch section {
@@ -275,31 +275,31 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     @objc func webserviceGetAddPayment(){
         let addpayment = AddPaymentReqModel()
         addpayment.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.addPayment(addpaymentmodel: addpayment, showHud: true, completion: { (json, status, error) in
+        WebServiceSubClass.addPayment(addpaymentmodel: addpayment, showHud: false, completion: { (json, status, error) in
             // self.hideHUD()
             self.refreshList.endRefreshing()
-             if(status) {
-                 let cardListRes = AddPaymentResModel.init(fromJson: json)
-                 self.arrCard = cardListRes.cards
-                 self.tblPaymentMethod.reloadData()
+            if(status) {
+                let cardListRes = AddPaymentResModel.init(fromJson: json)
+                self.arrCard = cardListRes.cards
+                self.tblPaymentMethod.reloadData()
                 self.imgEmptyCard.isHidden = true
-             } else {
+            } else {
                 self.imgEmptyCard.isHidden = false
-                 Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
                 
-             }
-//            if self.arrCard.count > 0{
-//                self.tblPaymentMethod.restore()
-//                self.imgEmptyCard.isHidden = true
-////                self.tblPaymentMethod.isHidden = false
-//            }else {
-//                self.imgEmptyCard.isHidden = true
-////                self.tblPaymentMethod.isHidden = true
-//            }
-//            DispatchQueue.main.async {
-//                self.refreshList.endRefreshing()
-//            }
-         })
+            }
+            //            if self.arrCard.count > 0{
+            //                self.tblPaymentMethod.restore()
+            //                self.imgEmptyCard.isHidden = true
+            ////                self.tblPaymentMethod.isHidden = false
+            //            }else {
+            //                self.imgEmptyCard.isHidden = true
+            ////                self.tblPaymentMethod.isHidden = true
+            //            }
+            //            DispatchQueue.main.async {
+            //                self.refreshList.endRefreshing()
+            //            }
+        })
         
     }
     func refreshAddPaymentScreen() {
@@ -309,76 +309,63 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         let deleteCardModel = AddPaymentDeleteReqModel()
         deleteCardModel.card_id = strCardId
         deleteCardModel.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.removePaymentList(removePaymentList: deleteCardModel, showHud: true, completion: { (json, status, error) in
+        WebServiceSubClass.removePaymentList(removePaymentList: deleteCardModel, showHud: false, completion: { (json, status, error) in
             // self.hideHUD()
-             if(status) {
-                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
-                 self.webserviceGetAddPayment()
-             } else {
-                 Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
-             }
-         })
+            if(status) {
+                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                self.webserviceGetAddPayment()
+            } else {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
+            }
+        })
     }
     func apply() {
-           let enabledBackgroundColor = UIColor.clear
-       let enabledBorderColor = UIColor(hexString: "FFFFFF")
-       let enabledTextColor = UIColor(hexString: "FFFFFF")
-       let activeBorderColor = UIColor(hexString: "FFFFFF")
-
+        let enabledBackgroundColor = UIColor.clear
+        let enabledBorderColor = UIColor(hexString: "FFFFFF")
+        let enabledTextColor = UIColor(hexString: "FFFFFF")
+        let activeBorderColor = UIColor(hexString: "FFFFFF")
+        
         FormTextField.appearance().clearButtonMode = .never
         
-           FormTextField.appearance().borderWidth = 0
-       FormTextField.appearance().placeHolderColor = enabledBorderColor
-           FormTextField.appearance().clearButtonColor = activeBorderColor
-           FormTextField.appearance().font = CustomFont.NexaRegular.returnFont(15)
-
-           FormTextField.appearance().enabledBackgroundColor = enabledBackgroundColor
-           FormTextField.appearance().enabledBorderColor = enabledBorderColor
-           FormTextField.appearance().enabledTextColor = enabledTextColor
-
-           FormTextField.appearance().validBackgroundColor = enabledBackgroundColor
-           FormTextField.appearance().validBorderColor = enabledBorderColor
-           FormTextField.appearance().validTextColor = enabledTextColor
-
-           FormTextField.appearance().activeBackgroundColor = enabledBackgroundColor
-           FormTextField.appearance().activeBorderColor = activeBorderColor
-           FormTextField.appearance().activeTextColor = enabledTextColor
-
-           FormTextField.appearance().inactiveBackgroundColor = enabledBackgroundColor
-           FormTextField.appearance().inactiveBorderColor = enabledBorderColor
-           FormTextField.appearance().inactiveTextColor = enabledTextColor
-
-       FormTextField.appearance().disabledBackgroundColor = UIColor(hexString: "DFDFDF")
-           FormTextField.appearance().disabledBorderColor = UIColor(hexString: "DFDFDF")
-           FormTextField.appearance().disabledTextColor = UIColor.white
-
-           FormTextField.appearance().invalidBackgroundColor = UIColor(hexString: "FFC9C8")
-           FormTextField.appearance().invalidBorderColor = UIColor(hexString: "FF4B47")
-           FormTextField.appearance().invalidTextColor = UIColor(hexString: "FF4B47")
-       }
+        FormTextField.appearance().borderWidth = 0
+        FormTextField.appearance().placeHolderColor = enabledBorderColor
+        FormTextField.appearance().clearButtonColor = activeBorderColor
+        FormTextField.appearance().font = CustomFont.NexaRegular.returnFont(15)
+        
+        FormTextField.appearance().enabledBackgroundColor = enabledBackgroundColor
+        FormTextField.appearance().enabledBorderColor = enabledBorderColor
+        FormTextField.appearance().enabledTextColor = enabledTextColor
+        
+        FormTextField.appearance().validBackgroundColor = enabledBackgroundColor
+        FormTextField.appearance().validBorderColor = enabledBorderColor
+        FormTextField.appearance().validTextColor = enabledTextColor
+        
+        FormTextField.appearance().activeBackgroundColor = enabledBackgroundColor
+        FormTextField.appearance().activeBorderColor = activeBorderColor
+        FormTextField.appearance().activeTextColor = enabledTextColor
+        
+        FormTextField.appearance().inactiveBackgroundColor = enabledBackgroundColor
+        FormTextField.appearance().inactiveBorderColor = enabledBorderColor
+        FormTextField.appearance().inactiveTextColor = enabledTextColor
+        
+        FormTextField.appearance().disabledBackgroundColor = UIColor(hexString: "DFDFDF")
+        FormTextField.appearance().disabledBorderColor = UIColor(hexString: "DFDFDF")
+        FormTextField.appearance().disabledTextColor = UIColor.white
+        
+        FormTextField.appearance().invalidBackgroundColor = UIColor(hexString: "FFC9C8")
+        FormTextField.appearance().invalidBorderColor = UIColor(hexString: "FF4B47")
+        FormTextField.appearance().invalidTextColor = UIColor(hexString: "FF4B47")
+    }
 }
 extension addPaymentVC {
     func WebServiceCallForOrder(OrderJson:String){
-   
-      let ReqModel = OrderReqModel()
+        
+        let ReqModel = OrderReqModel()
         ReqModel.order_data = OrderJson
-        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
             if(status)
             {
-                        commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-                
-//                let alertController = UIAlertController(title: AppName,
-//                                                        message: json["data"].string ?? "",
-//                                                        preferredStyle: .alert)
-//
-//                alertController.addAction(UIAlertAction(title: "OK".Localized(), style: .default){ _ in
-//                    appDel.navigateToHome()
-//                })
-//                self.present(alertController, animated: true)
-//
-                //Utilities.ShowAlert(OfMessage: json["data"].string ?? "")
-                
-                //Utilities.displayAlert(json["message"].string ?? "")
+                commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
             }
             else
             {
@@ -387,5 +374,5 @@ extension addPaymentVC {
         })
         
     }
-   
+    
 }

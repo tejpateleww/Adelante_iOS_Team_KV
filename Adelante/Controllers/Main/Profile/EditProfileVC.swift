@@ -159,7 +159,7 @@ class EditProfileVC: BaseViewController{
         if self.isRemovePhoto{
             updateModel.remove_image = "1"
         }
-        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: false, completion: { (response, status, error) in
             if status{
                 let updatedData = Userinfo.init(fromJson: response)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
@@ -186,7 +186,7 @@ class EditProfileVC: BaseViewController{
         otp.user_name = txtEmail.text ?? ""
         
        // self.showHUD()
-        WebServiceSubClass.sendOTP(optModel: otp, showHud: true) { [self] (json, status, response) in
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 print(json)

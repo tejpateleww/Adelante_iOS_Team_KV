@@ -22,19 +22,15 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var strOrderId = ""
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]
     let MapViewForShowRastaurantLocation = MKMapView()
+    lazy var skeletonData : skeletonCheckout = skeletonCheckout.fromNib()
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
-    
     @IBOutlet weak var tblOrderDetails: UITableView!
-    
     @IBOutlet weak var restaurantLocationView: customImagewithShadow!
     @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var btnCanclePromoCOde: myOrdersBtn!
     @IBOutlet weak var lblPromoCode: CheckOutLabel!
-    
     @IBOutlet weak var tblAddProductHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var vwChangeLocOptions: UIView!
     @IBOutlet weak var lblItemName: CheckOutLabel!
     @IBOutlet weak var lblAddress: CheckOutLabel!
@@ -94,6 +90,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        skeletonData.showAnimatedSkeleton()
+        self.view.addSubview(skeletonData)
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
        
@@ -113,6 +111,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.skeletonData.removeFromSuperview()
+        self.skeletonData.stopShimmering()
+        self.skeletonData.stopSkeletonAnimation()
     }
     // MARK: - Other Methods
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -476,11 +479,12 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         repeatOrder.main_order_id = strOrderId
         repeatOrder.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         repeatOrder.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.RepeatOrder(repeatOrder: repeatOrder, showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.RepeatOrder(repeatOrder: repeatOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 let repeatOrderData = RepeatOrderResModel.init(fromJson: json)
-                //                self.objOrderData = repeatOrderData.data
+                
+//                self.objCurrentorder = repeatOrderData.data.subOrder
                 Utilities.displayAlert(json["message"].string ?? "")
             }
             else
@@ -497,7 +501,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         foodList.item_id = "\(arritem.joined(separator: ","))"
         foodList.restaurant_id = objCurrentorder!.restaurant_id
         foodList.cart_id = "1"
-        WebServiceSubClass.AddToFoodList(FoodListModel: foodList, showHud: true) { (json, status, response) in
+        WebServiceSubClass.AddToFoodList(FoodListModel: foodList, showHud: false) { (json, status, response) in
             if(status)
             {
                 print(json)

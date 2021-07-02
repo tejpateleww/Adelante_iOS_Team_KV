@@ -240,6 +240,10 @@
 		84C5F6AC2643C05A000B2DDE /* NotificationDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */; };
 		881715E9267B12A300F821AA /* VerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881715E8267B12A300F821AA /* VerifyVC.swift */; };
 		884B350326844F8B0019BB4F /* otpReceive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884B350226844F8B0019BB4F /* otpReceive.swift */; };
+		88C9E4FB268ED612005B0899 /* skeletonCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9E4FA268ED612005B0899 /* skeletonCheckout.swift */; };
+		88C9E4FE268ED64D005B0899 /* skeletonCheckout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */; };
+		88C9E502268F1730005B0899 /* BffComboShimmerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */; };
+		88C9E503268F1730005B0899 /* BffComboShimmerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C9E501268F1730005B0899 /* BffComboShimmerCell.xib */; };
 		88E806F5268D821E007B3FC0 /* SearchResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E806F1268D821D007B3FC0 /* SearchResModel.swift */; };
 		88E806FD268D8509007B3FC0 /* SearchRestaurantItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E806FA268D8508007B3FC0 /* SearchRestaurantItem.swift */; };
 		88E806FE268D8509007B3FC0 /* SearchRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E806FB268D8508007B3FC0 /* SearchRestaurant.swift */; };
@@ -502,6 +506,10 @@
 		86784D51C37BBA35E10C918A /* Pods-ApiStructureModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.release.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.release.xcconfig"; sourceTree = "<group>"; };
 		881715E8267B12A300F821AA /* VerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyVC.swift; sourceTree = "<group>"; };
 		884B350226844F8B0019BB4F /* otpReceive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpReceive.swift; sourceTree = "<group>"; };
+		88C9E4FA268ED612005B0899 /* skeletonCheckout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skeletonCheckout.swift; sourceTree = "<group>"; };
+		88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = skeletonCheckout.xib; sourceTree = "<group>"; };
+		88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BffComboShimmerCell.swift; sourceTree = "<group>"; };
+		88C9E501268F1730005B0899 /* BffComboShimmerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BffComboShimmerCell.xib; sourceTree = "<group>"; };
 		88E806F1268D821D007B3FC0 /* SearchResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResModel.swift; sourceTree = "<group>"; };
 		88E806FA268D8508007B3FC0 /* SearchRestaurantItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestaurantItem.swift; sourceTree = "<group>"; };
 		88E806FB268D8508007B3FC0 /* SearchRestaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestaurant.swift; sourceTree = "<group>"; };
@@ -906,6 +914,8 @@
 				81E67210257E62DC00DCE9DA /* RestaurantDetailsVC.swift */,
 				18F369502580ADFE00992FCD /* BffComboVC.swift */,
 				349347B225D10EEB006366B4 /* RestaurantOutletVC.swift */,
+				88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */,
+				88C9E501268F1730005B0899 /* BffComboShimmerCell.xib */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -914,6 +924,8 @@
 			isa = PBXGroup;
 			children = (
 				81E67212257E68BB00DCE9DA /* checkOutVC.swift */,
+				88C9E4FA268ED612005B0899 /* skeletonCheckout.swift */,
+				88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */,
 			);
 			path = "Checkout & Payment";
 			sourceTree = "<group>";
@@ -1319,6 +1331,7 @@
 				817A16F925839D7100C11BB2 /* Nunito-ExtraLightItalic.ttf in Resources */,
 				817A170125839D7100C11BB2 /* Nunito-Light.ttf in Resources */,
 				34A9005225947B1300EAD2FF /* Popup.storyboard in Resources */,
+				88C9E503268F1730005B0899 /* BffComboShimmerCell.xib in Resources */,
 				817A16F825839D7100C11BB2 /* Nunito-BoldItalic.ttf in Resources */,
 				8105FDFE25751644008D36D6 /* Aileron-SemiBold.otf in Resources */,
 				8105FE0825751644008D36D6 /* NexaBoldItalic.otf in Resources */,
@@ -1327,6 +1340,7 @@
 				8105FDFC25751644008D36D6 /* Aileron-HeavyItalic.otf in Resources */,
 				817A16FB25839D7100C11BB2 /* Nunito-Regular.ttf in Resources */,
 				817A16FF25839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf in Resources */,
+				88C9E4FE268ED64D005B0899 /* skeletonCheckout.xib in Resources */,
 				8105FDF725751644008D36D6 /* Aileron-UltraLight.otf in Resources */,
 				8105FDFB25751644008D36D6 /* Aileron-Thin.otf in Resources */,
 				342ADF3D25B717820097B5AD /* GoogleService-Info.plist in Resources */,
@@ -1458,6 +1472,7 @@
 				340D4AF825D25CB8007CC54B /* RepeatOrderResModel.swift in Sources */,
 				345EA8F225B5477100A4E56D /* restaurantDetailsList.swift in Sources */,
 				3431E0682593224C002F1435 /* RestWithPageCell.swift in Sources */,
+				88C9E4FB268ED612005B0899 /* skeletonCheckout.swift in Sources */,
 				84C5F6882643A8B7000B2DDE /* PromocodeVC.swift in Sources */,
 				81CFFD852574C60D005AA86A /* Data+Extensions.swift in Sources */,
 				81CFFD872574C60D005AA86A /* customTextField.swift in Sources */,
@@ -1467,6 +1482,7 @@
 				34EE68E925CC15E300056D62 /* AddPaymentDeleteReqModel.swift in Sources */,
 				9203B47B268B58FA0096AFDF /* NoDataCollectionview.swift in Sources */,
 				3443D62225C11E62001CFAFE /* MenuItem.swift in Sources */,
+				88C9E502268F1730005B0899 /* BffComboShimmerCell.swift in Sources */,
 				340A4C7225A3291F00FB6061 /* Profile.swift in Sources */,
 				180A9E7E265CDB3700AC7A22 /* PromocodeApplyReqModel.swift in Sources */,
 				81CFFD7E2574C60D005AA86A /* String+Extensions.swift in Sources */,

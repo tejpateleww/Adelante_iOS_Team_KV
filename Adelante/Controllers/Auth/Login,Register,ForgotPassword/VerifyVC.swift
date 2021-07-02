@@ -240,7 +240,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         register.device_type = ReqDeviceType
         register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.register(registerModel: register,showHud: true, completion: { (json, status, response) in
+        WebServiceSubClass.register(registerModel: register,showHud: false, completion: { (json, status, response) in
             if(status)
             {
                 print(json)
@@ -281,7 +281,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         if self.isRemovePhoto{
             updateModel.remove_image = "1"
         }
-        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: true, completion: { (response, status, error) in
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: false, completion: { (response, status, error) in
             if status{
                 let updatedData = Userinfo.init(fromJson: response)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile

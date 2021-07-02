@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="skeletonCheckout" customModule="Adelante" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K39-sz-4lc">
+                    <rect key="frame" x="0.0" y="44" width="374" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0kT-JL-llp">
+                            <rect key="frame" x="15" y="15" width="344" height="200"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="jRR-SD-bVG"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lty-FC-dqr">
+                            <rect key="frame" x="15" y="230" width="344" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjE-vf-UhE">
+                            <rect key="frame" x="15" y="266" width="344" height="41"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="Lty-FC-dqr" firstAttribute="top" secondItem="0kT-JL-llp" secondAttribute="bottom" constant="15" id="5ux-Zg-61W"/>
+                        <constraint firstItem="0kT-JL-llp" firstAttribute="top" secondItem="K39-sz-4lc" secondAttribute="top" constant="15" id="7pb-Af-Ud8"/>
+                        <constraint firstItem="IjE-vf-UhE" firstAttribute="top" secondItem="Lty-FC-dqr" secondAttribute="bottom" constant="15" id="Fgg-sM-y25"/>
+                        <constraint firstItem="0kT-JL-llp" firstAttribute="leading" secondItem="K39-sz-4lc" secondAttribute="leading" constant="15" id="Ipb-dN-PtM"/>
+                        <constraint firstAttribute="trailing" secondItem="0kT-JL-llp" secondAttribute="trailing" constant="15" id="KD4-6B-dCH"/>
+                        <constraint firstItem="IjE-vf-UhE" firstAttribute="leading" secondItem="K39-sz-4lc" secondAttribute="leading" constant="15" id="UFh-EP-S5w"/>
+                        <constraint firstItem="Lty-FC-dqr" firstAttribute="leading" secondItem="K39-sz-4lc" secondAttribute="leading" constant="15" id="dc8-hw-ApR"/>
+                        <constraint firstAttribute="trailing" secondItem="Lty-FC-dqr" secondAttribute="trailing" constant="15" id="k6o-jo-I0p"/>
+                        <constraint firstAttribute="trailing" secondItem="IjE-vf-UhE" secondAttribute="trailing" constant="15" id="ohr-PU-NcH"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="K39-sz-4lc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="AOC-bv-bbE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="K39-sz-4lc" secondAttribute="trailing" constant="40" id="Thb-s0-Da3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="K39-sz-4lc" secondAttribute="bottom" id="cnD-SH-xoO"/>
+                <constraint firstItem="K39-sz-4lc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="z1u-GD-gWL"/>
+            </constraints>
+            <connections>
+                <outlet property="lblDisc" destination="IjE-vf-UhE" id="Jc8-K2-RcM"/>
+                <outlet property="lblTitle" destination="Lty-FC-dqr" id="CNn-jC-IKX"/>
+                <outlet property="viewContainer" destination="K39-sz-4lc" id="k1I-R8-3FO"/>
+                <outlet property="viewShimmer" destination="0kT-JL-llp" id="pTj-cK-WRm"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="131"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
