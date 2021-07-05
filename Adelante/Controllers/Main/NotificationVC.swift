@@ -102,11 +102,12 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
                 
                 NoDatacell.imgNoData.image = UIImage(named: "Notification List")
                 NoDatacell.lblNoDataTitle.isHidden = true
-                
+                NoDatacell.selectionStyle = .none
                 return NoDatacell
             }
         }else{
             let Cell = tbvNotification.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
+            Cell.selectionStyle = .none
             return Cell
         }
     }

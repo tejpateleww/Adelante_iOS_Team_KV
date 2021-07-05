@@ -109,7 +109,7 @@ extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
             
             NoDatacell.imgNoData.image = UIImage(named: NoData.promocode.ImageName)
             NoDatacell.lblNoDataTitle.text = "No promocode found".Localized()
-        
+            NoDatacell.selectionStyle = .none
             return NoDatacell
         }
     }

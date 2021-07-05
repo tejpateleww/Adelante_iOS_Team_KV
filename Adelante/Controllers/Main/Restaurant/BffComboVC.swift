@@ -246,7 +246,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 
                 NoDatacell.imgNoData.image = UIImage(named: NoData.varient.ImageName)
                 NoDatacell.lblNoDataTitle.text = "No varient available".Localized()
-                
+                NoDatacell.selectionStyle = .none
                 return NoDatacell
             }
         }else{

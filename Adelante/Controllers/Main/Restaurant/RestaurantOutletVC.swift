@@ -223,6 +223,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 
                 NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
                 NoDatacell.lblNoDataTitle.isHidden = true
+                NoDatacell.selectionStyle = .none
                 return NoDatacell
             }
         }else{

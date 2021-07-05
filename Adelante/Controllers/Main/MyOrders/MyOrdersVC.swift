@@ -195,7 +195,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     
                     NoDatacell.imgNoData.image = UIImage(named: "Orders")
                     NoDatacell.lblNoDataTitle.isHidden = true
-                    
+                    NoDatacell.selectionStyle = .none
                     return NoDatacell
                 }
             }else {
@@ -252,6 +252,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     return NoDatacell
                 }} else{
                     let cell = tblOrders.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
+                    cell.selectionStyle = .none
                     return cell
                 }
         }

@@ -128,11 +128,12 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
                 
                 NoDatacell.imgNoData.image = UIImage(named: "Rating List")
                 NoDatacell.lblNoDataTitle.isHidden = true//text = "Be The First to Rate This Store".Localized()
-                
+                NoDatacell.selectionStyle = .none
                 return NoDatacell
             }
         }else{
             let cell = tbvReview.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
+            cell.selectionStyle = .none
             return cell
         }
         
