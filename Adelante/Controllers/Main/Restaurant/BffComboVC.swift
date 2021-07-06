@@ -9,6 +9,10 @@
 import UIKit
 import SkeletonView
 
+protocol AddveriantDelegate {
+    func addVeriantincart(veriantid:String)
+}
+
 class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,SkeletonTableViewDataSource {
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -17,11 +21,13 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     var selectedSection = 0
     var expendedCell = -1
     var selectedRestaurantId = ""
+    var selectedItemId = ""
     var refreshList = UIRefreshControl()
     var arrVariants : [Variant]?
     var objCurrentOrder : currentOrder?
     var arrSelectedVariants = [selectedVariants]()
-    
+    var arrselectedId = [String]()
+    var delegateAddVariant : AddveriantDelegate!
     // MARK: - IBOutlets
    
     @IBOutlet weak var tblBFFCombo: UITableView!{
@@ -75,6 +81,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     }
     func checkandUpdateVariants() {
         self.arrSelectedVariants.removeAll()
+        self.arrselectedId.removeAll()
         if (self.arrVariants?.count ?? 0) > 0 {
             for i in 0..<(self.arrVariants?.count ?? 0) {
                 for j in 0..<(self.arrVariants?[i].option.count ?? 0) {
@@ -89,39 +96,41 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         if self.arrSelectedVariants.count > 0 {
             for i in 0..<arrSelectedVariants.count {
                 print("\(self.arrSelectedVariants[i].variant_SubName)")
+                self.arrselectedId.append(self.arrSelectedVariants[i].variant_option_id)
             }
         }
         checkItemsAndUpdateFooter()
     }
     func checkItemsAndUpdateFooter(){
-        if SingletonClass.sharedInstance.restCurrentOrder != nil{
-            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
-                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
-            } else {
-                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
-            }
+       // if SingletonClass.sharedInstance.restCurrentOrder != nil{
+//            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
+//                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
+//            } else {
+                self.lblItem.text = "1 item"
+//            }
             //Note :- Unnecessary code
 //            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
 //                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
 //            } else {
 //                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
 //            }
-            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0  > 0{
+           // if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0  > 0{
                 viewFooter.isHidden = false
                 lblSign.isHidden = false
                 lblTotal.isHidden = false
                 lblItem.isHidden = false
-            }else{
-                viewFooter.isHidden = true
-                lblTotal.text = ""
-                lblItem.text = ""
-            }
-        }else{
-            viewFooter.isHidden = true
-            lblTotal.text = ""
-            lblItem.text = ""
-            lblSign.isHidden = true
-        }
+//            }else{
+//                viewFooter.isHidden = true
+//                lblTotal.text = ""
+//                lblItem.text = ""
+//            }
+        //}
+//    else{
+//            viewFooter.isHidden = true
+//            lblTotal.text = ""
+//            lblItem.text = ""
+//            lblSign.isHidden = true
+//        }
         
     }
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
@@ -174,11 +183,10 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                             self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = false
                         } else {
                             self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = true
+                            self.arrselectedId.append((self.arrVariants?[indexPath.section].option[indexPath.row].id)!)
                         }
-                        
                     }
                     self.checkandUpdateVariants()
-                    
                     self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
                 }
                 
@@ -311,14 +319,17 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
-//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
-//            self.navigationController?.pushViewController(controller, animated: true)
+            self.navigationController?.popViewController(animated: true)
+            let strarray = arrselectedId.joined(separator: ",")
+            webwerviceAddtoCart(strAddon: strarray)
+           // self.delegateAddVariant.addVeriantincart(veriantid: strarray)
         }
     }
+    
     // MARK: - Api Calls
     @objc func webservicePostCombo(){
         let ResVariants = RestaurantVariantsReqModel()
-        ResVariants.restaurant_item_id = selectedRestaurantId
+        ResVariants.restaurant_item_id = selectedItemId
         WebServiceSubClass.RestaurantVariants(RestaurantVariantsmodel: ResVariants, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             self.refreshList.endRefreshing()
@@ -343,5 +354,30 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
 //        DispatchQueue.main.async {
 //
 //        }
+    }
+    
+    func webwerviceAddtoCart(strAddon:String){
+        let addToCart = AddToCartReqModel()
+        addToCart.restaurant_id = selectedRestaurantId
+        addToCart.user_id = SingletonClass.sharedInstance.UserId
+        addToCart.qty = "1"
+        addToCart.item_id = selectedItemId
+        addToCart.addon_id = strAddon
+        WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { (response, status, error) in
+            if status {
+            //   print(response)
+//                self.objRestaurant.favourite = response
+//                if self.objRestaurant.favourite == "1"{
+//                    self.btnNavLike.isSelected = true
+//                } else {
+//                    self.btnNavLike.isSelected = false
+//                }
+//                NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
+//                NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
+//                NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
+            } else {
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        }
     }
 }

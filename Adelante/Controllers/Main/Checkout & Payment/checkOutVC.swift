@@ -23,6 +23,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]
     let MapViewForShowRastaurantLocation = MKMapView()
     lazy var skeletonData : skeletonCheckout = skeletonCheckout.fromNib()
+    var cartDetails : CartDatum?
+    
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
@@ -47,7 +50,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var btnPlaceOrder: submitButton!
     
     var arritem = [String]()
-
+    var arrCartItem = [CartItem]()
     // MARK: - ViewController Lifecycle
     
     // handle notification
@@ -98,17 +101,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
      
-        setData()
-        addMapView()
-        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.GetPromocodeData(notification:)), name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
-        
-        self.tblOrderDetails.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
-        
-        self.tblAddedProduct.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
-       
+        webserviceGetCartDetails()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
@@ -144,25 +141,27 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         restaurantLocationView.addSubview(MapViewForShowRastaurantLocation)
     }
     func setData(){
-        if SingletonClass.sharedInstance.restCurrentOrder != nil{
-            self.objCurrentorder = SingletonClass.sharedInstance.restCurrentOrder
-            lblItemName.text = objCurrentorder?.currentRestaurantDetail.name
-            centerMapOnLocation(location: CLLocation(latitude: Double(objCurrentorder?.currentRestaurantDetail.lat ?? "") ?? 0.0, longitude: Double(objCurrentorder?.currentRestaurantDetail.lng ?? "") ?? 0.0), mapView: MapViewForShowRastaurantLocation)
-            lblAddress.text = objCurrentorder?.currentRestaurantDetail.address
-            LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
+       // if SingletonClass.sharedInstance.restCurrentOrder != nil{
+           // self.objCurrentorder = SingletonClass.sharedInstance.restCurrentOrder
+            lblItemName.text = cartDetails?.name//objCurrentorder?.currentRestaurantDetail.name
+            centerMapOnLocation(location: CLLocation(latitude: Double(cartDetails?.lat ?? "") ?? 0.0, longitude: Double(cartDetails?.lng ?? "") ?? 0.0), mapView: MapViewForShowRastaurantLocation)
+            lblAddress.text = cartDetails?.address
+            LblTotlaPrice.text = "\(CurrencySymbol)\(cartDetails?.grandTotal ?? 0.0)"
             tblAddedProduct.delegate = self
             tblOrderDetails.delegate = self
             tblAddedProduct.dataSource = self
             tblOrderDetails.dataSource = self
             tblOrderDetails.reloadData()
-            calculateTotalAndSubtotal()
+           // calculateTotalAndSubtotal()
            
             reloadAddproductTableAndResize()
-        }else{
+       // }else{
             tblAddProductHeight.constant = 0
             tblOrderDetailsHeight.constant = 0
-        }
+       // }
     }
+    
+    //Not in use
     func calculateTotalAndSubtotal(){
         var total = 0.0
         let arrSelectedOrder = self.objCurrentorder?.order
@@ -177,7 +176,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             total = Double(subTotal) + (self.objCurrentorder?.currentRestaurantDetail.serviceFee.ToDouble() ?? 0) + (CalculateTax)
             self.objCurrentorder?.total = "\(total)"
             self.objCurrentorder?.sub_total = "\(subTotal)"
-            LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
+            LblTotlaPrice.text = "\(CurrencySymbol)\(String((cartDetails?.total)!).ConvertToTwoDecimal())"
            
             self.tblOrderDetails.reloadData()
             SingletonClass.sharedInstance.restCurrentOrder = self.objCurrentorder
@@ -189,11 +188,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         }
         NotificationCenter.default.post(name: notifRefreshRestaurantDetails, object: nil)
     }
+    
     func reloadAddproductTableAndResize(){
         tblAddedProduct.reloadData()
-       
-        
     }
+    
     func setUpLocalizedStrings()
     {
        
@@ -215,7 +214,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         
         switch tableView {
         case tblAddedProduct:
-            return self.objCurrentorder?.order.count ?? 0
+            return self.arrCartItem.count
         case tblOrderDetails:
             arrayForTitle.removeAll()
             
@@ -225,11 +224,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())
                 cnt = cnt + 1
             }
-            if (self.objCurrentorder?.service_fee.ToDouble() ?? 0) > 0{
+            if (cartDetails?.serviceFee ?? "0") != "0"{
                 arrayForTitle.append("checkOutVC_arrayForTitle_title1".Localized())
                 cnt = cnt + 1
             }
-            if (self.objCurrentorder?.tax.ToDouble() ?? 0) > 0{
+            if (cartDetails?.tax ?? "0") != "0"{
                 arrayForTitle.append("checkOutVC_arrayForTitle_title2".Localized())
                 cnt = cnt + 1
             }
@@ -246,48 +245,51 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         case tblAddedProduct:
             
             let cell = tblAddedProduct.dequeueReusableCell(withIdentifier: addedProductCell.reuseIdentifier, for: indexPath) as! addedProductCell
-            if self.objCurrentorder?.order[indexPath.row].size != ""{
-                cell.lblItem.text = (self.objCurrentorder?.order[indexPath.row].name)! + " - " + (self.objCurrentorder?.order[indexPath.row].size)!
-            }else{
-                cell.lblItem.text = self.objCurrentorder?.order[indexPath.row].name
-            }
-            cell.lblPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.order[indexPath.row].price.ConvertToTwoDecimal() ?? "")"
-            cell.lbltotalCount.text = self.objCurrentorder?.order[indexPath.row].selectedQuantity
+            let objitem = arrCartItem[indexPath.row]
+//            if self.objCurrentorder?.order[indexPath.row].size != ""{
+//                cell.lblItem.text = (self.objCurrentorder?.order[indexPath.row].name)! + " - " + (self.objCurrentorder?.order[indexPath.row].size)!
+//            }else{
+            cell.lblItem.text = objitem.itemName
+//            }
+            cell.lblPrice.text = "\(CurrencySymbol)\(Double(objitem.subTotal))"
+            cell.lbltotalCount.text = objitem.cartQty
             let value : Int = (cell.lbltotalCount.text! as NSString).integerValue
             cell.decreaseClick = {
                 if value >= 1{
-                    var quantity = cell.lbltotalCount.text?.toInt() ?? 0
-                    let Price = self.objCurrentorder?.order[indexPath.row].originalPrice.ToDouble() ?? 0
-                    quantity = quantity - 1
-                    let T = Double(quantity) * Price
-                    cell.lblPrice.text = "\(CurrencySymbol)\(T)".ConvertToTwoDecimal()
-                    cell.lbltotalCount.text = "\(quantity)"
-                    if quantity == 0{
-                        self.objCurrentorder?.order.remove(at: indexPath.row)
-                        self.reloadAddproductTableAndResize()
-                    }else{
-                        self.objCurrentorder?.order[indexPath.row].price = "\(T)"
-                        self.objCurrentorder?.order[indexPath.row].selectedQuantity = "\(quantity)"
-                    }
+//                    var quantity = cell.lbltotalCount.text?.toInt() ?? 0
+//                    let Price = objitem.price.ToDouble()
+//                    quantity = quantity - 1
+//                    let T = Double(quantity) * Price
+//                    cell.lblPrice.text = "\(CurrencySymbol)\(T)".ConvertToTwoDecimal()
+//                    cell.lbltotalCount.text = "\(quantity)"
+                    
+                    self.webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "0")
+//                    if quantity == 0{
+//                        self.objCurrentorder?.order.remove(at: indexPath.row)
+//                        self.reloadAddproductTableAndResize()
+//                    }else{
+//                        self.objCurrentorder?.order[indexPath.row].price = "\(T)"
+//                        self.objCurrentorder?.order[indexPath.row].selectedQuantity = "\(quantity)"
+//                    }
                 }else{
                     
                 }
-                self.calculateTotalAndSubtotal()
-                
+                //self.calculateTotalAndSubtotal()
             }
-            cell.increaseClick = {
-                var quantity = cell.lbltotalCount.text?.toInt() ?? 0
-                if self.objCurrentorder?.order[indexPath.row].quantity.toInt() ?? 0 > quantity {
+            
+            cell.increaseClick = { [self] in
+                let quantity = cell.lbltotalCount.text?.toInt() ?? 0
+                if objitem.quantity.toInt() > quantity {
                     
-                    let Price = self.objCurrentorder?.order[indexPath.row].originalPrice.ToDouble() ?? 0
-                    quantity = quantity + 1
-                    let T = Double(quantity) * Price
-                    cell.lblPrice.text = "\(CurrencySymbol)\(T)".ConvertToTwoDecimal()
-                    cell.lbltotalCount.text = "\(quantity)"
-                    self.objCurrentorder?.order[indexPath.row].price = "\(T)"
-                    self.objCurrentorder?.order[indexPath.row].selectedQuantity = "\(quantity)"
-                    
-                    self.calculateTotalAndSubtotal()
+//                    let Price = objitem.price.ToDouble()
+//                    quantity = quantity + 1
+//                    let T = Double(quantity) * Price
+//                    cell.lblPrice.text = "\(CurrencySymbol)\(T)".ConvertToTwoDecimal()
+//                    cell.lbltotalCount.text = "\(quantity)"
+//                    objitem.price = "\(T)"
+//                    objitem.cartQty = "\(quantity)"
+                    webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "1")
+                   // self.calculateTotalAndSubtotal()
                 }
                 else {
                   
@@ -304,32 +306,32 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             
             switch arrayForTitle[indexPath.row] {
             case "checkOutVC_arrayForTitle_title".Localized():
-                cell.lblPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.sub_total.ConvertToTwoDecimal() ?? "")"
+                cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.total ?? 0)"
             case "checkOutVC_arrayForTitle_title1".Localized():
-                cell.lblPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.service_fee.ConvertToTwoDecimal() ?? "")"
+                cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.serviceFee ?? "0")"
             case "checkOutVC_arrayForTitle_title2".Localized():
-                cell.lblPrice.text = "\(CurrencySymbol)\(self.TotalTaxAmount.ConvertToTwoDecimal())"
+                cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? 0.0)"
             case "checkOutVC_arrayForTitle_title3".Localized():
                 switch AppliedPromocode?.offerType.lowercased() {
-                case "flat":
-                    var total = 0.0
-                   
-                    total = (Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) - (Double(self.AppliedPromocode?.percentage ?? "") ?? 0.0) + (self.objCurrentorder?.service_fee.ToDouble() ?? 0.0)
-                    self.objCurrentorder?.total = "\(total)"
-                    cell.lblPrice.text = "-\(CurrencySymbol)\(self.AppliedPromocode?.percentage.ConvertToTwoDecimal() ?? "")"
-                   
-                    LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
-                case "discount":
-                    var total = 0.0
-                    
-                    let CalculateTax = ((Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) * (Double(self.AppliedPromocode?.percentage ?? "") ?? 0.0)) / 100
-                    total = (Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) - CalculateTax + (self.objCurrentorder?.service_fee.ToDouble() ?? 0.0)
-                    
-                    cell.lblPrice.text = "-\(CurrencySymbol)\(CalculateTax)".ConvertToTwoDecimal()
-                    
-                    self.objCurrentorder?.total = "\(total)"
-                   
-                    LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
+ //               case "flat":
+//                    var total = 0.0
+//0
+//                    total = (Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) - (Double(self.AppliedPromocode?.percentage ?? "") ?? 0.0) + (self.objCurrentorder?.service_fee.ToDouble() ?? 0.0)
+//                    self.objCurrentorder?.total = "\(total)"
+//                    cell.lblPrice.text = "-\(CurrencySymbol)\(self.AppliedPromocode?.percentage.ConvertToTwoDecimal() ?? "")"
+//
+//                    LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
+//                case "discount":
+//                    var total = 0.0
+//
+//                    let CalculateTax = ((Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) * (Double(self.AppliedPromocode?.percentage ?? "") ?? 0.0)) / 100
+//                    total = (Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) - CalculateTax + (self.objCurrentorder?.service_fee.ToDouble() ?? 0.0)
+//
+//                    cell.lblPrice.text = "-\(CurrencySymbol)\(CalculateTax)".ConvertToTwoDecimal()
+//
+//                    self.objCurrentorder?.total = "\(total)"
+//
+//                    LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
                 default:
                     break
                 }
@@ -339,6 +341,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             
             cell.lblTitle.text = arrayForTitle[indexPath.row]
+            if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
+                cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(cartDetails?.tax! ?? "0")%)"
+            }
             cell.selectionStyle = .none
             return cell
             
@@ -461,10 +466,10 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBAction func btnAddFoodlistClicked(_ sender: Any) {
        // let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
        // self.navigationController?.pushViewController(vc, animated: true)
-        for i in 0...(objCurrentorder?.order.count)! - 1 {
-            arritem.append((objCurrentorder?.order[i].restaurant_item_id)!)
-        }
-        print(arritem.joined(separator: ","))
+//        for i in 0...(objCurrentorder?.order.count)! - 1 {
+//            arritem.append((objCurrentorder?.order[i].restaurant_item_id)!)
+//        }
+//        print(arritem.joined(separator: ","))
         webserviceAddToFoodlist()
     }
     
@@ -483,7 +488,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             if(status)
             {
                 let repeatOrderData = RepeatOrderResModel.init(fromJson: json)
-                
+                print(repeatOrderData)
 //                self.objCurrentorder = repeatOrderData.data.subOrder
                 Utilities.displayAlert(json["message"].string ?? "")
             }
@@ -498,9 +503,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     func webserviceAddToFoodlist(){
         let foodList = AddToFoodlistReqModel()
         foodList.user_id = SingletonClass.sharedInstance.UserId
-        foodList.item_id = "\(arritem.joined(separator: ","))"
-        foodList.restaurant_id = objCurrentorder!.restaurant_id
-        foodList.cart_id = "1"
+        foodList.restaurant_id = (cartDetails?.id)!
+        foodList.cart_id = (self.cartDetails?.cartId)!
         WebServiceSubClass.AddToFoodList(FoodListModel: foodList, showHud: false) { (json, status, response) in
             if(status)
             {
@@ -510,6 +514,58 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
                 self.navigationController?.pushViewController(vc, animated: true)
                 Utilities.displayAlert(json["message"].string ?? "")
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
+    }
+    
+    func webserviceGetCartDetails(){
+        let cartDetails = GetCartReqModel()
+        cartDetails.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.GetCartDetails(getCartModel: cartDetails, showHud: true) { [self] (json, status, response) in
+            if(status)
+            {
+                print(json)
+                let cartData = CartListResModel.init(fromJson: json)
+                self.cartDetails = cartData.data
+                self.arrCartItem = cartData.data.item
+                Utilities.displayAlert(json["message"].string ?? "")
+                self.tblAddedProduct.reloadData()
+                self.tblOrderDetails.reloadData()
+                setData()
+                addMapView()
+                self.tblOrderDetails.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+                self.tblAddedProduct.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
+    }
+    
+    //Api for update Qty of item
+    //NOTE :- type 1- increment, 0 - decrement
+    func webserviceUpdateQty(itemID:String,strtype:String){
+        let updateCart = UpdateCardQtyReqModel()
+        updateCart.cart_item_id = itemID
+        updateCart.qty = "1"
+        updateCart.type = strtype
+        WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: true) { (json, status, response) in
+            if(status)
+            {
+                print(json)
+                let cartData = CartListResModel.init(fromJson: json)
+                self.cartDetails = cartData.data
+                self.arrCartItem = cartData.data.item
+                Utilities.displayAlert(json["message"].string ?? "")
+                self.tblAddedProduct.reloadData()
+                self.tblOrderDetails.reloadData()
+                self.setData()
+                self.addMapView()
             }
             else
             {

@@ -22,6 +22,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         tblFoodLIst.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(webservicePostMyFoodlist), for: .valueChanged)
+        webserviceGetFoodlist()
         setup()
     }
     
@@ -64,6 +65,26 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
 //        }
         DispatchQueue.main.async {
             self.refreshList.endRefreshing()
+        }
+    }
+    
+    func webserviceGetFoodlist(){
+        let GetfoodList = GetFoodlistReqModel()
+        GetfoodList.user_id = SingletonClass.sharedInstance.UserId
+        
+        WebServiceSubClass.GetFoodList(getFoodlistModel: GetfoodList, showHud: true) { (json, status, response) in
+            if(status)
+            {
+                print(json)
+                // let AddtoFoodlistData = AddToFoodlistReqModel.init()
+                //                self.objOrderData = repeatOrderData.data
+                
+                Utilities.displayAlert(json["message"].string ?? "")
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
         }
     }
 }

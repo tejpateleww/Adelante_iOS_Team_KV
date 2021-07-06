@@ -13,6 +13,7 @@ class RestaurantDetailsReqModel:RequestModel{
     var user_id : String = ""
     var lat : String = ""
     var lng : String = ""
+    
 }
 
 
@@ -21,4 +22,17 @@ class AddToCartReqModel:RequestModel{
     var item_id : String = ""
     var user_id : String = ""
     var qty : String = ""
+    var addon_id : String = ""
+}
+
+
+class GetCartReqModel:RequestModel{
+    var user_id : String = ""
+}
+
+
+class UpdateCardQtyReqModel:RequestModel{
+    var cart_item_id : String = ""
+    var qty : String = ""
+    var type : String = ""
 }

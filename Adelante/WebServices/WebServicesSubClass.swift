@@ -173,6 +173,22 @@ class WebServiceSubClass
         let params : [String:String] = AddToCartModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Add_to_Card, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    
+    class func GetCartDetails( getCartModel : GetCartReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
+        let params : [String:String] = getCartModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Get_Card, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
+    
+    class func UpdateItemQty( updateQtyModel : UpdateCardQtyReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
+        let params : [String:String] = updateQtyModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Update_Cart_Qty, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
+    
+    
+    class func GetFoodList( getFoodlistModel : GetFoodlistReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
+        let params : [String:String] = getFoodlistModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .Get_Foodlist, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
 }
 
 

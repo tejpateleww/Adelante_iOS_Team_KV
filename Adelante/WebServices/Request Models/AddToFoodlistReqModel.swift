@@ -14,3 +14,8 @@ class AddToFoodlistReqModel:RequestModel{
     var item_id : String = ""
     var cart_id : String = ""
 }
+
+
+class GetFoodlistReqModel:RequestModel{
+    var user_id : String = ""
+}

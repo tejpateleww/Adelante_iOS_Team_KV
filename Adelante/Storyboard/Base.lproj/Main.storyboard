@@ -7073,7 +7073,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLZ-b3-If5">
                                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="57"/>
                                                                 <connections>
-                                                                    <action selector="btnViewCart:" destination="RBI-9k-57W" eventType="touchUpInside" id="9b5-fw-1SX"/>
+                                                                    <action selector="btnViewCart:" destination="DQ7-Wo-ra6" eventType="touchUpInside" id="rus-r9-7Rz"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -8576,20 +8576,20 @@
                                                                                             <rect key="frame" x="187" y="0.0" width="153" height="60"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TS-kt-GpR" customClass="checkoutView" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="5" y="16" width="95" height="28"/>
+                                                                                                    <rect key="frame" x="5" y="16" width="75" height="28"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="y1b-uq-kKp">
-                                                                                                            <rect key="frame" x="5" y="0.0" width="85" height="28"/>
+                                                                                                            <rect key="frame" x="5" y="0.0" width="65" height="28"/>
                                                                                                             <subviews>
                                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkG-BB-TmR" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="28.5" height="28"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="21.5" height="28"/>
                                                                                                                     <state key="normal" title="-"/>
                                                                                                                     <connections>
                                                                                                                         <action selector="decreaseBtn:" destination="SoL-Y3-stF" eventType="touchUpInside" id="d37-fp-Xpx"/>
                                                                                                                     </connections>
                                                                                                                 </button>
                                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWf-TO-j3Z" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="28.5" y="0.0" width="28" height="28"/>
+                                                                                                                    <rect key="frame" x="21.5" y="0.0" width="22" height="28"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                     <nil key="textColor"/>
                                                                                                                     <nil key="highlightedColor"/>
@@ -8598,7 +8598,7 @@
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </label>
                                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0Z-as-dQO" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="56.5" y="0.0" width="28.5" height="28"/>
+                                                                                                                    <rect key="frame" x="43.5" y="0.0" width="21.5" height="28"/>
                                                                                                                     <state key="normal" title="+"/>
                                                                                                                     <connections>
                                                                                                                         <action selector="increaseBtn:" destination="SoL-Y3-stF" eventType="touchUpInside" id="UXU-ve-Tsr"/>
@@ -8611,7 +8611,7 @@
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="trailing" secondItem="y1b-uq-kKp" secondAttribute="trailing" constant="5" id="9Ba-Zb-icH"/>
                                                                                                         <constraint firstAttribute="bottom" secondItem="y1b-uq-kKp" secondAttribute="bottom" id="JwI-iO-fk4"/>
-                                                                                                        <constraint firstAttribute="width" constant="95" id="UGf-OY-YF4"/>
+                                                                                                        <constraint firstAttribute="width" constant="75" id="UGf-OY-YF4"/>
                                                                                                         <constraint firstItem="y1b-uq-kKp" firstAttribute="leading" secondItem="7TS-kt-GpR" secondAttribute="leading" constant="5" id="d8P-zv-gN8"/>
                                                                                                         <constraint firstAttribute="height" constant="28" id="o4z-6J-RQC"/>
                                                                                                         <constraint firstItem="y1b-uq-kKp" firstAttribute="top" secondItem="7TS-kt-GpR" secondAttribute="top" id="u1h-Ae-nkk"/>
