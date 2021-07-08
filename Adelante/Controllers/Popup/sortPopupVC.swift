@@ -20,8 +20,7 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     // @IBOutlet weak var heightViewBG: NSLayoutConstraint!
     @IBOutlet weak var tblSorting: UITableView!
     @IBOutlet weak var viewBG: UIView!
-    
-    @IBOutlet weak var lblSort: sortPopUPLabel!
+            @IBOutlet weak var lblSort: sortPopUPLabel!
     @IBOutlet weak var heightTblSorting: NSLayoutConstraint!
     
     var arrayForSort : [Sorting] = SingletonClass.sharedInstance.arrSorting
@@ -44,7 +43,7 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
         let verticalSafeAreaInset: CGFloat
         if #available(iOS 11.0, *) {
             verticalSafeAreaInset = self.view.safeAreaInsets.bottom + self.view.safeAreaInsets.top
-        } else {
+               } else {
             verticalSafeAreaInset = 0.0
         }
         let safeAreaHeight = self.view.frame.height - verticalSafeAreaInset

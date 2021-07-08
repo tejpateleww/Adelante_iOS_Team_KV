@@ -3824,10 +3824,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztA-LX-W9N" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
-                                                            <rect key="frame" x="20" y="7" width="376" height="102"/>
+                                                            <rect key="frame" x="18" y="7" width="378" height="102"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Jsi-nH-bDb">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="376" height="102"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="102"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFU-5k-DjS" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="94" height="102"/>
@@ -3869,16 +3869,16 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbF-Yx-Mnj" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
-                                                                            <rect key="frame" x="106" y="0.0" width="192.5" height="102"/>
+                                                                            <rect key="frame" x="106" y="0.0" width="194.5" height="102"/>
                                                                             <subviews>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="se7-1T-sZN">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="102"/>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="se7-1T-sZN">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="194.5" height="102"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHf-eP-Myj">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="192.5" height="17"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="194.5" height="21"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bff Combo Meal(L)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3p-2X-uFZ" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="17"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bff Combo Meal(L)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3p-2X-uFZ" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="194.5" height="21"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -3895,10 +3895,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2W-Km-PXk">
-                                                                                            <rect key="frame" x="0.0" y="26" width="192.5" height="14.5"/>
+                                                                                            <rect key="frame" x="0.0" y="26" width="194.5" height="18.5"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$19.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55C-zJ-NmG" customClass="tblMyOrdersLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="14.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="194.5" height="18.5"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -3915,10 +3915,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIy-ou-562">
-                                                                                            <rect key="frame" x="0.0" y="49.5" width="192.5" height="52.5"/>
+                                                                                            <rect key="frame" x="0.0" y="49.5" width="194.5" height="52.5"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyn-9V-Kbh">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="52.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="194.5" height="52.5"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -3946,7 +3946,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEf-Or-B1k">
-                                                                            <rect key="frame" x="310.5" y="0.0" width="65.5" height="102"/>
+                                                                            <rect key="frame" x="312.5" y="0.0" width="65.5" height="102"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zUy-po-Tly" customClass="CustomView" customModule="Adelante" customModuleProvider="target">
                                                                                     <rect key="frame" x="-0.5" y="0.0" width="66" height="23"/>
@@ -4007,8 +4007,8 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="ztA-LX-W9N" secondAttribute="bottom" constant="5" id="BvI-7q-wnw"/>
-                                                        <constraint firstItem="ztA-LX-W9N" firstAttribute="leading" secondItem="bbI-iX-kJI" secondAttribute="leadingMargin" id="JYB-EV-g0T"/>
                                                         <constraint firstItem="ztA-LX-W9N" firstAttribute="top" secondItem="bbI-iX-kJI" secondAttribute="top" constant="7" id="UBY-Sy-dcq"/>
+                                                        <constraint firstItem="ztA-LX-W9N" firstAttribute="leading" secondItem="bbI-iX-kJI" secondAttribute="leading" constant="18" id="WYk-BE-4gG"/>
                                                         <constraint firstAttribute="trailing" secondItem="ztA-LX-W9N" secondAttribute="trailing" constant="18" id="coh-AV-Cnq"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -9138,6 +9138,47 @@ avoid cancellations </string>
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="IOt-oG-ldn">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
+        </designable>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="90.5" height="34"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="zNM-X4-rQ4">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
         <image name="Card List" width="166" height="166"/>

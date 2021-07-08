@@ -105,7 +105,6 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         print("ATDebug :: \(#function)")
         if arrDetails?.count == 0 {
             return 1
-           
         } else {
             return arrDetails?.count ?? 0
         }

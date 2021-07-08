@@ -1213,31 +1213,31 @@ Adelante</string>
     </scenes>
     <designables>
         <designable name="6J4-UA-qRl">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="143" height="18.5"/>
         </designable>
         <designable name="6tv-ps-pmp">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
         </designable>
         <designable name="B7K-d2-yLt">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="62.5" height="17"/>
         </designable>
         <designable name="C8x-B2-NSw">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
         </designable>
         <designable name="Fzc-oY-XVq">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="62.5" height="17"/>
         </designable>
         <designable name="dUz-LN-60d">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="96.5" height="18.5"/>
         </designable>
         <designable name="qFI-49-A7Q">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="69" height="18.5"/>
         </designable>
         <designable name="uln-Rl-AH4">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="117.5" height="17"/>
         </designable>
         <designable name="zgZ-JQ-I7N">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="34.5" height="18.5"/>
         </designable>
     </designables>
     <resources>

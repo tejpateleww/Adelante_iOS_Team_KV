@@ -37,6 +37,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var objRestaurant : Restaurantinfo!
     var objCurrentOrder : currentOrder!
     var arrAddToCartItem = [addcartItem]()
+    var arrUpdateCartValue = [updateQtyItem]()
     var SelectedCatId = ""
     var pageNumber = "1"
     var selectedIndex = ""
@@ -873,6 +874,29 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
 //                NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
+            }
+        }
+    }
+    //MARK : - update quantity
+    func webserviceUpdateCartQuantity(){
+        let updateCart = UpdateCardQtyReqModel()
+        updateCart.cart_item_id = ""
+        updateCart.qty = ""
+        updateCart.type = ""
+        WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: false){ (json, status, response) in
+            if(status)
+            {
+                print(json)
+                let cartData = UpdateCartQuantityResModel.init(fromJson: json)
+                self.arrUpdateCartValue = cartData.data.item
+                Utilities.displayAlert(json["message"].string ?? "")
+                self.tblRestaurantDetails.reloadData()
+                self.tblRestaurantDetails.reloadData()
+                self.setData()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         }
     }

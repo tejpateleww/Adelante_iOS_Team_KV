@@ -7,26 +7,42 @@
 //
 
 import UIKit
+import SDWebImage
+import SkeletonView
 
-class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,SkeletonTableViewDataSource {
 
     // MARK: - Properties
+    var responseStatus : webserviceResponse = .initial
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
+    var arrOrderData = [myFoodlistItem]()
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
+    {
+        didSet{
+            tblFoodLIst.isSkeletonable = true
+        }
+    }
 
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tblFoodLIst.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webservicePostMyFoodlist), for: .valueChanged)
+        registerNIB()
+        tblFoodLIst.showAnimatedSkeleton()
         webserviceGetFoodlist()
+        tblFoodLIst.refreshControl = refreshList
+        refreshList.addTarget(self, action: #selector(webserviceGetFoodlist), for: .valueChanged)
+        tblFoodLIst.reloadData()
         setup()
     }
     
     // MARK: - Other Methods
+    func registerNIB(){
+        tblFoodLIst.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        tblFoodLIst.register(UINib(nibName: "ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
+    }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
@@ -38,19 +54,65 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - IBActions
     
+    // MARK: - SkeletonTableview Datasource
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return self.responseStatus == .gotData ? (self.arrOrderData.count > 0 ? MyFoodlistCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+    }
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.responseStatus == .gotData{
+            return 0
+        }
+        return 10
+    }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if responseStatus == .gotData{
+            if arrOrderData.count != 0 {
+                return self.arrOrderData.count
+            }else{
+                return 1
+            }
+        }else{
+            return 5
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:MyFoodlistCell = tblFoodLIst.dequeueReusableCell(withIdentifier: "MyFoodlistCell", for: indexPath) as! MyFoodlistCell
-        cell.selectionStyle = .none
-        return cell
+        if responseStatus == .gotData{
+            if arrOrderData.count != 0{
+                let cell:MyFoodlistCell = tblFoodLIst.dequeueReusableCell(withIdentifier: "MyFoodlistCell", for: indexPath) as! MyFoodlistCell
+                cell.lblComboTitle.text = arrOrderData[indexPath.row].itemName
+                cell.lblPrice.text = arrOrderData[indexPath.row].price
+                cell.lblDisc.text = arrOrderData[indexPath.row].descriptionField
+                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
+                cell.imgFoodLIst.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                cell.selectionStyle = .none
+                return cell
+            }else{
+                let NoDatacell = tblFoodLIst.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+                
+                NoDatacell.imgNoData.image = UIImage(named: "Rating List")
+                NoDatacell.lblNoDataTitle.isHidden = true//text = "Be The First to Rate This Store".Localized()
+                NoDatacell.selectionStyle = .none
+                return NoDatacell
+            }
+        }else{
+            let cell = tblFoodLIst.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
+            cell.selectionStyle = .none
+            return cell
+        }
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        if responseStatus == .gotData{
+            if arrOrderData.count != 0 {
+                return UITableView.automaticDimension
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return self.responseStatus == .gotData ?  230 : 131
+        }
     }
     
     // MARK: - Api Calls
@@ -68,23 +130,42 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
-    func webserviceGetFoodlist(){
+    @objc func webserviceGetFoodlist(){
         let GetfoodList = GetFoodlistReqModel()
         GetfoodList.user_id = SingletonClass.sharedInstance.UserId
         
-        WebServiceSubClass.GetFoodList(getFoodlistModel: GetfoodList, showHud: true) { (json, status, response) in
+        WebServiceSubClass.GetFoodList(getFoodlistModel: GetfoodList, showHud: false) { (response, status, error) in
+            self.refreshList.endRefreshing()
+            self.responseStatus = .gotData
             if(status)
             {
-                print(json)
-                // let AddtoFoodlistData = AddToFoodlistReqModel.init()
-                //                self.objOrderData = repeatOrderData.data
+                let myfoodlistData = MyFoodLIstResModel.init(fromJson: response)
+                self.arrOrderData = myfoodlistData.data.item
+                let cell = self.tblFoodLIst.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
+                cell.stopShimmering()
+                self.tblFoodLIst.stopSkeletonAnimation()
                 
-                Utilities.displayAlert(json["message"].string ?? "")
+                self.tblFoodLIst.dataSource = self
+                self.tblFoodLIst.isScrollEnabled = true
+                self.tblFoodLIst.isUserInteractionEnabled = true
+                self.tblFoodLIst.reloadData()
+                DispatchQueue.main.async {
+                    self.refreshList.endRefreshing()
+                }
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         }
+    }
+}
+
+
+class shimmerView : UIView{
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.startShimmeringAnimation(animationSpeed: 1.4, direction: .leftToRight, repeatCount: 1000)
+
     }
 }

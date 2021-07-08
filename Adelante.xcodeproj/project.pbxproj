@@ -246,6 +246,12 @@
 		883614522693172A00B35C1D /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8836144F2693172900B35C1D /* CartItem.swift */; };
 		883614532693172A00B35C1D /* CartListResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883614502693172A00B35C1D /* CartListResModel.swift */; };
 		884B350326844F8B0019BB4F /* otpReceive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884B350226844F8B0019BB4F /* otpReceive.swift */; };
+		88883F6026970B140041D277 /* updateQtyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88883F5D26970B130041D277 /* updateQtyItem.swift */; };
+		88883F6126970B140041D277 /* UpdateCartQuantityResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88883F5E26970B140041D277 /* UpdateCartQuantityResModel.swift */; };
+		88883F6226970B140041D277 /* updateQtyDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88883F5F26970B140041D277 /* updateQtyDatum.swift */; };
+		88883F69269716E90041D277 /* myFoodlistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88883F66269716E90041D277 /* myFoodlistItem.swift */; };
+		88883F6A269716E90041D277 /* MyFoodLIstResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88883F67269716E90041D277 /* MyFoodLIstResModel.swift */; };
+		88883F6B269716E90041D277 /* myFoodlistDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88883F68269716E90041D277 /* myFoodlistDatum.swift */; };
 		88C9E4FB268ED612005B0899 /* skeletonCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9E4FA268ED612005B0899 /* skeletonCheckout.swift */; };
 		88C9E4FE268ED64D005B0899 /* skeletonCheckout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */; };
 		88C9E502268F1730005B0899 /* BffComboShimmerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */; };
@@ -518,6 +524,12 @@
 		8836144F2693172900B35C1D /* CartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		883614502693172A00B35C1D /* CartListResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartListResModel.swift; sourceTree = "<group>"; };
 		884B350226844F8B0019BB4F /* otpReceive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpReceive.swift; sourceTree = "<group>"; };
+		88883F5D26970B130041D277 /* updateQtyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = updateQtyItem.swift; sourceTree = "<group>"; };
+		88883F5E26970B140041D277 /* UpdateCartQuantityResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCartQuantityResModel.swift; sourceTree = "<group>"; };
+		88883F5F26970B140041D277 /* updateQtyDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = updateQtyDatum.swift; sourceTree = "<group>"; };
+		88883F66269716E90041D277 /* myFoodlistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myFoodlistItem.swift; sourceTree = "<group>"; };
+		88883F67269716E90041D277 /* MyFoodLIstResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFoodLIstResModel.swift; sourceTree = "<group>"; };
+		88883F68269716E90041D277 /* myFoodlistDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myFoodlistDatum.swift; sourceTree = "<group>"; };
 		88C9E4FA268ED612005B0899 /* skeletonCheckout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skeletonCheckout.swift; sourceTree = "<group>"; };
 		88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = skeletonCheckout.xib; sourceTree = "<group>"; };
 		88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BffComboShimmerCell.swift; sourceTree = "<group>"; };
@@ -1036,6 +1048,8 @@
 		81CFFD392574C60D005AA86A /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				88883F65269716AC0041D277 /* MyFoodLIstResModel */,
+				88883F53269707950041D277 /* UpdateQtyResModel */,
 				882F0EA9269487D800316F87 /* AddToCartResModel */,
 				8836144D2693171400B35C1D /* CartResModel */,
 				180F19DC265B81EB00150966 /* PromoCodeResModel */,
@@ -1254,6 +1268,26 @@
 				883614502693172A00B35C1D /* CartListResModel.swift */,
 			);
 			path = CartResModel;
+			sourceTree = "<group>";
+		};
+		88883F53269707950041D277 /* UpdateQtyResModel */ = {
+			isa = PBXGroup;
+			children = (
+				88883F5F26970B140041D277 /* updateQtyDatum.swift */,
+				88883F5D26970B130041D277 /* updateQtyItem.swift */,
+				88883F5E26970B140041D277 /* UpdateCartQuantityResModel.swift */,
+			);
+			path = UpdateQtyResModel;
+			sourceTree = "<group>";
+		};
+		88883F65269716AC0041D277 /* MyFoodLIstResModel */ = {
+			isa = PBXGroup;
+			children = (
+				88883F68269716E90041D277 /* myFoodlistDatum.swift */,
+				88883F66269716E90041D277 /* myFoodlistItem.swift */,
+				88883F67269716E90041D277 /* MyFoodLIstResModel.swift */,
+			);
+			path = MyFoodLIstResModel;
 			sourceTree = "<group>";
 		};
 		9203B475268B58720096AFDF /* Skeleton */ = {
@@ -1495,6 +1529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				189E57BE2664BDA9008AECA6 /* NoDataCollectionViewCell.swift in Sources */,
+				88883F6226970B140041D277 /* updateQtyDatum.swift in Sources */,
 				81CFFD792574C60D005AA86A /* Fonts.swift in Sources */,
 				3431E05425931D1F002F1435 /* MyOrderDetailsCell.swift in Sources */,
 				3431E05A25931DFF002F1435 /* RestaurantItemCell.swift in Sources */,
@@ -1596,6 +1631,7 @@
 				8105FDBB2574D0A9008D36D6 /* SearchVC.swift in Sources */,
 				883614512693172A00B35C1D /* CartDatum.swift in Sources */,
 				81CFFD6C2574C60D005AA86A /* Method.swift in Sources */,
+				88883F6126970B140041D277 /* UpdateCartQuantityResModel.swift in Sources */,
 				81CFFD8F2574C60D005AA86A /* AppDelegate.swift in Sources */,
 				8105FDBF2574D0E7008D36D6 /* MyAccountVC.swift in Sources */,
 				342C545A25CBB2E80098F573 /* AddPaymentReqModel.swift in Sources */,
@@ -1608,6 +1644,7 @@
 				345EA8F025B5477100A4E56D /* RestaurantFavResModel.swift in Sources */,
 				34A260E025D3B26000E24D73 /* ReviewData.swift in Sources */,
 				88E80720268DF38C007B3FC0 /* SkeletonOrderDetails.swift in Sources */,
+				88883F6A269716E90041D277 /* MyFoodLIstResModel.swift in Sources */,
 				3400019625C7EB8E00C584DE /* Option.swift in Sources */,
 				81CFFD742574C60D005AA86A /* Singleton.swift in Sources */,
 				3431E06025931FF3002F1435 /* myAccountSubDetails.swift in Sources */,
@@ -1636,6 +1673,7 @@
 				3400019725C7EB8E00C584DE /* RestaurantVariantResModel.swift in Sources */,
 				8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */,
 				347D953E25A70A23000C64B5 /* Dashboard.swift in Sources */,
+				88883F69269716E90041D277 /* myFoodlistItem.swift in Sources */,
 				3400019B25C7ED0400C584DE /* RestaurantVariantsReqModel.swift in Sources */,
 				342C57A025CBC94D0098F573 /* AddPaymentResModel.swift in Sources */,
 				3431E05625931D79002F1435 /* RestaurantListCell.swift in Sources */,
@@ -1659,6 +1697,7 @@
 				81CFFD822574C60D005AA86A /* UIStoryboard+Extension.swift in Sources */,
 				84C5F6AC2643C05A000B2DDE /* NotificationDatum.swift in Sources */,
 				88E806FF268D8509007B3FC0 /* SearchDatum.swift in Sources */,
+				88883F6B269716E90041D277 /* myFoodlistDatum.swift in Sources */,
 				81B447F725763C3700A0724E /* UICollectionViewCell+Extension.swift in Sources */,
 				180F19DF265B81EC00150966 /* Promocode.swift in Sources */,
 				8170CAF3257A10B500B24B7A /* FeedbackVC.swift in Sources */,
@@ -1674,6 +1713,7 @@
 				8170CAF0257A10B500B24B7A /* EditProfileVC.swift in Sources */,
 				3431E07225932587002F1435 /* orderDetailsCell.swift in Sources */,
 				34CF866F25A825120040C188 /* SearchReqModel.swift in Sources */,
+				88883F6026970B140041D277 /* updateQtyItem.swift in Sources */,
 				8105FDA92574C9A2008D36D6 /* ProfileUpdateReqModel.swift in Sources */,
 				8105FDD1257501C4008D36D6 /* customView.swift in Sources */,
 				88E8071C268DCA9C007B3FC0 /* AddToFoodlistReqModel.swift in Sources */,
