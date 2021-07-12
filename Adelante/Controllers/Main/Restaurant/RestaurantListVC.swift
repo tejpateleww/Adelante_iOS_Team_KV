@@ -82,14 +82,14 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.tblMainList.reloadData()
         }
-        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
-            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
-            self.navigationController?.pushViewController(vc, animated: true)
-        }else{
+//        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
+//            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }else{
             self.SelectFilterId = SortId
             pageNumber = 1
             webserviceGetRestaurantList(strSearch: "", strFilter: "")
-        }
+//        }
     }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)

@@ -101,9 +101,9 @@ struct currentOrder {
     var tax : String = ""
     var total : String = ""
     var order : [selectedOrderItems] = []
-    var currentRestaurantDetail : Restaurantinfo
+    var currentRestaurantDetail : RestaurantDataDetails
     
-    init(userId:String,restautaurantId:String,rating:String,comment:String,subTotal:String,serviceFee:String,tax:String,total:String,order:[selectedOrderItems],currentRestaurantDetail:Restaurantinfo){
+    init(userId:String,restautaurantId:String,rating:String,comment:String,subTotal:String,serviceFee:String,tax:String,total:String,order:[selectedOrderItems],currentRestaurantDetail:RestaurantDataDetails){
         self.user_id = userId
         self.restaurant_id = restautaurantId
         self.rating = rating

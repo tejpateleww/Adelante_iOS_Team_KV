@@ -189,6 +189,10 @@ class WebServiceSubClass
         let params : [String:String] = getFoodlistModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Get_Foodlist, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    class func itemList(itemListModel : ItemListReqModel,showHud: Bool = false , completion:@escaping CompletionResponse){
+        let params : [String:String] = itemListModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .ItemList, httpMethod: .post,showHud:showHud,parameters:params,completion:completion)
+    }
 }
 
 

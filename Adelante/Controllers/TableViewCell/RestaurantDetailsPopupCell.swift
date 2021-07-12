@@ -10,6 +10,7 @@ import UIKit
 
 class RestaurantDetailsPopupCell: UITableViewCell {
 
+    @IBOutlet weak var imgRestDetails: customImagewithShadow!
     @IBOutlet weak var vwStapper: UIView!
     @IBOutlet weak var btnAdd: UIButton!
     @IBOutlet weak var lblNoOfItem: UILabel!

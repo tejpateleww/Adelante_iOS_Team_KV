@@ -3142,20 +3142,20 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReViewDiscCell" id="zYv-cy-nYb" customClass="ReViewDiscCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="109"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="139"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zYv-cy-nYb" id="F95-Xz-0AW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rlp-bS-0tk" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
-                                                            <rect key="frame" x="18" y="7.5" width="378" height="94"/>
+                                                            <rect key="frame" x="18" y="7.5" width="378" height="124"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17.699999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="iSf-Fx-yzY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="94"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="124"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6.5999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="2u5-vb-Qf5">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="76.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="106.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vf1-pQ-gG0" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
@@ -3167,7 +3167,7 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </label>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q44-Lk-LSf" customClass="CosmosView" customModule="Cosmos">
-                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="20"/>
+                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="50"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Selected_star"/>
@@ -3183,7 +3183,7 @@
                                                                             </subviews>
                                                                         </stackView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSc-1R-Zli" customClass="CustomLabel" customModule="Adelante" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="94" width="378" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="124" width="378" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -6000,6 +6000,7 @@
                                                                             <outlet property="lblItemName" destination="vdh-Yc-sO5" id="mcd-dT-xcf"/>
                                                                             <outlet property="lblItemPrice" destination="2Vc-2l-J1v" id="5RU-ba-fLL"/>
                                                                             <outlet property="lblNoOfItem" destination="GDR-6g-WHL" id="fth-6d-ID6"/>
+                                                                            <outlet property="vwRadius" destination="Lnv-2i-OPx" id="FTb-Gf-nCJ"/>
                                                                             <outlet property="vwStapper" destination="NX6-fo-wdP" id="MFj-nH-H4M"/>
                                                                         </connections>
                                                                     </tableViewCell>
@@ -6191,6 +6192,7 @@
                                                                             <outlet property="lblItemPrice" destination="9U7-VY-4KF" id="5fv-AZ-3jd"/>
                                                                             <outlet property="lblNoOfItem" destination="32A-NQ-lVn" id="b1p-el-mKT"/>
                                                                             <outlet property="lblSizeOfItem" destination="mAd-2M-Ynn" id="v2m-Dd-o73"/>
+                                                                            <outlet property="vwRadius" destination="0CZ-Wd-kYs" id="4Wy-5S-Qq7"/>
                                                                             <outlet property="vwStapper" destination="qI6-bK-ekh" id="VdJ-oE-sl5"/>
                                                                         </connections>
                                                                     </tableViewCell>
@@ -6663,6 +6665,7 @@
                                                     </tableViewCellContentView>
                                                     <connections>
                                                         <outlet property="btnAdd" destination="gaZ-8e-zpe" id="i84-B9-xCF"/>
+                                                        <outlet property="imgRestDetails" destination="tFi-ve-mGB" id="dNK-Pf-8O7"/>
                                                         <outlet property="lblDesc" destination="07e-oO-PfF" id="lFw-LM-QbD"/>
                                                         <outlet property="lblItemName" destination="4rc-Ti-v6z" id="WGN-aD-5jW"/>
                                                         <outlet property="lblNoOfItem" destination="zqH-WK-hOo" id="XT6-zs-240"/>
@@ -9473,20 +9476,44 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
-        <designable name="0kK-8b-MA7">
-            <size key="intrinsicContentSize" width="195" height="32"/>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
-        <designable name="2fI-hX-w88">
-            <size key="intrinsicContentSize" width="120" height="20"/>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
-        <designable name="G78-jH-dfh">
-            <size key="intrinsicContentSize" width="195" height="32"/>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
-        <designable name="HGY-kw-5YU">
-            <size key="intrinsicContentSize" width="210" height="30"/>
+        <designable name="IOt-oG-ldn">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
         </designable>
-        <designable name="Q44-Lk-LSf">
-            <size key="intrinsicContentSize" width="120" height="20"/>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="90.5" height="34"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="32" height="34"/>
+        </designable>
+        <designable name="zNM-X4-rQ4">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
         </designable>
     </designables>
     <resources>

@@ -357,9 +357,9 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 3
     }
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        if indexPath.row == 0{
-            return responseStatus == .gotData ? (self.arrCategories.count > 0 ? RestaurantCatListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
-        }
+//        if indexPath.row == 0{
+//            return responseStatus == .gotData ? (self.arrCategories.count > 0 ? RestaurantCatListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
+//        }
         return responseStatus == .gotData ? (self.arrRestaurant.count > 0 ? RestaurantCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
     }
     // MARK: - UITableViewDelegates And Datasource
@@ -399,15 +399,14 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     return cell
                 }else{
                     let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-                    
-                    NoDatacell.imgNoData.image = UIImage(named: NoData.Favorite.ImageName)
-                    NoDatacell.lblNoDataTitle.text = "No_data_favorite".Localized()
-                    
+                    NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
+                    NoDatacell.lblNoDataTitle.isHidden = true
+                    NoDatacell.selectionStyle = .none
                     return NoDatacell
                 }
             }else{
                 let cell = tblMainList.dequeueReusableCell(withIdentifier: HomeSkeletonCell.reuseIdentifier, for: indexPath) as! HomeSkeletonCell
-                print("Shimmer RestaurantCell  loaded")
+                print("Shimmer RestaurantCell loaded")
                 cell.selectionStyle = .none
                 return cell
             }
@@ -415,7 +414,15 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        if responseStatus == .gotData{
+            if arrRestaurant.count != 0 {
+                return 200
+            }else{
+                return tableView.frame.height
+            }
+        }else {
+            return responseStatus == .gotData ?  230 : 131
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -466,14 +473,14 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             self.colVwFilterOptions.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
         
-        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
-            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
-            self.navigationController?.pushViewController(vc, animated: true)
-        }else{
+//        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
+//            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }else{
             self.SelectFilterId = SortId
             self.pageNumber = 1
             webserviceGetDashboard()
-        }
+//        }
     }
     // MARK: - UIScrollView Delegates
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

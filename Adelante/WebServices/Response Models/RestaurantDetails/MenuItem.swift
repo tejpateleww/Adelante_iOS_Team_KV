@@ -1,7 +1,7 @@
 //
 //  MenuItem.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 27, 2021
+//  Created on July 12, 2021
 
 import Foundation
 import SwiftyJSON
@@ -20,8 +20,10 @@ class MenuItem : NSObject, NSCoding{
     var price : String!
     var quantity : String!
     var restaurantId : String!
+    var searchIndex : String!
     var size : String!
     var status : String!
+    var time : String!
     var trash : String!
     var updatedAt : String!
     var userId : String!
@@ -29,7 +31,6 @@ class MenuItem : NSObject, NSCoding{
     var vegNonveg : String!
     var viewCount : String!
     var selectedQuantity : String! = ""
-    
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -48,8 +49,10 @@ class MenuItem : NSObject, NSCoding{
         price = json["price"].stringValue
         quantity = json["quantity"].stringValue
         restaurantId = json["restaurant_id"].stringValue
+        searchIndex = json["search_index"].stringValue
         size = json["size"].stringValue
         status = json["status"].stringValue
+        time = json["time"].stringValue
         trash = json["trash"].stringValue
         updatedAt = json["updated_at"].stringValue
         userId = json["user_id"].stringValue
@@ -97,11 +100,17 @@ class MenuItem : NSObject, NSCoding{
         if restaurantId != nil{
         	dictionary["restaurant_id"] = restaurantId
         }
+        if searchIndex != nil{
+        	dictionary["search_index"] = searchIndex
+        }
         if size != nil{
         	dictionary["size"] = size
         }
         if status != nil{
         	dictionary["status"] = status
+        }
+        if time != nil{
+        	dictionary["time"] = time
         }
         if trash != nil{
         	dictionary["trash"] = trash
@@ -141,8 +150,10 @@ class MenuItem : NSObject, NSCoding{
 		price = aDecoder.decodeObject(forKey: "price") as? String
 		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
 		restaurantId = aDecoder.decodeObject(forKey: "restaurant_id") as? String
+		searchIndex = aDecoder.decodeObject(forKey: "search_index") as? String
 		size = aDecoder.decodeObject(forKey: "size") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? String
+		time = aDecoder.decodeObject(forKey: "time") as? String
 		trash = aDecoder.decodeObject(forKey: "trash") as? String
 		updatedAt = aDecoder.decodeObject(forKey: "updated_at") as? String
 		userId = aDecoder.decodeObject(forKey: "user_id") as? String
@@ -190,11 +201,17 @@ class MenuItem : NSObject, NSCoding{
 		if restaurantId != nil{
 			aCoder.encode(restaurantId, forKey: "restaurant_id")
 		}
+		if searchIndex != nil{
+			aCoder.encode(searchIndex, forKey: "search_index")
+		}
 		if size != nil{
 			aCoder.encode(size, forKey: "size")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")
+		}
+		if time != nil{
+			aCoder.encode(time, forKey: "time")
 		}
 		if trash != nil{
 			aCoder.encode(trash, forKey: "trash")

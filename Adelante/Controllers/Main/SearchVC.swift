@@ -290,6 +290,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
             }else{
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
                 controller.selectedRestaurantId = arrSearchRestItemList[indexPath.row].id
+                controller.SearchData = arrSearchRestItemList[indexPath.row].itemId
                 controller.selectedIndex = "\(indexPath.row)"
                 self.navigationController?.pushViewController(controller, animated: true)
             }

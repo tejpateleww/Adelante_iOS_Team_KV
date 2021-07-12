@@ -1,7 +1,7 @@
 //
 //  FoodMenu.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 27, 2021
+//  Created on July 12, 2021
 
 import Foundation
 import SwiftyJSON

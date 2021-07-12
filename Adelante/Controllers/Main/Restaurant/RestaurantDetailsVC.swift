@@ -34,10 +34,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var arrMenuitem = [MenuItem]()
     var arrFoodMenu = [FoodMenu]()
     var arrSelectedOrder = [selectedOrderItems]()
-    var objRestaurant : Restaurantinfo!
+    var objRestaurant : RestaurantDataDetails!
     var objCurrentOrder : currentOrder!
     var arrAddToCartItem = [addcartItem]()
     var arrUpdateCartValue = [updateQtyItem]()
+    var arrItemList = [ItemList]()
     var SelectedCatId = ""
     var pageNumber = "1"
     var selectedIndex = ""
@@ -46,6 +47,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     var isFromFavoriteList : Bool = false
     var isFromRestaurantOutlets : Bool = false
     var expandviewheight = 0
+    var SearchData = ""
     lazy var skeletonViewData : skeletonView = skeletonView.fromNib()
     
     // MARK: - IBOutlets
@@ -192,22 +194,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         print("Start: \(date)") // Start: Optional(2000-01-01 19:00:00 +0000)
     }
     func setUpLocalizedStrings(){
-        //        lblRestaurantName.text = "RestaurantDetailsVC_lblRestaurantName".Localized()
-        //        lblReviews.text = String(format: "RestaurantDetailsVC_lblReviews".Localized(), "53")
-        
         lblPromoCode.text = "RestaurantDetailsVC_lblPromoCode".Localized()
         lblCode.text = "RestaurantDetailsVC_lblCode".Localized()
-        
-        //        lblDistance.text = String(format: "RestaurantDetailsVC_lblDistance".Localized(), "1.7")
         lblOpenTime.text = "RestaurantDetailsVC_lblOpenTime".Localized()
-        //        lblTime.text = "RestaurantDetailsVC_lblTime".Localized()
         lblTimeZone.text = "RestaurantDetailsVC_lblTimeZone".Localized()
-        lblEastern.text = "RestaurantDetailsVC_lblEastern".Localized()
-        //        lblAboutRestaurant.text = "RestaurantDetailsVC_lblAboutRestaurant".Localized()
         btnViewPolicy.setTitle("RestaurantDetailsVC_btnViewPolicy".Localized(), for: .normal)
-        //        lblNoOfItem.text = String(format: "RestaurantDetailsVC_lblNoOfItem".Localized(), "1")
         lblSign.text = "RestaurantDetailsVC_lblSign".Localized()
-        //        lblPrice.text = "$30"
         lblViewCards.text = "RestaurantDetailsVC_lblViewCart".Localized()
     }
     func setData(){
@@ -219,6 +211,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             //            self.lblTimeZone.text = objRestaurant.
             self.lblDistance.text =  objRestaurant.distance
             self.lblAddress.text = objRestaurant.address ?? ""
+            self.lblEastern.text = objRestaurant.timeZone
             //            if objRestaurant.promocode == ""{
             //                stackPromocode.isHidden = true
             //            }else{
@@ -228,7 +221,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             self.lblTime.text = "\(objRestaurant.fromTime ?? "")"
             self.lblCompleteTime.text = "\(objRestaurant.toTime ?? "")"
             self.lblAboutRestaurant.text = objRestaurant.descriptionField ?? ""
-            self.lblEastern.text = objRestaurant.timezone ?? ""
             let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objRestaurant.image ?? "")"
             self.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
             self.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -417,7 +409,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         if tableView == tblRestaurantDetails{
             return self.setRowCount(section: section)
         }else{
-            return 5
+            return arrItemList.count
         }
         
     }
@@ -454,6 +446,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.lblNoOfItem.text = arrMenuitem[indexPath.row].selectedQuantity
                     cell.btnAddItem.isHidden = false
                     cell.vwStapper.isHidden = true
+                    if indexPath.row == 0{
+                        if objRestaurant.menuType == 1{
+                            cell.vwRadius.cornerRadius = 5
+                            cell.vwRadius.layer.borderColor = colors.appOrangeColor.value.cgColor
+                            cell.vwRadius.layer.borderWidth = 1
+                        }else{
+                            cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                        }
+                    }
                     if Int(arrMenuitem[indexPath.row].selectedQuantity) ?? 0 > 0 {
                         cell.btnAddItem.isHidden = true
                         cell.vwStapper.isHidden = false
@@ -461,6 +462,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.decreaseData = {
                         self.viewPopup.isHidden = false
                         self.view.addSubview(self.viewPopup)
+                        self.webserviceItemList(strItemId: self.arrMenuitem[indexPath.row].id)
                         self.tblPopup.reloadData()
                         var strQty = ""
                         //                    if cell.lblNoOfItem.text != ""{
@@ -486,6 +488,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.IncreseData = {
                         self.viewPopup.isHidden = false
                         self.view.addSubview(self.viewPopup)
+                        self.webserviceItemList(strItemId: self.arrMenuitem[indexPath.row].id)
                         self.tblPopup.reloadData()
                         //                    var strQty = ""
                         //                    var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
@@ -520,8 +523,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             pr = strQty.ToDouble() * self.arrMenuitem[indexPath.row].price.ToDouble()
                             let objItem = selectedOrderItems(restaurant_item_id: self.arrMenuitem[indexPath.row].id, quantity: self.arrMenuitem[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrMenuitem[indexPath.row].name, originalPrice: self.arrMenuitem[indexPath.row].price, size: "", selectedQuantity: "\(strQty)")
                             self.checkOrderItems(objOrder: objItem)
-                            //                        self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id)
-                            //                        self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                            //                                                    self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id)
+                            self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
                         } else {
                             //Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
                             Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
@@ -551,6 +554,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     
                     cell.btnAdd.isHidden = false
                     cell.vwStapper.isHidden = true
+                    if indexPath.section == 1 && indexPath.row == 0{
+                        if objRestaurant.foodType == 1{
+                            cell.vwRadius.cornerRadius = 5
+                            cell.vwRadius.layer.borderColor = colors.appOrangeColor.value.cgColor
+                            cell.vwRadius.layer.borderWidth = 1
+                        }else{
+                            cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                        }
+                    }
                     if Int(arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].selectedQuantity) ?? 0 > 0 {
                         cell.btnAdd.isHidden = true
                         cell.vwStapper.isHidden = false
@@ -564,6 +576,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.decreaseData = { [self] in
                         self.viewPopup.isHidden = false
                         self.view.addSubview(self.viewPopup)
+                        self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id)
                         self.tblPopup.reloadData()
                         var strQty = ""
                         if cell.lblNoOfItem.text != ""{
@@ -588,6 +601,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.IncreseData = {
                         self.viewPopup.isHidden = false
                         self.view.addSubview(self.viewPopup)
+                        self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id)
                         self.tblPopup.reloadData()
                         var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                         if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.toInt() - 1 > value {
@@ -615,36 +629,36 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.vwStapper.isHidden = false
                         let strQty = "1"
                         cell.lblNoOfItem.text = strQty
-                        //                    if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.ToDouble() > 1 {
-                        //                        let variantValue = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant.ToDouble()
-                        //                        if variantValue > 0{
-                        //                            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                        //                            controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
-                        //                            controller.selectedRestaurantId = self.objRestaurant.id
-                        //                            let navigationController = UINavigationController(rootViewController: controller)
-                        //
-                        //                            self.navigationController?.present(navigationController, animated: true, completion: nil)
-                        ////                            self.navigationController?.pushViewController(controller, animated: true)
-                        //
-                        //                        } else {
-                        //
-                        //
-                        //                            let strQty = "1"
-                        //                            cell.lblNoOfItem.text = strQty
-                        //                            self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].selectedQuantity = strQty
-                        //                            var pr = 0
-                        //                            pr = strQty.toInt() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.toInt()
-                        //                            let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size, selectedQuantity: strQty)
-                        //                            self.checkOrderItems(objOrder: objItem)
-                        //                            //self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id)
-                        ////                            self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                        //                        }
-                        
-                        //                    }
-                        //                    else {
-                        //                        //Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
-                        //                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
-                        //                    }
+                        if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.ToDouble() > 1 {
+                            let variantValue = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant.ToDouble()
+                            if variantValue > 0{
+                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                                controller.selectedRestaurantId = self.objRestaurant.id
+                                let navigationController = UINavigationController(rootViewController: controller)
+                                
+                                self.navigationController?.present(navigationController, animated: true, completion: nil)
+                                //                            self.navigationController?.pushViewController(controller, animated: true)
+                                
+                            } else {
+                                
+                                
+                                let strQty = "1"
+                                cell.lblNoOfItem.text = strQty
+                                self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].selectedQuantity = strQty
+                                var pr = 0
+                                pr = strQty.toInt() * self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.toInt()
+                                let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size, selectedQuantity: strQty)
+                                self.checkOrderItems(objOrder: objItem)
+                                //self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id)
+                                self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                            }
+                            
+                        }
+                        else {
+                            //Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                            Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+                        }
                     }
                     let variantValue = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant.ToDouble()
                     if variantValue > 0{
@@ -673,7 +687,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.btnAdd.isHidden = true
                     cell.vwStapper.isHidden = false
                 }
-                
+                if indexPath.section == 0 && indexPath.row == 0{
+                    if objRestaurant.foodType == 1{
+                        cell.vwRadius.cornerRadius = 5
+                        cell.vwRadius.layer.borderColor = colors.appOrangeColor.value.cgColor
+                        cell.vwRadius.layer.borderWidth = 1
+                    }else{
+                        cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                    }
+                }
                 if arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant == "1"{
                     cell.btnCustomize.isHidden = false
                 }else{
@@ -682,6 +704,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 cell.decreaseData = {
                     self.viewPopup.isHidden = false
                     self.view.addSubview(self.viewPopup)
+                    self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id)
                     self.tblPopup.reloadData()
                     //                var strQty = ""
                     //                if cell.lblNoOfItem.text != ""{
@@ -706,8 +729,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 cell.IncreseData = { [self] in
                     self.viewPopup.isHidden = false
                     self.view.addSubview(self.viewPopup)
+                    self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id)
                     self.tblPopup.reloadData()
-                    var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                    let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                     if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.toInt() - 1 > value {
                         //                    var strQty = ""
                         //                    if cell.lblNoOfItem.text != ""{
@@ -730,24 +754,24 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                 }
                 cell.btnAddAction = {
-                    //                if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.ToDouble() > 1 {
-                    cell.btnAdd.isHidden = true
-                    cell.vwStapper.isHidden = false
-                    let strQty = "1"
-                    cell.lblNoOfItem.text = strQty
-                    // cell.lblNoOfItem.text = strQty
-                    // self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].selectedQuantity = strQty
-                    //  var pr = 0
-                    // pr = strQty.toInt() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.toInt()
-                    // let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].size, selectedQuantity: strQty)
-                    // self.checkOrderItems(objOrder: objItem)
-                    //self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id)
-                    //                    self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                    //                }
-                    //                else {
-                    // Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
-                    //                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
-                    //                }
+                    if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.ToDouble() > 1 {
+                        cell.btnAdd.isHidden = true
+                        cell.vwStapper.isHidden = false
+                        let strQty = "1"
+                        cell.lblNoOfItem.text = strQty
+                        cell.lblNoOfItem.text = strQty
+                        self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].selectedQuantity = strQty
+                        var pr = 0
+                        pr = strQty.toInt() * self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price.toInt()
+                        let objItem = selectedOrderItems(restaurant_item_id: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, quantity: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name, originalPrice: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].price, size: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].size, selectedQuantity: strQty)
+                        self.checkOrderItems(objOrder: objItem)
+                        //                    self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id)
+                        self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                    }
+                    else {
+//                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
+                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+                    }
                 }
                 let variantValue = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant.ToDouble()
                 if variantValue > 0{
@@ -766,16 +790,29 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             }
         }else{
             let cell:RestaurantDetailsPopupCell = tblPopup.dequeueReusableCell(withIdentifier: RestaurantDetailsPopupCell.reuseIdentifier) as! RestaurantDetailsPopupCell
+            cell.lblItemName.text = arrItemList[indexPath.row].itemName
+            cell.lblPrice.text = "\(CurrencySymbol)" + arrItemList[indexPath.row].price.ConvertToTwoDecimal()
+            cell.lblDesc.text = arrItemList[indexPath.row].descriptionField
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrItemList[indexPath.row].itemImage ?? "")"
+            cell.imgRestDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.imgRestDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.lblNoOfItem.text = arrItemList[indexPath.row].qty
+            if arrItemList[indexPath.row].qty.toInt() > 0{
+                cell.btnAdd.isHidden = true
+                cell.vwStapper.isHidden = false
+            }else{
+                cell.btnAdd.isHidden = false
+                cell.vwStapper.isHidden = true 
+            }
             cell.IncreseData = {
                 var strQty = ""
                 var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
-                if self.arrMenuitem[indexPath.row].quantity.toInt() - 1 > value {
+                if self.arrItemList[indexPath.row].quantity.toInt() - 1 > value {
                     if cell.lblNoOfItem.text != "" {
                         
                         value = value + 1
-                        cell.lblNoOfItem.text = String(value)
                         strQty = "\(value)"
-                        
+                        cell.lblNoOfItem.text = String(strQty)
                     }
                 }
             }
@@ -789,8 +826,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.vwStapper.isHidden = true
                     }else if value > 1{
                         value = value - 1
-                        cell.lblNoOfItem.text = String(value)
                         strQty = "\(value)"
+                        cell.lblNoOfItem.text = String(strQty)
                     }
                 }
             }
@@ -908,6 +945,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         ResDetails.user_id = SingletonClass.sharedInstance.UserId
         ResDetails.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         ResDetails.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        ResDetails.search = SearchData
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             if status {
@@ -961,29 +999,39 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { [self] (response, status, error) in
             if status {
                 let cartitem = addcartResModel.init(fromJson: response)
+                
                 arrAddToCartItem = cartitem.data.item
+                print(Section)
                 let index = IndexPath(row: row, section: Section)
-                let cell = self.tblRestaurantDetails.cellForRow(at: index) as! RestaurantItemCell
-                
-                let id = self.arrFoodMenu[Section].subMenu[row].id
-                
-                for i in 0...arrAddToCartItem.count - 1{
-                    if id == arrAddToCartItem[i].id {
-                        cell.lblNoOfItem.text = arrAddToCartItem[i].cartQty
+                if arrMenuitem.count > 0 {
+                    
+                    if Section == 0{
+                        let DetailCell = self.tblRestaurantDetails.cellForRow(at: index) as! RestaurantDetailsCell
+                        let id = self.arrMenuitem[row].id
+                        for i in 0...arrAddToCartItem.count - 1{
+                            if id == arrAddToCartItem[i].id {
+                                DetailCell.lblNoOfItem.text = arrAddToCartItem[i].cartQty
+                            }
+                        }
+                    }else{
+                        let cell = self.tblRestaurantDetails.cellForRow(at: index) as! RestaurantItemCell
+                        let id = self.arrFoodMenu[Section].subMenu[row].id
+                        for i in 0...arrAddToCartItem.count - 1{
+                            if id == arrAddToCartItem[i].id {
+                                cell.lblNoOfItem.text = arrAddToCartItem[i].cartQty
+                            }
+                        }
+                    }
+                }else{
+                    let cell = self.tblRestaurantDetails.cellForRow(at: index) as! RestaurantItemCell
+                    let id = self.arrFoodMenu[Section].subMenu[row].id
+                    for i in 0...arrAddToCartItem.count - 1{
+                        if id == arrAddToCartItem[i].id {
+                            cell.lblNoOfItem.text = arrAddToCartItem[i].cartQty
+                        }
                     }
                 }
                 
-                // }
-                //    print(response)
-                //                self.objRestaurant.favourite = response
-                //                if self.objRestaurant.favourite == "1"{
-                //                    self.btnNavLike.isSelected = true
-                //                } else {
-                //                    self.btnNavLike.isSelected = false
-                //                }
-                //                NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
-                //                NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
-                //                NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
@@ -1003,7 +1051,25 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 self.arrUpdateCartValue = cartData.data.item
                 Utilities.displayAlert(json["message"].string ?? "")
                 self.tblRestaurantDetails.reloadData()
-                self.tblRestaurantDetails.reloadData()
+                self.setData()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
+    }
+    func webserviceItemList(strItemId:String){
+        let itemlist = ItemListReqModel()
+        itemlist.item_id = strItemId
+        itemlist.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.itemList(itemListModel: itemlist, showHud: false){ (json, status, response) in
+            if(status)
+            {
+                print(json)
+                let itemListData = ItemListResModel.init(fromJson: json)
+                self.arrItemList = itemListData.data.item
+                self.tblPopup.reloadData()
                 self.setData()
             }
             else

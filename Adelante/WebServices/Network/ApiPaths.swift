@@ -105,5 +105,6 @@ enum ApiKey: String {
     case Get_Card = "get_cart"
     case Get_Foodlist = "get_foodlist"
     case Update_Cart_Qty = "update_cart_quantity"
+    case ItemList = "item_list"
 }
 

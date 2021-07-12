@@ -167,14 +167,14 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.tblRestaurantList.reloadData()
         }
-        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
-            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
-            self.navigationController?.pushViewController(vc, animated: true)
-        }else{
+//        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
+//            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }else{
             self.SelectFilterId = SortId
             self.pageNumber = 1
             webserviceGetRestaurantOutlet(strFilter: "")
-        }
+//        }
     }
     // MAQRK:- Skeletontableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {

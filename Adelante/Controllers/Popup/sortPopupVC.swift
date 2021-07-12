@@ -65,8 +65,10 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     override func viewDidLayoutSubviews() {
         self.viewBG.layer.cornerRadius = 10
         self.viewBG.clipsToBounds = true
-        
-    }
+        self.viewBG.layer.shadowColor = colors.black.value.cgColor
+        self.viewBG.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.viewBG.layer.shadowOpacity = 10
+        self.viewBG.layer.shadowRadius = 10.0    }
     //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     //        return UITableView.automaticDimension
     //

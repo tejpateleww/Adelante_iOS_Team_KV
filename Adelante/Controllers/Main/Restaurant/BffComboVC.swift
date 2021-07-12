@@ -319,7 +319,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
-            self.navigationController?.popViewController(animated: true)
+//            self.navigationController?.popViewController(animated: true)
             let strarray = arrselectedId.joined(separator: ",")
             webwerviceAddtoCart(strAddon: strarray)
            // self.delegateAddVariant.addVeriantincart(veriantid: strarray)
@@ -365,6 +365,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         addToCart.addon_id = strAddon
         WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { (response, status, error) in
             if status {
+                self.navigationController?.popViewController(animated: true)
             //   print(response)
 //                self.objRestaurant.favourite = response
 //                if self.objRestaurant.favourite == "1"{

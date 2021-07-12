@@ -1,15 +1,15 @@
 //
-//  RestaurantDetailsData.swift
+//  RestaurantDetailsDatum.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on January 27, 2021
+//  Created on July 12, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class RestaurantDetailsData : NSObject, NSCoding{
+class RestaurantDetailsDatum : NSObject, NSCoding{
 
-    var restaurant : Restaurantinfo!
+    var restaurant : RestaurantDataDetails!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -20,7 +20,7 @@ class RestaurantDetailsData : NSObject, NSCoding{
 		}
         let restaurantJson = json["restaurant"]
         if !restaurantJson.isEmpty{
-            restaurant = Restaurantinfo(fromJson: restaurantJson)
+            restaurant = RestaurantDataDetails(fromJson: restaurantJson)
         }
 	}
 
@@ -42,7 +42,7 @@ class RestaurantDetailsData : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		restaurant = aDecoder.decodeObject(forKey: "restaurant") as? Restaurantinfo
+		restaurant = aDecoder.decodeObject(forKey: "restaurant") as? RestaurantDataDetails
 	}
 
     /**
