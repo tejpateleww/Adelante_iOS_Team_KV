@@ -89,8 +89,10 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 if arrOrderData[indexPath.row].cartQty.toInt() > 0{
                     cell.btnAdd.isHidden = true
+                    cell.vwStapper.isHidden = false
                 }else{
                     cell.btnAdd.isHidden = false
+                    cell.vwStapper.isHidden = true
                 }
                 cell.selectionStyle = .none
                 return cell

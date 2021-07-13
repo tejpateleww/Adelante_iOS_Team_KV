@@ -296,7 +296,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="169" id="hvK-Qu-0qe">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchFoodLIstCell" rowHeight="169" id="hvK-Qu-0qe" customClass="searchFoodLIstCell" customModule="Adelante" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="169"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hvK-Qu-0qe" id="5ss-Qo-Wac">
@@ -449,7 +449,7 @@
                                                                                                                         <color key="titleColor" red="0.89019607840000003" green="0.2901960784" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                                     </state>
                                                                                                                     <connections>
-                                                                                                                        <action selector="btnDecrease:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="ppk-xu-ae8"/>
+                                                                                                                        <action selector="btnDecrease:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="Svk-px-uPz"/>
                                                                                                                     </connections>
                                                                                                                 </button>
                                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJL-a1-glh">
@@ -481,7 +481,7 @@
                                                                                                                         <color key="titleColor" red="0.89019607840000003" green="0.2901960784" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                                     </state>
                                                                                                                     <connections>
-                                                                                                                        <action selector="btnIncrease:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="YfN-ZI-S8K"/>
+                                                                                                                        <action selector="btnDecrease:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="D6X-bE-1bE"/>
                                                                                                                     </connections>
                                                                                                                 </button>
                                                                                                             </subviews>
@@ -499,7 +499,7 @@
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="66" height="23"/>
                                                                                                     <state key="normal" image="Add  +"/>
                                                                                                     <connections>
-                                                                                                        <action selector="btnAdd:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="vMp-T6-nT7"/>
+                                                                                                        <action selector="btnAdd:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="C1d-dg-gJ7"/>
                                                                                                     </connections>
                                                                                                 </button>
                                                                                             </subviews>
@@ -3970,7 +3970,6 @@
                                                                                                                     </state>
                                                                                                                     <connections>
                                                                                                                         <action selector="btnDecrease:" destination="OHv-lI-MER" eventType="touchUpInside" id="HAC-Xf-kum"/>
-                                                                                                                        <action selector="btnDecrease:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="a30-FP-Bpf"/>
                                                                                                                     </connections>
                                                                                                                 </button>
                                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Leo-K7-gYD">
@@ -4003,7 +4002,6 @@
                                                                                                                     </state>
                                                                                                                     <connections>
                                                                                                                         <action selector="btnIncrease:" destination="OHv-lI-MER" eventType="touchUpInside" id="6Cc-qU-CVx"/>
-                                                                                                                        <action selector="btnIncrease:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="btn-94-e1A"/>
                                                                                                                     </connections>
                                                                                                                 </button>
                                                                                                             </subviews>
@@ -4022,7 +4020,6 @@
                                                                                                     <state key="normal" image="Add  +"/>
                                                                                                     <connections>
                                                                                                         <action selector="btnAdd:" destination="OHv-lI-MER" eventType="touchUpInside" id="Da8-p3-2bI"/>
-                                                                                                        <action selector="btnAdd:" destination="hvK-Qu-0qe" eventType="touchUpInside" id="xPF-Vv-EBC"/>
                                                                                                     </connections>
                                                                                                 </button>
                                                                                             </subviews>

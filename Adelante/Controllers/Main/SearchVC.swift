@@ -159,7 +159,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         }else{
 //            if responseStatus == .gotData{
 //                if arrSearchRestItemList.count != 0{
-                    let cell:MyFoodlistCell = tblFoodList.dequeueReusableCell(withIdentifier: "MyFoodlistCell", for: indexPath) as! MyFoodlistCell
+                    let cell:searchFoodLIstCell = tblFoodList.dequeueReusableCell(withIdentifier: "searchFoodLIstCell", for: indexPath) as! searchFoodLIstCell
                     cell.lblComboTitle.text = arrSearchRestItemList[indexPath.row].name
                     cell.lblPrice.text = "$" + arrSearchRestItemList[indexPath.row].price
                     cell.lblDisc.text = arrSearchRestItemList[indexPath.row].descriptionField
