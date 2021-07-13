@@ -1,7 +1,7 @@
 //
 //  updateQtyItem.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 8, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
@@ -18,7 +18,7 @@ class updateQtyItem : NSObject, NSCoding{
     var outletId : String!
     var price : String!
     var quantity : String!
-    var subTotal : Float!
+    var subTotal : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -36,7 +36,7 @@ class updateQtyItem : NSObject, NSCoding{
         outletId = json["outlet_id"].stringValue
         price = json["price"].stringValue
         quantity = json["quantity"].stringValue
-        subTotal = json["sub_total"].floatValue
+        subTotal = json["sub_total"].stringValue
 	}
 
 	/**
@@ -93,7 +93,7 @@ class updateQtyItem : NSObject, NSCoding{
 		outletId = aDecoder.decodeObject(forKey: "outlet_id") as? String
 		price = aDecoder.decodeObject(forKey: "price") as? String
 		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
-		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? Float
+		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? String
 	}
 
     /**

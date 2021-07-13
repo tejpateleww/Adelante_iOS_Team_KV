@@ -1,26 +1,26 @@
 //
-//  addcartDatum.swift
+//  itemListDatum.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 6, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class addcartDatum : NSObject, NSCoding{
+class itemListDatum : NSObject, NSCoding{
 
     var address : String!
     var cartId : String!
-    var grandTotal : Int!
+    var grandTotal : String!
     var id : String!
-    var item : [addcartItem]!
+    var item : [ItemList]!
     var lat : String!
     var lng : String!
     var name : String!
     var serviceFee : String!
     var storePolicy : String!
     var tax : String!
-    var total : Int!
+    var total : String!
     var totalQuantity : Int!
     var totalRound : Int!
 
@@ -33,12 +33,12 @@ class addcartDatum : NSObject, NSCoding{
 		}
         address = json["address"].stringValue
         cartId = json["cart_id"].stringValue
-        grandTotal = json["grand_total"].intValue
+        grandTotal = json["grand_total"].stringValue
         id = json["id"].stringValue
-        item = [addcartItem]()
+        item = [ItemList]()
         let itemArray = json["item"].arrayValue
         for itemJson in itemArray{
-            let value = addcartItem(fromJson: itemJson)
+            let value = ItemList(fromJson: itemJson)
             item.append(value)
         }
         lat = json["lat"].stringValue
@@ -47,7 +47,7 @@ class addcartDatum : NSObject, NSCoding{
         serviceFee = json["service_fee"].stringValue
         storePolicy = json["store_policy"].stringValue
         tax = json["tax"].stringValue
-        total = json["total"].intValue
+        total = json["total"].stringValue
         totalQuantity = json["total_quantity"].intValue
         totalRound = json["total_round"].intValue
 	}
@@ -115,16 +115,16 @@ class addcartDatum : NSObject, NSCoding{
 	{
 		address = aDecoder.decodeObject(forKey: "address") as? String
 		cartId = aDecoder.decodeObject(forKey: "cart_id") as? String
-		grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? Int
+		grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
-		item = aDecoder.decodeObject(forKey: "item") as? [addcartItem]
+		item = aDecoder.decodeObject(forKey: "item") as? [ItemList]
 		lat = aDecoder.decodeObject(forKey: "lat") as? String
 		lng = aDecoder.decodeObject(forKey: "lng") as? String
 		name = aDecoder.decodeObject(forKey: "name") as? String
 		serviceFee = aDecoder.decodeObject(forKey: "service_fee") as? String
 		storePolicy = aDecoder.decodeObject(forKey: "store_policy") as? String
 		tax = aDecoder.decodeObject(forKey: "tax") as? String
-		total = aDecoder.decodeObject(forKey: "total") as? Int
+		total = aDecoder.decodeObject(forKey: "total") as? String
 		totalQuantity = aDecoder.decodeObject(forKey: "total_quantity") as? Int
 		totalRound = aDecoder.decodeObject(forKey: "total_round") as? Int
 	}

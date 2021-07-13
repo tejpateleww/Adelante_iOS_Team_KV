@@ -416,7 +416,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if responseStatus == .gotData{
             if arrRestaurant.count != 0 {
-                return 200
+                return UITableView.automaticDimension
             }else{
                 return tableView.frame.height
             }

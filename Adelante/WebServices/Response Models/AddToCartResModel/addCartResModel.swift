@@ -1,16 +1,17 @@
 //
-//  addcartResModel.swift
+//  addCartResModel.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 6, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class addcartResModel : NSObject, NSCoding{
+class addCartResModel : NSObject, NSCoding{
 
-    var data : addcartDatum!
+    var data : addCartDatum!
     var message : String!
+    var restaurant : addCartRestaurant!
     var status : Bool!
 
 	/**
@@ -22,9 +23,13 @@ class addcartResModel : NSObject, NSCoding{
 		}
         let dataJson = json["data"]
         if !dataJson.isEmpty{
-            data = addcartDatum(fromJson: dataJson)
+            data = addCartDatum(fromJson: dataJson)
         }
         message = json["message"].stringValue
+        let restaurantJson = json["restaurant"]
+        if !restaurantJson.isEmpty{
+            restaurant = addCartRestaurant(fromJson: restaurantJson)
+        }
         status = json["status"].boolValue
 	}
 
@@ -40,6 +45,9 @@ class addcartResModel : NSObject, NSCoding{
         if message != nil{
         	dictionary["message"] = message
         }
+        if restaurant != nil{
+        	dictionary["restaurant"] = restaurant.toDictionary()
+        }
         if status != nil{
         	dictionary["status"] = status
         }
@@ -52,8 +60,9 @@ class addcartResModel : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		data = aDecoder.decodeObject(forKey: "data") as? addcartDatum
+		data = aDecoder.decodeObject(forKey: "data") as? addCartDatum
 		message = aDecoder.decodeObject(forKey: "message") as? String
+		restaurant = aDecoder.decodeObject(forKey: "restaurant") as? addCartRestaurant
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
 
@@ -68,6 +77,9 @@ class addcartResModel : NSObject, NSCoding{
 		}
 		if message != nil{
 			aCoder.encode(message, forKey: "message")
+		}
+		if restaurant != nil{
+			aCoder.encode(restaurant, forKey: "restaurant")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

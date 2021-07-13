@@ -257,7 +257,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if responseStatus == .gotData{
             if arrRestaurantList.count != 0 {
-                return 230
+                return UITableView.automaticDimension
             }else{
                 return tableView.frame.height
             }

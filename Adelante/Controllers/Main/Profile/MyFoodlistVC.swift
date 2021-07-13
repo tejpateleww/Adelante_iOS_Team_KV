@@ -87,6 +87,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
                 cell.imgFoodLIst.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                if arrOrderData[indexPath.row].cartQty.toInt() > 0{
+                    cell.btnAdd.isHidden = true
+                }else{
+                    cell.btnAdd.isHidden = false
+                }
                 cell.selectionStyle = .none
                 return cell
             }else{

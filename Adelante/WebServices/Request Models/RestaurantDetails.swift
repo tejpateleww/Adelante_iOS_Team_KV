@@ -23,6 +23,7 @@ class AddToCartReqModel:RequestModel{
     var user_id : String = ""
     var qty : String = ""
     var addon_id : String = ""
+    var search : String = ""
 }
 
 
@@ -35,6 +36,7 @@ class UpdateCardQtyReqModel:RequestModel{
     var cart_item_id : String = ""
     var qty : String = ""
     var type : String = ""
+    var search : String = ""
 }
 
 class ItemListReqModel: RequestModel{

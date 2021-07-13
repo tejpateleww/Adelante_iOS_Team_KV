@@ -1,7 +1,7 @@
 //
 //  ItemList.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 12, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
@@ -12,14 +12,13 @@ class ItemList : NSObject, NSCoding{
     var cartItemId : String!
     var descriptionField : String!
     var id : String!
-    var itemImage : String!
+    var itemImg : String!
     var itemName : String!
     var outletId : String!
     var price : String!
     var qty : String!
     var quantity : String!
-    var subTotal : Float!
-    var selectedQuantity : String! = ""
+    var subTotal : Int!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -31,13 +30,13 @@ class ItemList : NSObject, NSCoding{
         cartItemId = json["cart_item_id"].stringValue
         descriptionField = json["description"].stringValue
         id = json["id"].stringValue
-        itemImage = json["item_image"].stringValue
+        itemImg = json["item_img"].stringValue
         itemName = json["item_name"].stringValue
         outletId = json["outlet_id"].stringValue
         price = json["price"].stringValue
         qty = json["qty"].stringValue
         quantity = json["quantity"].stringValue
-        subTotal = json["sub_total"].floatValue
+        subTotal = json["sub_total"].intValue
 	}
 
 	/**
@@ -55,8 +54,8 @@ class ItemList : NSObject, NSCoding{
         if id != nil{
         	dictionary["id"] = id
         }
-        if itemImage != nil{
-        	dictionary["item_image"] = itemImage
+        if itemImg != nil{
+        	dictionary["item_img"] = itemImg
         }
         if itemName != nil{
         	dictionary["item_name"] = itemName
@@ -88,13 +87,13 @@ class ItemList : NSObject, NSCoding{
 		cartItemId = aDecoder.decodeObject(forKey: "cart_item_id") as? String
 		descriptionField = aDecoder.decodeObject(forKey: "description") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
-		itemImage = aDecoder.decodeObject(forKey: "item_image") as? String
+		itemImg = aDecoder.decodeObject(forKey: "item_img") as? String
 		itemName = aDecoder.decodeObject(forKey: "item_name") as? String
 		outletId = aDecoder.decodeObject(forKey: "outlet_id") as? String
 		price = aDecoder.decodeObject(forKey: "price") as? String
 		qty = aDecoder.decodeObject(forKey: "qty") as? String
 		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
-		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? Float
+		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? Int
 	}
 
     /**
@@ -112,8 +111,8 @@ class ItemList : NSObject, NSCoding{
 		if id != nil{
 			aCoder.encode(id, forKey: "id")
 		}
-		if itemImage != nil{
-			aCoder.encode(itemImage, forKey: "item_image")
+		if itemImg != nil{
+			aCoder.encode(itemImg, forKey: "item_img")
 		}
 		if itemName != nil{
 			aCoder.encode(itemName, forKey: "item_name")

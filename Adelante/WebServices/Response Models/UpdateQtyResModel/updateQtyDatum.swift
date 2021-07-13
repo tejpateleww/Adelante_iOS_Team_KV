@@ -1,7 +1,7 @@
 //
 //  updateQtyDatum.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 8, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
@@ -11,7 +11,7 @@ class updateQtyDatum : NSObject, NSCoding{
 
     var address : String!
     var cartId : String!
-    var grandTotal : Float!
+    var grandTotal : String!
     var id : String!
     var item : [updateQtyItem]!
     var lat : String!
@@ -20,9 +20,9 @@ class updateQtyDatum : NSObject, NSCoding{
     var serviceFee : String!
     var storePolicy : String!
     var tax : String!
-    var total : Float!
-    var totalQuantity : Int!
-    var totalRound : Float!
+    var total : String!
+    var totalQuantity : String!
+    var totalRound : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -33,7 +33,7 @@ class updateQtyDatum : NSObject, NSCoding{
 		}
         address = json["address"].stringValue
         cartId = json["cart_id"].stringValue
-        grandTotal = json["grand_total"].floatValue
+        grandTotal = json["grand_total"].stringValue
         id = json["id"].stringValue
         item = [updateQtyItem]()
         let itemArray = json["item"].arrayValue
@@ -47,9 +47,9 @@ class updateQtyDatum : NSObject, NSCoding{
         serviceFee = json["service_fee"].stringValue
         storePolicy = json["store_policy"].stringValue
         tax = json["tax"].stringValue
-        total = json["total"].floatValue
-        totalQuantity = json["total_quantity"].intValue
-        totalRound = json["total_round"].floatValue
+        total = json["total"].stringValue
+        totalQuantity = json["total_quantity"].stringValue
+        totalRound = json["total_round"].stringValue
 	}
 
 	/**
@@ -115,7 +115,7 @@ class updateQtyDatum : NSObject, NSCoding{
 	{
 		address = aDecoder.decodeObject(forKey: "address") as? String
 		cartId = aDecoder.decodeObject(forKey: "cart_id") as? String
-		grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? Float
+		grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
 		item = aDecoder.decodeObject(forKey: "item") as? [updateQtyItem]
 		lat = aDecoder.decodeObject(forKey: "lat") as? String
@@ -124,9 +124,9 @@ class updateQtyDatum : NSObject, NSCoding{
 		serviceFee = aDecoder.decodeObject(forKey: "service_fee") as? String
 		storePolicy = aDecoder.decodeObject(forKey: "store_policy") as? String
 		tax = aDecoder.decodeObject(forKey: "tax") as? String
-		total = aDecoder.decodeObject(forKey: "total") as? Float
-		totalQuantity = aDecoder.decodeObject(forKey: "total_quantity") as? Int
-		totalRound = aDecoder.decodeObject(forKey: "total_round") as? Float
+		total = aDecoder.decodeObject(forKey: "total") as? String
+		totalQuantity = aDecoder.decodeObject(forKey: "total_quantity") as? String
+		totalRound = aDecoder.decodeObject(forKey: "total_round") as? String
 	}
 
     /**

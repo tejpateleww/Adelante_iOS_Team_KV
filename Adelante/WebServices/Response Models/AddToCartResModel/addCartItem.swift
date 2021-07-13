@@ -1,13 +1,13 @@
 //
-//  addcartItem.swift
+//  addCartItem.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 6, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class addcartItem : NSObject, NSCoding{
+class addCartItem : NSObject, NSCoding{
 
     var cartItemId : String!
     var cartQty : String!
@@ -18,7 +18,7 @@ class addcartItem : NSObject, NSCoding{
     var outletId : String!
     var price : String!
     var quantity : String!
-    var subTotal : Int!
+    var subTotal : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -36,7 +36,7 @@ class addcartItem : NSObject, NSCoding{
         outletId = json["outlet_id"].stringValue
         price = json["price"].stringValue
         quantity = json["quantity"].stringValue
-        subTotal = json["sub_total"].intValue
+        subTotal = json["sub_total"].stringValue
 	}
 
 	/**
@@ -93,7 +93,7 @@ class addcartItem : NSObject, NSCoding{
 		outletId = aDecoder.decodeObject(forKey: "outlet_id") as? String
 		price = aDecoder.decodeObject(forKey: "price") as? String
 		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
-		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? Int
+		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? String
 	}
 
     /**

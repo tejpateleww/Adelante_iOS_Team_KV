@@ -1,16 +1,17 @@
 //
-//  UpdateCartQuantityResModel.swift
+//  updateCartResModel.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 8, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class UpdateCartQuantityResModel : NSObject, NSCoding{
+class updateCartResModel : NSObject, NSCoding{
 
     var data : updateQtyDatum!
     var message : String!
+    var restaurant : updateQtyRestaurant!
     var status : Bool!
 
 	/**
@@ -25,6 +26,10 @@ class UpdateCartQuantityResModel : NSObject, NSCoding{
             data = updateQtyDatum(fromJson: dataJson)
         }
         message = json["message"].stringValue
+        let restaurantJson = json["restaurant"]
+        if !restaurantJson.isEmpty{
+            restaurant = updateQtyRestaurant(fromJson: restaurantJson)
+        }
         status = json["status"].boolValue
 	}
 
@@ -40,6 +45,9 @@ class UpdateCartQuantityResModel : NSObject, NSCoding{
         if message != nil{
         	dictionary["message"] = message
         }
+        if restaurant != nil{
+        	dictionary["restaurant"] = restaurant.toDictionary()
+        }
         if status != nil{
         	dictionary["status"] = status
         }
@@ -54,6 +62,7 @@ class UpdateCartQuantityResModel : NSObject, NSCoding{
 	{
 		data = aDecoder.decodeObject(forKey: "data") as? updateQtyDatum
 		message = aDecoder.decodeObject(forKey: "message") as? String
+		restaurant = aDecoder.decodeObject(forKey: "restaurant") as? updateQtyRestaurant
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
 
@@ -68,6 +77,9 @@ class UpdateCartQuantityResModel : NSObject, NSCoding{
 		}
 		if message != nil{
 			aCoder.encode(message, forKey: "message")
+		}
+		if restaurant != nil{
+			aCoder.encode(restaurant, forKey: "restaurant")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

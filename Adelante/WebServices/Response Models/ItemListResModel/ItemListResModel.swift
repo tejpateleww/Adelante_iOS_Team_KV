@@ -1,7 +1,7 @@
 //
 //  ItemListResModel.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 12, 2021
+//  Created on July 13, 2021
 
 import Foundation
 import SwiftyJSON
@@ -9,7 +9,7 @@ import SwiftyJSON
 
 class ItemListResModel : NSObject, NSCoding{
 
-    var data : itemDatum!
+    var data : itemListDatum!
     var message : String!
     var status : Bool!
 
@@ -22,7 +22,7 @@ class ItemListResModel : NSObject, NSCoding{
 		}
         let dataJson = json["data"]
         if !dataJson.isEmpty{
-            data = itemDatum(fromJson: dataJson)
+            data = itemListDatum(fromJson: dataJson)
         }
         message = json["message"].stringValue
         status = json["status"].boolValue
@@ -52,7 +52,7 @@ class ItemListResModel : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		data = aDecoder.decodeObject(forKey: "data") as? itemDatum
+		data = aDecoder.decodeObject(forKey: "data") as? itemListDatum
 		message = aDecoder.decodeObject(forKey: "message") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
