@@ -34,7 +34,7 @@ class ItemList : NSObject, NSCoding{
         itemName = json["item_name"].stringValue
         outletId = json["outlet_id"].stringValue
         price = json["price"].stringValue
-        qty = json["qty"].stringValue
+        qty = json["cart_qty"].stringValue
         quantity = json["quantity"].stringValue
         subTotal = json["sub_total"].intValue
 	}
@@ -67,7 +67,7 @@ class ItemList : NSObject, NSCoding{
         	dictionary["price"] = price
         }
         if qty != nil{
-        	dictionary["qty"] = qty
+        	dictionary["cart_qty"] = qty
         }
         if quantity != nil{
         	dictionary["quantity"] = quantity
@@ -91,7 +91,7 @@ class ItemList : NSObject, NSCoding{
 		itemName = aDecoder.decodeObject(forKey: "item_name") as? String
 		outletId = aDecoder.decodeObject(forKey: "outlet_id") as? String
 		price = aDecoder.decodeObject(forKey: "price") as? String
-		qty = aDecoder.decodeObject(forKey: "qty") as? String
+		qty = aDecoder.decodeObject(forKey: "cart_qty") as? String
 		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
 		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? Int
 	}
@@ -124,7 +124,7 @@ class ItemList : NSObject, NSCoding{
 			aCoder.encode(price, forKey: "price")
 		}
 		if qty != nil{
-			aCoder.encode(qty, forKey: "qty")
+			aCoder.encode(qty, forKey: "cart_qty")
 		}
 		if quantity != nil{
 			aCoder.encode(quantity, forKey: "quantity")

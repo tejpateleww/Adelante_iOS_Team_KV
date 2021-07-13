@@ -193,6 +193,10 @@ class WebServiceSubClass
         let params : [String:String] = itemListModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .ItemList, httpMethod: .post,showHud:showHud,parameters:params,completion:completion)
     }
+    class func removeFoodList(removeFoodList : RemoveCartReqModel,showHud : Bool = false,completion : @escaping CompletionResponse){
+        let params : [String:String] = removeFoodList.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .clearFoodlist, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
 }
 
 

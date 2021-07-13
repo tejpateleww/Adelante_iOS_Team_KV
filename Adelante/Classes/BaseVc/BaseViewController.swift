@@ -168,7 +168,7 @@ class BaseViewController: UIViewController {
                     btnClearALl.setTitle("Clear All", for: .normal)
                     btnClearALl.setTitleColor(colors.appOrangeColor.value, for: .normal)
                     btnClearALl.titleLabel?.font = CustomFont.NexaBold.returnFont(13)
-                    //  btnNotif.addTarget(self, action: #selector(OpenNotificationsVC(_:)), for: .touchUpInside)
+                    btnClearALl.addTarget(self, action: #selector(self.btnClearAllClick), for: .touchUpInside)
                     btnClearALl.layer.setValue(controller, forKey: "controller")
                     vwClearAll.addSubview(btnClearALl)
                     
@@ -481,7 +481,9 @@ class BaseViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
+    @objc func btnClearAllClick(){
+        
+    }
     @objc func btnSkipAction() {
         appDel.navigateToHome()
     }

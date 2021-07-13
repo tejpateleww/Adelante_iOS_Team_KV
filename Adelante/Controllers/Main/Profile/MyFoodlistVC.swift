@@ -17,6 +17,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
     var arrOrderData = [myFoodlistItem]()
+    var strcartitemid = ""
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
     {
@@ -48,6 +49,10 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.clearAll.value], isTranslucent: true, isShowHomeTopBar: false)
     }
+    override func btnClearAllClick() {
+        webserviceRemoveCart()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
@@ -81,6 +86,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         if responseStatus == .gotData{
             if arrOrderData.count != 0{
                 let cell:MyFoodlistCell = tblFoodLIst.dequeueReusableCell(withIdentifier: "MyFoodlistCell", for: indexPath) as! MyFoodlistCell
+                self.strcartitemid = arrOrderData[indexPath.row].cartItemId
                 cell.lblComboTitle.text = arrOrderData[indexPath.row].itemName
                 cell.lblPrice.text = arrOrderData[indexPath.row].price
                 cell.lblDisc.text = arrOrderData[indexPath.row].descriptionField
@@ -98,8 +104,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 return cell
             }else{
                 let NoDatacell = tblFoodLIst.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-                
-                NoDatacell.imgNoData.image = UIImage(named: "Rating List")
+                NoDatacell.imgNoData.image = UIImage(named: "MyFoodlist")
                 NoDatacell.lblNoDataTitle.isHidden = true//text = "Be The First to Rate This Store".Localized()
                 NoDatacell.selectionStyle = .none
                 return NoDatacell
@@ -141,20 +146,19 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         let GetfoodList = GetFoodlistReqModel()
         GetfoodList.user_id = SingletonClass.sharedInstance.UserId
         
-        WebServiceSubClass.GetFoodList(getFoodlistModel: GetfoodList, showHud: false) { (response, status, error) in
+        WebServiceSubClass.GetFoodList(getFoodlistModel: GetfoodList, showHud: false,completion: { (response, status, error) in
             self.refreshList.endRefreshing()
             self.responseStatus = .gotData
-            if(status)
-            {
+            let cell = self.tblFoodLIst.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
+            cell.stopShimmering()
+            self.tblFoodLIst.stopSkeletonAnimation()
+            self.tblFoodLIst.dataSource = self
+            self.tblFoodLIst.isScrollEnabled = true
+            self.tblFoodLIst.isUserInteractionEnabled = true
+            self.tblFoodLIst.reloadData()
+            if status{
                 let myfoodlistData = MyFoodLIstResModel.init(fromJson: response)
                 self.arrOrderData = myfoodlistData.data.item
-                let cell = self.tblFoodLIst.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
-                cell.stopShimmering()
-                self.tblFoodLIst.stopSkeletonAnimation()
-                
-                self.tblFoodLIst.dataSource = self
-                self.tblFoodLIst.isScrollEnabled = true
-                self.tblFoodLIst.isUserInteractionEnabled = true
                 self.tblFoodLIst.reloadData()
                 DispatchQueue.main.async {
                     self.refreshList.endRefreshing()
@@ -164,7 +168,23 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
-        }
+        })
+    }
+    func webserviceRemoveCart(){
+        let clearFoodlist = RemoveCartReqModel()
+//        clearFoodlist.cart_item_id = strcartitemid
+        clearFoodlist.user_id = SingletonClass.sharedInstance.UserId
+        clearFoodlist.type = "1"
+        WebServiceSubClass.removeFoodList(removeFoodList: clearFoodlist, showHud: false,completion: { (json, status, error) in
+            // self.hideHUD()
+            if(status) {
+                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                self.arrOrderData.removeAll()
+                self.webserviceGetFoodlist()
+            } else {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
+            }
+        })
     }
 }
 
