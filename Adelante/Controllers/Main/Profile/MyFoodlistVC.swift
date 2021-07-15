@@ -16,8 +16,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var responseStatus : webserviceResponse = .initial
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
-    var arrOrderData = [myFoodlistItem]()
+    var arrOrderData = [ItemList]()
     var strcartitemid = ""
+    var objFoodlist : myFoodlistDatum?
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
     {
@@ -59,6 +60,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - IBActions
     
+    @IBAction func btnAddToCartClick(_ sender: Any) {
+        webservicefoodlisttocart()
+    }
     // MARK: - SkeletonTableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return self.responseStatus == .gotData ? (self.arrOrderData.count > 0 ? MyFoodlistCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
@@ -93,12 +97,22 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
                 cell.imgFoodLIst.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                if arrOrderData[indexPath.row].cartQty.toInt() > 0{
+                if arrOrderData[indexPath.row].qty.toInt() > 0{
                     cell.btnAdd.isHidden = true
                     cell.vwStapper.isHidden = false
                 }else{
                     cell.btnAdd.isHidden = false
                     cell.vwStapper.isHidden = true
+                }
+                cell.IncreseData = {
+                    self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
+                }
+                cell.decreaseData = {
+                    self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
+                }
+                cell.btnAddAction = {
+                    cell.btnAdd.isHidden = true
+                    cell.vwStapper.isHidden = false
                 }
                 cell.selectionStyle = .none
                 return cell
@@ -128,20 +142,6 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     // MARK: - Api Calls
-    @objc func webservicePostMyFoodlist(){
-//        if self.arrOrderListing.count > 0{
-//            self.tblOrders.restore()
-//            self.imgOrderEmpty.isHidden = true
-//            self.tblOrders.isHidden = false
-//        }else {
-//            self.imgOrderEmpty.isHidden = false
-//            self.tblOrders.isHidden = true
-//        }
-        DispatchQueue.main.async {
-            self.refreshList.endRefreshing()
-        }
-    }
-    
     @objc func webserviceGetFoodlist(){
         let GetfoodList = GetFoodlistReqModel()
         GetfoodList.user_id = SingletonClass.sharedInstance.UserId
@@ -159,6 +159,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             if status{
                 let myfoodlistData = MyFoodLIstResModel.init(fromJson: response)
                 self.arrOrderData = myfoodlistData.data.item
+                self.objFoodlist = myfoodlistData.data
                 self.tblFoodLIst.reloadData()
                 DispatchQueue.main.async {
                     self.refreshList.endRefreshing()
@@ -183,6 +184,49 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 self.webserviceGetFoodlist()
             } else {
                 Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
+            }
+        })
+    }
+    func webserviceUpdateCartQuantity(strItemid:String,strQty:String,strType:String,row:Int){
+        let updateCart = UpdateCardQtyReqModel()
+        updateCart.cart_item_id = strItemid
+        updateCart.qty = strQty
+        updateCart.type = strType
+        updateCart.search = ""
+        updateCart.status = "1"
+        WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: true){ (json, status, response) in
+            if(status)
+            {
+                let cartData = updateCartResModel.init(fromJson: json)
+                self.arrOrderData = cartData.data.item
+                let index = IndexPath(row: row, section: 0)
+                let cell = self.tblFoodLIst.cellForRow(at: index) as! MyFoodlistCell
+                for i in 0...self.arrOrderData.count - 1{
+                    if strItemid == self.arrOrderData[i].cartItemId{
+                        cell.lblNoOfItem.text = self.arrOrderData[i].qty
+                    }
+                }
+//                Utilities.displayAlert(json["message"].string ?? "")
+                self.tblFoodLIst.reloadData()
+              //  self.setData()
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
+    }
+    func webservicefoodlisttocart(){
+        let strURL = APIEnvironment.baseURL + ApiKey.FoodlisttoCart.rawValue + "/" + (objFoodlist?.foodlistId ?? "")
+        WebServiceSubClass.foodlisttocart(strURL: strURL, completion: { (json, status, response) in
+            if(status)
+            {
+                let vc =  AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "checkOutVC") as! checkOutVC
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         })
     }

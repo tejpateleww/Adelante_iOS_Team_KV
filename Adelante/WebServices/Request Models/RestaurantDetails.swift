@@ -36,6 +36,7 @@ class UpdateCardQtyReqModel:RequestModel{
     var cart_item_id : String = ""
     var qty : String = ""
     var type : String = ""
+    var status : String = ""
     var search : String = ""
 }
 

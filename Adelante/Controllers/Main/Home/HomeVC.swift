@@ -304,24 +304,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     return cell
                 }
             }
-//            let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: RestWithPageCell.reuseIdentifier, for: indexPath) as! RestWithPageCell
-//            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrBanner[indexPath.row].image ?? "")"
-//            cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-//            if cell.lblRestName.text == ""{
-//                cell.vwRestName.isHidden = true
-//            }else{
-//                cell.vwRestName.isHidden = false
-//            }
-//            if cell.lblRestDesc.text == ""{
-//                cell.vwRestDesc.isHidden = true
-//            }else{
-//                cell.vwRestDesc.isHidden = false
-//            }
-//            cell.lblRestName.text = arrBanner[indexPath.row].name
-//            cell.lblRestDesc.text = arrBanner[indexPath.row].descriptionField
-//            return cell
-//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -442,7 +424,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //        if indexPath.row != 0
 //        {
          
-            if arrRestaurant[indexPath.row].is_outlet != "0" {
+            if arrRestaurant[indexPath.row].type != "outlet" {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
                 controller.selectedRestaurantId = arrRestaurant[indexPath.row].id
                 controller.strRestaurantName = arrRestaurant[indexPath.row].name
@@ -575,6 +557,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.arrRestaurant.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 self.tblMainList.reloadData()
                 NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
+                NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

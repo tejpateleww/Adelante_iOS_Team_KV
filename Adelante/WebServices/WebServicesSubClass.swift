@@ -197,6 +197,9 @@ class WebServiceSubClass
         let params : [String:String] = removeFoodList.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .clearFoodlist, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    class func foodlisttocart( strURL : String  ,completion: @escaping CompletionResponse ) {
+        WebService.shared.getMethod(url: URL.init(string: strURL)!, httpMethod: .get, completion: completion)
+    }
 }
 
 

@@ -14,12 +14,8 @@ class MyFoodlistCell: UITableViewCell {
     @IBOutlet weak var lblComboTitle: tblMyOrdersLabel!
     @IBOutlet weak var imgFoodLIst: UIImageView!
     @IBOutlet weak var lblNoOfItem: tblMyOrdersLabel!
-    @IBOutlet weak var lblRestaurant: tblHomeLabels!
-    @IBOutlet weak var lblRating: tblHomeLabels!
     @IBOutlet weak var btnAdd: UIButton!
-    @IBOutlet weak var lblMiles: tblHomeLabels!
     @IBOutlet weak var vwStapper: UIView!
-    var customize : (() -> ())?
     var decreaseData : (() -> ())?
     var IncreseData : (() -> ())?
     var btnAddAction : (() -> ())?
@@ -28,13 +24,6 @@ class MyFoodlistCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-    }
-    
-    
-    @IBAction func btnCustomize(_ sender: Any) {
-        if let click = self.customize {
-            click()
-        }
     }
     @IBAction func btnAdd(_ sender: Any) {
         if let btnAdd = self.btnAddAction{

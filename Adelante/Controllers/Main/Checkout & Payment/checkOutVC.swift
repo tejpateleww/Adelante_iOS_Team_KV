@@ -51,6 +51,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     var arritem = [String]()
     var arrCartItem = [CartItem]()
+    var addRemoveItem : ((Int,Int)->())?
     // MARK: - ViewController Lifecycle
     
     // handle notification
@@ -532,7 +533,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 let cartData = CartListResModel.init(fromJson: json)
                 self.cartDetails = cartData.data
                 self.arrCartItem = cartData.data.item
-                Utilities.displayAlert(json["message"].string ?? "")
+                Utilities.displayAlert(json["messSage"].string ?? "")
                 self.tblAddedProduct.reloadData()
                 self.tblOrderDetails.reloadData()
                 setData()
@@ -554,6 +555,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         updateCart.cart_item_id = itemID
         updateCart.qty = "1"
         updateCart.type = strtype
+        updateCart.status = "0"
         WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: true) { (json, status, response) in
             if(status)
             {
@@ -566,6 +568,10 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 self.tblOrderDetails.reloadData()
                 self.setData()
                 self.addMapView()
+                
+                if let obj = self.addRemoveItem{
+                     obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity)
+                }
             }
             else
             {

@@ -102,36 +102,11 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         checkItemsAndUpdateFooter()
     }
     func checkItemsAndUpdateFooter(){
-       // if SingletonClass.sharedInstance.restCurrentOrder != nil{
-//            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
-//                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
-//            } else {
                 self.lblItem.text = "1 item"
-//            }
-            //Note :- Unnecessary code
-//            if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0 > 1 {
-//                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) items"
-//            } else {
-//                self.lblItem.text = "\(SingletonClass.sharedInstance.restCurrentOrder!.order.count ) item"
-//            }
-           // if SingletonClass.sharedInstance.restCurrentOrder?.order.count ?? 0  > 0{
                 viewFooter.isHidden = false
                 lblSign.isHidden = false
                 lblTotal.isHidden = false
                 lblItem.isHidden = false
-//            }else{
-//                viewFooter.isHidden = true
-//                lblTotal.text = ""
-//                lblItem.text = ""
-//            }
-        //}
-//    else{
-//            viewFooter.isHidden = true
-//            lblTotal.text = ""
-//            lblItem.text = ""
-//            lblSign.isHidden = true
-//        }
-        
     }
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return self.responseStatus == .gotData ? (self.arrVariants?.count ?? 0 > 0 ? bffComboCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  BffComboShimmerCell.reuseIdentifier
@@ -174,17 +149,12 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                     cell.selectButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
                 }
                 cell.selectedBtn = {
-                    let tempIndex = indexPath.row
-                    if self.arrVariants?[indexPath.section].option[tempIndex].isSelected == true {
-                        self.arrVariants?[indexPath.section].option[tempIndex].isSelected = false
-                    } else {
+                    
+                    if selectOne == 0{
                         self.arrVariants?[indexPath.section].option.forEach { $0.isSelected = false }
-                        if self.arrVariants?[indexPath.section].option[indexPath.row].isSelected == true {
-                            self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = false
-                        } else {
-                            self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = true
-                            self.arrselectedId.append((self.arrVariants?[indexPath.section].option[indexPath.row].id)!)
-                        }
+                        self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = true
+                    }else{
+                        self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = !(self.arrVariants?[indexPath.section].option[indexPath.row].isSelected ?? Bool())
                     }
                     self.checkandUpdateVariants()
                     self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)

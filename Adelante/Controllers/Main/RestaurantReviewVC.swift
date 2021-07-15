@@ -39,6 +39,8 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tbvReview.delegate = self
+        tbvReview.dataSource = self
         registerNIB()
         tbvReview.showAnimatedSkeleton()
         webservicePostReview()
@@ -48,6 +50,7 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshRestaurantList, object: nil)
         setUpLocalizedStrings()
         setUp()
+        tbvReview.reloadData()
     }
     // MARK: - Other Methods
     func registerNIB(){
@@ -140,7 +143,7 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if responseStatus == .gotData{
             if arrDetails?.count != 0 {
-                return 230
+                return UITableView.automaticDimension
             }else{
                 return tableView.frame.height
             }
@@ -171,7 +174,7 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
                     } else {
                         self.arrDetails = reviewData.data.details
                     }
-                    print("ATDebug :: \(self.arrDetails?.count)")
+                    print("ATDebug :: \(self.arrDetails?.count ?? 0)")
                 } else {
                     let arrTemp = reviewData.data.details
                     arrTemp?.forEach({ (element) in
