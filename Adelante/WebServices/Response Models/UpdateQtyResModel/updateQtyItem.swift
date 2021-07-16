@@ -1,5 +1,5 @@
 //
-//  SubMenu.swift
+//  updateQtyItem.swift
 //  Model Generated using http://www.jsoncafe.com/ 
 //  Created on July 16, 2021
 
@@ -7,20 +7,18 @@ import Foundation
 import SwiftyJSON
 
 
-class SubMenu : NSObject, NSCoding{
+class updateQtyItem : NSObject, NSCoding{
 
     var cartItemId : String!
     var cartQty : String!
-    var category : String!
-    var categoryId : String!
+    var descriptionField : String!
     var id : String!
-    var image : String!
-    var name : String!
+    var itemImg : String!
+    var itemName : String!
+    var outletId : String!
     var price : String!
     var quantity : String!
-    var searchIndex : String!
-    var size : String!
-    var variant : String!
+    var subTotal : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -31,16 +29,14 @@ class SubMenu : NSObject, NSCoding{
 		}
         cartItemId = json["cart_item_id"].stringValue
         cartQty = json["cart_qty"].stringValue
-        category = json["category"].stringValue
-        categoryId = json["category_id"].stringValue
+        descriptionField = json["description"].stringValue
         id = json["id"].stringValue
-        image = json["image"].stringValue
-        name = json["name"].stringValue
+        itemImg = json["item_img"].stringValue
+        itemName = json["item_name"].stringValue
+        outletId = json["outlet_id"].stringValue
         price = json["price"].stringValue
         quantity = json["quantity"].stringValue
-        searchIndex = json["search_index"].stringValue
-        size = json["size"].stringValue
-        variant = json["variant"].stringValue
+        subTotal = json["sub_total"].stringValue
 	}
 
 	/**
@@ -55,20 +51,20 @@ class SubMenu : NSObject, NSCoding{
         if cartQty != nil{
         	dictionary["cart_qty"] = cartQty
         }
-        if category != nil{
-        	dictionary["category"] = category
-        }
-        if categoryId != nil{
-        	dictionary["category_id"] = categoryId
+        if descriptionField != nil{
+        	dictionary["description"] = descriptionField
         }
         if id != nil{
         	dictionary["id"] = id
         }
-        if image != nil{
-        	dictionary["image"] = image
+        if itemImg != nil{
+        	dictionary["item_img"] = itemImg
         }
-        if name != nil{
-        	dictionary["name"] = name
+        if itemName != nil{
+        	dictionary["item_name"] = itemName
+        }
+        if outletId != nil{
+        	dictionary["outlet_id"] = outletId
         }
         if price != nil{
         	dictionary["price"] = price
@@ -76,14 +72,8 @@ class SubMenu : NSObject, NSCoding{
         if quantity != nil{
         	dictionary["quantity"] = quantity
         }
-        if searchIndex != nil{
-        	dictionary["search_index"] = searchIndex
-        }
-        if size != nil{
-        	dictionary["size"] = size
-        }
-        if variant != nil{
-        	dictionary["variant"] = variant
+        if subTotal != nil{
+        	dictionary["sub_total"] = subTotal
         }
 		return dictionary
 	}
@@ -96,16 +86,14 @@ class SubMenu : NSObject, NSCoding{
 	{
 		cartItemId = aDecoder.decodeObject(forKey: "cart_item_id") as? String
 		cartQty = aDecoder.decodeObject(forKey: "cart_qty") as? String
-		category = aDecoder.decodeObject(forKey: "category") as? String
-		categoryId = aDecoder.decodeObject(forKey: "category_id") as? String
+		descriptionField = aDecoder.decodeObject(forKey: "description") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
-		image = aDecoder.decodeObject(forKey: "image") as? String
-		name = aDecoder.decodeObject(forKey: "name") as? String
+		itemImg = aDecoder.decodeObject(forKey: "item_img") as? String
+		itemName = aDecoder.decodeObject(forKey: "item_name") as? String
+		outletId = aDecoder.decodeObject(forKey: "outlet_id") as? String
 		price = aDecoder.decodeObject(forKey: "price") as? String
 		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
-		searchIndex = aDecoder.decodeObject(forKey: "search_index") as? String
-		size = aDecoder.decodeObject(forKey: "size") as? String
-		variant = aDecoder.decodeObject(forKey: "variant") as? String
+		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? String
 	}
 
     /**
@@ -120,20 +108,20 @@ class SubMenu : NSObject, NSCoding{
 		if cartQty != nil{
 			aCoder.encode(cartQty, forKey: "cart_qty")
 		}
-		if category != nil{
-			aCoder.encode(category, forKey: "category")
-		}
-		if categoryId != nil{
-			aCoder.encode(categoryId, forKey: "category_id")
+		if descriptionField != nil{
+			aCoder.encode(descriptionField, forKey: "description")
 		}
 		if id != nil{
 			aCoder.encode(id, forKey: "id")
 		}
-		if image != nil{
-			aCoder.encode(image, forKey: "image")
+		if itemImg != nil{
+			aCoder.encode(itemImg, forKey: "item_img")
 		}
-		if name != nil{
-			aCoder.encode(name, forKey: "name")
+		if itemName != nil{
+			aCoder.encode(itemName, forKey: "item_name")
+		}
+		if outletId != nil{
+			aCoder.encode(outletId, forKey: "outlet_id")
 		}
 		if price != nil{
 			aCoder.encode(price, forKey: "price")
@@ -141,14 +129,8 @@ class SubMenu : NSObject, NSCoding{
 		if quantity != nil{
 			aCoder.encode(quantity, forKey: "quantity")
 		}
-		if searchIndex != nil{
-			aCoder.encode(searchIndex, forKey: "search_index")
-		}
-		if size != nil{
-			aCoder.encode(size, forKey: "size")
-		}
-		if variant != nil{
-			aCoder.encode(variant, forKey: "variant")
+		if subTotal != nil{
+			aCoder.encode(subTotal, forKey: "sub_total")
 		}
 
 	}

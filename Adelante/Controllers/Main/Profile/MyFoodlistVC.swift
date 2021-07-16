@@ -16,7 +16,8 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var responseStatus : webserviceResponse = .initial
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
-    var arrOrderData = [ItemList]()
+    var arrOrderData = [myFoodlistItem]()
+    var arrUpdateQty : updateQtyDatum!
     var strcartitemid = ""
     var objFoodlist : myFoodlistDatum?
     // MARK: - IBOutlet
@@ -97,7 +98,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
                 cell.imgFoodLIst.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                if arrOrderData[indexPath.row].qty.toInt() > 0{
+                if arrOrderData[indexPath.row].cartQty.toInt() > 0{
                     cell.btnAdd.isHidden = true
                     cell.vwStapper.isHidden = false
                 }else{
@@ -198,12 +199,12 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             if(status)
             {
                 let cartData = updateCartResModel.init(fromJson: json)
-                self.arrOrderData = cartData.data.item
+                self.arrUpdateQty = cartData.data
                 let index = IndexPath(row: row, section: 0)
                 let cell = self.tblFoodLIst.cellForRow(at: index) as! MyFoodlistCell
                 for i in 0...self.arrOrderData.count - 1{
                     if strItemid == self.arrOrderData[i].cartItemId{
-                        cell.lblNoOfItem.text = self.arrOrderData[i].qty
+                        cell.lblNoOfItem.text = self.arrOrderData[i].cartQty
                     }
                 }
 //                Utilities.displayAlert(json["message"].string ?? "")

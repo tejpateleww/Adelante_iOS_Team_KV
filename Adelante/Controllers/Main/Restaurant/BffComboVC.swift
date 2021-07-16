@@ -121,7 +121,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if responseStatus == .gotData{
             if arrVariants?.count != 0 {
-                return (arrVariants?[section].isExpanded == false) ?  arrVariants?[section].option.count ?? 0 : 0
+                return (arrVariants?[section].isExpanded == true) ?  arrVariants?[section].option.count ?? 0 : 0
             }else{
                 return 1
             }

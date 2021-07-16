@@ -13,7 +13,7 @@ class myFoodlistDatum : NSObject, NSCoding{
     var foodlistId : String!
     var grandTotal : Float!
     var id : String!
-    var item : [ItemList]!
+    var item : [myFoodlistItem]!
     var lat : String!
     var lng : String!
     var name : String!
@@ -36,10 +36,10 @@ class myFoodlistDatum : NSObject, NSCoding{
         foodlistId = json["foodlist_id"].stringValue
         grandTotal = json["grand_total"].floatValue
         id = json["id"].stringValue
-        item = [ItemList]()
+        item = [myFoodlistItem]()
         let itemArray = json["item"].arrayValue
         for itemJson in itemArray{
-            let value = ItemList(fromJson: itemJson)
+            let value = myFoodlistItem(fromJson: itemJson)
             item.append(value)
         }
         lat = json["lat"].stringValue
@@ -122,7 +122,7 @@ class myFoodlistDatum : NSObject, NSCoding{
         foodlistId = aDecoder.decodeObject(forKey: "foodlist_id") as? String
         grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? Float
         id = aDecoder.decodeObject(forKey: "id") as? String
-        item = aDecoder.decodeObject(forKey: "item") as? [ItemList]
+        item = aDecoder.decodeObject(forKey: "item") as? [myFoodlistItem]
         lat = aDecoder.decodeObject(forKey: "lat") as? String
         lng = aDecoder.decodeObject(forKey: "lng") as? String
         name = aDecoder.decodeObject(forKey: "name") as? String
