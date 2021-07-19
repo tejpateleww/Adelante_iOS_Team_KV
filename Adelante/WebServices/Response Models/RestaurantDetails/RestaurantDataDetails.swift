@@ -32,6 +32,7 @@ class RestaurantDataDetails : NSObject, NSCoding{
     var lng : String!
     var menuItem : [MenuItem]!
     var menuType : Int!
+    var isdiff : Int!
     var name : String!
     var parkingSlot : String!
     var rating : String!
@@ -90,6 +91,7 @@ class RestaurantDataDetails : NSObject, NSCoding{
             menuItem.append(value)
         }
         menuType = json["menu_type"].intValue
+        isdiff = json["is_diff"].intValue
         name = json["name"].stringValue
         parkingSlot = json["parking_slot"].stringValue
         rating = json["rating"].stringValue
@@ -184,6 +186,9 @@ class RestaurantDataDetails : NSObject, NSCoding{
         if menuType != nil{
             dictionary["menu_type"] = menuType
         }
+        if isdiff != nil{
+            dictionary["is_diff"] = isdiff
+        }
         if name != nil{
             dictionary["name"] = name
         }
@@ -275,6 +280,7 @@ class RestaurantDataDetails : NSObject, NSCoding{
         lng = aDecoder.decodeObject(forKey: "lng") as? String
         menuItem = aDecoder.decodeObject(forKey: "menu_item") as? [MenuItem]
         menuType = aDecoder.decodeObject(forKey: "menu_type") as? Int
+        isdiff = aDecoder.decodeObject(forKey: "is_diff") as? Int
         name = aDecoder.decodeObject(forKey: "name") as? String
         parkingSlot = aDecoder.decodeObject(forKey: "parking_slot") as? String
         rating = aDecoder.decodeObject(forKey: "rating") as? String
@@ -360,6 +366,9 @@ class RestaurantDataDetails : NSObject, NSCoding{
         }
         if menuType != nil{
             aCoder.encode(menuType, forKey: "menu_type")
+        }
+        if isdiff != nil{
+            aCoder.encode(isdiff, forKey: "is_diff")
         }
         if name != nil{
             aCoder.encode(name, forKey: "name")

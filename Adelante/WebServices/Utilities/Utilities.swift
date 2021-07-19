@@ -457,8 +457,6 @@ class Utilities:NSObject{
         alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
     }
     
-    
-    
     class func getReadableDate(timeStamp: TimeInterval , isFromTime : Bool) -> String? {
         let date = Date(timeIntervalSinceNow: timeStamp)//Date(timeIntervalSince1970: timeStamp)
         let dateFormatter = DateFormatter()

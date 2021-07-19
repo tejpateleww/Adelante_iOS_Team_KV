@@ -122,7 +122,7 @@
 
 //BffComboVC
 "BffComboVC_lblItem" = "1 Item | $30";
-"BffComboVC_lblViewCart" = "View Cart";
+"BffComboVC_lblViewCart" = "Add Item";
 "bffComboData_name1" = "Choices of Sub";
 "bffComboData_subComboArray_subBFFCombo_name1" = "Chicken Kofta";
 "bffComboData_subComboArray_subBFFCombo_name2" = "Chicken Slice";

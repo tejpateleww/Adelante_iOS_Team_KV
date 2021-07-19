@@ -208,12 +208,15 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 let expandImageView = UIImageView()
                 expandImageView.frame = CGRect.init(x: headerView.frame.width - 35.66, y: 34.31, width: 16.66, height: 8.38)
                 expandImageView.center.y = headerView.frame.size.height / 2
-                expandImageView.image = UIImage(named: "ic_expand")
+                if arrVariants?[section].isExpanded == true{
+                    expandImageView.image = UIImage(named: "ic_upExpand")
+                }else{
+                    expandImageView.image = UIImage(named: "ic_expand")
+                }
                 headerView.addSubview(expandImageView)
                 
                 let expandButton = UIButton()
                 expandButton.frame = CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
-                
                 expandButton.tag = section
                 expandButton.addTarget(self, action: #selector(btnExpand(_:)), for: .touchUpInside)
                 headerView.addSubview(expandButton)

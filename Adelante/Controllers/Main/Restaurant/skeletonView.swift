@@ -28,7 +28,7 @@ class skeletonView: UIView {
     func startShimmering(){
         self.isSkeletonable = true
         viewContainer.layer.cornerRadius = 20
-        viewContainer.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
+//        viewContainer.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
         lblShimmerText.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
         viewShimmer.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
         viewImageOne.showAnimatedGradientSkeleton(usingGradient: skeletonGradient, animation: skeletonAnimation)
@@ -40,7 +40,7 @@ class skeletonView: UIView {
     }
     
     func stopShimmering(){
-        viewContainer.hideSkeleton()
+//        viewContainer.hideSkeleton()
         lblShimmerText.hideSkeleton()
         viewShimmer.hideSkeleton()
         viewImageOne.hideSkeleton()

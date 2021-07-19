@@ -16,10 +16,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWr-hi-K6H">
-                    <rect key="frame" x="0.0" y="54" width="374" height="808"/>
+                    <rect key="frame" x="0.0" y="54" width="399" height="808"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy " textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL3-Ta-gTe">
-                            <rect key="frame" x="15" y="15" width="344" height="105.5"/>
+                            <rect key="frame" x="15" y="15" width="369" height="105.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -30,8 +30,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing typesetting industry. printing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKU-pV-3SZ">
-                            <rect key="frame" x="15" y="150.5" width="344" height="61"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing typesetting industry. printing" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKU-pV-3SZ">
+                            <rect key="frame" x="15" y="150.5" width="369" height="61"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -42,8 +42,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing typesetting industry. printing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrP-dD-paQ">
-                            <rect key="frame" x="15" y="226.5" width="344" height="61"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing typesetting industry. printing" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrP-dD-paQ">
+                            <rect key="frame" x="15" y="226.5" width="369" height="61"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -54,8 +54,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing typesetting industry. printing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMn-22-lya">
-                            <rect key="frame" x="15" y="302.5" width="344" height="61"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing typesetting industry. printing" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMn-22-lya">
+                            <rect key="frame" x="15" y="302.5" width="369" height="61"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -93,7 +93,7 @@
                 <constraint firstItem="SWr-hi-K6H" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="AqK-R8-lMd"/>
                 <constraint firstItem="SWr-hi-K6H" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="UfY-vd-z93"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SWr-hi-K6H" secondAttribute="bottom" id="tIM-Cg-V4x"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SWr-hi-K6H" secondAttribute="trailing" constant="40" id="vlR-67-45r"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SWr-hi-K6H" secondAttribute="trailing" constant="15" id="vlR-67-45r"/>
             </constraints>
             <connections>
                 <outlet property="lblDiscOne" destination="uKU-pV-3SZ" id="sQ8-xj-Zac"/>

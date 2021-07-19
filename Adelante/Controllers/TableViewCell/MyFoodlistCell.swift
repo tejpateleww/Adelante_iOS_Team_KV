@@ -16,6 +16,7 @@ class MyFoodlistCell: UITableViewCell {
     @IBOutlet weak var lblNoOfItem: tblMyOrdersLabel!
     @IBOutlet weak var btnAdd: UIButton!
     @IBOutlet weak var vwStapper: UIView!
+    @IBOutlet weak var stackHide: UIStackView!
     var decreaseData : (() -> ())?
     var IncreseData : (() -> ())?
     var btnAddAction : (() -> ())?

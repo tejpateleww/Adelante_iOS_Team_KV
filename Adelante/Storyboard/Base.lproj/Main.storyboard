@@ -4087,6 +4087,7 @@
                                                             <outlet property="lblDisc" destination="iyn-9V-Kbh" id="0HS-g3-mPG"/>
                                                             <outlet property="lblNoOfItem" destination="h9y-BQ-I7i" id="R2Y-Wk-o9b"/>
                                                             <outlet property="lblPrice" destination="55C-zJ-NmG" id="So0-CL-foa"/>
+                                                            <outlet property="stackHide" destination="MAC-Lx-qWv" id="Jaf-EM-Sja"/>
                                                             <outlet property="vwStapper" destination="J0c-6A-US0" id="geT-4w-fEC"/>
                                                         </connections>
                                                     </tableViewCell>
@@ -5982,7 +5983,7 @@
                                                                                                                                                 <constraint firstAttribute="width" constant="0.5" id="Tm2-An-zTY"/>
                                                                                                                                             </constraints>
                                                                                                                                         </view>
-                                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDR-6g-WHL">
+                                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDR-6g-WHL">
                                                                                                                                             <rect key="frame" x="20.5" y="0.0" width="0.0" height="23"/>
                                                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -6103,6 +6104,7 @@
                                                                             <outlet property="lblItemName" destination="vdh-Yc-sO5" id="mcd-dT-xcf"/>
                                                                             <outlet property="lblItemPrice" destination="2Vc-2l-J1v" id="5RU-ba-fLL"/>
                                                                             <outlet property="lblNoOfItem" destination="GDR-6g-WHL" id="fth-6d-ID6"/>
+                                                                            <outlet property="stackHide" destination="tZ2-Yq-tmP" id="N6C-0M-5Bm"/>
                                                                             <outlet property="vwRadius" destination="Lnv-2i-OPx" id="FTb-Gf-nCJ"/>
                                                                             <outlet property="vwStapper" destination="NX6-fo-wdP" id="MFj-nH-H4M"/>
                                                                         </connections>
@@ -6183,7 +6185,7 @@
                                                                                                                                         <constraint firstAttribute="width" constant="0.5" id="Kxj-xC-8yi"/>
                                                                                                                                     </constraints>
                                                                                                                                 </view>
-                                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32A-NQ-lVn">
+                                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32A-NQ-lVn">
                                                                                                                                     <rect key="frame" x="20.5" y="0.0" width="0.0" height="23"/>
                                                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -6288,6 +6290,7 @@
                                                                             </constraints>
                                                                         </tableViewCellContentView>
                                                                         <connections>
+                                                                            <outlet property="StackHide" destination="ddz-Ar-6wz" id="RRJ-jY-FVr"/>
                                                                             <outlet property="btnAdd" destination="EcZ-16-d6n" id="YEN-QV-P3E"/>
                                                                             <outlet property="btnCustomize" destination="xhS-jx-Kzf" id="cNY-iY-3K8"/>
                                                                             <outlet property="lblItem" destination="d20-J3-Mbd" id="Xi5-T0-siU"/>
@@ -6772,6 +6775,7 @@
                                                         <outlet property="lblItemName" destination="4rc-Ti-v6z" id="WGN-aD-5jW"/>
                                                         <outlet property="lblNoOfItem" destination="zqH-WK-hOo" id="007-N3-lio"/>
                                                         <outlet property="lblPrice" destination="BeZ-g6-g2W" id="8lQ-PO-k1k"/>
+                                                        <outlet property="stackHide" destination="auU-Yb-NUw" id="6TE-rg-z6G"/>
                                                         <outlet property="vwStapper" destination="nGj-iU-PtW" id="BKc-PD-B87"/>
                                                     </connections>
                                                 </tableViewCell>
@@ -9104,6 +9108,8 @@
                                                                     <outlet property="lblItem" destination="cE9-zM-f6m" id="cTh-UT-JZK"/>
                                                                     <outlet property="lblPrice" destination="OHm-IQ-8Y9" id="TaG-iB-dmU"/>
                                                                     <outlet property="lbltotalCount" destination="BWf-TO-j3Z" id="a0g-ZF-hEi"/>
+                                                                    <outlet property="stackHide" destination="y1b-uq-kKp" id="q3u-e7-S9W"/>
+                                                                    <outlet property="vwStapper" destination="7TS-kt-GpR" id="yD3-vg-YgE"/>
                                                                 </connections>
                                                             </tableViewCell>
                                                         </prototypes>

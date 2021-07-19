@@ -20,6 +20,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var arrUpdateQty : updateQtyDatum!
     var strcartitemid = ""
     var objFoodlist : myFoodlistDatum?
+    
+    let activityView = UIActivityIndicatorView(style: .gray)
+    
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
     {
@@ -98,6 +101,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
                 cell.imgFoodLIst.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                cell.stackHide.isHidden = false
                 if arrOrderData[indexPath.row].cartQty.toInt() > 0{
                     cell.btnAdd.isHidden = true
                     cell.vwStapper.isHidden = false
@@ -107,9 +111,19 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 }
                 cell.IncreseData = {
                     self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
+                    //let activityView = UIActivityIndicatorView(style: .gray)
+                    cell.stackHide.isHidden = true
+                    self.activityView.center = cell.vwStapper.center
+                    cell.vwStapper.addSubview(self.activityView)
+                    self.activityView.startAnimating()
                 }
                 cell.decreaseData = {
                     self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
+                    
+                    cell.stackHide.isHidden = true
+                    self.activityView.center = cell.vwStapper.center
+                    cell.vwStapper.addSubview(self.activityView)
+                    self.activityView.startAnimating()
                 }
                 cell.btnAddAction = {
                     cell.btnAdd.isHidden = true
@@ -195,20 +209,23 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         updateCart.type = strType
         updateCart.search = ""
         updateCart.status = "1"
-        WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: true){ (json, status, response) in
+        WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: false){ (json, status, response) in
             if(status)
             {
                 let cartData = updateCartResModel.init(fromJson: json)
                 self.arrUpdateQty = cartData.data
                 let index = IndexPath(row: row, section: 0)
                 let cell = self.tblFoodLIst.cellForRow(at: index) as! MyFoodlistCell
-                for i in 0...self.arrOrderData.count - 1{
-                    if strItemid == self.arrOrderData[i].cartItemId{
-                        cell.lblNoOfItem.text = self.arrOrderData[i].cartQty
+                for i in 0...self.arrUpdateQty.item.count - 1{
+                    if strItemid == self.arrUpdateQty.item[i].cartItemId{
+                        cell.lblNoOfItem.text = self.arrUpdateQty.item[i].cartQty
+                        
                     }
                 }
+                cell.stackHide.isHidden = false
+                self.activityView.stopAnimating()
 //                Utilities.displayAlert(json["message"].string ?? "")
-                self.tblFoodLIst.reloadData()
+                //self.tblFoodLIst.reloadData()
               //  self.setData()
             }
             else

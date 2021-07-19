@@ -13,7 +13,8 @@ class addCartRestaurant : NSObject, NSCoding{
     var foodType : Int!
     var menuItem : [MenuItem]!
     var menuType : Int!
-
+    var totalQty : String!
+    var isdiff : Int!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -35,6 +36,8 @@ class addCartRestaurant : NSObject, NSCoding{
             menuItem.append(value)
         }
         menuType = json["menu_type"].intValue
+        totalQty = json["total_quantity"].stringValue
+        isdiff = json["is_diff"].intValue
 	}
 
 	/**
@@ -63,6 +66,12 @@ class addCartRestaurant : NSObject, NSCoding{
         if menuType != nil{
         	dictionary["menu_type"] = menuType
         }
+        if totalQty != nil{
+            dictionary["total_quantity"] = totalQty
+        }
+        if isdiff != nil{
+            dictionary["is_diff"] = isdiff
+        }
 		return dictionary
 	}
 
@@ -76,6 +85,8 @@ class addCartRestaurant : NSObject, NSCoding{
 		foodType = aDecoder.decodeObject(forKey: "food_type") as? Int
 		menuItem = aDecoder.decodeObject(forKey: "menu_item") as? [MenuItem]
 		menuType = aDecoder.decodeObject(forKey: "menu_type") as? Int
+        totalQty = aDecoder.decodeObject(forKey: "total_quantity") as? String
+        isdiff = aDecoder.decodeObject(forKey: "is_diff") as? Int
 	}
 
     /**
@@ -96,6 +107,12 @@ class addCartRestaurant : NSObject, NSCoding{
 		if menuType != nil{
 			aCoder.encode(menuType, forKey: "menu_type")
 		}
+        if totalQty != nil{
+            aCoder.encode(totalQty, forKey: "total_quantity")
+        }
+        if isdiff != nil{
+            aCoder.encode(isdiff, forKey: "is_diff")
+        }
 
 	}
 

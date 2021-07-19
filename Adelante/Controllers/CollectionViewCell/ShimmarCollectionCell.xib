@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,59 +12,41 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ShimmarCollectionCell" customModule="Adelante" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="353" height="263"/>
+            <rect key="frame" x="0.0" y="0.0" width="147" height="63"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="353" height="263"/>
+                <rect key="frame" x="0.0" y="0.0" width="147" height="63"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHW-wB-Uw4">
-                        <rect key="frame" x="0.0" y="0.0" width="353" height="263"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yb2-HO-nhf">
-                                <rect key="frame" x="0.0" y="39.5" width="353" height="184"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="184" id="Pqw-iK-NMP"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Yb2-HO-nhf" firstAttribute="centerY" secondItem="QHW-wB-Uw4" secondAttribute="centerY" id="7XF-hR-HdG"/>
-                            <constraint firstItem="Yb2-HO-nhf" firstAttribute="leading" secondItem="QHW-wB-Uw4" secondAttribute="leading" id="LFF-9M-34S"/>
-                            <constraint firstItem="Yb2-HO-nhf" firstAttribute="centerX" secondItem="QHW-wB-Uw4" secondAttribute="centerX" id="M4q-2X-jzs"/>
-                            <constraint firstAttribute="trailing" secondItem="Yb2-HO-nhf" secondAttribute="trailing" id="hLW-z6-Yx3"/>
-                        </constraints>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXX-bL-2ei">
+                        <rect key="frame" x="5" y="5" width="137" height="53"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="QHW-wB-Uw4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5GB-we-yTW"/>
-                <constraint firstAttribute="bottom" secondItem="QHW-wB-Uw4" secondAttribute="bottom" id="fDM-5f-Etc"/>
-                <constraint firstAttribute="trailing" secondItem="QHW-wB-Uw4" secondAttribute="trailing" id="yqY-fj-pPL"/>
-                <constraint firstItem="QHW-wB-Uw4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zeT-9B-tj0"/>
+                <constraint firstItem="mXX-bL-2ei" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="2Cp-AF-tsc"/>
+                <constraint firstAttribute="bottom" secondItem="mXX-bL-2ei" secondAttribute="bottom" constant="5" id="B4m-PQ-RDy"/>
+                <constraint firstAttribute="trailing" secondItem="mXX-bL-2ei" secondAttribute="trailing" constant="5" id="ljv-G9-Uwb"/>
+                <constraint firstItem="mXX-bL-2ei" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="zml-bO-bWc"/>
             </constraints>
-            <size key="customSize" width="353" height="263"/>
+            <size key="customSize" width="147" height="63"/>
             <connections>
-                <outlet property="viewShimmer" destination="Yb2-HO-nhf" id="ikA-yZ-LHu"/>
+                <outlet property="viewShimmer" destination="mXX-bL-2ei" id="waQ-dG-Cyy"/>
             </connections>
-            <point key="canvasLocation" x="222.46376811594206" y="142.96875"/>
+            <point key="canvasLocation" x="73.188405797101453" y="76.004464285714278"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

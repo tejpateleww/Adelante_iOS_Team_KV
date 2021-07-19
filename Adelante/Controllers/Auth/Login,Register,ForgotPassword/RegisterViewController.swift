@@ -198,38 +198,6 @@ class RegisterViewController: UIViewController {
             }
         }
     }
-    
-//    func webserviceForRegister()
-//    {
-//        let register = RegisterReqModel()
-//        register.first_name = txtFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//        register.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//        register.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//        register.phone = txtPhoneNumber.text ?? ""
-//        register.password = txtPassword.text ?? ""
-//        register.device_token = SingletonClass.sharedInstance.DeviceToken
-//        register.device_type = ReqDeviceType
-//        register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-//        register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-//        WebServiceSubClass.register(registerModel: register,showHud: true, completion: { (json, status, response) in
-//            if(status)
-//            {
-//                print(json)
-//                let loginModel = Userinfo.init(fromJson: json)
-//                let registerRespoDetails = loginModel.profile
-//               // Utilities.displayAlert("", message: "Registered successfully! Email verification link has been sent to your registered email",vc: self, completion: {_ in
-////                    appDel.navigateToLogin()
-////                }, otherTitles: nil)
-//                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID)
-//                self.navigationController?.pushViewController(OTPVC, animated: true)
-//            }
-//            else
-//            {
-//                Utilities.displayErrorAlert(json["message"].string ?? "MessageNoIntenet".Localized())
-//            }
-//        })
-//    }
-    
 }
 
 

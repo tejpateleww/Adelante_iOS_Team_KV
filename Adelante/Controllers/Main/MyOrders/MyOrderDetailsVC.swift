@@ -63,13 +63,13 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         skeletonViewData.showAnimatedSkeleton()
+        skeletonViewData.frame.size.width = view.frame.size.width
         self.view.addSubview(skeletonViewData)
         setUpLocalizedStrings()
         webserviceOrderDetails()
         tblItems.rowHeight = UITableView.automaticDimension
         tblItems.estimatedRowHeight = 66.5
         setup()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

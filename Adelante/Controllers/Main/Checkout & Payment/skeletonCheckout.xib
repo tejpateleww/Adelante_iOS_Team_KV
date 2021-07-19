@@ -16,10 +16,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K39-sz-4lc">
-                    <rect key="frame" x="0.0" y="44" width="374" height="818"/>
+                    <rect key="frame" x="0.0" y="44" width="399" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0kT-JL-llp">
-                            <rect key="frame" x="15" y="15" width="344" height="200"/>
+                            <rect key="frame" x="15" y="15" width="369" height="200"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="200" id="jRR-SD-bVG"/>
@@ -32,7 +32,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lty-FC-dqr">
-                            <rect key="frame" x="15" y="230" width="344" height="21"/>
+                            <rect key="frame" x="15" y="230" width="369" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -40,8 +40,8 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjE-vf-UhE">
-                            <rect key="frame" x="15" y="266" width="344" height="41"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjE-vf-UhE">
+                            <rect key="frame" x="15" y="266" width="369" height="41"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="K39-sz-4lc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="AOC-bv-bbE"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="K39-sz-4lc" secondAttribute="trailing" constant="40" id="Thb-s0-Da3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="K39-sz-4lc" secondAttribute="trailing" constant="15" id="Thb-s0-Da3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="K39-sz-4lc" secondAttribute="bottom" id="cnD-SH-xoO"/>
                 <constraint firstItem="K39-sz-4lc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="z1u-GD-gWL"/>
             </constraints>

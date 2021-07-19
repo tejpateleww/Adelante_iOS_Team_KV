@@ -10,6 +10,7 @@ import UIKit
 
 class RestaurantItemCell: UITableViewCell {
 
+    @IBOutlet weak var StackHide: UIStackView!
     @IBOutlet weak var vwRadius: UIView!
     @IBOutlet weak var vwStapper: UIView!
     @IBOutlet weak var btnCustomize: underLineButton!

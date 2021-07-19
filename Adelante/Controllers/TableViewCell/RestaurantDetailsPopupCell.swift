@@ -17,6 +17,7 @@ class RestaurantDetailsPopupCell: UITableViewCell {
     @IBOutlet weak var lblItemName: tblMyOrdersLabel!
     @IBOutlet weak var lblPrice: tblMyOrdersLabel!
     @IBOutlet weak var lblDesc: tblMyOrdersLabel!
+    @IBOutlet weak var stackHide: UIStackView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -529,7 +529,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.colVwRestWthPage.dataSource = self
                 self.colVwRestWthPage.isScrollEnabled = true
                 self.colVwRestWthPage.isUserInteractionEnabled = true
-                self.colVwRestWthPage.reloadData()
+                 self.colVwRestWthPage.reloadData()
             }else{
                 Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
                 //                Utilities.showAlertOfAPIResponse(param: error ?? "No internet connection", vc: self)

@@ -16,10 +16,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVa-K5-vpA">
-                    <rect key="frame" x="0.0" y="44" width="374" height="818"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTS-SO-PED">
-                            <rect key="frame" x="127" y="20" width="120" height="120"/>
+                            <rect key="frame" x="147" y="20" width="120" height="120"/>
                             <color key="backgroundColor" systemColor="systemGray2Color"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="zTS-SO-PED" secondAttribute="height" multiplier="1:1" id="6oo-h5-GqK"/>
@@ -33,7 +33,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy " textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qka-2v-VK1">
-                            <rect key="frame" x="15" y="170" width="344" height="105.5"/>
+                            <rect key="frame" x="15" y="170" width="384" height="105.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. printing typesetting industry. printing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOK-f2-nA6">
-                            <rect key="frame" x="110" y="295" width="249" height="81.5"/>
+                            <rect key="frame" x="110" y="305" width="289" height="61"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Df5-LB-LqR">
-                            <rect key="frame" x="110" y="405" width="249" height="61"/>
+                            <rect key="frame" x="110" y="415" width="289" height="41"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -111,7 +111,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m02-VA-gdd">
-                            <rect key="frame" x="110" y="505" width="249" height="61"/>
+                            <rect key="frame" x="110" y="515" width="289" height="41"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -159,7 +159,7 @@
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pVa-K5-vpA" secondAttribute="bottom" id="33N-8I-Roz"/>
                 <constraint firstItem="pVa-K5-vpA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MDb-Yg-LBK"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pVa-K5-vpA" secondAttribute="trailing" constant="40" id="WbJ-Er-Nvc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pVa-K5-vpA" secondAttribute="trailing" id="WbJ-Er-Nvc"/>
                 <constraint firstItem="pVa-K5-vpA" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="zKr-HA-04D"/>
             </constraints>
             <connections>

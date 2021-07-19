@@ -18,14 +18,16 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     
     var customTabBarController: CustomTabBarVC?
-    var objCurrentorder : currentOrder?
+//    var objCurrentorder : currentOrder?
     var strOrderId = ""
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]
     let MapViewForShowRastaurantLocation = MKMapView()
     lazy var skeletonData : skeletonCheckout = skeletonCheckout.fromNib()
     var cartDetails : CartDatum?
-    
-    
+    var arritem = [String]()
+    var arrCartItem = [CartItem]()
+    var addRemoveItem : ((Int,Int)->())?
+    let activityView = UIActivityIndicatorView(style: .gray)
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
@@ -49,9 +51,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var btnAddFoodlist: checkoutButton!
     @IBOutlet weak var btnPlaceOrder: submitButton!
     
-    var arritem = [String]()
-    var arrCartItem = [CartItem]()
-    var addRemoveItem : ((Int,Int)->())?
     // MARK: - ViewController Lifecycle
     
     // handle notification
@@ -95,6 +94,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         skeletonData.showAnimatedSkeleton()
+        skeletonData.frame.size.width = view.frame.size.width
         self.view.addSubview(skeletonData)
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -163,32 +163,32 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     //Not in use
-    func calculateTotalAndSubtotal(){
-        var total = 0.0
-        let arrSelectedOrder = self.objCurrentorder?.order
-        if arrSelectedOrder!.count > 0{
-            var subTotal = 0.0
-            for i in 0..<arrSelectedOrder!.count{
-                let price : Double = Double(arrSelectedOrder![i].price) ?? 0.0
-                subTotal = subTotal + price
-            }
-            let CalculateTax = ((Double(subTotal) * (self.objCurrentorder?.currentRestaurantDetail.tax.ToDouble() ?? 0) / 100))
-            TotalTaxAmount = "\(CalculateTax)"
-            total = Double(subTotal) + (self.objCurrentorder?.currentRestaurantDetail.serviceFee.ToDouble() ?? 0) + (CalculateTax)
-            self.objCurrentorder?.total = "\(total)"
-            self.objCurrentorder?.sub_total = "\(subTotal)"
-            LblTotlaPrice.text = "\(CurrencySymbol)\(String((cartDetails?.total)!).ConvertToTwoDecimal())"
-           
-            self.tblOrderDetails.reloadData()
-            SingletonClass.sharedInstance.restCurrentOrder = self.objCurrentorder
-         
-            
-        }else{
-            SingletonClass.sharedInstance.restCurrentOrder = nil
-            self.navigationController?.popViewController(animated: true)
-        }
-        NotificationCenter.default.post(name: notifRefreshRestaurantDetails, object: nil)
-    }
+//    func calculateTotalAndSubtotal(){
+//        var total = 0.0
+//        let arrSelectedOrder = self.objCurrentorder?.order
+//        if arrSelectedOrder!.count > 0{
+//            var subTotal = 0.0
+//            for i in 0..<arrSelectedOrder!.count{
+//                let price : Double = Double(arrSelectedOrder![i].price) ?? 0.0
+//                subTotal = subTotal + price
+//            }
+//            let CalculateTax = ((Double(subTotal) * (self.objCurrentorder?.currentRestaurantDetail.tax.ToDouble() ?? 0) / 100))
+//            TotalTaxAmount = "\(CalculateTax)"
+//            total = Double(subTotal) + (self.objCurrentorder?.currentRestaurantDetail.serviceFee.ToDouble() ?? 0) + (CalculateTax)
+//            self.objCurrentorder?.total = "\(total)"
+//            self.objCurrentorder?.sub_total = "\(subTotal)"
+//            LblTotlaPrice.text = "\(CurrencySymbol)\(String((cartDetails?.total)!).ConvertToTwoDecimal())"
+//
+//            self.tblOrderDetails.reloadData()
+//            SingletonClass.sharedInstance.restCurrentOrder = self.objCurrentorder
+//
+//
+//        }else{
+//            SingletonClass.sharedInstance.restCurrentOrder = nil
+//            self.navigationController?.popViewController(animated: true)
+//        }
+//        NotificationCenter.default.post(name: notifRefreshRestaurantDetails, object: nil)
+//    }
     
     func reloadAddproductTableAndResize(){
         tblAddedProduct.reloadData()
@@ -247,55 +247,27 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             
             let cell = tblAddedProduct.dequeueReusableCell(withIdentifier: addedProductCell.reuseIdentifier, for: indexPath) as! addedProductCell
             let objitem = arrCartItem[indexPath.row]
-//            if self.objCurrentorder?.order[indexPath.row].size != ""{
-//                cell.lblItem.text = (self.objCurrentorder?.order[indexPath.row].name)! + " - " + (self.objCurrentorder?.order[indexPath.row].size)!
-//            }else{
             cell.lblItem.text = objitem.itemName
-//            }
             cell.lblPrice.text = "\(CurrencySymbol)\(Double(objitem.subTotal))"
             cell.lbltotalCount.text = objitem.cartQty
+            cell.stackHide.isHidden = false
             let value : Int = (cell.lbltotalCount.text! as NSString).integerValue
             cell.decreaseClick = {
-                if value >= 1{
-//                    var quantity = cell.lbltotalCount.text?.toInt() ?? 0
-//                    let Price = objitem.price.ToDouble()
-//                    quantity = quantity - 1
-//                    let T = Double(quantity) * Price
-//                    cell.lblPrice.text = "\(CurrencySymbol)\(T)".ConvertToTwoDecimal()
-//                    cell.lbltotalCount.text = "\(quantity)"
-                    
-                    self.webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "0")
-//                    if quantity == 0{
-//                        self.objCurrentorder?.order.remove(at: indexPath.row)
-//                        self.reloadAddproductTableAndResize()
-//                    }else{
-//                        self.objCurrentorder?.order[indexPath.row].price = "\(T)"
-//                        self.objCurrentorder?.order[indexPath.row].selectedQuantity = "\(quantity)"
-//                    }
-                }else{
-                    
-                }
-                //self.calculateTotalAndSubtotal()
+                self.webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "0")
+                cell.stackHide.isHidden = true
+                cell.vwStapper.isHidden = false
+                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2, y: cell.vwStapper.frame.height/2)
+                cell.vwStapper.addSubview(self.activityView)
+                self.activityView.startAnimating()
             }
             
             cell.increaseClick = { [self] in
-                let quantity = cell.lbltotalCount.text?.toInt() ?? 0
-                if objitem.quantity.toInt() > quantity {
-                    
-//                    let Price = objitem.price.ToDouble()
-//                    quantity = quantity + 1
-//                    let T = Double(quantity) * Price
-//                    cell.lblPrice.text = "\(CurrencySymbol)\(T)".ConvertToTwoDecimal()
-//                    cell.lbltotalCount.text = "\(quantity)"
-//                    objitem.price = "\(T)"
-//                    objitem.cartQty = "\(quantity)"
-                    webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "1")
-                   // self.calculateTotalAndSubtotal()
-                }
-                else {
-                  
-                    Utilities.showAlert(AppName, message: "MessageQtyNotAvailable".Localized(), vc: self)
-                }
+                webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "1")
+                cell.stackHide.isHidden = true
+                cell.vwStapper.isHidden = false
+                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2, y: cell.vwStapper.frame.height/2)
+                cell.vwStapper.addSubview(self.activityView)
+                self.activityView.startAnimating()
             }
             
             cell.selectionStyle = .none
@@ -314,29 +286,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? 0.0)"
             case "checkOutVC_arrayForTitle_title3".Localized():
                 switch AppliedPromocode?.offerType.lowercased() {
- //               case "flat":
-//                    var total = 0.0
-//0
-//                    total = (Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) - (Double(self.AppliedPromocode?.percentage ?? "") ?? 0.0) + (self.objCurrentorder?.service_fee.ToDouble() ?? 0.0)
-//                    self.objCurrentorder?.total = "\(total)"
-//                    cell.lblPrice.text = "-\(CurrencySymbol)\(self.AppliedPromocode?.percentage.ConvertToTwoDecimal() ?? "")"
-//
-//                    LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
-//                case "discount":
-//                    var total = 0.0
-//
-//                    let CalculateTax = ((Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) * (Double(self.AppliedPromocode?.percentage ?? "") ?? 0.0)) / 100
-//                    total = (Double(self.objCurrentorder?.sub_total ?? "") ?? 0.0) - CalculateTax + (self.objCurrentorder?.service_fee.ToDouble() ?? 0.0)
-//
-//                    cell.lblPrice.text = "-\(CurrencySymbol)\(CalculateTax)".ConvertToTwoDecimal()
-//
-//                    self.objCurrentorder?.total = "\(total)"
-//
-//                    LblTotlaPrice.text = "\(CurrencySymbol)\(self.objCurrentorder?.total.ConvertToTwoDecimal() ?? "")"
                 default:
                     break
                 }
-                
             default:
                 break
             }
@@ -382,14 +334,14 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
         controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
-        controller.strStorePolicy = objCurrentorder?.currentRestaurantDetail.storePolicy ?? ""
+//        controller.strStorePolicy = objCurrentorder?.currentRestaurantDetail.storePolicy ?? ""
         self.navigationController?.pushViewController(controller, animated: true)
         
     }
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
         
         let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: PromocodeVC.storyboardID) as! PromocodeVC
-        vc.RestuarantID = objCurrentorder?.restaurant_id ?? ""
+//        vc.RestuarantID = objCurrentorder?.restaurant_id ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
@@ -397,37 +349,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBAction func placeOrderBtn(_ sender: submitButton) {
         
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-        
-        
-        var ForPassOrderData : [Order] = []
-        self.objCurrentorder?.order.forEach({ (element) in
-            var ForPassVarientIdData : [Int] = []
-            element.variants_id.forEach { (varientElement) in
-                ForPassVarientIdData.append(varientElement.variant_id.toInt())
-            }
-            
-            ForPassOrderData.append(Order(OrderPirce: element.price, OrderQuantity: element.selectedQuantity, OrderRestaurantItemID: element.restaurant_item_id, OrderVariantsId: ForPassVarientIdData))
-        })
-        var PromoCodeID = ""
-        if AppliedPromocode != nil {
-            PromoCodeID = AppliedPromocode?.id ?? ""
-        }
-        let ForPassPlaceOrderData = PlacerOrderData.init(PlaceComment: "", PlaceOrder: ForPassOrderData, PlacePromoCodeID: PromoCodeID, PlaceRating: "", PlaceRestaurantID: self.objCurrentorder?.restaurant_id ?? "", PlaceServiceFee: self.objCurrentorder?.service_fee ?? "", PlaceSubTotal: self.objCurrentorder?.sub_total ?? "", PlaceTax: self.TotalTaxAmount, PlaceTotal: LblTotlaPrice.text?.RemoveCurrencySymbol() ?? "", PlaceUserID: self.objCurrentorder?.user_id ?? "")
-        
-        
-        let stringOfJSONData = ForPassPlaceOrderData.toDictionary()
-        let jsonData = try! JSONSerialization.data(withJSONObject: stringOfJSONData, options: [])
-        let jsonString:String = String(data: jsonData, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) ?? ""
-        print(jsonString)
-        controller.OrderDetails = jsonString
         self.navigationController?.pushViewController(controller, animated: true)
         
         
     }
     
     @IBAction func seeMenu(_ sender: submitButton) {
-        //        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
-        //        self.navigationController?.pushViewController(controller, animated: true)
+        
     }
     
     @IBAction func canclePromoCode(_ sender: myOrdersBtn) {
@@ -443,9 +371,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func btnChangeLocationClicked(_ sender: Any) {
-        //commonPopup.customAlert(isHideCancelButton: false, isHideSubmitButton: false, strSubmitTitle: "checkOutVC_strSubmit_title".Localized(), strCancelButtonTitle: "checkOutVC_strCancel_title".Localized(), strDescription: "checkOutVC_strDescription_title1".Localized(), strTitle: "", isShowImage: true, strImage: "ic_popupCancleOrder", isCancleOrder: true, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-        
-        
         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
         //controller.modalPresentationStyle = .fullScreen
         controller.isHideCancelButton = false
@@ -465,12 +390,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func btnAddFoodlistClicked(_ sender: Any) {
-       // let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
-       // self.navigationController?.pushViewController(vc, animated: true)
-//        for i in 0...(objCurrentorder?.order.count)! - 1 {
-//            arritem.append((objCurrentorder?.order[i].restaurant_item_id)!)
-//        }
-//        print(arritem.joined(separator: ","))
+        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
+        self.navigationController?.pushViewController(vc, animated: true)
         webserviceAddToFoodlist()
     }
     
@@ -526,7 +447,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     func webserviceGetCartDetails(){
         let cartDetails = GetCartReqModel()
         cartDetails.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.GetCartDetails(getCartModel: cartDetails, showHud: true) { [self] (json, status, response) in
+        WebServiceSubClass.GetCartDetails(getCartModel: cartDetails, showHud: false) { [self] (json, status, response) in
             if(status)
             {
                 print(json)
@@ -556,22 +477,24 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         updateCart.qty = "1"
         updateCart.type = strtype
         updateCart.status = "0"
-        WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: true) { (json, status, response) in
+        WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: false) { (json, status, response) in
             if(status)
             {
                 print(json)
                 let cartData = CartListResModel.init(fromJson: json)
                 self.cartDetails = cartData.data
-                self.arrCartItem = cartData.data.item
-                Utilities.displayAlert(json["message"].string ?? "")
-                self.tblAddedProduct.reloadData()
-                self.tblOrderDetails.reloadData()
+                if self.cartDetails == nil{
+                    self.navigationController?.popViewController(animated: true)
+                }else{
+                    self.arrCartItem = cartData.data.item
+                    if let obj = self.addRemoveItem{
+                         obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity)
+                    }
+                }
+//                self.tblAddedProduct.reloadData()
+//                self.tblOrderDetails.reloadData()
                 self.setData()
                 self.addMapView()
-                
-                if let obj = self.addRemoveItem{
-                     obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity)
-                }
             }
             else
             {
@@ -581,112 +504,5 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-class PlacerOrderData {
-    
-    var comment : String!
-    var order : [Order]!
-    var promocodeId : String!
-    var rating : String!
-    var restaurantId : String!
-    var serviceFee : String!
-    var subTotal : String!
-    var tax : String!
-    var total : String!
-    var userId : String!
-    
-    init(PlaceComment:String,PlaceOrder:[Order],PlacePromoCodeID:String,PlaceRating:String,PlaceRestaurantID:String,PlaceServiceFee:String,PlaceSubTotal:String,PlaceTax:String,PlaceTotal:String,PlaceUserID:String) {
-        comment = PlaceComment
-        order = PlaceOrder
-        promocodeId = PlacePromoCodeID
-        rating = PlaceRating
-        restaurantId = PlaceRestaurantID
-        serviceFee = PlaceServiceFee
-        subTotal = PlaceSubTotal
-        tax = PlaceTax
-        total = PlaceTotal
-        userId = PlaceUserID
-    }
-
-      
-        func toDictionary() -> [String:Any]
-        {
-            var dictionary = [String:Any]()
-            if comment != nil{
-                dictionary["comment"] = comment
-            }
-            if order != nil{
-            var dictionaryElements = [[String:Any]]()
-            for orderElement in order {
-                dictionaryElements.append(orderElement.toDictionary())
-            }
-            dictionary["order"] = dictionaryElements
-            }
-            if promocodeId != nil{
-                dictionary["promocode_id"] = promocodeId
-            }
-            if rating != nil{
-                dictionary["rating"] = rating
-            }
-            if restaurantId != nil{
-                dictionary["restaurant_id"] = restaurantId
-            }
-            if serviceFee != nil{
-                dictionary["service_fee"] = serviceFee
-            }
-            if subTotal != nil{
-                dictionary["sub_total"] = subTotal
-            }
-            if tax != nil{
-                dictionary["tax"] = tax
-            }
-            if total != nil{
-                dictionary["total"] = total
-            }
-            if userId != nil{
-                dictionary["user_id"] = userId
-            }
-            return dictionary
-        }
-    
-   
-    
-    class func convertDataCartArrayToProductsDictionary(arrayDataCart : PlacerOrderData) -> [String:Any] {
-        return arrayDataCart.toDictionary()
-    }
-    
-}
 
 
-class Order {
-
-    var price : String!
-    var quantity : String!
-    var restaurantItemId : String!
-    var variantsId : [Int]!
-
-    init(OrderPirce:String,OrderQuantity:String,OrderRestaurantItemID:String,OrderVariantsId:[Int]) {
-        price = OrderPirce
-        quantity = OrderQuantity
-        restaurantItemId = OrderRestaurantItemID
-        variantsId = OrderVariantsId
-      
-    }
-   
-    func toDictionary() -> [String:Any]
-    {
-        var dictionary = [String:Any]()
-        if price != nil{
-            dictionary["price"] = price
-        }
-        if quantity != nil{
-            dictionary["quantity"] = quantity
-        }
-        if restaurantItemId != nil{
-            dictionary["restaurant_item_id"] = restaurantItemId
-        }
-        if variantsId != nil{
-            dictionary["variants_id"] = variantsId
-        }
-        return dictionary
-    }
-}
