@@ -98,7 +98,7 @@ enum ApiKey: String {
     case Notification = "notification"
     case fetch_promocode = "fetch_promocode"
     case apply_promocode = "apply_promocode"
-    case order = "order"
+    case orderPlaced = "order"
     case Email_verify = "resend_link"
     case Add_Foodlist = "foodlist"
     case Add_to_Card = "add_cart"

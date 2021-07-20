@@ -10,6 +10,7 @@ import Foundation
 class PromocodeListReqModel:RequestModel{
     var user_id : String = ""
     var restaurant_id : String = ""
+    var cart_id : String = ""
 }
 
 

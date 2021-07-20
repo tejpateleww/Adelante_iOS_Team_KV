@@ -234,7 +234,7 @@
 "checkOutVC_strSubmit_title" = "Yes";
 "checkOutVC_strDescription_title1" = "Are you sure you want to choose another location? Then your cart item will discard.";
 "checkOutVC_strDescription_title2" = "Changing restaurants will empty your cart. Are you sure you want to continue?";
-
+"checkOutVC_btnCanclePromoCOde" = "Remove";
 
 //applyPromoCodeVC
 "applyPromoCodeVC_okButton" = "Apply";

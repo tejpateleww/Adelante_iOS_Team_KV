@@ -159,9 +159,9 @@ class WebServiceSubClass
         WebService.shared.requestMethod(api: .apply_promocode, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
     //Order
-    class func PlaceOrder( OrderModel : OrderReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
+    class func PlaceOrder( OrderModel : orderPlaceReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
         let params : [String:String] = OrderModel.generatPostParams() as! [String:String]
-        WebService.shared.requestMethod(api: .order, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+        WebService.shared.requestMethod(api: .orderPlaced, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
 
     }
     class func AddToFoodList( FoodListModel : AddToFoodlistReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){

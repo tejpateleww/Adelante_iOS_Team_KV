@@ -12,13 +12,13 @@ import SwiftyJSON
 class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     // MARK: - Properties
-   var TotalTaxAmount = ""
+    var TotalTaxAmount = ""
     var AppliedPromocode : Promocode?
     
     
     
     var customTabBarController: CustomTabBarVC?
-//    var objCurrentorder : currentOrder?
+    //    var objCurrentorder : currentOrder?
     var strOrderId = ""
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]
     let MapViewForShowRastaurantLocation = MKMapView()
@@ -28,6 +28,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var arrCartItem = [CartItem]()
     var addRemoveItem : ((Int,Int)->())?
     let activityView = UIActivityIndicatorView(style: .gray)
+    var strCartId = ""
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
@@ -60,10 +61,10 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: notification.userInfo ?? [:], options: .prettyPrinted)
             // here "jsonData" is the dictionary encoded in JSON data
-
+            
             let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
             // here "decoded" is of type `Any`, decoded from JSON data
-
+            
             // you can now cast it with the right type
             if let dictFromJSON = decoded as? [String:String] {
                 let ResModel = Promocode.init(FromDictonary: dictFromJSON)
@@ -75,20 +76,20 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         } catch {
             print(error.localizedDescription)
         }
-      
         
-
+        
+        
     }
     func ApplyPromocode() {
         
         if AppliedPromocode != nil {
             btnAppyPromoCode.isHidden = true
-          
+            
             lblPromoCode.isHidden = false
             lblPromoCode.text = AppliedPromocode?.promocode
             btnCanclePromoCOde.isHidden = false
         }
-
+        
     }
     
     override func viewDidLoad() {
@@ -98,10 +99,10 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         self.view.addSubview(skeletonData)
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
-       
+        
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-     
+        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.GetPromocodeData(notification:)), name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
         webserviceGetCartDetails()
@@ -142,53 +143,26 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         restaurantLocationView.addSubview(MapViewForShowRastaurantLocation)
     }
     func setData(){
-       // if SingletonClass.sharedInstance.restCurrentOrder != nil{
-           // self.objCurrentorder = SingletonClass.sharedInstance.restCurrentOrder
-            lblItemName.text = cartDetails?.name//objCurrentorder?.currentRestaurantDetail.name
-            centerMapOnLocation(location: CLLocation(latitude: Double(cartDetails?.lat ?? "") ?? 0.0, longitude: Double(cartDetails?.lng ?? "") ?? 0.0), mapView: MapViewForShowRastaurantLocation)
-            lblAddress.text = cartDetails?.address
-            LblTotlaPrice.text = "\(CurrencySymbol)\(cartDetails?.grandTotal ?? 0.0)"
-            tblAddedProduct.delegate = self
-            tblOrderDetails.delegate = self
-            tblAddedProduct.dataSource = self
-            tblOrderDetails.dataSource = self
-            tblOrderDetails.reloadData()
-           // calculateTotalAndSubtotal()
-           
-            reloadAddproductTableAndResize()
-       // }else{
-            tblAddProductHeight.constant = 0
-            tblOrderDetailsHeight.constant = 0
-       // }
+        // if SingletonClass.sharedInstance.restCurrentOrder != nil{
+        // self.objCurrentorder = SingletonClass.sharedInstance.restCurrentOrder
+        lblItemName.text = cartDetails?.name//objCurrentorder?.currentRestaurantDetail.name
+        centerMapOnLocation(location: CLLocation(latitude: Double(cartDetails?.lat ?? "") ?? 0.0, longitude: Double(cartDetails?.lng ?? "") ?? 0.0), mapView: MapViewForShowRastaurantLocation)
+        lblAddress.text = cartDetails?.address
+        LblTotlaPrice.text = "\(CurrencySymbol)\(cartDetails?.grandTotal ?? 0.0)"
+        tblAddedProduct.delegate = self
+        tblOrderDetails.delegate = self
+        tblAddedProduct.dataSource = self
+        tblOrderDetails.dataSource = self
+        tblOrderDetails.reloadData()
+        self.strCartId = cartDetails?.cartId ?? ""
+        // calculateTotalAndSubtotal()
+        
+        reloadAddproductTableAndResize()
+        // }else{
+        tblAddProductHeight.constant = 0
+        tblOrderDetailsHeight.constant = 0
+        // }
     }
-    
-    //Not in use
-//    func calculateTotalAndSubtotal(){
-//        var total = 0.0
-//        let arrSelectedOrder = self.objCurrentorder?.order
-//        if arrSelectedOrder!.count > 0{
-//            var subTotal = 0.0
-//            for i in 0..<arrSelectedOrder!.count{
-//                let price : Double = Double(arrSelectedOrder![i].price) ?? 0.0
-//                subTotal = subTotal + price
-//            }
-//            let CalculateTax = ((Double(subTotal) * (self.objCurrentorder?.currentRestaurantDetail.tax.ToDouble() ?? 0) / 100))
-//            TotalTaxAmount = "\(CalculateTax)"
-//            total = Double(subTotal) + (self.objCurrentorder?.currentRestaurantDetail.serviceFee.ToDouble() ?? 0) + (CalculateTax)
-//            self.objCurrentorder?.total = "\(total)"
-//            self.objCurrentorder?.sub_total = "\(subTotal)"
-//            LblTotlaPrice.text = "\(CurrencySymbol)\(String((cartDetails?.total)!).ConvertToTwoDecimal())"
-//
-//            self.tblOrderDetails.reloadData()
-//            SingletonClass.sharedInstance.restCurrentOrder = self.objCurrentorder
-//
-//
-//        }else{
-//            SingletonClass.sharedInstance.restCurrentOrder = nil
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//        NotificationCenter.default.post(name: notifRefreshRestaurantDetails, object: nil)
-//    }
     
     func reloadAddproductTableAndResize(){
         tblAddedProduct.reloadData()
@@ -196,8 +170,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     func setUpLocalizedStrings()
     {
-       
-        
         lblAddress.text = "43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA 43369 Ellgworthg St, remont,CA"
         btnChangeLocation.setTitle("checkOutVC_btnChangeLocation".Localized(), for: .normal)
         btnChangeRestaurant.setTitle("checkOutVC_btnChangeRestaurant".Localized(), for: .normal)
@@ -209,6 +181,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         btnReadPOlicy.setTitle("checkOutVC_btnReadPOlicy".Localized(), for: .normal)
         btnAddFoodlist.setTitle("checkOutVC_btnAddFoodlist".Localized(), for: .normal)
         btnPlaceOrder.setTitle("checkOutVC_btnPlaceOrder".Localized(), for: .normal)
+        btnCanclePromoCOde.setTitle("checkOutVC_btnCanclePromoCOde".Localized(), for: .normal)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -248,6 +221,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             let cell = tblAddedProduct.dequeueReusableCell(withIdentifier: addedProductCell.reuseIdentifier, for: indexPath) as! addedProductCell
             let objitem = arrCartItem[indexPath.row]
             cell.lblItem.text = objitem.itemName
+            cell.lblDisc.text = objitem.descriptionField
             cell.lblPrice.text = "\(CurrencySymbol)\(Double(objitem.subTotal))"
             cell.lbltotalCount.text = objitem.cartQty
             cell.stackHide.isHidden = false
@@ -276,7 +250,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         case tblOrderDetails:
             
             let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: orderDetailsCell.reuseIdentifier, for: indexPath) as! orderDetailsCell
-            
             switch arrayForTitle[indexPath.row] {
             case "checkOutVC_arrayForTitle_title".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.total ?? 0)"
@@ -308,7 +281,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView {
         case tblAddedProduct:
-            return 60
+            return UITableView.automaticDimension
         case tblOrderDetails:
             return 43
         default:
@@ -334,22 +307,24 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
         controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
-//        controller.strStorePolicy = objCurrentorder?.currentRestaurantDetail.storePolicy ?? ""
+        //        controller.strStorePolicy = objCurrentorder?.currentRestaurantDetail.storePolicy ?? ""
         self.navigationController?.pushViewController(controller, animated: true)
         
     }
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
         
         let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: PromocodeVC.storyboardID) as! PromocodeVC
-//        vc.RestuarantID = objCurrentorder?.restaurant_id ?? ""
+        vc.RestuarantID = cartDetails?.id ?? ""
+        vc.cartID = cartDetails?.cartId ?? ""
+        //        vc.RestuarantID = objCurrentorder?.restaurant_id ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
-
+        
     }
     
     @IBAction func placeOrderBtn(_ sender: submitButton) {
-        
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-        self.navigationController?.pushViewController(controller, animated: true)
+        WebServiceCallForOrder()
+//        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+//        self.navigationController?.pushViewController(controller, animated: true)
         
         
     }
@@ -366,7 +341,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         btnAppyPromoCode.titleLabel?.textAlignment = .left
         
         lblPromoCode.text = ""
-       
+        
         self.tblOrderDetails.reloadData()
     }
     
@@ -411,7 +386,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             {
                 let repeatOrderData = RepeatOrderResModel.init(fromJson: json)
                 print(repeatOrderData)
-//                self.objCurrentorder = repeatOrderData.data.subOrder
+                //                self.objCurrentorder = repeatOrderData.data.subOrder
                 Utilities.displayAlert(json["message"].string ?? "")
             }
             else
@@ -488,11 +463,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 }else{
                     self.arrCartItem = cartData.data.item
                     if let obj = self.addRemoveItem{
-                         obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity)
+                        obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity)
                     }
                 }
-//                self.tblAddedProduct.reloadData()
-//                self.tblOrderDetails.reloadData()
+                //                self.tblAddedProduct.reloadData()
+                //                self.tblOrderDetails.reloadData()
                 self.setData()
                 self.addMapView()
             }
@@ -501,6 +476,25 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         }
+    }
+    func WebServiceCallForOrder(){
+        
+        let ReqModel = orderPlaceReqModel()
+        ReqModel.user_id = SingletonClass.sharedInstance.UserId
+        ReqModel.cart_id = strCartId
+        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+//                commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrdersVC.storyboardID) as! MyOrdersVC
+                    self.navigationController?.pushViewController(controller, animated: true)
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        })
+        
     }
 }
 

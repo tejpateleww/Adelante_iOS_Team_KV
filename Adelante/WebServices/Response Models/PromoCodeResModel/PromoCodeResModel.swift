@@ -22,7 +22,7 @@ class PromoCodeResModel : NSObject, NSCoding{
 		}
         message = json["message"].stringValue
         promocode = [Promocode]()
-        let promocodeArray = json["promocode"].arrayValue
+        let promocodeArray = json["data"].arrayValue
         for promocodeJson in promocodeArray{
             let value = Promocode(fromJson: promocodeJson)
             promocode.append(value)
@@ -44,7 +44,7 @@ class PromoCodeResModel : NSObject, NSCoding{
         for promocodeElement in promocode {
         	dictionaryElements.append(promocodeElement.toDictionary())
         }
-        dictionary["promocode"] = dictionaryElements
+        dictionary["data"] = dictionaryElements
         }
         if status != nil{
         	dictionary["status"] = status
@@ -59,7 +59,7 @@ class PromoCodeResModel : NSObject, NSCoding{
     @objc required init(coder aDecoder: NSCoder)
 	{
 		message = aDecoder.decodeObject(forKey: "message") as? String
-		promocode = aDecoder.decodeObject(forKey: "promocode") as? [Promocode]
+		promocode = aDecoder.decodeObject(forKey: "data") as? [Promocode]
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
 
@@ -73,7 +73,7 @@ class PromoCodeResModel : NSObject, NSCoding{
 			aCoder.encode(message, forKey: "message")
 		}
 		if promocode != nil{
-			aCoder.encode(promocode, forKey: "promocode")
+			aCoder.encode(promocode, forKey: "data")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

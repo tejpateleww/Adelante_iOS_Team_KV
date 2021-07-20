@@ -14,6 +14,7 @@ class addedProductCell: UITableViewCell {
     @IBOutlet weak var lblItem: CheckOutLabel!
     @IBOutlet weak var lblPrice: CheckOutLabel!
     @IBOutlet weak var stackHide: UIStackView!
+    @IBOutlet weak var lblDisc: CheckOutLabel!
     @IBAction func decreaseBtn(_ sender: Any) {
         if let click = self.decreaseClick {
             click()

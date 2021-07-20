@@ -45,14 +45,15 @@ class CheckOutLabel : UILabel {
      @IBInspectable var isProductName: Bool = false
     @IBInspectable var isProductTotalPrice: Bool = false
     @IBInspectable var isPromo : Bool = false
+    @IBInspectable var isDescription : Bool = false
     override func drawText(in rect: CGRect) {
       
         if isUserName || isAddress {
             let insets = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
                    super.drawText(in: rect.inset(by: insets))
-        } else {
-            let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-                  super.drawText(in: rect.inset(by: insets))
+        }else {
+    let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+          super.drawText(in: rect.inset(by: insets))
         }
        
     }
@@ -124,9 +125,12 @@ class CheckOutLabel : UILabel {
             self.textColor = colors.black.value
             self.textAlignment = .right
         }
-        
         else if isPromo {
             self.font = CustomFont.NexaRegular.returnFont(14)
+            self.textColor = colors.black.value
+            self.textAlignment = .left
+        }else if isDescription{
+            self.font = CustomFont.NexaRegular.returnFont(10)
             self.textColor = colors.black.value
             self.textAlignment = .left
         }

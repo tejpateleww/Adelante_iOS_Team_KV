@@ -127,7 +127,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                         self.shake(cell2.textFieldEnterCVV)
                     }
                     else {
-                        self.WebServiceCallForOrder(OrderJson: self.OrderDetails ?? "")
+//                        self.WebServiceCallForOrder(OrderJson: self.OrderDetails ?? "")
                         //                        self.AddAmountDetails(cardID: self.cardDetailsData?.cards?[indexPath.row].id ?? "")
                     }
                 }
@@ -357,22 +357,22 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         FormTextField.appearance().invalidTextColor = UIColor(hexString: "FF4B47")
     }
 }
-extension addPaymentVC {
-    func WebServiceCallForOrder(OrderJson:String){
-        
-        let ReqModel = OrderReqModel()
-        ReqModel.order_data = OrderJson
-        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
-            if(status)
-            {
-                commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-            }
-            else
-            {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
-            }
-        })
-        
-    }
-    
-}
+//extension addPaymentVC {
+//    func WebServiceCallForOrder(OrderJson:String){
+//
+//        let ReqModel = OrderReqModel()
+//        ReqModel.order_data = OrderJson
+//        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
+//            if(status)
+//            {
+//                commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
+//            }
+//            else
+//            {
+//                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+//            }
+//        })
+//
+//    }
+//
+//}

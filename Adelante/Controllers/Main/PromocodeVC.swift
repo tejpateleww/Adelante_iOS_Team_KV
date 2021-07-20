@@ -12,7 +12,8 @@ class PromocodeVC: BaseViewController {
     //MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var RestuarantID = ""
-    var PromoCodeList : [Promocode]?
+    var cartID = ""
+    var PromoCodeList = [Promocode]()
     //MARK: - IBOutlets
     @IBOutlet weak var tblPromoCode: UITableView!
     @IBOutlet weak var TextFieldPromoCode: UITextField!
@@ -22,15 +23,12 @@ class PromocodeVC: BaseViewController {
         super.viewDidLoad()
         setLocalization()
         setValue()
-        
+        WebserviceCallForFetchPromocode()
         tblPromoCode.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
         
         tblPromoCode.delegate = self
         tblPromoCode.dataSource = self
-        tblPromoCode.reloadData()
-        
-        WebserviceCallForFetchPromocode(restaurant_id: RestuarantID)
-        
+//        tblPromoCode.reloadData()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.PromocodeVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
@@ -38,7 +36,7 @@ class PromocodeVC: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
-
+        
     }
     
     //MARK: - other methods
@@ -54,7 +52,7 @@ class PromocodeVC: BaseViewController {
         if TextFieldPromoCode.text?.trim() == "" {
             Utilities.ShowAlert(OfMessage: "Please enter promocode")
         } else {
-            self.WebserviceCallForPromocodeApply(PromocodeID: "", Promocode: self.TextFieldPromoCode.text?.trim() ?? "")
+//            self.WebserviceCallForPromocodeApply(Promocode: self.TextFieldPromoCode.text?.trim() ?? "", cartID: <#String#>)
         }
     }
     
@@ -63,52 +61,52 @@ class PromocodeVC: BaseViewController {
 }
 extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.PromoCodeList?.count == 0 {
+        if self.PromoCodeList.count == 0 {
             return 1
         } else {
-            return PromoCodeList?.count ?? 0
+            return PromoCodeList.count ?? 0
         }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if PromoCodeList?.count == 0 {
+        if PromoCodeList.count == 0 {
             return tableView.frame.size.height
         } else {
             return UITableView.automaticDimension
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (self.PromoCodeList?.count ?? 0) != 0 {
-        let cell:PromocodeCell = tblPromoCode.dequeueReusableCell(withIdentifier: PromocodeCell.reuseIdentifier, for: indexPath)as! PromocodeCell
-        cell.lblPromoCode.text = PromoCodeList?[indexPath.row].promocode
-        switch PromoCodeList?[indexPath.row].offerType.lowercased() {
-        case "flat":
-           
-            cell.lblOfferDescription.text = "Get flat \(CurrencySymbol)\(PromoCodeList?[indexPath.row].percentage.ConvertToTwoDecimal() ?? "")"
+        if PromoCodeList.count != 0 {
+            let cell:PromocodeCell = tblPromoCode.dequeueReusableCell(withIdentifier: PromocodeCell.reuseIdentifier, for: indexPath)as! PromocodeCell
+            cell.lblPromoCode.text = PromoCodeList[indexPath.row].promocode
+            switch PromoCodeList[indexPath.row].offerType.lowercased() {
+            case "flat":
+                
+                cell.lblOfferDescription.text = "Get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() )"
+                
+                cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() )"
+                
+                
+            case "discount":
+                
+                cell.lblOfferDescription.text = "Get \(PromoCodeList[indexPath.row].percentage ?? "")% discount"
+                cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get \(PromoCodeList[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() )"
+                
+            default:
+                break
+            }
             
-            cell.lblValidOn.text = "Use code \(PromoCodeList?[indexPath.row].promocode ?? "") & get flat \(CurrencySymbol)\(PromoCodeList?[indexPath.row].percentage.ConvertToTwoDecimal() ?? "") on orders above \(CurrencySymbol)\(PromoCodeList?[indexPath.row].minAmount.ConvertToTwoDecimal() ?? "")"
+            cell.ApplyClickClosour = {
+                self.WebserviceCallForPromocodeApply(Promocode: self.PromoCodeList[indexPath.row].promocode ?? "")
+            }
             
-         
-        case "discount":
-          
-            cell.lblOfferDescription.text = "Get \(PromoCodeList?[indexPath.row].percentage ?? "")% discount"
-            cell.lblValidOn.text = "Use code \(PromoCodeList?[indexPath.row].promocode ?? "") & get \(PromoCodeList?[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList?[indexPath.row].minAmount.ConvertToTwoDecimal() ?? "") on orders above \(CurrencySymbol)\(PromoCodeList?[indexPath.row].maxAmount.ConvertToTwoDecimal() ?? "")"
+            return cell
             
-        default:
-            break
-        }
-        
-        cell.ApplyClickClosour = {
-            self.WebserviceCallForPromocodeApply(PromocodeID: self.PromoCodeList?[indexPath.row].id ?? "", Promocode: self.PromoCodeList?[indexPath.row].promocode ?? "")
-        }
-        
-        return cell
-        
         } else {
             let NoDatacell = tblPromoCode.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-            
-            NoDatacell.imgNoData.image = UIImage(named: NoData.promocode.ImageName)
-            NoDatacell.lblNoDataTitle.text = "No promocode found".Localized()
+//            NoDatacell.imgNoData.image = UIImage(named: "ic_applyPromoCode")
+//            NoDatacell.imgNoData.
+            NoDatacell.lblNoDataTitle.text = "No promocode found"
             NoDatacell.selectionStyle = .none
             return NoDatacell
         }
@@ -117,35 +115,38 @@ extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
 }
 //MARK: - API Calls
 extension PromocodeVC {
-    func WebserviceCallForFetchPromocode(restaurant_id:String){
+    func WebserviceCallForFetchPromocode(){
         let PromocodeList = PromocodeListReqModel()
-        PromocodeList.restaurant_id = restaurant_id
+        PromocodeList.restaurant_id = RestuarantID
         PromocodeList.user_id = SingletonClass.sharedInstance.UserId
+        PromocodeList.cart_id = cartID
         WebServiceSubClass.PromoCodeList(PromocodeModel: PromocodeList, showHud: false, completion: { (response, status, error) in
-            
             if status{
                 let ResModel = PromoCodeResModel.init(fromJson: response)
                 self.PromoCodeList = ResModel.promocode
+                DispatchQueue.main.async {
+                    self.tblPromoCode.reloadData()
+                }
                 
-                self.tblPromoCode.reloadData()
-              
+                
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
     }
-    func WebserviceCallForPromocodeApply(PromocodeID:String,Promocode:String){
+    func WebserviceCallForPromocodeApply(Promocode:String){
         let ApplyPromoCode = PromocodeApplyReqModel()
         ApplyPromoCode.promocode = Promocode
         ApplyPromoCode.user_id = SingletonClass.sharedInstance.UserId
+        ApplyPromoCode.cart_id = cartID
         WebServiceSubClass.ApplyPromoCode(PromocodeModel: ApplyPromoCode, showHud: false, completion: { (response, status, error) in
             
             if status{
                 self.navigationController?.popViewController(animated: true)
                 let ResModel = PromocodeAppliedResModel.init(fromJson: response)
-                print(ResModel.promocode.toDictionary())
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil, userInfo: ResModel.promocode.toDictionary())
-
+                Utilities.ShowAlert(OfMessage: response["message"].string ?? "")
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil, userInfo: ResModel.promocode.toDictionary())
+                
                 
             }else{
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)

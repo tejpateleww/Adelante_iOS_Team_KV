@@ -24,7 +24,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     var selectedItemId = ""
     var refreshList = UIRefreshControl()
     var arrVariants : [Variant]?
-    var objCurrentOrder : currentOrder?
+//    var objCurrentOrder : currentOrder?
     var arrSelectedVariants = [selectedVariants]()
     var arrselectedId = [String]()
     var delegateAddVariant : AddveriantDelegate!
@@ -54,7 +54,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         tblBFFCombo.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(webservicePostCombo), for: .valueChanged)
         setUpLocalizedStrings()
-        objCurrentOrder = SingletonClass.sharedInstance.restCurrentOrder
+//        objCurrentOrder = SingletonClass.sharedInstance.restCurrentOrder
         let footerView = UIView()
         footerView.backgroundColor = .white
         footerView.frame = CGRect.init(x: 0, y: 0, width: tblBFFCombo.frame.size.width, height: 31)
@@ -225,8 +225,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             } else {
                 let NoDatacell = tblBFFCombo.dequeueReusableCell(withIdentifier: "NoDataTableViewCell") as! NoDataTableViewCell
                 
-                NoDatacell.imgNoData.image = UIImage(named: NoData.varient.ImageName)
-                NoDatacell.lblNoDataTitle.text = "No varient available".Localized()
+                NoDatacell.imgNoData.image = UIImage(named: "Bff Combo")
+                NoDatacell.lblNoDataTitle.isHidden = true
                 NoDatacell.selectionStyle = .none
                 return NoDatacell
             }
@@ -252,7 +252,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             if arrVariants?.count != 0 {
                 return UITableView.automaticDimension
             }else{
-                return tableView.frame.height
+                return tableView.frame.height / 2
             }
         }else {
             return self.responseStatus == .gotData ?  40 : 70
