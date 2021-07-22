@@ -18,6 +18,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var allDetails = [myAccountDetails]()
     var expendedCell = -1
     var SettingsData : SettingsResModel!
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
     @IBOutlet weak var imgProfile: UIImageView!

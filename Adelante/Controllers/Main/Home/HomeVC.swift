@@ -43,7 +43,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var arrCategories = [Category]()
     var arrRestaurant  = [Restaurant]()
     var arrBanner = [Banner]()
-    var SelectedCatId = ""
+    var SelectedCatId = "0"
     var SelectFilterId = ""
     var refreshList = UIRefreshControl()
     var pageNumber = 1
@@ -96,7 +96,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         self.navigationController?.navigationBar.isHidden = false
         print("homeVc \(#function)")
     }
-    
+    override func viewDidLayoutSubviews() {
+        
+    }
     // MARK: - Other Methods
     func registerNIB(){
         tblMainList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
@@ -411,8 +413,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         let headerCell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier) as! RestaurantCatListCell
         headerCell.arrCategories = self.arrCategories
         headerCell.delegateResCatCell = self
+        headerCell.selectedIdForFood = self.SelectedCatId
         headerCell.colRestaurantCatList.reloadData()
         headerCell.selectionStyle = .none
+        
         return headerCell
     }
     

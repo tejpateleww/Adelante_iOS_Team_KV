@@ -12,3 +12,9 @@ class PromocodeApplyReqModel:RequestModel{
     var promocode : String = ""
     var cart_id : String = ""
 }
+
+class removePromocodeReqModel: RequestModel{
+    var user_id : String = ""
+    var cart_id : String = ""
+    var promocode_id : String = ""
+}

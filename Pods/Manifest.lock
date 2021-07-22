@@ -45,9 +45,12 @@ PODS:
   - FormTextField (3.0.0)
   - GoogleDataTransport (8.2.0):
     - nanopb (~> 2.30907.0)
-  - GoogleMaps/Base (4.1.0)
-  - GooglePlaces (4.1.0):
-    - GoogleMaps/Base (= 4.1.0)
+  - GoogleMaps (5.1.0):
+    - GoogleMaps/Maps (= 5.1.0)
+  - GoogleMaps/Base (5.1.0)
+  - GoogleMaps/Maps (5.1.0):
+    - GoogleMaps/Base
+  - GooglePlaces (5.0.0)
   - GoogleUtilities/AppDelegateSwizzler (7.2.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -77,7 +80,7 @@ PODS:
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
-  - SkeletonView (1.19.0)
+  - SkeletonView (1.21.1)
   - SkyFloatingLabelTextField (4.0.0)
   - SwiftyJSON (4.0.0)
 
@@ -88,6 +91,7 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Firebase/Messaging
   - FormTextField
+  - GoogleMaps
   - GooglePlaces
   - GrowingTextView (= 0.7.2)
   - IQKeyboardManagerSwift (= 6.3.0)
@@ -98,6 +102,10 @@ DEPENDENCIES:
   - SwiftyJSON (= 4.0)
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - GoogleMaps
+    - GooglePlaces
+    - SkeletonView
   trunk:
     - Alamofire
     - BetterSegmentedControl
@@ -111,8 +119,6 @@ SPEC REPOS:
     - FirebaseMessaging
     - FormTextField
     - GoogleDataTransport
-    - GoogleMaps
-    - GooglePlaces
     - GoogleUtilities
     - GrowingTextView
     - IQKeyboardManagerSwift
@@ -120,7 +126,6 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SDWebImage
-    - SkeletonView
     - SkyFloatingLabelTextField
     - SwiftyJSON
 
@@ -137,8 +142,8 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 4b9b2850fcfcaac2820097ee3703ba6cfff3df84
   FormTextField: fd5dc441ad40ba12d08ef66aeb0453ee9bf55e6d
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
-  GoogleMaps: 008e2c80e38605b56b560e8deb73d4194ff30bef
-  GooglePlaces: a058b776259c13e1323c9ff135549cb1b13ad8e7
+  GoogleMaps: 086ae1dab659eaa7339bdb30fc88e2f44e7c597c
+  GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   GoogleUtilities: 31c5b01f978a70c6cff2afc6272b3f1921614b43
   GrowingTextView: 876bf42005b5e4a4fd740597db12caaf41f0fe6c
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
@@ -146,10 +151,10 @@ SPEC CHECKSUMS:
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
-  SkeletonView: 2ebf2f23c341f55ef2d12072a149857eabee8218
+  SkeletonView: 5b79eb6e09d2a7f3d2e620d34ff97510a1c763e9
   SkyFloatingLabelTextField: 79ddc40e4ad59707fedbb48d605417aee48bb78a
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 9d183edcf09883ede9b4d6ac0b8c90c47521745f
+PODFILE CHECKSUM: 669b5fb2458e7bca0ea44456e708d1ec4afed7f1
 
 COCOAPODS: 1.10.1

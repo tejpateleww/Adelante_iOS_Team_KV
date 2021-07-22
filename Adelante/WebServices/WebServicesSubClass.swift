@@ -111,6 +111,10 @@ class WebServiceSubClass
         let params : [String:String] = removePaymentList.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .RemovePaymentList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    class func removepromocode(removepromocode : removePromocodeReqModel,showHud : Bool = false,completion : @escaping CompletionResponse){
+        let params : [String:String] = removepromocode.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .RemovePromocode, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
     class func orderList(orderListModel: OrderListReqModel,showHud : Bool = false, completion: @escaping CompletionResponse ){
         let params : [String:String] = orderListModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .OrderList, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)

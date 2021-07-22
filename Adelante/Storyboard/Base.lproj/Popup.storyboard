@@ -180,58 +180,39 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8i-2G-srw">
-                                                <rect key="frame" x="0.0" y="213" width="378" height="64"/>
+                                                <rect key="frame" x="0.0" y="213" width="378" height="38"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="vBw-pM-FmQ">
-                                                        <rect key="frame" x="36" y="0.0" width="306" height="64"/>
+                                                        <rect key="frame" x="46" y="0.0" width="286" height="38"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZv-Qb-IGd">
-                                                                <rect key="frame" x="0.0" y="0.0" width="136" height="64"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukE-SO-3WD" customClass="commonPopupButton" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="136" height="38"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="38" id="IYt-Rx-MUc"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <state key="normal" title="Button"/>
-                                                                        <connections>
-                                                                            <action selector="btnCancelAction:" destination="CIm-KZ-oyR" eventType="touchUpInside" id="ypL-lM-tDa"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukE-SO-3WD" customClass="commonPopupButton" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="126" height="38"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="ukE-SO-3WD" firstAttribute="leading" secondItem="LZv-Qb-IGd" secondAttribute="leading" id="82r-9C-Dlh"/>
-                                                                    <constraint firstItem="ukE-SO-3WD" firstAttribute="top" secondItem="LZv-Qb-IGd" secondAttribute="top" id="jbt-0D-4hJ"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="ukE-SO-3WD" secondAttribute="bottom" constant="26" id="lfx-W2-x6P"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="ukE-SO-3WD" secondAttribute="trailing" id="mFh-BA-OYd"/>
+                                                                    <constraint firstAttribute="width" constant="126" id="cwh-sI-YBB"/>
                                                                 </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-S9-qiL">
-                                                                <rect key="frame" x="170" y="0.0" width="136" height="64"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="VL9-zG-g4p" customClass="commonPopupButton" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="136" height="38"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="38" id="wPa-Xe-Zrt"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <state key="normal" title="Payment Sucess"/>
-                                                                        <connections>
-                                                                            <action selector="submitButtonAction:" destination="CIm-KZ-oyR" eventType="touchUpInside" id="KXO-fi-968"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="VL9-zG-g4p" secondAttribute="trailing" id="WPf-dw-crd"/>
-                                                                    <constraint firstItem="VL9-zG-g4p" firstAttribute="leading" secondItem="ETJ-S9-qiL" secondAttribute="leading" id="nah-xc-jum"/>
-                                                                    <constraint firstItem="VL9-zG-g4p" firstAttribute="top" secondItem="ETJ-S9-qiL" secondAttribute="top" id="qSv-MV-7qJ"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="VL9-zG-g4p" secondAttribute="bottom" constant="26" id="xEV-rd-Jtc"/>
-                                                                </constraints>
-                                                            </view>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="btnCancelAction:" destination="CIm-KZ-oyR" eventType="touchUpInside" id="ypL-lM-tDa"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="VL9-zG-g4p" customClass="commonPopupButton" customModule="Adelante" customModuleProvider="target">
+                                                                <rect key="frame" x="160" y="0.0" width="126" height="38"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <state key="normal" title="Payment Sucess"/>
+                                                                <connections>
+                                                                    <action selector="submitButtonAction:" destination="CIm-KZ-oyR" eventType="touchUpInside" id="KXO-fi-968"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="38" id="8cy-wQ-1wI"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -260,7 +241,7 @@
                                             <constraint firstItem="QqX-ai-4b0" firstAttribute="leading" secondItem="bdf-L8-f2T" secondAttribute="leading" constant="22" id="kwR-OH-xjT"/>
                                             <constraint firstAttribute="trailing" secondItem="h8i-2G-srw" secondAttribute="trailing" id="mx8-eg-Fve"/>
                                             <constraint firstItem="S2Q-Ix-SZk" firstAttribute="top" secondItem="bdf-L8-f2T" secondAttribute="top" constant="27.800000000000001" id="p2z-D9-yKD"/>
-                                            <constraint firstAttribute="bottom" secondItem="h8i-2G-srw" secondAttribute="bottom" id="ybS-Xd-kr3"/>
+                                            <constraint firstAttribute="bottom" secondItem="h8i-2G-srw" secondAttribute="bottom" constant="26" id="ybS-Xd-kr3"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -288,9 +269,7 @@
                         <outlet property="lblDescription" destination="QqX-ai-4b0" id="gIz-kT-0i3"/>
                         <outlet property="lblTitle" destination="rPy-yI-xNb" id="np1-hk-E5g"/>
                         <outlet property="submitButton" destination="VL9-zG-g4p" id="7j2-ev-Lkz"/>
-                        <outlet property="vwCancel" destination="LZv-Qb-IGd" id="rNP-bf-wFc"/>
                         <outlet property="vwMain" destination="iU3-Yz-Yug" id="OEs-Yl-VZH"/>
-                        <outlet property="vwSubmit" destination="ETJ-S9-qiL" id="7VF-3W-bp8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whY-cs-lhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

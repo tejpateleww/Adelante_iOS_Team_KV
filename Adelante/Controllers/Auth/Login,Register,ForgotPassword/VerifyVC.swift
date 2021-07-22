@@ -188,13 +188,13 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     @IBAction func btnResendOtp(_ sender: UIButton) {
         if isFromLogin == true && isFromRegister == false {
             self.clearAllFields()
-           // self.webserviceForOtpLogin()
+//            self.webserviceForSendOTP()
         } else if isFromLogin == false && isFromRegister == true {
             self.clearAllFields()
-           // self.webserviceForOtpRegister()
+            self.webserviceForSendOTP()
         }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
             self.clearAllFields()
-           // self.webserviceForOtpRegister()
+            self.webserviceForSendOTP()
         }
     }
     
@@ -294,6 +294,24 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }
         })
+    }
+    func webserviceForSendOTP()
+    {
+        let otp = sendOtpReqModel()
+        otp.user_name = strEmail
+        
+       // self.showHUD()
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
+            self.hideHUD()
+            if(status){
+                let otpModel = otpReceive.init(fromJson: json)
+                Utilities.showAlertOfAPIResponse(param: otpModel.code, vc: self)
+                print(json)
+                strOTP = otpModel.code
+            }else {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        }
     }
 }
 

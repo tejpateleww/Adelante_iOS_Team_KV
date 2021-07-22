@@ -20,6 +20,8 @@ pod 'Alamofire', '5.0'
     pod 'GooglePlaces'
     pod 'FormTextField'
     pod 'Firebase/Crashlytics'
-    
+    pod 'GoogleMaps'
+    pod 'SkeletonView'
+
 end
 

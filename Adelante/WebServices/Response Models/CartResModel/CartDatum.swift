@@ -1,7 +1,7 @@
 //
 //  CartDatum.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 5, 2021
+//  Created on July 22, 2021
 
 import Foundation
 import SwiftyJSON
@@ -11,18 +11,25 @@ class CartDatum : NSObject, NSCoding{
 
     var address : String!
     var cartId : String!
-    var grandTotal : Float!
+    var discount : String!
+    var discountAmount : String!
+    var foodlistId : String!
+    var grandTotal : String!
     var id : String!
     var item : [CartItem]!
     var lat : String!
     var lng : String!
     var name : String!
+    var oldTotal : String!
+    var promocode : String!
+    var promocodeId : String!
+    var promocodeType : String!
     var serviceFee : String!
     var storePolicy : String!
     var tax : String!
-    var total : Int!
-    var totalQuantity : Int!
-    var totalRound : Float!
+    var total : String!
+    var totalQuantity : String!
+    var totalRound : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -33,7 +40,10 @@ class CartDatum : NSObject, NSCoding{
 		}
         address = json["address"].stringValue
         cartId = json["cart_id"].stringValue
-        grandTotal = json["grand_total"].floatValue
+        discount = json["discount"].stringValue
+        discountAmount = json["discount_amount"].stringValue
+        foodlistId = json["foodlist_id"].stringValue
+        grandTotal = json["grand_total"].stringValue
         id = json["id"].stringValue
         item = [CartItem]()
         let itemArray = json["item"].arrayValue
@@ -44,12 +54,16 @@ class CartDatum : NSObject, NSCoding{
         lat = json["lat"].stringValue
         lng = json["lng"].stringValue
         name = json["name"].stringValue
+        oldTotal = json["old_total"].stringValue
+        promocode = json["promocode"].stringValue
+        promocodeId = json["promocode_id"].stringValue
+        promocodeType = json["promocode_type"].stringValue
         serviceFee = json["service_fee"].stringValue
         storePolicy = json["store_policy"].stringValue
         tax = json["tax"].stringValue
-        total = json["total"].intValue
-        totalQuantity = json["total_quantity"].intValue
-        totalRound = json["total_round"].floatValue
+        total = json["total"].stringValue
+        totalQuantity = json["total_quantity"].stringValue
+        totalRound = json["total_round"].stringValue
 	}
 
 	/**
@@ -63,6 +77,15 @@ class CartDatum : NSObject, NSCoding{
         }
         if cartId != nil{
         	dictionary["cart_id"] = cartId
+        }
+        if discount != nil{
+        	dictionary["discount"] = discount
+        }
+        if discountAmount != nil{
+        	dictionary["discount_amount"] = discountAmount
+        }
+        if foodlistId != nil{
+        	dictionary["foodlist_id"] = foodlistId
         }
         if grandTotal != nil{
         	dictionary["grand_total"] = grandTotal
@@ -85,6 +108,18 @@ class CartDatum : NSObject, NSCoding{
         }
         if name != nil{
         	dictionary["name"] = name
+        }
+        if oldTotal != nil{
+        	dictionary["old_total"] = oldTotal
+        }
+        if promocode != nil{
+        	dictionary["promocode"] = promocode
+        }
+        if promocodeId != nil{
+        	dictionary["promocode_id"] = promocodeId
+        }
+        if promocodeType != nil{
+        	dictionary["promocode_type"] = promocodeType
         }
         if serviceFee != nil{
         	dictionary["service_fee"] = serviceFee
@@ -115,18 +150,25 @@ class CartDatum : NSObject, NSCoding{
 	{
 		address = aDecoder.decodeObject(forKey: "address") as? String
 		cartId = aDecoder.decodeObject(forKey: "cart_id") as? String
-		grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? Float
+		discount = aDecoder.decodeObject(forKey: "discount") as? String
+		discountAmount = aDecoder.decodeObject(forKey: "discount_amount") as? String
+		foodlistId = aDecoder.decodeObject(forKey: "foodlist_id") as? String
+		grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
 		item = aDecoder.decodeObject(forKey: "item") as? [CartItem]
 		lat = aDecoder.decodeObject(forKey: "lat") as? String
 		lng = aDecoder.decodeObject(forKey: "lng") as? String
 		name = aDecoder.decodeObject(forKey: "name") as? String
+		oldTotal = aDecoder.decodeObject(forKey: "old_total") as? String
+		promocode = aDecoder.decodeObject(forKey: "promocode") as? String
+		promocodeId = aDecoder.decodeObject(forKey: "promocode_id") as? String
+		promocodeType = aDecoder.decodeObject(forKey: "promocode_type") as? String
 		serviceFee = aDecoder.decodeObject(forKey: "service_fee") as? String
 		storePolicy = aDecoder.decodeObject(forKey: "store_policy") as? String
 		tax = aDecoder.decodeObject(forKey: "tax") as? String
-		total = aDecoder.decodeObject(forKey: "total") as? Int
-		totalQuantity = aDecoder.decodeObject(forKey: "total_quantity") as? Int
-		totalRound = aDecoder.decodeObject(forKey: "total_round") as? Float
+		total = aDecoder.decodeObject(forKey: "total") as? String
+		totalQuantity = aDecoder.decodeObject(forKey: "total_quantity") as? String
+		totalRound = aDecoder.decodeObject(forKey: "total_round") as? String
 	}
 
     /**
@@ -140,6 +182,15 @@ class CartDatum : NSObject, NSCoding{
 		}
 		if cartId != nil{
 			aCoder.encode(cartId, forKey: "cart_id")
+		}
+		if discount != nil{
+			aCoder.encode(discount, forKey: "discount")
+		}
+		if discountAmount != nil{
+			aCoder.encode(discountAmount, forKey: "discount_amount")
+		}
+		if foodlistId != nil{
+			aCoder.encode(foodlistId, forKey: "foodlist_id")
 		}
 		if grandTotal != nil{
 			aCoder.encode(grandTotal, forKey: "grand_total")
@@ -158,6 +209,18 @@ class CartDatum : NSObject, NSCoding{
 		}
 		if name != nil{
 			aCoder.encode(name, forKey: "name")
+		}
+		if oldTotal != nil{
+			aCoder.encode(oldTotal, forKey: "old_total")
+		}
+		if promocode != nil{
+			aCoder.encode(promocode, forKey: "promocode")
+		}
+		if promocodeId != nil{
+			aCoder.encode(promocodeId, forKey: "promocode_id")
+		}
+		if promocodeType != nil{
+			aCoder.encode(promocodeType, forKey: "promocode_type")
 		}
 		if serviceFee != nil{
 			aCoder.encode(serviceFee, forKey: "service_fee")

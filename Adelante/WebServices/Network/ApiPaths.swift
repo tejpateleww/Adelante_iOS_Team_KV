@@ -108,5 +108,6 @@ enum ApiKey: String {
     case ItemList = "item_list"
     case clearFoodlist = "remove_cart"
     case FoodlisttoCart = "foodlist_cart"
+    case RemovePromocode = "remove_promocode"
 }
 

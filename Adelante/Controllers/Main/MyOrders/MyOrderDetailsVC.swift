@@ -90,7 +90,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     func setData(){
         if objOrderDetailsData != nil{
             lblId.text = objOrderDetailsData.orderId
-            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
+            if objOrderDetailsData.itemQuantity.toInt() > 1 {
+                lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
+            } else {
+                lblNoOfItems.text = objOrderDetailsData.itemQuantity + " item"
+            }
+//            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
             lblRestName.text = objOrderDetailsData.restaurantName
             lblTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.total.ConvertToTwoDecimal()
             lblAddress.text = objOrderDetailsData.address
@@ -129,7 +134,22 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-        webserviceCancelOrder()
+        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+        //controller.modalPresentationStyle = .fullScreen
+        controller.isHideCancelButton = false
+        controller.isHideSubmitButton = true
+        controller.submitBtnTitle = ""
+        controller.cancelBtnTitle = "Cancel Order"
+        controller.strDescription = "Do you really want  to cancel the order."
+        controller.strPopupTitle = "Are you Sure?"
+        controller.submitBtnColor = colors.appGreenColor
+        controller.cancelBtnColor = colors.appRedColor
+        controller.strPopupImage = "ic_popupCancleOrder"
+        controller.isCancleOrder = true
+        controller.btnSubmit = {
+            self.webserviceCancelOrder()
+        }
+        self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {
@@ -223,6 +243,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             {
                 Utilities.displayAlert(json["message"].string ?? "")
                 self.delegateCancelOrder.refreshOrderDetailsScreen()
+                appDel.navigateToHome()
             }
             else
             {

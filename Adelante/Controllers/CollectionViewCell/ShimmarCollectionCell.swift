@@ -13,9 +13,12 @@ class ShimmarCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         startShimmering()
-        viewShimmer.frame.size.width = contentView.frame.size.width
-        viewShimmer.frame.size.height = 0
+//
         // Initialization code
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        viewShimmer.frame.size.width = contentView.frame.size.width
     }
     func startShimmering(){
         self.isSkeletonable = true

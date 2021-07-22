@@ -1775,11 +1775,11 @@ Licensed under the **MIT** license
 
 ## GoogleMaps
 
-Copyright 2020 Google
+Copyright 2021 Google
 
 ## GooglePlaces
 
-Copyright 2020 Google
+Copyright 2021 Google
 
 ## GoogleUtilities
 

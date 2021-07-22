@@ -202,10 +202,10 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         if responseStatus == .gotData{
             if arrOutletList.count != 0{
                 let cell = tblRestaurantList.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
-                cell.lblAreaName.text = arrOutletList[indexPath.row].street
+                cell.lblAreaName.text = arrOutletList[indexPath.row].name
                 cell.lblAddress.text = arrOutletList[indexPath.row].address
                 cell.lblMiles.text = arrOutletList[indexPath.row].distance
-                cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
+                cell.lblRating.text = arrOutletList[indexPath.row].reviewCount
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())

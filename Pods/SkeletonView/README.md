@@ -4,10 +4,12 @@
     <a href="https://github.com/Juanpe/SkeletonView/actions?query=workflow%3ACI">
       <img src="https://github.com/Juanpe/SkeletonView/workflows/CI/badge.svg">
     </a>
-    <a href="https://codebeat.co/projects/github-com-juanpe-skeletonview-master"><img alt="codebeat badge" src="https://codebeat.co/badges/f854fdfd-31e5-4689-ba04-075d83653e60" /></a>
-    <img src="http://img.shields.io/badge/dependency%20manager-swiftpm%2Bcocoapods%2Bcarthage-green" />
-    <img src="https://img.shields.io/badge/platforms-ios%2Btvos-green" />
-    <a href="https://badge.bow-swift.io/recipe?name=SkeletonView&description=An%20elegant%20way%20to%20show%20users%20that%20something%20is%20happening%20and%20also%20prepare%20them%20to%20which%20contents%20he%20is%20waiting&url=https://github.com/juanpe/skeletonview&owner=Juanpe&avatar=https://avatars0.githubusercontent.com/u/1409041?v=4&tag=1.8.7"><img src="https://raw.githubusercontent.com/bow-swift/bow-art/master/badges/nef-playgrounds-badge.svg" alt="SkeletonView Playground" style="height:20px"></a>   
+    <a href="https://codebeat.co/projects/github-com-juanpe-skeletonview-main"><img alt="codebeat badge" src="https://codebeat.co/badges/1f37bbab-a1c8-4a4a-94d7-f21740d461e9" /></a>
+    <a href="https://cocoapods.org/pods/SkeletonView"><img src="https://img.shields.io/cocoapods/v/SkeletonView.svg?style=flat"></a>
+    <a href="https://github.com/Carthage/Carthage/"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
+    <a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/SPM-supported-Green.svg?style=flat"></a>
+    <img src="https://img.shields.io/badge/platforms-iOS_tvOS-green" />
+    <a href="https://badge.bow-swift.io/recipe?name=SkeletonView&description=An%20elegant%20way%20to%20show%20users%20that%20something%20is%20happening%20and%20also%20prepare%20them%20to%20which%20contents%20he%20is%20waiting&url=https://github.com/juanpe/skeletonview&owner=Juanpe&avatar=https://avatars0.githubusercontent.com/u/1409041?v=4&tag=1.20.0"><img src="https://raw.githubusercontent.com/bow-swift/bow-art/master/badges/nef-playgrounds-badge.svg" alt="SkeletonView Playground" style="height:20px"></a>   
 </p>
 
 <p align="center">
@@ -37,12 +39,12 @@ Enjoy it! 🙂
   - [🔠 Texts](#-texts)
   - [🦋 Appearance](#-appearance)
   - [🎨 Custom colors](#-custom-colors)
-        - [Image captured from website https://flatuicolors.com](#image-captured-from-website-httpsflatuicolorscom)
   - [🏃‍♀️ Animations](#️-animations)
   - [🏄 Transitions](#-transitions)
 - [✨ Miscellaneous](#-miscellaneous)
 - [❤️ Contributing](#️-contributing)
 - [📢 Mentions](#-mentions)
+- [🏆 Sponsors](#-sponsors)
 - [👨🏻‍💻 Author](#-author)
 - [👮🏻 License](#-license)
 
@@ -563,11 +565,11 @@ Then, when the skeleton appears, you can see the view hierarchy in the Xcode con
 
 * iOS 9.0+
 * tvOS 9.0+
-* Swift 5
-
+* Swift 5.3
 
 ## ❤️ Contributing
 This is an open source project, so feel free to contribute. How?
+
 - Open an [issue](https://github.com/Juanpe/SkeletonView/issues/new).
 - Send feedback via [email](mailto://juanpecatalan.com).
 - Propose your own fixes, suggestions and open a pull request with the changes.
@@ -593,7 +595,12 @@ For more information, please read the [contributing guidelines](https://github.c
 - [Swift News #36](https://www.youtube.com/watch?v=mAGpsQiy6so)
 - [Best iOS articles, new tools & more](https://medium.com/flawless-app-stories/best-ios-articles-new-tools-more-fcbe673e10d)
 
+## 🏆 Sponsors
 
+Open-source projects cannot live long without your help. If you find **SkeletonView** is useful, please consider supporting this 
+project by becoming a sponsor. 
+
+Become a sponsor through [GitHub Sponsors](https://github.com/sponsors/Juanpe) :heart:
 
 ## 👨🏻‍💻 Author
 
