@@ -12,6 +12,7 @@ import Firebase
 import UserNotifications
 import CoreLocation
 import GooglePlaces
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
@@ -39,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         FirebaseApp.configure()
         
         registerForPushNotifications()
-        
-        GMSPlacesClient.provideAPIKey("AIzaSyAHoxA9mAOwiilUUwLfauECc7SrJSNwywM")
+        GMSServices.provideAPIKey("AIzaSyAanqcKJTTvrFIsWqQRCjTdecR_CpPZo0E")
+        GMSPlacesClient.provideAPIKey("AIzaSyAanqcKJTTvrFIsWqQRCjTdecR_CpPZo0E")
         return true
     }
     func setUpLocationServices() {

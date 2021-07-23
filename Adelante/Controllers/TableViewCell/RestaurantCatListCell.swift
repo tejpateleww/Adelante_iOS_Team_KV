@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 @objc protocol RestaurantCatListDelegate {
-    func SelectedCategory(_ CategoryId: String)
+    func SelectedCategory(_ CategoryId: String,_ SelctedIndex: IndexPath)
 }
 
 class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -25,35 +25,40 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
         super.awakeFromNib()
         self.colRestaurantCatList.delegate = self
         self.colRestaurantCatList.dataSource = self
-        self.colRestaurantCatList.reloadData()
+//        self.colRestaurantCatList.reloadData()
+       // self.colRestaurantCatList.scrollToItem(at: selectedIndexPath, at: .top, animated: true)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        colRestaurantCatList.scrollToItem(at: self.selectedIndexPath, at: .top, animated: true)
+//    }
+//    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrCategories.count
     }
-    @IBAction func btnCategortClick(_ sender : UIButton){
-        DispatchQueue.main.async {
-            if self.selectedIdForFood == "" {
-                self.selectedIdForFood = self.arrCategories[sender.tag].id
-                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
-            }
-            else if self.selectedIdForFood == self.arrCategories[sender.tag].id{
-                self.selectedIdForFood = ""
-                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
-            } else {
-                self.selectedIdForFood = self.arrCategories[sender.tag].id
-                self.colRestaurantCatList.reloadData()
-            }
-        }
-        self.delegateResCatCell?.SelectedCategory(selectedIdForFood)
+//    @IBAction func btnCategortClick(_ sender : UIButton){
+//        DispatchQueue.main.async {
+//            if self.selectedIdForFood == "" {
+//                self.selectedIdForFood = self.arrCategories[sender.tag].id
+//                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+//                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+//            }
+//            else if self.selectedIdForFood == self.arrCategories[sender.tag].id{
+//                self.selectedIdForFood = ""
+//                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
+//                self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+//            } else {
+//                self.selectedIdForFood = self.arrCategories[sender.tag].id
+//                self.colRestaurantCatList.reloadData()
+//            }
+//        }
+//        self.delegateResCatCell?.SelectedCategory(selectedIdForFood)
         
-    }
+//    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = colRestaurantCatList.dequeueReusableCell(withReuseIdentifier: RestaurantCategoryCell.reuseIdentifier, for: indexPath) as! RestaurantCategoryCell
         // cell.btnCategory.setTitle(arrCategories[indexPath.row].name, for: .normal)
@@ -68,6 +73,7 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
         } else {
             cell.viewCategory.backgroundColor = colors.segmentDeselectedColor.value
         }
+        
         //        cell.btnCategory.tag = indexPath.row
         //        cell.btnCategory.addTarget(self, action: #selector(btnCategortClick(_:)), for: .touchUpOutside)
         return cell
@@ -82,17 +88,18 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
         if self.selectedIdForFood == "" {
             self.selectedIdForFood = self.arrCategories[indexPath.row].id
             selectedIndexPath = IndexPath(item:indexPath.row, section: 0)
-            self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+//            self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
         }
         else if self.selectedIdForFood == self.arrCategories[indexPath.row].id{
             self.selectedIdForFood = ""
             selectedIndexPath = IndexPath(item:indexPath.row , section: 0)
-            self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
+//            self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
         } else {
             self.selectedIdForFood = self.arrCategories[indexPath.row].id
-            self.colRestaurantCatList.reloadData()
+            selectedIndexPath = IndexPath(item:indexPath.row , section: 0)
+//            self.colRestaurantCatList.reloadData()
         }
         //        }
-        self.delegateResCatCell?.SelectedCategory(selectedIdForFood)
+        self.delegateResCatCell?.SelectedCategory(selectedIdForFood, selectedIndexPath)
     }
 }

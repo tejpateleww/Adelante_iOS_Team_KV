@@ -22,11 +22,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var refreshList = UIRefreshControl()
     var arrCard = [CardList]()
     var filterSelect = [0]
-    
+    var strCartID = ""
     var direction:CGFloat = 1
     var shakes = 0
-    
-    var OrderDetails : String?
+     var OrderDetails : String?
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
@@ -51,6 +50,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnAddCart.isHidden = true
         //        tblPaymentMethod.refreshControl = refreshList
         //        refreshList.addTarget(self, action: #selector(webserviceGetAddPayment), for: .valueChanged)
         setUpLocalizedStrings()
@@ -233,6 +233,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             if indexPath.row == 0 {
                 let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
                 cell1.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+                WebServiceCallForOrder()
             } else {
                 let cell2 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
                 cell2.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
@@ -301,6 +302,38 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             //            }
         })
         
+    }
+    func WebServiceCallForOrder(){
+        
+        let ReqModel = orderPlaceReqModel()
+        ReqModel.user_id = SingletonClass.sharedInstance.UserId
+        ReqModel.cart_id = strCartID
+        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+                //controller.modalPresentationStyle = .fullScreen
+                controller.isHideCancelButton = true
+                controller.isHideSubmitButton = false
+                controller.submitBtnTitle = "  Payment Successful      "
+                controller.cancelBtnTitle = ""
+                controller.strDescription = json["data"].string ?? ""
+                controller.strPopupTitle = ""
+                controller.submitBtnColor = colors.appGreenColor
+                controller.cancelBtnColor = colors.appRedColor
+                controller.strPopupImage = "ic_popupPaymentSucessful"
+                controller.isCancleOrder = true
+                controller.btnSubmit = {
+                    appDel.navigateToHome()
+                }
+                self.present(controller, animated: true, completion: nil)
+//                commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
+            }
+            else
+            {
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+            }
+        })
     }
     func refreshAddPaymentScreen() {
         webserviceGetAddPayment()
@@ -374,5 +407,5 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
 //        })
 //
 //    }
-//
+
 //}

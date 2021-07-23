@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import SwiftyJSON
 import GooglePlaces
-//import GoogleMaps
+import GoogleMaps
 class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     // MARK: - Properties
@@ -33,7 +33,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
-    @IBOutlet weak var restaurantLocationView: customImagewithShadow!
+    @IBOutlet weak var restaurantLocationView: GMSMapView!
     @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
     @IBOutlet weak var btnCanclePromoCOde: myOrdersBtn!
     @IBOutlet weak var lblPromoCode: CheckOutLabel!
@@ -95,6 +95,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        restaurantLocationView.layer.cornerRadius = 7
+        restaurantLocationView.clipsToBounds = true
         skeletonData.showAnimatedSkeleton()
         skeletonData.frame.size.width = view.frame.size.width
         self.view.addSubview(skeletonData)
@@ -106,6 +108,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(self.GetPromocodeData(notification:)), name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
+//        location()
         webserviceGetCartDetails()
     }
     
@@ -341,9 +344,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func placeOrderBtn(_ sender: submitButton) {
-        WebServiceCallForOrder()
-//        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-//        self.navigationController?.pushViewController(controller, animated: true)
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+        controller.strCartID = strCartId
+        self.navigationController?.pushViewController(controller, animated: true)
         
         
     }
@@ -453,7 +456,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 self.tblAddedProduct.reloadData()
                 self.tblOrderDetails.reloadData()
                 setData()
-                addMapView()
+                location()
+//                addMapView()
                 self.tblOrderDetails.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
                 self.tblAddedProduct.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
             }
@@ -489,7 +493,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 //                self.tblAddedProduct.reloadData()
                 //                self.tblOrderDetails.reloadData()
                 self.setData()
-                self.addMapView()
+                self.location()
+//                self.addMapView()
             }
             else
             {
@@ -497,24 +502,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
         }
     }
-    func WebServiceCallForOrder(){
-        
-        let ReqModel = orderPlaceReqModel()
-        ReqModel.user_id = SingletonClass.sharedInstance.UserId
-        ReqModel.cart_id = strCartId
-        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
-            if(status)
-            {
-//                commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrdersVC.storyboardID) as! MyOrdersVC
-                    self.navigationController?.pushViewController(controller, animated: true)
-            }
-            else
-            {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
-            }
-        })
-    }
+    
     func webserviceRemovePromocode(){
         let removePromo = removePromocodeReqModel()
         removePromo.user_id = SingletonClass.sharedInstance.UserId
@@ -555,28 +543,32 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
         })
     }
-//    func location(){
-//    let camera = GMSCameraPosition.camera(withLatitude: 45.55934, longitude: 93.71822, zoom: 7.0)
-//    //        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-//                    
-//            restaurantLocationView.camera = camera
-//                    let marker = GMSMarker()
-//            let markerImage = UIImage(named: "imgMarker") //!.withRenderingMode(.alwaysTemplate)
-//            let markerView = UIImageView(image: markerImage)
-//                            marker.position = CLLocationCoordinate2D(latitude: 45.55934, longitude: 93.71822)
-//                    marker.iconView = markerView
-//                            marker.title = "Germain House"
-//                            marker.snippet = "Canada"
-//                            marker.map = restaurantLocationView
-//            let path = GMSMutablePath()
-//            path.addLatitude(45.55934, longitude: 93.71822)
-//            path.addLatitude(45.55934, longitude: 93.0)
-//            let polyline = GMSPolyline(path: path)
-//            polyline.strokeWidth = 4.0
-//            polyline.spans = [GMSStyleSpan(color: .black)]
-//            polyline.geodesic = true
-//            polyline.map = restaurantLocationView
-//    }
+    
+    func location(){
+//        getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+        let camera = GMSCameraPosition.camera(withLatitude: cartDetails?.lat.toDouble() ?? 0.0, longitude: cartDetails?.lng.toDouble() ?? 0.0, zoom: 18.0)
+//        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        restaurantLocationView.camera = camera
+//        do {
+//             // Set the map style by passing the URL of the local file.
+//             if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+//
+//                restaurantLocationView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+//             } else {
+//               NSLog("Unable to find style.json")
+//             }
+//           } catch {
+//             NSLog("One or more of the map styles failed to load. \(error)")
+//           }
+                let marker = GMSMarker()
+        let markerImage = UIImage(named: "imgMarker") //!.withRenderingMode(.alwaysTemplate)
+        let markerView = UIImageView(image: markerImage)
+                        marker.position = CLLocationCoordinate2D(latitude: cartDetails?.lat.toDouble() ?? 0.0, longitude: cartDetails?.lng.toDouble() ?? 0.0)
+                marker.iconView = markerView
+        marker.title = cartDetails?.name
+//        marker.snippet =
+                        marker.map = restaurantLocationView
+    }
 }
 
 
