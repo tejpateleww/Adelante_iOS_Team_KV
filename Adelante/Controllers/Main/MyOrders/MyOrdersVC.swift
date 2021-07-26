@@ -340,7 +340,22 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
 //                }
                 
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                
+                if(response["data"] == [])
+                {
+                    if self.selectedSegmentTag == 0 {
+                        self.arrPastList?.removeAll()
+                        
+                    } else {
+                        self.arrInProcessList?.removeAll()
+                        
+                    }
+                    self.tblOrders.reloadData()
+                }
+                else
+                {
+                    Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                }
             }
             
         })

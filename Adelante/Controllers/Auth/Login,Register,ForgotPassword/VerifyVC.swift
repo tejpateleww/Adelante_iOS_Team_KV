@@ -43,7 +43,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     var strEmail = ""
     var strphoneNo = ""
     var strPassword = ""
-    var strType = ""
+//    var strType = ""
     var strtime = 30
     var selectedImage : UIImage?
     var isRemovePhoto = false
@@ -179,10 +179,8 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
             if isFromLogin == true && isFromRegister == false {
                // self.webserviceForLogin()
             } else if isFromLogin == false && isFromRegister == true {
-                strType = "0"
                 webserviceForRegister()
             } else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
-                strType = "1"
                 webserviceForEditprofile()
             }
         }
@@ -191,13 +189,12 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     @IBAction func btnResendOtp(_ sender: UIButton) {
         if isFromLogin == true && isFromRegister == false {
             self.clearAllFields()
-//            self.webserviceForSendOTP()
         } else if isFromLogin == false && isFromRegister == true {
             self.clearAllFields()
-            self.webserviceForSendOTP()
+            self.webserviceForSendOTP(type: "0")
         }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
             self.clearAllFields()
-            self.webserviceForSendOTP()
+            self.webserviceForSendOTP(type: "1")
         }
     }
     
@@ -298,19 +295,19 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
             }
         })
     }
-    func webserviceForSendOTP()
+    func webserviceForSendOTP(type : String)
     {
         let otp = sendOtpReqModel()
         otp.email = strEmail
         otp.phone = strPassword
-        otp.type = strType
+        otp.type = type
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 let otpModel = otpReceive.init(fromJson: json)
-                Utilities.showAlertOfAPIResponse(param: otpModel.code, vc: self)
+                Utilities.showAlertOfAPIResponse(param: otpModel.code ?? "-", vc: self)
                 print(json)
                 strOTP = otpModel.code
             }else {

@@ -117,7 +117,7 @@ class EditProfileVC: BaseViewController{
         txtTemp.text = txtLastName.text?.replacingOccurrences(of: " ", with: "")
         let lastname =  txtTemp.validatedText(validationType: ValidatorType.username(field: "last name"))
         
-        let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.requiredField(field: "contact number"))
+        let phone = txtPhoneNumber.validatedText(validationType: ValidatorType.phoneNo)
         
         if (!firstName.0){
             Utilities.ShowAlert(OfMessage: firstName.1)
