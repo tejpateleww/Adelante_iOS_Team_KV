@@ -54,7 +54,8 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var pageLimit = 5
     var selectedRestaurantId = ""
     var isRefresh = false
-    
+    var headerCell : RestaurantCatListCell?
+
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -412,15 +413,17 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         }
     }
     
+    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerCell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier) as! RestaurantCatListCell
-        headerCell.arrCategories = self.arrCategories
-        headerCell.delegateResCatCell = self
-        headerCell.selectedIdForFood = self.SelectedCatId
-        headerCell.selectedIndexPath = self.SelectedCatIndex
-        headerCell.colRestaurantCatList.reloadData()
+        headerCell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier) as? RestaurantCatListCell
+        headerCell?.arrCategories = self.arrCategories
+        headerCell?.delegateResCatCell = self
+        headerCell?.selectedIdForFood = self.SelectedCatId
+        headerCell?.selectedIndexPath = self.SelectedCatIndex
+        headerCell?.colRestaurantCatList.reloadData()
 //        headerCell.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .top, animated: true)
-        headerCell.selectionStyle = .none
+        headerCell?.selectionStyle = .none
         return headerCell
     }
     
@@ -536,41 +539,26 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.tblMainList.dataSource = self
                 self.tblMainList.isScrollEnabled = true
                 self.tblMainList.isUserInteractionEnabled = true
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-              
-                if isFromFilter{
-//                    let allButFirst = self.tblMainList.indexPathsForVisibleRows ?? []
-//                    self.tblMainList.reloadRows(at: allButFirst, with: .automatic)
-//                    self.tblMainList.beginUpdates()
-//                    self.tblMainList.reloadSections([0], with: .none)
-                    self.tblMainList.reloadData()
-                    let header = self.tblMainList.headerView(forSection: 0) as? RestaurantCatListCell
-//                    header?.arrCategories = Homedata.category
-//                    header?.colRestaurantCatList.reloadData()
-                    header?.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .right, animated: false)
-//                    self.tblMainList.endUpdates()
+                self.tblMainList.reloadData()
+                self.colVwRestWthPage.dataSource = self
+                self.colVwRestWthPage.isScrollEnabled = true
+                self.colVwRestWthPage.isUserInteractionEnabled = true
+                self.colVwRestWthPage.reloadData()
 
+                if isFromFilter{
+                    let indexes = (0..<self.arrRestaurant.count).map { IndexPath(row: $0, section: 0) }
+                    self.tblMainList.reloadRows(at: indexes, with: .fade)
+                    DispatchQueue.main.async {
+                        self.headerCell?.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .centeredHorizontally, animated: false)
+                    }
                 }else{
                     self.tblMainList.reloadData()
             
                 }
-               
-             
-//                }
-//                self.tblMainList.reloadData()
-                self.colVwRestWthPage.dataSource = self
-                self.colVwRestWthPage.isScrollEnabled = true
-                self.colVwRestWthPage.isUserInteractionEnabled = true
-                 self.colVwRestWthPage.reloadData()
             }else{
                 Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
-                //                Utilities.showAlertOfAPIResponse(param: error ?? "No internet connection", vc: self)
             }
-//            if self.arrRestaurant.count > 0{
-//                self.tblMainList.restore()
-//            }else {
-//                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-//            }
+
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
