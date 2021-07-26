@@ -183,7 +183,9 @@ class EditProfileVC: BaseViewController{
     func webserviceForSendOTP()
     {
         let otp = sendOtpReqModel()
-        otp.user_name = txtEmail.text ?? ""
+        otp.email = txtEmail.text ?? ""
+        otp.phone = txtPhoneNumber.text ?? ""
+        otp.type = "1"
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in

@@ -176,7 +176,9 @@ class RegisterViewController: UIViewController {
     func webserviceForSendOTP()
     {
         let otp = sendOtpReqModel()
-        otp.user_name = txtEmail.text ?? ""
+        otp.email = txtEmail.text ?? ""
+        otp.phone = txtPhoneNumber.text ?? ""
+        otp.type = "0"
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in

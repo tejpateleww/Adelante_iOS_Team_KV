@@ -43,6 +43,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     var strEmail = ""
     var strphoneNo = ""
     var strPassword = ""
+    var strType = ""
     var strtime = 30
     var selectedImage : UIImage?
     var isRemovePhoto = false
@@ -178,8 +179,10 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
             if isFromLogin == true && isFromRegister == false {
                // self.webserviceForLogin()
             } else if isFromLogin == false && isFromRegister == true {
+                strType = "0"
                 webserviceForRegister()
             } else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
+                strType = "1"
                 webserviceForEditprofile()
             }
         }
@@ -298,7 +301,9 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     func webserviceForSendOTP()
     {
         let otp = sendOtpReqModel()
-        otp.user_name = strEmail
+        otp.email = strEmail
+        otp.phone = strPassword
+        otp.type = strType
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
