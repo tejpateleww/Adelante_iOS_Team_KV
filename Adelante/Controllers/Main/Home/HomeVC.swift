@@ -54,7 +54,8 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var pageLimit = 5
     var selectedRestaurantId = ""
     var isRefresh = false
-    
+    var headerCell : RestaurantCatListCell?
+
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -78,7 +79,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         setUpLocalizedStrings()
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        webserviceGetDashboard(isFromFilter: false)
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshListing), for: .valueChanged)
         let button = UIButton()
@@ -139,7 +140,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        webserviceGetDashboard(isFromFilter: false)
     }
     @objc func deSelectFilterAndRefresh() {
         selectedSortTypedIndexFromcolVwFilter = -1
@@ -268,7 +269,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
                 cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
                 cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedSortTypedIndexFromcolVwFilter))
             }
             else {
                 cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
@@ -413,15 +413,17 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         }
     }
     
+    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerCell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier) as! RestaurantCatListCell
-        headerCell.arrCategories = self.arrCategories
-        headerCell.delegateResCatCell = self
-        headerCell.selectedIdForFood = self.SelectedCatId
-        headerCell.selectedIndexPath = self.SelectedCatIndex
-        headerCell.colRestaurantCatList.reloadData()
+        headerCell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier) as? RestaurantCatListCell
+        headerCell?.arrCategories = self.arrCategories
+        headerCell?.delegateResCatCell = self
+        headerCell?.selectedIdForFood = self.SelectedCatId
+        headerCell?.selectedIndexPath = self.SelectedCatIndex
+        headerCell?.colRestaurantCatList.reloadData()
 //        headerCell.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .top, animated: true)
-        headerCell.selectionStyle = .none
+        headerCell?.selectionStyle = .none
         return headerCell
     }
     
@@ -455,7 +457,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "")
+        self.webserviceGetDashboard(isFromFilter:true)
        
 
     }
@@ -473,7 +475,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //        }else{
             self.SelectFilterId = SortId
             self.pageNumber = 1
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        webserviceGetDashboard(isFromFilter: false)
 //        }
     }
     // MARK: - UIScrollView Delegates
@@ -484,12 +486,12 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func stoppedScrolling() {
         if isNeedToReload && isRefresh == false {
             self.pageNumber = self.pageNumber + 1
-            webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+            webserviceGetDashboard(isFromFilter: false)
         }
         // done, do whatever
     }
     // MARK: - Api Calls
-    @objc func webserviceGetDashboard(isFromFilter : Bool,strTabfilter:String){
+    @objc func webserviceGetDashboard(isFromFilter : Bool){
         let Deshboard = DashboardReqModel()
         Deshboard.category_id = SelectedCatId
         Deshboard.user_id = SingletonClass.sharedInstance.UserId
@@ -497,7 +499,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         Deshboard.page = "\(self.pageNumber)"
-        Deshboard.tab_filter = strTabfilter
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             responseStatus = .gotData
@@ -538,41 +539,26 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.tblMainList.dataSource = self
                 self.tblMainList.isScrollEnabled = true
                 self.tblMainList.isUserInteractionEnabled = true
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-              
-                if isFromFilter{
-//                    let allButFirst = self.tblMainList.indexPathsForVisibleRows ?? []
-//                    self.tblMainList.reloadRows(at: allButFirst, with: .automatic)
-//                    self.tblMainList.beginUpdates()
-//                    self.tblMainList.reloadSections([0], with: .none)
-                    self.tblMainList.reloadData()
-                    let header = self.tblMainList.headerView(forSection: 0) as? RestaurantCatListCell
-//                    header?.arrCategories = Homedata.category
-//                    header?.colRestaurantCatList.reloadData()
-                    header?.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .right, animated: false)
-//                    self.tblMainList.endUpdates()
+                self.tblMainList.reloadData()
+                self.colVwRestWthPage.dataSource = self
+                self.colVwRestWthPage.isScrollEnabled = true
+                self.colVwRestWthPage.isUserInteractionEnabled = true
+                self.colVwRestWthPage.reloadData()
 
+                if isFromFilter{
+                    let indexes = (0..<self.arrRestaurant.count).map { IndexPath(row: $0, section: 0) }
+                    self.tblMainList.reloadRows(at: indexes, with: .fade)
+                    DispatchQueue.main.async {
+                        self.headerCell?.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .centeredHorizontally, animated: false)
+                    }
                 }else{
                     self.tblMainList.reloadData()
             
                 }
-               
-             
-//                }
-//                self.tblMainList.reloadData()
-                self.colVwRestWthPage.dataSource = self
-                self.colVwRestWthPage.isScrollEnabled = true
-                self.colVwRestWthPage.isUserInteractionEnabled = true
-                 self.colVwRestWthPage.reloadData()
             }else{
-                Utilities.displayErrorAlert(response["message"].string ?? "Something went wrong")
-                //                Utilities.showAlertOfAPIResponse(param: error ?? "No internet connection", vc: self)
+                Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
             }
-//            if self.arrRestaurant.count > 0{
-//                self.tblMainList.restore()
-//            }else {
-//                self.tblMainList.setEmptyMessage("emptyMsg_Restaurant".Localized())
-//            }
+
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
@@ -601,7 +587,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        webserviceGetDashboard(isFromFilter: false)
 //        if selectedIndex != ""{
 //            let i = Int(selectedIndex) ?? 0
 //            arrRestaurant[i].favourite = strStatus
@@ -610,7 +596,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func refreshFavoriteScreen() {
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        webserviceGetDashboard(isFromFilter: false)
     }
 }
 
@@ -622,7 +608,7 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
     print("Place ID: \(place.placeID!)")
     lblAddress.text =  place.name
     SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-    webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+    webserviceGetDashboard(isFromFilter: false)
     dismiss(animated: true, completion: nil)
   }
 

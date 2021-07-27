@@ -43,6 +43,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     var strEmail = ""
     var strphoneNo = ""
     var strPassword = ""
+//    var strType = ""
     var strtime = 30
     var selectedImage : UIImage?
     var isRemovePhoto = false
@@ -188,13 +189,12 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     @IBAction func btnResendOtp(_ sender: UIButton) {
         if isFromLogin == true && isFromRegister == false {
             self.clearAllFields()
-//            self.webserviceForSendOTP()
         } else if isFromLogin == false && isFromRegister == true {
             self.clearAllFields()
-            self.webserviceForSendOTP()
+            self.webserviceForSendOTP(type: "0")
         }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
             self.clearAllFields()
-            self.webserviceForSendOTP()
+            self.webserviceForSendOTP(type: "1")
         }
     }
     
@@ -295,27 +295,23 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
             }
         })
     }
-    func webserviceForSendOTP()
+    func webserviceForSendOTP(type : String)
     {
         let otp = sendOtpReqModel()
         otp.email = strEmail
-        otp.phone = strphoneNo
-        if isFromRegister == true{
-            otp.type = "0"
-        }else{
-            otp.type = "1"
-        }
+        otp.phone = strPassword
+        otp.type = type
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 let otpModel = otpReceive.init(fromJson: json)
-                Utilities.showAlertOfAPIResponse(param: otpModel.code, vc: self)
+                Utilities.showAlertOfAPIResponse(param: otpModel.code ?? "-", vc: self)
                 print(json)
                 strOTP = otpModel.code
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         }
     }
