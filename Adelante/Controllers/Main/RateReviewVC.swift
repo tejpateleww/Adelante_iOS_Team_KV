@@ -66,7 +66,7 @@ class RateReviewVC: BaseViewController {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }

@@ -108,7 +108,7 @@ class LoginViewController: BaseViewController {
                         }
                     }
                 }else{
-                    Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                    Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
                 }
             }
         })
@@ -144,7 +144,7 @@ class LoginViewController: BaseViewController {
                 print(json)
                 Utilities.displayErrorAlert(json["message"].string!)
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }

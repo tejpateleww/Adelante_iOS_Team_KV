@@ -70,8 +70,10 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
         if arrCategories[indexPath.row].id.contains(selectedIdForFood)
         {
             cell.viewCategory.backgroundColor = colors.segmentSelectedColor.value
+            cell.lblCategory.textColor = UIColor.black
         } else {
             cell.viewCategory.backgroundColor = colors.segmentDeselectedColor.value
+            cell.lblCategory.textColor = UIColor.init(hexString: "#A9ABAE")
         }
         
         //        cell.btnCategory.tag = indexPath.row

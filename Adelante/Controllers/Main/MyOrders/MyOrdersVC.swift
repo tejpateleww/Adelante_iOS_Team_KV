@@ -11,6 +11,7 @@ import BetterSegmentedControl
 import SDWebImage
 import SkeletonView
 
+
 class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate,orderCancelDelegate,SkeletonTableViewDataSource {
     
     
@@ -20,9 +21,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var selectedSegmentTag = 0
     var refreshList = UIRefreshControl()
     var responseStatus : webserviceResponse = .initial
-    var arrPastList :  [orderListingData]?
-    var arrInProcessList :  [orderListingData]?
-    
+    var arrPastList =  [orderListingData]()
+    var arrInProcessList =  [orderListingData]()
+    var isfrompayment : Bool?
     var isRepeatFrom = false
     var strOrderId = ""
     // MARK: - IBOutlets
@@ -31,6 +32,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             tblOrders.isSkeletonable = true
         }
     }
+    @IBOutlet weak var segment: myOrdersSegmentControl!
     
     
     // MARK: - ViewController Lifecycle
@@ -48,6 +50,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
+        
+        if let _ = SingletonClass.sharedInstance.selectInProcessInMyOrder{
+            self.segment.setIndex(1)
+            self.segmentControlChanged(self.segment)
+        }
         
     }
     // MARK: - Other Methods
@@ -69,13 +76,14 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     // MARK: - IBActions
     
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
+        SingletonClass.sharedInstance.selectInProcessInMyOrder = nil
         selectedSegmentTag = sender.index
         if selectedSegmentTag == 0{
-            if self.arrPastList?.count == 0{
+            if self.arrPastList.count == 0{
                 webserviceGetOrderDetail(selectedOrder:  "past" )
             }
         }else{
-            if self.arrInProcessList == nil || self.arrInProcessList?.count == 0 {
+            if self.arrInProcessList == nil || self.arrInProcessList.count == 0 {
                 webserviceGetOrderDetail(selectedOrder:  "In-Process")
             }
             
@@ -101,9 +109,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     // MARK: - SkeletonTableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         if selectedSegmentTag == 0  {
-            return self.responseStatus == .gotData ? (self.arrPastList?.count ?? 0 > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+            return self.responseStatus == .gotData ? (self.arrPastList.count ?? 0 > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
         }else{
-            return self.responseStatus == .gotData ? (self.arrInProcessList?.count ?? 0 > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+            return self.responseStatus == .gotData ? (self.arrInProcessList.count ?? 0 > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
         }
     }
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,8 +124,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if selectedSegmentTag == 0  {
             if responseStatus == .gotData{
-                if arrPastList?.count != 0 {
-                    return self.arrPastList?.count ?? 0
+                if arrPastList.count != 0 {
+                    return self.arrPastList.count ?? 0
                 }else{
                     return 1
                 }
@@ -131,8 +139,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
 //            }
         } else {
             if responseStatus == .gotData{
-                if arrInProcessList?.count != 0 {
-                    return self.arrInProcessList?.count ?? 0
+                if arrInProcessList.count != 0 {
+                    return self.arrInProcessList.count ?? 0
                 }else{
                     return 1
                 }
@@ -152,7 +160,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         
         if selectedSegmentTag == 0  {
             if responseStatus == .gotData{
-                if arrPastList?.count != 0 {
+                if arrPastList.count != 0 {
                     let cell = tblOrders.dequeueReusableCell(withIdentifier: MyOrdersCell.reuseIdentifier, for: indexPath) as! MyOrdersCell
                     if selectedSegmentTag == 0 {
                         cell.vwShare.isHidden = true
@@ -164,7 +172,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                     }
                     
-                    if let obj = self.arrPastList?[indexPath.row]  {
+                     let obj = self.arrPastList[indexPath.row]
                         cell.lblRestName.text = obj.restaurantName
                         cell.lblRestLocation.text = obj.street
                         cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
@@ -176,16 +184,16 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
                         
                         strOrderId = obj.id
-                    }
+                    
                     cell.cancel = {
-                        let alertController = UIAlertController(title: AppName,
-                                                                message: "Are you sure you want to cancel order".Localized(),
-                                                                preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                        alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
+//                        let alertController = UIAlertController(title: AppName,
+//                                                                message: "Are you sure you want to cancel order".Localized(),
+//                                                                preferredStyle: .alert)
+//                        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//                        alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
                             self.webserviceCancelOrder()
-                        })
-                        self.present(alertController, animated: true)
+//                        })
+//                        self.present(alertController, animated: true)
                     }
                     cell.selectionStyle = .none
                     return cell
@@ -204,7 +212,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             }
         } else {
             if responseStatus == .gotData{
-                if arrInProcessList?.count != 0 {
+                if arrInProcessList.count != 0 {
                     let cell = tblOrders.dequeueReusableCell(withIdentifier: MyOrdersCell.reuseIdentifier, for: indexPath) as! MyOrdersCell
                     if selectedSegmentTag == 0 {
                         cell.vwShare.isHidden = true
@@ -216,7 +224,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                     }
                     
-                    if let obj = self.arrInProcessList?[indexPath.row] {
+                     let obj = self.arrInProcessList[indexPath.row] 
                         cell.lblRestName.text = obj.restaurantName
                         cell.lblRestLocation.text = obj.street
                         cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
@@ -228,18 +236,18 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
                         
                         strOrderId = obj.id
-                    }
+                    
                     cell.cancel = {
                         
-                        let alertController = UIAlertController(title: AppName,
-                                                                message: "Are you sure you want to cancel order".Localized(),
-                                                                preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                        alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
+//                        let alertController = UIAlertController(title: AppName,
+//                                                                message: "Are you sure you want to cancel order".Localized(),
+//                                                                preferredStyle: .alert)
+//                        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//                        alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
                             self.webserviceCancelOrder()
                             
-                        })
-                        self.present(alertController, animated: true)
+//                        })
+//                        self.present(alertController, animated: true)
                     }
                     cell.selectionStyle = .none
                     return cell
@@ -260,7 +268,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if selectedSegmentTag == 0  {
             if responseStatus == .gotData{
-                if arrPastList?.count != 0 {
+                if arrPastList.count != 0 {
                     return UITableView.automaticDimension
                 }else{
                     return tableView.frame.height
@@ -270,7 +278,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             }
         } else {
             if responseStatus == .gotData{
-                if arrInProcessList?.count != 0 {
+                if arrInProcessList.count != 0 {
                     return UITableView.automaticDimension
                 }else{
                     return tableView.frame.height
@@ -283,28 +291,28 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectedSegmentTag == 0  {
-            if self.arrPastList?.count != 0 {
+            if self.arrPastList.count != 0 {
                 let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
-                if let obj = self.arrPastList?[indexPath.row] {
+                let obj = self.arrPastList[indexPath.row]
                     orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
                     orderDetailsVC.orderId = obj.id
                     orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
                     orderDetailsVC.strRestaurantId = obj.restaurant_id
                     orderDetailsVC.delegateCancelOrder = self
                     self.navigationController?.pushViewController(orderDetailsVC, animated: true)
-                }
+                
             }
         } else {
-            if self.arrInProcessList?.count != 0 {
+            if self.arrInProcessList.count != 0 {
                 let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
-                if let obj = self.arrInProcessList?[indexPath.row] {
+                 let obj = self.arrInProcessList[indexPath.row]
                     orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
                     orderDetailsVC.orderId = obj.id
                     orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
                     orderDetailsVC.strRestaurantId = obj.restaurant_id
                     orderDetailsVC.delegateCancelOrder = self
                     self.navigationController?.pushViewController(orderDetailsVC, animated: true)
-                }
+                
             }
         }
     }
@@ -356,13 +364,26 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
-                Utilities.displayAlert("", message: json["message"].string ?? "", completion: {_ in
-                    self.refreshOrderDetailsScreen()
-                }, otherTitles: nil)
+                let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+                //controller.modalPresentationStyle = .fullScreen
+                controller.isHideCancelButton = false
+                controller.isHideSubmitButton = true
+                controller.submitBtnTitle = ""
+                controller.cancelBtnTitle = "Cancel Order"
+                controller.strDescription = "Do you really want  to cancel the order."
+                controller.strPopupTitle = "Are you Sure?"
+                controller.submitBtnColor = colors.appGreenColor
+                controller.cancelBtnColor = colors.appRedColor
+                controller.strPopupImage = "ic_popupCancleOrder"
+                controller.isCancleOrder = true
+                controller.btnSubmit = {
+                    self.webserviceGetOrderDetail(selectedOrder: "")
+                }
+                self.present(controller, animated: true, completion: nil)
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }

@@ -40,7 +40,9 @@ class LogoutReqModel: RequestModel{
     var user_id : String = ""
 }
 class sendOtpReqModel: RequestModel{
-    var user_name : String = ""
+    var email : String = ""
+    var phone : String = ""
+    var type : String = ""
 }
 class sendEmailVerifyReqModel: RequestModel{
     var user_name : String = ""

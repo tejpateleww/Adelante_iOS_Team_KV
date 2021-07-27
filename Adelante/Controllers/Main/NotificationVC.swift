@@ -142,7 +142,7 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             }
             else
             {
-                Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(response["message"].string ?? "Something went wrong")
             }
         })
     }

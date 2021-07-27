@@ -176,7 +176,9 @@ class RegisterViewController: UIViewController {
     func webserviceForSendOTP()
     {
         let otp = sendOtpReqModel()
-        otp.user_name = txtEmail.text ?? ""
+        otp.email = txtEmail.text ?? ""
+        otp.phone = txtPhoneNumber.text ?? ""
+        otp.type = "0"
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
@@ -194,7 +196,7 @@ class RegisterViewController: UIViewController {
                 OTPVC.strOTP = otpModel.code
                 self.navigationController?.pushViewController(OTPVC, animated: true)
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }
@@ -216,7 +218,7 @@ extension RegisterViewController:UITextFieldDelegate{
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
         } else if textField == txtPhoneNumber{
-            let maxLength = 15
+            let maxLength = 10
             let currentString: NSString = textField.text! as NSString
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString

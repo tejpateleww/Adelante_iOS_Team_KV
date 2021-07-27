@@ -198,7 +198,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 self.arrOrderData.removeAll()
                 self.webserviceGetFoodlist()
             } else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }
@@ -230,7 +230,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }
@@ -244,7 +244,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }

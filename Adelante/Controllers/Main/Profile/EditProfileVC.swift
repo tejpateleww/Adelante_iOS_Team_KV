@@ -97,9 +97,10 @@ class EditProfileVC: BaseViewController{
                             webserviceForEditprofile()
                         }, otherTitles: nil)
                     }else if userdata.phone != txtPhoneNumber.text {
-                        Utilities.displayAlert("", message: "EditProfileVC_PhoneChange".Localized(), completion: { [self]_ in
-                            self.webserviceForSendOTP()
-                        }, otherTitles: nil)
+//                        Utilities.displayAlert("", message: "EditProfileVC_PhoneChange".Localized(), completion: { [self]_ in
+//
+//                        }, otherTitles: nil)
+                        self.webserviceForSendOTP()
                     }else{
                         webserviceForEditprofile()
                     }
@@ -183,7 +184,9 @@ class EditProfileVC: BaseViewController{
     func webserviceForSendOTP()
     {
         let otp = sendOtpReqModel()
-        otp.user_name = txtEmail.text ?? ""
+        otp.email = txtEmail.text ?? ""
+        otp.phone = txtPhoneNumber.text ?? ""
+        otp.type = "1"
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
@@ -202,7 +205,7 @@ class EditProfileVC: BaseViewController{
                 OTPVC.selectedImage = selectedImage
                 self.navigationController?.pushViewController(OTPVC, animated: true)
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }

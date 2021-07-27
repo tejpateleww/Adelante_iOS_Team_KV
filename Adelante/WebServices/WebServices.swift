@@ -26,7 +26,7 @@ class WebService{
     // MARK:- Method for Get, post..
     //-------------------------------------
     func requestMethod(api: ApiKey, httpMethod:Method, showHud : Bool = false,parameters: Any, completion: @escaping CompletionResponse){
-        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
+        guard isConnected else { completion(JSON(), false, "Something went wrong"); return }
         
         var parameterString = "" // "/"
         if httpMethod == .get{
@@ -80,7 +80,9 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                                                        appDel.SetLogout()
+                            Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
+                                                           appDel.SetLogout()
+                                                       }
                         }
                         else{
                             //                            utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -117,7 +119,9 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                             appDel.SetLogout()
+                            Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
+                                                           appDel.SetLogout()
+                                                       }
                         }
                         else{
 //                            utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -130,7 +134,7 @@ class WebService{
     }
     func getMethod(api: ApiKey,parameterString:String, httpMethod:Method,showHud : Bool = false, completion: @escaping CompletionResponse)
     {
-        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
+        guard isConnected else { completion(JSON(), false, "Something went wrong"); return }
         
         guard let url = URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
             completion(JSON(),false, "")
@@ -175,7 +179,9 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                             appDel.SetLogout()
+                            Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
+                                                           appDel.SetLogout()
+                                                       }
                         }
                         else{
                             // utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -233,7 +239,7 @@ class WebService{
     
     func postDataWithImage(api: ApiKey, isRemoveimage: Bool, showHud : Bool, parameter dictParams: [String: Any], image: UIImage?, imageParamName: String, completion: @escaping CompletionResponse) {
         
-        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
+        guard isConnected else { completion(JSON(), false, "Something went wrong"); return }
         guard let url = URL(string: APIEnvironment.baseURL + api.rawValue) else { return }
         //        let request = URLRequest(url: url)
         print("the url is \(url) and the parameters are \n \(dictParams) and the headers are \(APIEnvironment.headers)")
@@ -293,7 +299,10 @@ class WebService{
                     if let error = response.error {
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
-                                                         appDel.SetLogout()
+                            Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
+                                                           appDel.SetLogout()
+                                                       }
+                            
                         }
                         else{
                             //                            utility.ShowAlert(OfMessage: error.localizedDescription)

@@ -14,5 +14,5 @@ class EditProfileReqModel : RequestModel{
     var email : String = ""
     var user_id : String = ""
     var remove_image : String = ""
-    //var profile_picture : String = ""
+    var profile_picture : String = ""
 }

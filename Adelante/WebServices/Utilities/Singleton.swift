@@ -21,6 +21,8 @@ class SingletonClass: NSObject
     var userCurrentLocation = CLLocation()
     var topSellingId : String = ""
     var isPresented = false
+    
+    var selectInProcessInMyOrder : Bool?
 //    var restCurrentOrder : currentOrder?
     
 //    var currentLat = Double()

@@ -67,6 +67,7 @@ struct DeviceType {
 
 enum GlobalStrings : String{
     case Alert_logout = "Are you sure you want to logout ?"
+    case EndSession_Logout = "Your account is logged in to another device"
 }
 
 struct selectedOrderItems{

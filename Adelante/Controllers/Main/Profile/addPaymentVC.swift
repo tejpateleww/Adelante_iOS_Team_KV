@@ -286,7 +286,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 self.imgEmptyCard.isHidden = true
             } else {
                 self.imgEmptyCard.isHidden = false
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
                 
             }
             //            if self.arrCard.count > 0{
@@ -318,20 +318,31 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 controller.submitBtnTitle = "  Payment Successful      "
                 controller.cancelBtnTitle = ""
                 controller.strDescription = json["data"].string ?? ""
-                controller.strPopupTitle = ""
+                controller.strPopupTitle = "Payment Successful"
                 controller.submitBtnColor = colors.appGreenColor
                 controller.cancelBtnColor = colors.appRedColor
                 controller.strPopupImage = "ic_popupPaymentSucessful"
                 controller.isCancleOrder = true
                 controller.btnSubmit = {
-                    appDel.navigateToHome()
+                   // appDel.navigateToHome()
+                    let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
+                    controller.selectedIndex = 2
+//                    if controller.selectedIndex == 2{
+//                        let vc = AppStoryboard.Main.
+//                    }
+                    
+                    SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+                    let nav = UINavigationController(rootViewController: controller)
+                    nav.navigationBar.isHidden = true
+                    appDel.window?.rootViewController = nav
+//                    self.customTabBarController?.selectedIndex = 2
                 }
                 self.present(controller, animated: true, completion: nil)
 //                commonPopup.customAlert(isHideCancelButton: true, isHideSubmitButton: false, strSubmitTitle: "  Payment Successful      ", strCancelButtonTitle: "", strDescription: json["data"].string ?? "", strTitle: "", isShowImage: true, strImage: "ic_popupPaymentSucessful", isCancleOrder: false, submitBtnColor: colors.appGreenColor, cancelBtnColor: colors.appRedColor, viewController: self)
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }
@@ -348,7 +359,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
                 self.webserviceGetAddPayment()
             } else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }

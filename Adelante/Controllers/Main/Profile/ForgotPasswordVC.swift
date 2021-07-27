@@ -64,7 +64,7 @@ class ForgotPasswordVC: BaseViewController {
                     }
                 }
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                Utilities.showAlertOfAPIResponse(param: "Please enter valid email", vc: self)
             }
         })
     }

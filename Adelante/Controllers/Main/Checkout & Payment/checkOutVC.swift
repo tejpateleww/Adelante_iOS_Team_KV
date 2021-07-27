@@ -414,7 +414,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }
@@ -437,7 +437,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }
@@ -463,7 +463,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }
@@ -498,7 +498,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }
@@ -527,7 +527,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 self.tblOrderDetails.reloadData()
                 
             } else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection!")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }
@@ -539,7 +539,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 self.SettingsData = SettingsResModel.init(fromJson: json)            }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }

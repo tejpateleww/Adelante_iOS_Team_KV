@@ -15,4 +15,5 @@ class DashboardReqModel:RequestModel{
     var lat : String = ""
     var lng : String = ""
     var page : String = ""
+    var tab_filter : String = ""
 }

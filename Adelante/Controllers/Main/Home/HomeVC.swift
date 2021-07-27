@@ -78,7 +78,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         setUpLocalizedStrings()
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshListing), for: .valueChanged)
         let button = UIButton()
@@ -139,7 +139,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     }
     @objc func deSelectFilterAndRefresh() {
         selectedSortTypedIndexFromcolVwFilter = -1
@@ -268,6 +268,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
                 cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
                 cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
+                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedSortTypedIndexFromcolVwFilter))
             }
             else {
                 cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
@@ -454,7 +455,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:true)
+        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "")
        
 
     }
@@ -472,7 +473,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //        }else{
             self.SelectFilterId = SortId
             self.pageNumber = 1
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
 //        }
     }
     // MARK: - UIScrollView Delegates
@@ -483,12 +484,12 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func stoppedScrolling() {
         if isNeedToReload && isRefresh == false {
             self.pageNumber = self.pageNumber + 1
-            webserviceGetDashboard(isFromFilter: false)
+            webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         }
         // done, do whatever
     }
     // MARK: - Api Calls
-    @objc func webserviceGetDashboard(isFromFilter : Bool){
+    @objc func webserviceGetDashboard(isFromFilter : Bool,strTabfilter:String){
         let Deshboard = DashboardReqModel()
         Deshboard.category_id = SelectedCatId
         Deshboard.user_id = SingletonClass.sharedInstance.UserId
@@ -496,6 +497,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         Deshboard.page = "\(self.pageNumber)"
+        Deshboard.tab_filter = strTabfilter
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             responseStatus = .gotData
@@ -563,7 +565,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.colVwRestWthPage.isUserInteractionEnabled = true
                  self.colVwRestWthPage.reloadData()
             }else{
-                Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(response["message"].string ?? "Something went wrong")
                 //                Utilities.showAlertOfAPIResponse(param: error ?? "No internet connection", vc: self)
             }
 //            if self.arrRestaurant.count > 0{
@@ -599,7 +601,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
 //        if selectedIndex != ""{
 //            let i = Int(selectedIndex) ?? 0
 //            arrRestaurant[i].favourite = strStatus
@@ -608,7 +610,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func refreshFavoriteScreen() {
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     }
 }
 
@@ -620,7 +622,7 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
     print("Place ID: \(place.placeID!)")
     lblAddress.text =  place.name
     SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-    webserviceGetDashboard(isFromFilter: false)
+    webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     dismiss(animated: true, completion: nil)
   }
 

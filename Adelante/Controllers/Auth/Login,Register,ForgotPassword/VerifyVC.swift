@@ -298,7 +298,13 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     func webserviceForSendOTP()
     {
         let otp = sendOtpReqModel()
-        otp.user_name = strEmail
+        otp.email = strEmail
+        otp.phone = strphoneNo
+        if isFromRegister == true{
+            otp.type = "0"
+        }else{
+            otp.type = "1"
+        }
         
        // self.showHUD()
         WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
@@ -309,7 +315,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                 print(json)
                 strOTP = otpModel.code
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }

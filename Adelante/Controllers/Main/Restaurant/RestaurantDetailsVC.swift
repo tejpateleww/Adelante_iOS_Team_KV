@@ -427,12 +427,17 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                     cell.btnAddAction = {
                         if self.objRestaurant.isdiff == 0{
-                            let alert = UIAlertController(title: "Adelante System", message: "if you want to add data here your previous cart is empty", preferredStyle: UIAlertController.Style.alert)
+                            let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                             let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
                                 if self.arrMenuitem[indexPath.row].quantity.toInt() > 1 {
                                     cell.btnAddItem.isHidden = true
                                     cell.vwStapper.isHidden = false
                                     self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                    cell.stackHide.isHidden = true
+                                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                    cell.vwStapper.addSubview(self.activityView)
+                                    self.activityView.startAnimating()
+                                    
                                 }
                             }
                             let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
@@ -444,6 +449,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 cell.btnAddItem.isHidden = true
                                 cell.vwStapper.isHidden = false
                                 self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                cell.stackHide.isHidden = true
+                                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                cell.vwStapper.addSubview(self.activityView)
+                                self.activityView.startAnimating()
+                                
                             }
                         }
                     }
@@ -541,12 +551,16 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                     cell.btnAddAction = {
                         if self.objRestaurant.isdiff == 0{
-                            let alert = UIAlertController(title: "Adelante System", message: "if you want to add data here your previous cart is empty", preferredStyle: UIAlertController.Style.alert)
+                            let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                             let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
                                 if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.ToDouble() > 1{
                                     cell.btnAdd.isHidden = true
                                     cell.vwStapper.isHidden = false
                                     self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                    cell.StackHide.isHidden = true
+                                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                    cell.vwStapper.addSubview(self.activityView)
+                                    self.activityView.startAnimating()
                                 }
                             }
                             let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
@@ -558,6 +572,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 cell.btnAdd.isHidden = true
                                 cell.vwStapper.isHidden = false
                                 self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                cell.StackHide.isHidden = true
+                                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                cell.vwStapper.addSubview(self.activityView)
+                                self.activityView.startAnimating()
                             }
                         }
                         
@@ -663,12 +681,16 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }
                 cell.btnAddAction = {
                     if self.objRestaurant.isdiff == 0{
-                        let alert = UIAlertController(title: "Adelante System", message: "if you want to add data here your previous cart is empty", preferredStyle: UIAlertController.Style.alert)
+                        let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                         let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
                             if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.ToDouble() > 1 {
                                 cell.btnAdd.isHidden = true
                                 cell.vwStapper.isHidden = false
                                 self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                cell.StackHide.isHidden = true
+                                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                cell.vwStapper.addSubview(self.activityView)
+                                self.activityView.startAnimating()
                             }
                         }
                         let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
@@ -680,6 +702,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             cell.btnAdd.isHidden = true
                             cell.vwStapper.isHidden = false
                             self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                            cell.StackHide.isHidden = true
+                            self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                            cell.vwStapper.addSubview(self.activityView)
+                            self.activityView.startAnimating()
                         }
                     }
                     
@@ -973,7 +999,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }
                 self.tblRestaurantDetails.reloadData()
             }else{
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }
@@ -992,7 +1018,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         }
     }
@@ -1004,7 +1030,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 self.SettingsData = SettingsResModel.init(fromJson: json)            }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }

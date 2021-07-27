@@ -155,6 +155,27 @@ class Utilities:NSObject{
             AppDelegate.shared.window?.rootViewController!.present(alert, animated: true, completion: nil)
         }
     }
+    
+    static func showAlertWithTitleFromWindow(title:String?, andMessage message:String, buttons:[String], completion:((_ index:Int) -> Void)!) -> Void {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        for index in 0..<buttons.count
+        {
+            let action = UIAlertAction(title: buttons[index], style: .default, handler: {
+                (alert: UIAlertAction!) in
+                
+                if(completion != nil) {
+                    completion(index)
+                }
+            })
+            
+            alertController.addAction(action)
+        }
+        
+        appDel.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        
+    }
     static func displayAlert(_ title: String, message: String, completion:((_ index: Int) -> Void)?, acceptTitle:String, otherTitles: String? ...) {
         if message.trimmedString == "" {
             return

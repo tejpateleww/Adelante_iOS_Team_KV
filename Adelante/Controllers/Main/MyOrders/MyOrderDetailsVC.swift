@@ -242,12 +242,13 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if(status)
             {
                 Utilities.displayAlert(json["message"].string ?? "")
+                self.webserviceOrderDetails()
                 self.delegateCancelOrder.refreshOrderDetailsScreen()
                 appDel.navigateToHome()
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }
@@ -262,7 +263,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
     }
