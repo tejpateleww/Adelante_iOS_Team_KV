@@ -81,8 +81,8 @@ class WebService{
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
                             Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
-                                                           appDel.SetLogout()
-                                                       }
+                                appDel.SetLogout()
+                            }
                         }
                         else{
                             //                            utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -91,7 +91,7 @@ class WebService{
                         
                     }
                 }
-        }
+            }
     }
     func getMethod(url: URL, httpMethod:Method, completion: @escaping CompletionResponse)
     {
@@ -104,7 +104,7 @@ class WebService{
                 if let json = response.value{
                     let resJson = JSON(json)
                     print("the response is \(resJson)")
-
+                    
                     if "\(url)".contains("geocode/json?latlng=") {
                         let status = resJson["status"].stringValue.lowercased() == "ok"
                         completion(resJson, status, json)
@@ -120,17 +120,17 @@ class WebService{
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
                             Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
-                                                           appDel.SetLogout()
-                                                       }
+                                appDel.SetLogout()
+                            }
                         }
                         else{
-//                            utility.ShowAlert(OfMessage: error.localizedDescription)
+                            //                            utility.ShowAlert(OfMessage: error.localizedDescription)
                         }
                         completion(JSON(), false,error.localizedDescription)
-
+                        
                     }
                 }
-        }
+            }
     }
     func getMethod(api: ApiKey,parameterString:String, httpMethod:Method,showHud : Bool = false, completion: @escaping CompletionResponse)
     {
@@ -180,8 +180,8 @@ class WebService{
                         print("Error = \(error.localizedDescription)")
                         if error.localizedDescription == "Response status code was unacceptable: 403."{
                             Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
-                                                           appDel.SetLogout()
-                                                       }
+                                appDel.SetLogout()
+                            }
                         }
                         else{
                             // utility.ShowAlert(OfMessage: error.localizedDescription)
@@ -190,7 +190,7 @@ class WebService{
                         
                     }
                 }
-        }
+            }
     }
     
     //-------------------------------------
@@ -213,26 +213,26 @@ class WebService{
                         if let string = element as? String {
                             multiPart.append(string.data(using: .utf8)!, withName: keyObj)
                         } else
-                            if let num = element as? Int {
-                                let value = "\(num)"
-                                multiPart.append(value.data(using: .utf8)!, withName: keyObj)
+                        if let num = element as? Int {
+                            let value = "\(num)"
+                            multiPart.append(value.data(using: .utf8)!, withName: keyObj)
                         }
                     })
                 }
             }
             multiPart.append(image, withName: "file", fileName: "file.png", mimeType: "image/png")
         }, with: url)
-            .uploadProgress(queue: .main, closure: { progress in
-                //Current upload progress of file
-                print("Upload Progress: \(progress.fractionCompleted)")
-            })
-            .responseJSON(completionHandler: { data in
-                //Do what ever you want to do with response
-            })
+        .uploadProgress(queue: .main, closure: { progress in
+            //Current upload progress of file
+            print("Upload Progress: \(progress.fractionCompleted)")
+        })
+        .responseJSON(completionHandler: { data in
+            //Do what ever you want to do with response
+        })
     }
     
     
-//    var download : AF.request?
+    //    var download : AF.request?
     
     
     
@@ -251,7 +251,7 @@ class WebService{
         {
             Utilities.showHud()
         }
-
+        
         AF.upload(multipartFormData: { (multiPart) in
             for (key, value) in dictParams {
                 if let temp = value as? String {
@@ -266,9 +266,9 @@ class WebService{
                         if let string = element as? String {
                             multiPart.append(string.data(using: .utf8)!, withName: keyObj)
                         } else
-                            if let num = element as? Int {
-                                let value = "\(num)"
-                                multiPart.append(value.data(using: .utf8)!, withName: keyObj)
+                        if let num = element as? Int {
+                            let value = "\(num)"
+                            multiPart.append(value.data(using: .utf8)!, withName: keyObj)
                         }
                     })
                 }
@@ -279,301 +279,301 @@ class WebService{
             }
             
         }, to: url, usingThreshold: UInt64.init(), method: .post, headers: APIEnvironment.headers, interceptor: .none, fileManager: .default)
-            .responseJSON { (response) in
+        .responseJSON { (response) in
+            
+            if(showHud){
+                Utilities.hideHud()
+            }
+            
+            //Do what ever you want to do with response
+            if let json = response.value{
+                let resJson = JSON(json)
                 
-                if(showHud){
-                    Utilities.hideHud()
-                }
+                print("the response is \(resJson)")
                 
-                //Do what ever you want to do with response
-                if let json = response.value{
-                    let resJson = JSON(json)
-                    
-                    print("the response is \(resJson)")
-                    
-                    let status = resJson["status"].boolValue
-                    completion(resJson, status,json)
-                }
-                else {
-                    //  LoaderClass.hideActivityIndicator()
-                    if let error = response.error {
-                        print("Error = \(error.localizedDescription)")
-                        if error.localizedDescription == "Response status code was unacceptable: 403."{
-                            Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
-                                                           appDel.SetLogout()
-                                                       }
-                            
+                let status = resJson["status"].boolValue
+                completion(resJson, status,json)
+            }
+            else {
+                //  LoaderClass.hideActivityIndicator()
+                if let error = response.error {
+                    print("Error = \(error.localizedDescription)")
+                    if error.localizedDescription == "Response status code was unacceptable: 403."{
+                        Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
+                            appDel.SetLogout()
                         }
-                        else{
-                            //                            utility.ShowAlert(OfMessage: error.localizedDescription)
-                        }
-                        completion(JSON(), false,error.localizedDescription)
+                        
                     }
+                    else{
+                        //                            utility.ShowAlert(OfMessage: error.localizedDescription)
+                    }
+                    completion(JSON(), false,error.localizedDescription)
                 }
-                
+            }
+            
         }.uploadProgress(queue: .main) { (progress) in
-             print("Upload Progress: \(progress.fractionCompleted)")
+            print("Upload Progress: \(progress.fractionCompleted)")
         }
     }
     
 }
-    
-    
-    /*
-    func uploadMultipartFormData(api: ApiKey,from images: [String:UIImage],completion: @escaping CompletionResponse){
-        
-        guard isConnected else { completion(JSON(), false, ""); return }
-        let url = (APIEnvironment.baseURL + api.rawValue)
-        
-      
-        AF.upload(
-            multipartFormData: { multipartFormData in
-                for (key,value) in images{
-                    if let imageData = value.jpegData(compressionQuality: 0.6) {
-                        multipartFormData.append(imageData, withName: key, mimeType: "image/jpeg")
-                    }
-                }
-                
-        },usingThreshold:(10 * 1024 * 1024)
-          to: (APIEnvironment.baseURL + api.rawValue), method:.post,
-          headers:APIEnvironment.headers,
-          encodingCompletion: { encodingResult in
-            print("the response is \n \(encodingResult)")
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.responseJSON { response in
-                    debugPrint(response)
-                }
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        })
-    }
-    
-    
-    
-    
-    
-   
-    func postDataWithVideo(api: ApiKey,parameter dictParams: [String: Any], selectedVideoURL : URL, ParamName: String, completion: @escaping CompletionResponse , ProgressingValue : @escaping PassProgressValue) {
-        
-        guard isConnected else { completion(JSON(), false, ""); return }
-        
-        AF.upload(multipartFormData: { (multipartFormData) in
-            
-            multipartFormData.append(selectedVideoURL, withName: ParamName, fileName: "video.mp4", mimeType: "video/mp4")
-            
-            for (key, value) in dictParams {
-                if JSONSerialization.isValidJSONObject(value) {
-                    let array = value as! [String]
-                    
-                    for string in array {
-                        if let stringData = string.data(using: .utf8) {
-                            multipartFormData.append(stringData, withName: key+"[]")
-                        }
-                    }
-                } else {
-                    multipartFormData.append(String(describing: value).data(using: .utf8)!, withName: key)
-                }
-            }
-        }, usingThreshold: 10 *  1024 * 1024, to: (APIEnvironment.baseURL + api.rawValue),
-           method: .post, headers: APIEnvironment.headers) { (encodingResult) in
-            switch encodingResult
-            {
-            case .success(let upload,_,_):
-                
-                upload.uploadProgress(closure: { (progressValue) in
-                    //Print progress
-                     
-                    print("uploading \(progressValue)")
-                    ProgressingValue(CGFloat(progressValue.fractionCompleted * 100))
-                    
-                })
 
-                upload.responseJSON {
-                    response in
-                    
-                    if let json = response.result.value {
-                        
-                        if (json as AnyObject).object(forKey:("status")) as! Bool == false {
-                            let resJson = JSON(json)
-                            completion(resJson, false, json)
-                        }
-                        else {
-                            let resJson = JSON(json)
-                            print(resJson)
-                            
-                            completion(resJson, true, json)
-                        }
-                    }
-                    else {
-                        if let error = response.result.error {
-                            print("Error = \(error.localizedDescription)")
-                            if error.localizedDescription == "Response status code was unacceptable: 403."{
-                                appDel.ForecedLogout()
-                            }
-                            else{
-                                utility.ShowAlert(OfMessage: error.localizedDescription)
-                            }
-                        }
-                    }
-                }
-            case .failure( _):
-                print("failure")
-                break
-            }
-        }
-    }
 
-    func postDataWithVideoImage(api: ApiKey,parameter dictParams: [String: Any], selectedVideoURL : URL, ParamName: String,image: UIImage?, imageParamName: String , completion: @escaping CompletionResponse , ProgressingValue : @escaping PassProgressValue) {
-        
-        guard isConnected else { completion(JSON(), false, ""); return }
-        
-        AF.upload(multipartFormData: { (multipartFormData) in
-            if let imageData = image?.jpegData(compressionQuality: 0.6) {
-                
-                multipartFormData.append(imageData, withName: imageParamName, fileName: "image.jpeg", mimeType: "image/jpeg")
-            }
-            multipartFormData.append(selectedVideoURL, withName: ParamName, fileName: "video.mp4", mimeType: "video/mp4")
-            
-            for (key, value) in dictParams {
-                if JSONSerialization.isValidJSONObject(value) {
-                    let array = value as! [String]
-                    
-                    for string in array {
-                        if let stringData = string.data(using: .utf8) {
-                            multipartFormData.append(stringData, withName: key+"[]")
-                        }
-                    }
-                } else {
-                    multipartFormData.append(String(describing: value).data(using: .utf8)!, withName: key)
-                }
-            }
-        }, usingThreshold: 10 *  1024 * 1024, to: (APIEnvironment.baseURL + api.rawValue),
-           method: .post, headers: APIEnvironment.headers) { (encodingResult) in
-            switch encodingResult
-            {
-            case .success(let upload,_,_):
-                
-                upload.uploadProgress(closure: { (progressValue) in
-                    //Print progress
-                    
-                    print("uploading \(progressValue)")
-                    ProgressingValue(CGFloat(progressValue.fractionCompleted * 100))
-                    
-                })
-                
-                
-                
-                upload.responseJSON {
-                    response in
-                    
-                    if let json = response.result.value {
-                        
-                        if (json as AnyObject).object(forKey:("status")) as! Bool == false {
-                            let resJson = JSON(json)
-                            completion(resJson, false, json)
-                        }
-                        else {
-                            let resJson = JSON(json)
-                            print(resJson)
-                            
-                            completion(resJson, true, json)
-                        }
-                    }
-                    else {
-                        if let error = response.result.error {
-                            print("Error = \(error.localizedDescription)")
-                            if error.localizedDescription == "Response status code was unacceptable: 403."{
-                                appDel.ForecedLogout()
-                            }
-                            else{
-                                utility.ShowAlert(OfMessage: error.localizedDescription)
-                            }
-                        }
-                    }
-                }
-            case .failure( _):
-                print("failure")
-                break
-            }
-        }
-    }
-    func postDataWithImageProgress(api: ApiKey, parameter dictParams: [String: Any], image: UIImage?, imageParamName: String, completion: @escaping CompletionResponse , ProgressingValue : @escaping PassProgressValue ) {
-        
-        guard isConnected else { completion(JSON(), false, ""); return }
-        
-        AF.upload(multipartFormData: { (multipartFormData) in
-            
-            if let imageData = image?.jpegData(compressionQuality: 0.6) {
-                
-                multipartFormData.append(imageData, withName: imageParamName, fileName: "image.jpeg", mimeType: "image/jpeg")
-            }
-            
-            for (key, value) in dictParams {
-                if JSONSerialization.isValidJSONObject(value) {
-                    let array = value as! [String]
-                    
-                    for string in array {
-                        if let stringData = string.data(using: .utf8) {
-                            multipartFormData.append(stringData, withName: key+"[]")
-                        }
-                    }
-                } else {
-                    multipartFormData.append(String(describing: value).data(using: .utf8)!, withName: key)
-                }
-            }
-        }, usingThreshold: 10 *  1024 * 1024, to: (APIEnvironment.baseURL + api.rawValue),
-           method: .post, headers: APIEnvironment.headers) { (encodingResult) in
-            switch encodingResult
-            {
-            case .success(let upload,_,_):
-                upload.uploadProgress(closure: { (progressValue) in
-                    //Print progress
-                    
-                    print("uploading \(progressValue)")
-                    ProgressingValue(CGFloat(progressValue.fractionCompleted * 100))
-                    
-                })
-                
-                upload.responseJSON {
-                    response in
-                    
-                    if let json = response.result.value {
-                        
-                        if (json as AnyObject).object(forKey:("status")) as! Bool == false {
-                            let resJson = JSON(json)
-                            completion(resJson, false, json)
-                        }
-                        else {
-                            let resJson = JSON(json)
-                            print(resJson)
-                            
-                            completion(resJson, true, json)
-                        }
-                    }
-                    else {
-                        if let error = response.result.error {
-                            print("Error = \(error.localizedDescription)")
-                            if error.localizedDescription == "Response status code was unacceptable: 403."{
-                                appDel.ForecedLogout()
-                            }
-                            else{
-                                utility.ShowAlert(OfMessage: error.localizedDescription)
-                            }
-                        }
-                    }
-                }
-            case .failure( _):
-                print("failure")
-                break
-            }
-        }
-    }
-    
-    */
-    
-    
+/*
+ func uploadMultipartFormData(api: ApiKey,from images: [String:UIImage],completion: @escaping CompletionResponse){
+ 
+ guard isConnected else { completion(JSON(), false, ""); return }
+ let url = (APIEnvironment.baseURL + api.rawValue)
+ 
+ 
+ AF.upload(
+ multipartFormData: { multipartFormData in
+ for (key,value) in images{
+ if let imageData = value.jpegData(compressionQuality: 0.6) {
+ multipartFormData.append(imageData, withName: key, mimeType: "image/jpeg")
+ }
+ }
+ 
+ },usingThreshold:(10 * 1024 * 1024)
+ to: (APIEnvironment.baseURL + api.rawValue), method:.post,
+ headers:APIEnvironment.headers,
+ encodingCompletion: { encodingResult in
+ print("the response is \n \(encodingResult)")
+ switch encodingResult {
+ case .success(let upload, _, _):
+ upload.responseJSON { response in
+ debugPrint(response)
+ }
+ case .failure(let encodingError):
+ print(encodingError)
+ }
+ })
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ func postDataWithVideo(api: ApiKey,parameter dictParams: [String: Any], selectedVideoURL : URL, ParamName: String, completion: @escaping CompletionResponse , ProgressingValue : @escaping PassProgressValue) {
+ 
+ guard isConnected else { completion(JSON(), false, ""); return }
+ 
+ AF.upload(multipartFormData: { (multipartFormData) in
+ 
+ multipartFormData.append(selectedVideoURL, withName: ParamName, fileName: "video.mp4", mimeType: "video/mp4")
+ 
+ for (key, value) in dictParams {
+ if JSONSerialization.isValidJSONObject(value) {
+ let array = value as! [String]
+ 
+ for string in array {
+ if let stringData = string.data(using: .utf8) {
+ multipartFormData.append(stringData, withName: key+"[]")
+ }
+ }
+ } else {
+ multipartFormData.append(String(describing: value).data(using: .utf8)!, withName: key)
+ }
+ }
+ }, usingThreshold: 10 *  1024 * 1024, to: (APIEnvironment.baseURL + api.rawValue),
+ method: .post, headers: APIEnvironment.headers) { (encodingResult) in
+ switch encodingResult
+ {
+ case .success(let upload,_,_):
+ 
+ upload.uploadProgress(closure: { (progressValue) in
+ //Print progress
+ 
+ print("uploading \(progressValue)")
+ ProgressingValue(CGFloat(progressValue.fractionCompleted * 100))
+ 
+ })
+ 
+ upload.responseJSON {
+ response in
+ 
+ if let json = response.result.value {
+ 
+ if (json as AnyObject).object(forKey:("status")) as! Bool == false {
+ let resJson = JSON(json)
+ completion(resJson, false, json)
+ }
+ else {
+ let resJson = JSON(json)
+ print(resJson)
+ 
+ completion(resJson, true, json)
+ }
+ }
+ else {
+ if let error = response.result.error {
+ print("Error = \(error.localizedDescription)")
+ if error.localizedDescription == "Response status code was unacceptable: 403."{
+ appDel.ForecedLogout()
+ }
+ else{
+ utility.ShowAlert(OfMessage: error.localizedDescription)
+ }
+ }
+ }
+ }
+ case .failure( _):
+ print("failure")
+ break
+ }
+ }
+ }
+ 
+ func postDataWithVideoImage(api: ApiKey,parameter dictParams: [String: Any], selectedVideoURL : URL, ParamName: String,image: UIImage?, imageParamName: String , completion: @escaping CompletionResponse , ProgressingValue : @escaping PassProgressValue) {
+ 
+ guard isConnected else { completion(JSON(), false, ""); return }
+ 
+ AF.upload(multipartFormData: { (multipartFormData) in
+ if let imageData = image?.jpegData(compressionQuality: 0.6) {
+ 
+ multipartFormData.append(imageData, withName: imageParamName, fileName: "image.jpeg", mimeType: "image/jpeg")
+ }
+ multipartFormData.append(selectedVideoURL, withName: ParamName, fileName: "video.mp4", mimeType: "video/mp4")
+ 
+ for (key, value) in dictParams {
+ if JSONSerialization.isValidJSONObject(value) {
+ let array = value as! [String]
+ 
+ for string in array {
+ if let stringData = string.data(using: .utf8) {
+ multipartFormData.append(stringData, withName: key+"[]")
+ }
+ }
+ } else {
+ multipartFormData.append(String(describing: value).data(using: .utf8)!, withName: key)
+ }
+ }
+ }, usingThreshold: 10 *  1024 * 1024, to: (APIEnvironment.baseURL + api.rawValue),
+ method: .post, headers: APIEnvironment.headers) { (encodingResult) in
+ switch encodingResult
+ {
+ case .success(let upload,_,_):
+ 
+ upload.uploadProgress(closure: { (progressValue) in
+ //Print progress
+ 
+ print("uploading \(progressValue)")
+ ProgressingValue(CGFloat(progressValue.fractionCompleted * 100))
+ 
+ })
+ 
+ 
+ 
+ upload.responseJSON {
+ response in
+ 
+ if let json = response.result.value {
+ 
+ if (json as AnyObject).object(forKey:("status")) as! Bool == false {
+ let resJson = JSON(json)
+ completion(resJson, false, json)
+ }
+ else {
+ let resJson = JSON(json)
+ print(resJson)
+ 
+ completion(resJson, true, json)
+ }
+ }
+ else {
+ if let error = response.result.error {
+ print("Error = \(error.localizedDescription)")
+ if error.localizedDescription == "Response status code was unacceptable: 403."{
+ appDel.ForecedLogout()
+ }
+ else{
+ utility.ShowAlert(OfMessage: error.localizedDescription)
+ }
+ }
+ }
+ }
+ case .failure( _):
+ print("failure")
+ break
+ }
+ }
+ }
+ func postDataWithImageProgress(api: ApiKey, parameter dictParams: [String: Any], image: UIImage?, imageParamName: String, completion: @escaping CompletionResponse , ProgressingValue : @escaping PassProgressValue ) {
+ 
+ guard isConnected else { completion(JSON(), false, ""); return }
+ 
+ AF.upload(multipartFormData: { (multipartFormData) in
+ 
+ if let imageData = image?.jpegData(compressionQuality: 0.6) {
+ 
+ multipartFormData.append(imageData, withName: imageParamName, fileName: "image.jpeg", mimeType: "image/jpeg")
+ }
+ 
+ for (key, value) in dictParams {
+ if JSONSerialization.isValidJSONObject(value) {
+ let array = value as! [String]
+ 
+ for string in array {
+ if let stringData = string.data(using: .utf8) {
+ multipartFormData.append(stringData, withName: key+"[]")
+ }
+ }
+ } else {
+ multipartFormData.append(String(describing: value).data(using: .utf8)!, withName: key)
+ }
+ }
+ }, usingThreshold: 10 *  1024 * 1024, to: (APIEnvironment.baseURL + api.rawValue),
+ method: .post, headers: APIEnvironment.headers) { (encodingResult) in
+ switch encodingResult
+ {
+ case .success(let upload,_,_):
+ upload.uploadProgress(closure: { (progressValue) in
+ //Print progress
+ 
+ print("uploading \(progressValue)")
+ ProgressingValue(CGFloat(progressValue.fractionCompleted * 100))
+ 
+ })
+ 
+ upload.responseJSON {
+ response in
+ 
+ if let json = response.result.value {
+ 
+ if (json as AnyObject).object(forKey:("status")) as! Bool == false {
+ let resJson = JSON(json)
+ completion(resJson, false, json)
+ }
+ else {
+ let resJson = JSON(json)
+ print(resJson)
+ 
+ completion(resJson, true, json)
+ }
+ }
+ else {
+ if let error = response.result.error {
+ print("Error = \(error.localizedDescription)")
+ if error.localizedDescription == "Response status code was unacceptable: 403."{
+ appDel.ForecedLogout()
+ }
+ else{
+ utility.ShowAlert(OfMessage: error.localizedDescription)
+ }
+ }
+ }
+ }
+ case .failure( _):
+ print("failure")
+ break
+ }
+ }
+ }
+ 
+ */
+
+
 
 extension Encodable {
     func asDictionary() throws -> [String: Any] {
@@ -595,7 +595,7 @@ extension Encodable {
 extension WebService{
     var isConnected : Bool{
         guard isConnectedToInternet() else {
-//            AlertMessage.showMessageForError("Please connect to internet")
+            //            AlertMessage.showMessageForError("Please connect to internet")
             //utility.ShowAlert(OfMessage: "kjhdfjkhd")
             //  LoaderClass.hideActivityIndicator()
             return false

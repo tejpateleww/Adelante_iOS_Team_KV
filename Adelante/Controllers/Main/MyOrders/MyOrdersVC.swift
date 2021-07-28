@@ -352,10 +352,10 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 if(response["data"] == [])
                 {
                     if self.selectedSegmentTag == 0 {
-                        self.arrPastList?.removeAll()
+                        self.arrPastList.removeAll()
                         
                     } else {
-                        self.arrInProcessList?.removeAll()
+                        self.arrInProcessList.removeAll()
                         
                     }
                     self.tblOrders.reloadData()
