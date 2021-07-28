@@ -11,7 +11,6 @@ import UIKit
 enum Direction { case left, right }
 
 class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
-
     // MARK: - Properties
     var isFromLogin = false
     var isFromRegister = false
@@ -299,7 +298,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     {
         let otp = sendOtpReqModel()
         otp.email = strEmail
-        otp.phone = strPassword
+        otp.phone = strphoneNo
         otp.type = type
         
        // self.showHUD()
@@ -309,6 +308,13 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                 let otpModel = otpReceive.init(fromJson: json)
                 Utilities.showAlertOfAPIResponse(param: otpModel.code ?? "-", vc: self)
                 print(json)
+                strtime = 30
+                lblCount.isHidden = false
+                lblCount.text = "\(strtime)"
+                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+                    self?.setCalculationLs()
+                }
+                viewResendOTP.isHidden = true
                 strOTP = otpModel.code
             }else {
                 Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")

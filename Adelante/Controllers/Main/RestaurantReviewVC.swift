@@ -63,6 +63,8 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.ratingAndReviews.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     @objc func refreshFavList() {
+        responseStatus = .initial
+        tbvReview.reloadData()
         pageNumber = 1
         self.isNeedToReload = true
         self.webservicePostReview()

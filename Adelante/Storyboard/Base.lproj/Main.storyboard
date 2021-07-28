@@ -6701,7 +6701,7 @@
                                                     <outlet property="lblItemName" destination="u3g-bD-02m" id="842-NS-8dB"/>
                                                     <outlet property="lblNoOfItem" destination="EWd-5R-e3d" id="x4n-pt-nqw"/>
                                                     <outlet property="lblPrice" destination="uYm-H0-58P" id="z8X-iu-gut"/>
-                                                    <outlet property="stackHide" destination="gNr-nX-eD6" id="iR1-5G-Yzc"/>
+                                                    <outlet property="stackHide" destination="gNr-nX-eD6" id="t3Z-9v-bO7"/>
                                                     <outlet property="vwStapper" destination="7um-Ik-Km6" id="Vpw-Sb-BDm"/>
                                                 </connections>
                                             </tableViewCell>

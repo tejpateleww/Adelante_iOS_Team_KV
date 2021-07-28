@@ -80,6 +80,8 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
         lblRestaurantName.text = strRestaurantName
     }
     @objc func refreshFavList() {
+        responseStatus = .initial
+        tblRestaurantList.reloadData()
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true

@@ -315,7 +315,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 //controller.modalPresentationStyle = .fullScreen
                 controller.isHideCancelButton = true
                 controller.isHideSubmitButton = false
-                controller.submitBtnTitle = "  Payment Successful      "
+                controller.submitBtnTitle = "OK                       "
                 controller.cancelBtnTitle = ""
                 controller.strDescription = json["data"].string ?? ""
                 controller.strPopupTitle = "Payment Successful"

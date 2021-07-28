@@ -136,18 +136,19 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
         //controller.modalPresentationStyle = .fullScreen
-        controller.isHideCancelButton = false
-        controller.isHideSubmitButton = true
-        controller.submitBtnTitle = ""
-        controller.cancelBtnTitle = "Cancel Order"
+        controller.isHideCancelButton = true
+        controller.isHideSubmitButton = false
+        controller.submitBtnTitle = "Cancel Order       "
+        controller.cancelBtnTitle = ""
         controller.strDescription = "Do you really want  to cancel the order."
         controller.strPopupTitle = "Are you Sure?"
-        controller.submitBtnColor = colors.appGreenColor
-        controller.cancelBtnColor = colors.appRedColor
+        controller.submitBtnColor = colors.appRedColor
+        controller.cancelBtnColor = colors.appGreenColor
         controller.strPopupImage = "ic_popupCancleOrder"
         controller.isCancleOrder = true
         controller.btnSubmit = {
             self.webserviceCancelOrder()
+//                            dismiss(animated: , completion: nil)
         }
         self.present(controller, animated: true, completion: nil)
     }

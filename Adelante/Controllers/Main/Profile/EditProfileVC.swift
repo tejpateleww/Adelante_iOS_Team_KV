@@ -35,6 +35,7 @@ class EditProfileVC: BaseViewController{
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtPhoneNumber.delegate = self
         //        imgProfile.layer.cornerRadius = imgProfile.layer.bounds.height / 2
         self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing: false)
         setUpLocalizedStrings()
@@ -127,9 +128,15 @@ class EditProfileVC: BaseViewController{
             Utilities.ShowAlert(OfMessage: lastname.1)
             return lastname.0
         }
-        else if (!phone.0){
-            Utilities.ShowAlert(OfMessage: phone.1)
+        else if (!phone.0) {
+//            Utilities.ShowAlert(OfMessage: invalidPhone.1)
+            Utilities.showAlert(AppInfo.appName, message: phone.1, vc: self)
             return phone.0
+        }
+        else if (txtPhoneNumber.text?.count ?? 0) < 9 {
+//            Utilities.ShowAlert(OfMessage: "Please enter valid phone number")
+            Utilities.showAlert(AppInfo.appName, message: "Please enter valid phone number", vc: self)
+            return false
         }
         
         return true
@@ -273,7 +280,7 @@ extension EditProfileVC:UITextFieldDelegate{
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
         } else if textField == txtPhoneNumber{
-            let maxLength = 15
+            let maxLength = 10
             let currentString: NSString = textField.text! as NSString
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString

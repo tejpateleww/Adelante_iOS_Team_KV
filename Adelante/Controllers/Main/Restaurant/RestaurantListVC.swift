@@ -47,7 +47,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
        
         registerNIB()
         txtSearch.delegate = self
-        tblMainList.stopSkeletonAnimation()
+        
         webserviceGetRestaurantList(strSearch: "", strFilter: "")
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
@@ -72,6 +72,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Other Methods
     @objc func refreshFavList() {
+        responseStatus = .initial
+        tblMainList.reloadData()
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true
@@ -82,14 +84,9 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.tblMainList.reloadData()
         }
-//        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
-//            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }else{
             self.SelectFilterId = SortId
             pageNumber = 1
             webserviceGetRestaurantList(strSearch: "", strFilter: "")
-//        }
     }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -97,7 +94,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.restaurantList.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         NotificationCenter.default.removeObserver(self, name: notifDeSelectFilterRestaurant, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deSelectFilterAndRefresh), name: notifDeSelectFilterRestaurant, object: nil)
-        
         btnFilterOptions.isSelected = false
         self.changeLayoutOfFilterButton()
         tblMainList.delegate = self
@@ -229,7 +225,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }else
             {
                 let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-                
                 NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
                 NoDatacell.lblNoDataTitle.isHidden = true
                 NoDatacell.selectionStyle = .none

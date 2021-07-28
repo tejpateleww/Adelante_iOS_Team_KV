@@ -137,6 +137,10 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         pageControl.hidesForSinglePage = true
     }
     @objc func refreshListing(){
+        responseStatus = .initial
+        tblMainList.reloadData()
+        colVwRestWthPage.reloadData()
+        colVwFilterOptions.reloadData()
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true

@@ -483,13 +483,29 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                     
                     cell.customize = {
-                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                        controller.selectedItemId = self.arrMenuitem[indexPath.row].id
-                        controller.selectedRestaurantId = self.objRestaurant.id
-                        controller.delegateAddVariant = self
-                        self.strItemId = self.arrMenuitem[indexPath.row].id
-                        self.navigationController?.pushViewController(controller, animated: true)
-                    }
+                        if self.objRestaurant.isdiff == 0{
+                            let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
+                            let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                controller.selectedItemId = self.arrMenuitem[indexPath.row].id
+                                controller.selectedRestaurantId = self.objRestaurant.id
+                                controller.delegateAddVariant = self
+                                self.strItemId = self.arrMenuitem[indexPath.row].id
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                            let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
+                            alert.addAction(yesAction)
+                            alert.addAction(NoAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }else{
+                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                controller.selectedItemId = self.arrMenuitem[indexPath.row].id
+                                controller.selectedRestaurantId = self.objRestaurant.id
+                                controller.delegateAddVariant = self
+                                self.strItemId = self.arrMenuitem[indexPath.row].id
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
                     cell.selectionStyle = .none
                     return cell
                 } else {
@@ -613,13 +629,30 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }else{
                         cell.btnCustomize.isHidden = true
                     }
-                    cell.customize = { [self] in
-                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                        controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
-                        controller.selectedRestaurantId = self.objRestaurant.id
-                        self.strItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
-                        self.navigationController?.pushViewController(controller, animated: true)
-                    }
+                    cell.customize = {
+                        if self.objRestaurant.isdiff == 0{
+                            let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
+                            let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                                controller.selectedRestaurantId = self.objRestaurant.id
+                                controller.delegateAddVariant = self
+                                self.strItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                            let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
+                            alert.addAction(yesAction)
+                            alert.addAction(NoAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }else{
+                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                                controller.selectedRestaurantId = self.objRestaurant.id
+                                controller.delegateAddVariant = self
+                                self.strItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
                     cell.selectionStyle = .none
                     return cell
                 }
@@ -744,12 +777,29 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }
                 
                 cell.customize = {
-                    let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                    controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
-                    controller.selectedRestaurantId = self.objRestaurant.id
-                    self.strItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
-                    self.navigationController?.pushViewController(controller, animated: true)
-                }
+                    if self.objRestaurant.isdiff == 0{
+                        let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
+                        let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                            controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
+                            controller.selectedRestaurantId = self.objRestaurant.id
+                            controller.delegateAddVariant = self
+                            self.strItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
+                        let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
+                        alert.addAction(yesAction)
+                        alert.addAction(NoAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }else{
+                            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                            controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
+                            controller.selectedRestaurantId = self.objRestaurant.id
+                            controller.delegateAddVariant = self
+                            self.strItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
+                    }
                 cell.selectionStyle = .none
                 return cell
             }
@@ -791,7 +841,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         if self.arrItemList[indexPath.row].quantity.ToDouble() > 1 {
                             cell.btnAdd.isHidden = true
                             cell.vwStapper.isHidden = false
-                            self.webwerviceAddtoCart(strItemId: self.arrItemList[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                            self.webserviceUpdateCartQuantity(strItemid: self.arrItemList[indexPath.row].cartItemId, strQty: "1", strType: "1",row: indexPath.row)
+                            cell.stackHide.isHidden = true
+                            self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 10, y: cell.vwStapper.frame.height/2)
+                            cell.vwStapper.addSubview(self.activityView)
+                            self.activityView.startAnimating()
                         }
                     }
                     cell.selectionStyle = .none
@@ -801,11 +855,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     let cell = tblPopup.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
                     cell.selectionStyle = .none
                     return cell
-//                    let NoDatacell = tblPopup.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-//                    NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
-//                    NoDatacell.lblNoDataTitle.isHidden = true
-//                    NoDatacell.selectionStyle = .none
-//                    return NoDatacell
                 }
             }else{
                 let cell = tblPopup.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
@@ -976,6 +1025,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 objRestaurant.isdiff = cartitem.restaurant.isdiff
                 self.checkItemsAndUpdateFooter(Qty: arrAddToCartItem.totalQuantity, Total: arrAddToCartItem.total)
                 tblRestaurantDetails.reloadData()
+                tblPopup.reloadData()
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

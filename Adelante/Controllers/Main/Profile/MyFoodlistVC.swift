@@ -39,7 +39,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         tblFoodLIst.showAnimatedSkeleton()
         webserviceGetFoodlist()
         tblFoodLIst.refreshControl = refreshList
-        refreshList.addTarget(self, action: #selector(webserviceGetFoodlist), for: .valueChanged)
+        refreshList.addTarget(self, action: #selector(refreshFoodlist), for: .valueChanged)
         tblFoodLIst.reloadData()
         setup()
     }
@@ -48,6 +48,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     func registerNIB(){
         tblFoodLIst.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
         tblFoodLIst.register(UINib(nibName: "ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
+    }
+    @objc func refreshFoodlist(){
+        responseStatus = .initial
+        tblFoodLIst.reloadData()
+        webserviceGetFoodlist()
     }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)

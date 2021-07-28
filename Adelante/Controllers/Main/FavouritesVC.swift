@@ -80,6 +80,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshFavouriteList, object: nil)
     }
     @objc func refreshFavList() {
+        responseStatus = .initial
+        tblMainList.reloadData()
         self.pageNumber = 1
         self.isNeedToReload = true
         self.isRefresh = true

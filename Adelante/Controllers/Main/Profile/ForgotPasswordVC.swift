@@ -42,7 +42,7 @@ class ForgotPasswordVC: BaseViewController {
     @IBAction func btnSend(_ sender: Any) {
 //           self.navigationController?.popViewController(animated: true)
       //  webserviceForForgotPassword()
-        let checkEmail = txtEmailOrPhone.validatedText(validationType: ValidatorType.requiredField(field: "Email / Phone number"))
+        let checkEmail = txtEmailOrPhone.validatedText(validationType: .email)
         
         if(!checkEmail.0)
         {
@@ -52,6 +52,7 @@ class ForgotPasswordVC: BaseViewController {
             webserviceForForgotPassword()
         }
        }
+    
     // MARK: - Api Calls
     func webserviceForForgotPassword(){
         let forgot = ForgotPasswordReqModel()
@@ -64,7 +65,7 @@ class ForgotPasswordVC: BaseViewController {
                     }
                 }
             }else{
-                Utilities.showAlertOfAPIResponse(param: "Please enter valid email", vc: self)
+                Utilities.showAlertOfAPIResponse(param: response["message"].stringValue, vc: self)
             }
         })
     }

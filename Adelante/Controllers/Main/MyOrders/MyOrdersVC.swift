@@ -71,6 +71,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         tblOrders.reloadData()
     }
     @objc func refreshData(){
+        responseStatus = .initial
+        tblOrders.reloadData()
         webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
     }
     // MARK: - IBActions
@@ -186,14 +188,24 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         strOrderId = obj.id
                     
                     cell.cancel = {
-//                        let alertController = UIAlertController(title: AppName,
-//                                                                message: "Are you sure you want to cancel order".Localized(),
-//                                                                preferredStyle: .alert)
-//                        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//                        alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
-                            self.webserviceCancelOrder()
-//                        })
-//                        self.present(alertController, animated: true)
+                        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+                        //controller.modalPresentationStyle = .fullScreen
+                        controller.isHideCancelButton = true
+                        controller.isHideSubmitButton = false
+                        controller.submitBtnTitle = "Cancel Order       "
+                        controller.cancelBtnTitle = ""
+                        controller.strDescription = "Do you really want  to cancel the order."
+                        controller.strPopupTitle = "Are you Sure?"
+                        controller.submitBtnColor = colors.appRedColor
+                        controller.cancelBtnColor = colors.appGreenColor
+                        controller.strPopupImage = "ic_popupCancleOrder"
+                        controller.isCancleOrder = true
+                        controller.btnSubmit = {
+                            controller.dismiss(animated: true, completion: nil)
+                            self.webserviceCancelOrder {
+                            }
+                        }
+                        self.present(controller, animated: true, completion: nil)
                     }
                     cell.selectionStyle = .none
                     return cell
@@ -239,15 +251,24 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     
                     cell.cancel = {
                         
-//                        let alertController = UIAlertController(title: AppName,
-//                                                                message: "Are you sure you want to cancel order".Localized(),
-//                                                                preferredStyle: .alert)
-//                        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//                        alertController.addAction(UIAlertAction(title: "Yes", style: .default){ _ in
-                            self.webserviceCancelOrder()
-                            
-//                        })
-//                        self.present(alertController, animated: true)
+                        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+                        //controller.modalPresentationStyle = .fullScreen
+                        controller.isHideCancelButton = true
+                        controller.isHideSubmitButton = false
+                        controller.submitBtnTitle = "Cancel Order       "
+                        controller.cancelBtnTitle = ""
+                        controller.strDescription = "Do you really want  to cancel the order."
+                        controller.strPopupTitle = "Are you Sure?"
+                        controller.submitBtnColor = colors.appRedColor
+                        controller.cancelBtnColor = colors.appGreenColor
+                        controller.strPopupImage = "ic_popupCancleOrder"
+                        controller.isCancleOrder = true
+                        controller.btnSubmit = {
+                            controller.dismiss(animated: true, completion: nil)
+                            self.webserviceCancelOrder {
+                            }
+                        }
+                        self.present(controller, animated: true, completion: nil)
                     }
                     cell.selectionStyle = .none
                     return cell
@@ -371,7 +392,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     func refreshOrderDetailsScreen() {
         webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
     }
-    func webserviceCancelOrder(){
+    func webserviceCancelOrder(completion: @escaping () -> ()){
         
         let cancelOrder = CancelOrderReqModel()
         cancelOrder.user_id = SingletonClass.sharedInstance.UserId
@@ -379,27 +400,14 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
-                let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-                //controller.modalPresentationStyle = .fullScreen
-                controller.isHideCancelButton = false
-                controller.isHideSubmitButton = true
-                controller.submitBtnTitle = ""
-                controller.cancelBtnTitle = "Cancel Order"
-                controller.strDescription = "Do you really want  to cancel the order."
-                controller.strPopupTitle = "Are you Sure?"
-                controller.submitBtnColor = colors.appGreenColor
-                controller.cancelBtnColor = colors.appRedColor
-                controller.strPopupImage = "ic_popupCancleOrder"
-                controller.isCancleOrder = true
-                controller.btnSubmit = {
-                    self.webserviceGetOrderDetail(selectedOrder: "")
-                }
-                self.present(controller, animated: true, completion: nil)
+                
+                self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : "In-Process")
             }
             else
             {
                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
+            completion()
         })
     }
 }
