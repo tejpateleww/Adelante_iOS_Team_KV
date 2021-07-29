@@ -16,9 +16,16 @@ class RestaurantListCell: UITableViewCell {
     @IBOutlet weak var lblRating: tblHomeLabels!
     @IBOutlet weak var lblPrice: tblHomeLabels!
     @IBOutlet weak var btnFavorite: UIButton!
+    @IBOutlet weak var vwIndicator: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    var btnFavouriteClick : (()->())?
+    @IBAction func btnFavTap(_ sender: Any) {
+        if let btnfavAdd = self.btnFavouriteClick{
+            btnfavAdd()
+        }
     }
     @IBAction func BtnLikeDislike(_ sender: UIButton) {
            if sender.isSelected {

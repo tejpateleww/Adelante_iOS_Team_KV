@@ -231,7 +231,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                     self.navigationController?.popViewController(animated: true)
                 }, otherTitles: nil)
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -249,7 +253,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -264,7 +272,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

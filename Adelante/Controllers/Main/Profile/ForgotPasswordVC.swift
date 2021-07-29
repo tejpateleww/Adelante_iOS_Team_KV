@@ -57,7 +57,7 @@ class ForgotPasswordVC: BaseViewController {
     func webserviceForForgotPassword(){
         let forgot = ForgotPasswordReqModel()
         forgot.email = txtEmailOrPhone.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: true, completion: { (response, status, error) in
             if (status){
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
                     if index == 0{
@@ -65,7 +65,11 @@ class ForgotPasswordVC: BaseViewController {
                     }
                 }
             }else{
-                Utilities.showAlertOfAPIResponse(param: response["message"].stringValue, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

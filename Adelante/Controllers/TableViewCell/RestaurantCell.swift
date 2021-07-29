@@ -15,16 +15,20 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var lblMiles: tblHomeLabels!
     @IBOutlet weak var imgRestaurant: customImageView!
     @IBOutlet weak var btnFavorite: UIButton!
-    
-    
+    @IBOutlet weak var vwIndicator: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
        // setUpLocalizedStrings()
     }
+    var btnFavouriteClick : (()->())?
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    @IBAction func btnFavouriteTapAdd(_ sender: Any) {
+        if let btnfavAdd = self.btnFavouriteClick{
+            btnfavAdd()
+        }
+    }
     func setUpLocalizedStrings(){
         lblItemName.text = "Kangkung siram sambel"
         lblRating.text = "4.2"

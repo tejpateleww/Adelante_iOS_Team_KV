@@ -25,7 +25,7 @@ struct structFilter {
 }
 
 class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
-
+    
     
     //    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
     //
@@ -55,7 +55,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var selectedRestaurantId = ""
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
-
+    let activityView = UIActivityIndicatorView(style: .white)
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -127,7 +127,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         colVwRestWthPage.reloadData()
         tblMainList.delegate = self
         tblMainList.dataSource = self
-//        tblMainList.reloadData()
+        //        tblMainList.reloadData()
         
         
         colVwFilterOptions.delegate = self
@@ -202,7 +202,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     }
     
     @IBAction func btnEditClicked(_ sender: UIButton) {
-
+        
     }
     
     @IBAction func btnFilterClicked(_ sender: UIButton) {
@@ -215,7 +215,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
             else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
                 self.selectedSortTypedIndexFromcolVwFilter = 1
                 //                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+                //                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
                 self.colVwFilterOptions.reloadData()
             } else {
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
@@ -243,7 +243,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 3
     }
     func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-            return responseStatus == .gotData ? (self.arrBanner.count > 0 ? RestWithPageCell.reuseIdentifier : NoDataCollectionview.reuseIdentifier) :  ShimmarCollectionCell.reuseIdentifier
+        return responseStatus == .gotData ? (self.arrBanner.count > 0 ? RestWithPageCell.reuseIdentifier : NoDataCollectionview.reuseIdentifier) :  ShimmarCollectionCell.reuseIdentifier
     }
     // MARK: - UICollectionView Delegates And Datasource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -310,10 +310,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     return NoDatacell
                 }
             }else{
-                    let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
-                    return cell
-                }
+                let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
+                return cell
             }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -349,9 +349,9 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 3
     }
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-//        if indexPath.row == 0{
-//            return responseStatus == .gotData ? (self.arrCategories.count > 0 ? RestaurantCatListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
-//        }
+        //        if indexPath.row == 0{
+        //            return responseStatus == .gotData ? (self.arrCategories.count > 0 ? RestaurantCatListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
+        //        }
         return responseStatus == .gotData ? (self.arrRestaurant.count > 0 ? RestaurantCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
     }
     // MARK: - UITableViewDelegates And Datasource
@@ -363,46 +363,73 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.row == 0 {
-//            let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier, for: indexPath) as! RestaurantCatListCell
-//            cell.arrCategories = self.arrCategories
-//            cell.delegateResCatCell = self
-//            cell.colRestaurantCatList.reloadData()
-//            cell.selectionStyle = .none
-//            return cell
-//        } else {
-            if responseStatus == .gotData{
-                if arrRestaurant.count != 0 {
-                    let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
-                    cell.lblItemName.text = arrRestaurant[indexPath.row].name
-                    cell.lblMiles.text = arrRestaurant[indexPath.row].distance//arrRestaurant[indexPath.row - 1].distance
-                    cell.lblRating.text = arrRestaurant[indexPath.row].review
-                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
-                    cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                    cell.btnFavorite.tag = indexPath.row
-                    cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
-                    if arrRestaurant[indexPath.row].favourite == "1"{
-                        cell.btnFavorite.isSelected = true
+        //        if indexPath.row == 0 {
+        //            let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier, for: indexPath) as! RestaurantCatListCell
+        //            cell.arrCategories = self.arrCategories
+        //            cell.delegateResCatCell = self
+        //            cell.colRestaurantCatList.reloadData()
+        //            cell.selectionStyle = .none
+        //            return cell
+        //        } else {
+        if responseStatus == .gotData{
+            if arrRestaurant.count != 0 {
+                let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
+                cell.lblItemName.text = arrRestaurant[indexPath.row].name
+                cell.lblMiles.text = arrRestaurant[indexPath.row].distance//arrRestaurant[indexPath.row - 1].distance
+                cell.lblRating.text = arrRestaurant[indexPath.row].rating_count
+                cell.btnFavorite.isHidden = false
+                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
+                cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                cell.btnFavouriteClick = {
+                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                        let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                        let navController = UINavigationController.init(rootViewController: vc)
+                        navController.modalPresentationStyle = .overFullScreen
+                        navController.navigationController?.modalTransitionStyle = .crossDissolve
+                        navController.navigationBar.isHidden = true
+                        SingletonClass.sharedInstance.isPresented = true
+                        self.present(navController, animated: true, completion: nil)
                     }else{
-                        cell.btnFavorite.isSelected = false
+                        var Select = self.arrRestaurant[indexPath.row].favourite ?? ""
+                        let restaurantId = self.arrRestaurant[indexPath.row].id ?? ""
+                        if Select == "1"{
+                            Select = "0"
+                        }else{
+                            Select = "1"
+                        }
+                        self.webwerviceFavorite(strRestaurantId: restaurantId, Status: Select)
+                        cell.btnFavorite.isHidden = true
+                        self.activityView.center = CGPoint(x: cell.vwIndicator.frame.width / 2, y: cell.vwIndicator.frame.height/2)
+                        self.activityView.color = .red
+                        cell.vwIndicator.addSubview(self.activityView)
+                        self.activityView.startAnimating()
                     }
-                    cell.selectionStyle = .none
-                    return cell
-                }else{
-                    let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-                    NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
-                    NoDatacell.lblNoDataTitle.isHidden = true
-                    NoDatacell.selectionStyle = .none
-                    return NoDatacell
                 }
-            }else{
-                let cell = tblMainList.dequeueReusableCell(withIdentifier: HomeSkeletonCell.reuseIdentifier, for: indexPath) as! HomeSkeletonCell
-                print("Shimmer RestaurantCell loaded")
+                //                    cell.btnFavorite.isHidden = false
+                //                    cell.btnFavorite.tag = indexPath.row
+                //                    cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+                if arrRestaurant[indexPath.row].favourite == "1"{
+                    cell.btnFavorite.isSelected = true
+                }else{
+                    cell.btnFavorite.isSelected = false
+                }
                 cell.selectionStyle = .none
                 return cell
+            }else{
+                let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+                NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
+                NoDatacell.lblNoDataTitle.isHidden = true
+                NoDatacell.selectionStyle = .none
+                return NoDatacell
             }
-//        }
+        }else{
+            let cell = tblMainList.dequeueReusableCell(withIdentifier: HomeSkeletonCell.reuseIdentifier, for: indexPath) as! HomeSkeletonCell
+            print("Shimmer RestaurantCell loaded")
+            cell.selectionStyle = .none
+            return cell
+        }
+        //        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -418,7 +445,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         headerCell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier) as? RestaurantCatListCell
         headerCell?.arrCategories = self.arrCategories
@@ -426,7 +453,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         headerCell?.selectedIdForFood = self.SelectedCatId
         headerCell?.selectedIndexPath = self.SelectedCatIndex
         headerCell?.colRestaurantCatList.reloadData()
-//        headerCell.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .top, animated: true)
+        //        headerCell.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .top, animated: true)
         headerCell?.selectionStyle = .none
         return headerCell
     }
@@ -436,24 +463,24 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row != 0
-//        {
-         
-            if arrRestaurant[indexPath.row].type != "outlet" {
-                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
-                controller.selectedRestaurantId = arrRestaurant[indexPath.row].id
-                controller.strRestaurantName = arrRestaurant[indexPath.row].name
-    //            controller.selectedIndex = "\(indexPath.row - 1)"
-    //            controller.isFromDeshboard = true
-                self.navigationController?.pushViewController(controller, animated: true)
-            }else{
-                let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
-                restDetailsVc.selectedRestaurantId = arrRestaurant[indexPath.row].id
-                restDetailsVc.isFromRestaurantList = true
-                restDetailsVc.selectedIndex = "\(indexPath.row)"
-                self.navigationController?.pushViewController(restDetailsVc, animated: true)
-            }
-//        }
+        //        if indexPath.row != 0
+        //        {
+        
+        if arrRestaurant[indexPath.row].type != "outlet" {
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
+            controller.selectedRestaurantId = arrRestaurant[indexPath.row].id
+            controller.strRestaurantName = arrRestaurant[indexPath.row].name
+            //            controller.selectedIndex = "\(indexPath.row - 1)"
+            //            controller.isFromDeshboard = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        }else{
+            let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+            restDetailsVc.selectedRestaurantId = arrRestaurant[indexPath.row].id
+            restDetailsVc.isFromRestaurantList = true
+            restDetailsVc.selectedIndex = "\(indexPath.row)"
+            self.navigationController?.pushViewController(restDetailsVc, animated: true)
+        }
+        //        }
     }
     // MARK: - RestaurantCatListCelldelegate
     func SelectedCategory(_ CategoryId: String, _ SelctedIndex: IndexPath) {
@@ -462,8 +489,8 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
         self.webserviceGetDashboard(isFromFilter:true)
-       
-
+        
+        
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
@@ -473,14 +500,14 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             self.colVwFilterOptions.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
         
-//        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
-//            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }else{
-            self.SelectFilterId = SortId
-            self.pageNumber = 1
+        //        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
+        //            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
+        //            self.navigationController?.pushViewController(vc, animated: true)
+        //        }else{
+        self.SelectFilterId = SortId
+        self.pageNumber = 1
         webserviceGetDashboard(isFromFilter: false)
-//        }
+        //        }
     }
     // MARK: - UIScrollView Delegates
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -548,7 +575,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.colVwRestWthPage.isScrollEnabled = true
                 self.colVwRestWthPage.isUserInteractionEnabled = true
                 self.colVwRestWthPage.reloadData()
-
+                
                 if isFromFilter{
                     let indexes = (0..<self.arrRestaurant.count).map { IndexPath(row: $0, section: 0) }
                     self.tblMainList.reloadRows(at: indexes, with: .fade)
@@ -557,12 +584,16 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     }
                 }else{
                     self.tblMainList.reloadData()
-            
+                    
                 }
             }else{
-                Utilities.displayErrorAlert(response["message"].string ?? "No internet connection")
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
-
+            
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }
@@ -577,13 +608,17 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
             //            self.hideHUD()
             if status{
-//                self.webserviceGetDashboard()
+                //                self.webserviceGetDashboard()
                 self.arrRestaurant.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 self.tblMainList.reloadData()
                 NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
                 NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -592,11 +627,11 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.isRefresh = true
         self.isNeedToReload = true
         webserviceGetDashboard(isFromFilter: false)
-//        if selectedIndex != ""{
-//            let i = Int(selectedIndex) ?? 0
-//            arrRestaurant[i].favourite = strStatus
-//            tblMainList.reloadRows(at: [IndexPath(row: i + 1, section: 0)], with: .automatic)
-//        }
+        //        if selectedIndex != ""{
+        //            let i = Int(selectedIndex) ?? 0
+        //            arrRestaurant[i].favourite = strStatus
+        //            tblMainList.reloadRows(at: [IndexPath(row: i + 1, section: 0)], with: .automatic)
+        //        }
     }
     
     func refreshFavoriteScreen() {
@@ -605,35 +640,35 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 }
 
 extension HomeVC: GMSAutocompleteViewControllerDelegate {
-
-  // Handle the user's selection.
-  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    print("Place name: \(place.name!)")
-    print("Place ID: \(place.placeID!)")
-    lblAddress.text =  place.name
-    SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-    webserviceGetDashboard(isFromFilter: false)
-    dismiss(animated: true, completion: nil)
-  }
-
-  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-    // TODO: handle the error.
-    print("Error: ", error.localizedDescription)
-  }
-
-  // User canceled the operation.
-  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-    dismiss(animated: true, completion: nil)
-  }
-
-  // Turn the network activity indicator on and off again.
-  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-  }
-
-  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-  }
-
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        print("Place name: \(place.name!)")
+        print("Place ID: \(place.placeID!)")
+        lblAddress.text =  place.name
+        SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        webserviceGetDashboard(isFromFilter: false)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
 }
 

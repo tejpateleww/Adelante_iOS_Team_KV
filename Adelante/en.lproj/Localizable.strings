@@ -17,7 +17,7 @@
 "LoginViewController_txtPassword" = "Password";
 "LoginViewController_btnForgotPassword" = "Forgot Password";
 "LoginViewController_lblSignin" = "Sign in";
-"LoginViewController_lblDontHave" = "Don't have an account";
+"LoginViewController_lblDontHave" = "Don't have an account?";
 "LoginViewController_btnCreateAccount" = "Create Account";
 
 //RegisterViewController
@@ -29,7 +29,7 @@
 "RegisterViewController_txtPassword" = "Password";
 "RegisterViewController_txtConPassword" = "Confirm Password";
 "RegisterViewController_lblCreateAccount" = "Create Account";
-"RegisterViewController_lblAlreadyHave" = "Already have an account";
+"RegisterViewController_lblAlreadyHave" = "Already have an account?";
 "RegisterViewController_btnSignin" = "Sign in";
 
 //SearchVC

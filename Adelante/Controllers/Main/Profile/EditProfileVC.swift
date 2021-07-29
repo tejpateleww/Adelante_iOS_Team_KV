@@ -182,7 +182,11 @@ class EditProfileVC: BaseViewController{
                     }
                 }, otherTitles: nil)
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -212,7 +216,11 @@ class EditProfileVC: BaseViewController{
                 OTPVC.selectedImage = selectedImage
                 self.navigationController?.pushViewController(OTPVC, animated: true)
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }

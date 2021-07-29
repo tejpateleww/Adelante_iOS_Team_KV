@@ -108,7 +108,11 @@ class LoginViewController: BaseViewController {
                         }
                     }
                 }else{
-                    Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                    if let strMessage = json["message"].string {
+                        Utilities.displayAlert(strMessage)
+                    }else {
+                        Utilities.displayAlert("Something went wrong")
+                    }
                 }
             }
         })
@@ -127,7 +131,11 @@ class LoginViewController: BaseViewController {
                     }
                 }
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -144,7 +152,11 @@ class LoginViewController: BaseViewController {
                 print(json)
                 Utilities.displayErrorAlert(json["message"].string!)
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -171,7 +183,7 @@ class LoginViewController: BaseViewController {
     {
         let txtTemp = UITextField()
         txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
-        let checkEmail = txtTemp.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder ?? ""))
+        let checkEmail = txtTemp.validatedText(validationType:  ValidatorType.requiredField(field: txtEmail.placeholder?.lowercased() ?? ""))
         let StrPassWord = txtPassword.validatedText(validationType: .password(field: "password"))
 //        let checkPassword = txtPassword.validatedText(validationType:  .password(field: txtPassword.placeholder ?? ""))
          if(!checkEmail.0)

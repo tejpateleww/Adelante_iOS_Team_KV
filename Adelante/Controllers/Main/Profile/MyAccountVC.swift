@@ -91,6 +91,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         //
         case 0:
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+            controller.isfromPayment = true
             self.navigationController?.pushViewController(controller, animated: true)
             
             print(sender.tag)
@@ -242,7 +243,11 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                 self.SettingsData = SettingsResModel.init(fromJson: json)            }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

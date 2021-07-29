@@ -26,7 +26,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     var strItemType = ""
     var SelectFilterId = ""
     var isRefresh = false
-    
+    let activityView = UIActivityIndicatorView(style: .white)
     // MARK: - IBOutlets
     @IBOutlet weak var tblMainList: UITableView!{
         didSet{
@@ -48,7 +48,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         registerNIB()
         txtSearch.delegate = self
         
-        webserviceGetRestaurantList(strSearch: "", strFilter: "")
+        webserviceGetRestaurantList(strSearch: "")
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         setUpLocalizedStrings()
@@ -66,7 +66,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblMainList.register(UINib(nibName:"ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
     }
     override func viewWillAppear(_ animated: Bool) {
-        webserviceGetRestaurantList(strSearch: "", strFilter: "")
+//        webserviceGetRestaurantList(strSearch: "")
+//        tblMainList.reloadData()
         self.customTabBarController?.hideTabBar()
     }
     
@@ -77,7 +78,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true
-        self.webserviceGetRestaurantList(strSearch: "", strFilter: "")
+        self.webserviceGetRestaurantList(strSearch: "")
     }
     func SelectedSortList(_ SortId: String) {
         DispatchQueue.main.async {
@@ -86,7 +87,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
             self.SelectFilterId = SortId
             pageNumber = 1
-            webserviceGetRestaurantList(strSearch: "", strFilter: "")
+            webserviceGetRestaurantList(strSearch: "")
     }
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -125,32 +126,13 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     func stoppedScrolling() {
         if self.isNeedToReload && self.isRefresh == false{
             pageNumber = pageNumber + 1
-            webserviceGetRestaurantList(strSearch: "", strFilter: "")
+            webserviceGetRestaurantList(strSearch: "")
         }
         // done, do whatever
     }
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
-        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
-            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
-//             vc.delegateFilter = self
-//             vc.selectedSortData = self.SelectFilterId
-            let navController = UINavigationController.init(rootViewController: vc)
-            navController.modalPresentationStyle = .overFullScreen
-            navController.navigationController?.modalTransitionStyle = .crossDissolve
-            navController.navigationBar.isHidden = true
-            SingletonClass.sharedInstance.isPresented = true
-            self.present(navController, animated: true, completion: nil)
-        }else{
-            var Select = arrRestaurantList[sender.tag].favourite ?? ""
-            let restaurantId = arrRestaurantList[sender.tag].id ?? ""
-            if Select == "1"{
-                Select = "0"
-            }else{
-                Select = "1"
-            }
-            webserviceFavorite(strRestaurantId: restaurantId, Status: Select)
-        }
+        
     }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
         DispatchQueue.main.async {
@@ -213,8 +195,36 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurantList[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                cell.btnFavorite.tag = indexPath.row
-                cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
+                cell.btnFavorite.isHidden = false
+                cell.btnFavouriteClick = {
+                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                        let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+            //             vc.delegateFilter = self
+            //             vc.selectedSortData = self.SelectFilterId
+                        let navController = UINavigationController.init(rootViewController: vc)
+                        navController.modalPresentationStyle = .overFullScreen
+                        navController.navigationController?.modalTransitionStyle = .crossDissolve
+                        navController.navigationBar.isHidden = true
+                        SingletonClass.sharedInstance.isPresented = true
+                        self.present(navController, animated: true, completion: nil)
+                    }else{
+                        var Select = self.arrRestaurantList[indexPath.row].favourite ?? ""
+                        let restaurantId = self.arrRestaurantList[indexPath.row].id ?? ""
+                        if Select == "1"{
+                            Select = "0"
+                        }else{
+                            Select = "1"
+                        }
+                        self.webserviceFavorite(strRestaurantId: restaurantId, Status: Select)
+                        cell.btnFavorite.isHidden = true
+                        self.activityView.center = CGPoint(x: cell.vwIndicator.frame.width / 2, y: cell.vwIndicator.frame.height/2)
+                        self.activityView.color = .red
+                        cell.vwIndicator.addSubview(self.activityView)
+                        self.activityView.startAnimating()
+                    }
+                }
+//                cell.btnFavorite.tag = indexPath.row
+//                cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
                 if arrRestaurantList[indexPath.row].favourite == "1"{
                     cell.btnFavorite.isSelected = true
                 }else{
@@ -238,8 +248,22 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if arrRestaurantList.count == 0{
-            print("No Data Found")
+//        if arrRestaurantList.count == 0{
+//            print("No Data Found")
+//        }else{
+//            let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
+//            restDetailsVc.selectedRestaurantId = arrRestaurantList[indexPath.row].id
+//            restDetailsVc.isFromRestaurantList = true
+//            restDetailsVc.selectedIndex = "\(indexPath.row)"
+//            self.navigationController?.pushViewController(restDetailsVc, animated: true)
+//        }
+        if arrRestaurantList[indexPath.row].type != "outlet" {
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
+            controller.selectedRestaurantId = arrRestaurantList[indexPath.row].id
+            controller.strRestaurantName = arrRestaurantList[indexPath.row].name
+//            controller.selectedIndex = "\(indexPath.row - 1)"
+//            controller.isFromDeshboard = true
+            self.navigationController?.pushViewController(controller, animated: true)
         }else{
             let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
             restDetailsVc.selectedRestaurantId = arrRestaurantList[indexPath.row].id
@@ -262,10 +286,10 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - Api Calls
-    @objc func webserviceGetRestaurantList(strSearch:String,strFilter:String){
+    @objc func webserviceGetRestaurantList(strSearch:String){
         let RestaurantList = RestaurantListReqModel()
         RestaurantList.user_id = SingletonClass.sharedInstance.UserId
-        RestaurantList.filter = strFilter
+        RestaurantList.filter = SelectFilterId
         RestaurantList.item = strSearch
         RestaurantList.page = "\(pageNumber)"
         RestaurantList.item_id = strItemId
@@ -308,7 +332,14 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 self.tblMainList.isUserInteractionEnabled = true
                 self.tblMainList.reloadData()
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                self.arrRestaurantList = []
+                self.tblMainList.reloadData()
+                
+//                if let strMessage = response["message"].string {
+//                    Utilities.displayAlert(strMessage)
+//                }else {
+//                    Utilities.displayAlert("Something went wrong")
+//                }
             }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
@@ -328,7 +359,11 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
                 NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -342,18 +377,15 @@ extension RestaurantListVC:UISearchBarDelegate{
         lastSearchTxt = searchText
         self.perform(#selector(self.makeNetworkCall), with: searchText, afterDelay: 0.7)
     }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        txtSearch.resignFirstResponder()
-    }
+    
     @objc private func makeNetworkCall(_ query: String)
     {
         if query == ""{
-            webserviceGetRestaurantList(strSearch: query, strFilter: "")
+            webserviceGetRestaurantList(strSearch: query)
         }else{
             if query.count > 2{
-//                txtSearch.resignFirstResponder()
                 self.pageNumber = 1
-                webserviceGetRestaurantList(strSearch: query, strFilter: "")
+                webserviceGetRestaurantList(strSearch: query)
             }
         }
     }

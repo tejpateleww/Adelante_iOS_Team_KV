@@ -230,7 +230,11 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "MessageTitle".Localized())
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

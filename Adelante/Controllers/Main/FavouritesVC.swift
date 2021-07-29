@@ -243,7 +243,11 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
                 self.tblMainList.isUserInteractionEnabled = true
                 self.tblMainList.reloadData()
             } else {
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -259,7 +263,11 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
                 NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
                 NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

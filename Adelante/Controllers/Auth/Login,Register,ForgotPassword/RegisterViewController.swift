@@ -122,8 +122,8 @@ class RegisterViewController: UIViewController {
         txtTemp.text = txtEmail.text?.replacingOccurrences(of: " ", with: "")
         let checkEmailRequired = txtTemp.validatedText(validationType: ValidatorType.requiredField(field: txtEmail.placeholder?.lowercased() ?? ""))
         let checkEmailValid = txtTemp.validatedText(validationType: ValidatorType.email)
-        let newPW =  txtPassword.validatedText(validationType: ValidatorType.password(field: txtPassword.placeholder ?? ""))
-        let confirmPW = txtConPassword.validatedText(validationType: ValidatorType.password(field: txtConPassword.placeholder ?? ""))
+        let newPW =  txtPassword.validatedText(validationType: ValidatorType.password(field: txtPassword.placeholder?.lowercased() ?? ""))
+        let confirmPW = txtConPassword.validatedText(validationType: ValidatorType.password(field: txtConPassword.placeholder?.lowercased() ?? ""))
         let invalidPhone =  txtPhoneNumber.validatedText(validationType: ValidatorType.phoneNo)
         if (!firstName.0){
 //            Utilities.ShowAlert(OfMessage: firstName.1)
@@ -196,7 +196,11 @@ class RegisterViewController: UIViewController {
                 OTPVC.strOTP = otpModel.code
                 self.navigationController?.pushViewController(OTPVC, animated: true)
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }

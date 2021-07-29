@@ -4946,24 +4946,37 @@
                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </imageView>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QE5-fj-NCE">
-                                                                                    <rect key="frame" x="346" y="142" width="27" height="27"/>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiZ-bO-jid">
+                                                                                    <rect key="frame" x="338" y="134" width="35" height="35"/>
+                                                                                    <subviews>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QE5-fj-NCE">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                                                            <state key="normal" image="ic_dislike"/>
+                                                                                            <state key="selected" image="ic_favouriteSelected"/>
+                                                                                            <connections>
+                                                                                                <action selector="btnFavTap:" destination="hu2-bj-dns" eventType="touchUpInside" id="7dm-6T-xGA"/>
+                                                                                            </connections>
+                                                                                        </button>
+                                                                                    </subviews>
+                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="width" constant="27" id="x67-B9-bGO"/>
-                                                                                        <constraint firstAttribute="height" constant="27" id="xCb-1w-wCr"/>
+                                                                                        <constraint firstAttribute="width" secondItem="PiZ-bO-jid" secondAttribute="height" multiplier="1:1" id="0oo-mD-gs6"/>
+                                                                                        <constraint firstItem="QE5-fj-NCE" firstAttribute="top" secondItem="PiZ-bO-jid" secondAttribute="top" id="68h-FV-gj4"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="QE5-fj-NCE" secondAttribute="bottom" id="DJI-fb-Ruu"/>
+                                                                                        <constraint firstItem="QE5-fj-NCE" firstAttribute="leading" secondItem="PiZ-bO-jid" secondAttribute="leading" id="Vcf-lt-fbA"/>
+                                                                                        <constraint firstAttribute="height" constant="35" id="fzn-zl-IMv"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="QE5-fj-NCE" secondAttribute="trailing" id="pct-bV-yP4"/>
                                                                                     </constraints>
-                                                                                    <state key="normal" image="ic_dislike"/>
-                                                                                    <state key="selected" image="ic_favouriteSelected"/>
-                                                                                </button>
+                                                                                </view>
                                                                             </subviews>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
                                                                                 <constraint firstItem="raJ-Ag-LQK" firstAttribute="top" secondItem="IKL-kK-ki8" secondAttribute="top" constant="10" id="7Pg-hN-9TQ"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="QE5-fj-NCE" secondAttribute="trailing" constant="5" id="8mn-cS-tje"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="QE5-fj-NCE" secondAttribute="bottom" constant="15" id="94q-Pf-IGx"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="raJ-Ag-LQK" secondAttribute="bottom" constant="10" id="Ed0-mj-avp"/>
                                                                                 <constraint firstItem="raJ-Ag-LQK" firstAttribute="leading" secondItem="IKL-kK-ki8" secondAttribute="leading" id="EiS-tw-EwF"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="PiZ-bO-jid" secondAttribute="bottom" constant="15" id="KNn-eU-pK9"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="raJ-Ag-LQK" secondAttribute="trailing" id="i6Y-vs-fWo"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="PiZ-bO-jid" secondAttribute="trailing" constant="5" id="rVN-Th-WBa"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
@@ -5130,6 +5143,7 @@
                                                     <outlet property="lblName" destination="CSX-KQ-9Bx" id="NqP-wV-eQO"/>
                                                     <outlet property="lblPrice" destination="BHm-OZ-6gg" id="I6O-HW-BKr"/>
                                                     <outlet property="lblRating" destination="KFM-AF-FmY" id="fdG-ws-Q2n"/>
+                                                    <outlet property="vwIndicator" destination="PiZ-bO-jid" id="kkf-9P-0WR"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -5216,7 +5230,6 @@
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="btnFilterClick:" destination="wVL-Cr-ihp" eventType="touchUpInside" id="ULO-2Z-L3h"/>
-                                                                    <action selector="btnFilterClicked:" destination="0Bo-0R-ju0" eventType="touchUpInside" id="F1Q-2S-aIM"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5269,24 +5282,37 @@
                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </imageView>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agn-W6-Ovh">
-                                                                                    <rect key="frame" x="346" y="142" width="27" height="27"/>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j6c-eA-icv">
+                                                                                    <rect key="frame" x="338" y="134" width="35" height="35"/>
+                                                                                    <subviews>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agn-W6-Ovh">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                                                            <state key="normal" image="ic_dislike"/>
+                                                                                            <state key="selected" image="ic_favouriteSelected"/>
+                                                                                            <connections>
+                                                                                                <action selector="btnFavouriteTap:" destination="g7E-bU-pcB" eventType="touchUpInside" id="kFR-ZC-GJP"/>
+                                                                                            </connections>
+                                                                                        </button>
+                                                                                    </subviews>
+                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="width" constant="27" id="HdZ-Vf-G4e"/>
-                                                                                        <constraint firstAttribute="height" constant="27" id="Oik-5q-f13"/>
+                                                                                        <constraint firstItem="Agn-W6-Ovh" firstAttribute="top" secondItem="j6c-eA-icv" secondAttribute="top" id="3VA-v6-zKi"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="Agn-W6-Ovh" secondAttribute="trailing" id="5xm-7V-okl"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="Agn-W6-Ovh" secondAttribute="bottom" id="coa-QN-JBn"/>
+                                                                                        <constraint firstAttribute="height" constant="35" id="gNN-SO-ig0"/>
+                                                                                        <constraint firstItem="Agn-W6-Ovh" firstAttribute="leading" secondItem="j6c-eA-icv" secondAttribute="leading" id="lpN-fs-9AN"/>
+                                                                                        <constraint firstAttribute="width" secondItem="j6c-eA-icv" secondAttribute="height" multiplier="1:1" id="yMF-TY-bhw"/>
                                                                                     </constraints>
-                                                                                    <state key="normal" image="ic_dislike"/>
-                                                                                    <state key="selected" image="ic_favouriteSelected"/>
-                                                                                </button>
+                                                                                </view>
                                                                             </subviews>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
+                                                                                <constraint firstAttribute="trailing" secondItem="j6c-eA-icv" secondAttribute="trailing" constant="5" id="CAI-sm-Fdx"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="j6c-eA-icv" secondAttribute="bottom" constant="15" id="DTR-7N-5ZK"/>
                                                                                 <constraint firstItem="XVa-rj-pdn" firstAttribute="leading" secondItem="ude-ZO-VJL" secondAttribute="leading" id="OZK-PG-rDt"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="Agn-W6-Ovh" secondAttribute="bottom" constant="15" id="Q8m-yE-kXI"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="XVa-rj-pdn" secondAttribute="trailing" id="aBF-JW-1Jb"/>
                                                                                 <constraint firstItem="XVa-rj-pdn" firstAttribute="top" secondItem="ude-ZO-VJL" secondAttribute="top" constant="10" id="dCr-do-Uob"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="XVa-rj-pdn" secondAttribute="bottom" constant="10" id="dq2-Ag-Omj"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="Agn-W6-Ovh" secondAttribute="trailing" constant="5" id="oeD-hn-SH1"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
@@ -5452,6 +5478,7 @@
                                                     <outlet property="lblAreaName" destination="nQS-0Y-4l3" id="e7J-kO-Zre"/>
                                                     <outlet property="lblMiles" destination="3gZ-Pe-zJg" id="29h-qZ-erZ"/>
                                                     <outlet property="lblRating" destination="x8F-aD-Slx" id="Ph6-O1-akm"/>
+                                                    <outlet property="vwIndicator" destination="j6c-eA-icv" id="Nqz-4n-ngl"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -8629,24 +8656,37 @@
                                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isViewRadius" value="YES"/>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </imageView>
-                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJH-6L-uq1">
-                                                                                            <rect key="frame" x="346" y="152" width="27" height="27"/>
+                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xb-iR-9Nj">
+                                                                                            <rect key="frame" x="338" y="144" width="35" height="35"/>
+                                                                                            <subviews>
+                                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJH-6L-uq1">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                                                                    <state key="normal" image="ic_dislike"/>
+                                                                                                    <state key="selected" image="ic_favouriteSelected"/>
+                                                                                                    <connections>
+                                                                                                        <action selector="btnFavouriteTapAdd:" destination="YVw-po-u7R" eventType="touchUpInside" id="ZCC-Uk-eBC"/>
+                                                                                                    </connections>
+                                                                                                </button>
+                                                                                            </subviews>
+                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
-                                                                                                <constraint firstAttribute="width" constant="27" id="HEc-Pg-uHI"/>
-                                                                                                <constraint firstAttribute="height" constant="27" id="kxQ-oK-jqg"/>
+                                                                                                <constraint firstAttribute="height" constant="35" id="976-c2-HzS"/>
+                                                                                                <constraint firstItem="DJH-6L-uq1" firstAttribute="leading" secondItem="7xb-iR-9Nj" secondAttribute="leading" id="AIM-bG-LzC"/>
+                                                                                                <constraint firstAttribute="bottom" secondItem="DJH-6L-uq1" secondAttribute="bottom" id="Jdl-FF-Tfh"/>
+                                                                                                <constraint firstAttribute="width" secondItem="7xb-iR-9Nj" secondAttribute="height" multiplier="1:1" id="fty-U6-GsU"/>
+                                                                                                <constraint firstItem="DJH-6L-uq1" firstAttribute="top" secondItem="7xb-iR-9Nj" secondAttribute="top" id="g6T-bi-t2M"/>
+                                                                                                <constraint firstAttribute="trailing" secondItem="DJH-6L-uq1" secondAttribute="trailing" id="wHC-UM-77m"/>
                                                                                             </constraints>
-                                                                                            <state key="normal" image="ic_dislike"/>
-                                                                                            <state key="selected" image="ic_favouriteSelected"/>
-                                                                                        </button>
+                                                                                        </view>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="bottom" secondItem="DJH-6L-uq1" secondAttribute="bottom" constant="15" id="B9S-7G-UYc"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="Smh-om-Im1" secondAttribute="bottom" constant="10" id="GN4-aE-Q4C"/>
                                                                                         <constraint firstItem="Smh-om-Im1" firstAttribute="top" secondItem="dKf-No-ddH" secondAttribute="top" constant="20" id="GrR-Ix-xhR"/>
-                                                                                        <constraint firstAttribute="trailing" secondItem="DJH-6L-uq1" secondAttribute="trailing" constant="5" id="Hfj-An-Lh5"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="Smh-om-Im1" secondAttribute="trailing" id="Lp1-dC-MAx"/>
                                                                                         <constraint firstItem="Smh-om-Im1" firstAttribute="leading" secondItem="dKf-No-ddH" secondAttribute="leading" id="bva-Qj-WKK"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="7xb-iR-9Nj" secondAttribute="trailing" constant="5" id="nog-uK-prQ"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="7xb-iR-9Nj" secondAttribute="bottom" constant="15" id="ygh-li-tXV"/>
                                                                                     </constraints>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
@@ -8813,6 +8853,7 @@
                                                             <outlet property="lblItemName" destination="FJ4-wJ-tbB" id="MaS-fp-7Wf"/>
                                                             <outlet property="lblMiles" destination="cMB-Yr-Kpi" id="Wxh-mA-egp"/>
                                                             <outlet property="lblRating" destination="NMk-sf-Zgu" id="I0E-dM-dAN"/>
+                                                            <outlet property="vwIndicator" destination="7xb-iR-9Nj" id="efi-9q-ATM"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -9586,14 +9627,53 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
         <designable name="2fI-hX-w88">
             <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
         <designable name="HGY-kw-5YU">
             <size key="intrinsicContentSize" width="210" height="30"/>
         </designable>
+        <designable name="IOt-oG-ldn">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
         <designable name="Q44-Lk-LSf">
             <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="zNM-X4-rQ4">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
     </designables>
     <resources>

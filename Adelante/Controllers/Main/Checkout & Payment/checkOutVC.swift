@@ -382,6 +382,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         controller.strPopupImage = "ic_popupCancleOrder"
         controller.isCancleOrder = true
         controller.btnSubmit = {
+            self.webserviceRemoveCart()
             appDel.navigateToHome()
         }
         self.present(controller, animated: true, completion: nil)
@@ -414,7 +415,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -437,7 +442,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -463,7 +472,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -498,7 +511,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -527,7 +544,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 self.tblOrderDetails.reloadData()
                 
             } else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -539,11 +560,34 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 self.SettingsData = SettingsResModel.init(fromJson: json)            }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
-    
+    func webserviceRemoveCart(){
+        let clearFoodlist = RemoveCartReqModel()
+//        clearFoodlist.cart_item_id = strcartitemid
+        clearFoodlist.user_id = SingletonClass.sharedInstance.UserId
+        clearFoodlist.type = "0"
+        WebServiceSubClass.removeFoodList(removeFoodList: clearFoodlist, showHud: false,completion: { (json, status, error) in
+            // self.hideHUD()
+            if(status) {
+                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                self.arrCartItem.removeAll()
+                self.webserviceGetCartDetails()
+            } else {
+//                if let strMessage = json["message"].string {
+//                    Utilities.displayAlert(strMessage)
+//                }else {
+//                    Utilities.displayAlert("Something went wrong")
+//                }
+            }
+        })
+    }
     func location(){
 //        getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
         let camera = GMSCameraPosition.camera(withLatitude: cartDetails?.lat.toDouble() ?? 0.0, longitude: cartDetails?.lng.toDouble() ?? 0.0, zoom: 18.0)

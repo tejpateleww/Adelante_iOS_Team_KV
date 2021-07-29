@@ -383,7 +383,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 }
                 else
                 {
-                    Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                    if let strMessage = response["message"].string {
+                        Utilities.displayAlert(strMessage)
+                    }else {
+                        Utilities.displayAlert("Something went wrong")
+                    }
                 }
             }
             
@@ -405,7 +409,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
             completion()
         })

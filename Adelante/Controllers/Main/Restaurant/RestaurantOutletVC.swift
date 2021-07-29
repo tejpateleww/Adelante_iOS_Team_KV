@@ -11,10 +11,7 @@ import SDWebImage
 import SkeletonView
 
 class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,favoriteDelegate, SortListDelegate,SkeletonTableViewDataSource{
-    
-    
-    
-    // MARK: - Properties
+        // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
     var pageNumber = 1
@@ -27,6 +24,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     var SelectFilterId = ""
     var isRefresh = false
     var responseStatus : webserviceResponse = .initial
+    let activityView = UIActivityIndicatorView(style: .white)
     // MARK: - IBOutlets
     @IBOutlet weak var lblRestaurantName: themeLabel!
     @IBOutlet weak var vwFilter: UIView!
@@ -114,26 +112,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
     // MARK: - IBActions
     
     @IBAction func btnTapFavorite(_ sender: UIButton) {
-        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
-            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
-            //             vc.delegateFilter = self
-            //             vc.selectedSortData = self.SelectFilterId
-            let navController = UINavigationController.init(rootViewController: vc)
-            navController.modalPresentationStyle = .overFullScreen
-            navController.navigationController?.modalTransitionStyle = .crossDissolve
-            navController.navigationBar.isHidden = true
-            SingletonClass.sharedInstance.isPresented = true
-            self.present(navController, animated: true, completion: nil)
-        }else{
-            var Select = arrOutletList[sender.tag].favourite ?? ""
-            let restaurantId = arrOutletList[sender.tag].id ?? ""
-            if Select == "1"{
-                Select = "0"
-            }else{
-                Select = "1"
-            }
-            webserviceFavorite(strRestaurantId: restaurantId, Status: Select)
-        }
+        
     }
     @IBAction func btnFilterClick(_ sender: UIButton) {
         DispatchQueue.main.async {
@@ -207,12 +186,40 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.lblAreaName.text = arrOutletList[indexPath.row].name
                 cell.lblAddress.text = arrOutletList[indexPath.row].address
                 cell.lblMiles.text = arrOutletList[indexPath.row].distance
-                cell.lblRating.text = arrOutletList[indexPath.row].reviewCount
+                cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                cell.btnFavorite.tag = indexPath.row
-                cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
+                cell.btnFavorite.isHidden = false
+                cell.btnFavouriteClick = {
+                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                        let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                        //             vc.delegateFilter = self
+                        //             vc.selectedSortData = self.SelectFilterId
+                        let navController = UINavigationController.init(rootViewController: vc)
+                        navController.modalPresentationStyle = .overFullScreen
+                        navController.navigationController?.modalTransitionStyle = .crossDissolve
+                        navController.navigationBar.isHidden = true
+                        SingletonClass.sharedInstance.isPresented = true
+                        self.present(navController, animated: true, completion: nil)
+                    }else{
+                        var Select = self.arrOutletList[indexPath.row].favourite ?? ""
+                        let restaurantId = self.arrOutletList[indexPath.row].id ?? ""
+                        if Select == "1"{
+                            Select = "0"
+                        }else{
+                            Select = "1"
+                        }
+                        self.webserviceFavorite(strRestaurantId: restaurantId, Status: Select)
+                        cell.btnFavorite.isHidden = true
+                        self.activityView.center = CGPoint(x: cell.vwIndicator.frame.width / 2, y: cell.vwIndicator.frame.height/2)
+                        self.activityView.color = .red
+                        cell.vwIndicator.addSubview(self.activityView)
+                        self.activityView.startAnimating()
+                    }
+                }
+//                cell.btnFavorite.tag = indexPath.row
+//                cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
                 if arrOutletList[indexPath.row].favourite == "1"{
                     cell.btnFavorite.isSelected = true
                 }else{
@@ -315,7 +322,11 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 self.tblRestaurantList.isUserInteractionEnabled = true
                 self.tblRestaurantList.reloadData()
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
 //            if self.arrOutletList.count > 0{
 //                self.tblRestaurantList.restore()
@@ -343,7 +354,11 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 self.arrOutletList.first(where: { $0.id == strRestaurantId })?.favourite = Status
                 self.tblRestaurantList.reloadData()
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

@@ -979,7 +979,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 //                self.calculateTableHeight()
                 self.setData()
             } else {
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -1002,7 +1006,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
                 NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             } else {
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -1027,7 +1035,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 tblRestaurantDetails.reloadData()
                 tblPopup.reloadData()
             } else {
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -1110,7 +1122,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }
                 self.tblRestaurantDetails.reloadData()
             }else{
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -1136,7 +1152,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -1148,7 +1168,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 self.SettingsData = SettingsResModel.init(fromJson: json)            }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

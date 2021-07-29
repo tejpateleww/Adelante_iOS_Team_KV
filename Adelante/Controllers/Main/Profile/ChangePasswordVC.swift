@@ -12,7 +12,7 @@ class ChangePasswordVC: BaseViewController {
     
     //MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    
+    var isApiCalling : Bool = false
     // MARK: - IBOutlets
     @IBOutlet weak var lblTitle: themeLabel!
     @IBOutlet weak var txtOldPassword: floatTextField!
@@ -51,10 +51,12 @@ class ChangePasswordVC: BaseViewController {
     }
     // MARK: - IBActions
     @IBAction func btnSaveTap(_ sender: UIButton) {
+        if isApiCalling{
+            return
+        }
         if validations(){
             let trimmed = txtNewPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmed!.isEmpty == true{
-                print(txtNewPassword.text)
                 Utilities.ShowAlert(OfMessage: "Your password can’t start or end with a blank space")
             }
             webservice_ChangePW()
@@ -84,24 +86,29 @@ class ChangePasswordVC: BaseViewController {
         changePWReqModel.new_password = txtNewPassword.text ?? ""
         changePWReqModel.user_id = SingletonClass.sharedInstance.UserId
         //self.showHUD()
+        isApiCalling = true
         WebServiceSubClass.ChangePassword(changepassModel: changePWReqModel,showHud: false) { (response, status, error) in
+            self.isApiCalling = false
             //self.hideHUD()
             if status{
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
                     if index == 0{
-                        //                        self.navigationController?.popViewController(animated: true)
                         appDel.SetLogout()
                     }
                 }
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
     func validations()->Bool{
-        let currentPW = txtOldPassword.validatedText(validationType: ValidatorType.password(field: txtOldPassword.placeholder ?? ""))
-        let newPW =  txtNewPassword.validatedText(validationType: ValidatorType.password(field: txtNewPassword.placeholder ?? ""))
-        let confirmPW = txtConfirmPassword.validatedText(validationType: ValidatorType.password(field: txtConfirmPassword.placeholder ?? ""))
+        let currentPW = txtOldPassword.validatedText(validationType: ValidatorType.password(field: txtOldPassword.placeholder?.lowercased() ?? ""))
+        let newPW =  txtNewPassword.validatedText(validationType: ValidatorType.password(field: txtNewPassword.placeholder?.lowercased() ?? ""))
+        let confirmPW = txtConfirmPassword.validatedText(validationType: ValidatorType.password(field: txtConfirmPassword.placeholder?.lowercased() ?? ""))
         if !currentPW.0{
             Utilities.displayAlert(currentPW.1)
             return false

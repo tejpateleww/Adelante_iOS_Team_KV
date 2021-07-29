@@ -142,7 +142,11 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             }
             else
             {
-                Utilities.displayErrorAlert(response["message"].string ?? "Something went wrong")
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

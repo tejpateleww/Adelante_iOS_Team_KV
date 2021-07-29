@@ -258,9 +258,14 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
             }
             else
             {
-                Utilities.displayAlert("", message: json["message"].string ?? "MessageNoIntenet".Localized(), completion: {_ in
-                    self.navigationController?.popViewController(animated: true)
-                }, otherTitles: nil)
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("", message: json["message"].string ?? "MessageNoIntenet".Localized(), completion: {_ in
+                        self.navigationController?.popViewController(animated: true)
+                    }, otherTitles: nil)
+                }
+                
                 //displayErrorAlert(json["message"].string ?? "MessageNoIntenet".Localized())
             }
         })
@@ -290,7 +295,11 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                     appDel.SetLogout()
                 }, otherTitles: nil)
             }else{
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -317,7 +326,11 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                 viewResendOTP.isHidden = true
                 strOTP = otpModel.code
             }else {
-                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }

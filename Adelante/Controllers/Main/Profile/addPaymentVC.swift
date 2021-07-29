@@ -26,7 +26,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var direction:CGFloat = 1
     var shakes = 0
      var OrderDetails : String?
-    
+    var isfromPayment : Bool = false
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
@@ -231,9 +231,13 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
-                cell1.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
-                WebServiceCallForOrder()
+                if isfromPayment == true{
+                    
+                }else{
+                    let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
+                    cell1.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+                    WebServiceCallForOrder()
+                }
             } else {
                 let cell2 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
                 cell2.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
@@ -286,7 +290,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 self.imgEmptyCard.isHidden = true
             } else {
                 self.imgEmptyCard.isHidden = false
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
                 
             }
             //            if self.arrCard.count > 0{
@@ -342,7 +350,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -359,7 +371,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
                 self.webserviceGetAddPayment()
             } else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

@@ -376,7 +376,11 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
 //                self.tblFoodList.isScrollEnabled = true
                 self.tblFoodList.reloadData()
             }else{
-                Utilities.showAlertOfAPIResponse(param: response, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
             if self.arrSearchRestList.count > 0{
                 self.tblRestaurant.restore()
@@ -405,6 +409,13 @@ extension SearchVC:UISearchBarDelegate{
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        txtSearch.resignFirstResponder()
+    }
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if txtSearch.text!.isEmptyOrWhitespace(){
+            self.tblRestaurant.setEmptyMessage("Search something")
+            self.tblFoodList.setEmptyMessage("Search something")
+        }
+        return true
     }
     @objc private func makeNetworkCall(_ query: String)
     {

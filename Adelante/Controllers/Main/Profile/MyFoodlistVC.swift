@@ -187,7 +187,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
-                Utilities.showAlertOfAPIResponse(param: error, vc: self)
+                if let strMessage = response["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -203,7 +207,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 self.arrOrderData.removeAll()
                 self.webserviceGetFoodlist()
             } else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
@@ -224,7 +232,6 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 for i in 0...self.arrUpdateQty.item.count - 1{
                     if strItemid == self.arrUpdateQty.item[i].cartItemId{
                         cell.lblNoOfItem.text = self.arrUpdateQty.item[i].cartQty
-                        
                     }
                 }
                 cell.stackHide.isHidden = false
@@ -235,7 +242,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         }
     }
@@ -249,7 +260,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }
