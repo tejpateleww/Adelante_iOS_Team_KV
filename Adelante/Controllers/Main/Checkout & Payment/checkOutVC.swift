@@ -576,9 +576,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         WebServiceSubClass.removeFoodList(removeFoodList: clearFoodlist, showHud: false,completion: { (json, status, error) in
             // self.hideHUD()
             if(status) {
-                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+//                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
                 self.arrCartItem.removeAll()
-                self.webserviceGetCartDetails()
+//                self.webserviceGetCartDetails()
             } else {
 //                if let strMessage = json["message"].string {
 //                    Utilities.displayAlert(strMessage)

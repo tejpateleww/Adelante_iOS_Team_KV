@@ -54,6 +54,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     lazy var skeletonViewData : skeletonView = skeletonView.fromNib()
     let activityView = UIActivityIndicatorView(style: .gray)
     var SettingsData : SettingsResModel!
+    var isFromPlus : Bool = false
     // MARK: - IBOutlets
     
     @IBOutlet weak var ViewForAddItem: UIView!
@@ -90,12 +91,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var viewBG: UIView!
     @IBOutlet weak var tblPopupHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var ViewForBottomBottom: NSLayoutConstraint!
+    @IBOutlet weak var ViewForBottom: NSLayoutConstraint!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNIB()
-        ViewForBottomBottom.constant = -(ViewForAddItem.frame.size.height)
+        ViewForBottom.constant = -(ViewForAddItem.frame.size.height)
         viewBG.isHidden = true
         tblPopup.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         tblRestaurantDetails.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
@@ -180,7 +181,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 btnNavLike.isSelected = false
             }
         }
-     }
+    }
     
     func checkItemsAndUpdateFooter(Qty:String,Total:String){
         if Qty.toInt() > 1 {
@@ -238,7 +239,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
         controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
         controller.strUrl = SettingsData.privacyPolicy
-//        controller.strStorePolicy = objRestaurant?.storePolicy ?? ""
+        //        controller.strStorePolicy = objRestaurant?.storePolicy ?? ""
         
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -393,26 +394,37 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.vwStapper.isHidden = false
                     }
                     cell.decreaseData = {
-                        if variantValue > 0{
-                            self.arrItemList = [ItemList]()
-                            self.tblPopup.showAnimatedSkeleton()
-                            self.tblPopup.reloadData()
-                            self.ViewForBottomBottom.constant = 0
-                            self.viewPopup.layoutIfNeeded()
-                            self.viewPopup.layoutSubviews()
-                            self.viewBG.isHidden = false
-                            self.viewPopup.isHidden = false
-                            UIView.animate(withDuration: 0.6, animations: {
-                                //                                self.view.layoutIfNeeded()
-                            }){ (success) in
-                                self.isfromMenu = true
-                                self.webserviceItemList(strItemId: self.arrMenuitem[indexPath.row].id)
+                        self.isFromPlus = false
+                        if variantValue > 0 && self.arrMenuitem[indexPath.row].cartVariantCount.toInt() == 1{
+                            if variantValue > 0{
+                                self.arrItemList = [ItemList]()
+                                self.tblPopup.showAnimatedSkeleton()
+                                self.tblPopup.reloadData()
+                                self.ViewForBottom.constant = 0
+                                self.viewPopup.layoutIfNeeded()
+                                self.viewPopup.layoutSubviews()
+                                self.viewBG.isHidden = false
+                                self.viewPopup.isHidden = false
+                                UIView.animate(withDuration: 0.6, animations: {
+                                    //                                                                    self.view.layoutIfNeeded()
+                                }){ (success) in
+                                    self.isfromMenu = true
+                                    self.webserviceItemList(strItemId: self.arrMenuitem[indexPath.row].id)
+                                    self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                                }
+                            }else{
                                 self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                                self.isfromMenu = true
+                                self.webserviceUpdateCartQuantity(strItemid: self.arrMenuitem[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
+                                cell.stackHide.isHidden = true
+                                self.activityView.center = cell.vwStapper.center
+                                cell.vwStapper.addSubview(self.activityView)
+                                self.activityView.startAnimating()
                             }
                         }else{
-                            self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                             self.isfromMenu = true
                             self.webserviceUpdateCartQuantity(strItemid: self.arrMenuitem[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
+                            self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                             cell.stackHide.isHidden = true
                             self.activityView.center = cell.vwStapper.center
                             cell.vwStapper.addSubview(self.activityView)
@@ -420,11 +432,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }
                     cell.IncreseData = {
+                        self.isFromPlus = true
                         if variantValue > 0{
                             self.arrItemList = [ItemList]()
                             self.tblPopup.showAnimatedSkeleton()
                             self.tblPopup.reloadData()
-                            self.ViewForBottomBottom.constant = 0
+                            self.ViewForBottom.constant = 0
                             self.viewPopup.layoutIfNeeded()
                             self.viewPopup.layoutSubviews()
                             self.viewBG.isHidden = false
@@ -455,7 +468,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         if self.objRestaurant.isdiff == 0{
                             let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                             let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
-                                if self.arrMenuitem[indexPath.row].quantity.toInt() > 1 {
+                                if self.arrMenuitem[indexPath.row].quantity > 1 {
                                     cell.btnAddItem.isHidden = true
                                     cell.vwStapper.isHidden = false
                                     self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
@@ -470,7 +483,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             alert.addAction(NoAction)
                             self.present(alert, animated: true, completion: nil)
                         }else{
-                            if self.arrMenuitem[indexPath.row].quantity.toInt() > 1 {
+                            if self.arrMenuitem[indexPath.row].quantity > 1 {
                                 cell.btnAddItem.isHidden = true
                                 cell.vwStapper.isHidden = false
                                 self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
@@ -498,14 +511,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             alert.addAction(NoAction)
                             self.present(alert, animated: true, completion: nil)
                         }else{
-                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                                controller.selectedItemId = self.arrMenuitem[indexPath.row].id
-                                controller.selectedRestaurantId = self.objRestaurant.id
-                                controller.delegateAddVariant = self
-                                self.strItemId = self.arrMenuitem[indexPath.row].id
-                                self.navigationController?.pushViewController(controller, animated: true)
-                            }
+                            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                            controller.selectedItemId = self.arrMenuitem[indexPath.row].id
+                            controller.selectedRestaurantId = self.objRestaurant.id
+                            controller.delegateAddVariant = self
+                            self.strItemId = self.arrMenuitem[indexPath.row].id
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
+                    }
                     cell.selectionStyle = .none
                     return cell
                 } else {
@@ -540,26 +553,37 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.btnCustomize.isHidden = true
                     }
                     cell.decreaseData = { [self] in
-                        if variantValue > 0{
-                            self.arrItemList = [ItemList]()
-                            self.tblPopup.showAnimatedSkeleton()
-                            self.tblPopup.reloadData()
-                            self.ViewForBottomBottom.constant = 0
-                            self.viewPopup.layoutIfNeeded()
-                            self.viewPopup.layoutSubviews()
-                            self.viewBG.isHidden = false
-                            self.viewPopup.isHidden = false
-                            UIView.animate(withDuration: 0.6, animations: {
-                                //                                self.view.layoutIfNeeded()
-                            }){ (success) in
-                                self.isfromMenu = true
-                                self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId)
-                                self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                        isFromPlus = false
+                        if variantValue > 0 && self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartVariantCount.toInt() == 1{
+                            if variantValue > 0{
+                                self.arrItemList = [ItemList]()
+                                self.tblPopup.showAnimatedSkeleton()
+                                self.tblPopup.reloadData()
+                                self.ViewForBottom.constant = 0
+                                self.viewPopup.layoutIfNeeded()
+                                self.viewPopup.layoutSubviews()
+                                self.viewBG.isHidden = false
+                                self.viewPopup.isHidden = false
+                                UIView.animate(withDuration: 0.6, animations: {
+                                    //                                self.view.layoutIfNeeded()
+                                }){ (success) in
+                                    self.isfromMenu = false
+                                    self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId)
+                                    self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                                }
+                            }else{
+                                self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
+                                self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
+                                self.isfromMenu = false
+                                cell.StackHide.isHidden = true
+                                self.activityView.center = cell.vwStapper.center
+                                cell.vwStapper.addSubview(self.activityView)
+                                self.activityView.startAnimating()
                             }
                         }else{
+                            self.isfromMenu = false
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                             self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
-                            self.isfromMenu = false
                             cell.StackHide.isHidden = true
                             self.activityView.center = cell.vwStapper.center
                             cell.vwStapper.addSubview(self.activityView)
@@ -567,11 +591,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }
                     cell.IncreseData = {
+                        self.isFromPlus = true
                         if variantValue > 0{
                             self.arrItemList = [ItemList]()
                             self.tblPopup.showAnimatedSkeleton()
                             self.tblPopup.reloadData()
-                            self.ViewForBottomBottom.constant = 0
+                            self.ViewForBottom.constant = 0
                             self.viewPopup.layoutIfNeeded()
                             self.viewPopup.layoutSubviews()
                             self.viewBG.isHidden = false
@@ -579,9 +604,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             UIView.animate(withDuration: 0.6, animations: {
                                 //                                self.view.layoutIfNeeded()
                             }){ (success) in
-                                self.isfromMenu = true
+                                self.isfromMenu = false
+                                self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                                 self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId)
-                                self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                             }
                         }else{
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
@@ -597,7 +622,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         if self.objRestaurant.isdiff == 0{
                             let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                             let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
-                                if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.ToDouble() > 1{
+                                if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 1{
                                     cell.btnAdd.isHidden = true
                                     cell.vwStapper.isHidden = false
                                     self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
@@ -612,7 +637,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             alert.addAction(NoAction)
                             self.present(alert, animated: true, completion: nil)
                         }else{
-                            if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity.ToDouble() > 1{
+                            if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 1{
                                 cell.btnAdd.isHidden = true
                                 cell.vwStapper.isHidden = false
                                 self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
@@ -645,14 +670,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             alert.addAction(NoAction)
                             self.present(alert, animated: true, completion: nil)
                         }else{
-                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                                controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
-                                controller.selectedRestaurantId = self.objRestaurant.id
-                                controller.delegateAddVariant = self
-                                self.strItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
-                                self.navigationController?.pushViewController(controller, animated: true)
-                            }
+                            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                            controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                            controller.selectedRestaurantId = self.objRestaurant.id
+                            controller.delegateAddVariant = self
+                            self.strItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
+                    }
                     cell.selectionStyle = .none
                     return cell
                 }
@@ -686,26 +711,37 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.btnCustomize.isHidden = true
                 }
                 cell.decreaseData = {
-                    if variantValue > 0{
-                        self.arrItemList = [ItemList]()
-                        self.tblPopup.showAnimatedSkeleton()
-                        self.tblPopup.reloadData()
-                        self.ViewForBottomBottom.constant = 0
-                        self.viewPopup.layoutIfNeeded()
-                        self.viewPopup.layoutSubviews()
-                        self.viewBG.isHidden = false
-                        self.viewPopup.isHidden = false
-                        UIView.animate(withDuration: 0.6, animations: {
-                            //                                self.view.layoutIfNeeded()
-                        }){ (success) in
-                            self.isfromMenu = true
-                            self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId)
+                    self.isFromPlus = false
+                    if variantValue > 0 && self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartVariantCount.toInt() == 1{
+                        if variantValue > 0{
+                            self.arrItemList = [ItemList]()
+                            self.tblPopup.showAnimatedSkeleton()
+                            self.tblPopup.reloadData()
+                            self.ViewForBottom.constant = 0
+                            self.viewPopup.layoutIfNeeded()
+                            self.viewPopup.layoutSubviews()
+                            self.viewBG.isHidden = false
+                            self.viewPopup.isHidden = false
+                            UIView.animate(withDuration: 0.6, animations: {
+                                //                                self.view.layoutIfNeeded()
+                            }){ (success) in
+                                self.isfromMenu = false
+                                self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId)
+                                self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                            }
+                        }else{
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                            self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
+                            self.isfromMenu = false
+                            cell.StackHide.isHidden = true
+                            self.activityView.center = cell.vwStapper.center
+                            cell.vwStapper.addSubview(self.activityView)
+                            self.activityView.startAnimating()
                         }
                     }else{
-                        self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
-                        self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
                         self.isfromMenu = false
+                        self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
+                        self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                         cell.StackHide.isHidden = true
                         self.activityView.center = cell.vwStapper.center
                         cell.vwStapper.addSubview(self.activityView)
@@ -713,11 +749,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                 }
                 cell.IncreseData = { [self] in
+                    isFromPlus = true
                     if variantValue > 0{
                         self.arrItemList = [ItemList]()
                         self.tblPopup.showAnimatedSkeleton()
                         self.tblPopup.reloadData()
-                        self.ViewForBottomBottom.constant = 0
+                        self.ViewForBottom.constant = 0
                         self.viewPopup.layoutIfNeeded()
                         self.viewPopup.layoutSubviews()
                         self.viewBG.isHidden = false
@@ -725,7 +762,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         UIView.animate(withDuration: 0.6, animations: {
                             //                                self.view.layoutIfNeeded()
                         }){ (success) in
-                            self.isfromMenu = true
+                            self.isfromMenu = false
                             self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId)
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                         }
@@ -748,7 +785,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     if self.objRestaurant.isdiff == 0{
                         let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                         let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
-                            if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.ToDouble() > 1 {
+                            if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 {
                                 cell.btnAdd.isHidden = true
                                 cell.vwStapper.isHidden = false
                                 self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
@@ -763,7 +800,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         alert.addAction(NoAction)
                         self.present(alert, animated: true, completion: nil)
                     }else{
-                        if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity.ToDouble() > 1 {
+                        if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 {
                             cell.btnAdd.isHidden = true
                             cell.vwStapper.isHidden = false
                             self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
@@ -773,7 +810,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             self.activityView.startAnimating()
                         }
                     }
-                    
                 }
                 
                 cell.customize = {
@@ -792,14 +828,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         alert.addAction(NoAction)
                         self.present(alert, animated: true, completion: nil)
                     }else{
-                            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                            controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
-                            controller.selectedRestaurantId = self.objRestaurant.id
-                            controller.delegateAddVariant = self
-                            self.strItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
+                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                        controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
+                        controller.selectedRestaurantId = self.objRestaurant.id
+                        controller.delegateAddVariant = self
+                        self.strItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
+                        self.navigationController?.pushViewController(controller, animated: true)
                     }
+                }
                 cell.selectionStyle = .none
                 return cell
             }
@@ -831,7 +867,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         self.activityView.startAnimating()
                     }
                     cell.decreaseData = {
-                        self.webserviceUpdateCartQuantity(strItemid: self.arrItemList[indexPath.row].cartItemId, strQty: "1", strType: "0",row: indexPath.row)
+                        self.webserviceUpdateCartQuantity(strItemid: self.arrItemList[self.arrItemList.count == 1 ? 0 : indexPath.row].cartItemId, strQty: "1", strType: "0",row:  self.arrItemList.count == 1 ? 0 : indexPath.row)
                         cell.stackHide.isHidden = true
                         self.activityView.center = cell.vwStapper.center
                         cell.vwStapper.addSubview(self.activityView)
@@ -1044,8 +1080,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         }
     }
     func HidePopUp() {
-       
-        self.ViewForBottomBottom.constant = -(self.viewPopup.frame.size.height)
+        self.ViewForBottom.constant = -(self.viewPopup.frame.size.height + tblPopup.contentSize.height)
         self.viewPopup.layoutIfNeeded()
         self.viewPopup.layoutSubviews()
         self.viewBG.isHidden = true
@@ -1074,49 +1109,116 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 self.arrUpdateQty = cartData.data
                 self.arrFoodMenu = cartData.restaurant.foodMenu
                 self.arrMenuitem = cartData.restaurant.menuItem
-                let index = IndexPath(row: row, section: 0)
+//                self.arrItemList = cartData.data
+                
+                let index = IndexPath(row: row, section:0)
                 
                 if self.arrUpdateQty == nil {
-//                    let cell = self.tblPopup.cellForRow(at: index) as! RestaurantDetailsPopupCell
                     self.HidePopUp()
                     self.checkItemsAndUpdateFooter(Qty: "0", Total: "0")
-//                    cell.stackHide.isHidden = false
-//                    self.activityView.stopAnimating()
                 }else{
                     self.checkItemsAndUpdateFooter(Qty: self.arrUpdateQty.totalQuantity, Total: self.arrUpdateQty.total)
-                    
                     if self.isfromMenu == false {
                         if self.arrFoodMenu[selectedIndexItem.section].subMenu[selectedIndexItem.row].variant == "1"{
                             let cell = self.tblPopup.cellForRow(at: index) as! RestaurantDetailsPopupCell
                             
                             if (cell.lblNoOfItem.text?.toInt())! <= 1 && strType == "0"{
+//                                cell.vwStapper.isHidden = true
+//                                cell.btnAdd.isHidden = false
+//                                arrItemList.remove(at: index.row)
+//                                tblPopup.deleteRows(at: [index], with: .fade)
                                 self.HidePopUp()
                             }
+                            self.arrItemList.removeAll()
                             for i in 0...self.arrUpdateQty.item.count - 1{
                                 if strItemid == self.arrUpdateQty.item[i].cartItemId{
-                                    cell.lblNoOfItem.text = self.arrUpdateQty.item[i].cartQty
-                                    cell.lblPrice.text = (CurrencySymbol) + self.arrUpdateQty.item[i].subTotal
+                                    cell.lblNoOfItem.text = self.arrUpdateQty.item[i].qty
+                                    cell.lblPrice.text = (CurrencySymbol) + "\(self.arrUpdateQty.item[i].subTotal ?? 0)"
+//                                    self.arrItemList.append(self.arrUpdateQty.item[i])
                                 }
                             }
+//                            self.arrItemList = self.arrUpdateQty.item.map({$0.cartItemId.filter({$0 == self.arrItemList[index.row].cartItemId})})
+//                            self.arrItemList.removeAll()
+//                            self.arrItemList.append(contentsOf: self.arrUpdateQty.item.filter { (item) -> Bool in
+//                                return item.id == arrMenuitem[selectedIndexItem.row].id
+//                                })
+//                            self.tblPopup.reloadData()
                             cell.stackHide.isHidden = false
+//                            if cell.vwStapper.isHidden == true{
+//                                tblPopup.deleteRows(at: [index], with: .fade)//reloadRows(at: [index], with: UITableView.RowAnimation.top)
+//                            }
                             self.activityView.stopAnimating()
                         }
                     }else{
                         let variantValue = arrMenuitem[selectedIndexItem.row].variant.ToDouble()
-                        if variantValue > 0{
-                            let cell = self.tblPopup.cellForRow(at: index) as! RestaurantDetailsPopupCell
-                            
-                            if (cell.lblNoOfItem.text?.toInt())! <= 1 && strType == "0"{
-                                self.HidePopUp()
+                        if variantValue > 0 && arrMenuitem[selectedIndexItem.row].cartVariantCount.toInt() == 1{
+                            if variantValue > 0{
+                                let cell = self.tblPopup.cellForRow(at: index) as! RestaurantDetailsPopupCell
+                                    if (cell.lblNoOfItem.text?.toInt())! <= 1 && strType == "0"{
+                                        
+                                        if index.row >= 0{
+                                            cell.vwStapper.isHidden = true
+                                            cell.btnAdd.isHidden = false
+                                            arrItemList.remove(at: index.row)
+                                            tblPopup.deleteRows(at: [index], with: .fade)
+                                            tblPopup.reloadData()
+                                        }else{
+                                            HidePopUp()
+                                        }
+                                    }
+                                for i in 0...self.arrUpdateQty.item.count - 1{
+                                    if strItemid == self.arrUpdateQty.item[i].cartItemId{
+                                        cell.lblNoOfItem.text = self.arrUpdateQty.item[i].qty
+                                        cell.lblPrice.text = (CurrencySymbol) + "\(self.arrUpdateQty.item[i].subTotal ?? 0)"
+                                    }
+                                }
+//                                self.arrItemList.append(self.arrUpdateQty.item.)
+//                                self.arrUpdateQty.item.map{ $0.id}.filter { (<#String?#>) -> Bool in
+//                                    <#code#>
+//                                }
+//                                self.arrItemList.removeAll()
+//                                self.arrItemList.append(contentsOf: self.arrUpdateQty.item.filter { (item) -> Bool in
+//                                    return item.id == arrMenuitem[selectedIndexItem.row].id
+//                                    })
+//                                self.tblPopup.reloadData()
+                                cell.stackHide.isHidden = false
+                                self.activityView.stopAnimating()
+                            }else{
+                                
                             }
-                            for i in 0...self.arrUpdateQty.item.count - 1{
-                                if strItemid == self.arrUpdateQty.item[i].cartItemId{
-                                    cell.lblNoOfItem.text = self.arrUpdateQty.item[i].cartQty
-                                    cell.lblPrice.text = (CurrencySymbol) + self.arrUpdateQty.item[i].subTotal
+                        }else{
+                            if isFromPlus == true{
+                                if variantValue > 0{
+                                    let cell = self.tblPopup.cellForRow(at: index) as! RestaurantDetailsPopupCell
+                                        if (cell.lblNoOfItem.text?.toInt())! <= 1 && strType == "0"{
+                                            cell.vwStapper.isHidden = true
+                                            cell.btnAdd.isHidden = false
+                                            if index.row >= 0{
+                                                cell.vwStapper.isHidden = true
+                                                cell.btnAdd.isHidden = false
+                                                arrItemList.remove(at: index.row)
+                                                tblPopup.deleteRows(at: [index], with: .fade)
+                                                tblPopup.reloadData()
+                                            }else{
+                                                    HidePopUp()
+                                            }                                        }
+                                    for i in 0...self.arrUpdateQty.item.count - 1{
+                                        if strItemid == self.arrUpdateQty.item[i].cartItemId{
+                                            cell.lblNoOfItem.text = self.arrUpdateQty.item[i].qty
+                                            cell.lblPrice.text = (CurrencySymbol) + "\(self.arrUpdateQty.item[i].subTotal ?? 0)"
+
+
+                                        }
+                                    }
+//                                    self.arrItemList.removeAll()
+//                                    self.arrItemList.append(contentsOf: self.arrUpdateQty.item.filter { (item) -> Bool in
+//                                        return item.id == arrMenuitem[selectedIndexItem.row].id
+//                                        })
+//                                    self.tblPopup.reloadData()
+                                    cell.stackHide.isHidden = false
+                                    self.activityView.stopAnimating()
                                 }
                             }
-                            cell.stackHide.isHidden = false
-                            self.activityView.stopAnimating()
                         }
                     }
                 }
@@ -1147,6 +1249,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 self.tblPopup.dataSource = self
                 self.tblPopup.isScrollEnabled = true
                 self.tblPopup.isUserInteractionEnabled = true
+              
                 self.tblPopup.reloadData()
                 self.setData()
             }

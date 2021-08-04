@@ -23,8 +23,10 @@ enum APIEnvironment : String{
     
 //    case bu = "http://adelante.excellentwebworld.in/api/User/"
 //    case profileBu = "http://adelante.excellentwebworld.in/"
-    case BaseURL = "http://18.208.18.170/api/User/"
-    case profileBaseURL = "http://18.208.18.170/"
+    case BaseURL = "http://3.239.174.164/api/User/"
+//    case BaseURL = "http://18.208.18.170/api/User/"
+//    case profileBaseURL = "http://18.208.18.170/"
+    case profileBaseURL = "http://3.239.174.164/"
     static var baseURL: String{
         return APIEnvironment.environment.rawValue
     }

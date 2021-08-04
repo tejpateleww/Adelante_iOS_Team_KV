@@ -103,6 +103,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 cell.lblComboTitle.text = arrOrderData[indexPath.row].itemName
                 cell.lblPrice.text = arrOrderData[indexPath.row].price
                 cell.lblDisc.text = arrOrderData[indexPath.row].descriptionField
+                cell.lblNoOfItem.text = arrOrderData[indexPath.row].cartQty
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
                 cell.imgFoodLIst.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -187,11 +188,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
-                if let strMessage = response["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
-                }
+//                if let strMessage = response["message"].string {
+//                    Utilities.displayAlert(strMessage)
+//                }else {
+//                    Utilities.displayAlert("Something went wrong")
+//                }
             }
         })
     }
@@ -229,9 +230,19 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 self.arrUpdateQty = cartData.data
                 let index = IndexPath(row: row, section: 0)
                 let cell = self.tblFoodLIst.cellForRow(at: index) as! MyFoodlistCell
+                if (cell.lblNoOfItem.text?.toInt())! <= 1 && strType == "0"{
+                    
+                    if index.row >= 0{
+//                        cell.vwStapper.isHidden = true
+//                        cell.btnAdd.isHidden = false
+                        self.arrOrderData.remove(at: index.row)
+                        self.tblFoodLIst.deleteRows(at: [index], with: .fade)
+                        self.tblFoodLIst.reloadData()
+                    }
+                }
                 for i in 0...self.arrUpdateQty.item.count - 1{
                     if strItemid == self.arrUpdateQty.item[i].cartItemId{
-                        cell.lblNoOfItem.text = self.arrUpdateQty.item[i].cartQty
+                        cell.lblNoOfItem.text = self.arrUpdateQty.item[i].qty
                     }
                 }
                 cell.stackHide.isHidden = false

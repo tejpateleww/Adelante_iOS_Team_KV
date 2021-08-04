@@ -93,8 +93,8 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
 //            self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
         }
         else if self.selectedIdForFood == self.arrCategories[indexPath.row].id{
-            self.selectedIdForFood = ""
-            selectedIndexPath = IndexPath(item:indexPath.row , section: 0)
+            self.selectedIdForFood = "0"
+            selectedIndexPath = IndexPath(item:0 , section: 0)
 //            self.colRestaurantCatList.reloadItems(at: [selectedIndexPath])
         } else {
             self.selectedIdForFood = self.arrCategories[indexPath.row].id

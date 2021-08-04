@@ -121,11 +121,12 @@ extension PromocodeVC {
                 
                 
             }else{
-                if let strMessage = response["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
+                let alert = UIAlertController(title: AppName, message: response["message"].stringValue, preferredStyle: UIAlertController.Style.alert)
+                let OkAction = UIAlertAction(title:"OK" , style: .default) { (sct) in
+                    self.navigationController?.popViewController(animated: true)
                 }
+                alert.addAction(OkAction)
+                appDel.window?.rootViewController?.present(alert, animated: true, completion: nil)
             }
         })
     }

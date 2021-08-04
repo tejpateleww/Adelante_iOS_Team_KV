@@ -147,6 +147,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         controller.strPopupImage = "ic_popupCancleOrder"
         controller.isCancleOrder = true
         controller.btnSubmit = {
+            controller.dismiss(animated: true, completion: nil)
             self.webserviceCancelOrder()
 //                            dismiss(animated: , completion: nil)
         }
@@ -242,14 +243,15 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     func webserviceCancelOrder(){
         let cancelOrder = CancelOrderReqModel()
         cancelOrder.user_id = SingletonClass.sharedInstance.UserId
-        cancelOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
+        cancelOrder.main_order_id = objOrderDetailsData.orderId
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
-                Utilities.displayAlert(json["message"].string ?? "")
-                self.webserviceOrderDetails()
+//                Utilities.displayAlert(json["message"].string ?? "")
+//                self.webserviceOrderDetails()
                 self.delegateCancelOrder.refreshOrderDetailsScreen()
-                appDel.navigateToHome()
+                self.navigationController?.popViewController(animated: true)
+//                appDel.navigateToHome()
             }
             else
             {

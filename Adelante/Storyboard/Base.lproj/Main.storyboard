@@ -6775,6 +6775,7 @@
                             <constraint firstItem="zX6-B8-Hwi" firstAttribute="trailing" secondItem="Upm-8D-0w5" secondAttribute="trailing" id="OLo-6X-fdo"/>
                             <constraint firstItem="RpY-Y3-LQW" firstAttribute="top" secondItem="ATH-WR-7KA" secondAttribute="top" id="SLa-LL-snd"/>
                             <constraint firstItem="zX6-B8-Hwi" firstAttribute="leading" secondItem="Upm-8D-0w5" secondAttribute="leading" id="TcH-Hd-uk3"/>
+                            <constraint firstItem="zX6-B8-Hwi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Upm-8D-0w5" secondAttribute="top" constant="150" id="XqG-68-7Bm"/>
                             <constraint firstItem="RpY-Y3-LQW" firstAttribute="leading" secondItem="Upm-8D-0w5" secondAttribute="leading" id="bKP-cx-uw9"/>
                             <constraint firstItem="Upm-8D-0w5" firstAttribute="trailing" secondItem="RpY-Y3-LQW" secondAttribute="trailing" id="coJ-oc-r8B"/>
                             <constraint firstAttribute="bottomMargin" secondItem="RpY-Y3-LQW" secondAttribute="bottom" id="n6c-Ht-Hen"/>
@@ -6784,7 +6785,7 @@
                     </view>
                     <connections>
                         <outlet property="ViewForAddItem" destination="zX6-B8-Hwi" id="cmw-TM-v5V"/>
-                        <outlet property="ViewForBottomBottom" destination="12R-pr-4dB" id="auU-hg-6LU"/>
+                        <outlet property="ViewForBottom" destination="12R-pr-4dB" id="Egp-SJ-B76"/>
                         <outlet property="btnViewPolicy" destination="gB5-SD-PGD" id="t26-QJ-tZH"/>
                         <outlet property="heightTblRestDetails" destination="xrq-KQ-F7y" id="ii3-ar-cjp"/>
                         <outlet property="imgFoodDetails" destination="mCY-Y0-csR" id="2q6-IX-9oq"/>
@@ -7238,7 +7239,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hwl-d1-PII">
-                                        <rect key="frame" x="18" y="84.5" width="378" height="656.5"/>
+                                        <rect key="frame" x="18" y="84.5" width="378" height="576"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="myAccountSubDetails" rowHeight="49" id="hyL-Es-54P" customClass="myAccountSubDetails" customModule="Adelante" customModuleProvider="target">
@@ -7287,19 +7288,31 @@
                                             <outlet property="delegate" destination="8Hy-mt-5Gp" id="MJt-9q-M2K"/>
                                         </connections>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v57-ie-MIC" customClass="myaccountLabel" customModule="Adelante" customModuleProvider="target">
+                                        <rect key="frame" x="18" y="670.5" width="378" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isVersion" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="HyF-if-GV8" secondAttribute="trailing" id="5ug-Vi-SND"/>
+                                    <constraint firstItem="v57-ie-MIC" firstAttribute="top" secondItem="Hwl-d1-PII" secondAttribute="bottom" constant="10" id="60H-gM-nQi"/>
                                     <constraint firstItem="wN0-xh-D4G" firstAttribute="leading" secondItem="iUY-wm-n3A" secondAttribute="leading" constant="18" id="7gp-xu-n8M"/>
                                     <constraint firstItem="HyF-if-GV8" firstAttribute="top" secondItem="wN0-xh-D4G" secondAttribute="bottom" constant="15.5" id="9r1-76-MuF"/>
                                     <constraint firstAttribute="trailing" secondItem="wN0-xh-D4G" secondAttribute="trailing" constant="18" id="ENd-sq-6vM"/>
                                     <constraint firstItem="wN0-xh-D4G" firstAttribute="top" secondItem="iUY-wm-n3A" secondAttribute="top" id="MhH-oZ-KeO"/>
                                     <constraint firstItem="Hwl-d1-PII" firstAttribute="leading" secondItem="iUY-wm-n3A" secondAttribute="leading" constant="18" id="Q0N-GP-neP"/>
                                     <constraint firstAttribute="trailing" secondItem="Hwl-d1-PII" secondAttribute="trailing" constant="18" id="RIH-XK-Cei"/>
-                                    <constraint firstAttribute="bottom" secondItem="Hwl-d1-PII" secondAttribute="bottom" id="cM9-UP-49f"/>
+                                    <constraint firstAttribute="bottom" secondItem="v57-ie-MIC" secondAttribute="bottom" constant="50" id="Wvt-K0-FaQ"/>
                                     <constraint firstItem="Hwl-d1-PII" firstAttribute="top" secondItem="HyF-if-GV8" secondAttribute="bottom" id="ffj-8v-UKw"/>
                                     <constraint firstItem="HyF-if-GV8" firstAttribute="leading" secondItem="iUY-wm-n3A" secondAttribute="leading" id="g9w-6p-YOy"/>
+                                    <constraint firstItem="v57-ie-MIC" firstAttribute="leading" secondItem="Hwl-d1-PII" secondAttribute="leading" id="p0O-ex-glI"/>
+                                    <constraint firstItem="v57-ie-MIC" firstAttribute="trailing" secondItem="Hwl-d1-PII" secondAttribute="trailing" id="unz-vo-14S"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -7316,6 +7329,7 @@
                     <connections>
                         <outlet property="imgProfile" destination="KWW-jU-Iie" id="FVU-Z2-iHP"/>
                         <outlet property="lblName" destination="zYp-Jc-w1z" id="oo9-Dv-cVG"/>
+                        <outlet property="lblVersion" destination="v57-ie-MIC" id="bli-vP-qFh"/>
                         <outlet property="tblAcountDetails" destination="Hwl-d1-PII" id="cBI-iQ-MGH"/>
                     </connections>
                 </viewController>
@@ -9466,7 +9480,7 @@ avoid cancellations </string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btV-nS-6Lx">
                                                         <rect key="frame" x="18" y="753" width="378" height="60"/>
                                                         <subviews>
-                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epc-Qg-J09" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epc-Qg-J09" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="60"/>
                                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
                                                                 <state key="normal">
@@ -9627,53 +9641,14 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
-        <designable name="0t8-U3-ebv">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="2Ut-AC-9Qr">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
         <designable name="2fI-hX-w88">
             <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="4rN-z1-ohE">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
         <designable name="HGY-kw-5YU">
             <size key="intrinsicContentSize" width="210" height="30"/>
         </designable>
-        <designable name="IOt-oG-ldn">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="M00-EB-i9S">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
         <designable name="Q44-Lk-LSf">
             <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="QPd-3g-SxC">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="cc0-dj-TGl">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="cpW-fr-cqC">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="lWD-a0-7KT">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="mJ2-zK-PS6">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="pGH-j9-vWm">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="ypJ-aF-6Y5">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="zNM-X4-rQ4">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
     </designables>
     <resources>

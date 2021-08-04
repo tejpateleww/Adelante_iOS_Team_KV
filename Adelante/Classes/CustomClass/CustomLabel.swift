@@ -15,7 +15,7 @@ import UIKit
 class myaccountLabel : UILabel {
     @IBInspectable var isUserName : Bool = false
     @IBInspectable var isSubDetails : Bool = false
-  
+    @IBInspectable var isVersion : Bool = false
     override func awakeFromNib() {
         if isUserName {
             self.textAlignment = .left
@@ -23,6 +23,10 @@ class myaccountLabel : UILabel {
             self.textColor = colors.black.value
         } else if isSubDetails {
             self.textAlignment = .left
+            self.font = CustomFont.NexaRegular.returnFont(14)
+            self.textColor = colors.black.value
+        } else if isVersion{
+            self.textAlignment = .center
             self.font = CustomFont.NexaRegular.returnFont(14)
             self.textColor = colors.black.value
         }

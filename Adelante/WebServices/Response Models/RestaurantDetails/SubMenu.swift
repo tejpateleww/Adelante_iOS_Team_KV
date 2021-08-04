@@ -1,7 +1,7 @@
 //
 //  SubMenu.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 16, 2021
+//  Created on July 30, 2021
 
 import Foundation
 import SwiftyJSON
@@ -11,13 +11,14 @@ class SubMenu : NSObject, NSCoding{
 
     var cartItemId : String!
     var cartQty : String!
+    var cartVariantCount : String!
     var category : String!
     var categoryId : String!
     var id : String!
     var image : String!
     var name : String!
     var price : String!
-    var quantity : String!
+    var quantity : Int!
     var searchIndex : String!
     var size : String!
     var variant : String!
@@ -31,13 +32,14 @@ class SubMenu : NSObject, NSCoding{
 		}
         cartItemId = json["cart_item_id"].stringValue
         cartQty = json["cart_qty"].stringValue
+        cartVariantCount = json["cart_variant_count"].stringValue
         category = json["category"].stringValue
         categoryId = json["category_id"].stringValue
         id = json["id"].stringValue
         image = json["image"].stringValue
         name = json["name"].stringValue
         price = json["price"].stringValue
-        quantity = json["quantity"].stringValue
+        quantity = json["quantity"].intValue
         searchIndex = json["search_index"].stringValue
         size = json["size"].stringValue
         variant = json["variant"].stringValue
@@ -54,6 +56,9 @@ class SubMenu : NSObject, NSCoding{
         }
         if cartQty != nil{
         	dictionary["cart_qty"] = cartQty
+        }
+        if cartVariantCount != nil{
+        	dictionary["cart_variant_count"] = cartVariantCount
         }
         if category != nil{
         	dictionary["category"] = category
@@ -96,13 +101,14 @@ class SubMenu : NSObject, NSCoding{
 	{
 		cartItemId = aDecoder.decodeObject(forKey: "cart_item_id") as? String
 		cartQty = aDecoder.decodeObject(forKey: "cart_qty") as? String
+		cartVariantCount = aDecoder.decodeObject(forKey: "cart_variant_count") as? String
 		category = aDecoder.decodeObject(forKey: "category") as? String
 		categoryId = aDecoder.decodeObject(forKey: "category_id") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
 		image = aDecoder.decodeObject(forKey: "image") as? String
 		name = aDecoder.decodeObject(forKey: "name") as? String
 		price = aDecoder.decodeObject(forKey: "price") as? String
-		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
+		quantity = aDecoder.decodeObject(forKey: "quantity") as? Int
 		searchIndex = aDecoder.decodeObject(forKey: "search_index") as? String
 		size = aDecoder.decodeObject(forKey: "size") as? String
 		variant = aDecoder.decodeObject(forKey: "variant") as? String
@@ -119,6 +125,9 @@ class SubMenu : NSObject, NSCoding{
 		}
 		if cartQty != nil{
 			aCoder.encode(cartQty, forKey: "cart_qty")
+		}
+		if cartVariantCount != nil{
+			aCoder.encode(cartVariantCount, forKey: "cart_variant_count")
 		}
 		if category != nil{
 			aCoder.encode(category, forKey: "category")

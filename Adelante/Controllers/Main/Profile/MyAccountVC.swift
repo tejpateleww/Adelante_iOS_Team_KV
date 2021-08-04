@@ -23,11 +23,12 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     @IBOutlet weak var tblAcountDetails: UITableView!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblName: myaccountLabel!
+    @IBOutlet weak var lblVersion: UILabel!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         //addNavBarImage(isLeft: true, isRight: true)
-        
+        lblVersion.text = "Version " + AppInfo.appVersion
         allDetails = [
             //            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
             
@@ -68,7 +69,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                                                 message: GlobalStrings.Alert_logout.rawValue,
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel){ _ in
-            self.expendedCell = -1
             DispatchQueue.main.async {
                 self.tblAcountDetails.reloadData()
             }
@@ -84,6 +84,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         }
     }
     @objc  func btnExpand(_ sender : UIButton) {
+        let  _ = allDetails.map({$0.isExpanded = true})
+         allDetails[sender.tag].isExpanded = false
         switch sender.tag {
         //           case 0:
         //               print(sender.tag)
@@ -112,21 +114,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         default:
             print(sender.tag)
         }
-        if expendedCell == sender.tag
-        {
-            expendedCell = -1
-            DispatchQueue.main.async {
-                self.tblAcountDetails.reloadData()
-            }
-            
-        }
-        else
-        {
-            expendedCell = sender.tag
-            DispatchQueue.main.async {
-                self.tblAcountDetails.reloadData()
-            }
-        }
+       
+        self.tblAcountDetails.reloadData()
     }
     
     //MARK: -IBActions
@@ -137,13 +126,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     //MARK: -tableView Methos
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if expendedCell == section
-        {
-            return allDetails[section].subDetails!.count
-        }
-        else  {
-            return 0
-        }
+            return (allDetails[section].isExpanded == true) ?  allDetails[section].subDetails?.count ?? 0 : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,14 +149,14 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         
         let label = UILabel()
         label.frame = CGRect.init(x: 35, y: 20.5, width: headerView.frame.width - 80, height: 23)
-        if section == expendedCell
+        if allDetails[section].isExpanded
         {
-            label.font = CustomFont.NexaBold.returnFont(17)
-            iconImageView.image = allDetails[section].selectedDetailsIcon
-        }
-        else{
             label.font = CustomFont.NexaRegular.returnFont(17)
             iconImageView.image = allDetails[section].detailsIcon
+        }
+        else{
+            label.font = CustomFont.NexaBold.returnFont(17)
+            iconImageView.image = allDetails[section].selectedDetailsIcon
         }
         label.text = allDetails[section].detailsTitle
         
@@ -184,7 +167,11 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         let expandImageView = UIImageView()
         expandImageView.frame = CGRect.init(x: headerView.frame.width - 16.66, y: 34.31, width: 16.66, height: 8.38)
         expandImageView.center.y = label.center.y
-        expandImageView.image = UIImage(named: "ic_expand")
+        if allDetails[section].isExpanded == true{
+            expandImageView.image = UIImage(named: "ic_upExpand")
+        }else{
+            expandImageView.image = UIImage(named: "ic_expand")
+        }
         headerView.addSubview(expandImageView)
         
         let expandButton = UIButton()
@@ -258,6 +245,7 @@ class myAccountDetails
     var selectedDetailsIcon : UIImage?
     var detailsTitle : String?
     var subDetails : [subAccountDetails]?
+    var isExpanded : Bool = true
     init(icon:UIImage,title:String,subTitle:[subAccountDetails],selectedIcon : UIImage) {
         self.detailsIcon = icon
         self.detailsTitle = title

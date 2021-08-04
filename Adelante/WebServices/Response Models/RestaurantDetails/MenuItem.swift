@@ -1,7 +1,7 @@
 //
 //  MenuItem.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on July 16, 2021
+//  Created on July 30, 2021
 
 import Foundation
 import SwiftyJSON
@@ -11,6 +11,7 @@ class MenuItem : NSObject, NSCoding{
 
     var cartItemId : String!
     var cartQty : String!
+    var cartVariantCount : String!
     var categoryId : String!
     var createdAt : String!
     var descriptionField : String!
@@ -20,7 +21,7 @@ class MenuItem : NSObject, NSCoding{
     var name : String!
     var outletId : String!
     var price : String!
-    var quantity : String!
+    var quantity : Int!
     var restaurantId : String!
     var searchIndex : String!
     var size : String!
@@ -42,6 +43,7 @@ class MenuItem : NSObject, NSCoding{
 		}
         cartItemId = json["cart_item_id"].stringValue
         cartQty = json["cart_qty"].stringValue
+        cartVariantCount = json["cart_variant_count"].stringValue
         categoryId = json["category_id"].stringValue
         createdAt = json["created_at"].stringValue
         descriptionField = json["description"].stringValue
@@ -51,7 +53,7 @@ class MenuItem : NSObject, NSCoding{
         name = json["name"].stringValue
         outletId = json["outlet_id"].stringValue
         price = json["price"].stringValue
-        quantity = json["quantity"].stringValue
+        quantity = json["quantity"].intValue
         restaurantId = json["restaurant_id"].stringValue
         searchIndex = json["search_index"].stringValue
         size = json["size"].stringValue
@@ -76,6 +78,9 @@ class MenuItem : NSObject, NSCoding{
         }
         if cartQty != nil{
         	dictionary["cart_qty"] = cartQty
+        }
+        if cartVariantCount != nil{
+        	dictionary["cart_variant_count"] = cartVariantCount
         }
         if categoryId != nil{
         	dictionary["category_id"] = categoryId
@@ -151,6 +156,7 @@ class MenuItem : NSObject, NSCoding{
 	{
 		cartItemId = aDecoder.decodeObject(forKey: "cart_item_id") as? String
 		cartQty = aDecoder.decodeObject(forKey: "cart_qty") as? String
+		cartVariantCount = aDecoder.decodeObject(forKey: "cart_variant_count") as? String
 		categoryId = aDecoder.decodeObject(forKey: "category_id") as? String
 		createdAt = aDecoder.decodeObject(forKey: "created_at") as? String
 		descriptionField = aDecoder.decodeObject(forKey: "description") as? String
@@ -160,7 +166,7 @@ class MenuItem : NSObject, NSCoding{
 		name = aDecoder.decodeObject(forKey: "name") as? String
 		outletId = aDecoder.decodeObject(forKey: "outlet_id") as? String
 		price = aDecoder.decodeObject(forKey: "price") as? String
-		quantity = aDecoder.decodeObject(forKey: "quantity") as? String
+		quantity = aDecoder.decodeObject(forKey: "quantity") as? Int
 		restaurantId = aDecoder.decodeObject(forKey: "restaurant_id") as? String
 		searchIndex = aDecoder.decodeObject(forKey: "search_index") as? String
 		size = aDecoder.decodeObject(forKey: "size") as? String
@@ -185,6 +191,9 @@ class MenuItem : NSObject, NSCoding{
 		}
 		if cartQty != nil{
 			aCoder.encode(cartQty, forKey: "cart_qty")
+		}
+		if cartVariantCount != nil{
+			aCoder.encode(cartVariantCount, forKey: "cart_variant_count")
 		}
 		if categoryId != nil{
 			aCoder.encode(categoryId, forKey: "category_id")

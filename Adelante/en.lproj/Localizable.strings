@@ -42,7 +42,7 @@
 
 //VerifyVC
 "verify_lblVerify" = "Verify";
-"verify_lblCodeInstruction" = "A Code has been Sent to your phone";
+"verify_lblCodeInstruction" = "OTP has been sent to your phone number";
 "verify_btnDontRecOtp" = "Don't receive the OTP? ";
 "verify_btnResendOtp" = "RESEND OTP";
 "verify_btnVerify" = "Verify";

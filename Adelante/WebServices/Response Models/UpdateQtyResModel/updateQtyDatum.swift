@@ -13,7 +13,7 @@ class updateQtyDatum : NSObject, NSCoding{
     var cartId : String!
     var grandTotal : String!
     var id : String!
-    var item : [updateQtyItem]!
+    var item : [ItemList]!
     var lat : String!
     var lng : String!
     var name : String!
@@ -35,10 +35,10 @@ class updateQtyDatum : NSObject, NSCoding{
         cartId = json["cart_id"].stringValue
         grandTotal = json["grand_total"].stringValue
         id = json["id"].stringValue
-        item = [updateQtyItem]()
+        item = [ItemList]()
         let itemArray = json["item"].arrayValue
         for itemJson in itemArray{
-            let value = updateQtyItem(fromJson: itemJson)
+            let value = ItemList(fromJson: itemJson)
             item.append(value)
         }
         lat = json["lat"].stringValue
@@ -117,7 +117,7 @@ class updateQtyDatum : NSObject, NSCoding{
 		cartId = aDecoder.decodeObject(forKey: "cart_id") as? String
 		grandTotal = aDecoder.decodeObject(forKey: "grand_total") as? String
 		id = aDecoder.decodeObject(forKey: "id") as? String
-		item = aDecoder.decodeObject(forKey: "item") as? [updateQtyItem]
+		item = aDecoder.decodeObject(forKey: "item") as? [ItemList]
 		lat = aDecoder.decodeObject(forKey: "lat") as? String
 		lng = aDecoder.decodeObject(forKey: "lng") as? String
 		name = aDecoder.decodeObject(forKey: "name") as? String
