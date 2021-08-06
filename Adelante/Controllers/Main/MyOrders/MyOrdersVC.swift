@@ -148,18 +148,19 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                     }
                     
-                     let obj = self.arrPastList[indexPath.row]
-                        cell.lblRestName.text = obj.restaurantName
-                        cell.lblRestLocation.text = obj.street
-                        cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
-                        cell.lblItem.text = obj.restaurantItemName
-                        cell.lblDtTime.text = obj.date
-                        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
-                        cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                        cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                        cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
-                        
-                        strOrderId = obj.id
+                    let obj = self.arrPastList[indexPath.row]
+                    cell.lblRestName.text = obj.restaurantName
+                    cell.lblRestLocation.text = obj.street
+                    cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
+                    cell.lblItem.text = obj.restaurantItemName
+                    cell.lblDtTime.text = obj.date
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
+                    cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    cell.share = {
+                        self.webserviceShareOrder(strMainOrderId: obj.id )
+                    }
+                    strOrderId = obj.id
                     
                     cell.cancel = {
                         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
@@ -210,20 +211,20 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                     }
                     
-                     let obj = self.arrInProcessList[indexPath.row] 
-                        cell.lblRestName.text = obj.restaurantName
-                        cell.lblRestLocation.text = obj.street
-                        cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
-                        cell.lblItem.text = obj.restaurantItemName
-                        cell.lblDtTime.text = obj.date
-                        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
-                        cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                        cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                        cell.share = {
-                            self.webserviceShareOrder(strMainOrderId: obj.id )
-                        }
-                        
-                        strOrderId = obj.id
+                    let obj = self.arrInProcessList[indexPath.row]
+                    cell.lblRestName.text = obj.restaurantName
+                    cell.lblRestLocation.text = obj.street
+                    cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
+                    cell.lblItem.text = obj.restaurantItemName
+                    cell.lblDtTime.text = obj.date
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
+                    cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    cell.share = {
+                        self.webserviceShareOrder(strMainOrderId: obj.id )
+                    }
+                    
+                    strOrderId = obj.id
                     
                     cell.cancel = {
                         
@@ -291,24 +292,24 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             if self.arrPastList.count != 0 {
                 let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
                 let obj = self.arrPastList[indexPath.row]
-                    orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
-                    orderDetailsVC.orderId = obj.id
-                    orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
-                    orderDetailsVC.strRestaurantId = obj.restaurant_id
-                    orderDetailsVC.delegateCancelOrder = self
-                    self.navigationController?.pushViewController(orderDetailsVC, animated: true)
+                orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
+                orderDetailsVC.orderId = obj.id
+                orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
+                orderDetailsVC.strRestaurantId = obj.restaurant_id
+                orderDetailsVC.delegateCancelOrder = self
+                self.navigationController?.pushViewController(orderDetailsVC, animated: true)
                 
             }
         } else {
             if self.arrInProcessList.count != 0 {
                 let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
-                 let obj = self.arrInProcessList[indexPath.row]
-                    orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
-                    orderDetailsVC.orderId = obj.id
-                    orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
-                    orderDetailsVC.strRestaurantId = obj.restaurant_id
-                    orderDetailsVC.delegateCancelOrder = self
-                    self.navigationController?.pushViewController(orderDetailsVC, animated: true)
+                let obj = self.arrInProcessList[indexPath.row]
+                orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
+                orderDetailsVC.orderId = obj.id
+                orderDetailsVC.orderType = selectedSegmentTag == 0 ? "past" : "In-Process"
+                orderDetailsVC.strRestaurantId = obj.restaurant_id
+                orderDetailsVC.delegateCancelOrder = self
+                self.navigationController?.pushViewController(orderDetailsVC, animated: true)
                 
             }
         }
@@ -337,12 +338,12 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     self.arrInProcessList = OrderList
                     
                 }
-//                DispatchQueue.main.async {
-                    self.tblOrders.dataSource = self
-                    self.tblOrders.isScrollEnabled = true
-                    self.tblOrders.isUserInteractionEnabled = true
-                    self.tblOrders.reloadData()
-//                }
+                //                DispatchQueue.main.async {
+                self.tblOrders.dataSource = self
+                self.tblOrders.isScrollEnabled = true
+                self.tblOrders.isUserInteractionEnabled = true
+                self.tblOrders.reloadData()
+                //                }
                 
             }else{
                 
@@ -408,7 +409,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
                 activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
                 self.present(activityViewController, animated: true, completion: nil)
-//                Utilities.displayAlert(json["message"].string ?? "")
+                //                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {

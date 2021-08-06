@@ -137,7 +137,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: bffComboCell.reuseIdentifier, for: indexPath) as! bffComboCell
                 cell.lblbffComboTitle.text = arrVariants?[indexPath.section].option[indexPath.row].name
                 cell.lblBffComboPrice.isHidden = (arrVariants?[indexPath.section].option[indexPath.row].price != "") ? false : true
-                cell.lblBffComboPrice.text = "$" + (arrVariants?[indexPath.section].option[indexPath.row].price)!
+                cell.lblBffComboPrice.text = (CurrencySymbol) + (arrVariants?[indexPath.section].option[indexPath.row].price)!
                 let selectOne = arrVariants?[indexPath.section].option[indexPath.row].menuChoice.toInt()
                 if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 {
                     cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)

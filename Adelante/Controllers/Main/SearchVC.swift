@@ -161,7 +161,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
 //                if arrSearchRestItemList.count != 0{
                     let cell:searchFoodLIstCell = tblFoodList.dequeueReusableCell(withIdentifier: "searchFoodLIstCell", for: indexPath) as! searchFoodLIstCell
                     cell.lblComboTitle.text = arrSearchRestItemList[indexPath.row].name
-                    cell.lblPrice.text = "$" + arrSearchRestItemList[indexPath.row].price
+                    cell.lblPrice.text = (CurrencySymbol) + arrSearchRestItemList[indexPath.row].price
                     cell.lblDisc.text = arrSearchRestItemList[indexPath.row].descriptionField
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestItemList[indexPath.row].image ?? "")"
                     cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
