@@ -25,8 +25,9 @@ class MyOrdersCell: UITableViewCell {
      @IBOutlet weak var btnCancelOrder: myOrdersBtn!
      
      // MARK: - Properties
-     var cancel : (() -> ())?
-     var Repeat : (() -> ())?
+    var cancel : (() -> ())?
+    var Repeat : (() -> ())?
+    var share : (()->())?
      @IBAction func btnCancel(_ sender: myOrdersBtn) {
          if let click = self.cancel {
              click()
@@ -37,7 +38,12 @@ class MyOrdersCell: UITableViewCell {
              click()
          }
      }
-     
+    @IBAction func btnShare(_ sender: UIButton) {
+        if let click = self.share{
+            click()
+        }
+    }
+    
      override func awakeFromNib() {
          super.awakeFromNib()
         setUpLocalizedStrings()

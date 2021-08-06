@@ -58,7 +58,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var vwRateOrder: UIView!
     @IBOutlet weak var vwShareOrder: UIView!
     @IBOutlet weak var heightTblItems: NSLayoutConstraint!
-//    @IBOutlet weak var viewSkeleton: skeletonView!
+    @IBOutlet weak var lblTax: UILabel!
+    //    @IBOutlet weak var viewSkeleton: skeletonView!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,10 +99,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
             lblRestName.text = objOrderDetailsData.restaurantName
             lblTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.total.ConvertToTwoDecimal()
+            lblTax.text = "(" + objOrderDetailsData.tax + "%" + ")"
             lblAddress.text = objOrderDetailsData.address
-            lblTaxes.text = "\(CurrencySymbol)" + objOrderDetailsData.tax.ConvertToTwoDecimal()
+            lblTaxes.text = "\(CurrencySymbol)" + objOrderDetailsData.totalRound.ConvertToTwoDecimal()
             lblServiceFee.text = "\(CurrencySymbol)" + objOrderDetailsData.serviceFee.ConvertToTwoDecimal()
-            lblSubTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.sub_total.ConvertToTwoDecimal()
+            lblSubTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.subTotal.ConvertToTwoDecimal()
             lblLocation.text = objOrderDetailsData.street
             let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objOrderDetailsData.qrcode ?? "")"
             imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -162,16 +164,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
-        self.isSharedOrder = true
-        let textToShare = [ "Order share successfully." ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-        }
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
-        self.present(activityViewController, animated: true, completion: nil)
-        
-      
+        webserviceShareOrder()
     }
     
     // MARK: - UITableView Delegates & Datasource
@@ -200,13 +193,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         lblAddress.text = "43369 Ellsworth St, remont,CA"
         lblYourOrder.text = "MyOrderDetailsVC_lblYourOrder".Localized()
         lblSubTotalTitle.text = "MyOrderDetailsVC_lblSubTotalTitle".Localized()
-       
         lblServiceFeeTitle.text = "MyOrderDetailsVC_lblServiceFeeTitle".Localized()
-        
         lblTaxesTitle.text = "MyOrderDetailsVC_lblTaxesTitle".Localized()
-       
         lblTotalTitle.text = "MyOrderDetailsVC_lblTotalTitle".Localized()
-       
         btnCancel.setTitle("MyOrderDetailsVC_btnCancel".Localized(), for: .normal)
         btnRateOrder.setTitle("MyOrderDetailsVC_btnRateOrder".Localized(), for: .normal)
         btnShareOrder.setTitle("MyOrderDetailsVC_btnShareOrder".Localized(), for: .normal)
@@ -263,14 +252,22 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
-    func webserviceShareOrder(strUsertype:String){
+    func webserviceShareOrder(){
         let shareOrder = shareOrderReqModel()
-        shareOrder.user_type = strUsertype
+        shareOrder.user_type = SingletonClass.sharedInstance.LoginRegisterUpdateData?.email ?? ""
         shareOrder.main_order_id = objOrderDetailsData.item[0].mainOrderId
         WebServiceSubClass.ShareOrder(shareOrder: shareOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
-                Utilities.displayAlert(json["message"].string ?? "")
+                self.isSharedOrder = true
+                let textToShare = [ "Order share successfully." ]
+                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+                activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                }
+                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
+                self.present(activityViewController, animated: true, completion: nil)
+//                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {

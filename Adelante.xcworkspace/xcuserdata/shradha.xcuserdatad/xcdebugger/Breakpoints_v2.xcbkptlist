@@ -5,127 +5,19 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            uuid = "C42BE96D-6F54-4557-BE1C-502CD528D7D3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            breakpointStackSelectionBehavior = "1"
-            scope = "1"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1EE9FC88-4933-4FF6-9D19-7D81BB3A78A8"
+            uuid = "259FAFAE-67A5-4149-83B2-618C7396B11C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
+            filePath = "Adelante/Controllers/Main/Profile/MyFoodlistVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1116"
-            endingLineNumber = "1116"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "webserviceUpdateCartQuantity(strItemid:strQty:strType:row:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D0DF4CE5-B05B-4DF8-861C-1829E956965C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1183"
-            endingLineNumber = "1183"
-            landmarkName = "webserviceUpdateCartQuantity(strItemid:strQty:strType:row:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "18A504CA-CDCC-4F2C-B9D6-94A5F8BB8176"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1153"
-            endingLineNumber = "1153"
-            landmarkName = "webserviceUpdateCartQuantity(strItemid:strQty:strType:row:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "80A48438-9886-4576-86AD-3F51A4459ADA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1155"
-            endingLineNumber = "1155"
-            landmarkName = "webserviceUpdateCartQuantity(strItemid:strQty:strType:row:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6D0500EC-92F6-4717-8BD9-6BB9D9498DE7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1180"
-            endingLineNumber = "1180"
-            landmarkName = "webserviceUpdateCartQuantity(strItemid:strQty:strType:row:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6D0500EC-92F6-4717-8BD9-6BB9D9498DE7 - b7754946dd6624ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftyJSON.JSON, Swift.Bool, Any) -&gt; () in Adelante.RestaurantDetailsVC.webserviceUpdateCartQuantity(strItemid: Swift.String, strQty: Swift.String, strType: Swift.String, row: Swift.Int) -&gt; ()"
-                  moduleName = "Adelante"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shradha/Documents/Harsh%20Dave/Adelante/Code/Adelante/Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1175"
-                  endingLineNumber = "1175"
-                  offsetFromSymbolStart = "13829">
-               </Location>
-               <Location
-                  uuid = "6D0500EC-92F6-4717-8BD9-6BB9D9498DE7 - 91a882b973a128b9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Adelante.ItemList) -&gt; Swift.Bool in closure #1 (SwiftyJSON.JSON, Swift.Bool, Any) -&gt; () in Adelante.RestaurantDetailsVC.webserviceUpdateCartQuantity(strItemid: Swift.String, strQty: Swift.String, strType: Swift.String, row: Swift.Int) -&gt; ()"
-                  moduleName = "Adelante"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shradha/Documents/Harsh%20Dave/Adelante/Code/Adelante/Adelante/Controllers/Main/Restaurant/RestaurantDetailsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1176"
-                  endingLineNumber = "1176"
-                  offsetFromSymbolStart = "106">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

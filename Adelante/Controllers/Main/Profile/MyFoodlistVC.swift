@@ -101,7 +101,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let cell:MyFoodlistCell = tblFoodLIst.dequeueReusableCell(withIdentifier: "MyFoodlistCell", for: indexPath) as! MyFoodlistCell
                 self.strcartitemid = arrOrderData[indexPath.row].cartItemId
                 cell.lblComboTitle.text = arrOrderData[indexPath.row].itemName
-                cell.lblPrice.text = arrOrderData[indexPath.row].price
+                cell.lblPrice.text = (CurrencySymbol) + arrOrderData[indexPath.row].price
                 cell.lblDisc.text = arrOrderData[indexPath.row].descriptionField
                 cell.lblNoOfItem.text = arrOrderData[indexPath.row].cartQty
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
@@ -117,7 +117,6 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 }
                 cell.IncreseData = {
                     self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
-                    //let activityView = UIActivityIndicatorView(style: .gray)
                     cell.stackHide.isHidden = true
                     self.activityView.center = cell.vwStapper.center
                     cell.vwStapper.addSubview(self.activityView)
@@ -125,7 +124,6 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 }
                 cell.decreaseData = {
                     self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
-                    
                     cell.stackHide.isHidden = true
                     self.activityView.center = cell.vwStapper.center
                     cell.vwStapper.addSubview(self.activityView)
@@ -227,29 +225,8 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             if(status)
             {
                 let cartData = updateCartResModel.init(fromJson: json)
-                self.arrUpdateQty = cartData.data
-                let index = IndexPath(row: row, section: 0)
-                let cell = self.tblFoodLIst.cellForRow(at: index) as! MyFoodlistCell
-                if (cell.lblNoOfItem.text?.toInt())! <= 1 && strType == "0"{
-                    
-                    if index.row >= 0{
-//                        cell.vwStapper.isHidden = true
-//                        cell.btnAdd.isHidden = false
-                        self.arrOrderData.remove(at: index.row)
-                        self.tblFoodLIst.deleteRows(at: [index], with: .fade)
-                        self.tblFoodLIst.reloadData()
-                    }
-                }
-                for i in 0...self.arrUpdateQty.item.count - 1{
-                    if strItemid == self.arrUpdateQty.item[i].cartItemId{
-                        cell.lblNoOfItem.text = self.arrUpdateQty.item[i].qty
-                    }
-                }
-                cell.stackHide.isHidden = false
-                self.activityView.stopAnimating()
-//                Utilities.displayAlert(json["message"].string ?? "")
-                //self.tblFoodLIst.reloadData()
-              //  self.setData()
+                self.webserviceGetFoodlist()
+                self.tblFoodLIst.reloadData()
             }
             else
             {

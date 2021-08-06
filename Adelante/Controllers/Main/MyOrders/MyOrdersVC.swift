@@ -92,28 +92,12 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         }
         self.tblOrders.reloadData()
     }
-    
-    @objc func btnShareClick()
-    {
-        let text = ""
-        
-        
-        let textToShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        
-        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-        
-        
-        self.present(activityViewController, animated: true, completion: nil)
-    }
     // MARK: - SkeletonTableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         if selectedSegmentTag == 0  {
-            return self.responseStatus == .gotData ? (self.arrPastList.count ?? 0 > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+            return self.responseStatus == .gotData ? (self.arrPastList.count > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
         }else{
-            return self.responseStatus == .gotData ? (self.arrInProcessList.count ?? 0 > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
+            return self.responseStatus == .gotData ? (self.arrInProcessList.count > 0 ? MyOrdersCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
         }
     }
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,33 +111,23 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         if selectedSegmentTag == 0  {
             if responseStatus == .gotData{
                 if arrPastList.count != 0 {
-                    return self.arrPastList.count ?? 0
+                    return self.arrPastList.count
                 }else{
                     return 1
                 }
             }else{
                 return 5
             }
-//            if self.arrPastList?.count == 0 {
-//                return 1
-//            } else {
-                
-//            }
         } else {
             if responseStatus == .gotData{
                 if arrInProcessList.count != 0 {
-                    return self.arrInProcessList.count ?? 0
+                    return self.arrInProcessList.count
                 }else{
                     return 1
                 }
             }else{
                 return 5
             }
-//            if self.arrInProcessList?.count == 0 {
-//                return 1
-//            } else {
-//                return self.arrInProcessList?.count ?? 0 > 0 ? arrInProcessList?.count ?? 0 : 5
-//            }
         }
         
     }
@@ -245,7 +219,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
                         cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                         cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                        cell.btnShare.addTarget(self, action: #selector(btnShareClick), for: .touchUpInside)
+                        cell.share = {
+                            self.webserviceShareOrder(strMainOrderId: obj.id )
+                        }
                         
                         strOrderId = obj.id
                     
@@ -416,6 +392,32 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 }
             }
             completion()
+        })
+    }
+    func webserviceShareOrder(strMainOrderId:String){
+        let shareOrder = shareOrderReqModel()
+        shareOrder.user_type = SingletonClass.sharedInstance.LoginRegisterUpdateData?.email ?? ""
+        shareOrder.main_order_id = strMainOrderId
+        WebServiceSubClass.ShareOrder(shareOrder: shareOrder, showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                let textToShare = [ "Order share successfully." ]
+                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+                activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                }
+                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
+                self.present(activityViewController, animated: true, completion: nil)
+//                Utilities.displayAlert(json["message"].string ?? "")
+            }
+            else
+            {
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
+            }
         })
     }
 }

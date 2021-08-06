@@ -389,8 +389,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func btnAddFoodlistClicked(_ sender: Any) {
-        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
-        self.navigationController?.pushViewController(vc, animated: true)
         webserviceAddToFoodlist()
     }
     
@@ -436,9 +434,15 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 print(json)
                 // let AddtoFoodlistData = AddToFoodlistReqModel.init()
                 //                self.objOrderData = repeatOrderData.data
-                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
-                self.navigationController?.pushViewController(vc, animated: true)
-                Utilities.displayAlert(json["message"].string ?? "")
+                let alert = UIAlertController(title: AppName, message: json["message"].stringValue, preferredStyle: UIAlertController.Style.alert)
+                let OkAction = UIAlertAction(title:"OK" , style: .default) { (sct) in
+                    let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                alert.addAction(OkAction)
+                appDel.window?.rootViewController?.present(alert, animated: true, completion: nil)
+               
+//                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {

@@ -1,7 +1,7 @@
 //
 //  MainOrder.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on February 5, 2021
+//  Created on August 5, 2021
 
 import Foundation
 import SwiftyJSON
@@ -11,21 +11,25 @@ class MainOrder : NSObject, NSCoding{
 
     var address : String!
     var createdAt : String!
-    var date : String!
+    var discount : String!
+    var discountAmount : String!
     var item : [Item]!
     var itemQuantity : String!
     var orderId : String!
-    var restaurantItemName : String!
+    var promocodeId : String!
+    var promocodeType : String!
+    var qrcode : String!
+    var restaurantId : String!
     var restaurantName : String!
     var serviceFee : String!
+    var shareOrder : String!
+    var street : String!
+    var subTotal : String!
     var tax : String!
     var total : String!
+    var totalRound : String!
     var username : String!
-    var sub_total : String!
-    var street : String!
-    var qrcode : String!
-    var restaurant_id : String!
-    var main_order_id : String!
+
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -35,7 +39,8 @@ class MainOrder : NSObject, NSCoding{
 		}
         address = json["address"].stringValue
         createdAt = json["created_at"].stringValue
-        date = json["date"].stringValue
+        discount = json["discount"].stringValue
+        discountAmount = json["discount_amount"].stringValue
         item = [Item]()
         let itemArray = json["item"].arrayValue
         for itemJson in itemArray{
@@ -44,17 +49,19 @@ class MainOrder : NSObject, NSCoding{
         }
         itemQuantity = json["item_quantity"].stringValue
         orderId = json["order_id"].stringValue
-        restaurantItemName = json["restaurant_item_name"].stringValue
+        promocodeId = json["promocode_id"].stringValue
+        promocodeType = json["promocode_type"].stringValue
+        qrcode = json["qrcode"].stringValue
+        restaurantId = json["restaurant_id"].stringValue
         restaurantName = json["restaurant_name"].stringValue
         serviceFee = json["service_fee"].stringValue
+        shareOrder = json["share_order"].stringValue
+        street = json["street"].stringValue
+        subTotal = json["sub_total"].stringValue
         tax = json["tax"].stringValue
         total = json["total"].stringValue
+        totalRound = json["total_round"].stringValue
         username = json["username"].stringValue
-        sub_total = json["sub_total"].stringValue
-        street = json["street"].stringValue
-        qrcode = json["qrcode"].stringValue
-        restaurant_id = json["restaurant_id"].stringValue
-        main_order_id = json["main_order_id"].stringValue
 	}
 
 	/**
@@ -69,8 +76,11 @@ class MainOrder : NSObject, NSCoding{
         if createdAt != nil{
         	dictionary["created_at"] = createdAt
         }
-        if date != nil{
-        	dictionary["date"] = date
+        if discount != nil{
+        	dictionary["discount"] = discount
+        }
+        if discountAmount != nil{
+        	dictionary["discount_amount"] = discountAmount
         }
         if item != nil{
         var dictionaryElements = [[String:Any]]()
@@ -85,8 +95,17 @@ class MainOrder : NSObject, NSCoding{
         if orderId != nil{
         	dictionary["order_id"] = orderId
         }
-        if restaurantItemName != nil{
-        	dictionary["restaurant_item_name"] = restaurantItemName
+        if promocodeId != nil{
+        	dictionary["promocode_id"] = promocodeId
+        }
+        if promocodeType != nil{
+        	dictionary["promocode_type"] = promocodeType
+        }
+        if qrcode != nil{
+        	dictionary["qrcode"] = qrcode
+        }
+        if restaurantId != nil{
+        	dictionary["restaurant_id"] = restaurantId
         }
         if restaurantName != nil{
         	dictionary["restaurant_name"] = restaurantName
@@ -94,29 +113,26 @@ class MainOrder : NSObject, NSCoding{
         if serviceFee != nil{
         	dictionary["service_fee"] = serviceFee
         }
+        if shareOrder != nil{
+        	dictionary["share_order"] = shareOrder
+        }
+        if street != nil{
+        	dictionary["street"] = street
+        }
+        if subTotal != nil{
+        	dictionary["sub_total"] = subTotal
+        }
         if tax != nil{
         	dictionary["tax"] = tax
         }
         if total != nil{
         	dictionary["total"] = total
         }
+        if totalRound != nil{
+        	dictionary["total_round"] = totalRound
+        }
         if username != nil{
         	dictionary["username"] = username
-        }
-        if sub_total != nil{
-            dictionary["sub_total"] = sub_total
-        }
-        if street != nil{
-            dictionary["street"] = street
-        }
-        if qrcode != nil{
-            dictionary["qrcode"] = qrcode
-        }
-        if restaurant_id != nil{
-            dictionary["restaurant_id"] = restaurant_id
-        }
-        if main_order_id != nil{
-            dictionary["main_order_id"] = main_order_id
         }
 		return dictionary
 	}
@@ -129,21 +145,24 @@ class MainOrder : NSObject, NSCoding{
 	{
 		address = aDecoder.decodeObject(forKey: "address") as? String
 		createdAt = aDecoder.decodeObject(forKey: "created_at") as? String
-		date = aDecoder.decodeObject(forKey: "date") as? String
+		discount = aDecoder.decodeObject(forKey: "discount") as? String
+		discountAmount = aDecoder.decodeObject(forKey: "discount_amount") as? String
 		item = aDecoder.decodeObject(forKey: "item") as? [Item]
 		itemQuantity = aDecoder.decodeObject(forKey: "item_quantity") as? String
 		orderId = aDecoder.decodeObject(forKey: "order_id") as? String
-		restaurantItemName = aDecoder.decodeObject(forKey: "restaurant_item_name") as? String
+		promocodeId = aDecoder.decodeObject(forKey: "promocode_id") as? String
+		promocodeType = aDecoder.decodeObject(forKey: "promocode_type") as? String
+		qrcode = aDecoder.decodeObject(forKey: "qrcode") as? String
+		restaurantId = aDecoder.decodeObject(forKey: "restaurant_id") as? String
 		restaurantName = aDecoder.decodeObject(forKey: "restaurant_name") as? String
 		serviceFee = aDecoder.decodeObject(forKey: "service_fee") as? String
+		shareOrder = aDecoder.decodeObject(forKey: "share_order") as? String
+		street = aDecoder.decodeObject(forKey: "street") as? String
+		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? String
 		tax = aDecoder.decodeObject(forKey: "tax") as? String
 		total = aDecoder.decodeObject(forKey: "total") as? String
+		totalRound = aDecoder.decodeObject(forKey: "total_round") as? String
 		username = aDecoder.decodeObject(forKey: "username") as? String
-        sub_total = aDecoder.decodeObject(forKey: "sub_total") as? String
-        street = aDecoder.decodeObject(forKey: "street") as? String
-        qrcode = aDecoder.decodeObject(forKey: "qrcode") as? String
-        restaurant_id = aDecoder.decodeObject(forKey: "restaurant_id") as? String
-        main_order_id = aDecoder.decodeObject(forKey: "main_order_id") as? String
 	}
 
     /**
@@ -158,8 +177,11 @@ class MainOrder : NSObject, NSCoding{
 		if createdAt != nil{
 			aCoder.encode(createdAt, forKey: "created_at")
 		}
-		if date != nil{
-			aCoder.encode(date, forKey: "date")
+		if discount != nil{
+			aCoder.encode(discount, forKey: "discount")
+		}
+		if discountAmount != nil{
+			aCoder.encode(discountAmount, forKey: "discount_amount")
 		}
 		if item != nil{
 			aCoder.encode(item, forKey: "item")
@@ -170,8 +192,17 @@ class MainOrder : NSObject, NSCoding{
 		if orderId != nil{
 			aCoder.encode(orderId, forKey: "order_id")
 		}
-		if restaurantItemName != nil{
-			aCoder.encode(restaurantItemName, forKey: "restaurant_item_name")
+		if promocodeId != nil{
+			aCoder.encode(promocodeId, forKey: "promocode_id")
+		}
+		if promocodeType != nil{
+			aCoder.encode(promocodeType, forKey: "promocode_type")
+		}
+		if qrcode != nil{
+			aCoder.encode(qrcode, forKey: "qrcode")
+		}
+		if restaurantId != nil{
+			aCoder.encode(restaurantId, forKey: "restaurant_id")
 		}
 		if restaurantName != nil{
 			aCoder.encode(restaurantName, forKey: "restaurant_name")
@@ -179,30 +210,28 @@ class MainOrder : NSObject, NSCoding{
 		if serviceFee != nil{
 			aCoder.encode(serviceFee, forKey: "service_fee")
 		}
+		if shareOrder != nil{
+			aCoder.encode(shareOrder, forKey: "share_order")
+		}
+		if street != nil{
+			aCoder.encode(street, forKey: "street")
+		}
+		if subTotal != nil{
+			aCoder.encode(subTotal, forKey: "sub_total")
+		}
 		if tax != nil{
 			aCoder.encode(tax, forKey: "tax")
 		}
 		if total != nil{
 			aCoder.encode(total, forKey: "total")
 		}
+		if totalRound != nil{
+			aCoder.encode(totalRound, forKey: "total_round")
+		}
 		if username != nil{
 			aCoder.encode(username, forKey: "username")
 		}
-        if sub_total != nil{
-            aCoder.encode(sub_total, forKey: "sub_total")
-        }
-        if street != nil{
-            aCoder.encode(street, forKey: "street")
-        }
-        if qrcode != nil{
-            aCoder.encode(qrcode, forKey: "qrcode")
-        }
-        if restaurant_id != nil{
-            aCoder.encode(restaurant_id, forKey: "restaurant_id")
-        }
-        if main_order_id != nil{
-            aCoder.encode(main_order_id, forKey: "main_order_id")
-        }
+
 	}
 
 }

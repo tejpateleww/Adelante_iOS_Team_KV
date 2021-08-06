@@ -22,7 +22,7 @@ class themeTextView: GrowingTextView {
         super.awakeFromNib()
         if isFeedback{
             self.font = CustomFont.NexaRegular.returnFont(16)
-            self.textColor = colors.textFieldColor.value
+            self.textColor = colors.black.value
             self.minHeight = 79
             self.maxHeight = 79
             self.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
@@ -32,6 +32,7 @@ class themeTextView: GrowingTextView {
             self.textContainerInset = UIEdgeInsets(top: 13, left: 13, bottom: 13, right: 13)
         }
         if isBorder{
+            self.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             self.layer.borderColor = UIColor(hexString: "#707070").withAlphaComponent(0.2).cgColor
             self.layer.borderWidth = 1
         }

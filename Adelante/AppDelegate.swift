@@ -14,8 +14,7 @@ import CoreLocation
 import GooglePlaces
 import GoogleMaps
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
+@UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
     
     var window: UIWindow?
     var locationManager: CLLocationManager?
