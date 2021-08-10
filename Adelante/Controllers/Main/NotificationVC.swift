@@ -41,6 +41,8 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         super.viewDidLoad()
         setUp()
         registerNIB()
+        tbvNotification.delegate = self
+        tbvNotification.dataSource = self
         self.tbvNotification.showAnimatedSkeleton()
         webservicePostNotification()
         tbvNotification.refreshControl = refreshList
@@ -114,7 +116,7 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if responseStatus == .gotData{
             if arrNotification.count != 0 {
-                return 100
+                return UITableView.automaticDimension
             }else{
                 return tableView.frame.height
             }

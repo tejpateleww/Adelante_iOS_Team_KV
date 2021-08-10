@@ -57,7 +57,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         imgEmptyCard.isHidden = true
         webserviceGetAddPayment()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +64,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     //MARK: -tblViewMethods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return arrCard.count
         switch section {
         case 0:
             return arrCard.count + 1
@@ -140,9 +138,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.btnDelete.isHidden = true
             cell.vwCvv.isHidden = true
             cell.selectPaymentMethodButton.isHidden = false
-            cell.selectedBtn = {
-                cell.selectPaymentMethodButton.isSelected = true
-            }
             cell.selectionStyle = .none
             return cell
         default:
@@ -171,7 +166,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             
             let label = UILabel()
             label.frame = CGRect(x: 16, y: 0, width:  headerView .frame.size.width, height: 19)
-            // let label = UILabel.init(frame: )
             label.center.y = headerView.frame.size.height / 2
             label.text = "Choose desired Payment Method"
             label.font = CustomFont.NexaRegular.returnFont(15)
@@ -288,7 +282,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             if(status)
             {
                 let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-                //controller.modalPresentationStyle = .fullScreen
                 controller.isHideCancelButton = true
                 controller.isHideSubmitButton = false
                 controller.submitBtnTitle = "  Payment Successful      "
@@ -300,7 +293,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 controller.strPopupImage = "ic_popupPaymentSucessful"
                 controller.isCancleOrder = true
                 controller.btnSubmit = {
-                    // appDel.navigateToHome()
                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
                     controller.selectedIndex = 2
                     SingletonClass.sharedInstance.selectInProcessInMyOrder = true
@@ -324,7 +316,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         deleteCardModel.card_id = strCardId
         deleteCardModel.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.removePaymentList(removePaymentList: deleteCardModel, showHud: false, completion: { (json, status, error) in
-            // self.hideHUD()
             if(status) {
                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
                 self.webserviceGetAddPayment()

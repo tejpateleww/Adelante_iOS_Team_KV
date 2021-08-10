@@ -92,8 +92,6 @@ extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
             
         } else {
             let NoDatacell = tblPromoCode.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-//            NoDatacell.imgNoData.image = UIImage(named: "ic_applyPromoCode")
-//            NoDatacell.imgNoData.
             NoDatacell.lblNoDataTitle.text = "No promocode found"
             NoDatacell.selectionStyle = .none
             return NoDatacell

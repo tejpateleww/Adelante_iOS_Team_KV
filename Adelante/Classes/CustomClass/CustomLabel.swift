@@ -351,7 +351,7 @@ super.awakeFromNib()
         self.textColor = UIColor(hexString: "#242E42")
     } else if isNotificatioDescription {
         self.font = CustomFont.NexaRegular.returnFont(17)
-               self.textColor = UIColor(hexString: "#242E42")
+        self.textColor = UIColor(hexString: "#242E42")
     }else if isRateName{
         self.font = CustomFont.NexaBold.returnFont(15)
     }
