@@ -20,9 +20,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var arrUpdateQty : updateQtyDatum!
     var strcartitemid = ""
     var objFoodlist : myFoodlistDatum?
-    
+    var isfromcheckout : Bool = false
     let activityView = UIActivityIndicatorView(style: .gray)
-    
+    var restaurantid = ""
     // MARK: - IBOutlet
     @IBOutlet weak var tblFoodLIst: UITableView!
     {
@@ -30,7 +30,8 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             tblFoodLIst.isSkeletonable = true
         }
     }
-
+    @IBOutlet weak var btnAddtoCart: submitButton!
+    
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
@@ -42,6 +43,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         refreshList.addTarget(self, action: #selector(refreshFoodlist), for: .valueChanged)
         tblFoodLIst.reloadData()
         setup()
+        
     }
     
     // MARK: - Other Methods
@@ -65,6 +67,20 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
 
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
+    }
+    
+    override func btnBackAction() {
+//        super.btnBackAction()
+        if isfromcheckout == true{
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
+            controller.selectedIndex = 3
+            let nav = UINavigationController(rootViewController: controller)
+            nav.navigationBar.isHidden = true
+            appDel.window?.rootViewController = nav
+        }else{
+            super.btnBackAction()
+        }
+        
     }
     
     // MARK: - IBActions
@@ -104,6 +120,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 cell.lblPrice.text = (CurrencySymbol) + arrOrderData[indexPath.row].price
                 cell.lblDisc.text = arrOrderData[indexPath.row].descriptionField
                 cell.lblNoOfItem.text = arrOrderData[indexPath.row].cartQty
+                self.restaurantid = arrOrderData[indexPath.row].outletId
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOrderData[indexPath.row].itemImg ?? "")"
                 cell.imgFoodLIst.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -179,6 +196,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let myfoodlistData = MyFoodLIstResModel.init(fromJson: response)
                 self.arrOrderData = myfoodlistData.data.item
                 self.objFoodlist = myfoodlistData.data
+                
                 self.tblFoodLIst.reloadData()
                 DispatchQueue.main.async {
                     self.refreshList.endRefreshing()
@@ -186,17 +204,23 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
+                self.arrOrderData.removeAll()
+                self.tblFoodLIst.reloadData()
 //                if let strMessage = response["message"].string {
 //                    Utilities.displayAlert(strMessage)
 //                }else {
 //                    Utilities.displayAlert("Something went wrong")
 //                }
             }
+            if self.arrOrderData.count == 0{
+                self.btnAddtoCart.isHidden = true
+            }else{
+                self.btnAddtoCart.isHidden = false
+            }
         })
     }
     func webserviceRemoveCart(){
         let clearFoodlist = RemoveCartReqModel()
-//        clearFoodlist.cart_item_id = strcartitemid
         clearFoodlist.user_id = SingletonClass.sharedInstance.UserId
         clearFoodlist.type = "1"
         WebServiceSubClass.removeFoodList(removeFoodList: clearFoodlist, showHud: false,completion: { (json, status, error) in
@@ -243,7 +267,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         WebServiceSubClass.foodlisttocart(strURL: strURL, completion: { (json, status, response) in
             if(status)
             {
-                let vc =  AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "checkOutVC") as! checkOutVC
+                let vc =  AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantDetailsVC") as! RestaurantDetailsVC
+                vc.isFromFoodlist = true
+                vc.selectedRestaurantId = self.restaurantid
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else

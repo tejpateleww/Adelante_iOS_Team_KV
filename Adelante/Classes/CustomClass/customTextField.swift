@@ -177,7 +177,7 @@ class floatTextField: SkyFloatingLabelTextField {
         self.selectedTitleColor = colors.forgotpassGreyColor.value
         self.lineColor = colors.forgotpassGreyColor.value
         self.selectedLineColor = colors.forgotpassGreyColor.value
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         self.rightView = paddingView
         self.rightViewMode = .always
 

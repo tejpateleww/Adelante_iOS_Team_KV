@@ -16,9 +16,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     var myACDetailsARray:[String] = ["","","","","","",""]
     var customTabBarController: CustomTabBarVC?
     var allDetails = [myAccountDetails]()
-    var expendedCell = -1
     var SettingsData : SettingsResModel!
-    
+    var expandedCell = -1
     // MARK: - IBOutlets
     @IBOutlet weak var tblAcountDetails: UITableView!
     @IBOutlet weak var imgProfile: UIImageView!
@@ -69,14 +68,13 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                                                 message: GlobalStrings.Alert_logout.rawValue,
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleCancel".Localized(), style: .cancel){ _ in
+            self.expandedCell = -1
             DispatchQueue.main.async {
                 self.tblAcountDetails.reloadData()
             }
         })
         alertController.addAction(UIAlertAction(title: "MyAccountVC_titleLogout".Localized(), style: .default){ _ in
             appDel.performLogout()
-            // userDefault.setValue(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
-            // appDel.navigateToLogin()
         })
         
         DispatchQueue.main.async {
@@ -85,22 +83,16 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     @objc  func btnExpand(_ sender : UIButton) {
         let  _ = allDetails.map({$0.isExpanded = true})
-         allDetails[sender.tag].isExpanded = false
+        allDetails[sender.tag].isExpanded = false
         switch sender.tag {
-        //           case 0:
-        //               print(sender.tag)
-        //               customTabBarController?.selectedIndex = 2
-        //
         case 0:
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
             controller.isfromPayment = true
             self.navigationController?.pushViewController(controller, animated: true)
-            
             print(sender.tag)
         case 1:
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyFoodlistVC.storyboardID) as! MyFoodlistVC
             self.navigationController?.pushViewController(controller, animated: true)
-            
             print(sender.tag)
         case 2:
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: ChangePasswordVC.storyboardID) as! ChangePasswordVC
@@ -114,8 +106,30 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         default:
             print(sender.tag)
         }
-       
-        self.tblAcountDetails.reloadData()
+        
+        if sender.tag == 3 {
+            if expandedCell == sender.tag
+            {
+                expandedCell = -1
+                DispatchQueue.main.async {
+                    self.tblAcountDetails.reloadData()
+                }
+            }
+            else
+            {
+                expandedCell = sender.tag
+                DispatchQueue.main.async {
+                    self.tblAcountDetails.reloadData()
+                }
+            }
+        } else {
+            expandedCell = sender.tag
+            DispatchQueue.main.async {
+                self.tblAcountDetails.reloadData()
+            }
+            
+        }
+        
     }
     
     //MARK: -IBActions
@@ -126,7 +140,13 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     //MARK: -tableView Methos
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return (allDetails[section].isExpanded == true) ?  allDetails[section].subDetails?.count ?? 0 : 0
+        if expandedCell == section
+        {
+            return allDetails[section].subDetails!.count
+        }
+        else  {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -149,25 +169,24 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         
         let label = UILabel()
         label.frame = CGRect.init(x: 35, y: 20.5, width: headerView.frame.width - 80, height: 23)
-        if allDetails[section].isExpanded
+        if section == expandedCell
         {
-            label.font = CustomFont.NexaRegular.returnFont(17)
-            iconImageView.image = allDetails[section].detailsIcon
-        }
-        else{
             label.font = CustomFont.NexaBold.returnFont(17)
             iconImageView.image = allDetails[section].selectedDetailsIcon
         }
+        else{
+            label.font = CustomFont.NexaRegular.returnFont(17)
+            iconImageView.image = allDetails[section].detailsIcon
+        }
         label.text = allDetails[section].detailsTitle
         
-        label.textColor = colors.black.value// colors.black.value
-        //headerView.backgroundColor = colors.white.value
+        label.textColor = colors.black.value
         headerView.addSubview(label)
         
         let expandImageView = UIImageView()
         expandImageView.frame = CGRect.init(x: headerView.frame.width - 16.66, y: 34.31, width: 16.66, height: 8.38)
         expandImageView.center.y = label.center.y
-        if allDetails[section].isExpanded == true{
+        if section == expandedCell{
             expandImageView.image = UIImage(named: "ic_upExpand")
         }else{
             expandImageView.image = UIImage(named: "ic_expand")
@@ -184,7 +203,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         {
             expandImageView.isHidden = true
         }
-        
         return headerView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -207,14 +225,11 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
                 self.navigationController?.pushViewController(controller, animated: true)
             case 3:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: FeedbackVC.storyboardID) as! FeedbackVC
-                //                controller.strNavTitle = "MyAccountVC_title3_D".Localized()
-                //                controller.strUrl = SettingsData.aboutUs
                 self.navigationController?.pushViewController(controller, animated: true)
             default:
                 print(indexPath.row)
             }
         }}
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 43.5
     }
@@ -227,7 +242,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         WebServiceSubClass.Settings(showHud: false, completion: { (json, status, response) in
             if(status)
             {
-                self.SettingsData = SettingsResModel.init(fromJson: json)            }
+                self.SettingsData = SettingsResModel.init(fromJson: json)
+            }
             else
             {
                 if let strMessage = json["message"].string {
@@ -252,7 +268,6 @@ class myAccountDetails
         self.subDetails = subTitle
         self.selectedDetailsIcon = selectedIcon
     }
-    
 }
 class subAccountDetails
 {

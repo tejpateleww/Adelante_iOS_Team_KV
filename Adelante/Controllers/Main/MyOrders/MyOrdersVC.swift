@@ -347,16 +347,16 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 
             }else{
                 
-                if(response["data"] == [])
+                if(response["data"] != nil)
                 {
                     if self.selectedSegmentTag == 0 {
                         self.arrPastList.removeAll()
-                        
+                        self.tblOrders.reloadData()
                     } else {
                         self.arrInProcessList.removeAll()
-                        
+                        self.tblOrders.reloadData()
                     }
-                    self.tblOrders.reloadData()
+                    
                 }
                 else
                 {

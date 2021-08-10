@@ -87,7 +87,7 @@ class ChangePasswordVC: BaseViewController {
         changePWReqModel.user_id = SingletonClass.sharedInstance.UserId
         //self.showHUD()
         isApiCalling = true
-        WebServiceSubClass.ChangePassword(changepassModel: changePWReqModel,showHud: false) { (response, status, error) in
+        WebServiceSubClass.ChangePassword(changepassModel: changePWReqModel,showHud: true) { (response, status, error) in
             self.isApiCalling = false
             //self.hideHUD()
             if status{

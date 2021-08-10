@@ -27,29 +27,13 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     // MARK: - IBOutlets
     @IBOutlet weak var txtSearch: UISearchBar!
     @IBOutlet weak var tblRestaurant: UITableView!
-//    {
-//        didSet{
-//            tblRestaurant.isSkeletonable = true
-//        }
-//    }
     @IBOutlet weak var tblFoodList: UITableView!
-//    {
-//        didSet{
-//            tblFoodList.isSkeletonable = true
-//        }
-//    }
-    
     // MARK: - ViewController Lifecycl
     override func viewDidLoad() {
         super.viewDidLoad()
-//        registerNIB()
         txtSearch.delegate = self
         tblRestaurant.refreshControl = refreshList
         tblFoodList.refreshControl = refreshList
-//        tblRestaurant.showAnimatedSkeleton()
-//        tblFoodList.showAnimatedSkeleton()
-//        webserviceSearchModel(strSearch:"")
-        //tblRestaurant.backgroundImage = UIImage()
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
         setUpLocalizedStrings()
         setup()
@@ -67,13 +51,6 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
             self.tblFoodList.setEmptyMessage("Search something")
         }
     }
-    // MARK: - Other Methods
-//    func registerNIB(){
-//        tblRestaurant.register(UINib(nibName: "NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
-//        tblRestaurant.register(UINib(nibName: "ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
-//        tblFoodList.register(UINib(nibName: "NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
-//        tblFoodList.register(UINib(nibName: "ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
-//    }
     @objc func refreshFavList() {
         self.webserviceSearchModel(strSearch: "")
     }
@@ -86,49 +63,16 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         tblFoodList.delegate = self
         tblFoodList.dataSource = self
     }
-    
-    //MARK: - SkeletonTableview Datasource
-//    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if self.responseStatus == .gotData{
-//            return 0
-//        }
-//        return 3
-//    }
-//    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-//        if self.responseStatus == .gotData{
-//            return self.responseStatus == .gotData ? (self.arrSearchRestList.count > 0 ? RestaurantOutletListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
-//        }else{
-//            return self.responseStatus == .gotData ? (self.arrSearchRestItemList.count > 0 ? MyFoodlistCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  ShimmerCell.reuseIdentifier
-//        }
-//    }
     //MARK: - UITableview Delegate and Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblRestaurant {
-//            if responseStatus == .gotData{
-//                if arrSearchRestList.count != 0 {
                     return self.arrSearchRestList.count
-//                }else{
-//                    return 1
-//                }
-//            }else{
-//                return 5
-//            }
         }else{
-//            if responseStatus == .gotData{
-//                if arrSearchRestItemList.count != 0 {
                     return self.arrSearchRestItemList.count
-//                }else{
-//                    return 1
-//                }
-//            }else{
-//                return 5
-//            }
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tblRestaurant {
-//            if responseStatus == .gotData{
-//                if arrSearchRestList.count != 0{
                     let cell = tblRestaurant.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
                     cell.lblAreaName.text = arrSearchRestList[indexPath.row].name
                     cell.lblAddress.text = arrSearchRestList[indexPath.row].address
@@ -144,21 +88,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                     }
                     cell.selectionStyle = .none
                     return cell
-//                }else{
-//                    let NoDatacell = tblRestaurant.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-//                    NoDatacell.imgNoData.image = UIImage(named: "restaurant")
-//                    NoDatacell.lblNoDataTitle.isHidden = true
-//                    NoDatacell.selectionStyle = .none
-//                    return NoDatacell
-//                }
-//            }else{
-//                let cell = tblRestaurant.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
-//                cell.selectionStyle = .none
-//                return cell
-//            }
         }else{
-//            if responseStatus == .gotData{
-//                if arrSearchRestItemList.count != 0{
                     let cell:searchFoodLIstCell = tblFoodList.dequeueReusableCell(withIdentifier: "searchFoodLIstCell", for: indexPath) as! searchFoodLIstCell
                     cell.lblComboTitle.text = arrSearchRestItemList[indexPath.row].name
                     cell.lblPrice.text = (CurrencySymbol) + arrSearchRestItemList[indexPath.row].price
@@ -204,11 +134,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                             pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
                             let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
                             print(objItem)
-                            //  self.checkOrderItems(objOrder: objItem)
-                            //self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, strqty: strQty)
                         }
                         else {
-                            // Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name ?? "")","\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity ?? "")"]), vc: self)
                             Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
                         }
                     }
@@ -223,51 +150,14 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                             pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
                             let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
                             print(objItem)
-                            //  self.checkOrderItems(objOrder: objItem)
                         }
                         else {
-                            // Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")","\(self.arrMenuitem[indexPath.row].quantity ?? "")"]), vc: self)
                             Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
                         }
                     }
                     return cell
-//                }else{
-//                    let NoDatacell = tblFoodList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-//                    NoDatacell.imgNoData.image = UIImage(named: "restaurant")
-//                    NoDatacell.lblNoDataTitle.isHidden = true
-//                    NoDatacell.selectionStyle = .none
-//                    return NoDatacell
-//                }
-//            }else{
-//                let cell = tblFoodList.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
-//                cell.selectionStyle = .none
-//                return cell
-//            }
         }
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if tableView == tblRestaurant{
-//            if responseStatus == .gotData{
-//                if arrSearchRestList.count != 0 {
-//                    return 230
-//                }else{
-//                    return tableView.frame.height
-//                }
-//            }else {
-//                return self.responseStatus == .gotData ?  230 : 131
-//            }
-//        }else{
-//            if responseStatus == .gotData{
-//                if arrSearchRestItemList.count != 0 {
-//                    return 230
-//                }else{
-//                    return tableView.frame.height
-//                }
-//            }else {
-//                return self.responseStatus == .gotData ?  230 : 131
-//            }
-//        }
-//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tblRestaurant {
             if arrSearchRestList[indexPath.row].type == "restaurant" {
@@ -306,8 +196,6 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     @IBAction func btnTapFavorite(_ sender: UIButton) {
         if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
-            //             vc.delegateFilter = self
-            //             vc.selectedSortData = self.SelectFilterId
             let navController = UINavigationController.init(rootViewController: vc)
             navController.modalPresentationStyle = .overFullScreen
             navController.navigationController?.modalTransitionStyle = .crossDissolve
@@ -315,31 +203,17 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
             SingletonClass.sharedInstance.isPresented = true
             self.present(navController, animated: true, completion: nil)
         }else{
-//            var Select = arrOutletList[sender.tag].favourite ?? ""
-//            let restaurantId = arrOutletList[sender.tag].id ?? ""
-//            if Select == "1"{
-//                Select = "0"
-//            }else{
-//                Select = "1"
-//            }
-//            webserviceFavorite(strRestaurantId: restaurantId, Status: Select)
         }
     }
     
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
         selectedSegmentTag = sender.index
         if selectedSegmentTag == 0{
-//            if self.arrPastList?.count == 0{
-//                webserviceGetOrderDetail(selectedOrder:  "past" )
             print("restaurnt")
             tblRestaurant.isHidden = false
             tblFoodList.isHidden = true
             tblRestaurant.reloadData()
-//            }
         }else{
-//            if self.arrInProcessList == nil || self.arrInProcessList?.count == 0 {
-//                webserviceGetOrderDetail(selectedOrder:  "In-Process")
-//            }
             print("Food List")
             tblRestaurant.isHidden = true
             tblFoodList.isHidden = false
@@ -355,25 +229,18 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         search.user_id = SingletonClass.sharedInstance.UserId
         search.page = "\(pageNumber)"
-        WebServiceSubClass.search(Searchmodel: search, showHud: false, completion: { (response, status, error) in
+
+        WebServiceSubClass.search(Searchmodel: search, showHud: true, completion: { (response, status, error) in
             self.responseStatus = .gotData
             if status{
                 let result = SearchResModel(fromJson: response)
                 self.arrSearchRestList = result.data.restaurant
                 self.arrSearchRestItemList = result.data.restaurantItem
-//                let cell = self.tblRestaurant.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
-//                cell.stopShimmering()
-//                self.tblRestaurant.stopSkeletonAnimation()
-//                let Foodcell = self.tblFoodList.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
-//                Foodcell.stopShimmering()
-//                self.tblFoodList.stopSkeletonAnimation()
-//                self.tblRestaurant.dataSource = self
-//                self.tblRestaurant.isUserInteractionEnabled = true
-//                self.tblRestaurant.isScrollEnabled = true
+                if self.txtSearch.text == ""{
+                    self.tblRestaurant.setEmptyMessage("Search something")
+                    self.tblFoodList.setEmptyMessage("Search something")
+                }
                 self.tblRestaurant.reloadData()
-//                self.tblFoodList.dataSource = self
-//                self.tblFoodList.isUserInteractionEnabled = true
-//                self.tblFoodList.isScrollEnabled = true
                 self.tblFoodList.reloadData()
             }else{
                 if let strMessage = response["message"].string {
@@ -399,6 +266,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     }
 }
 extension SearchVC:UISearchBarDelegate{
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if lastSearchTxt.isEmpty{
             lastSearchTxt = searchText
@@ -411,15 +279,27 @@ extension SearchVC:UISearchBarDelegate{
 //        txtSearch.resignFirstResponder()
     }
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if txtSearch.text!.isEmptyOrWhitespace(){
+        if txtSearch.text == ""{
             self.tblRestaurant.setEmptyMessage("Search something")
             self.tblFoodList.setEmptyMessage("Search something")
         }
         return true
     }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        txtSearch.text = ""
+        if txtSearch.text == ""{
+            self.tblRestaurant.setEmptyMessage("Search something")
+            self.tblFoodList.setEmptyMessage("Search something")
+        }
+    }
     @objc private func makeNetworkCall(_ query: String)
     {
         if query == ""{
+            if txtSearch.text == ""{
+                self.tblRestaurant.setEmptyMessage("Search something")
+                self.tblFoodList.setEmptyMessage("Search something")
+            }
+//            webserviceSearchModel(strSearch: query)
             arrSearchRestList.removeAll()
             arrSearchRestItemList.removeAll()
             tblRestaurant.reloadData()

@@ -102,7 +102,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         self.view.addSubview(skeletonData)
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
-        webserviceGetSettings()
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         
@@ -143,7 +142,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     func addMapView()
     {
         MapViewForShowRastaurantLocation.frame = CGRect(x: 0, y: 0, width: restaurantLocationView.frame.size.width, height: restaurantLocationView.frame.size.height)
-        
         restaurantLocationView.addSubview(MapViewForShowRastaurantLocation)
     }
     func setData(){
@@ -315,13 +313,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 //        self.tblOrderDetails.reloadData()
     }
     @IBAction func btnReadPolicyTap(_ sender: Any) {
-        
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-        controller.strUrl = SettingsData.privacyPolicy
-        controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
-        //        controller.strStorePolicy = objCurrentorder?.currentRestaurantDetail.storePolicy ?? ""
-        self.navigationController?.pushViewController(controller, animated: true)
-        
+        webserviceGetSettings()
     }
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
         
@@ -356,21 +348,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func canclePromoCode(_ sender: myOrdersBtn) {
-//        AppliedPromocode = nil
-//        lblPromoCode.isHidden = true
-//        btnCanclePromoCOde.isHidden = true
-//        btnAppyPromoCode.isHidden = false
-//        btnAppyPromoCode.titleLabel?.textAlignment = .left
-//
-//        lblPromoCode.text = ""
-//
-//        self.tblOrderDetails.reloadData()
         webserviceRemovePromocode()
     }
     
     @IBAction func btnChangeLocationClicked(_ sender: Any) {
         let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-        //controller.modalPresentationStyle = .fullScreen
         controller.isHideCancelButton = false
         controller.isHideSubmitButton = false
         controller.submitBtnTitle = "checkOutVC_strSubmit_title".Localized()
@@ -408,7 +390,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             {
                 let repeatOrderData = RepeatOrderResModel.init(fromJson: json)
                 print(repeatOrderData)
-                //                self.objCurrentorder = repeatOrderData.data.subOrder
                 Utilities.displayAlert(json["message"].string ?? "")
             }
             else
@@ -432,11 +413,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             if(status)
             {
                 print(json)
-                // let AddtoFoodlistData = AddToFoodlistReqModel.init()
-                //                self.objOrderData = repeatOrderData.data
                 let alert = UIAlertController(title: AppName, message: json["message"].stringValue, preferredStyle: UIAlertController.Style.alert)
                 let OkAction = UIAlertAction(title:"OK" , style: .default) { (sct) in
                     let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
+                    vc.isfromcheckout = true
+                    vc.restaurantid = self.cartDetails?.id ?? ""
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 alert.addAction(OkAction)
@@ -507,11 +488,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                         obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity.toInt())
                     }
                 }
-                //                self.tblAddedProduct.reloadData()
-                //                self.tblOrderDetails.reloadData()
                 self.setData()
                 self.location()
-//                self.addMapView()
             }
             else
             {
@@ -558,10 +536,15 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     func webserviceGetSettings(){
         
-        WebServiceSubClass.Settings(showHud: false, completion: { (json, status, response) in
+        WebServiceSubClass.Settings(showHud: true, completion: { (json, status, response) in
             if(status)
             {
-                self.SettingsData = SettingsResModel.init(fromJson: json)            }
+                self.SettingsData = SettingsResModel.init(fromJson: json)
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+                controller.strUrl = self.SettingsData.privacyPolicy
+                controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
             else
             {
                 if let strMessage = json["message"].string {
@@ -574,47 +557,25 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     func webserviceRemoveCart(){
         let clearFoodlist = RemoveCartReqModel()
-//        clearFoodlist.cart_item_id = strcartitemid
         clearFoodlist.user_id = SingletonClass.sharedInstance.UserId
         clearFoodlist.type = "0"
         WebServiceSubClass.removeFoodList(removeFoodList: clearFoodlist, showHud: false,completion: { (json, status, error) in
             // self.hideHUD()
             if(status) {
-//                Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
                 self.arrCartItem.removeAll()
-//                self.webserviceGetCartDetails()
             } else {
-//                if let strMessage = json["message"].string {
-//                    Utilities.displayAlert(strMessage)
-//                }else {
-//                    Utilities.displayAlert("Something went wrong")
-//                }
             }
         })
     }
     func location(){
-//        getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
         let camera = GMSCameraPosition.camera(withLatitude: cartDetails?.lat.toDouble() ?? 0.0, longitude: cartDetails?.lng.toDouble() ?? 0.0, zoom: 18.0)
-//        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         restaurantLocationView.camera = camera
-//        do {
-//             // Set the map style by passing the URL of the local file.
-//             if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
-//
-//                restaurantLocationView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-//             } else {
-//               NSLog("Unable to find style.json")
-//             }
-//           } catch {
-//             NSLog("One or more of the map styles failed to load. \(error)")
-//           }
                 let marker = GMSMarker()
-        let markerImage = UIImage(named: "imgMarker") //!.withRenderingMode(.alwaysTemplate)
+        let markerImage = UIImage(named: "imgMarker")
         let markerView = UIImageView(image: markerImage)
                         marker.position = CLLocationCoordinate2D(latitude: cartDetails?.lat.toDouble() ?? 0.0, longitude: cartDetails?.lng.toDouble() ?? 0.0)
                 marker.iconView = markerView
         marker.title = cartDetails?.name
-//        marker.snippet =
                         marker.map = restaurantLocationView
     }
 }

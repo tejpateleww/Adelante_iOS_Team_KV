@@ -123,8 +123,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             }
             else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
                 self.selectedSortTypedIndexFromcolVwFilter = 1
-                //                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-                //                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
                 self.tblRestaurantList.reloadData()
             } else {
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
@@ -148,14 +146,9 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.tblRestaurantList.reloadData()
         }
-//        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
-//            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }else{
             self.SelectFilterId = SortId
             self.pageNumber = 1
             webserviceGetRestaurantOutlet(strFilter: "")
-//        }
     }
     // MAQRK:- Skeletontableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
@@ -194,8 +187,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.btnFavouriteClick = {
                     if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
                         let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
-                        //             vc.delegateFilter = self
-                        //             vc.selectedSortData = self.SelectFilterId
                         let navController = UINavigationController.init(rootViewController: vc)
                         navController.modalPresentationStyle = .overFullScreen
                         navController.navigationController?.modalTransitionStyle = .crossDissolve
@@ -218,8 +209,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                         self.activityView.startAnimating()
                     }
                 }
-//                cell.btnFavorite.tag = indexPath.row
-//                cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
                 if arrOutletList[indexPath.row].favourite == "1"{
                     cell.btnFavorite.isSelected = true
                 }else{
@@ -240,23 +229,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
             cell.selectionStyle = .none
             return cell
         }
-//        let cell = tblRestaurantList.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
-//        cell.lblAreaName.text = arrOutletList[indexPath.row].name
-//        cell.lblAddress.text = arrOutletList[indexPath.row].address
-//        cell.lblMiles.text = arrOutletList[indexPath.row].distance
-//        cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
-//        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
-//        cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//        cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-//        cell.btnFavorite.tag = indexPath.row
-//        cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
-//        if arrOutletList[indexPath.row].favourite == "1"{
-//            cell.btnFavorite.isSelected = true
-//        }else{
-//            cell.btnFavorite.isSelected = false
-//        }
-//        cell.selectionStyle = .none
-//        return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if responseStatus == .gotData{
@@ -306,11 +278,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                     self.setData()
                 } else {
                     let arrTemp = restaurantData.data
-                    //                    if arrTemp!.count > 0 {
-                    //                        for i in 0..<arrTemp!.count {
-                    //                            self.arrOutletList.append(arrTemp![i])
-                    //                        }
-                    //                    }
                     if arrTemp!.count < self.pageLimit {
                         self.isNeedToReload = false
                     } else {
@@ -328,16 +295,6 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                     Utilities.displayAlert("Something went wrong")
                 }
             }
-//            if self.arrOutletList.count > 0{
-//                self.tblRestaurantList.restore()
-//                self.imgRestaurantEmpty.isHidden = true
-//                self.tblRestaurantList.isHidden = false
-//                self.vwFilter.isHidden = false
-//            }else {
-//                self.imgRestaurantEmpty.isHidden = false
-//                self.tblRestaurantList.isHidden = true
-//                self.vwFilter.isHidden = true
-//            }
             DispatchQueue.main.async {
                 self.refreshList.endRefreshing()
             }

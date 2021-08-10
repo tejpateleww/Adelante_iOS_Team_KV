@@ -27,7 +27,6 @@ class ForgotPasswordVC: BaseViewController {
 
     // MARK: - Other Methods
     func setUp() {
-       // self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         self.navigationController?.navigationBar.isHidden = false
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
@@ -40,8 +39,6 @@ class ForgotPasswordVC: BaseViewController {
     }
     // MARK: - IBActions
     @IBAction func btnSend(_ sender: Any) {
-//           self.navigationController?.popViewController(animated: true)
-      //  webserviceForForgotPassword()
         let checkEmail = txtEmailOrPhone.validatedText(validationType: .email)
         
         if(!checkEmail.0)

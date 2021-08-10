@@ -29,11 +29,9 @@ class PromocodeVC: BaseViewController {
         TextFieldPromoCode.placeholder = "Enter Promocode"
         tblPromoCode.delegate = self
         tblPromoCode.dataSource = self
-//        tblPromoCode.reloadData()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.PromocodeVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
@@ -53,7 +51,6 @@ class PromocodeVC: BaseViewController {
         if TextFieldPromoCode.text?.trim() == "" {
             Utilities.ShowAlert(OfMessage: "Please enter promocode")
         } else {
-//            self.WebserviceCallForPromocodeApply(Promocode: self.TextFieldPromoCode.text?.trim() ?? "", cartID: <#String#>)
         }
     }
 }

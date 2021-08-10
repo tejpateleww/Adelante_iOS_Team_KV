@@ -214,8 +214,6 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
             }
             else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
                 self.selectedSortTypedIndexFromcolVwFilter = 1
-                //                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-                //                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
                 self.colVwFilterOptions.reloadData()
             } else {
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
@@ -349,9 +347,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 3
     }
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        //        if indexPath.row == 0{
-        //            return responseStatus == .gotData ? (self.arrCategories.count > 0 ? RestaurantCatListCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
-        //        }
         return responseStatus == .gotData ? (self.arrRestaurant.count > 0 ? RestaurantCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
     }
     // MARK: - UITableViewDelegates And Datasource
@@ -363,14 +358,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        if indexPath.row == 0 {
-        //            let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier, for: indexPath) as! RestaurantCatListCell
-        //            cell.arrCategories = self.arrCategories
-        //            cell.delegateResCatCell = self
-        //            cell.colRestaurantCatList.reloadData()
-        //            cell.selectionStyle = .none
-        //            return cell
-        //        } else {
+        
         if responseStatus == .gotData{
             if arrRestaurant.count != 0 {
                 let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
@@ -406,9 +394,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                         self.activityView.startAnimating()
                     }
                 }
-                //                    cell.btnFavorite.isHidden = false
-                //                    cell.btnFavorite.tag = indexPath.row
-                //                    cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
                 if arrRestaurant[indexPath.row].favourite == "1"{
                     cell.btnFavorite.isSelected = true
                 }else{
@@ -429,7 +414,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             cell.selectionStyle = .none
             return cell
         }
-        //        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -453,7 +437,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         headerCell?.selectedIdForFood = self.SelectedCatId
         headerCell?.selectedIndexPath = self.SelectedCatIndex
         headerCell?.colRestaurantCatList.reloadData()
-        //        headerCell.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .top, animated: true)
         headerCell?.selectionStyle = .none
         return headerCell
     }
@@ -463,15 +446,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        if indexPath.row != 0
-        //        {
-        
         if arrRestaurant[indexPath.row].type != "outlet" {
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
             controller.selectedRestaurantId = arrRestaurant[indexPath.row].id
             controller.strRestaurantName = arrRestaurant[indexPath.row].name
-            //            controller.selectedIndex = "\(indexPath.row - 1)"
-            //            controller.isFromDeshboard = true
             self.navigationController?.pushViewController(controller, animated: true)
         }else{
             let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
@@ -480,7 +458,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             restDetailsVc.selectedIndex = "\(indexPath.row)"
             self.navigationController?.pushViewController(restDetailsVc, animated: true)
         }
-        //        }
     }
     // MARK: - RestaurantCatListCelldelegate
     func SelectedCategory(_ CategoryId: String, _ SelctedIndex: IndexPath) {
@@ -499,15 +476,9 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.colVwFilterOptions.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
-        
-        //        if SingletonClass.sharedInstance.topSellingId != "" && SortId == SingletonClass.sharedInstance.topSellingId{
-        //            let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "CategoryVC")
-        //            self.navigationController?.pushViewController(vc, animated: true)
-        //        }else{
         self.SelectFilterId = SortId
         self.pageNumber = 1
         webserviceGetDashboard(isFromFilter: false)
-        //        }
     }
     // MARK: - UIScrollView Delegates
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -519,7 +490,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             self.pageNumber = self.pageNumber + 1
             webserviceGetDashboard(isFromFilter: false)
         }
-        // done, do whatever
     }
     // MARK: - Api Calls
     @objc func webserviceGetDashboard(isFromFilter : Bool){
@@ -627,11 +597,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.isRefresh = true
         self.isNeedToReload = true
         webserviceGetDashboard(isFromFilter: false)
-        //        if selectedIndex != ""{
-        //            let i = Int(selectedIndex) ?? 0
-        //            arrRestaurant[i].favourite = strStatus
-        //            tblMainList.reloadRows(at: [IndexPath(row: i + 1, section: 0)], with: .automatic)
-        //        }
     }
     
     func refreshFavoriteScreen() {

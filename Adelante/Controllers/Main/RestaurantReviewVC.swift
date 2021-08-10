@@ -77,8 +77,6 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
     }
     func setUpLocalizedStrings()
     {
-        //        lblAreaName.text = "RestaurantReviewVC_lblAreaName".Localized()
-        //        lblReviews.text = String(format: "RestaurantReviewVC_lblReviews".Localized(), "35")
     }
     
     // MARK: - UIScrollView Delegates

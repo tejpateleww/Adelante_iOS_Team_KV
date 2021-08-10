@@ -50,7 +50,7 @@
 "validMsg_InvalidOtp" = "Please enter valid OTP";
 
 //MyOrderVC
-"MyOrderVC_lblPastOrders" = "Past";
+"MyOrderVC_lblPastOrders" = "Previous";
 "MyOrderVC_lblUpcomingOrders" = "In-Process";
 "MyOrderVC_MyOrdersCess_btnRepeatOrder" = "Repeat Order";
 "MyOrderVC_MyOrdersCess_btnCancelOrder" = "Cancel Order";
@@ -249,7 +249,7 @@
 //NavigationTitles
 "NavigationTitles_Privacypolicy" = "Privacy policy";
 "NavigationTitles_MyOrders" = "My Orders";
-"NavigationTitles_PastOrderDetails" = "Past Order Details";
+"NavigationTitles_PastOrderDetails" = "Previous Order Details";
 "NavigationTitles_UpcomingOrderDetails" = "Upcoming Order Details";
 "NavigationTitles_Checkout" = "Checkout";
 "NavigationTitles_AddPayment" = "Add Payment";
@@ -302,7 +302,7 @@
 //No data found
 
 "No_data_favorite" = "No Favorites Listed";
-"No past order found" = "No past order found";
+"No past order found" = "No Previous order found";
 "No in-progress order found" = "No in-progress order found";
 "No varient available" = "No varient available";
 "No promocode found" = "No promocode found";

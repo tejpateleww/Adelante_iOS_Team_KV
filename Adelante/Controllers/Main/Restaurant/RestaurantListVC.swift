@@ -55,7 +55,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         setup()
         txtSearch.backgroundImage = UIImage()
         let button = UIButton()
-        //        button.backgroundColor = .green
         button.setTitle("", for: .normal)
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantList, object: nil)
@@ -66,8 +65,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblMainList.register(UINib(nibName:"ShimmerCell", bundle: nil), forCellReuseIdentifier: "ShimmerCell")
     }
     override func viewWillAppear(_ animated: Bool) {
-//        webserviceGetRestaurantList(strSearch: "")
-//        tblMainList.reloadData()
         self.customTabBarController?.hideTabBar()
     }
     
@@ -143,8 +140,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
             else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
                 self.selectedSortTypedIndexFromcolVwFilter = 1
-//                let selectedIndexPath = IndexPath(item:sender.tag , section: 0)
-//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
                 self.tblMainList.reloadData()
             } else {
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
@@ -199,8 +194,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.btnFavouriteClick = {
                     if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
                         let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
-            //             vc.delegateFilter = self
-            //             vc.selectedSortData = self.SelectFilterId
                         let navController = UINavigationController.init(rootViewController: vc)
                         navController.modalPresentationStyle = .overFullScreen
                         navController.navigationController?.modalTransitionStyle = .crossDissolve
@@ -223,8 +216,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                         self.activityView.startAnimating()
                     }
                 }
-//                cell.btnFavorite.tag = indexPath.row
-//                cell.btnFavorite.addTarget(self, action: #selector(buttonTapFavorite(_:)), for: .touchUpInside)
                 if arrRestaurantList[indexPath.row].favourite == "1"{
                     cell.btnFavorite.isSelected = true
                 }else{
@@ -248,21 +239,10 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if arrRestaurantList.count == 0{
-//            print("No Data Found")
-//        }else{
-//            let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC
-//            restDetailsVc.selectedRestaurantId = arrRestaurantList[indexPath.row].id
-//            restDetailsVc.isFromRestaurantList = true
-//            restDetailsVc.selectedIndex = "\(indexPath.row)"
-//            self.navigationController?.pushViewController(restDetailsVc, animated: true)
-//        }
         if arrRestaurantList[indexPath.row].type != "outlet" {
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
             controller.selectedRestaurantId = arrRestaurantList[indexPath.row].id
             controller.strRestaurantName = arrRestaurantList[indexPath.row].name
-//            controller.selectedIndex = "\(indexPath.row - 1)"
-//            controller.isFromDeshboard = true
             self.navigationController?.pushViewController(controller, animated: true)
         }else{
             let restDetailsVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantDetailsVC.storyboardID) as! RestaurantDetailsVC

@@ -21,17 +21,8 @@ class SingletonClass: NSObject
     var userCurrentLocation = CLLocation()
     var topSellingId : String = ""
     var isPresented = false
-    
+    var expandedCell = -1
     var selectInProcessInMyOrder : Bool?
-//    var restCurrentOrder : currentOrder?
-    
-//    var currentLat = Double()
-//    var currentLong = Double()
-    
-    ///Owner Profile Info
-//    var OwnerProfileInfo : ResProfileRootClass?
-    
-  
     var arrFutureYears:[String] {
         get {
             let calendar = Calendar.current

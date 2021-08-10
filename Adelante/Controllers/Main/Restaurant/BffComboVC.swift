@@ -342,16 +342,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { (response, status, error) in
             if status {
                 self.navigationController?.popViewController(animated: true)
-            //   print(response)
-//                self.objRestaurant.favourite = response
-//                if self.objRestaurant.favourite == "1"{
-//                    self.btnNavLike.isSelected = true
-//                } else {
-//                    self.btnNavLike.isSelected = false
-//                }
-//                NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
-//                NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
-//                NotificationCenter.default.post(name: notifRefreshFavouriteList, object: nil)
             } else {
                 Utilities.showAlertOfAPIResponse(param: error, vc: self)
             }

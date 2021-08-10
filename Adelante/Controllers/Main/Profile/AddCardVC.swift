@@ -188,9 +188,7 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
             txtCardNumber.inputType = .integer
            txtCardNumber.textFieldDelegate = self
             txtCardNumber.formatter = CardNumberFormatter()
-//            txtCardNumber.setValue(UIColor.black , forKeyPath: "placeholderLabel.textColor")
             txtCardNumber.placeholder = "Card Number"
-    //        txtCardNumber.font = UIFont.regular(ofSize: 13.0)
             txtCardNumber.textColor = UIColor.black
             txtCardNumber.leftMargin = 0
             txtCardNumber.layer.cornerRadius = 5
@@ -203,7 +201,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
     @IBAction func btnSaveClick(_ sender: Any) {
         if isValidatePaymentDetail().0 {
                 self.webserviceForAddCard()
-//            self.navigationController?.popViewController(animated: true)
         } else {
             Utilities.showAlert(AppName, message: isValidatePaymentDetail().1, vc: self)
         }
@@ -213,9 +210,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         let addcard = AddCardReqModel()
         addcard.card_holder_name = txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         addcard.card_num = txtCardNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//        if let txtnum = txtCardNumber.text?.filter({ !" \n\t\r".contains($0) }){
-//            addcard.card_num = txtnum
-//        }
         addcard.exp_date_month_year = txtDate.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         addcard.cvv = txtCvv.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         addcard.user_id = SingletonClass.sharedInstance.UserId 
@@ -261,14 +255,6 @@ public class CreditCardValidator {
         }
         return nil
     }
-    
-    /**
-     Validate card number
-     
-     - parameter string: card number string
-     
-     - returns: true or false
-     */
     public func validate(string: String) -> Bool {
         let numbers = self.onlyNumbers(string: string)
         if numbers.count < 9 {

@@ -46,8 +46,6 @@ class LoginViewController: BaseViewController {
     @IBAction func btnShowPasswordTap(_ sender: UIButton) {
         let isvisible = txtPassword.isSecureTextEntry
         txtPassword.isSecureTextEntry = !isvisible
-//        let img = isvisible ? "privatePassword" : "viewPassword"
-//        btnPasswordVisible.setImage(UIImage(named: img), for: .normal)
         btnPasswordVisible.isSelected =  !btnPasswordVisible.isSelected
     }
     @IBAction func btnCreateAccountClicked(_ sender: Any) {
@@ -59,9 +57,6 @@ class LoginViewController: BaseViewController {
         if validation(){
             webserviceForlogin()
         }
-      
-//        UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
-//        appDel.navigateToHome()
        }
     //MARK:- Other Method
     func setUpLocalizedStrings() {
@@ -85,7 +80,7 @@ class LoginViewController: BaseViewController {
         login.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         login.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
 //        self.showHUD()
-        WebServiceSubClass.login(loginModel: login,showHud: false, completion: { (json, status, response) in
+        WebServiceSubClass.login(loginModel: login,showHud: true, completion: { (json, status, response) in
 //            self.hideHUD()
             if(status)
             {
@@ -117,29 +112,6 @@ class LoginViewController: BaseViewController {
             }
         })
     }
-    
-    func webserviceForForgotPassword(){
-        let forgot = ForgotPasswordReqModel()
-       //forgot.user_name = txtEmailOrPhone.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        self.showHUD()
-        WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: false, completion: { (response, status, error) in
-            self.hideHUD()
-            if (status){
-                self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
-                    if index == 0{
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
-            }else{
-                if let strMessage = response["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
-                }
-            }
-        })
-    }
-    
     func webserviceForSendEmailVerify()
     {
         let email = sendEmailVerifyReqModel()

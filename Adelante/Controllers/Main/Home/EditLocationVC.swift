@@ -20,7 +20,6 @@ class EditLocationVC: BaseViewController {
     func setup(){
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.EditLocationVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "deselectFilterOptionRest"), object: nil)
     }
     func setUpLocalizedStrings() {
         txtSearch.placeholder = "EditLocationVC_txtSearch".Localized()

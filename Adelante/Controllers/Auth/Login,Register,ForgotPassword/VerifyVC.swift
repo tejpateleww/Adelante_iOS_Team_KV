@@ -239,7 +239,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         register.device_type = ReqDeviceType
         register.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         register.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.register(registerModel: register,showHud: false, completion: { (json, status, response) in
+        WebServiceSubClass.register(registerModel: register,showHud: true, completion: { (json, status, response) in
             if(status)
             {
                 print(json)
@@ -265,8 +265,6 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                         self.navigationController?.popViewController(animated: true)
                     }, otherTitles: nil)
                 }
-                
-                //displayErrorAlert(json["message"].string ?? "MessageNoIntenet".Localized())
             }
         })
     }
@@ -280,12 +278,12 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         updateModel.email = strEmail.trimmingCharacters(in: .whitespacesAndNewlines)
         updateModel.first_name = strfirst.trimmingCharacters(in: .whitespacesAndNewlines)
         updateModel.last_name = strLast.trimmingCharacters(in: .whitespacesAndNewlines)
-        updateModel.phone = StrPhone //txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        updateModel.phone = StrPhone
         updateModel.user_id = SingletonClass.sharedInstance.UserId
         if self.isRemovePhoto{
             updateModel.remove_image = "1"
         }
-        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: true, completion: { (response, status, error) in
             if status{
                 let updatedData = Userinfo.init(fromJson: response)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
@@ -311,7 +309,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         otp.type = type
         
        // self.showHUD()
-        WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: true) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 let otpModel = otpReceive.init(fromJson: json)

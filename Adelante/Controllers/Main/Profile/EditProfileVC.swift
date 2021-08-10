@@ -167,7 +167,7 @@ class EditProfileVC: BaseViewController{
         if self.isRemovePhoto{
             updateModel.remove_image = "1"
         }
-        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.UpdateProfileInfo(editProfileModel: updateModel, img: selectedImage ?? UIImage(), isRemoveImage: self.isRemovePhoto , showHud: true, completion: { (response, status, error) in
             if status{
                 let updatedData = Userinfo.init(fromJson: response)
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = updatedData.profile
@@ -200,7 +200,7 @@ class EditProfileVC: BaseViewController{
         otp.type = "1"
         
        // self.showHUD()
-        WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: true) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 print(json)
@@ -253,25 +253,6 @@ extension EditProfileVC:ImagePickerDelegate {
             }
     }
 }
-
-//extension EditProfileVC:ImagePickerDelegate {
-//
-//    func didSelect(image: UIImage?, SelectedTag:Int) {
-//        //        isRemovePhoto = false
-//        if(image == nil && SelectedTag == 101){
-//            self.selectedImage = UIImage()
-//            self.isRemovePhoto = true
-//            self.imgProfile.image = UIImage.init(named: "Default_user")
-//            //webservice_RemoveProfilePicture()
-//        }else if image != nil{
-//            let fixedOrientedImage = image?.fixOrientation()
-//            self.imgProfile.image = fixedOrientedImage
-//            self.selectedImage = self.imgProfile.image
-//        }else{
-//            return
-//        }
-//    }
-//}
 extension EditProfileVC:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool

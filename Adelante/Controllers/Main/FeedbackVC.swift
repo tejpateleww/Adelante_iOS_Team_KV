@@ -75,7 +75,7 @@ class FeedbackVC: BaseViewController {
         feedback.title = txtTitle.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         feedback.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         feedback.message = tvFeedback.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        WebServiceSubClass.Feedback(Feedbackmodel: feedback, showHud: false, completion: { (json, status, response) in
+        WebServiceSubClass.Feedback(Feedbackmodel: feedback, showHud: true, completion: { (json, status, response) in
             if(status)
             {
                 let alertController = UIAlertController(title: AppName,

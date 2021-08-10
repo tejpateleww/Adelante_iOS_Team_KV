@@ -126,32 +126,26 @@ class RegisterViewController: UIViewController {
         let confirmPW = txtConPassword.validatedText(validationType: ValidatorType.password(field: txtConPassword.placeholder?.lowercased() ?? ""))
         let invalidPhone =  txtPhoneNumber.validatedText(validationType: ValidatorType.phoneNo)
         if (!firstName.0){
-//            Utilities.ShowAlert(OfMessage: firstName.1)
             Utilities.showAlert(AppInfo.appName, message: firstName.1, vc: self)
             return firstName.0
         }else if (!lastname.0){
-//            Utilities.ShowAlert(OfMessage: lastname.1)
             Utilities.showAlert(AppInfo.appName, message: lastname.1, vc: self)
             return lastname.0
         }else if(!checkEmailRequired.0)
         {
-//            Utilities.ShowAlert(OfMessage:checkEmailRequired.1)
             Utilities.showAlert(AppInfo.appName, message: checkEmailRequired.1, vc: self)
             return checkEmailRequired.0
         }
         else if(!checkEmailValid.0)
         {
-//            Utilities.ShowAlert(OfMessage:"Please enter a valid email")
             Utilities.showAlert(AppInfo.appName, message: "Please enter a valid email", vc: self)
             return checkEmailValid.0
         }
         else if (!invalidPhone.0) {
-//            Utilities.ShowAlert(OfMessage: invalidPhone.1)
             Utilities.showAlert(AppInfo.appName, message: invalidPhone.1, vc: self)
             return invalidPhone.0
         }
         else if (txtPhoneNumber.text?.count ?? 0) < 9 {
-//            Utilities.ShowAlert(OfMessage: "Please enter valid phone number")
             Utilities.showAlert(AppInfo.appName, message: "Please enter valid phone number", vc: self)
             return false
         }
@@ -163,7 +157,6 @@ class RegisterViewController: UIViewController {
             return false
         }
         else if txtPassword.text?.lowercased() != txtConPassword.text?.lowercased(){
-//            Utilities .ShowAlert(OfMessage: "Password and confirm password must be same")
             Utilities.showAlert(AppInfo.appName, message: "Password and confirm password must be same", vc: self)
             return false
         }
@@ -181,7 +174,7 @@ class RegisterViewController: UIViewController {
         otp.type = "0"
         
        // self.showHUD()
-        WebServiceSubClass.sendOTP(optModel: otp, showHud: false) { [self] (json, status, response) in
+        WebServiceSubClass.sendOTP(optModel: otp, showHud: true) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 print(json)

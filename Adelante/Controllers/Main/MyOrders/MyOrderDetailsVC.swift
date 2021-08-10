@@ -236,11 +236,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
-//                Utilities.displayAlert(json["message"].string ?? "")
-//                self.webserviceOrderDetails()
                 self.delegateCancelOrder.refreshOrderDetailsScreen()
                 self.navigationController?.popViewController(animated: true)
-//                appDel.navigateToHome()
             }
             else
             {
@@ -267,7 +264,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
                 activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
                 self.present(activityViewController, animated: true, completion: nil)
-//                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {
