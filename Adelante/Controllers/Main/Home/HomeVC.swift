@@ -79,7 +79,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         setUpLocalizedStrings()
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshListing), for: .valueChanged)
         let button = UIButton()
@@ -144,7 +144,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     }
     @objc func deSelectFilterAndRefresh() {
         selectedSortTypedIndexFromcolVwFilter = -1
@@ -176,8 +176,18 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         }
     }
     @IBAction func btnNotifClicked(_ sender: Any) {
-        let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)
-        self.navigationController?.pushViewController(notifVc, animated: true)
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+            let navController = UINavigationController.init(rootViewController: vc)
+            navController.modalPresentationStyle = .overFullScreen
+            navController.navigationController?.modalTransitionStyle = .crossDissolve
+            navController.navigationBar.isHidden = true
+            SingletonClass.sharedInstance.isPresented = true
+            self.present(navController, animated: true, completion: nil)
+        }else{
+            let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)
+            self.navigationController?.pushViewController(notifVc, animated: true)
+        }
     }
     
     @IBAction func btnNavAddressHomeClicked(_ sender: Any) {
@@ -261,7 +271,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return arrRestaurant.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         if collectionView == self.colVwFilterOptions{
             let cell = colVwFilterOptions.dequeueReusableCell(withReuseIdentifier: FilterOptionsCell.reuseIdentifier, for: indexPath) as! FilterOptionsCell
@@ -271,6 +281,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
                 cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
                 cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
+                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedSortTypedIndexFromcolVwFilter))
             }
             else {
                 cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
@@ -308,10 +319,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     return NoDatacell
                 }
             }else{
-                let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
-                return cell
+                    let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
+                    return cell
+                }
             }
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -465,7 +476,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:true)
+        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "")
         
         
     }
@@ -478,7 +489,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         }
         self.SelectFilterId = SortId
         self.pageNumber = 1
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     }
     // MARK: - UIScrollView Delegates
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -488,18 +499,19 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func stoppedScrolling() {
         if isNeedToReload && isRefresh == false {
             self.pageNumber = self.pageNumber + 1
-            webserviceGetDashboard(isFromFilter: false)
+            webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         }
     }
     // MARK: - Api Calls
-    @objc func webserviceGetDashboard(isFromFilter : Bool){
+    @objc func webserviceGetDashboard(isFromFilter : Bool,strTabfilter:String){
         let Deshboard = DashboardReqModel()
         Deshboard.category_id = SelectedCatId
         Deshboard.user_id = SingletonClass.sharedInstance.UserId
         Deshboard.filter = SelectFilterId
         Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        Deshboard.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        Deshboard.lng =  "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         Deshboard.page = "\(self.pageNumber)"
+        Deshboard.tab_filter = strTabfilter
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             responseStatus = .gotData
@@ -596,11 +608,11 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     }
     
     func refreshFavoriteScreen() {
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     }
 }
 
@@ -612,7 +624,7 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
         print("Place ID: \(place.placeID!)")
         lblAddress.text =  place.name
         SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-        webserviceGetDashboard(isFromFilter: false)
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         dismiss(animated: true, completion: nil)
     }
     

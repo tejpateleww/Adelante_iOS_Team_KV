@@ -601,7 +601,7 @@ class orderDetailsLabel:UILabel {
     @IBInspectable var isAmountTitle:Bool = false
     @IBInspectable var isAmountValue:Bool = false
     @IBInspectable var isSharedFrom:Bool = false
-    
+    @IBInspectable var isTitle:Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textColor = colors.black.value
@@ -637,6 +637,9 @@ class orderDetailsLabel:UILabel {
             self.font = CustomFont.NexaBold.returnFont(16)
             self.textColor = colors.appOrangeColor.value
             self.textAlignment = .right
+        } else if isTitle{
+            self.font = CustomFont.NexaBold.returnFont(16)
+            self.textColor = colors.black.value
         }
     }
 }

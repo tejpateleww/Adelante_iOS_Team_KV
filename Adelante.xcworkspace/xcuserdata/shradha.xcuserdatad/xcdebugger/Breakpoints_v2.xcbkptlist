@@ -3,4 +3,54 @@
    uuid = "DD6C3E5B-1B25-48A6-A5F1-C0E3E9A3B5A3"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "193ABF8B-8C1D-4683-848B-B7EECE2CE843"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Adelante/Controllers/Main/MyOrders/MyOrdersVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "193ABF8B-8C1D-4683-848B-B7EECE2CE843 - 1e9faa33b8cb0e5c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Adelante.MyOrdersVC.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "Adelante"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shradha/Documents/Harsh%20Dave/Adelante/Code/Adelante/Adelante/Controllers/Main/MyOrders/MyOrdersVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
+                  offsetFromSymbolStart = "5896">
+               </Location>
+               <Location
+                  uuid = "193ABF8B-8C1D-4683-848B-B7EECE2CE843 - 2c04f25cad715984"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Adelante.MyOrdersVC.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "Adelante"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shradha/Documents/Harsh%20Dave/Adelante/Code/Adelante/Adelante/Controllers/Main/MyOrders/MyOrdersVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

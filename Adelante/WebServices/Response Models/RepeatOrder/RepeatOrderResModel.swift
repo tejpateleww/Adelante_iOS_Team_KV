@@ -1,16 +1,17 @@
 //
-//  RepeatOrderResModel.swift
+//  repeatOrderResModel.swift
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on February 9, 2021
+//  Created on August 11, 2021
 
 import Foundation
 import SwiftyJSON
 
 
-class RepeatOrderResModel : NSObject, NSCoding{
+class repeatOrderResModel : NSObject, NSCoding{
 
-    var data : orderData!
+    var cartId : Int!
     var message : String!
+    var restaurantId : Int!
     var status : Bool!
 
 	/**
@@ -20,11 +21,9 @@ class RepeatOrderResModel : NSObject, NSCoding{
 		if json.isEmpty{
 			return
 		}
-        let dataJson = json["data"]
-        if !dataJson.isEmpty{
-            data = orderData(fromJson: dataJson)
-        }
+        cartId = json["cart_id"].intValue
         message = json["message"].stringValue
+        restaurantId = json["restaurant_id"].intValue
         status = json["status"].boolValue
 	}
 
@@ -34,11 +33,14 @@ class RepeatOrderResModel : NSObject, NSCoding{
 	func toDictionary() -> [String:Any]
 	{
 		var dictionary = [String:Any]()
-        if data != nil{
-        	dictionary["data"] = data.toDictionary()
+        if cartId != nil{
+        	dictionary["cart_id"] = cartId
         }
         if message != nil{
         	dictionary["message"] = message
+        }
+        if restaurantId != nil{
+        	dictionary["restaurant_id"] = restaurantId
         }
         if status != nil{
         	dictionary["status"] = status
@@ -52,8 +54,9 @@ class RepeatOrderResModel : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-		data = aDecoder.decodeObject(forKey: "data") as? orderData
+		cartId = aDecoder.decodeObject(forKey: "cart_id") as? Int
 		message = aDecoder.decodeObject(forKey: "message") as? String
+		restaurantId = aDecoder.decodeObject(forKey: "restaurant_id") as? Int
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 	}
 
@@ -63,11 +66,14 @@ class RepeatOrderResModel : NSObject, NSCoding{
     */
     func encode(with aCoder: NSCoder)
 	{
-		if data != nil{
-			aCoder.encode(data, forKey: "data")
+		if cartId != nil{
+			aCoder.encode(cartId, forKey: "cart_id")
 		}
 		if message != nil{
 			aCoder.encode(message, forKey: "message")
+		}
+		if restaurantId != nil{
+			aCoder.encode(restaurantId, forKey: "restaurant_id")
 		}
 		if status != nil{
 			aCoder.encode(status, forKey: "status")

@@ -459,9 +459,40 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.btnCustomize.isHidden = true
                     }
                     cell.btnAddAction = {
-                        if self.objRestaurant.isdiff == 0{
-                            let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
-                            let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                            let navController = UINavigationController.init(rootViewController: vc)
+                            navController.modalPresentationStyle = .overFullScreen
+                            navController.navigationController?.modalTransitionStyle = .crossDissolve
+                            navController.navigationBar.isHidden = true
+                            SingletonClass.sharedInstance.isPresented = true
+                            self.present(navController, animated: true, completion: nil)
+                        }else{
+                            if self.objRestaurant.isdiff == 0{
+                                let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
+                                let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                                    if self.arrMenuitem[indexPath.row].quantity > 1 && variantValue > 0{
+                                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                        controller.selectedItemId = self.arrMenuitem[indexPath.row].id
+                                        controller.selectedRestaurantId = self.objRestaurant.id
+                                        controller.delegateAddVariant = self
+                                        self.strItemId = self.arrMenuitem[indexPath.row].id
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }else{
+                                        cell.btnAddItem.isHidden = true
+                                        cell.vwStapper.isHidden = false
+                                        self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                        cell.stackHide.isHidden = true
+                                        self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                        cell.vwStapper.addSubview(self.activityView)
+                                        self.activityView.startAnimating()
+                                    }
+                                }
+                                let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
+                                alert.addAction(yesAction)
+                                alert.addAction(NoAction)
+                                self.present(alert, animated: true, completion: nil)
+                            }else{
                                 if self.arrMenuitem[indexPath.row].quantity > 1 && variantValue > 0{
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrMenuitem[indexPath.row].id
@@ -478,27 +509,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     cell.vwStapper.addSubview(self.activityView)
                                     self.activityView.startAnimating()
                                 }
-                            }
-                            let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
-                            alert.addAction(yesAction)
-                            alert.addAction(NoAction)
-                            self.present(alert, animated: true, completion: nil)
-                        }else{
-                            if self.arrMenuitem[indexPath.row].quantity > 1 && variantValue > 0{
-                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                                controller.selectedItemId = self.arrMenuitem[indexPath.row].id
-                                controller.selectedRestaurantId = self.objRestaurant.id
-                                controller.delegateAddVariant = self
-                                self.strItemId = self.arrMenuitem[indexPath.row].id
-                                self.navigationController?.pushViewController(controller, animated: true)
-                            }else{
-                                cell.btnAddItem.isHidden = true
-                                cell.vwStapper.isHidden = false
-                                self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                cell.stackHide.isHidden = true
-                                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                cell.vwStapper.addSubview(self.activityView)
-                                self.activityView.startAnimating()
                             }
                         }
                     }
@@ -633,9 +643,40 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }
                     cell.btnAddAction = {
-                        if self.objRestaurant.isdiff == 0{
-                            let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
-                            let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                            let navController = UINavigationController.init(rootViewController: vc)
+                            navController.modalPresentationStyle = .overFullScreen
+                            navController.navigationController?.modalTransitionStyle = .crossDissolve
+                            navController.navigationBar.isHidden = true
+                            SingletonClass.sharedInstance.isPresented = true
+                            self.present(navController, animated: true, completion: nil)
+                        }else{
+                            if self.objRestaurant.isdiff == 0{
+                                let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
+                                let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                                    if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
+                                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                        controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
+                                        controller.selectedRestaurantId = self.objRestaurant.id
+                                        controller.delegateAddVariant = self
+                                        self.strItemId = self.arrMenuitem[indexPath.row].id
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }else{
+                                        cell.btnAdd.isHidden = true
+                                        cell.vwStapper.isHidden = false
+                                        self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                        cell.StackHide.isHidden = true
+                                        self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                        cell.vwStapper.addSubview(self.activityView)
+                                        self.activityView.startAnimating()
+                                    }
+                                }
+                                let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
+                                alert.addAction(yesAction)
+                                alert.addAction(NoAction)
+                                self.present(alert, animated: true, completion: nil)
+                            }else{
                                 if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
@@ -652,27 +693,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     cell.vwStapper.addSubview(self.activityView)
                                     self.activityView.startAnimating()
                                 }
-                            }
-                            let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
-                            alert.addAction(yesAction)
-                            alert.addAction(NoAction)
-                            self.present(alert, animated: true, completion: nil)
-                        }else{
-                            if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
-                                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                                controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
-                                controller.selectedRestaurantId = self.objRestaurant.id
-                                controller.delegateAddVariant = self
-                                self.strItemId = self.arrMenuitem[indexPath.row].id
-                                self.navigationController?.pushViewController(controller, animated: true)
-                            }else{
-                                cell.btnAdd.isHidden = true
-                                cell.vwStapper.isHidden = false
-                                self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                cell.StackHide.isHidden = true
-                                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                cell.vwStapper.addSubview(self.activityView)
-                                self.activityView.startAnimating()
                             }
                         }
                     }
@@ -813,10 +833,41 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.btnCustomize.isHidden = true
                 }
                 cell.btnAddAction = {
-                    if self.objRestaurant.isdiff == 0{
-                        let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
-                        let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
-                            if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 && variantValue > 0 {
+                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                        let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                        let navController = UINavigationController.init(rootViewController: vc)
+                        navController.modalPresentationStyle = .overFullScreen
+                        navController.navigationController?.modalTransitionStyle = .crossDissolve
+                        navController.navigationBar.isHidden = true
+                        SingletonClass.sharedInstance.isPresented = true
+                        self.present(navController, animated: true, completion: nil)
+                    }else{
+                        if self.objRestaurant.isdiff == 0{
+                            let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
+                            let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
+                                if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 && variantValue > 0 {
+                                    let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
+                                    controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
+                                    controller.selectedRestaurantId = self.objRestaurant.id
+                                    controller.delegateAddVariant = self
+                                    self.strItemId = self.arrMenuitem[indexPath.row].id
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                }else{
+                                    cell.btnAdd.isHidden = true
+                                    cell.vwStapper.isHidden = false
+                                    self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                    cell.StackHide.isHidden = true
+                                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                    cell.vwStapper.addSubview(self.activityView)
+                                    self.activityView.startAnimating()
+                                }
+                            }
+                            let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
+                            alert.addAction(yesAction)
+                            alert.addAction(NoAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }else{
+                            if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
                                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                 controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                                 controller.selectedRestaurantId = self.objRestaurant.id
@@ -833,28 +884,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 self.activityView.startAnimating()
                             }
                         }
-                        let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
-                        alert.addAction(yesAction)
-                        alert.addAction(NoAction)
-                        self.present(alert, animated: true, completion: nil)
-                    }else{
-                        if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
-                            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
-                            controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
-                            controller.selectedRestaurantId = self.objRestaurant.id
-                            controller.delegateAddVariant = self
-                            self.strItemId = self.arrMenuitem[indexPath.row].id
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }else{
-                            cell.btnAdd.isHidden = true
-                            cell.vwStapper.isHidden = false
-                            self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                            cell.StackHide.isHidden = true
-                            self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                            cell.vwStapper.addSubview(self.activityView)
-                            self.activityView.startAnimating()
-                        }
                     }
+                    
                 }
                 
                 cell.customize = {

@@ -83,7 +83,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             self.tblMainList.reloadData()
         }
             self.SelectFilterId = SortId
-            pageNumber = 1
+            self.pageNumber = 1
             webserviceGetRestaurantList(strSearch: "")
     }
     func setup() {
@@ -122,7 +122,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     func stoppedScrolling() {
         if self.isNeedToReload && self.isRefresh == false{
-            pageNumber = pageNumber + 1
+            self.pageNumber = self.pageNumber + 1
             webserviceGetRestaurantList(strSearch: "")
         }
         // done, do whatever
@@ -271,10 +271,10 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         RestaurantList.user_id = SingletonClass.sharedInstance.UserId
         RestaurantList.filter = SelectFilterId
         RestaurantList.item = strSearch
-        RestaurantList.page = "\(pageNumber)"
+        RestaurantList.page = "\(self.pageNumber)"
         RestaurantList.item_id = strItemId
         RestaurantList.item_type = strItemType
-        RestaurantList.page = "\(pageNumber)"
+        RestaurantList.page = "\(self.pageNumber)"
         RestaurantList.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
         RestaurantList.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: false, completion: { (response, status, error) in
@@ -312,8 +312,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 self.tblMainList.isUserInteractionEnabled = true
                 self.tblMainList.reloadData()
             }else{
-                self.arrRestaurantList = []
-                self.tblMainList.reloadData()
+//                self.arrRestaurantList = []
+//                self.tblMainList.reloadData()
                 
 //                if let strMessage = response["message"].string {
 //                    Utilities.displayAlert(strMessage)

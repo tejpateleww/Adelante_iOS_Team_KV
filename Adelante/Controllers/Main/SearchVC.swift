@@ -119,7 +119,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                         let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
                         print(objItem)
                     }
-                    cell.IncreseData = { [self] in
+                    cell.IncreseData = { [self] in 
                         var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                         if self.arrSearchRestItemList[indexPath.row].quantity.toInt() > value {
                             var strQty = ""

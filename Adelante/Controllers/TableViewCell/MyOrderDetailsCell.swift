@@ -15,7 +15,9 @@ class MyOrderDetailsCell: UITableViewCell {
      @IBOutlet weak var lblItemName: orderDetailsLabel!
      @IBOutlet weak var lblDateTime: orderDetailsLabel!
      @IBOutlet weak var lblSharedFrom: orderDetailsLabel!
-     
+    @IBOutlet weak var lblQty: UILabel!
+    @IBOutlet weak var lblPrice: UILabel!
+    
      // MARK: - Properties
      
      override func awakeFromNib() {

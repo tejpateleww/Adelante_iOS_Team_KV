@@ -10,6 +10,4 @@ import Foundation
 class RepeatOrderReqModel:RequestModel{
     var user_id : String = ""
     var main_order_id : String = ""
-    var lat : String = ""
-    var lng : String = ""
 }

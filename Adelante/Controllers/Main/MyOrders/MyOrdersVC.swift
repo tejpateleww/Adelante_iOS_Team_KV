@@ -160,6 +160,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.share = {
                         self.webserviceShareOrder(strMainOrderId: obj.id )
                     }
+                    cell.Repeat = {
+                        self.webserviceRepeatOrder(strMainOrderId: obj.id)
+                    }
                     strOrderId = obj.id
                     
                     cell.cancel = {
@@ -223,7 +226,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.share = {
                         self.webserviceShareOrder(strMainOrderId: obj.id )
                     }
-                    
+                    cell.Repeat = {
+                        self.webserviceRepeatOrder(strMainOrderId: obj.id)
+                    }
                     strOrderId = obj.id
                     
                     cell.cancel = {
@@ -410,6 +415,34 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
                 self.present(activityViewController, animated: true, completion: nil)
                 //                Utilities.displayAlert(json["message"].string ?? "")
+            }
+            else
+            {
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
+            }
+        })
+    }
+    func webserviceRepeatOrder(strMainOrderId:String){
+        let repeatOrder = RepeatOrderReqModel()
+        repeatOrder.user_id = SingletonClass.sharedInstance.UserId
+        repeatOrder.main_order_id = strMainOrderId
+        WebServiceSubClass.RepeatOrder(repeatOrder: repeatOrder, showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                let repeatOrderData = repeatOrderResModel.init(fromJson: json)
+                if repeatOrderData.cartId > 0{
+                    let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "checkOutVC") as! checkOutVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantDetailsVC") as! RestaurantDetailsVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                print(repeatOrderData)
+                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {

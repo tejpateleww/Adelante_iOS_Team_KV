@@ -176,6 +176,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
         cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
         cell.lblDateTime.text = arrItem[indexPath.row].date
+        cell.lblQty.text = arrItem[indexPath.row].quantity
+        cell.lblPrice.text = (CurrencySymbol) + arrItem[indexPath.row].price
         cell.lblSharedFrom.isHidden = true
         cell.selectionStyle = .none
         return cell

@@ -379,30 +379,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     // MARK: - Api Calls
-    func webserviceRepeatOrder(){
-        let repeatOrder = RepeatOrderReqModel()
-        repeatOrder.user_id = SingletonClass.sharedInstance.UserId
-        repeatOrder.main_order_id = strOrderId
-        repeatOrder.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        repeatOrder.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
-        WebServiceSubClass.RepeatOrder(repeatOrder: repeatOrder, showHud: false, completion: { (json, status, response) in
-            if(status)
-            {
-                let repeatOrderData = RepeatOrderResModel.init(fromJson: json)
-                print(repeatOrderData)
-                Utilities.displayAlert(json["message"].string ?? "")
-            }
-            else
-            {
-                if let strMessage = json["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
-                }
-            }
-        })
-    }
-    
     
     func webserviceAddToFoodlist(){
         let foodList = AddToFoodlistReqModel()

@@ -266,7 +266,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 self.tblPaymentMethod.reloadData()
                 self.imgEmptyCard.isHidden = true
             } else {
-                self.imgEmptyCard.isHidden = false
+                self.imgEmptyCard.isHidden = true
                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
                 
             }
@@ -284,7 +284,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
                 controller.isHideCancelButton = true
                 controller.isHideSubmitButton = false
-                controller.submitBtnTitle = "  Payment Successful      "
+                controller.submitBtnTitle = "OK             "
                 controller.cancelBtnTitle = ""
                 controller.strDescription = json["data"].string ?? ""
                 controller.strPopupTitle = "Payment Successful"

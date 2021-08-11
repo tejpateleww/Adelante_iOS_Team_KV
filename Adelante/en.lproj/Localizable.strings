@@ -250,7 +250,7 @@
 "NavigationTitles_Privacypolicy" = "Privacy policy";
 "NavigationTitles_MyOrders" = "My Orders";
 "NavigationTitles_PastOrderDetails" = "Previous Order Details";
-"NavigationTitles_UpcomingOrderDetails" = "Upcoming Order Details";
+"NavigationTitles_UpcomingOrderDetails" = "In-Process Order Details";
 "NavigationTitles_Checkout" = "Checkout";
 "NavigationTitles_AddPayment" = "Add Payment";
 "NavigationTitles_AddCard" = "Add Card";
