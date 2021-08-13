@@ -13,6 +13,7 @@ class ReViewDiscCell: UITableViewCell {
     @IBOutlet weak var lblDescription: CustomLabel!
     @IBOutlet weak var lblName: themeLabel!
     @IBOutlet weak var vwRating: CosmosView!
+    @IBOutlet weak var lblSaperator: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,5 +24,4 @@ class ReViewDiscCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

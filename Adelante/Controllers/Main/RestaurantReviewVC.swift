@@ -121,13 +121,16 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
                 let cell:ReViewDiscCell = tbvReview.dequeueReusableCell(withIdentifier: "ReViewDiscCell", for: indexPath)as! ReViewDiscCell
                 cell.lblName.text = arrDetails?[indexPath.row].fullName
                 cell.lblDescription.text = arrDetails?[indexPath.row].feedback
+                cell.lblSaperator.isHidden = true
+                if cell.lblDescription.text == ""{
+                    cell.lblDescription.isHidden = true
+                    cell.lblSaperator.isHidden = false
+                }
                 cell.vwRating.rating = Double(arrDetails?[indexPath.row].rating ?? "0.0") ?? 0.0
                 cell.selectionStyle = .none
                 return cell
-                
             } else {
                 let NoDatacell = tbvReview.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
-                
                 NoDatacell.imgNoData.image = UIImage(named: "Rating List")
                 NoDatacell.lblNoDataTitle.isHidden = true//text = "Be The First to Rate This Store".Localized()
                 NoDatacell.selectionStyle = .none
@@ -180,7 +183,6 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
                     arrTemp?.forEach({ (element) in
                         self.arrDetails?.append(element)
                     })
-                    
                     
                     if (arrTemp?.count ?? 0) < self.pageLimit {
                         self.isNeedToReload = false

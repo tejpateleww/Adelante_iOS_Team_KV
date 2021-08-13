@@ -75,6 +75,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
+        tblItems.reloadData()
     }
     
     // MARK: - Other Methods
@@ -88,6 +89,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
         setUpOrderDetails()
     }
+    
     func setData(){
         if objOrderDetailsData != nil{
             lblId.text = objOrderDetailsData.orderId
@@ -96,7 +98,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             } else {
                 lblNoOfItems.text = objOrderDetailsData.itemQuantity + " item"
             }
-//            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
+            //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
             lblRestName.text = objOrderDetailsData.restaurantName
             lblTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.total.ConvertToTwoDecimal()
             lblTax.text = "(" + objOrderDetailsData.tax + "%" + ")"
@@ -112,6 +114,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblItems.reloadData()
         self.heightTblItems.constant = tblItems.contentSize.height
     }
+    
     func setUpOrderDetails() {
         if selectedSegmentTag == 0 {
             self.vwCancel.isHidden = true
@@ -143,6 +146,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         controller.submitBtnTitle = "Cancel Order       "
         controller.cancelBtnTitle = ""
         controller.strDescription = "Do you really want  to cancel the order."
+        
         controller.strPopupTitle = "Are you Sure?"
         controller.submitBtnColor = colors.appRedColor
         controller.cancelBtnColor = colors.appGreenColor
@@ -151,7 +155,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         controller.btnSubmit = {
             controller.dismiss(animated: true, completion: nil)
             self.webserviceCancelOrder()
-//                            dismiss(animated: , completion: nil)
+            //                            dismiss(animated: , completion: nil)
         }
         self.present(controller, animated: true, completion: nil)
     }
@@ -177,15 +181,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
         cell.lblDateTime.text = arrItem[indexPath.row].date
         cell.lblQty.text = arrItem[indexPath.row].quantity
-        cell.lblPrice.text = (CurrencySymbol) + arrItem[indexPath.row].price
+        cell.lblPrice.text = (CurrencySymbol) + arrItem[indexPath.row].subTotal
         cell.lblSharedFrom.isHidden = true
         cell.selectionStyle = .none
         return cell
     }
     
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //        return UITableView.automaticDimension
-    //    }
     func setUpLocalizedStrings()
     {
         lblOrderId.text = "MyOrderDetailsVC_lblOrderId".Localized()

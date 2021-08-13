@@ -62,7 +62,7 @@ class RateReviewVC: BaseViewController {
             {
                 Utilities.displayAlert(json["message"].string ?? "")
                 self.tvRateReview.text = ""
-                self.vwRating.rating = 0
+                self.vwRating.rating = 1
             }
             else
             {

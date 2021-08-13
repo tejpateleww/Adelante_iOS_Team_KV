@@ -234,7 +234,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             cell.lblPrice.text = "\(CurrencySymbol)\(objitem.subTotal ?? 0)"
             cell.lbltotalCount.text = objitem.cartQty
             cell.stackHide.isHidden = false
-            let value : Int = (cell.lbltotalCount.text! as NSString).integerValue
+            
             cell.decreaseClick = {
                 self.webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "0")
                 cell.stackHide.isHidden = true
@@ -245,12 +245,17 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             }
             
             cell.increaseClick = { [self] in
-                webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "1")
-                cell.stackHide.isHidden = true
-                cell.vwStapper.isHidden = false
-                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2, y: cell.vwStapper.frame.height/2)
-                cell.vwStapper.addSubview(self.activityView)
-                self.activityView.startAnimating()
+                let value : Int = (cell.lbltotalCount.text! as NSString).integerValue
+                if objitem.quantity.toInt() > value {
+                    webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "1")
+                    cell.stackHide.isHidden = true
+                    cell.vwStapper.isHidden = false
+                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2, y: cell.vwStapper.frame.height/2)
+                    cell.vwStapper.addSubview(self.activityView)
+                    self.activityView.startAnimating()
+                }else{
+                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(objitem.itemName ?? "")",objitem.quantity]), vc: self)
+                }
             }
             
             cell.selectionStyle = .none
@@ -385,7 +390,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         foodList.user_id = SingletonClass.sharedInstance.UserId
         foodList.restaurant_id = (cartDetails?.id)!
         foodList.cart_id = (self.cartDetails?.cartId)!
-        WebServiceSubClass.AddToFoodList(FoodListModel: foodList, showHud: false) { (json, status, response) in
+        WebServiceSubClass.AddToFoodList(FoodListModel: foodList, showHud: true) { (json, status, response) in
             if(status)
             {
                 print(json)
@@ -456,13 +461,22 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 print(json)
                 let cartData = CartListResModel.init(fromJson: json)
                 self.cartDetails = cartData.data
+                //self.arrCartItem = cartData.data.item
                 if self.cartDetails == nil{
                     self.navigationController?.popViewController(animated: true)
                 }else{
-                    self.arrCartItem = cartData.data.item
-                    if let obj = self.addRemoveItem{
-                        obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity.toInt())
+                    let tempArr = cartData.data.item.filter { (item) -> Bool in
+                        return item.cartQty.toInt() != 0
                     }
+                    //print(tempArr)
+                    self.arrCartItem = tempArr
+//                    {
+//                        self.arrCartItem.remove(at: index.row)
+//                        self.tblAddedProduct.deleteRows(at: [index], with: .fade)
+//                    }
+//                    if let obj = self.addRemoveItem{
+//                        obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity.toInt())
+//                    }
                 }
                 self.setData()
                 self.location()

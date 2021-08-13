@@ -133,11 +133,16 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                     cell.vwStapper.isHidden = true
                 }
                 cell.IncreseData = {
+                    let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                    if self.arrOrderData[indexPath.row].quantity.toInt() > value {
                     self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
                     cell.stackHide.isHidden = true
                     self.activityView.center = cell.vwStapper.center
                     cell.vwStapper.addSubview(self.activityView)
                     self.activityView.startAnimating()
+                    }else{
+                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrOrderData[indexPath.row].itemName ?? "")",self.arrOrderData[indexPath.row].quantity.toInt()]), vc: self)
+                    }
                 }
                 cell.decreaseData = {
                     self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)

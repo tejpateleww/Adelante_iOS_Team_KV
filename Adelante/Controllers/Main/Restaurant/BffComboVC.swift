@@ -339,7 +339,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         addToCart.qty = "1"
         addToCart.item_id = selectedItemId
         addToCart.addon_id = strAddon
-        WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { (response, status, error) in
+        WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: true) { (response, status, error) in
             if status {
                 self.navigationController?.popViewController(animated: true)
             } else {

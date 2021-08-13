@@ -18,7 +18,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     // MARK: - Properties
     var cardDetails : [String] = []
     var customTabBarController: CustomTabBarVC?
-    var selectedPaymentMethods = 1
+    var selectedPaymentMethods: IndexPath?
     var refreshList = UIRefreshControl()
     var arrCard = [CardList]()
     var filterSelect = [0]
@@ -86,7 +86,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
                 cell1.lblwalletBalance.text = "$250.00"
                 cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-                if indexPath.row == selectedPaymentMethods {
+                if indexPath == selectedPaymentMethods {
                     cell1.vWMain.layer.borderWidth = 1
                 } else {
                     cell1.vWMain.layer.borderWidth = 0
@@ -98,7 +98,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             } else {
                 let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
                 cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-                if indexPath.row == selectedPaymentMethods {
+                if indexPath == selectedPaymentMethods {
                     cell2.vWMain.layer.borderWidth = 1
                     cell2.vwCvv.isHidden = false
                 } else {
@@ -124,8 +124,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     else {
                     }
                 }
-                
-                
                 cell = cell2
             }
             cell.selectionStyle = .none
@@ -137,7 +135,12 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell.lblExpiresDate.text = "Default method"
             cell.btnDelete.isHidden = true
             cell.vwCvv.isHidden = true
-            cell.selectPaymentMethodButton.isHidden = false
+            if indexPath == selectedPaymentMethods {
+                cell.selectPaymentMethodButton.isSelected = true
+            }
+            else{
+                cell.selectPaymentMethodButton.isSelected = false
+            }
             cell.selectionStyle = .none
             return cell
         default:
@@ -148,7 +151,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         return 2
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         switch section {
         case 0:
             return 43
@@ -208,21 +210,16 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
                     cell1.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
                     WebServiceCallForOrder()
-                }} else {
-                    let cell2 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
-                    cell2.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
                 }
-            selectedPaymentMethods = indexPath.row
+            } else {
+                let cell2 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
+                cell2.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+            }
+            selectedPaymentMethods = indexPath
         case 1:
             let cell = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
             cell.selectPaymentMethodButton.isSelected = !cell.selectPaymentMethodButton.isSelected
-            if cell.selectPaymentMethodButton.isSelected == true {
-                print("yes")
-                cell.selectPaymentMethodButton.setImage(UIImage(named: "ic_paymentSelected"), for: .selected)
-                
-            }else{
-                cell.selectPaymentMethodButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
-            }
+            selectedPaymentMethods = indexPath
         default:
             return
         }
@@ -284,7 +281,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
                 controller.isHideCancelButton = true
                 controller.isHideSubmitButton = false
-                controller.submitBtnTitle = "OK             "
+                controller.submitBtnTitle = "OK                         "
                 controller.cancelBtnTitle = ""
                 controller.strDescription = json["data"].string ?? ""
                 controller.strPopupTitle = "Payment Successful"
@@ -304,7 +301,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

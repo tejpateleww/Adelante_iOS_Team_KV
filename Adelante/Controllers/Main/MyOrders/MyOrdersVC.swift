@@ -161,7 +161,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         self.webserviceShareOrder(strMainOrderId: obj.id )
                     }
                     cell.Repeat = {
-                        self.webserviceRepeatOrder(strMainOrderId: obj.id)
+                        self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
                     }
                     strOrderId = obj.id
                     
@@ -227,7 +227,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         self.webserviceShareOrder(strMainOrderId: obj.id )
                     }
                     cell.Repeat = {
-                        self.webserviceRepeatOrder(strMainOrderId: obj.id)
+                        self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
                     }
                     strOrderId = obj.id
                     
@@ -426,7 +426,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             }
         })
     }
-    func webserviceRepeatOrder(strMainOrderId:String){
+    func webserviceRepeatOrder(strMainOrderId:String,row:Int){
         let repeatOrder = RepeatOrderReqModel()
         repeatOrder.user_id = SingletonClass.sharedInstance.UserId
         repeatOrder.main_order_id = strMainOrderId
@@ -434,15 +434,24 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             if(status)
             {
                 let repeatOrderData = repeatOrderResModel.init(fromJson: json)
+                let index = IndexPath(row: row, section: 0)
+                let alert = UIAlertController(title: AppName, message: json["message"].stringValue, preferredStyle: UIAlertController.Style.alert)
                 if repeatOrderData.cartId > 0{
-                    let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "checkOutVC") as! checkOutVC
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    let OkAction = UIAlertAction(title:"OK" , style: .default) { (sct) in
+                        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "checkOutVC") as! checkOutVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    alert.addAction(OkAction)
+                    appDel.window?.rootViewController?.present(alert, animated: true, completion: nil)
                 }else{
-                    let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantDetailsVC") as! RestaurantDetailsVC
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    let OkAction = UIAlertAction(title:"OK" , style: .default) { (sct) in
+                        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantDetailsVC") as! RestaurantDetailsVC
+                        vc.selectedRestaurantId = self.arrPastList[index.row].restaurant_id
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    alert.addAction(OkAction)
+                    appDel.window?.rootViewController?.present(alert, animated: true, completion: nil)
                 }
-                print(repeatOrderData)
-                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {

@@ -221,13 +221,16 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
                 let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
                 self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+                self.tblMainList.reloadData()
             }
             else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
                 self.selectedSortTypedIndexFromcolVwFilter = 1
                 self.colVwFilterOptions.reloadData()
+                self.tblMainList.reloadData()
             } else {
                 self.selectedSortTypedIndexFromcolVwFilter = sender.tag
                 self.colVwFilterOptions.reloadData()
+                self.tblMainList.reloadData()
             }
             if self.selectedSortTypedIndexFromcolVwFilter == 0 {
                 let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID) as! sortPopupVC

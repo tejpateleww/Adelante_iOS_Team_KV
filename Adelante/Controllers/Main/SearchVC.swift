@@ -66,96 +66,96 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     //MARK: - UITableview Delegate and Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblRestaurant {
-                    return self.arrSearchRestList.count
+            return self.arrSearchRestList.count
         }else{
-                    return self.arrSearchRestItemList.count
+            return self.arrSearchRestItemList.count
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tblRestaurant {
-                    let cell = tblRestaurant.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
-                    cell.lblAreaName.text = arrSearchRestList[indexPath.row].name
-                    cell.lblAddress.text = arrSearchRestList[indexPath.row].address
-                    cell.lblMiles.text = arrSearchRestList[indexPath.row].distance
-                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestList[indexPath.row].image ?? "")"
-                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                    cell.btnFavorite.tag = indexPath.row
-                    cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
-                    if arrSearchRestList[indexPath.row].favourite == "1"{
-                        cell.btnFavorite.isSelected = true
-                    }else{
-                        cell.btnFavorite.isSelected = false
-                    }
-                    cell.selectionStyle = .none
-                    return cell
+            let cell = tblRestaurant.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
+            cell.lblAreaName.text = arrSearchRestList[indexPath.row].name
+            cell.lblAddress.text = arrSearchRestList[indexPath.row].address
+            cell.lblMiles.text = arrSearchRestList[indexPath.row].distance
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestList[indexPath.row].image ?? "")"
+            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.btnFavorite.tag = indexPath.row
+            cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
+            if arrSearchRestList[indexPath.row].favourite == "1"{
+                cell.btnFavorite.isSelected = true
+            }else{
+                cell.btnFavorite.isSelected = false
+            }
+            cell.selectionStyle = .none
+            return cell
         }else{
-                    let cell:searchFoodLIstCell = tblFoodList.dequeueReusableCell(withIdentifier: "searchFoodLIstCell", for: indexPath) as! searchFoodLIstCell
-                    cell.lblComboTitle.text = arrSearchRestItemList[indexPath.row].name
-                    cell.lblPrice.text = (CurrencySymbol) + arrSearchRestItemList[indexPath.row].price
-                    cell.lblDisc.text = arrSearchRestItemList[indexPath.row].descriptionField
-                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestItemList[indexPath.row].image ?? "")"
-                    cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                    cell.lblRating.text = "\(arrSearchRestItemList[indexPath.row].ratingCount!)"
-                    cell.lblRestaurant.text = arrSearchRestItemList[indexPath.row].restaurantName.trimmingCharacters(in: .whitespaces)
-                    cell.lblMiles.text = arrSearchRestItemList[indexPath.row].distance
-                    cell.selectionStyle = .none
-                    
-                    cell.decreaseData = {
-                        var strQty = ""
-                        if cell.lblNoOfItem.text != ""{
-                            var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
-                            if value == 1{
-                                cell.btnAdd.isHidden = false
-                                cell.vwStapper.isHidden = true
-                            }else if value > 1{
-                                value = value - 1
-                                cell.lblNoOfItem.text = String(value)
-                                strQty = "\(value)"
-                            }
-                        }
-                        self.arrSearchRestItemList[indexPath.row].quantity = strQty
-                        var pr = 0
-                        pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
-                        let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
-                        print(objItem)
+            let cell:searchFoodLIstCell = tblFoodList.dequeueReusableCell(withIdentifier: "searchFoodLIstCell", for: indexPath) as! searchFoodLIstCell
+            cell.lblComboTitle.text = arrSearchRestItemList[indexPath.row].name
+            cell.lblPrice.text = (CurrencySymbol) + arrSearchRestItemList[indexPath.row].price
+            cell.lblDisc.text = arrSearchRestItemList[indexPath.row].descriptionField
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestItemList[indexPath.row].image ?? "")"
+            cell.imgFoodLIst.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            cell.lblRating.text = "\(arrSearchRestItemList[indexPath.row].ratingCount!)"
+            cell.lblRestaurant.text = arrSearchRestItemList[indexPath.row].restaurantName.trimmingCharacters(in: .whitespaces)
+            cell.lblMiles.text = arrSearchRestItemList[indexPath.row].distance
+            cell.selectionStyle = .none
+            
+            cell.decreaseData = {
+                var strQty = ""
+                if cell.lblNoOfItem.text != ""{
+                    var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                    if value == 1{
+                        cell.btnAdd.isHidden = false
+                        cell.vwStapper.isHidden = true
+                    }else if value > 1{
+                        value = value - 1
+                        cell.lblNoOfItem.text = String(value)
+                        strQty = "\(value)"
                     }
-                    cell.IncreseData = { [self] in 
-                        var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
-                        if self.arrSearchRestItemList[indexPath.row].quantity.toInt() > value {
-                            var strQty = ""
-                            if cell.lblNoOfItem.text != ""{
-                                
-                                value = value + 1
-                                cell.lblNoOfItem.text = String(value)
-                                strQty = "\(value)"
-                            }
-                            self.arrSearchRestItemList[indexPath.row].quantity = strQty
-                            var pr = 0
-                            pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
-                            let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
-                            print(objItem)
-                        }
-                        else {
-                            Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
-                        }
+                }
+                self.arrSearchRestItemList[indexPath.row].quantity = strQty
+                var pr = 0
+                pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
+                let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
+                print(objItem)
+            }
+            cell.IncreseData = { [self] in
+                var value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                if self.arrSearchRestItemList[indexPath.row].quantity.toInt() > value {
+                    var strQty = ""
+                    if cell.lblNoOfItem.text != ""{
+                        
+                        value = value + 1
+                        cell.lblNoOfItem.text = String(value)
+                        strQty = "\(value)"
                     }
-                    cell.btnAddAction = {
-                        if self.arrSearchRestItemList[indexPath.row].quantity.ToDouble() >= 1 {
-                            cell.btnAdd.isHidden = true
-                            cell.vwStapper.isHidden = false
-                            let strQty = "1"
-                            cell.lblNoOfItem.text = strQty
-                            self.arrSearchRestItemList[indexPath.row].quantity = strQty
-                            var pr = 0
-                            pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
-                            let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
-                            print(objItem)
-                        }
-                        else {
-                            Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
-                        }
-                    }
-                    return cell
+                    self.arrSearchRestItemList[indexPath.row].quantity = strQty
+                    var pr = 0
+                    pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
+                    print(objItem)
+                }
+                else {
+                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+                }
+            }
+            cell.btnAddAction = {
+                if self.arrSearchRestItemList[indexPath.row].quantity.ToDouble() >= 1 {
+                    cell.btnAdd.isHidden = true
+                    cell.vwStapper.isHidden = false
+                    let strQty = "1"
+                    cell.lblNoOfItem.text = strQty
+                    self.arrSearchRestItemList[indexPath.row].quantity = strQty
+                    var pr = 0
+                    pr = strQty.toInt() * self.arrSearchRestItemList[indexPath.row].price.toInt()
+                    let objItem = selectedOrderItems(restaurant_item_id: self.arrSearchRestItemList[indexPath.row].id, quantity: self.arrSearchRestItemList[indexPath.row].quantity, price: "\(pr)", variants_id: [], name: self.arrSearchRestItemList[indexPath.row].name, originalPrice: self.arrSearchRestItemList[indexPath.row].price, size: self.arrSearchRestItemList[indexPath.row].size, selectedQuantity: strQty)
+                    print(objItem)
+                }
+                else {
+                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+                }
+            }
+            return cell
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -229,7 +229,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         search.user_id = SingletonClass.sharedInstance.UserId
         search.page = "\(pageNumber)"
-
+        
         WebServiceSubClass.search(Searchmodel: search, showHud: true, completion: { (response, status, error) in
             self.responseStatus = .gotData
             if status{
@@ -276,7 +276,7 @@ extension SearchVC:UISearchBarDelegate{
         self.perform(#selector(self.makeNetworkCall(_:)), with: searchText, afterDelay: 0.7)
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        txtSearch.resignFirstResponder()
+        //        txtSearch.resignFirstResponder()
     }
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if txtSearch.text == ""{
@@ -299,14 +299,14 @@ extension SearchVC:UISearchBarDelegate{
                 self.tblRestaurant.setEmptyMessage("Search something")
                 self.tblFoodList.setEmptyMessage("Search something")
             }
-//            webserviceSearchModel(strSearch: query)
+            //            webserviceSearchModel(strSearch: query)
             arrSearchRestList.removeAll()
             arrSearchRestItemList.removeAll()
             tblRestaurant.reloadData()
             tblFoodList.reloadData()
         }else{
             if query.count > 2{
-//                txtSearch.resignFirstResponder()
+                //                txtSearch.resignFirstResponder()
                 webserviceSearchModel(strSearch: query)
             }
         }

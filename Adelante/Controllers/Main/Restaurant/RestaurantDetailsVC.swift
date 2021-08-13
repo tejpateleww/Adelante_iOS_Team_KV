@@ -436,6 +436,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }
                     cell.IncreseData = {
+                        
                         if variantValue > 0{
                             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                             controller.selectedItemId = self.arrMenuitem[indexPath.row].id
@@ -444,13 +445,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             self.strItemId = self.arrMenuitem[indexPath.row].id
                             self.navigationController?.pushViewController(controller, animated: true)
                         }else{
-                            self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
-                            self.isfromMenu = true
-                            self.webserviceUpdateCartQuantity(strItemid: self.arrMenuitem[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
-                            cell.stackHide.isHidden = true
-                            self.activityView.center = cell.vwStapper.center
-                            cell.vwStapper.addSubview(self.activityView)
-                            self.activityView.startAnimating()
+                            let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                            if self.arrMenuitem[indexPath.row].quantity > value {
+                                self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                                self.isfromMenu = true
+                                self.webserviceUpdateCartQuantity(strItemid: self.arrMenuitem[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
+                                cell.stackHide.isHidden = true
+                                self.activityView.center = cell.vwStapper.center
+                                cell.vwStapper.addSubview(self.activityView)
+                                self.activityView.startAnimating()
+                            }else{
+                                Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")",self.arrMenuitem[indexPath.row].quantity]), vc: self)
+                            }
                         }
                     }
                     if variantValue > 0{
@@ -479,13 +485,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                         self.strItemId = self.arrMenuitem[indexPath.row].id
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }else{
-                                        cell.btnAddItem.isHidden = true
-                                        cell.vwStapper.isHidden = false
-                                        self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                        cell.stackHide.isHidden = true
-                                        self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                        cell.vwStapper.addSubview(self.activityView)
-                                        self.activityView.startAnimating()
+                                        let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                                        if self.arrMenuitem[indexPath.row].quantity > value {
+                                            cell.btnAddItem.isHidden = true
+                                            cell.vwStapper.isHidden = false
+                                            self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                            cell.stackHide.isHidden = true
+                                            self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                            cell.vwStapper.addSubview(self.activityView)
+                                            self.activityView.startAnimating()
+                                        }else{
+                                            Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")",self.arrMenuitem[indexPath.row].quantity]), vc: self)
+                                        }
                                     }
                                 }
                                 let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
@@ -501,13 +512,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }else{
-                                    cell.btnAddItem.isHidden = true
-                                    cell.vwStapper.isHidden = false
-                                    self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                    cell.stackHide.isHidden = true
-                                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                    cell.vwStapper.addSubview(self.activityView)
-                                    self.activityView.startAnimating()
+                                    let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                                    if self.arrMenuitem[indexPath.row].quantity > value {
+                                        cell.btnAddItem.isHidden = true
+                                        cell.vwStapper.isHidden = false
+                                        self.webwerviceAddtoCart(strItemId: self.arrMenuitem[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                        cell.stackHide.isHidden = true
+                                        self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                        cell.vwStapper.addSubview(self.activityView)
+                                        self.activityView.startAnimating()
+                                    }else{
+                                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrMenuitem[indexPath.row].name ?? "")",self.arrMenuitem[indexPath.row].quantity]), vc: self)
+                                    }
                                 }
                             }
                         }
@@ -617,22 +633,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             controller.delegateAddVariant = self
                             self.strItemId = self.arrMenuitem[indexPath.row].id
                             self.navigationController?.pushViewController(controller, animated: true)
-                            //                            self.arrItemList = [ItemList]()
-                            //                            self.tblPopup.showAnimatedSkeleton()
-                            //                            self.tblPopup.reloadData()
-                            //                            self.ViewForBottom.constant = 0
-                            //                            self.viewPopup.layoutIfNeeded()
-                            //                            self.viewPopup.layoutSubviews()
-                            //                            self.viewBG.isHidden = false
-                            //                            self.viewPopup.isHidden = false
-                            //                            UIView.animate(withDuration: 0.6, animations: {
-                            //                                //                                self.view.layoutIfNeeded()
-                            //                            }){ (success) in
-                            //                                self.isfromMenu = false
-                            //                                self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
-                            //                                self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId)
-                            //                            }
                         }else{
+                            let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                            if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > value {
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                             self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
                             self.isfromMenu = false
@@ -640,6 +643,9 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             self.activityView.center = cell.vwStapper.center
                             cell.vwStapper.addSubview(self.activityView)
                             self.activityView.startAnimating()
+                            }else{
+                                Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name ?? "")",self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity]), vc: self)
+                            }
                         }
                     }
                     cell.btnAddAction = {
@@ -663,13 +669,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                         self.strItemId = self.arrMenuitem[indexPath.row].id
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }else{
-                                        cell.btnAdd.isHidden = true
-                                        cell.vwStapper.isHidden = false
-                                        self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                        cell.StackHide.isHidden = true
-                                        self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                        cell.vwStapper.addSubview(self.activityView)
-                                        self.activityView.startAnimating()
+                                        let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                                        if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > value {
+                                            cell.btnAdd.isHidden = true
+                                            cell.vwStapper.isHidden = false
+                                            self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                            cell.StackHide.isHidden = true
+                                            self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                            cell.vwStapper.addSubview(self.activityView)
+                                            self.activityView.startAnimating()
+                                        }else{
+                                            Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name ?? "")",self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity]), vc: self)
+                                        }
                                     }
                                 }
                                 let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
@@ -685,13 +696,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }else{
-                                    cell.btnAdd.isHidden = true
-                                    cell.vwStapper.isHidden = false
-                                    self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                    cell.StackHide.isHidden = true
-                                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                    cell.vwStapper.addSubview(self.activityView)
-                                    self.activityView.startAnimating()
+                                    let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                                    if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > value {
+                                        cell.btnAdd.isHidden = true
+                                        cell.vwStapper.isHidden = false
+                                        self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                        cell.StackHide.isHidden = true
+                                        self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                        cell.vwStapper.addSubview(self.activityView)
+                                        self.activityView.startAnimating()
+                                    }else{
+                                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name ?? "")",self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity]), vc: self)
+                                    }
                                 }
                             }
                         }
@@ -818,13 +834,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         //                            self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                         //                        }
                     }else{
-                        self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
-                        self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
-                        cell.StackHide.isHidden = true
-                        self.isfromMenu = false
-                        self.activityView.center = cell.vwStapper.center
-                        cell.vwStapper.addSubview(self.activityView)
-                        self.activityView.startAnimating()
+                        let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                        if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > value {
+                            self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
+                            self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
+                            cell.StackHide.isHidden = true
+                            self.isfromMenu = false
+                            self.activityView.center = cell.vwStapper.center
+                            cell.vwStapper.addSubview(self.activityView)
+                            self.activityView.startAnimating()
+                        }else{
+                            Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name ?? "")",self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity]), vc: self)
+                        }
                     }
                 }
                 if variantValue > 0{
@@ -853,13 +874,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }else{
-                                    cell.btnAdd.isHidden = true
-                                    cell.vwStapper.isHidden = false
-                                    self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                    cell.StackHide.isHidden = true
-                                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                    cell.vwStapper.addSubview(self.activityView)
-                                    self.activityView.startAnimating()
+                                    let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                                    if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > value {
+                                        cell.btnAdd.isHidden = true
+                                        cell.vwStapper.isHidden = false
+                                        self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                        cell.StackHide.isHidden = true
+                                        self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                        cell.vwStapper.addSubview(self.activityView)
+                                        self.activityView.startAnimating()
+                                    }else{
+                                        Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name ?? "")",self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity]), vc: self)
+                                    }
                                 }
                             }
                             let NoAction = UIAlertAction(title: "No", style: .default, handler: nil)
@@ -875,13 +901,19 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 self.strItemId = self.arrMenuitem[indexPath.row].id
                                 self.navigationController?.pushViewController(controller, animated: true)
                             }else{
-                                cell.btnAdd.isHidden = true
-                                cell.vwStapper.isHidden = false
-                                self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                cell.StackHide.isHidden = true
-                                self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
-                                cell.vwStapper.addSubview(self.activityView)
-                                self.activityView.startAnimating()
+                                let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+                                if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > value {
+                                    cell.btnAdd.isHidden = true
+                                    cell.vwStapper.isHidden = false
+                                    self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
+                                    cell.StackHide.isHidden = true
+                                    self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
+                                    cell.vwStapper.addSubview(self.activityView)
+                                    self.activityView.startAnimating()
+                                }else
+                                {
+                                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].name ?? "")",self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity]), vc: self)
+                                }
                             }
                         }
                     }
@@ -1078,7 +1110,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         ResDetails.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
         ResDetails.search = SearchData
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
-            //self.hideHUD()
             if status {
                 let RestDetail = RestaurantDetailsResModel.init(fromJson: response)
                 self.skeletonViewData.removeFromSuperview()
@@ -1088,7 +1119,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 self.arrFoodMenu = RestDetail.data.restaurant.foodMenu
                 self.objRestaurant = RestDetail.data.restaurant
                 self.tblRestaurantDetails.reloadData()
-                //                self.calculateTableHeight()
                 self.setData()
             } else {
                 if let strMessage = response["message"].string {
@@ -1249,7 +1279,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                         }else{
                                             cell.btnAdd.isHidden = false
                                             HidePopUp()
-                                        }                                        }
+                                        }
+                                    }
                                     self.arrItemList.removeAll()
                                     self.arrItemList.append(contentsOf: self.arrUpdateQty.item.filter { (item) -> Bool in
                                         return item.id == arrMenuitem[selectedIndexItem.row].id
@@ -1286,10 +1317,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 print(json)
                 let itemListData = ItemListResModel.init(fromJson: json)
                 self.arrItemList = itemListData.data.item
+//                let tempArr =  self.arrItemList.filter({ (item) -> Bool in
+//                    return item.qty.toInt() != 0
+//                })
                 self.tblPopup.dataSource = self
                 self.tblPopup.isScrollEnabled = true
                 self.tblPopup.isUserInteractionEnabled = true
-                
                 self.tblPopup.reloadData()
                 self.setData()
             }
