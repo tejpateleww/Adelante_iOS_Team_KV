@@ -54,6 +54,8 @@
 "MyOrderVC_lblUpcomingOrders" = "In-Process";
 "MyOrderVC_MyOrdersCess_btnRepeatOrder" = "Repeat Order";
 "MyOrderVC_MyOrdersCess_btnCancelOrder" = "Cancel Order";
+"MyOrderVC_MyOrdersCess_btnAcceptOrder" = "Accept Order";
+"MyOrderVC_lblShareOrders" = "Share";
 
 //MyProfileVC
 "MyProfileVC_btnEditAccount" = "EDIT ACCOUNT";
@@ -115,6 +117,7 @@
 "MyOrderDetailsVC_btnCancel" = "Cancel";
 "MyOrderDetailsVC_btnRateOrder" = "Rate Order";
 "MyOrderDetailsVC_btnShareOrder" = "Share Order";
+"MyOrderDetailsVC_btnAcceptOrder" = "Accept Order";
 
 //RestaurantListVC
 "RestaurantListVC_txtSearch" = "Search for Food and Restaurant";

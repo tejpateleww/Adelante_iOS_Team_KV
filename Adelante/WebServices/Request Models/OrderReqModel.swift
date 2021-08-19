@@ -16,3 +16,7 @@ class orderPlaceReqModel:RequestModel{
     var cart_id : String = ""
     var promocode_id : String = ""
 }
+
+class shareOrderlistReqModel:RequestModel{
+    var user_id : String = ""
+}

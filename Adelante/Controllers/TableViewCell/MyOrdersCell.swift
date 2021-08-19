@@ -23,11 +23,14 @@ class MyOrdersCell: UITableViewCell {
      @IBOutlet weak var lblDtTime: tblMyOrdersLabel!
      @IBOutlet weak var btnRepeatOrder: myOrdersBtn!
      @IBOutlet weak var btnCancelOrder: myOrdersBtn!
-     
+    @IBOutlet weak var btnAccept: myOrdersBtn!
+    @IBOutlet weak var vwAccept: UIView!
+    
      // MARK: - Properties
     var cancel : (() -> ())?
     var Repeat : (() -> ())?
     var share : (()->())?
+    var accept : (()->())?
      @IBAction func btnCancel(_ sender: myOrdersBtn) {
          if let click = self.cancel {
              click()
@@ -40,6 +43,11 @@ class MyOrdersCell: UITableViewCell {
      }
     @IBAction func btnShare(_ sender: UIButton) {
         if let click = self.share{
+            click()
+        }
+    }
+    @IBAction func btnAcceptClick(_ sender: Any) {
+        if let click = self.accept{
             click()
         }
     }
@@ -56,6 +64,7 @@ class MyOrdersCell: UITableViewCell {
     func setUpLocalizedStrings() {
         btnRepeatOrder.setTitle("MyOrderVC_MyOrdersCess_btnRepeatOrder".Localized(), for: .normal)
         btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
+        btnAccept.setTitle("MyOrderVC_MyOrdersCess_btnAcceptOrder".Localized(), for: .normal)
     }
     
 }

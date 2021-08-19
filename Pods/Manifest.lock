@@ -82,6 +82,9 @@ PODS:
   - SDWebImage/Core (5.10.4)
   - SkeletonView (1.21.1)
   - SkyFloatingLabelTextField (4.0.0)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
@@ -99,6 +102,7 @@ DEPENDENCIES:
   - SDWebImage
   - SkeletonView
   - SkyFloatingLabelTextField
+  - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftyJSON (= 4.0)
 
 SPEC REPOS:
@@ -106,6 +110,8 @@ SPEC REPOS:
     - GoogleMaps
     - GooglePlaces
     - SkeletonView
+    - Socket.IO-Client-Swift
+    - Starscream
   trunk:
     - Alamofire
     - BetterSegmentedControl
@@ -153,8 +159,10 @@ SPEC CHECKSUMS:
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SkeletonView: 5b79eb6e09d2a7f3d2e620d34ff97510a1c763e9
   SkyFloatingLabelTextField: 79ddc40e4ad59707fedbb48d605417aee48bb78a
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 669b5fb2458e7bca0ea44456e708d1ec4afed7f1
+PODFILE CHECKSUM: 0b4d5c193f98112d81966a8bb562c3ab5a2c5056
 
 COCOAPODS: 1.10.1

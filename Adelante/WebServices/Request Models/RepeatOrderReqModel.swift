@@ -11,3 +11,8 @@ class RepeatOrderReqModel:RequestModel{
     var user_id : String = ""
     var main_order_id : String = ""
 }
+
+class AcceptOrderReqModel:RequestModel{
+    var user_id : String = ""
+    var main_order_id : String = ""
+}

@@ -11,6 +11,9 @@ import SDWebImage
 import FormTextField
 import Alamofire
 import SwiftyJSON
+import SocketIO
+import CoreLocation
+import GoogleMaps
 
 class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource,AddPaymentDelegate {
     
@@ -26,6 +29,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var direction:CGFloat = 1
     var shakes = 0
     var OrderDetails : String?
+    var orderid = ""
     var isfromPayment : Bool = false
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
@@ -278,6 +282,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
             if(status)
             {
+                
+                self.orderid = json["order_id"].stringValue
                 let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
                 controller.isHideCancelButton = true
                 controller.isHideSubmitButton = false
@@ -289,6 +295,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 controller.cancelBtnColor = colors.appRedColor
                 controller.strPopupImage = "ic_popupPaymentSucessful"
                 controller.isCancleOrder = true
+                
+                self.socketManageSetup()
                 controller.btnSubmit = {
                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
                     controller.selectedIndex = 2
@@ -362,4 +370,157 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         FormTextField.appearance().invalidBorderColor = UIColor(hexString: "FF4B47")
         FormTextField.appearance().invalidTextColor = UIColor(hexString: "FF4B47")
     }
+}
+
+extension addPaymentVC{
+    func socketManageSetup(){
+        SocketIOManager.shared.establishSocketConnection()
+        allSocketOffMethods()
+        self.SocketOnMethods()
+    }
+    
+    func SocketOnMethods() {
+        
+        SocketIOManager.shared.socket.on(clientEvent: .disconnect) { (data, ack) in
+            print ("socket is disconnected please reconnect")
+            SocketIOManager.shared.isSocketOn = false
+        }
+        
+        SocketIOManager.shared.socket.on(clientEvent: .reconnect) { (data, ack) in
+            print ("socket is reconnected")
+            SocketIOManager.shared.isSocketOn = true
+            
+        }
+        
+        
+        print("===========\(SocketIOManager.shared.socket.status)========================",SocketIOManager.shared.socket.status.active)
+        SocketIOManager.shared.socket.on(clientEvent: .connect) {data, ack in
+            print ("socket connected")
+            
+            SocketIOManager.shared.isSocketOn = true
+            //            self.allSocketOffMethods()
+            self.emitSocketUserConnect()
+            
+            self.allSocketOnMethods()
+            
+        }
+        //Connect User On Socket
+        SocketIOManager.shared.establishConnection()
+        //MARK: -====== Socket connection =======
+        
+        print("==============\(SocketIOManager.shared.socket.status)=====================",SocketIOManager.shared.socket.status.active)
+        
+        if SocketIOManager.shared.socket.status.active{
+            self.allSocketOffMethods()
+            self.emitSocketUserConnect()
+            self.allSocketOnMethods()
+        }
+    }
+    
+    
+    
+    // ON ALL SOCKETS
+    func allSocketOnMethods() {
+        print("\n\n", #function, "\n\n")
+        onSocketConnectUser()
+        //        onSocket_SendMessage()
+        onSocketUpdateLocation()
+        
+    }
+    
+    // OFF ALL SOCKETS
+    func allSocketOffMethods() {
+        print("\n\n", #function, "\n\n")
+        SocketIOManager.shared.socket.off(SocketData.kConnectUser.rawValue)
+        //        SocketIOManager.shared.socket.off(SocketKeys.SendMessage.rawValue)
+        SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
+    }
+    
+    //-------------------------------------
+    // MARK:= SOCKET ON METHODS =
+    //-------------------------------------
+    func onSocketConnectUser(){
+        SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
+            print(#function, "\n ", json)
+        }
+    }
+    
+    
+    func onSocketUpdateLocation(){
+        SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { (json) in
+//            print(#function, "\n ",json)
+//            self.driverLat = json.first?.1.first?.1.arrayValue[0].doubleValue ?? 0.0 //json["lat"].doubleValue
+//            self.driverLng = json.first?.1.first?.1.arrayValue[1].doubleValue ?? 0.0//json["lng"].doubleValue
+//
+//            if !self.isgetDriverlocation{
+//                self.isgetDriverlocation = true
+//                self.mapRouteForcurrentToRestaurant(PickupLat: SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude, PickupLng: SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude, destLat: self.driverLat , DestLng: self.driverLng)
+//            }
+//            self.updateMarker(lat: self.driverLat, lng: self.driverLng)
+//            self.setDriverMarker()
+            
+        }
+    }
+    
+    //-------------------------------------
+    // MARK:= SOCKET EMIT METHODS =
+    //-------------------------------------
+    
+    // Socket Emit Connect user
+    func emitSocketUserConnect(){
+        print(#function)
+        //        customer_id,lat,lng
+        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
+        ]
+        SocketIOManager.shared.socketEmit(for: SocketData.kConnectUser.rawValue, with: param)
+        self.emitSocketUpdateLocation()
+    }
+    
+    func emitSocketUpdateLocation() {
+        print(#function)
+//        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
+        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
+                                    "order_id" : self.orderid,
+                                    "lat": SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude ,
+                                    "lng" :SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude
+        ]
+        SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
+        
+    }
+}
+extension addPaymentVC: GMSMapViewDelegate,CLLocationManagerDelegate{
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // Handle authorization status
+           switch status {
+           case .restricted:
+             print("Location access was restricted.")
+           case .denied:
+             print("User denied access to location.")
+             // Display the map using the default location.
+//             vwMap.isHidden = false
+           case .notDetermined:
+             print("Location status not determined.")
+           case .authorizedAlways: fallthrough
+           case .authorizedWhenInUse:
+             print("Location status is OK.")
+           @unknown default:
+             fatalError()
+           }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(locations.last?.coordinate.latitude)// coordinate.latitude)
+        print(locations.last?.coordinate.longitude)
+               if let location = locations.last {
+
+                SingletonClass.sharedInstance.userCurrentLocation = location
+                
+//                self.updateMarker(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+//                setCustomerMarker()
+                
+            }
+              
+    }
+   
 }

@@ -18,7 +18,8 @@ import GoogleMaps
     
     var window: UIWindow?
     var locationManager: CLLocationManager?
-    
+    var fromPushUserId = String()
+    var fromPushItemId = String()
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
@@ -61,6 +62,24 @@ import GoogleMaps
             }
         }
     }
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            let url = userActivity.webpageURL!
+            print(url)
+            
+            let myUrl: String? = userActivity.webpageURL?.absoluteString
+            let itemID = url.valueOf("itemid")
+            fromPushItemId = itemID ?? ""
+            if myUrl?.range(of: "item") != nil {
+                if let _ = (self.window?.rootViewController as! UINavigationController).viewControllers.first as? SplashVC {
+                }
+            }
+        }
+        
+        return true
+    }
+    
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
     }

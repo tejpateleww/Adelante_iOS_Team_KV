@@ -59,6 +59,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var vwShareOrder: UIView!
     @IBOutlet weak var heightTblItems: NSLayoutConstraint!
     @IBOutlet weak var lblTax: UILabel!
+    @IBOutlet weak var vwAccept: UIView!
+    @IBOutlet weak var btnAccept: submitButton!
     //    @IBOutlet weak var viewSkeleton: skeletonView!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -121,7 +123,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             self.vwRateOrder.isHidden = false
             self.vwShareOrder.isHidden = true
             self.vwBarCode.isHidden = true
-        } else {
+            self.vwAccept.isHidden = true
+        } else if selectedSegmentTag == 1{
             self.vwCancel.isHidden = false
             self.vwRateOrder.isHidden = true
             if isSharedOrder {
@@ -129,7 +132,14 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             } else {
                 self.vwShareOrder.isHidden = false
             }
+            self.vwAccept.isHidden = true
             self.vwBarCode.isHidden = false
+        }else{
+            self.vwCancel.isHidden = true
+            self.vwRateOrder.isHidden = true
+            self.vwShareOrder.isHidden = true
+            self.vwBarCode.isHidden = true
+            self.vwAccept.isHidden = false
         }
         tblItems.delegate = self
         tblItems.dataSource = self
@@ -171,6 +181,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         webserviceShareOrder()
     }
     
+    @IBAction func btnAcceptClick(_ sender: Any) {
+        webserviceAcceptOrder()
+    }
     // MARK: - UITableView Delegates & Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrItem.count
@@ -202,6 +215,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         btnCancel.setTitle("MyOrderDetailsVC_btnCancel".Localized(), for: .normal)
         btnRateOrder.setTitle("MyOrderDetailsVC_btnRateOrder".Localized(), for: .normal)
         btnShareOrder.setTitle("MyOrderDetailsVC_btnShareOrder".Localized(), for: .normal)
+        btnAccept.setTitle("MyOrderDetailsVC_btnAcceptOrder".Localized(), for: .normal)
     }
     // MARK: - Api Calls
     func webserviceOrderDetails(){
@@ -241,6 +255,25 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             {
                 self.delegateCancelOrder.refreshOrderDetailsScreen()
                 self.navigationController?.popViewController(animated: true)
+            }
+            else
+            {
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
+            }
+        })
+    }
+    func webserviceAcceptOrder(){
+        let acceptOrder = AcceptOrderReqModel()
+        acceptOrder.user_id = SingletonClass.sharedInstance.UserId
+        acceptOrder.main_order_id = objOrderDetailsData.orderId
+        WebServiceSubClass.AcceptOrder(AcceptOrder: acceptOrder, showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                Utilities.displayAlert(json["message"].stringValue)
             }
             else
             {

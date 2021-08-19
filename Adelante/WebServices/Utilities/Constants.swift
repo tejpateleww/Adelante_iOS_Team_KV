@@ -38,7 +38,19 @@ enum DateFormatterString : String{
     case timeWithDate = "yyyy-MM-dd HH:mm:ss"
     case onlyDate = "yyyy-MM-dd"
 }
-
+enum NotificationKeys : CaseIterable{
+    static let AddLittleOne = "AddLittleOne"
+    static let EditLittleOne = "EditLittleOne"
+    static let PushBirthday = "birthdayPush"
+    static let PushFriendRequest = "NewRequestPush"
+    static let PushAcceptRequest = "acceptPush"
+    static let PushOnLinkClick = "OnLinkClicktoNavigate"
+    static let PushPurchased = "purchasedPush"
+    static let PushWeekly = "WeeklyPush"
+    static let PushLittleoneBirthday = "LittleoneBirthday"
+    static let PushyourBirthday = "YourBirthdayPush"
+    
+}
 struct ScreenSize {
 
     static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width

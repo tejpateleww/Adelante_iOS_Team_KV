@@ -111,5 +111,13 @@ enum ApiKey: String {
     case clearFoodlist = "remove_cart"
     case FoodlisttoCart = "foodlist_cart"
     case RemovePromocode = "remove_promocode"
+    case ShareOrderList = "share_order_list"
+    case Accept = "share_order_accept"
 }
 
+enum SocketData : String{
+    case kSocketHostUrl = "http://3.239.174.164:8080/"//"http://18.208.18.170:8080/"
+    case kConnectUser   = "connect_user"
+    case kLocationTracking = "location_tracking"
+//    case kDriverLocation    = "driver_location"
+}
