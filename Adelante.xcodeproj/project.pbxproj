@@ -276,6 +276,10 @@
 		88E80728268DF4C2007B3FC0 /* skeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E80726268DF4C2007B3FC0 /* skeletonView.swift */; };
 		88ECB12D26A93740001872D7 /* ApplyPromoDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ECB12C26A93740001872D7 /* ApplyPromoDatum.swift */; };
 		88ECB13126A93BAB001872D7 /* CartDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ECB13026A93BAB001872D7 /* CartDatum.swift */; };
+		88F6D94826CFB4B400ED5C95 /* ShareDetailsDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94426CFB4B400ED5C95 /* ShareDetailsDatum.swift */; };
+		88F6D94926CFB4B400ED5C95 /* ShareDetailsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94526CFB4B400ED5C95 /* ShareDetailsItem.swift */; };
+		88F6D94A26CFB4B400ED5C95 /* ShareDetailsMainOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94626CFB4B400ED5C95 /* ShareDetailsMainOrder.swift */; };
+		88F6D94B26CFB4B400ED5C95 /* shareDetailsResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94726CFB4B400ED5C95 /* shareDetailsResModel.swift */; };
 		88F7235C269823600002441E /* RestaurantDetailsPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7235B269823600002441E /* RestaurantDetailsPopupCell.swift */; };
 		9203B478268B58720096AFDF /* HomeSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203B476268B58720096AFDF /* HomeSkeletonCell.swift */; };
 		9203B479268B58730096AFDF /* HomeSkeletonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9203B477268B58720096AFDF /* HomeSkeletonCell.xib */; };
@@ -566,6 +570,10 @@
 		88E80726268DF4C2007B3FC0 /* skeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = skeletonView.swift; sourceTree = "<group>"; };
 		88ECB12C26A93740001872D7 /* ApplyPromoDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyPromoDatum.swift; sourceTree = "<group>"; };
 		88ECB13026A93BAB001872D7 /* CartDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartDatum.swift; sourceTree = "<group>"; };
+		88F6D94426CFB4B400ED5C95 /* ShareDetailsDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailsDatum.swift; sourceTree = "<group>"; };
+		88F6D94526CFB4B400ED5C95 /* ShareDetailsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailsItem.swift; sourceTree = "<group>"; };
+		88F6D94626CFB4B400ED5C95 /* ShareDetailsMainOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailsMainOrder.swift; sourceTree = "<group>"; };
+		88F6D94726CFB4B400ED5C95 /* shareDetailsResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shareDetailsResModel.swift; sourceTree = "<group>"; };
 		88F7235B269823600002441E /* RestaurantDetailsPopupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsPopupCell.swift; sourceTree = "<group>"; };
 		9203B476268B58720096AFDF /* HomeSkeletonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCell.swift; sourceTree = "<group>"; };
 		9203B477268B58720096AFDF /* HomeSkeletonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSkeletonCell.xib; sourceTree = "<group>"; };
@@ -1077,6 +1085,7 @@
 		81CFFD392574C60D005AA86A /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				88F6D94326CFB46900ED5C95 /* ShareDetails */,
 				886FE1EC26CE18350000FA08 /* ShareOrderList */,
 				88736FBB269C61ED00400087 /* ItemListResModel */,
 				88883F65269716AC0041D277 /* MyFoodLIstResModel */,
@@ -1342,6 +1351,17 @@
 			path = MyFoodLIstResModel;
 			sourceTree = "<group>";
 		};
+		88F6D94326CFB46900ED5C95 /* ShareDetails */ = {
+			isa = PBXGroup;
+			children = (
+				88F6D94426CFB4B400ED5C95 /* ShareDetailsDatum.swift */,
+				88F6D94526CFB4B400ED5C95 /* ShareDetailsItem.swift */,
+				88F6D94626CFB4B400ED5C95 /* ShareDetailsMainOrder.swift */,
+				88F6D94726CFB4B400ED5C95 /* shareDetailsResModel.swift */,
+			);
+			path = ShareDetails;
+			sourceTree = "<group>";
+		};
 		9203B475268B58720096AFDF /* Skeleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1590,11 +1610,13 @@
 				340D4AF625D25CB8007CC54B /* SubOrder.swift in Sources */,
 				340D4AF825D25CB8007CC54B /* RepeatOrderResModel.swift in Sources */,
 				345EA8F225B5477100A4E56D /* restaurantDetailsList.swift in Sources */,
+				88F6D94926CFB4B400ED5C95 /* ShareDetailsItem.swift in Sources */,
 				3431E0682593224C002F1435 /* RestWithPageCell.swift in Sources */,
 				88C9E4FB268ED612005B0899 /* skeletonCheckout.swift in Sources */,
 				84C5F6882643A8B7000B2DDE /* PromocodeVC.swift in Sources */,
 				81CFFD852574C60D005AA86A /* Data+Extensions.swift in Sources */,
 				81CFFD872574C60D005AA86A /* customTextField.swift in Sources */,
+				88F6D94826CFB4B400ED5C95 /* ShareDetailsDatum.swift in Sources */,
 				340D4AEC25D23A84007CC54B /* shareOrderReqModel.swift in Sources */,
 				3431E04A25931B70002F1435 /* MyOrdersCell.swift in Sources */,
 				81B06F7D257905D4003AD48B /* UITableViewCell+Extension.swift in Sources */,
@@ -1701,6 +1723,7 @@
 				34A260E025D3B26000E24D73 /* ReviewData.swift in Sources */,
 				88E80720268DF38C007B3FC0 /* SkeletonOrderDetails.swift in Sources */,
 				888EBC65269D5BDA006C1424 /* itemListDatum.swift in Sources */,
+				88F6D94A26CFB4B400ED5C95 /* ShareDetailsMainOrder.swift in Sources */,
 				888EBCBA269D9D01006C1424 /* searchFoodLIstCell.swift in Sources */,
 				88883F6A269716E90041D277 /* MyFoodLIstResModel.swift in Sources */,
 				3400019625C7EB8E00C584DE /* Option.swift in Sources */,
@@ -1722,6 +1745,7 @@
 				18E0B578265790F90016AFE9 /* PromocodeListReqModel.swift in Sources */,
 				88E806FD268D8509007B3FC0 /* SearchRestaurantItem.swift in Sources */,
 				88B0F41D26A7F737001DA88F /* applyPromocodeResModel.swift in Sources */,
+				88F6D94B26CFB4B400ED5C95 /* shareDetailsResModel.swift in Sources */,
 				884B350326844F8B0019BB4F /* otpReceive.swift in Sources */,
 				18F369542580AE0000992FCD /* commonPopup.swift in Sources */,
 				8170CAF1257A10B500B24B7A /* RateReviewVC.swift in Sources */,

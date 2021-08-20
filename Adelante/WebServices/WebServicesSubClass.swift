@@ -123,6 +123,10 @@ class WebServiceSubClass
         let  params : [String:String] = orderDetails.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .OrderDetails, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    class func shareorderDetailList( orderDetails : shareorderDetailsReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = orderDetails.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .shareDetails, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
     class func RateOrder( rateOrder : RateOrderReqModel ,showHud : Bool = false ,completion: @escaping CompletionResponse ) {
         let  params : [String:String] = rateOrder.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .RateOrder, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)

@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>http://adelantemovil.com/orders</string>
+		<string>applinks:www.adelantemovil.com</string>
 	</array>
 </dict>
 </plist>

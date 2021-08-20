@@ -30,7 +30,9 @@ import GoogleMaps
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 //        FirebaseApp.configure()
-       
+        if let url = launchOptions?[.url] as? URL, let annotation = launchOptions?[.annotation] {
+//            return self.application(application, open: url, sourceApplication: launchOptions?[.sourceApplication] as? String, annotation: annotation)
+        }
         checkAndSetDefaultLanguage()
         navigateToSplash()
         
@@ -44,6 +46,7 @@ import GoogleMaps
         GMSPlacesClient.provideAPIKey("AIzaSyAanqcKJTTvrFIsWqQRCjTdecR_CpPZo0E")
         return true
     }
+    
     func setUpLocationServices() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -108,7 +111,6 @@ import GoogleMaps
         UINavigationBar.appearance().barTintColor = UIColor.white
         UINavigationBar.appearance().isTranslucent = true
     }
-    
     func printAppFonts() {
         for family: String in UIFont.familyNames
         {

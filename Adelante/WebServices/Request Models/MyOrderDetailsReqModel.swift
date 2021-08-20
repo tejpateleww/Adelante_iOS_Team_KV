@@ -14,3 +14,7 @@ class MyorderDetailsReqModel:RequestModel{
     var type : String = ""
     var restaurant_id : String = ""
 }
+class shareorderDetailsReqModel:RequestModel{
+    var user_id : String = ""
+    var order_id : String = ""
+}

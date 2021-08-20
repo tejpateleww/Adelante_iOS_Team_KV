@@ -5,30 +5,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            uuid = "FCA8AD0F-DD91-49EC-A9E3-DF22A14DE717"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            breakpointStackSelectionBehavior = "1"
-            scope = "1"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "52555428-5E5C-4BBC-AF85-E4D04D91F1A9"
+            uuid = "8E63B3B6-E777-490C-AA16-B1A8DDBCC803"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Controllers/Main/MyOrders/MyOrdersVC.swift"
+            filePath = "Adelante/Controllers/Main/MyOrders/MyOrderDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "setData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -44,7 +44,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
 //        }
         tblOrders.showAnimatedSkeleton()
         registerNIB()
-        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "Share")
+        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : "In-Process")
         tblOrders.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         setup()
@@ -56,7 +56,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         self.customTabBarController?.showTabBar()
         
         if let _ = SingletonClass.sharedInstance.selectInProcessInMyOrder{
-            self.segment.setIndex(2)
+            self.segment.setIndex(1)
             self.segmentControlChanged(self.segment)
         }
         
@@ -77,7 +77,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     @objc func refreshData(){
         responseStatus = .initial
         tblOrders.reloadData()
-        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "Share")
+        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" :"In-Process")
     }
     // MARK: - IBActions
     
@@ -180,13 +180,13 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        let textToShare = [ "http://adelante.app.link?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")" ]
-                        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                        if let name = URL(string: "http://adelante.app.link?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
+                          let objectsToShare = [name]
+                          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                          self.present(activityVC, animated: true, completion: nil)
+                        } else {
+                          // show alert for not available
                         }
-                        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
-                        self.present(activityViewController, animated: true, completion: nil)
                     }
                     cell.Repeat = {
                         self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
@@ -259,13 +259,13 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        let textToShare = [ "http://adelante.app.link?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")" ]
-                        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                        if let name = URL(string: "http://adelante.app.link?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
+                          let objectsToShare = [name]
+                          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                          self.present(activityVC, animated: true, completion: nil)
+                        } else {
+                          // show alert for not available
                         }
-                        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
-                        self.present(activityViewController, animated: true, completion: nil)
                     }
                     cell.Repeat = {
                         self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
@@ -338,13 +338,13 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        let textToShare = [ "http://adelante.app.link?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")" ]
-                        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                        if let name = URL(string: "http://adelante.app.link?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
+                          let objectsToShare = [name]
+                          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                          self.present(activityVC, animated: true, completion: nil)
+                        } else {
+                          // show alert for not available
                         }
-                        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-                        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook,UIActivity.ActivityType.mail ]
-                        self.present(activityViewController, animated: true, completion: nil)
                     }
                     cell.Repeat = {
                         self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
@@ -453,9 +453,10 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         }else{
             if self.arrShareList.count != 0 {
                 let orderDetailsVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: MyOrderDetailsVC.storyboardID) as! MyOrderDetailsVC
-                orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
                 let obj = self.arrShareList[indexPath.row]
+                orderDetailsVC.selectedSegmentTag = self.selectedSegmentTag
                 orderDetailsVC.orderId = obj.id
+                orderDetailsVC.isfromShare = true
                 orderDetailsVC.strRestaurantId = obj.restaurantId
                 orderDetailsVC.delegateCancelOrder = self
                 self.navigationController?.pushViewController(orderDetailsVC, animated: true)
@@ -543,7 +544,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         })
     }
     func refreshOrderDetailsScreen() {
-        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : selectedSegmentTag == 1 ? "In-Process" : "Share")
+        webserviceGetOrderDetail(selectedOrder: selectedSegmentTag == 0 ? "past" : "In-Process")
     }
     func webserviceCancelOrder(completion: @escaping () -> ()){
         
@@ -553,7 +554,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
             if(status)
             {
-                self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "Share")
+                self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : "In-Process")
             }
             else
             {
@@ -574,7 +575,6 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             if(status)
             {
                 
-                //                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {

@@ -279,7 +279,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         let ReqModel = orderPlaceReqModel()
         ReqModel.user_id = SingletonClass.sharedInstance.UserId
         ReqModel.cart_id = strCartID
-        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: false, completion: { (json, status, response) in
+        WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: true, completion: { (json, status, response) in
             if(status)
             {
                 
