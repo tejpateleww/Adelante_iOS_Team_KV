@@ -115,35 +115,20 @@ extension UIViewController {
     }
     func showHUD() {
         MKProgress.config.hudType = .radial
-    MKProgress.config.hudColor = .clear
-    MKProgress.config.width = 65.0
-    MKProgress.config.height = 65.0
-    MKProgress.config.circleRadius = 30.0
-    MKProgress.config.cornerRadius = 16.0
+        MKProgress.config.hudColor = .clear
+        MKProgress.config.width = 65.0
+        MKProgress.config.height = 65.0
+        MKProgress.config.circleRadius = 30.0
+        MKProgress.config.cornerRadius = 16.0
         MKProgress.config.circleBorderColor = UIColor.init(hexString: "#E34A25")
-    MKProgress.config.circleBorderWidth = 3.0
-    MKProgress.config.backgroundColor = .clear
-    MKProgress.show()
-    // var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    //
-    // activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    //// activityIndicator.backgroundColor = .clear
-    // activityIndicator.layer.cornerRadius = 6
-    // activityIndicator.center = self.view.center
-    // activityIndicator.hidesWhenStopped = true
-    // activityIndicator.style = .whiteLarge
-    // activityIndicator.color = themeColor
-    // activityIndicator.tag = 1001
-    // self.view.addSubview(activityIndicator)
-    // activityIndicator.startAnimating()
-    // UIApplication.shared.beginIgnoringInteractionEvents()
+        MKProgress.config.circleBorderWidth = 3.0
+        MKProgress.config.backgroundColor = .clear
+        MKProgress.show()
+        
     }
     func hideHUD() {
-    MKProgress.hide()
-    // let activityIndicator = self.view.viewWithTag(1001) as? UIActivityIndicatorView
-    // activityIndicator?.stopAnimating()
-    // activityIndicator?.removeFromSuperview()
-    // UIApplication.shared.endIgnoringInteractionEvents()
+        MKProgress.hide()
+        
     }
     @objc func dismissView(gesture: UISwipeGestureRecognizer) {
         

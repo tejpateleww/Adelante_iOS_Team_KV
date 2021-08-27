@@ -118,7 +118,7 @@ class LoginViewController: BaseViewController {
         email.user_name = txtEmail.text ?? ""
         
         // self.showHUD()
-        WebServiceSubClass.sendEmail(optModel: email, showHud: false) { [self] (json, status, response) in
+        WebServiceSubClass.sendEmail(optModel: email, showHud: true) { [self] (json, status, response) in
             self.hideHUD()
             if(status){
                 print(json)

@@ -72,9 +72,10 @@ import GoogleMaps
             print(url)
             
             let myUrl: String? = userActivity.webpageURL?.absoluteString
-            let itemID = url.valueOf("itemid")
-            fromPushItemId = itemID ?? ""
-            if myUrl?.range(of: "item") != nil {
+            let userId = url.valueOf("user_id")
+            let Order_id = url.valueOf("order_id")
+//            fromPushItemId = userId ?? ""
+            if myUrl?.range(of: "home") != nil {
                 if let _ = (self.window?.rootViewController as! UINavigationController).viewControllers.first as? SplashVC {
                 }
             }
@@ -82,7 +83,7 @@ import GoogleMaps
         
         return true
     }
-    
+
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
     }

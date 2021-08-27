@@ -130,7 +130,7 @@ extension PromocodeVC {
         ApplyPromoCode.promocode = promocode
         ApplyPromoCode.user_id = SingletonClass.sharedInstance.UserId
         ApplyPromoCode.cart_id = cartID
-        WebServiceSubClass.ApplyPromoCode(PromocodeModel: ApplyPromoCode, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.ApplyPromoCode(PromocodeModel: ApplyPromoCode, showHud: true, completion: { (response, status, error) in
             
             if status{
                 let ResModel = applyPromocodeResModel.init(fromJson: response)

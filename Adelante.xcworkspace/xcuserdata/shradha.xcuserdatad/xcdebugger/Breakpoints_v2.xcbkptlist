@@ -20,5 +20,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8C31042-C413-43F5-AC29-374CBB19FE59"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Adelante/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E4FA7C9-DEAD-4ADE-8943-4E363B56E36D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Adelante/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "application(_:continue:restorationHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2E4FA7C9-DEAD-4ADE-8943-4E363B56E36D - 4f5bcb998564c957"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Adelante.AppDelegate.application(_: __C.UIApplication, continue: __C.NSUserActivity, restorationHandler: (Swift.Optional&lt;Swift.Array&lt;__C.UIUserActivityRestoring&gt;&gt;) -&gt; ()) -&gt; Swift.Bool"
+                  moduleName = "Adelante"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shradha/Documents/Harsh%20Dave/Adelante/Code/Adelante/Adelante/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "2908">
+               </Location>
+               <Location
+                  uuid = "2E4FA7C9-DEAD-4ADE-8943-4E363B56E36D - 4f5bcb998564c957"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Adelante.AppDelegate.application(_: __C.UIApplication, continue: __C.NSUserActivity, restorationHandler: (Swift.Optional&lt;Swift.Array&lt;__C.UIUserActivityRestoring&gt;&gt;) -&gt; ()) -&gt; Swift.Bool"
+                  moduleName = "Adelante"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shradha/Documents/Harsh%20Dave/Adelante/Code/Adelante/Adelante/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "4120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

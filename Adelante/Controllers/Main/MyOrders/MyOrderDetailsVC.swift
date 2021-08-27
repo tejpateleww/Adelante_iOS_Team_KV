@@ -208,7 +208,13 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
-        webserviceShareOrder()
+        if let name = URL(string: "https://www.adelantemovil.com/home?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(orderId ?? "")"), !name.absoluteString.isEmpty {
+          let objectsToShare = [name]
+          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+          self.present(activityVC, animated: true, completion: nil)
+        } else {
+          // show alert for not available
+        }//webserviceShareOrder()
     }
     
     @IBAction func btnAcceptClick(_ sender: Any) {

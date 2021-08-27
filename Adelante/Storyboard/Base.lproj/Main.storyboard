@@ -4793,7 +4793,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h58-f5-ggC">
                                                                 <rect key="frame" x="0.0" y="1233" width="378" height="16"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pwj-UI-oxD" customClass="orderDetailsButton" customModule="Adelante" customModuleProvider="target">
+                                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pwj-UI-oxD" customClass="orderDetailsButton" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="16" id="A0N-fp-2A0"/>

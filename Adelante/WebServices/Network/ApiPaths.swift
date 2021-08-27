@@ -24,9 +24,9 @@ enum APIEnvironment : String{
 //    case bu = "http://adelante.excellentwebworld.in/api/User/"
 //    case profileBu = "http://adelante.excellentwebworld.in/"
 //    case BaseURL = "http://3.239.174.164/api/User/"
-    case BaseURL = "http://18.208.18.170/api/User/"
-    case profileBaseURL = "http://18.208.18.170/"
-//    case profileBaseURL = "http://3.239.174.164/"
+    case BaseURL = "https://www.adelantemovil.com/api/User/"//"http://18.208.18.170/api/User/"
+    case profileBaseURL = "https://www.adelantemovil.com/"//"http://18.208.18.170/"
+//    case profileBaseURL = "http://3.239.174.164/
     static var baseURL: String{
         return APIEnvironment.environment.rawValue
     }
@@ -117,7 +117,7 @@ enum ApiKey: String {
 }
 
 enum SocketData : String{
-    case kSocketHostUrl = "http://3.239.174.164:8080/"//"http://18.208.18.170:8080/"
+    case kSocketHostUrl = "https://www.adelantemovil.com:8080/"//"http://3.239.174.164:8080/"//"http://18.208.18.170:8080/"
     case kConnectUser   = "connect_user"
     case kLocationTracking = "location_tracking"
 //    case kDriverLocation    = "driver_location"
