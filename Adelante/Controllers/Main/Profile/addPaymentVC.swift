@@ -14,6 +14,7 @@ import SwiftyJSON
 import SocketIO
 import CoreLocation
 import GoogleMaps
+import BraintreeDropIn
 
 class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource,AddPaymentDelegate {
     

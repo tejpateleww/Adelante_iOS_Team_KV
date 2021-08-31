@@ -13,6 +13,7 @@ import UserNotifications
 import CoreLocation
 import GooglePlaces
 import GoogleMaps
+import BraintreeDropIn
 
 @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
     
@@ -27,6 +28,7 @@ import GoogleMaps
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        setupNavigation()
+        BTAppContextSwitcher.setReturnURLScheme("com.your-company.your-app.payments")
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 //        FirebaseApp.configure()
