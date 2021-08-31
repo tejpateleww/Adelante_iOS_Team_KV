@@ -1,6 +1,10 @@
 PODS:
   - Alamofire (5.0.0)
   - BetterSegmentedControl (2.0.1)
+  - Braintree (5.4.2):
+    - Braintree/Card (= 5.4.2)
+    - Braintree/Core (= 5.4.2)
+    - Braintree/PayPal (= 5.4.2)
   - Braintree/ApplePay (5.4.2):
     - Braintree/Core
   - Braintree/Card (5.4.2):
@@ -115,6 +119,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (= 5.0)
   - BetterSegmentedControl
+  - Braintree
   - BraintreeDropIn
   - Cosmos
   - Firebase/Crashlytics
@@ -190,6 +195,6 @@ SPEC CHECKSUMS:
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 5a302113f6d6e13d89ccc045baad122e404b8d83
+PODFILE CHECKSUM: 71c5c09c32b883e3355539b145c4285699a53043
 
 COCOAPODS: 1.10.1

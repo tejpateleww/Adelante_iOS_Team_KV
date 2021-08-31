@@ -13,7 +13,7 @@ import UserNotifications
 import CoreLocation
 import GooglePlaces
 import GoogleMaps
-import BraintreeDropIn
+import Braintree 
 
 @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
     
@@ -28,7 +28,7 @@ import BraintreeDropIn
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        setupNavigation()
-        BTAppContextSwitcher.setReturnURLScheme("com.your-company.your-app.payments")
+        BTAppContextSwitcher.setReturnURLScheme("com.eww.adelante.payments")
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 //        FirebaseApp.configure()
@@ -85,7 +85,12 @@ import BraintreeDropIn
         
         return true
     }
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme?.localizedCaseInsensitiveCompare("com.eww.adelante.payments") == .orderedSame {
+            return BTAppContextSwitcher.handleOpenURL(url)
+        }
+        return false
+    }
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
     }
