@@ -21,7 +21,7 @@
   • <a href="#️-contributing">Contributing</a>
 </p>
 
-**🌎 README is available in other languages:  [🇪🇸](https://github.com/Juanpe/SkeletonView/blob/main/README_es.md) . [🇨🇳](https://github.com/Juanpe/SkeletonView/blob/master/README_zh.md) . [🇧🇷](https://github.com/Juanpe/SkeletonView/blob/master/README_pt-br.md) . [🇰🇷](https://github.com/Juanpe/SkeletonView/blob/master/README_ko.md) . [🇫🇷](https://github.com/Juanpe/SkeletonView/blob/master/README_fr.md)**
+**🌎 README is available in other languages:  [🇪🇸](Translations/README_es.md) . [🇨🇳](Translations/README_zh.md) . [🇧🇷](Translations/README_pt-br.md) . [🇰🇷](Translations/README_ko.md) . [🇫🇷](Translations/README_fr.md)**
 
 Today almost all apps have async processes, such as API requests, long running processes, etc. While the processes are working, usually developers place a loading view to show users that something is going on.
 
@@ -518,6 +518,14 @@ By default, the user interaction is disabled for skeletonized items, but if you 
 view.isUserInteractionDisabledWhenSkeletonIsActive = false  // The view will be active when the skeleton will be active.
 ```
 
+**Don't use the font line height for the skeleton lines in labels**
+
+False to disable skeleton to auto-adjust to font height for a `UILabel` or `UITextView`. By default, the skeleton lines height is auto-adjusted to font height to more accurately reflect the text in the label rect rather than using the bounding box.
+
+```swift
+label.useFontLineHeight = false
+```
+
 **Delayed show skeleton**
 
 You can delay the presentation of the skeleton if the views update quickly.
@@ -540,14 +548,11 @@ func showGradientSkeleton(usingGradient: SkeletonGradient,
 
 To facilitate the debug tasks when something is not working fine. **`SkeletonView`** has some new tools.
 
-First, `UIView` has available a new property with his skeleton info:
+First, `UIView` has available a property with his skeleton info:
 ```swift
-var skeletonDescription: String
+var sk.skeletonTreeDescription: String
 
 ```
-The skeleton representation looks like this:
-
-![](Assets/debug_description.png)
 
 Besides, you can activate the new **debug mode**. You just add the environment variable `SKELETON_DEBUG` and activate it.
 
@@ -555,11 +560,21 @@ Besides, you can activate the new **debug mode**. You just add the environment v
 
 Then, when the skeleton appears, you can see the view hierarchy in the Xcode console.
 
-<details>
-<summary>Open to see an output example </summary>
-<img src="Assets/hierarchy_output.png" />
-</details>
-
+```
+{ 
+  "type" : "UIView", // UITableView, UILabel...
+  "isSkeletonable" : true,
+  "reference" : "0x000000014751ce30",
+  "children" : [
+    {
+      "type" : "UIView",
+      "isSkeletonable" : true,
+      "children" : [ ... ],
+      "reference" : "0x000000014751cfa0"
+    }
+  ]
+}
+```
   
 **Supported OS & SDK Versions**
 

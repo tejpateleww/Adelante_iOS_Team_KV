@@ -4,7 +4,7 @@
 //
 //  Created by EWW071 on 13/03/20.
 //  Copyright © 2020 EWW071. All rights reserved.
-//
+//  pod 'BraintreeDropIn'
 
 import UIKit
 import IQKeyboardManagerSwift
@@ -13,7 +13,7 @@ import UserNotifications
 import CoreLocation
 import GooglePlaces
 import GoogleMaps
-import Braintree 
+
 
 @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
     
@@ -28,7 +28,7 @@ import Braintree
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        setupNavigation()
-        BTAppContextSwitcher.setReturnURLScheme("com.eww.adelante.payments")
+//        BTAppContextSwitcher.setReturnURLScheme("com.eww.adelante.payments")
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 //        FirebaseApp.configure()
@@ -82,14 +82,7 @@ import Braintree
                 }
             }
         }
-        
         return true
-    }
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if url.scheme?.localizedCaseInsensitiveCompare("com.eww.adelante.payments") == .orderedSame {
-            return BTAppContextSwitcher.handleOpenURL(url)
-        }
-        return false
     }
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")

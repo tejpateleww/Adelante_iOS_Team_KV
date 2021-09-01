@@ -27,19 +27,17 @@ struct structFilter {
 class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
     
     
-    //    func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
-    //
-    //        self.SelectedCatId = CategoryId
-    //        self.webserviceGetDashboard()
-    //    }
+//        func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
+//
+//            self.SelectedCatId = CategoryId
+//            return webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+//        }
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrFilter = [structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: ""),
                      structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title1".Localized()),
                      structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title2".Localized()),
                      structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title3".Localized())] //["","Mobile Pickup", "Recently Viewed", "Top Rated"]
-    var arrImagesForPage = ["dummyRest1", "dummyRest2" , "dummyRest1"]
-    var arrImages = ["dummyRest1", "dummyRest2" , "dummyRest1", "dummyRest1", "dummyRest2" , "dummyRest1"]
     var selectedSortTypedIndexFromcolVwFilter = 1
     var refresher = UIRefreshControl()
     var arrCategories = [Category]()
@@ -79,7 +77,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         setUpLocalizedStrings()
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        self.SelectedCategory(SelectedCatId, SelectedCatIndex)
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshListing), for: .valueChanged)
         let button = UIButton()
@@ -93,6 +91,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
         print("homeVc \(#function)")
+//        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
     }

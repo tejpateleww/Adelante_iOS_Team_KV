@@ -47,6 +47,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : "In-Process")
         tblOrders.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        self.tblOrders.reloadData()
         setup()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
@@ -54,7 +55,6 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
-        
         if let _ = SingletonClass.sharedInstance.selectInProcessInMyOrder{
             self.segment.setIndex(1)
             self.segmentControlChanged(self.segment)
@@ -93,7 +93,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 webserviceGetOrderDetail(selectedOrder:  "In-Process")
             }
         }else{
-            webserviceGetOrderDetail(selectedOrder:  "In-Process")
+            webserviceShareList()
         }
         self.tblOrders.reloadData()
     }
@@ -502,9 +502,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     if self.selectedSegmentTag == 0 {
                         self.arrPastList.removeAll()
                         self.tblOrders.reloadData()
-                    } else {
+                    } else if self.selectedSegmentTag == 1{
                         self.arrInProcessList.removeAll()
                         self.tblOrders.reloadData()
+                    } else{
+                        self.webserviceShareList()
                     }
                     
                 }
@@ -536,10 +538,15 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 self.tblOrders.isUserInteractionEnabled = true
                 self.tblOrders.reloadData()
             }else{
-                if let strMessage = response["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
+                if(response["data"] != nil){
+                    self.arrShareList.removeAll()
+                    self.tblOrders.reloadData()
+                }else{
+                    if let strMessage = response["message"].string {
+                        Utilities.displayAlert(strMessage)
+                    }else {
+                        Utilities.displayAlert("Something went wrong")
+                    }
                 }
             }
         })

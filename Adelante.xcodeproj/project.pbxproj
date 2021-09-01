@@ -534,6 +534,8 @@
 		8851B9E526A143CE00D614EA /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		8851B9E626A143CF00D614EA /* SubMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMenu.swift; sourceTree = "<group>"; };
 		8851B9EA26A14C0D00D614EA /* updateQtyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = updateQtyItem.swift; sourceTree = "<group>"; };
+		8858494E26DF684700AECD98 /* Braintree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Braintree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8858494F26DF684700AECD98 /* BraintreeDropIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BraintreeDropIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		886FE1ED26CE18BC0000FA08 /* ShareOrderListDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareOrderListDatum.swift; sourceTree = "<group>"; };
 		886FE1EE26CE18BC0000FA08 /* shareOrderListResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shareOrderListResModel.swift; sourceTree = "<group>"; };
 		88736F43269C22ED00400087 /* FoodMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodMenu.swift; sourceTree = "<group>"; };
@@ -1374,6 +1376,8 @@
 		B7F05C3E06CAA5224C293454 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8858494E26DF684700AECD98 /* Braintree.framework */,
+				8858494F26DF684700AECD98 /* BraintreeDropIn.framework */,
 				4C5F2D505CEAA7CF6129117F /* Pods_Adelante.framework */,
 			);
 			name = Frameworks;
@@ -2000,7 +2004,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2026,7 +2030,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

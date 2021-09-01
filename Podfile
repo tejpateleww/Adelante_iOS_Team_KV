@@ -24,5 +24,4 @@ pod 'Alamofire', '5.0'
     pod 'SkeletonView'
     pod 'Socket.IO-Client-Swift', '~> 15.2.0'
     pod 'BraintreeDropIn'
-    pod 'Braintree'
 end
