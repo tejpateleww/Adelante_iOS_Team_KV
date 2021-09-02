@@ -180,7 +180,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        if let name = URL(string: "https://www.adelantemovil.com/home?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
+                        if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(obj.id ?? "")"){
+                            //URL(string: "https://www.adelantemovil.com/home?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
                           let objectsToShare = [name]
                           let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                           self.present(activityVC, animated: true, completion: nil)
@@ -260,7 +261,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
 //                        if let https://www.adelantemovil.com
-                        if let name = URL(string: "https://www.adelantemovil.com/home?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
+                        if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
                           let objectsToShare = [name]
                           let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                           self.present(activityVC, animated: true, completion: nil)
@@ -339,7 +340,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        if let name = URL(string: "https://www.adelantemovil.com/home?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
+                        if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
                           let objectsToShare = [name]
                           let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                           self.present(activityVC, animated: true, completion: nil)

@@ -21,6 +21,7 @@ import GoogleMaps
     var locationManager: CLLocationManager?
     var fromPushUserId = String()
     var fromPushItemId = String()
+    
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
@@ -31,6 +32,7 @@ import GoogleMaps
 //        BTAppContextSwitcher.setReturnURLScheme("com.eww.adelante.payments")
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 //        FirebaseApp.configure()
         if let url = launchOptions?[.url] as? URL, let annotation = launchOptions?[.annotation] {
 //            return self.application(application, open: url, sourceApplication: launchOptions?[.sourceApplication] as? String, annotation: annotation)
@@ -49,6 +51,14 @@ import GoogleMaps
         return true
     }
     
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//
+//        print("click url is \(url)")
+//        let token = url.valueOf("token") ?? ""
+//        let email = url.valueOf("email") ?? ""
+//
+//        return true
+//    }
     func setUpLocationServices() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -74,16 +84,90 @@ import GoogleMaps
             print(url)
             
             let myUrl: String? = userActivity.webpageURL?.absoluteString
-            let userId = url.valueOf("user_id")
-            let Order_id = url.valueOf("order_id")
-//            fromPushItemId = userId ?? ""
-            if myUrl?.range(of: "home") != nil {
+            let itemID = url.valueOf("itemid")
+            fromPushItemId = itemID ?? ""
+            if myUrl?.range(of: "item") != nil {
                 if let _ = (self.window?.rootViewController as! UINavigationController).viewControllers.first as? SplashVC {
+                
+                    NotificationCenter.default.addObserver(self, selector: #selector(OnLinkClickToNavigate), name: NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
+                                           
                 }
-            }
+                else {
+                     OnLinkClickToNavigate()
+                }
+                
+              }
         }
+        
         return true
     }
+    
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let appUrl = URL(string: "https://www.adelantemovil.com/admin/item/view?itemid=151")
+        if UIApplication.shared.canOpenURL(appUrl!) {
+            UIApplication.shared.open(appUrl!, options: [:], completionHandler: nil)
+            //If you want handle the completion block than
+            UIApplication.shared.open(appUrl!, options: [:], completionHandler: { (success) in
+                 print("Open url : \(success)")
+            })
+        }
+      return true
+    }
+    @objc func OnLinkClickToNavigate(){
+        if UserDefaults.standard.value(forKey: "IsLogin") != nil{
+            if UserDefaults.standard.value(forKey: "IsLogin") as! Bool{
+                
+                if let Navigation = appDel.window?.rootViewController as? UINavigationController{
+                    let tabVC = Navigation.children.first as? CustomTabBarVC
+                    if tabVC?.selectedIndex == 3 || tabVC?.selectedIndex == 0 || tabVC?.selectedIndex == 1 || tabVC?.selectedIndex == 4{
+                        let selectedIndex = tabVC?.selectedIndex
+                        let nav = tabVC?.children[selectedIndex!] as? UINavigationController
+                        if ((nav?.topViewController as? MyOrdersVC) != nil){
+                            if nav?.presentedViewController != nil{
+                                if (nav?.presentedViewController?.isKind(of: addPaymentVC.self)) != nil{
+                                    nav?.dismiss(animated: true, completion: nil)
+                                }
+                              
+                            }
+                            
+                            let ItemDetailVC = nav?.topViewController as! MyOrdersVC
+                            ItemDetailVC.strOrderId = fromPushItemId
+                            ItemDetailVC.webserviceGetOrderDetail(selectedOrder: ItemDetailVC.strOrderId)
+                        }
+                            
+                        else{
+                            tabVC?.selectedIndex = 0
+                            let nav = tabVC!.children[0] as? UINavigationController
+                            let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC//MyOrdersVC.instantiate(appStoryboard: .main)
+                            itemDetailVC.strOrderId = fromPushItemId
+                            //itemDetailVC.isFromOthersProfile = true
+                            
+                            nav?.pushViewController(itemDetailVC, animated: true)
+                        }
+                    }
+                    else {
+                        tabVC?.selectedIndex = 0
+                        let nav = tabVC?.children[0] as? UINavigationController
+                        let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC
+                        itemDetailVC.strOrderId = fromPushItemId
+                        //itemDetailVC.isFromOthersProfile = true
+                        
+                        nav?.pushViewController(itemDetailVC, animated: true)
+                    }
+                }
+            }
+            else{
+                Utilities.ShowAlert(OfMessage: "Please login before you proceed")//OkalerwithAction(Msg: "Please login before you proceed") {
+            }
+        }
+        else {
+            
+            Utilities.ShowAlert(OfMessage: "Please login before you proceed")//OkalerwithAction(Msg: "Please login before you proceed") {
+            }
+    }
+    
+   
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
     }

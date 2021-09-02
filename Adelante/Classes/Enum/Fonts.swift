@@ -47,29 +47,6 @@ enum CustomFont{
         case .AileronRegular:
             return UIFont(name: "Aileron-Regular", size: font)!
             
-        // Nexa
-//        case .NexaBlackItalic:
-//            return UIFont(name: "Nexa-BlackItalic", size: font)!
-//        case .NexaBookItalic:
-//            return UIFont(name: "Nexa-BookItalic", size: font)!
-//        case .NexaBlack:
-//            return UIFont(name: "Nexa-Black", size: font)!
-//        case .NexaBoldItalic:
-//            return UIFont(name: "Nexa-BoldItalic", size: font)!
-//        case .NexaLightItalic:
-//            return UIFont(name: "Nexa-LightItalic", size: font)!
-//        case .NexaThinItalic:
-//            return UIFont(name: "Nexa-ThinItalic", size: font)!
-//        case .NexaThin:
-//            return UIFont(name: "Nexa-Thin", size: font)!
-//        case .NexaLight:
-//            return UIFont(name: "Nexa-Light", size: font)!
-//        case .NexaBold:
-//            return UIFont(name: "NexaBold", size: font)!
-//        case .NexaBook:
-//            return UIFont(name: "Nexa-Book", size: font)!
-//        case .NexaRegular:
-//            return UIFont(name: "NexaRegular", size: font)!
             
         // Nunito Replacement
         case .NexaBlackItalic:
