@@ -35,7 +35,7 @@ import GoogleMaps
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 //        FirebaseApp.configure()
         if let url = launchOptions?[.url] as? URL, let annotation = launchOptions?[.annotation] {
-//            return self.application(application, open: url, sourceApplication: launchOptions?[.sourceApplication] as? String, annotation: annotation)
+            return self.application(application, open: url)//(application, open: url, sourceApplication: launchOptions?[.sourceApplication] as? String, annotation: annotation)
         }
         checkAndSetDefaultLanguage()
         navigateToSplash()
