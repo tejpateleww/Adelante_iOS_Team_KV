@@ -137,6 +137,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     }
     @objc func refreshListing(){
         responseStatus = .initial
+        arrRestaurant.removeAll()
         tblMainList.reloadData()
         colVwRestWthPage.reloadData()
         colVwFilterOptions.reloadData()
@@ -283,7 +284,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
                 cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
                 cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedSortTypedIndexFromcolVwFilter))
+//                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedSortTypedIndexFromcolVwFilter - 1))
             }
             else {
                 cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
@@ -365,7 +366,11 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if responseStatus == .gotData{
-            return arrRestaurant.count
+            if arrRestaurant.count != 0 {
+                return arrRestaurant.count
+            }else{
+                return 1
+            }
         }
         return 3
     }
@@ -434,7 +439,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             if arrRestaurant.count != 0 {
                 return UITableView.automaticDimension
             }else{
-                return tableView.frame.height
+                return tableView.frame.height / 2 + 60
             }
         }else {
             return responseStatus == .gotData ?  230 : 131
@@ -478,13 +483,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "")
-        
-        
+        self.webserviceGetDashboard(isFromFilter:false, strTabfilter: "")
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
-        
         DispatchQueue.main.async {
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.colVwFilterOptions.reloadItems(at: [IndexPath(item: 0, section: 0)])
@@ -568,7 +570,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     }
                 }else{
                     self.tblMainList.reloadData()
-                    
                 }
             }else{
                 if let strMessage = response["message"].string {

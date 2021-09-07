@@ -81,9 +81,8 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         btnSave.setTitle("AddCardVC_btnSave".Localized(), for: .normal)
     }
     func pickerSetup() {
-    let calendar = Calendar.current
-    let currentYear = calendar.component(.year, from: Date())
-
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
     }
     
     func setUpDatePicker() {

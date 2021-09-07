@@ -32,6 +32,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var OrderDetails : String?
     var orderid = ""
     var isfromPayment : Bool = false
+    
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
@@ -80,6 +82,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             // Continue to the next section to learn more...
         }.resume()
     }
+
     func showDropIn(clientTokenOrTokenizationKey: String) {
         let request =  BTDropInRequest()
         
@@ -94,6 +97,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 let selectedPaymentMethod = result.paymentMethod
                 let selectedPaymentMethodIcon = result.paymentIcon
                 let selectedPaymentMethodDescription = result.paymentDescription
+                
             }
             controller.dismiss(animated: true, completion: nil)
         })
