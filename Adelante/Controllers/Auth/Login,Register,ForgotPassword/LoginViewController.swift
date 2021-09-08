@@ -57,7 +57,7 @@ class LoginViewController: BaseViewController {
         if validation(){
             webserviceForlogin()
         }
-       }
+    }
     //MARK:- Other Method
     func setUpLocalizedStrings() {
         lblTitle.text = "LoginViewController_lblTitle".Localized()
@@ -92,7 +92,17 @@ class LoginViewController: BaseViewController {
                 userDefault.setValue(loginModelDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 userDefault.setUserData(objProfile: loginModelDetails!)
-                appDel.navigateToHome()
+                if self.navigationController?.children.count == 1 {
+                    if SingletonClass.sharedInstance.isPresented  {
+                        SingletonClass.sharedInstance.isPresented = false
+                        self.navigationController?.dismiss(animated: true, completion: nil)
+                    } else {
+                        appDel.navigateToHome()
+                    }
+                }else{
+                    appDel.navigateToHome()
+                }
+                
             }
             else
             {

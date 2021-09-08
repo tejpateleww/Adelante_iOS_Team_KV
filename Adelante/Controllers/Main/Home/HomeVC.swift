@@ -34,11 +34,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
 //        }
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrFilter = [structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: ""),
-                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title1".Localized()),
-                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title2".Localized()),
-                     structFilter(strselectedImage: UIImage(), strDeselectedImage: UIImage(), strTitle: "HomeVC_arrFilter_title3".Localized())] //["","Mobile Pickup", "Recently Viewed", "Top Rated"]
-    var selectedSortTypedIndexFromcolVwFilter = 1
+    var arrFilter = ["HomeVC_arrFilter_title1".Localized(),"HomeVC_arrFilter_title2".Localized(),"HomeVC_arrFilter_title3".Localized()]
+//    structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: "")//["","Mobile Pickup", "Recently Viewed", "Top Rated"]
+    var selectedSortTypedIndexFromcolVwFilter = 0
     var refresher = UIRefreshControl()
     var arrCategories = [Category]()
     var arrRestaurant  = [Restaurant]()
@@ -53,6 +51,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var selectedRestaurantId = ""
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
+    var selectedIndex = 0
     let activityView = UIActivityIndicatorView(style: .white)
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
@@ -75,6 +74,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         super.viewDidLoad()
         registerNIB()
         setUpLocalizedStrings()
+        
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
         self.SelectedCategory(SelectedCatId, SelectedCatIndex)
@@ -147,7 +147,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
     }
     @objc func deSelectFilterAndRefresh() {
-        selectedSortTypedIndexFromcolVwFilter = -1
+        selectedSortTypedIndexFromcolVwFilter = 1
         colVwFilterOptions.reloadData()
     }
     func setUpLocalizedStrings(){
@@ -215,33 +215,36 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         
     }
     
+    @IBAction func btnFilterClick(_ sender: Any) {
+        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID) as! sortPopupVC
+        vc.delegateFilter = self
+        vc.selectedSortData = self.SelectFilterId
+        let navController = UINavigationController.init(rootViewController: vc)
+        navController.modalPresentationStyle = .overFullScreen
+        navController.navigationController?.modalTransitionStyle = .crossDissolve
+        navController.navigationBar.isHidden = true
+        self.present(navController, animated: true, completion: nil)
+    }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
         DispatchQueue.main.async {
-            if self.selectedSortTypedIndexFromcolVwFilter == -1 {
-                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
-                let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
-                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
-                self.tblMainList.reloadData()
-            }
-            else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
-                self.selectedSortTypedIndexFromcolVwFilter = 1
-                self.colVwFilterOptions.reloadData()
-                self.tblMainList.reloadData()
-            } else {
-                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
-                self.colVwFilterOptions.reloadData()
-                self.tblMainList.reloadData()
-            }
-            if self.selectedSortTypedIndexFromcolVwFilter == 0 {
-                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID) as! sortPopupVC
-                vc.delegateFilter = self
-                vc.selectedSortData = self.SelectFilterId
-                let navController = UINavigationController.init(rootViewController: vc)
-                navController.modalPresentationStyle = .overFullScreen
-                navController.navigationController?.modalTransitionStyle = .crossDissolve
-                navController.navigationBar.isHidden = true
-                self.present(navController, animated: true, completion: nil)
-            }
+//            if self.selectedSortTypedIndexFromcolVwFilter == 1 {
+//                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+//                let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
+//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+//                self.tblMainList.reloadData()
+//            }
+//            else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
+//                self.selectedSortTypedIndexFromcolVwFilter = 1
+//                self.colVwFilterOptions.reloadData()
+//                self.tblMainList.reloadData()
+//            } else {
+//                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+//                self.colVwFilterOptions.reloadData()
+//                self.tblMainList.reloadData()
+//            }
+//            if self.selectedSortTypedIndexFromcolVwFilter == 0 {
+                
+//            }
         }
     }
 }
@@ -278,22 +281,22 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         if collectionView == self.colVwFilterOptions{
             let cell = colVwFilterOptions.dequeueReusableCell(withReuseIdentifier: FilterOptionsCell.reuseIdentifier, for: indexPath) as! FilterOptionsCell
-            cell.btnFilterOptions.setTitle(arrFilter[indexPath.row].strTitle, for: .normal)
+            cell.btnFilterOptions.setTitle(arrFilter[indexPath.row], for: .normal)
             
-            if selectedSortTypedIndexFromcolVwFilter != -1 && selectedSortTypedIndexFromcolVwFilter == indexPath.row {
-                cell.btnFilterOptions.backgroundColor = colors.segmentSelectedColor.value
-                cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strselectedImage, for: .normal)
-                cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-//                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedSortTypedIndexFromcolVwFilter - 1))
-            }
-            else {
-                cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
-                cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strDeselectedImage, for: .normal)
-                cell.btnFilterOptions.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
-            }
-            cell.btnFilterOptions.isUserInteractionEnabled = true
-            cell.btnFilterOptions.tag = indexPath.row
-            cell.btnFilterOptions.addTarget(self, action: #selector(btnFilterClicked(_:)), for: .touchUpInside)
+            //            if selectedIndex == indexPath.row {//selectedSortTypedIndexFromcolVwFilter != -1 && selectedSortTypedIndexFromcolVwFilter
+            cell.btnFilterOptions.backgroundColor = (selectedIndex == indexPath.row) ? colors.segmentSelectedColor.value : colors.segmentDeselectedColor.value
+            //                cell.btnFilterOptions.setImage(selectedIndex == indexPath.row, for: .normal)
+            //                cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
+            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
+            //            }
+            //            else {
+            //                cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
+            //                cell.btnFilterOptions.setImage(arrFilter[indexPath.row].strDeselectedImage, for: .normal)
+            //                cell.btnFilterOptions.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
+            //            }
+            //            cell.btnFilterOptions.isUserInteractionEnabled = true
+            //            cell.btnFilterOptions.tag = indexPath.row
+            //            cell.btnFilterOptions.addTarget(self, action: #selector(btnFilterClicked(_:)), for: .touchUpInside)
             return cell
         }else {
             if responseStatus == .gotData{
@@ -322,18 +325,16 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     return NoDatacell
                 }
             }else{
-                    let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
-                    return cell
-                }
+                let cell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: ShimmarCollectionCell.reuseIdentifier, for: indexPath) as! ShimmarCollectionCell
+                return cell
             }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.colVwFilterOptions{
-            if indexPath.row == 0 {
-                return CGSize(width: colVwFilterOptions.frame.size.height, height: colVwFilterOptions.frame.size.height)
-            }
-            let s = arrFilter[indexPath.row].strTitle.size(withAttributes:[.font: CustomFont.NexaRegular.returnFont(14)])
+            
+            let s = arrFilter[indexPath.row].size(withAttributes:[.font: CustomFont.NexaRegular.returnFont(14)])
             return CGSize(width: s.width + 20, height: colVwFilterOptions.frame.size.height)
         } else {
             return CGSize(width: colVwRestWthPage.frame.size.width, height: colVwRestWthPage.frame.size.height)
@@ -347,7 +348,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView != self.colVwFilterOptions{
+        if collectionView == self.colVwFilterOptions{
+            selectedIndex = indexPath.row
+            colVwFilterOptions.reloadData()
+        }else{
             let restaurantListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID) as! RestaurantListVC
             //restaurantListVc.strItemId = arrBanner[indexPath.row].id
             self.navigationController?.pushViewController(restaurantListVc, animated: true)
@@ -456,9 +460,31 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         headerCell?.selectedIndexPath = self.SelectedCatIndex
         headerCell?.colRestaurantCatList.reloadData()
         headerCell?.selectionStyle = .none
+        headerCell?.filter = {
+            self.headerCell?.selectedIdForFood = "-1"
+            self.headerCell?.colRestaurantCatList.reloadData()
+            if self.headerCell?.btnFilter.isSelected == true{
+                self.headerCell?.btnFilter.backgroundColor = colors.segmentDeselectedColor.value
+                self.headerCell?.btnFilter.setImage(UIImage(named: "filterImage"), for: .normal)
+                self.headerCell?.btnFilter.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
+            }else{
+                self.headerCell?.btnFilter.backgroundColor = colors.segmentSelectedColor.value
+                self.headerCell?.btnFilter.setImage(UIImage(named: "filterImageSelected"), for: .normal)
+                self.headerCell?.btnFilter.setTitleColor(colors.black.value.withAlphaComponent(0.3), for: .normal)
+            }
+            DispatchQueue.main.async {
+                let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: sortPopupVC.storyboardID) as! sortPopupVC
+                vc.delegateFilter = self
+                vc.selectedSortData = self.SelectFilterId
+                let navController = UINavigationController.init(rootViewController: vc)
+                navController.modalPresentationStyle = .overFullScreen
+                navController.navigationController?.modalTransitionStyle = .crossDissolve
+                navController.navigationBar.isHidden = true
+                self.present(navController, animated: true, completion: nil)
+            }
+        }
         return headerCell
     }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
@@ -483,7 +509,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:false, strTabfilter: "")
+        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "")
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {

@@ -55,6 +55,7 @@
 "MyOrderVC_MyOrdersCess_btnRepeatOrder" = "Repeat Order";
 "MyOrderVC_MyOrdersCess_btnCancelOrder" = "Cancel Order";
 "MyOrderVC_MyOrdersCess_btnAcceptOrder" = "Accept Order";
+"MyOrderVC_MyOrdersCess_lblCancelOrder" = "Cancelled Order";
 "MyOrderVC_lblShareOrders" = "Share";
 
 //MyProfileVC

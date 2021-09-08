@@ -271,7 +271,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         default:
             return
         }
-        
         tblPaymentMethod.reloadData()
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

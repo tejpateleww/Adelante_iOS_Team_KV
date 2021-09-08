@@ -154,11 +154,24 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 if arrPastList.count != 0 {
                     let cell = tblOrders.dequeueReusableCell(withIdentifier: MyOrdersCell.reuseIdentifier, for: indexPath) as! MyOrdersCell
                     if selectedSegmentTag == 0 {
-                        cell.vwShare.isHidden = true
-                        cell.vwCancelOrder.isHidden = true
-                        cell.vwRepeatOrder.isHidden = false
-                        cell.vwAccept.isHidden = true
+                        if arrPastList[indexPath.row].trash == "1"{
+                            cell.vwShare.isHidden = true
+                            cell.vwCancelOrder.isHidden = false
+                            cell.vwRepeatOrder.isHidden = true
+                            cell.vwAccept.isHidden = true
+                            cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_lblCancelOrder".Localized(), for: .normal)
+                            cell.btnCancelOrder.isUserInteractionEnabled = false
+                            cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
+                        }else{
+                            cell.vwShare.isHidden = true
+                            cell.vwCancelOrder.isHidden = true
+                            cell.vwRepeatOrder.isHidden = false
+                            cell.vwAccept.isHidden = true
+                        }
                     } else if selectedSegmentTag == 1{
+                        cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
+                        cell.btnCancelOrder.isUserInteractionEnabled = true
+                        cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
                         cell.vwRepeatOrder.isHidden = true
@@ -190,6 +203,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         }
                     }
                     cell.Repeat = {
+                        
                         self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
                     }
                     strOrderId = obj.id
@@ -238,17 +252,21 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwCancelOrder.isHidden = true
                         cell.vwRepeatOrder.isHidden = false
                         cell.vwAccept.isHidden = true
-                    } else if selectedSegmentTag == 1 {
+                    } else if selectedSegmentTag == 1{
+                        cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
+                        cell.btnCancelOrder.isUserInteractionEnabled = true
+                        cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
                         cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = true
                     }else{
                         cell.vwShare.isHidden = true
-                        cell.vwRepeatOrder.isHidden = true
                         cell.vwCancelOrder.isHidden = true
+                        cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = false
                     }
+                    
                     
                     let obj = self.arrInProcessList[indexPath.row]
                     cell.lblRestName.text = obj.restaurantName
@@ -318,15 +336,18 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwCancelOrder.isHidden = true
                         cell.vwRepeatOrder.isHidden = false
                         cell.vwAccept.isHidden = true
-                    } else if selectedSegmentTag == 1 {
+                    } else if selectedSegmentTag == 1{
+                        cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
+                        cell.btnCancelOrder.isUserInteractionEnabled = true
+                        cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
                         cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = true
                     }else{
                         cell.vwShare.isHidden = true
-                        cell.vwRepeatOrder.isHidden = true
                         cell.vwCancelOrder.isHidden = true
+                        cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = false
                     }
                     

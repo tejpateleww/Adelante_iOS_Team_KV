@@ -8511,12 +8511,8 @@
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="bottom" secondItem="KKh-5y-pJy" secondAttribute="bottom" id="AZS-TD-6i9"/>
                                                                                             <constraint firstItem="KKh-5y-pJy" firstAttribute="top" secondItem="K2J-u0-Db2" secondAttribute="top" id="BOx-Rm-mCa"/>
-                                                                                            <constraint firstAttribute="bottom" secondItem="KKh-5y-pJy" secondAttribute="bottom" id="C1h-v0-TfB"/>
                                                                                             <constraint firstItem="KKh-5y-pJy" firstAttribute="leading" secondItem="K2J-u0-Db2" secondAttribute="leading" id="LMz-mE-Ovz"/>
                                                                                             <constraint firstAttribute="trailing" secondItem="KKh-5y-pJy" secondAttribute="trailing" id="LfY-no-P4Q"/>
-                                                                                            <constraint firstAttribute="trailing" secondItem="KKh-5y-pJy" secondAttribute="trailing" id="TME-kX-abO"/>
-                                                                                            <constraint firstItem="KKh-5y-pJy" firstAttribute="leading" secondItem="K2J-u0-Db2" secondAttribute="leading" id="ZcD-Rn-EgY"/>
-                                                                                            <constraint firstItem="KKh-5y-pJy" firstAttribute="top" secondItem="K2J-u0-Db2" secondAttribute="top" id="j1k-Qi-9kI"/>
                                                                                             <constraint firstItem="KKh-5y-pJy" firstAttribute="height" secondItem="K2J-u0-Db2" secondAttribute="height" multiplier="1:1" id="nXL-Z6-5jz"/>
                                                                                         </constraints>
                                                                                     </collectionViewCellContentView>
@@ -8700,8 +8696,33 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3h-Nq-A5K">
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="38"/>
                                                                     <subviews>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1c4-kS-gk4">
+                                                                            <rect key="frame" x="18" y="0.0" width="38" height="38"/>
+                                                                            <subviews>
+                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipn-5m-q4f">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
+                                                                                    <color key="backgroundColor" red="0.95294117647058818" green="0.96078431372549022" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" secondItem="ipn-5m-q4f" secondAttribute="height" multiplier="1:1" id="kEO-lZ-TMi"/>
+                                                                                        <constraint firstAttribute="height" constant="38" id="vfZ-YR-mre"/>
+                                                                                    </constraints>
+                                                                                    <state key="normal" image="filterImage"/>
+                                                                                    <state key="selected" image="filterImageSelected"/>
+                                                                                    <connections>
+                                                                                        <action selector="btnFilterClick:" destination="f9n-wp-Ncb" eventType="touchUpInside" id="lPj-eW-0Mq"/>
+                                                                                    </connections>
+                                                                                </button>
+                                                                            </subviews>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <constraints>
+                                                                                <constraint firstItem="ipn-5m-q4f" firstAttribute="leading" secondItem="1c4-kS-gk4" secondAttribute="leading" id="9e1-Lp-Idg"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="ipn-5m-q4f" secondAttribute="bottom" id="AsU-CU-lMP"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="ipn-5m-q4f" secondAttribute="trailing" id="UPC-Y4-M4z"/>
+                                                                                <constraint firstItem="ipn-5m-q4f" firstAttribute="top" secondItem="1c4-kS-gk4" secondAttribute="top" id="YhP-bg-ELJ"/>
+                                                                            </constraints>
+                                                                        </view>
                                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eQQ-nL-PC4">
-                                                                            <rect key="frame" x="18" y="0.0" width="394" height="38"/>
+                                                                            <rect key="frame" x="66" y="0.0" width="346" height="38"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="38" id="FUk-XY-yLb"/>
@@ -8796,8 +8817,11 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
+                                                                        <constraint firstItem="1c4-kS-gk4" firstAttribute="top" secondItem="H3h-Nq-A5K" secondAttribute="top" id="0EP-ie-Ggb"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="1c4-kS-gk4" secondAttribute="bottom" id="H9B-6y-YRl"/>
+                                                                        <constraint firstItem="1c4-kS-gk4" firstAttribute="leading" secondItem="H3h-Nq-A5K" secondAttribute="leading" constant="18" id="Op6-Yy-t9E"/>
                                                                         <constraint firstAttribute="bottom" secondItem="eQQ-nL-PC4" secondAttribute="bottom" id="Pte-GY-E3g"/>
-                                                                        <constraint firstItem="eQQ-nL-PC4" firstAttribute="leading" secondItem="H3h-Nq-A5K" secondAttribute="leading" constant="18" id="o3D-f9-RBw"/>
+                                                                        <constraint firstItem="eQQ-nL-PC4" firstAttribute="leading" secondItem="1c4-kS-gk4" secondAttribute="trailing" constant="10" id="Qw1-Na-ti5"/>
                                                                         <constraint firstAttribute="trailing" secondItem="eQQ-nL-PC4" secondAttribute="trailing" constant="2" id="plx-s8-dV0"/>
                                                                         <constraint firstItem="eQQ-nL-PC4" firstAttribute="top" secondItem="H3h-Nq-A5K" secondAttribute="top" id="rZv-Ti-PGe"/>
                                                                     </constraints>
@@ -8811,6 +8835,7 @@
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="btnFilter" destination="ipn-5m-q4f" id="uzf-Rd-MWW"/>
                                                             <outlet property="colRestaurantCatList" destination="eQQ-nL-PC4" id="LK9-qt-uTs"/>
                                                         </connections>
                                                     </tableViewCell>

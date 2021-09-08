@@ -145,7 +145,7 @@ class RegisterViewController: UIViewController {
             Utilities.showAlert(AppInfo.appName, message: invalidPhone.1, vc: self)
             return invalidPhone.0
         }
-        else if (txtPhoneNumber.text?.count ?? 0) < 9 {
+        else if (txtPhoneNumber.text?.count ?? 0) <= 9 {
             Utilities.showAlert(AppInfo.appName, message: "Please enter valid phone number", vc: self)
             return false
         }

@@ -559,6 +559,7 @@ class tblMyOrdersLabel: UILabel {
     @IBInspectable var isItemName:Bool = false
     @IBInspectable var isItemSize:Bool = false
     @IBInspectable var isItemPrice:Bool = false
+    @IBInspectable var isCancelled : Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -582,6 +583,9 @@ class tblMyOrdersLabel: UILabel {
             self.textColor = UIColor(hexString: "#000000").withAlphaComponent(0.33)
         } else if isItemPrice {
             self.font = CustomFont.NexaBold.returnFont(12)
+        } else if isCancelled {
+            self.font = CustomFont.NexaBold.returnFont(14)
+            self.textColor = UIColor.red
         }
     }
 }

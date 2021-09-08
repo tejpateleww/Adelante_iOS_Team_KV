@@ -16,40 +16,52 @@ import SDWebImage
 class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     var selectedIdForFood = "0"
+    var isAllSelected : Bool = false
     var delegateResCatCell : RestaurantCatListDelegate?
     var arrCategories = [Category]()
     var selectedIndexPath = IndexPath()
     @IBOutlet weak var colRestaurantCatList: UICollectionView!
+    @IBOutlet weak var btnFilter: collectionVwFilterBtns!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        btnFilter.layer.cornerRadius = btnFilter.layer.bounds.height / 2
         self.colRestaurantCatList.delegate = self
         self.colRestaurantCatList.dataSource = self
+    }
+    var filter : (() -> ())?
+    @IBAction func btnFilterClick(_ sender: Any) {
+        if let click = self.filter{
+            click()
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrCategories.count
+            return arrCategories.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = colRestaurantCatList.dequeueReusableCell(withReuseIdentifier: RestaurantCategoryCell.reuseIdentifier, for: indexPath) as! RestaurantCategoryCell
-        cell.lblCategory.text = arrCategories[indexPath.row].name
-        let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrCategories[indexPath.row].image ?? "")"
-        cell.imgCategory.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        cell.imgCategory.sd_setImage(with: URL(string: strUrl), placeholderImage: UIImage())
-        if arrCategories[indexPath.row].id.contains(selectedIdForFood)
-        {
-            cell.viewCategory.backgroundColor = colors.segmentSelectedColor.value
-            cell.lblCategory.textColor = UIColor.black
+            let cell = colRestaurantCatList.dequeueReusableCell(withReuseIdentifier: RestaurantCategoryCell.reuseIdentifier, for: indexPath) as! RestaurantCategoryCell
+            cell.lblCategory.text = arrCategories[indexPath.row].name
+            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrCategories[indexPath.row].image ?? "")"
+            cell.imgCategory.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.imgCategory.sd_setImage(with: URL(string: strUrl), placeholderImage: UIImage())
+        if !isAllSelected {
+            
         } else {
-            cell.viewCategory.backgroundColor = colors.segmentDeselectedColor.value
-            cell.lblCategory.textColor = UIColor.init(hexString: "#A9ABAE")
+            
         }
-        
-        return cell
+            if arrCategories[indexPath.row].id.contains(selectedIdForFood)
+            {
+                cell.viewCategory.backgroundColor = colors.segmentSelectedColor.value
+                cell.lblCategory.textColor = UIColor.black
+            } else {
+                cell.viewCategory.backgroundColor = colors.segmentDeselectedColor.value
+                cell.lblCategory.textColor = UIColor.init(hexString: "#A9ABAE")
+            }
+            return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -58,17 +70,17 @@ class RestaurantCatListCell: UITableViewCell,UICollectionViewDelegate,UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.selectedIdForFood == "" {
-            self.selectedIdForFood = self.arrCategories[indexPath.row].id
-            selectedIndexPath = IndexPath(item:indexPath.row, section: 0)
-        }
-        else if self.selectedIdForFood == self.arrCategories[indexPath.row].id{
-            self.selectedIdForFood = "0"
-            selectedIndexPath = IndexPath(item:0 , section: 0)
-        } else {
-            self.selectedIdForFood = self.arrCategories[indexPath.row].id
-            selectedIndexPath = IndexPath(item:indexPath.row , section: 0)
-        }
-        self.delegateResCatCell?.SelectedCategory(selectedIdForFood, selectedIndexPath)
+            if self.selectedIdForFood == "" {
+                self.selectedIdForFood = self.arrCategories[indexPath.row].id
+                selectedIndexPath = IndexPath(item:indexPath.row, section: 0)
+            }
+            else if self.selectedIdForFood == self.arrCategories[indexPath.row].id{
+                self.selectedIdForFood = "0"
+                selectedIndexPath = IndexPath(item:0 , section: 0)
+            } else {
+                self.selectedIdForFood = self.arrCategories[indexPath.row].id
+                selectedIndexPath = IndexPath(item:indexPath.row, section: 0)
+            }
+            self.delegateResCatCell?.SelectedCategory(selectedIdForFood, selectedIndexPath)
     }
 }
