@@ -13,9 +13,6 @@ import SkeletonView
 
 
 class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate,orderCancelDelegate,SkeletonTableViewDataSource {
-    
-    
-    
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var selectedSegmentTag = 0
@@ -170,7 +167,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         }
                     } else if selectedSegmentTag == 1{
                         cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
-                        cell.btnCancelOrder.isUserInteractionEnabled = true
+                        cell.btnCancelOrder.isUserInteractionEnabled = false
                         cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
@@ -254,7 +251,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwAccept.isHidden = true
                     } else if selectedSegmentTag == 1{
                         cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
-                        cell.btnCancelOrder.isUserInteractionEnabled = true
+                        cell.btnCancelOrder.isUserInteractionEnabled = false
                         cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
@@ -338,7 +335,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwAccept.isHidden = true
                     } else if selectedSegmentTag == 1{
                         cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
-                        cell.btnCancelOrder.isUserInteractionEnabled = true
+                        cell.btnCancelOrder.isUserInteractionEnabled = false
                         cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
