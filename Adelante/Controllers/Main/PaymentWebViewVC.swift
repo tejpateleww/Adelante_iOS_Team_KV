@@ -77,20 +77,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
      
         
         if str == callBackURL {
-            let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-            controller.isHideCancelButton = true
-            controller.isHideSubmitButton = false
-            controller.submitBtnTitle = "OK               "
-            controller.cancelBtnTitle = ""
-            controller.strDescription = ""
-            controller.strPopupTitle = "Payment Successful"
-            controller.submitBtnColor = colors.appGreenColor
-            controller.cancelBtnColor = colors.appRedColor
-            controller.strPopupImage = "ic_popupPaymentSucessful"
-            controller.isCancleOrder = true
-            
-            self.socketManageSetup()
-            controller.btnSubmit = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
                 controller.selectedIndex = 2
                 SingletonClass.sharedInstance.selectInProcessInMyOrder = true
@@ -98,7 +85,28 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
                 nav.navigationBar.isHidden = true
                 appDel.window?.rootViewController = nav
             }
-            self.present(controller, animated: true, completion: nil)
+//            let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+//            controller.isHideCancelButton = true
+//            controller.isHideSubmitButton = false
+//            controller.submitBtnTitle = "OK               "
+//            controller.cancelBtnTitle = ""
+//            controller.strDescription = ""
+//            controller.strPopupTitle = "Payment Successful"
+//            controller.submitBtnColor = colors.appGreenColor
+//            controller.cancelBtnColor = colors.appRedColor
+//            controller.strPopupImage = "ic_popupPaymentSucessful"
+//            controller.isCancleOrder = true
+//
+//            self.socketManageSetup()
+//            controller.btnSubmit = {
+//                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
+//                controller.selectedIndex = 2
+//                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+//                let nav = UINavigationController(rootViewController: controller)
+//                nav.navigationBar.isHidden = true
+//                appDel.window?.rootViewController = nav
+//            }
+//            self.present(controller, animated: true, completion: nil)
             
         }
         if str == self.cancelURL {

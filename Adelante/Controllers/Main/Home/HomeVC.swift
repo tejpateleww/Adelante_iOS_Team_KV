@@ -52,8 +52,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
     var selectedIndex = 0
-    var lat = String(userDefault.object(forKey: UserDefaultsKey.currentLat.rawValue) as? Double ?? 0.0)
-    var lng = String(userDefault.object(forKey: UserDefaultsKey.currentLng.rawValue) as? Double ?? 0.0)
+    var PlaceName = userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String
     let activityView = UIActivityIndicatorView(style: .white)
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
@@ -76,7 +75,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         super.viewDidLoad()
         registerNIB()
         setUpLocalizedStrings()
-        lblAddress.text = lat + lng
+        lblAddress.text = PlaceName
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
         self.SelectedCategory(SelectedCatId, SelectedCatIndex)
@@ -653,8 +652,8 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         print("Place name: \(place.name!)")
         print("Place ID: \(place.placeID!)")
-        userDefault.setValue(place.coordinate.latitude, forKey: UserDefaultsKey.currentLat.rawValue)
-        userDefault.setValue(place.coordinate.longitude, forKey: UserDefaultsKey.currentLng.rawValue)
+        userDefault.setValue(place.name, forKey: UserDefaultsKey.PlaceName.rawValue)
+        
         userDefault.synchronize()
         
         lblAddress.text =  place.name

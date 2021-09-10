@@ -135,7 +135,7 @@ struct EmailValidator: ValidatorConvertible {
         do {
             guard value.trimmingCharacters(in: .whitespacesAndNewlines) != "" else {return (false,ValidationError("Please enter email").message)}
             if try NSRegularExpression(pattern: "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$", options: .caseInsensitive).firstMatch(in: value, options: [], range: NSRange(location: 0, length: value.count)) == nil {
-                            return (false,ValidationError("Please enter valid email").message)
+                            return (false,ValidationError("Please enter a valid email").message)
                         }
         } catch {
             return (false,ValidationError("Please enter a valid email").message)

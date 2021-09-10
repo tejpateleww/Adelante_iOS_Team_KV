@@ -473,32 +473,18 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 if indexPath.row == 0 {
                     if WalletBalance < CartTotal {
                         IsWalletSelected = !IsWalletSelected
-                   
                     } else {
-                        
                         IsPaypalSelected = false
-                        
                         IsWalletSelected = !IsWalletSelected
-                        
-                        
                     }
-                    
-                   
-                    
                 } else {
                     if WalletBalance < CartTotal {
                         IsPaypalSelected = !IsPaypalSelected
-                   
                     } else {
-                        
                         IsWalletSelected = false
-                        
                         IsPaypalSelected = !IsPaypalSelected
-                        
-                        
                     }
                 }
-                
             }
             tblPaymentMethod.reloadData()
             /*
@@ -577,7 +563,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             } else {
                 WebServiceCallForOrder()
             }
-       
         } else {
             WebServiceCallForOrder()
         }
@@ -624,7 +609,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 
                print(json)
             } else {
-              
                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
                 
             }
@@ -645,10 +629,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             } else {
                 self.imgEmptyCard.isHidden = true
                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
-                
             }
         })
-        
     }
     
     
