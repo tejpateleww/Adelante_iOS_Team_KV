@@ -7,17 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "14F54B94-FA46-41A7-9A1E-DA54808D5DBA"
+            uuid = "C70D6A9E-1C1E-4991-AA8C-80874389C0FE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Adelante/Classes/BaseVc/BaseViewController.swift"
+            filePath = "Adelante/Controllers/Main/Home/HomeVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "btnBackAction()"
-            landmarkType = "7">
+            startingLineNumber = "656"
+            endingLineNumber = "656"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

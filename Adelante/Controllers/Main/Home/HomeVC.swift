@@ -52,6 +52,8 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
     var selectedIndex = 0
+    var lat = String(userDefault.object(forKey: UserDefaultsKey.currentLat.rawValue) as? Double ?? 0.0)
+    var lng = String(userDefault.object(forKey: UserDefaultsKey.currentLng.rawValue) as? Double ?? 0.0)
     let activityView = UIActivityIndicatorView(style: .white)
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
@@ -74,7 +76,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         super.viewDidLoad()
         registerNIB()
         setUpLocalizedStrings()
-        
+        lblAddress.text = lat + lng
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
         self.SelectedCategory(SelectedCatId, SelectedCatIndex)
@@ -152,7 +154,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     }
     func setUpLocalizedStrings(){
         lblMylocation.text = "HomeVC_lblMylocation".Localized()
-        lblAddress.text = "30 Memorial Drive, Avon MA 2322"
+//        lblAddress.text = "30 Memorial Drive, Avon MA 2322"
     }
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
@@ -651,6 +653,10 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         print("Place name: \(place.name!)")
         print("Place ID: \(place.placeID!)")
+        userDefault.setValue(place.coordinate.latitude, forKey: UserDefaultsKey.currentLat.rawValue)
+        userDefault.setValue(place.coordinate.longitude, forKey: UserDefaultsKey.currentLng.rawValue)
+        userDefault.synchronize()
+        
         lblAddress.text =  place.name
         SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         webserviceGetDashboard(isFromFilter: false, strTabfilter: "")

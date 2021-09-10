@@ -17,7 +17,8 @@ enum UserDefaultsKey : String {
     case X_API_KEY = "X_API_KEY"
     case DeviceToken = "DeviceToken"
     case selLanguage = "language"
-    
+    case currentLat = "currentLat"
+    case currentLng = "currentLng"
 }
 enum APIEnvironment : String{
     

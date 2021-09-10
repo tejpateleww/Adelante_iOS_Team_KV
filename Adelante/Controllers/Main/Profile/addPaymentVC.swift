@@ -15,6 +15,7 @@ import SocketIO
 import CoreLocation
 import GoogleMaps
 import BraintreeDropIn
+import Braintree
 
 class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSource,AddPaymentDelegate {
     
@@ -85,7 +86,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
 
     func showDropIn(clientTokenOrTokenizationKey: String) {
         let request =  BTDropInRequest()
-        
+
         let DropIN = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request, handler: { (controller, result, error) in
             if (error != nil) {
                 print("ERROR")
@@ -97,7 +98,17 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 let selectedPaymentMethod = result.paymentMethod
                 let selectedPaymentMethodIcon = result.paymentIcon
                 let selectedPaymentMethodDescription = result.paymentDescription
-                
+
+
+                let braintreeClient = BTAPIClient(authorization: self.ClientToken)!
+                let cardClient = BTCardClient(apiClient: braintreeClient)
+                let card = BTCard()
+                card.number = result.paymentMethod?.type//"4242424242424242"
+                card.expirationMonth = "12"
+                card.expirationYear = "2025"
+                cardClient.tokenizeCard(card) { (tokenizedCard, error) in
+                    // Communicate the tokenizedCard.nonce to your server, or handle error
+                }
             }
             controller.dismiss(animated: true, completion: nil)
         })
@@ -106,6 +117,73 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         }
     }
     
+    
+   /* func showDropIn(clientTokenOrTokenizationKey: String) {
+        let request =  BTDropInRequest()
+        request.applePayDisabled = false // Make sure that  applePayDisabled i sfalse
+
+        let dropIn = BTDropInController.init(authorization: clientTokenOrTokenizationKey, request: request) { (controller, result, error) in
+
+            if (error != nil) {
+                print("ERROR")
+                controller.dismiss(animated: true, completion: nil)
+            } else if (result?.isCanceled == true) {
+                print("CANCELLED")
+                controller.dismiss(animated: true, completion: nil)
+            } else if let result = result{
+
+                switch result.paymentMethodType {
+                case .applePay ,.payPal,.masterCard,.discover,.visa:
+                     // Here Result success  check paymentMethod not nil if nil then user select applePay
+                    if let paymentMethod = result.paymentMethod{
+                        //paymentMethod.nonce  You can use  nonce now
+                 controller.dismiss(animated: true, completion: nil)
+                    }else{
+
+                        controller.dismiss(animated: true, completion: {
+
+//                            self.ClientToken = BTAPIClient(authorization: clientTokenOrTokenizationKey)
+
+                            // call apple pay
+                            let paymentRequest = self.paymentRequest()
+
+                            // Example: Promote PKPaymentAuthorizationViewController to optional so that we can verify
+                            // that our paymentRequest is valid. Otherwise, an invalid paymentRequest would crash our app.
+
+                            if let vc = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
+                                as PKPaymentAuthorizationViewController?
+                            {
+                                vc.delegate = self
+                                self.present(vc, animated: true, completion: nil)
+                            } else {
+                                print("Error: Payment request is invalid.")
+                            }
+
+                        })
+
+
+
+
+                    }
+                default:
+                    print("error")
+                    controller.dismiss(animated: true, completion: nil)
+                }
+
+                // Use the BTDropInResult properties to update your UI
+                // result.paymentOptionType
+                // result.paymentMethod
+                // result.paymentIcon
+                // result.paymentDescription
+            }
+
+
+        }
+
+        self.present(dropIn!, animated: true, completion: nil)
+
+    }*/
+
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
     }
@@ -566,4 +644,52 @@ extension addPaymentVC: GMSMapViewDelegate,CLLocationManagerDelegate{
               
     }
    
+}
+extension addPaymentVC: PKPaymentAuthorizationViewControllerDelegate{
+    func paymentRequest() -> PKPaymentRequest {
+            let paymentRequest = PKPaymentRequest()
+            paymentRequest.merchantIdentifier = "merchant.com.Demo.example";
+            paymentRequest.supportedNetworks = [PKPaymentNetwork.amex, PKPaymentNetwork.visa, PKPaymentNetwork.masterCard];
+            paymentRequest.merchantCapabilities = PKMerchantCapability.capability3DS;
+            paymentRequest.countryCode = "US"; // e.g. US
+            paymentRequest.currencyCode = "USD"; // e.g. USD
+            paymentRequest.paymentSummaryItems = [
+                PKPaymentSummaryItem(label: "Dish", amount: NSDecimalNumber(string: "80.9")),
+
+            ]
+            return paymentRequest
+        }
+    
+    public func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Swift.Void){
+
+            // Example: Tokenize the Apple Pay payment
+            let applePayClient = BTApplePayClient(apiClient: BTAPIClient(authorization: self.ClientToken)!)
+            applePayClient.tokenizeApplePay(payment) {
+                (tokenizedApplePayPayment, error) in
+                guard let tokenizedApplePayPayment = tokenizedApplePayPayment else {
+                    // Tokenization failed. Check `error` for the cause of the failure.
+
+                    // Indicate failure via completion callback.
+                    completion(PKPaymentAuthorizationStatus.failure)
+
+                    return
+                }
+
+                // Received a tokenized Apple Pay payment from Braintree.
+                // If applicable, address information is accessible in `payment`.
+
+                // Send the nonce to your server for processing.
+                print("nonce = \(tokenizedApplePayPayment.nonce)")
+
+                //  self.postNonceToServer(paymentMethodNonce: tokenizedApplePayPayment.nonce)
+                // Then indicate success or failure via the completion callback, e.g.
+                completion(PKPaymentAuthorizationStatus.success)
+            }
+        }
+
+        func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+            dismiss(animated: true, completion: nil)
+        }
+
+
 }
