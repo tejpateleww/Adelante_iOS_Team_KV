@@ -38,11 +38,13 @@ class WebService{
             }
         }
         else { parameterString = "" }
-        
-        guard let url = URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
+        #warning("Please remove make payment api user2 when complete")
+        guard let url = (api == .make_payment) ? URL(string: "http://3.239.174.164/api/User2/" + api.rawValue + parameterString) : URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
             completion(JSON(),false, "")
             return
         }
+        
+        
         
         print("the url is \(url) and the parameters are \n \(parameters) and the headers are \(APIEnvironment.headers)")
         

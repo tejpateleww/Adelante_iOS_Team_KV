@@ -215,6 +215,11 @@ class WebServiceSubClass
         let params : [String:String] = shareOrderListModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .ShareOrderList, httpMethod: .post,showHud:showHud,parameters:params,completion:completion)
     }
+    //Payment
+    class func PayNow(ReqModel : PayNowReqModel,showHud: Bool = false , completion:@escaping CompletionResponse){
+        let params : [String:String] = ReqModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .make_payment, httpMethod: .post,showHud:showHud,parameters:params,completion:completion)
+    }
 }
 
 

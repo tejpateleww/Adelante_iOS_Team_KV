@@ -342,6 +342,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBAction func placeOrderBtn(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+        controller.CartTotal = (LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
+        //CGFloat(LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: ""))
+        
         controller.strCartID = strCartId
         self.navigationController?.pushViewController(controller, animated: true)
         

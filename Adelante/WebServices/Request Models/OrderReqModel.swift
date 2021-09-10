@@ -20,3 +20,9 @@ class orderPlaceReqModel:RequestModel{
 class shareOrderlistReqModel:RequestModel{
     var user_id : String = ""
 }
+class PayNowReqModel:RequestModel{
+    var user_id : String = ""
+    var order_id : String = ""
+    var is_wallet : String = ""
+    var is_paypal : String = ""
+}

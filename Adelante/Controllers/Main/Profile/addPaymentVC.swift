@@ -21,6 +21,12 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     
     
     // MARK: - Properties
+    var IsWalletSelected = false
+    var IsPaypalSelected = false
+    var IsBrainTreeSelected = false
+    
+    var CartTotal:CGFloat = 0.0
+    var WalletBalance:CGFloat = 0.0
     var cardDetails : [String] = []
     var customTabBarController: CustomTabBarVC?
     var selectedPaymentMethods: IndexPath?
@@ -66,6 +72,24 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         fetchClientToken()
         imgEmptyCard.isHidden = true
         webserviceGetAddPayment()
+        
+        let strURL = APIEnvironment.baseURL + ApiKey.Init.rawValue + "/" + kAPPVesion + "/" + "ios_customer" + "/\(SingletonClass.sharedInstance.UserId)"
+        WebServiceSubClass.initApi(strURL: strURL) { (json, status, error) in
+            
+            if status {
+                self.WalletBalance = json["wallet_balance"].stringValue.ConvertToCGFloat()//
+                self.tblPaymentMethod.reloadData()
+            }
+                 
+             else {
+                 
+              
+            }
+            
+        }
+        
+        
+        
     }
     var ClientToken = "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpGVXpJMU5pSXNJbXRwWkNJNklqSXdNVGd3TkRJMk1UWXRjMkZ1WkdKdmVDSXNJbWx6Y3lJNkltaDBkSEJ6T2k4dllYQnBMbk5oYm1SaWIzZ3VZbkpoYVc1MGNtVmxaMkYwWlhkaGVTNWpiMjBpZlEuZXlKbGVIQWlPakUyTXpBMU56RTBOalVzSW1wMGFTSTZJakl5WmpKaU56WXpMVE5sTURFdE5HUXdZeTFoTnpJMExUUTFOalUwTVRrNVpEWmhaQ0lzSW5OMVlpSTZJbVJqY0hOd2VUSmljbmRrYW5JemNXNGlMQ0pwYzNNaU9pSm9kSFJ3Y3pvdkwyRndhUzV6WVc1a1ltOTRMbUp5WVdsdWRISmxaV2RoZEdWM1lYa3VZMjl0SWl3aWJXVnlZMmhoYm5RaU9uc2ljSFZpYkdsalgybGtJam9pWkdOd2MzQjVNbUp5ZDJScWNqTnhiaUlzSW5abGNtbG1lVjlqWVhKa1gySjVYMlJsWm1GMWJIUWlPblJ5ZFdWOUxDSnlhV2RvZEhNaU9sc2liV0Z1WVdkbFgzWmhkV3gwSWwwc0luTmpiM0JsSWpwYklrSnlZV2x1ZEhKbFpUcFdZWFZzZENKZExDSnZjSFJwYjI1eklqcDdmWDAuMFZtd2JodkIxNlc2RFU5WFdfa1JPXzJqWk13UXR5SVFuU3RxcXhIV25EdU11dlU4ZXQ1RVBRVVZyRjRSMGd3dXZYZE1GWkhFYU9OZk5GdUhxSHJqRlEiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZGNwc3B5MmJyd2RqcjNxbi9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJncmFwaFFMIjp7InVybCI6Imh0dHBzOi8vcGF5bWVudHMuc2FuZGJveC5icmFpbnRyZWUtYXBpLmNvbS9ncmFwaHFsIiwiZGF0ZSI6IjIwMTgtMDUtMDgiLCJmZWF0dXJlcyI6WyJ0b2tlbml6ZV9jcmVkaXRfY2FyZHMiXX0sImNsaWVudEFwaVVybCI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb206NDQzL21lcmNoYW50cy9kY3BzcHkyYnJ3ZGpyM3FuL2NsaWVudF9hcGkiLCJlbnZpcm9ubWVudCI6InNhbmRib3giLCJtZXJjaGFudElkIjoiZGNwc3B5MmJyd2RqcjNxbiIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwidmVubW8iOiJvZmZsaW5lIiwiY2hhbGxlbmdlcyI6WyJjdnYiLCJwb3N0YWxfY29kZSJdLCJ0aHJlZURTZWN1cmVFbmFibGVkIjp0cnVlLCJhbmFseXRpY3MiOnsidXJsIjoiaHR0cHM6Ly9vcmlnaW4tYW5hbHl0aWNzLXNhbmQuc2FuZGJveC5icmFpbnRyZWUtYXBpLmNvbS9kY3BzcHkyYnJ3ZGpyM3FuIn0sImFwcGxlUGF5Ijp7ImNvdW50cnlDb2RlIjoiVVMiLCJjdXJyZW5jeUNvZGUiOiJVU0QiLCJtZXJjaGFudElkZW50aWZpZXIiOiJtZXJjaGFudC5jb20uYnJhaW50cmVlcGF5bWVudHMuYXBwbGUtcGF5LWRlbW8uQnJhaW50cmVlLURlbW8iLCJzdGF0dXMiOiJtb2NrIiwic3VwcG9ydGVkTmV0d29ya3MiOlsidmlzYSIsIm1hc3RlcmNhcmQiLCJhbWV4IiwiZGlzY292ZXIiLCJtYWVzdHJvIl19LCJwYXlwYWxFbmFibGVkIjp0cnVlLCJicmFpbnRyZWVfYXBpIjp7InVybCI6Imh0dHBzOi8vcGF5bWVudHMuc2FuZGJveC5icmFpbnRyZWUtYXBpLmNvbSIsImFjY2Vzc190b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSkZVekkxTmlJc0ltdHBaQ0k2SWpJd01UZ3dOREkyTVRZdGMyRnVaR0p2ZUNJc0ltbHpjeUk2SW1oMGRIQnpPaTh2WVhCcExuTmhibVJpYjNndVluSmhhVzUwY21WbFoyRjBaWGRoZVM1amIyMGlmUS5leUpsZUhBaU9qRTJNekExTnpFME5qVXNJbXAwYVNJNklqYzJNekl6WVRJMExXTXdaV1l0TkdGaVlTMDVNRGsyTFRZM05ETmpZVGMyTnpRNU9TSXNJbk4xWWlJNkltUmpjSE53ZVRKaWNuZGthbkl6Y1c0aUxDSnBjM01pT2lKb2RIUndjem92TDJGd2FTNXpZVzVrWW05NExtSnlZV2x1ZEhKbFpXZGhkR1YzWVhrdVkyOXRJaXdpYldWeVkyaGhiblFpT25zaWNIVmliR2xqWDJsa0lqb2laR053YzNCNU1tSnlkMlJxY2pOeGJpSXNJblpsY21sbWVWOWpZWEprWDJKNVgyUmxabUYxYkhRaU9uUnlkV1Y5TENKeWFXZG9kSE1pT2xzaWRHOXJaVzVwZW1VaUxDSnRZVzVoWjJWZmRtRjFiSFFpWFN3aWMyTnZjR1VpT2xzaVFuSmhhVzUwY21WbE9sWmhkV3gwSWwwc0ltOXdkR2x2Ym5NaU9udDlmUS5WelZkZHZZSDBTdW1LbGxfeElYbXF5bFVsVldmTEhNX2xCcVVfQmVIOElzMnM3RUQtVjR6bmtWbzRic3pLbVVKMU1ULVBEUmE0NnFGRTZYRG9kcE54USJ9LCJwYXlwYWwiOnsiYmlsbGluZ0FncmVlbWVudHNFbmFibGVkIjp0cnVlLCJlbnZpcm9ubWVudE5vTmV0d29yayI6dHJ1ZSwidW52ZXR0ZWRNZXJjaGFudCI6ZmFsc2UsImFsbG93SHR0cCI6dHJ1ZSwiZGlzcGxheU5hbWUiOiJBY21lIFdpZGdldHMsIEx0ZC4gKFNhbmRib3gpIiwiY2xpZW50SWQiOm51bGwsInByaXZhY3lVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vcHAiLCJ1c2VyQWdyZWVtZW50VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3RvcyIsImJhc2VVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFzc2V0c1VybCI6Imh0dHBzOi8vY2hlY2tvdXQucGF5cGFsLmNvbSIsImRpcmVjdEJhc2VVcmwiOm51bGwsImVudmlyb25tZW50Ijoib2ZmbGluZSIsImJyYWludHJlZUNsaWVudElkIjoibWFzdGVyY2xpZW50MyIsIm1lcmNoYW50QWNjb3VudElkIjoic3RjaDJuZmRmd3N6eXR3NSIsImN1cnJlbmN5SXNvQ29kZSI6IlVTRCJ9fQ=="
     func fetchClientToken() {
@@ -188,10 +212,17 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         self.customTabBarController?.hideTabBar()
     }
     //MARK: -tblViewMethods
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return arrCard.count + 1
+            
+            if WalletBalance == 0.0 {
+                return 1
+            }
+            return 2
         case 1:
             return 1
         default:
@@ -204,53 +235,162 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         switch indexPath.section {
         case 0:
             var cell = UITableViewCell()
-            if indexPath.row == 0 {
-                let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell1.reuseIdentifier, for: indexPath) as! paymentMethodCell1
-                
-                cell1.paymentImageView.image = UIImage(named: "ic_wallet")
-                cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
-                cell1.lblwalletBalance.text = "$250.00"
-                cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-                if indexPath == selectedPaymentMethods {
-                    cell1.vWMain.layer.borderWidth = 1
-                } else {
-                    cell1.vWMain.layer.borderWidth = 0
-                }
+            if WalletBalance == 0.0 {
+                let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
+                cell1.paymentMethodImageView.image = UIImage(named: "ic_paypal")
+                cell1.lblcardDetails.text = "Paypal"
+                cell1.lblExpiresDate.text = "Default method"
                 cell1.btnDelete.isHidden = true
-                cell1.selectPaymentMethodButton.isHidden = true
+                cell1.vwCvv.isHidden = true
+                
+                if IsPaypalSelected {
+                    cell1.selectPaymentMethodButton.isSelected = true
+                }
+                else{
+                    cell1.selectPaymentMethodButton.isSelected = false
+                }
                 cell1.selectionStyle = .none
+                
                 cell = cell1
             } else {
-                let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
-                cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-                if indexPath == selectedPaymentMethods {
-                    cell2.vWMain.layer.borderWidth = 1
-                    cell2.vwCvv.isHidden = false
+                if indexPath.row == 0 {
+                    let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell1.reuseIdentifier, for: indexPath) as! paymentMethodCell1
+                    
+                    cell1.paymentImageView.image = UIImage(named: "ic_wallet")
+                    cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
+                    cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
+                    cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                    
+                 
+                    cell1.btnDelete.isHidden = true
+                 
+                    if IsWalletSelected {
+                        cell1.selectPaymentMethodButton.isSelected = true
+                    }
+                    else{
+                        cell1.selectPaymentMethodButton.isSelected = false
+                    }
+                    cell1.selectionStyle = .none
+                    cell = cell1
                 } else {
-                    cell2.vWMain.layer.borderWidth = 0
+                    let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
+                    cell2.paymentMethodImageView.image = UIImage(named: "ic_paypal")
+                    cell2.lblcardDetails.text = "Paypal"
+                    cell2.lblExpiresDate.text = "Default method"
+                    cell2.btnDelete.isHidden = true
                     cell2.vwCvv.isHidden = true
-                }
-                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrCard[indexPath.row - 1].cardImage ?? "")"
-                cell2.paymentMethodImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                cell2.paymentMethodImageView.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                cell2.lblcardDetails.text = arrCard[indexPath.row - 1].formatedCardNo
-                cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), arrCard[indexPath.row - 1].expDateMonthYear)
-                cell2.selectPaymentMethodButton.isHidden = true
-                cell2.btnDelete.isHidden = false
-                cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
-                cell2.selectionStyle = .none
-                cell2.PayButton = {
-                    if cell2.textFieldEnterCVV.text?.trim() != self.arrCard[indexPath.row - 1].cardCvv {
-                        self.direction = 1
-                        self.shakes = 0
-                        cell2.textFieldEnterCVV.text = ""
-                        self.shake(cell2.textFieldEnterCVV)
+                    if IsPaypalSelected {
+                        cell2.selectPaymentMethodButton.isSelected = true
                     }
-                    else {
+                    else{
+                        cell2.selectPaymentMethodButton.isSelected = false
                     }
+                    
+                    cell2.selectionStyle = .none
+                    
+                    cell = cell2
                 }
-                cell = cell2
             }
+            
+            /*
+            if WalletBalance == 0.00 {
+//                if indexPath.row == 0 {
+//                    let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell1.reuseIdentifier, for: indexPath) as! paymentMethodCell1
+//
+//                    cell1.paymentImageView.image = UIImage(named: "ic_wallet")
+//                    cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
+//                    cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
+//                    cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+//                    if indexPath == selectedPaymentMethods {
+//                        cell1.vWMain.layer.borderWidth = 1
+//                    } else {
+//                        cell1.vWMain.layer.borderWidth = 0
+//                    }
+//                    cell1.btnDelete.isHidden = true
+//                    cell1.selectPaymentMethodButton.isHidden = true
+//                    cell1.selectionStyle = .none
+//                    cell = cell1
+//                } else {
+                    let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
+                    cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                    if indexPath == selectedPaymentMethods {
+                        cell2.vWMain.layer.borderWidth = 1
+                        cell2.vwCvv.isHidden = false
+                    } else {
+                        cell2.vWMain.layer.borderWidth = 0
+                        cell2.vwCvv.isHidden = true
+                    }
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrCard[indexPath.row - 1].cardImage ?? "")"
+                    cell2.paymentMethodImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell2.paymentMethodImageView.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    cell2.lblcardDetails.text = arrCard[indexPath.row - 1].formatedCardNo
+                    cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), arrCard[indexPath.row - 1].expDateMonthYear)
+                    cell2.selectPaymentMethodButton.isHidden = true
+                    cell2.btnDelete.isHidden = false
+                    cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
+                    cell2.selectionStyle = .none
+                    cell2.PayButton = {
+                        if cell2.textFieldEnterCVV.text?.trim() != self.arrCard[indexPath.row - 1].cardCvv {
+                            self.direction = 1
+                            self.shakes = 0
+                            cell2.textFieldEnterCVV.text = ""
+                            self.shake(cell2.textFieldEnterCVV)
+                        }
+                        else {
+                        }
+                    }
+                    cell = cell2
+               // }
+            } else {
+                if indexPath.row == 0 {
+                    let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell1.reuseIdentifier, for: indexPath) as! paymentMethodCell1
+                    
+                    cell1.paymentImageView.image = UIImage(named: "ic_wallet")
+                    cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
+                    cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
+                    cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                    if indexPath == selectedPaymentMethods {
+                        cell1.vWMain.layer.borderWidth = 1
+                    } else {
+                        cell1.vWMain.layer.borderWidth = 0
+                    }
+                    cell1.btnDelete.isHidden = true
+                    cell1.selectPaymentMethodButton.isHidden = false
+                    cell1.selectionStyle = .none
+                    cell = cell1
+                } else {
+                    let cell2 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell2.reuseIdentifier, for: indexPath) as! paymentMethodCell2
+                    cell2.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                    if indexPath == selectedPaymentMethods {
+                        cell2.vWMain.layer.borderWidth = 1
+                        cell2.vwCvv.isHidden = false
+                    } else {
+                        cell2.vWMain.layer.borderWidth = 0
+                        cell2.vwCvv.isHidden = true
+                    }
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrCard[indexPath.row - 1].cardImage ?? "")"
+                    cell2.paymentMethodImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell2.paymentMethodImageView.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    cell2.lblcardDetails.text = arrCard[indexPath.row - 1].formatedCardNo
+                    cell2.lblExpiresDate.text = String(format: "addPaymentVC_lblExpiresDate".Localized(), arrCard[indexPath.row - 1].expDateMonthYear)
+                    cell2.selectPaymentMethodButton.isHidden = true
+                    cell2.btnDelete.isHidden = false
+                    cell2.btnDelete.addTarget(self, action: #selector(btnDeleteCardClicked(_:)), for: .touchUpInside)
+                    cell2.selectionStyle = .none
+                    cell2.PayButton = {
+                        if cell2.textFieldEnterCVV.text?.trim() != self.arrCard[indexPath.row - 1].cardCvv {
+                            self.direction = 1
+                            self.shakes = 0
+                            cell2.textFieldEnterCVV.text = ""
+                            self.shake(cell2.textFieldEnterCVV)
+                        }
+                        else {
+                        }
+                    }
+                    cell = cell2
+                }
+            }
+            */
             cell.selectionStyle = .none
             return cell
         case 1:
@@ -272,9 +412,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             return UITableViewCell()
         }
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
@@ -328,23 +466,98 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         
         switch indexPath.section {
         case 0:
-            if indexPath.row == 0 {
-                if isfromPayment{
-                    
-                }else{
-                    let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
-                    cell1.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
-                    WebServiceCallForOrder()
-                }
+            if WalletBalance == 0.0 {
+                 IsPaypalSelected = !IsPaypalSelected
+              
             } else {
+                if indexPath.row == 0 {
+                    if WalletBalance < CartTotal {
+                        IsWalletSelected = !IsWalletSelected
+                   
+                    } else {
+                        
+                        IsPaypalSelected = false
+                        
+                        IsWalletSelected = !IsWalletSelected
+                        
+                        
+                    }
+                    
+                   
+                    
+                } else {
+                    if WalletBalance < CartTotal {
+                        IsPaypalSelected = !IsPaypalSelected
+                   
+                    } else {
+                        
+                        IsWalletSelected = false
+                        
+                        IsPaypalSelected = !IsPaypalSelected
+                        
+                        
+                    }
+                }
+                
+            }
+            tblPaymentMethod.reloadData()
+            /*
+            
+            
+            
+            
+            if WalletBalance == 0.00 {
                 let cell2 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
                 cell2.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+                
+                selectedPaymentMethods = indexPath
+            } else {
+                if indexPath.row == 0 {
+                    if isfromPayment{
+                        
+                    }else{
+                        if IsWalletSelected {
+                            let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
+                            cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                            IsWalletSelected = false
+                        } else {
+                            let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
+                            cell1.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+                            if WalletBalance < CartTotal {
+                                IsWalletSelected = true
+                            } else {
+                                WebServiceCallForOrder()
+                            }
+                        }
+                        
+                        
+                    }
+                } else {
+                    let cell2 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
+                    cell2.vWMain.layer.borderColor = colors.appRedColor.value.cgColor
+                }
+                selectedPaymentMethods = indexPath
             }
-            selectedPaymentMethods = indexPath
+            */
+            
         case 1:
-            self.showDropIn(clientTokenOrTokenizationKey: ClientToken)
+//            self.showDropIn(clientTokenOrTokenizationKey: ClientToken)
+           
             let cell = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell2
-            cell.selectPaymentMethodButton.isSelected = !cell.selectPaymentMethodButton.isSelected
+         cell.selectPaymentMethodButton.isSelected = !cell.selectPaymentMethodButton.isSelected
+            if WalletBalance < CartTotal {
+               
+                
+            } else {
+                if IsWalletSelected {
+                    let cell1 = tblPaymentMethod.cellForRow(at: indexPath) as! paymentMethodCell1
+                    cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+                    IsWalletSelected = false
+                }
+               
+            }
+         IsBrainTreeSelected = false
+            IsPaypalSelected = true
             selectedPaymentMethods = indexPath
         default:
             return
@@ -357,6 +570,20 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         }
     }
     //MARK: -btnAction
+    @IBAction func BtnpayNow(_ sender: submitButton) {
+        if WalletBalance < CartTotal {
+            if IsWalletSelected && !IsPaypalSelected  {
+                Utilities.ShowAlert(OfMessage: "Your wallet amount is lower than total amount")
+            } else {
+                WebServiceCallForOrder()
+            }
+       
+        } else {
+            WebServiceCallForOrder()
+        }
+        
+       
+    }
     @IBAction func btnAddcardClick(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID) as! AddCardVC
         controller.delegatePayment = self
@@ -376,6 +603,34 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         }
     }
     // MARK: - Api Calls
+    @objc func WebServiceForPayment(OrderId:String){
+        let addpayment = PayNowReqModel()
+        addpayment.user_id = SingletonClass.sharedInstance.UserId
+        addpayment.order_id = OrderId
+        addpayment.is_wallet = (IsWalletSelected == true) ? "1" : "0"
+        addpayment.is_paypal = (IsPaypalSelected == true) ? "1" : "0"
+        WebServiceSubClass.PayNow(ReqModel: addpayment, showHud: false, completion: { (json, status, error) in
+        
+            if(status) {
+      
+                let vc : PaymentWebViewVC = PaymentWebViewVC.instantiate(fromAppStoryboard: .Main)
+                //                    vc.strTitle = "Privacy Policy"
+                vc.strUrl = json["url"].stringValue
+                vc.OrderID = OrderId
+                vc.callBackURL = json["callbackurl"].stringValue
+                vc.cancelURL = json["cancel_url"].stringValue
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+               print(json)
+            } else {
+              
+                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                
+            }
+        })
+
+    }
     @objc func webserviceGetAddPayment(){
         let addpayment = AddPaymentReqModel()
         addpayment.user_id = SingletonClass.sharedInstance.UserId
@@ -395,6 +650,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         })
         
     }
+    
+    
     func WebServiceCallForOrder(){
         
         let ReqModel = orderPlaceReqModel()
@@ -403,30 +660,35 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         WebServiceSubClass.PlaceOrder(OrderModel: ReqModel, showHud: true, completion: { (json, status, response) in
             if(status)
             {
-                
-                self.orderid = json["order_id"].stringValue
-                let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-                controller.isHideCancelButton = true
-                controller.isHideSubmitButton = false
-                controller.submitBtnTitle = "OK                         "
-                controller.cancelBtnTitle = ""
-                controller.strDescription = json["data"].string ?? ""
-                controller.strPopupTitle = "Payment Successful"
-                controller.submitBtnColor = colors.appGreenColor
-                controller.cancelBtnColor = colors.appRedColor
-                controller.strPopupImage = "ic_popupPaymentSucessful"
-                controller.isCancleOrder = true
-                
-                self.socketManageSetup()
-                controller.btnSubmit = {
-                    let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
-                    controller.selectedIndex = 2
-                    SingletonClass.sharedInstance.selectInProcessInMyOrder = true
-                    let nav = UINavigationController(rootViewController: controller)
-                    nav.navigationBar.isHidden = true
-                    appDel.window?.rootViewController = nav
+                if self.IsWalletSelected && !self.IsPaypalSelected {
+                    let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+                    controller.isHideCancelButton = true
+                    controller.isHideSubmitButton = false
+                    controller.submitBtnTitle = "OK               "
+                    controller.cancelBtnTitle = ""
+                    controller.strDescription = ""
+                    controller.strPopupTitle = "Payment Successful"
+                    controller.submitBtnColor = colors.appGreenColor
+                    controller.cancelBtnColor = colors.appRedColor
+                    controller.strPopupImage = "ic_popupPaymentSucessful"
+                    controller.isCancleOrder = true
+                    
+                    self.socketManageSetup()
+                    controller.btnSubmit = {
+                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
+                        controller.selectedIndex = 2
+                        SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+                        let nav = UINavigationController(rootViewController: controller)
+                        nav.navigationBar.isHidden = true
+                        appDel.window?.rootViewController = nav
+                    }
+                    self.present(controller, animated: true, completion: nil)
+                } else {
+                    self.WebServiceForPayment(OrderId: json["order_id"].stringValue)
+                    self.orderid = json["order_id"].stringValue
                 }
-                self.present(controller, animated: true, completion: nil)
+              
+//               
             }
             else
             {
@@ -492,7 +754,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         FormTextField.appearance().invalidTextColor = UIColor(hexString: "FF4B47")
     }
 }
-
 extension addPaymentVC{
     func socketManageSetup(){
         SocketIOManager.shared.establishSocketConnection()
@@ -609,6 +870,7 @@ extension addPaymentVC{
         
     }
 }
+
 extension addPaymentVC: GMSMapViewDelegate,CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -692,4 +954,14 @@ extension addPaymentVC: PKPaymentAuthorizationViewControllerDelegate{
         }
 
 
+}
+extension String {
+    func ConvertToCGFloat() -> CGFloat {
+        if let n = NumberFormatter().number(from: self) {
+            let f = CGFloat(n)
+            return f
+        }
+        return 0.0
+    }
+    
 }

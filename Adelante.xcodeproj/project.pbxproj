@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1800C41126EB503300AC4190 /* PaymentWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1800C41026EB503300AC4190 /* PaymentWebViewVC.swift */; };
 		180A9E7E265CDB3700AC7A22 /* PromocodeApplyReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A9E7D265CDB3700AC7A22 /* PromocodeApplyReqModel.swift */; };
 		180A9F06265D0A4500AC7A22 /* PromocodeAppliedResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A9F05265D0A4500AC7A22 /* PromocodeAppliedResModel.swift */; };
 		180F19DF265B81EC00150966 /* Promocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F19DD265B81EB00150966 /* Promocode.swift */; };
@@ -292,6 +293,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1800C41026EB503300AC4190 /* PaymentWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWebViewVC.swift; sourceTree = "<group>"; };
 		180A9E7D265CDB3700AC7A22 /* PromocodeApplyReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeApplyReqModel.swift; sourceTree = "<group>"; };
 		180A9F05265D0A4500AC7A22 /* PromocodeAppliedResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromocodeAppliedResModel.swift; sourceTree = "<group>"; };
 		180F19DD265B81EB00150966 /* Promocode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promocode.swift; sourceTree = "<group>"; };
@@ -887,6 +889,7 @@
 				8105FDBA2574D0A9008D36D6 /* SearchVC.swift */,
 				8105FDC02574D0F9008D36D6 /* FavouritesVC.swift */,
 				84C5F6872643A8B7000B2DDE /* PromocodeVC.swift */,
+				1800C41026EB503300AC4190 /* PaymentWebViewVC.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1821,6 +1824,7 @@
 				8170CAEF257A10B500B24B7A /* RestaurantReviewVC.swift in Sources */,
 				3431E070259324CA002F1435 /* RestaurantCatListCell.swift in Sources */,
 				349347BA25D11562006366B4 /* RestaurantOutletListCell.swift in Sources */,
+				1800C41126EB503300AC4190 /* PaymentWebViewVC.swift in Sources */,
 				84C5F68E2643BCAF000B2DDE /* NotificationReqModel.swift in Sources */,
 				8105FDC52574D659008D36D6 /* NavigationItems.swift in Sources */,
 				883614522693172A00B35C1D /* CartItem.swift in Sources */,
