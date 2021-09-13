@@ -176,7 +176,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 return 1
             }
         }else{
-            return 5
+            return 10
         }
     }
     

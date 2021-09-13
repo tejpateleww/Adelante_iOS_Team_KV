@@ -40,7 +40,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var orderid = ""
     var isfromPayment : Bool = false
     
-    
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
     @IBOutlet weak var btnAddCart: submitButton!
@@ -71,7 +70,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         fetchClientToken()
         imgEmptyCard.isHidden = true
-        webserviceGetAddPayment()
+//        webserviceGetAddPayment()
         
         let strURL = APIEnvironment.baseURL + ApiKey.Init.rawValue + "/" + kAPPVesion + "/" + "ios_customer" + "/\(SingletonClass.sharedInstance.UserId)"
         WebServiceSubClass.initApi(strURL: strURL) { (json, status, error) in
@@ -557,17 +556,19 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     //MARK: -btnAction
     @IBAction func BtnpayNow(_ sender: submitButton) {
-        if WalletBalance < CartTotal {
-            if IsWalletSelected && !IsPaypalSelected  {
-                Utilities.ShowAlert(OfMessage: "Your wallet amount is lower than total amount")
+        if isfromPayment{
+            
+        }else{
+            if WalletBalance < CartTotal {
+                if IsWalletSelected && !IsPaypalSelected  {
+                    Utilities.ShowAlert(OfMessage: "Your wallet amount is lower than total amount")
+                } else {
+                    WebServiceCallForOrder()
+                }
             } else {
                 WebServiceCallForOrder()
             }
-        } else {
-            WebServiceCallForOrder()
         }
-        
-       
     }
     @IBAction func btnAddcardClick(_ sender: submitButton) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: AddCardVC.storyboardID) as! AddCardVC
@@ -599,7 +600,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             if(status) {
       
                 let vc : PaymentWebViewVC = PaymentWebViewVC.instantiate(fromAppStoryboard: .Main)
-                //                    vc.strTitle = "Privacy Policy"
                 vc.strUrl = json["url"].stringValue
                 vc.OrderID = OrderId
                 vc.callBackURL = json["callbackurl"].stringValue
@@ -669,8 +669,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     self.WebServiceForPayment(OrderId: json["order_id"].stringValue)
                     self.orderid = json["order_id"].stringValue
                 }
-              
-//               
+//
             }
             else
             {

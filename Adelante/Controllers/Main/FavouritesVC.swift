@@ -256,7 +256,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         favorite.restaurant_id = strRestaurantId
         favorite.status = Status
         favorite.user_id = SingletonClass.sharedInstance.UserId
-        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             if status{
                 self.pageNumber = 1
                 self.webservicePostRestaurantFav(strSearch: "")

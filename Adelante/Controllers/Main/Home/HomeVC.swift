@@ -13,7 +13,6 @@ import GooglePlaces
 import SkeletonView
 
 struct structFilter {
-    
     var strselectedImage : UIImage
     var strDeselectedImage:UIImage
     var strTitle : String
@@ -74,8 +73,20 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNIB()
+        if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String == nil{
+            self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+        }else{
+            lblAddress.text = PlaceName
+        }
+//        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == true{
+//            if userDefault.getUserData() != nil{
+//                lblAddress.text = PlaceName
+//            }else{
+//                self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+//            }
+//        }
+        
         setUpLocalizedStrings()
-        lblAddress.text = PlaceName
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
         self.SelectedCategory(SelectedCatId, SelectedCatIndex)
@@ -103,6 +114,60 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     override func viewDidLayoutSubviews() {
         
     }
+    func getAddressFromLatLon(pdblLatitude: String, withLongitude pdblLongitude: String) {
+        var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
+        let lat: Double = Double("\(pdblLatitude)") ?? 0.0
+        //21.228124
+        let lon: Double = Double("\(pdblLongitude)") ?? 0.0
+        //72.833770
+        let ceo: CLGeocoder = CLGeocoder()
+        center.latitude = lat
+        center.longitude = lon
+        
+        let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
+        
+        
+        ceo.reverseGeocodeLocation(loc, completionHandler:
+                                    {(placemarks, error) in
+                                        if (error != nil)
+                                        {
+                                            print("reverse geodcode fail: \(error!.localizedDescription)")
+                                        }
+                                        if let placemarks = placemarks,placemarks.count > 0{
+                                        
+                                            let pm = placemarks[0]
+                                            print(pm.country ?? "")
+                                            print(pm.locality ?? "")
+                                            print(pm.subLocality ?? "")
+                                            print(pm.thoroughfare ?? "")
+                                            print(pm.postalCode ?? "")
+                                            print(pm.subThoroughfare ?? "")
+                                            var addressString : String = ""
+                                            if pm.subLocality != nil {
+                                                addressString = addressString + (pm.subLocality ?? "") + ", "
+                                            }
+                                            if pm.thoroughfare != nil {
+                                                addressString = addressString + (pm.thoroughfare ?? "") + ", "
+                                            }
+                                            if pm.locality != nil {
+                                                addressString = addressString + (pm.locality ?? "") + ", "
+                                            }
+                                            if pm.country != nil {
+                                                addressString = addressString + (pm.country ?? "" ) + ", "
+                                            }
+                                            if pm.postalCode != nil {
+                                                addressString = addressString + (pm.postalCode ?? "") + " "
+                                            }
+                                            self.PlaceName = addressString
+                                                                    self.lblAddress.text = addressString
+                                            print(addressString)
+                                        }
+                                        else{
+                                            Utilities.ShowAlert(OfMessage: "Location Not Found")
+                                        }
+                                    })
+        
+    }
     // MARK: - Other Methods
     func registerNIB(){
         tblMainList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
@@ -127,7 +192,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         colVwRestWthPage.reloadData()
         tblMainList.delegate = self
         tblMainList.dataSource = self
-        //        tblMainList.reloadData()
+        tblMainList.reloadData()
         
         
         colVwFilterOptions.delegate = self
@@ -139,9 +204,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     @objc func refreshListing(){
         responseStatus = .initial
         arrRestaurant.removeAll()
-        tblMainList.reloadData()
-        colVwRestWthPage.reloadData()
-        colVwFilterOptions.reloadData()
+//        tblMainList.reloadData()
+//        colVwRestWthPage.reloadData()
+//        colVwFilterOptions.reloadData()
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true

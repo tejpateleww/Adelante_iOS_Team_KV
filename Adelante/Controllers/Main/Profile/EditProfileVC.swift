@@ -35,6 +35,8 @@ class EditProfileVC: BaseViewController{
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtEmail.autocorrectionType = .no
+
         txtPhoneNumber.delegate = self
         //        imgProfile.layer.cornerRadius = imgProfile.layer.bounds.height / 2
         self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing: false)

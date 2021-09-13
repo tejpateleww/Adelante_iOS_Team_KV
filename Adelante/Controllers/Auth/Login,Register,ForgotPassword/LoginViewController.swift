@@ -21,6 +21,7 @@ class LoginViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtEmail.autocorrectionType = .no
         setup()
         setUpLocalizedStrings()
         // Do any additional setup after loading the view.

@@ -11,7 +11,7 @@ import UIKit
 class RestaurantListCell: UITableViewCell {
 
     @IBOutlet weak var lblName: tblHomeLabels!
-    @IBOutlet weak var imgRestaurant: customImageView!
+    @IBOutlet weak var imgRestaurant: customImagewithShadow!
     @IBOutlet weak var lblMiles: tblHomeLabels!
     @IBOutlet weak var lblRating: tblHomeLabels!
     @IBOutlet weak var lblPrice: tblHomeLabels!

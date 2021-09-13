@@ -34,6 +34,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         txtPassword.delegate = self
         txtConPassword.delegate = self
+        txtEmail.autocorrectionType = .no
         setUpLocalizedStrings()
         setUp()
     }

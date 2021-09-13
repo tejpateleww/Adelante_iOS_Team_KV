@@ -142,6 +142,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             if collObj == self.tblRestaurantDetails{
                 self.heightTblRestDetails.constant = tblRestaurantDetails.contentSize.height
             }else if collObj == self.tblPopup{
+                
                 self.tblPopupHeight.constant = tblPopup.contentSize.height
             }
         }

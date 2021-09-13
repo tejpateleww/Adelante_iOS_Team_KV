@@ -80,6 +80,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
                 controller.selectedIndex = 2
+                
                 SingletonClass.sharedInstance.selectInProcessInMyOrder = true
                 let nav = UINavigationController(rootViewController: controller)
                 nav.navigationBar.isHidden = true
