@@ -559,10 +559,10 @@ Adelante</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPi-1e-xsK" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
-                                                <rect key="frame" x="0.0" y="240" width="414" height="576.5"/>
+                                                <rect key="frame" x="0.0" y="240" width="414" height="631"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TDM-Ur-Np6">
-                                                        <rect key="frame" x="18" y="0.0" width="378" height="416"/>
+                                                        <rect key="frame" x="18" y="0.0" width="378" height="470"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kad-eD-h8J">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -661,13 +661,18 @@ Adelante</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ce6-D5-lay">
-                                                                <rect key="frame" x="0.0" y="249" width="378" height="1"/>
+                                                                <rect key="frame" x="0.0" y="249" width="378" height="55"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="YNP-Cy-Jdx">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="1"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="55"/>
                                                                         <subviews>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c5h-dD-LbU" customClass="floatTextField" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="39"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                                            </textField>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dz-Wr-P8S" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="1"/>
+                                                                                <rect key="frame" x="0.0" y="54" width="378" height="1"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="MXa-CS-4ry"/>
@@ -685,7 +690,7 @@ Adelante</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFJ-GY-zO4">
-                                                                <rect key="frame" x="0.0" y="270" width="378" height="63"/>
+                                                                <rect key="frame" x="0.0" y="324" width="378" height="63"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Bae-gL-y8N">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -743,7 +748,7 @@ Adelante</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDJ-Fb-joT">
-                                                                <rect key="frame" x="0.0" y="353" width="378" height="63"/>
+                                                                <rect key="frame" x="0.0" y="407" width="378" height="63"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="32w-Qq-LRL">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -803,10 +808,10 @@ Adelante</string>
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9g-c5-ppY">
-                                                        <rect key="frame" x="18" y="446" width="378" height="63"/>
+                                                        <rect key="frame" x="18" y="500" width="378" height="63"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ab-4f-f8g" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="1" y="21" width="118.5" height="20.5"/>
+                                                                <rect key="frame" x="1" y="21.5" width="118.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -837,7 +842,7 @@ Adelante</string>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IZJ-l9-Yu9">
-                                                        <rect key="frame" x="86" y="536.5" width="242" height="30"/>
+                                                        <rect key="frame" x="86" y="591" width="242" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLy-vP-WB6" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="30"/>
@@ -924,6 +929,7 @@ Adelante</string>
                         <outlet property="txtFirstName" destination="6tv-ps-pmp" id="kxv-uV-suH"/>
                         <outlet property="txtLastName" destination="qFI-49-A7Q" id="4RW-OX-i0b"/>
                         <outlet property="txtPassword" destination="Fzc-oY-XVq" id="Ijx-bk-iou"/>
+                        <outlet property="txtPhoneNumber" destination="c5h-dD-LbU" id="41l-Kl-WqX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3y-sr-1bF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1194,6 +1200,35 @@ Adelante</string>
             <point key="canvasLocation" x="1687" y="-549"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="6J4-UA-qRl">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="6tv-ps-pmp">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="B7K-d2-yLt">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="C8x-B2-NSw">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="Fzc-oY-XVq">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="c5h-dD-LbU">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="qFI-49-A7Q">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="uln-Rl-AH4">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="zgZ-JQ-I7N">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+    </designables>
     <resources>
         <image name="adelanteLogo" width="127" height="125"/>
         <image name="adlanteLoginLogo" width="287" height="75"/>

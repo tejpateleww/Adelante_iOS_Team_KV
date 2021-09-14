@@ -353,7 +353,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             cell.btnFilterOptions.backgroundColor = (selectedIndex == indexPath.row) ? colors.segmentSelectedColor.value : colors.segmentDeselectedColor.value
             //                cell.btnFilterOptions.setImage(selectedIndex == indexPath.row, for: .normal)
             //                cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
+//            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
             //            }
             //            else {
             //                cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value
@@ -416,6 +416,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.colVwFilterOptions{
             selectedIndex = indexPath.row
+            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
             colVwFilterOptions.reloadData()
         }else{
             let restaurantListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID) as! RestaurantListVC
@@ -575,7 +576,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "")
+        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "\(selectedIndex)")
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
