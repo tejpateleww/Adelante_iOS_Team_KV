@@ -84,9 +84,14 @@ extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
             default:
                 break
             }
-            cell.ApplyClickClosour = {
-                self.WebserviceCallForPromocodeApply(promocode: self.PromoCodeList[indexPath.row].promocode ?? "")
-                
+            if PromoCodeList[indexPath.row].applied == "1"{
+                cell.btnApply.setTitle("Applied", for: .normal)
+                cell.btnApply.setTitleColor(UIColor.gray, for: .normal)
+                cell.btnApply.isUserInteractionEnabled = false
+            }else{
+                cell.ApplyClickClosour = {
+                    self.WebserviceCallForPromocodeApply(promocode: self.PromoCodeList[indexPath.row].promocode ?? "")
+                }
             }
             return cell
             

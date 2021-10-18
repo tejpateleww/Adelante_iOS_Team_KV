@@ -26,15 +26,15 @@ struct structFilter {
 class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
     
     
-//        func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
-//
-//            self.SelectedCatId = CategoryId
-//            return webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
-//        }
+    //        func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
+    //
+    //            self.SelectedCatId = CategoryId
+    //            return webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+    //        }
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrFilter = ["HomeVC_arrFilter_title1".Localized(),"HomeVC_arrFilter_title2".Localized(),"HomeVC_arrFilter_title3".Localized()]
-//    structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: "")//["","Mobile Pickup", "Recently Viewed", "Top Rated"]
+    //    structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: "")//["","Mobile Pickup", "Recently Viewed", "Top Rated"]
     var selectedSortTypedIndexFromcolVwFilter = 0
     var refresher = UIRefreshControl()
     var arrCategories = [Category]()
@@ -78,14 +78,6 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         }else{
             lblAddress.text = PlaceName
         }
-//        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == true{
-//            if userDefault.getUserData() != nil{
-//                lblAddress.text = PlaceName
-//            }else{
-//                self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
-//            }
-//        }
-        
         setUpLocalizedStrings()
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
@@ -103,7 +95,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
         print("homeVc \(#function)")
-//        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        //        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
     }
@@ -129,43 +121,43 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         
         ceo.reverseGeocodeLocation(loc, completionHandler:
                                     {(placemarks, error) in
-                                        if (error != nil)
-                                        {
-                                            print("reverse geodcode fail: \(error!.localizedDescription)")
-                                        }
-                                        if let placemarks = placemarks,placemarks.count > 0{
-                                        
-                                            let pm = placemarks[0]
-                                            print(pm.country ?? "")
-                                            print(pm.locality ?? "")
-                                            print(pm.subLocality ?? "")
-                                            print(pm.thoroughfare ?? "")
-                                            print(pm.postalCode ?? "")
-                                            print(pm.subThoroughfare ?? "")
-                                            var addressString : String = ""
-                                            if pm.subLocality != nil {
-                                                addressString = addressString + (pm.subLocality ?? "") + ", "
-                                            }
-                                            if pm.thoroughfare != nil {
-                                                addressString = addressString + (pm.thoroughfare ?? "") + ", "
-                                            }
-                                            if pm.locality != nil {
-                                                addressString = addressString + (pm.locality ?? "") + ", "
-                                            }
-                                            if pm.country != nil {
-                                                addressString = addressString + (pm.country ?? "" ) + ", "
-                                            }
-                                            if pm.postalCode != nil {
-                                                addressString = addressString + (pm.postalCode ?? "") + " "
-                                            }
-                                            self.PlaceName = addressString
-                                                                    self.lblAddress.text = addressString
-                                            print(addressString)
-                                        }
-                                        else{
-                                            Utilities.ShowAlert(OfMessage: "Location Not Found")
-                                        }
-                                    })
+            if (error != nil)
+            {
+                print("reverse geodcode fail: \(error!.localizedDescription)")
+            }
+            if let placemarks = placemarks,placemarks.count > 0{
+                
+                let pm = placemarks[0]
+                print(pm.country ?? "")
+                print(pm.locality ?? "")
+                print(pm.subLocality ?? "")
+                print(pm.thoroughfare ?? "")
+                print(pm.postalCode ?? "")
+                print(pm.subThoroughfare ?? "")
+                var addressString : String = ""
+                if pm.subLocality != nil {
+                    addressString = addressString + (pm.subLocality ?? "") + ", "
+                }
+                if pm.thoroughfare != nil {
+                    addressString = addressString + (pm.thoroughfare ?? "") + ", "
+                }
+                if pm.locality != nil {
+                    addressString = addressString + (pm.locality ?? "") + ", "
+                }
+                if pm.country != nil {
+                    addressString = addressString + (pm.country ?? "" ) + ", "
+                }
+                if pm.postalCode != nil {
+                    addressString = addressString + (pm.postalCode ?? "") + " "
+                }
+                self.PlaceName = addressString
+                self.lblAddress.text = addressString
+                print(addressString)
+            }
+            else{
+                Utilities.ShowAlert(OfMessage: "Location Not Found")
+            }
+        })
         
     }
     // MARK: - Other Methods
@@ -204,9 +196,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     @objc func refreshListing(){
         responseStatus = .initial
         arrRestaurant.removeAll()
-//        tblMainList.reloadData()
-//        colVwRestWthPage.reloadData()
-//        colVwFilterOptions.reloadData()
+        //        tblMainList.reloadData()
+        //        colVwRestWthPage.reloadData()
+        //        colVwFilterOptions.reloadData()
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true
@@ -218,7 +210,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     }
     func setUpLocalizedStrings(){
         lblMylocation.text = "HomeVC_lblMylocation".Localized()
-//        lblAddress.text = "30 Memorial Drive, Avon MA 2322"
+        //        lblAddress.text = "30 Memorial Drive, Avon MA 2322"
     }
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
@@ -262,10 +254,10 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         
         // Specify the place data types to return.
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-                                                    UInt(GMSPlaceField.placeID.rawValue) |
-                                                    UInt(GMSPlaceField.coordinate.rawValue) |
-                                                    GMSPlaceField.addressComponents.rawValue |
-                                                    GMSPlaceField.formattedAddress.rawValue)
+                                                  UInt(GMSPlaceField.placeID.rawValue) |
+                                                  UInt(GMSPlaceField.coordinate.rawValue) |
+                                                  GMSPlaceField.addressComponents.rawValue |
+                                                  GMSPlaceField.formattedAddress.rawValue)
         autocompleteController.placeFields = fields
         
         // Specify a filter.
@@ -293,24 +285,24 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     }
     @IBAction func btnFilterClicked(_ sender: UIButton) {
         DispatchQueue.main.async {
-//            if self.selectedSortTypedIndexFromcolVwFilter == 1 {
-//                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
-//                let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
-//                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
-//                self.tblMainList.reloadData()
-//            }
-//            else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
-//                self.selectedSortTypedIndexFromcolVwFilter = 1
-//                self.colVwFilterOptions.reloadData()
-//                self.tblMainList.reloadData()
-//            } else {
-//                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
-//                self.colVwFilterOptions.reloadData()
-//                self.tblMainList.reloadData()
-//            }
-//            if self.selectedSortTypedIndexFromcolVwFilter == 0 {
-                
-//            }
+            //            if self.selectedSortTypedIndexFromcolVwFilter == 1 {
+            //                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+            //                let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
+            //                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
+            //                self.tblMainList.reloadData()
+            //            }
+            //            else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
+            //                self.selectedSortTypedIndexFromcolVwFilter = 1
+            //                self.colVwFilterOptions.reloadData()
+            //                self.tblMainList.reloadData()
+            //            } else {
+            //                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
+            //                self.colVwFilterOptions.reloadData()
+            //                self.tblMainList.reloadData()
+            //            }
+            //            if self.selectedSortTypedIndexFromcolVwFilter == 0 {
+            
+            //            }
         }
     }
 }
@@ -353,7 +345,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             cell.btnFilterOptions.backgroundColor = (selectedIndex == indexPath.row) ? colors.segmentSelectedColor.value : colors.segmentDeselectedColor.value
             //                cell.btnFilterOptions.setImage(selectedIndex == indexPath.row, for: .normal)
             //                cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-//            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
+            //            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
             //            }
             //            else {
             //                cell.btnFilterOptions.backgroundColor = colors.segmentDeselectedColor.value

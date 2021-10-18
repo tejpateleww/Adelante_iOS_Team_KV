@@ -11,6 +11,7 @@ import UIKit
 class PromocodeCell: UITableViewCell {
     var ApplyClickClosour : (() -> ())?
     @IBOutlet weak var lblOfferDescription: promocodeLabel!
+    @IBOutlet weak var btnApply: btnApply!
     @IBOutlet weak var lblValidOn: promocodeLabel!
     @IBAction func btnApplyClick(_ sender: UIButton) {
         if let click = self.ApplyClickClosour {

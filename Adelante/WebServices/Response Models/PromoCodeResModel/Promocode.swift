@@ -21,7 +21,7 @@ class Promocode : NSObject, NSCoding{
     var useLimit : String!
     var validateDate : String!
     var subcategorytype : String!
-
+    var applied : String!//is_apply!
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
@@ -41,6 +41,7 @@ class Promocode : NSObject, NSCoding{
         useLimit = json["use_limit"].stringValue
         validateDate = json["validate_date"].stringValue
         subcategorytype = json["subcategory_type"].stringValue
+        applied = json["is_apply"].stringValue
     }
     
     init(FromDictonary:[String:String]){
@@ -57,6 +58,7 @@ class Promocode : NSObject, NSCoding{
         useLimit = FromDictonary["use_limit"] ?? ""
         validateDate = FromDictonary["validate_date"] ?? ""
         subcategorytype = FromDictonary["subcategory_type"] ?? ""
+        applied = FromDictonary["is_apply"] ?? ""
     }
 
     /**
@@ -101,6 +103,9 @@ class Promocode : NSObject, NSCoding{
         if subcategorytype != nil{
             dictionary["subcategory_type"] = subcategorytype
         }
+        if applied != nil{
+            dictionary["is_apply"] = applied
+        }
         return dictionary
     }
 
@@ -122,6 +127,7 @@ class Promocode : NSObject, NSCoding{
         useLimit = aDecoder.decodeObject(forKey: "use_limit") as? String
         validateDate = aDecoder.decodeObject(forKey: "validate_date") as? String
         subcategorytype = aDecoder.decodeObject(forKey: "subcategory_type") as? String
+        applied = aDecoder.decodeObject(forKey: "is_apply") as? String
     }
 
     /**
@@ -165,6 +171,9 @@ class Promocode : NSObject, NSCoding{
         }
         if subcategorytype != nil{
             aCoder.encode(subcategorytype, forKey: "subcategory_type")
+        }
+        if applied != nil{
+            aCoder.encode(applied, forKey: "is_apply")
         }
     }
 

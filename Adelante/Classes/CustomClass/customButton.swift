@@ -45,12 +45,12 @@ class submitButton: UIButton {
             self.backgroundColor = .clear
             self.titleLabel?.font = CustomFont.NexaBold.returnFont(18)
             self.setTitleColor(colors.appOrangeColor.value, for: .normal)
-        //    self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
+            //    self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
         } else if isBold{
             self.backgroundColor = .clear
             self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
             self.setTitleColor(colors.appOrangeColor.value, for: .normal)
-           // self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
+            // self.setunderlineWithUIColor(title: self.titleLabel?.text ?? "", color: underlineColor ?? UIColor.clear , font: (self.titleLabel?.font)!)
         } else if isEditAccount {
             self.backgroundColor = .clear
             self.titleLabel?.font = CustomFont.NexaRegular.returnFont(14)
@@ -121,21 +121,21 @@ class collectionVwFilterBtns: UIButton {
 }
 
 @IBDesignable class CustomButton: UIButton{
-
-@IBInspectable var borderWidth: CGFloat = 0.0 {
-    didSet{
-        self.layer.borderWidth = borderWidth
-    }
-}
     
-//@IBInspectable var borderColor: UIColor = UIColor.clear {
-//    didSet {
-//        self.layer.borderColor = borderColor.cgColor
-//    }
-//}
-override func prepareForInterfaceBuilder() {
-    super.prepareForInterfaceBuilder()
-}
+    @IBInspectable var borderWidth: CGFloat = 0.0 {
+        didSet{
+            self.layer.borderWidth = borderWidth
+        }
+    }
+    
+    //@IBInspectable var borderColor: UIColor = UIColor.clear {
+    //    didSet {
+    //        self.layer.borderColor = borderColor.cgColor
+    //    }
+    //}
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+    }
 }
 
 
@@ -181,11 +181,11 @@ class editProfileBtn : UIButton {
     }
 }
 class checkoutButton : UIButton {
-     @IBInspectable var isChangeLocation : Bool = false
-      @IBInspectable var isApplyPromocode : Bool = false
+    @IBInspectable var isChangeLocation : Bool = false
+    @IBInspectable var isApplyPromocode : Bool = false
     @IBInspectable var isSeeMenu : Bool = false
-     @IBInspectable var isReadPolicy : Bool = false
-    
+    @IBInspectable var isReadPolicy : Bool = false
+    @IBInspectable var isChange : Bool = false
     //.double.rawValue, .thick.rawValue
     override func awakeFromNib() {
         if isChangeLocation {
@@ -199,6 +199,10 @@ class checkoutButton : UIButton {
         } else if isApplyPromocode {
             self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
             self.setTitleColor(UIColor(hexString: "#E34A25"), for: .normal)
+            
+        }else if isChange {
+            self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
+            self.setTitleColor(UIColor(hexString: "#209413"), for: .normal)
             
         } else if isSeeMenu {
             let yourAttributes: [NSAttributedString.Key: Any] = [
@@ -241,12 +245,12 @@ class underLineButton : UIButton {
 class applyPromoCodeButtton : UIButton {
     @IBInspectable var isCancle:Bool = false
     override func awakeFromNib() {
-           self.setTitleColor(colors.white.value, for: .normal)
-             self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
-             self.titleLabel?.textAlignment = .center
+        self.setTitleColor(colors.white.value, for: .normal)
+        self.titleLabel?.font = CustomFont.NexaBold.returnFont(14)
+        self.titleLabel?.textAlignment = .center
         self.backgroundColor = colors.appGreenColor.value
         if isCancle {
-             self.backgroundColor = colors.appRedColor.value
+            self.backgroundColor = colors.appRedColor.value
         }
     }
 }
@@ -280,7 +284,7 @@ class btnOTP: UIButton {
             self.titleLabel?.font = CustomFont.AileronBlack.returnFont(14)
             self.setTitle("login_btnCreateAccount".Localized(), for: .normal)
             if isUnderline {
-                    self.setunderline(title: self.titleLabel?.text ?? "", color: colors.appOrangeColor, font: self.titleLabel?.font ?? CustomFont.AileronBold.returnFont(14))
+                self.setunderline(title: self.titleLabel?.text ?? "", color: colors.appOrangeColor, font: self.titleLabel?.font ?? CustomFont.AileronBold.returnFont(14))
             }
         }  else {
             self.isUserInteractionEnabled = false

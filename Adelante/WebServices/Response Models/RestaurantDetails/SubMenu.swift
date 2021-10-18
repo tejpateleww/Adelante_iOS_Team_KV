@@ -22,7 +22,7 @@ class SubMenu : NSObject, NSCoding{
     var searchIndex : String!
     var size : String!
     var variant : String!
-
+    var totalvariant : String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -43,6 +43,7 @@ class SubMenu : NSObject, NSCoding{
         searchIndex = json["search_index"].stringValue
         size = json["size"].stringValue
         variant = json["variant"].stringValue
+        totalvariant = json["total_variant"].stringValue
 	}
 
 	/**
@@ -90,6 +91,9 @@ class SubMenu : NSObject, NSCoding{
         if variant != nil{
         	dictionary["variant"] = variant
         }
+        if totalvariant != nil{
+            dictionary["total_variant"] = totalvariant
+        }
 		return dictionary
 	}
 
@@ -112,6 +116,7 @@ class SubMenu : NSObject, NSCoding{
 		searchIndex = aDecoder.decodeObject(forKey: "search_index") as? String
 		size = aDecoder.decodeObject(forKey: "size") as? String
 		variant = aDecoder.decodeObject(forKey: "variant") as? String
+        totalvariant = aDecoder.decodeObject(forKey: "total_variant") as? String
 	}
 
     /**
@@ -159,7 +164,9 @@ class SubMenu : NSObject, NSCoding{
 		if variant != nil{
 			aCoder.encode(variant, forKey: "variant")
 		}
-
+        if totalvariant != nil{
+            aCoder.encode(totalvariant, forKey: "total_variant")
+        }
 	}
 
 }

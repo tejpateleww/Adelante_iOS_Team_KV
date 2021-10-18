@@ -22,7 +22,6 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
     var restaurantId : String!
     var restaurantName : String!
     var serviceFee : String!
-    var shareOrder : String!
     var shareOrderId : String!
     var street : String!
     var subTotal : String!
@@ -30,6 +29,7 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
     var total : String!
     var totalRound : String!
     var username : String!
+    var promocode : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -56,7 +56,6 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
         restaurantId = json["restaurant_id"].stringValue
         restaurantName = json["restaurant_name"].stringValue
         serviceFee = json["service_fee"].stringValue
-        shareOrder = json["share_order"].stringValue
         shareOrderId = json["share_order_id"].stringValue
         street = json["street"].stringValue
         subTotal = json["sub_total"].stringValue
@@ -64,6 +63,7 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
         total = json["total"].stringValue
         totalRound = json["total_round"].stringValue
         username = json["username"].stringValue
+        promocode = json["promocode"].stringValue
 	}
 
 	/**
@@ -115,9 +115,6 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
         if serviceFee != nil{
         	dictionary["service_fee"] = serviceFee
         }
-        if shareOrder != nil{
-        	dictionary["share_order"] = shareOrder
-        }
         if shareOrderId != nil{
         	dictionary["share_order_id"] = shareOrderId
         }
@@ -138,6 +135,9 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
         }
         if username != nil{
         	dictionary["username"] = username
+        }
+        if promocode != nil{
+            dictionary["promocode"] = promocode
         }
 		return dictionary
 	}
@@ -161,7 +161,6 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
 		restaurantId = aDecoder.decodeObject(forKey: "restaurant_id") as? String
 		restaurantName = aDecoder.decodeObject(forKey: "restaurant_name") as? String
 		serviceFee = aDecoder.decodeObject(forKey: "service_fee") as? String
-		shareOrder = aDecoder.decodeObject(forKey: "share_order") as? String
 		shareOrderId = aDecoder.decodeObject(forKey: "share_order_id") as? String
 		street = aDecoder.decodeObject(forKey: "street") as? String
 		subTotal = aDecoder.decodeObject(forKey: "sub_total") as? String
@@ -169,6 +168,7 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
 		total = aDecoder.decodeObject(forKey: "total") as? String
 		totalRound = aDecoder.decodeObject(forKey: "total_round") as? String
 		username = aDecoder.decodeObject(forKey: "username") as? String
+        promocode = aDecoder.decodeObject(forKey: "promocode") as? String
 	}
 
     /**
@@ -216,9 +216,6 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
 		if serviceFee != nil{
 			aCoder.encode(serviceFee, forKey: "service_fee")
 		}
-		if shareOrder != nil{
-			aCoder.encode(shareOrder, forKey: "share_order")
-		}
 		if shareOrderId != nil{
 			aCoder.encode(shareOrderId, forKey: "share_order_id")
 		}
@@ -240,7 +237,9 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
 		if username != nil{
 			aCoder.encode(username, forKey: "username")
 		}
-
+        if promocode != nil{
+            aCoder.encode(promocode, forKey: "promocode")
+        }
 	}
 
 }

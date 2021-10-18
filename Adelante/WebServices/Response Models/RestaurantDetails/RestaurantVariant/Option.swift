@@ -15,11 +15,16 @@ class Option : NSObject, NSCoding{
     var name : String!
     var price : String!
     var restaurantItemId : String!
+    var quantity : String!
     var status : String!
     var trash : String!
     var variantId : String!
     var variantName : String!
     var isSelected : Bool = false
+    
+    var doublePrice: Double {
+        return Double(price) ?? 0
+    }
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -34,11 +39,19 @@ class Option : NSObject, NSCoding{
         name = json["name"].stringValue
         price = json["price"].stringValue
         restaurantItemId = json["restaurant_item_id"].stringValue
+        quantity = json["quantity"].stringValue
         status = json["status"].stringValue
         trash = json["trash"].stringValue
         variantId = json["variant_id"].stringValue
         variantName = json["variant_name"].stringValue
 	}
+    
+    init(Price:String,Name:String,isSelected:Bool,id:String) {
+        self.id = id
+        self.isSelected = isSelected
+        self.price = Price
+        self.name = Name
+    }
 
 	/**
 	 * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property

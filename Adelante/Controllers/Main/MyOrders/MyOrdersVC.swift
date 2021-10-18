@@ -165,7 +165,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         }
                     } else if selectedSegmentTag == 1{
                         cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
-                        cell.btnCancelOrder.isUserInteractionEnabled = false
+                        cell.btnCancelOrder.isUserInteractionEnabled = true
                         cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
@@ -216,10 +216,10 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         controller.cancelBtnColor = colors.appGreenColor
                         controller.strPopupImage = "ic_popupCancleOrder"
                         controller.isCancleOrder = true
+                        
                         controller.btnSubmit = {
                             controller.dismiss(animated: true, completion: nil)
-                            self.webserviceCancelOrder {
-                            }
+                            self.webserviceCancelOrder(orderID: self.arrPastList[indexPath.row].id)
                         }
                         self.present(controller, animated: true, completion: nil)
                     }
@@ -249,7 +249,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwAccept.isHidden = true
                     } else if selectedSegmentTag == 1{
                         cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
-                        cell.btnCancelOrder.isUserInteractionEnabled = false
+                        cell.btnCancelOrder.isUserInteractionEnabled = true
                         cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
@@ -261,8 +261,20 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = false
                     }
-                    
-                    
+                    if arrInProcessList[indexPath.row].shareOrderId.toInt() == 0{
+                        cell.share = {
+    //                        if let https://www.adelantemovil.com
+                            if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(self.arrInProcessList[indexPath.row].id ?? "")"), !name.absoluteString.isEmpty {
+                              let objectsToShare = [name]
+                              let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                              self.present(activityVC, animated: true, completion: nil)
+                            } else {
+                              // show alert for not available
+                            }
+                        }
+                    }else{
+                        cell.btnShare.isUserInteractionEnabled = false
+                    }
                     let obj = self.arrInProcessList[indexPath.row]
                     cell.lblRestName.text = obj.restaurantName
                     cell.lblRestLocation.text = obj.street
@@ -272,16 +284,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                    cell.share = {
-//                        if let https://www.adelantemovil.com
-                        if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
-                          let objectsToShare = [name]
-                          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                          self.present(activityVC, animated: true, completion: nil)
-                        } else {
-                          // show alert for not available
-                        }
-                    }
+                    
                     cell.Repeat = {
                         self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
                     }
@@ -303,8 +306,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         controller.isCancleOrder = true
                         controller.btnSubmit = {
                             controller.dismiss(animated: true, completion: nil)
-                            self.webserviceCancelOrder {
-                            }
+                            self.webserviceCancelOrder(orderID: self.arrInProcessList[indexPath.row].id)
                         }
                         self.present(controller, animated: true, completion: nil)
                     }
@@ -333,7 +335,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwAccept.isHidden = true
                     } else if selectedSegmentTag == 1{
                         cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
-                        cell.btnCancelOrder.isUserInteractionEnabled = false
+                        cell.btnCancelOrder.isUserInteractionEnabled = true
                         cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
                         cell.vwShare.isHidden = false
                         cell.vwCancelOrder.isHidden = false
@@ -388,8 +390,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         controller.isCancleOrder = true
                         controller.btnSubmit = {
                             controller.dismiss(animated: true, completion: nil)
-                            self.webserviceCancelOrder {
-                            }
+                            self.webserviceCancelOrder(orderID: self.arrShareList[indexPath.row].id)
+                            
                         }
                         self.present(controller, animated: true, completion: nil)
                     }
@@ -571,11 +573,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     func refreshOrderDetailsScreen() {
         self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
     }
-    func webserviceCancelOrder(completion: @escaping () -> ()){
+    func webserviceCancelOrder(orderID:String){
         
         let cancelOrder = CancelOrderReqModel()
         cancelOrder.user_id = SingletonClass.sharedInstance.UserId
-        cancelOrder.main_order_id = strOrderId
+        cancelOrder.main_order_id = orderID
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
             if(status)
             {
@@ -589,7 +591,6 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     Utilities.displayAlert("Something went wrong")
                 }
             }
-            completion()
         })
     }
     func webserviceShareOrder(strMainOrderId:String){

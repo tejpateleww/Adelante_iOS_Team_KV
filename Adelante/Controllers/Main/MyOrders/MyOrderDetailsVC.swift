@@ -34,6 +34,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var arrShareDetail = [ShareDetailsItem]()
     var objShareOrderDetails : ShareDetailsMainOrder!
     lazy var skeletonViewData : SkeletonOrderDetails = SkeletonOrderDetails.fromNib()
+    var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]//"checkOutVC_arrayForTitle_title3".Localized()
     var isfromShare : Bool = false
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
@@ -44,15 +45,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var lblRestName: UILabel!
     @IBOutlet weak var lblLocation: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
-    @IBOutlet weak var lblYourOrder: orderDetailsLabel!
-    @IBOutlet weak var lblSubTotalTitle: UILabel!
-    @IBOutlet weak var lblSubTotal: UILabel!
-    @IBOutlet weak var lblServiceFeeTitle: UILabel!
-    @IBOutlet weak var lblServiceFee: UILabel!
-    @IBOutlet weak var lblTaxesTitle: UILabel!
-    @IBOutlet weak var lblTaxes: UILabel!
-    @IBOutlet weak var lblTotalTitle: UILabel!
-    @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnRateOrder: UIButton!
     @IBOutlet weak var btnShareOrder: submitButton!
@@ -61,13 +53,20 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var vwRateOrder: UIView!
     @IBOutlet weak var vwShareOrder: UIView!
     @IBOutlet weak var heightTblItems: NSLayoutConstraint!
-    @IBOutlet weak var lblTax: UILabel!
     @IBOutlet weak var vwAccept: UIView!
     @IBOutlet weak var btnAccept: submitButton!
+    @IBOutlet weak var tblOrderDetails: UITableView!
+    @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
+    @IBOutlet weak var lblTotal: UILabel!
+    @IBOutlet weak var lblSharedDetail: orderDetailsLabel!
     //    @IBOutlet weak var viewSkeleton: skeletonView!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tblOrderDetails.delegate = self
+        tblOrderDetails.dataSource = self
+        tblOrderDetails.reloadData()
+        tblOrderDetails.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         skeletonViewData.showAnimatedSkeleton()
         skeletonViewData.frame.size.width = view.frame.size.width
         self.view.addSubview(skeletonViewData)
@@ -76,6 +75,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             webserviceShareOrderDetails()
         }else{
             webserviceOrderDetails()
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
         }
         tblItems.rowHeight = UITableView.automaticDimension
         tblItems.estimatedRowHeight = 66.5
@@ -86,7 +86,18 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         self.customTabBarController?.hideTabBar()
         tblItems.reloadData()
     }
-    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
+        if let info = object, let collObj = info as? UITableView{
+            
+            if collObj == self.tblOrderDetails{
+                self.tblOrderDetailsHeight.constant = tblOrderDetails.contentSize.height
+            }
+//            else if collObj == self.tblPopup{
+//                
+//                self.tblPopupHeight.constant = tblPopup.contentSize.height
+//            }
+        }
+    }
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -110,12 +121,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 }
                 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objShareOrderDetails.restaurantName
-                lblTotal.text = "\(CurrencySymbol)" + objShareOrderDetails.total.ConvertToTwoDecimal()
-                lblTax.text = "(" + objShareOrderDetails.tax + "%" + ")"
-                lblAddress.text = objShareOrderDetails.address
-                lblTaxes.text = "\(CurrencySymbol)" + objShareOrderDetails.totalRound.ConvertToTwoDecimal()
-                lblServiceFee.text = "\(CurrencySymbol)" + objShareOrderDetails.serviceFee.ConvertToTwoDecimal()
-                lblSubTotal.text = "\(CurrencySymbol)" + objShareOrderDetails.subTotal.ConvertToTwoDecimal()
                 lblLocation.text = objShareOrderDetails.street
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objShareOrderDetails.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -131,16 +136,21 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 }
                 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objOrderDetailsData.restaurantName
-                lblTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.total.ConvertToTwoDecimal()
-                lblTax.text = "(" + objOrderDetailsData.tax + "%" + ")"
-                lblAddress.text = objOrderDetailsData.address
-                lblTaxes.text = "\(CurrencySymbol)" + objOrderDetailsData.totalRound.ConvertToTwoDecimal()
-                lblServiceFee.text = "\(CurrencySymbol)" + objOrderDetailsData.serviceFee.ConvertToTwoDecimal()
-                lblSubTotal.text = "\(CurrencySymbol)" + objOrderDetailsData.subTotal.ConvertToTwoDecimal()
                 lblLocation.text = objOrderDetailsData.street
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objOrderDetailsData.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                lblTotal.text = CurrencySymbol + objOrderDetailsData.total
+                if objOrderDetailsData.shareFrom == ""{
+                    lblSharedDetail.isHidden = true
+                }else{
+                    lblSharedDetail.text = objOrderDetailsData.shareFrom
+                }
+                if objOrderDetailsData.shareTo == ""{
+                    lblSharedDetail.isHidden = true
+                }else{
+                    lblSharedDetail.text = objOrderDetailsData.shareTo
+                }
             }
         }
         tblItems.reloadData()
@@ -208,13 +218,16 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
-        if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(orderId)"), !name.absoluteString.isEmpty {
-          let objectsToShare = [name]
-          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-          self.present(activityVC, animated: true, completion: nil)
-        } else {
-          // show alert for not available
-        }//webserviceShareOrder()
+        if objOrderDetailsData.shareOrderId.toInt() == 0{
+            if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(orderId)"), !name.absoluteString.isEmpty {
+                let objectsToShare = [name]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+            } else {
+            }
+        }else {
+            btnShareOrder.isUserInteractionEnabled = false
+        }
     }
     
     @IBAction func btnAcceptClick(_ sender: Any) {
@@ -222,46 +235,104 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     // MARK: - UITableView Delegates & Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isfromShare{
-            return arrShareDetail.count
+        switch tableView{
+        case tblItems:
+            if isfromShare{
+                return arrShareDetail.count
+            }
+            return arrItem.count
+        case tblOrderDetails:
+            arrayForTitle.removeAll()
+            
+            arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
+            var cnt = 1
+            if objOrderDetailsData?.promocodeType == "discount" || objOrderDetailsData?.promocode != ""{
+                arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())
+                cnt = cnt + 1
+            }
+            if (objOrderDetailsData?.serviceFee ?? "0") != "0"{
+                arrayForTitle.append("checkOutVC_arrayForTitle_title1".Localized())
+                cnt = cnt + 1
+            }
+            if (objOrderDetailsData?.tax ?? "0") != "0"{
+                arrayForTitle.append("checkOutVC_arrayForTitle_title2".Localized())
+                cnt = cnt + 1
+            }
+            
+            return cnt
+        default:
+            return 0
         }
-        return arrItem.count
+        
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isfromShare{
-            let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
-            cell.lblItemName.text = arrShareDetail[indexPath.row].restaurantItemName
-            cell.lblDateTime.text = arrShareDetail[indexPath.row].date
-            cell.lblQty.text = arrShareDetail[indexPath.row].quantity
-            cell.lblPrice.text = (CurrencySymbol) + arrShareDetail[indexPath.row].subTotal
-            cell.lblSharedFrom.isHidden = true
+        switch tableView{
+        case tblItems:
+            if isfromShare{
+                let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
+                cell.lblItemName.text = arrShareDetail[indexPath.row].restaurantItemName
+                cell.lblDateTime.text = arrShareDetail[indexPath.row].date
+                cell.lblQty.text = arrShareDetail[indexPath.row].quantity
+                cell.lblPrice.text = (CurrencySymbol) + arrShareDetail[indexPath.row].subTotal
+                cell.selectionStyle = .none
+                return cell
+            }else{
+                let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
+                cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
+                cell.lblDateTime.text = arrItem[indexPath.row].date
+                cell.lblQty.text = arrItem[indexPath.row].quantity
+                cell.lblPrice.text = (CurrencySymbol) + arrItem[indexPath.row].subTotal
+                cell.selectionStyle = .none
+                return cell
+            }
+        case tblOrderDetails:
+            let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: MyOrderTotalCell.reuseIdentifier, for: indexPath) as! MyOrderTotalCell
+            switch arrayForTitle[indexPath.row] {
+            case "checkOutVC_arrayForTitle_title".Localized():
+                cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.subTotal ?? "")"
+            case "checkOutVC_arrayForTitle_title1".Localized():
+                cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.serviceFee ?? "")"
+            case "checkOutVC_arrayForTitle_title2".Localized():
+                cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.totalRound ?? "")"
+            case "checkOutVC_arrayForTitle_title3".Localized():
+                if objOrderDetailsData?.promocodeType == "discount"{
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
+                }else if objOrderDetailsData?.promocode != ""{
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
+                }
+            default:
+                break
+            }
+            cell.lblTitle.text = arrayForTitle[indexPath.row]
+            if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
+                cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objOrderDetailsData?.tax! ?? "0")%)"
+            }
             cell.selectionStyle = .none
             return cell
-        }else{
-            let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
-            cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
-            cell.lblDateTime.text = arrItem[indexPath.row].date
-            cell.lblQty.text = arrItem[indexPath.row].quantity
-            cell.lblPrice.text = (CurrencySymbol) + arrItem[indexPath.row].subTotal
-            cell.lblSharedFrom.isHidden = true
-            cell.selectionStyle = .none
-            return cell
+        
+        default:
+        return UITableViewCell()
         }
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch tableView {
+        case tblItems:
+            return UITableView.automaticDimension
+        case tblOrderDetails:
+            return 43
+        default:
+            return 43
+        }
+    }
     func setUpLocalizedStrings()
     {
         lblOrderId.text = "MyOrderDetailsVC_lblOrderId".Localized()
         lblNoOfItems.text = String(format: "MyOrderDetailsVC_lblNoOfItems".Localized(), "1")
         lblRestName.text = "MyOrderDetailsVC_lblRestName".Localized()
         lblLocation.text = "MyOrderDetailsVC_lblLocation".Localized()
-        lblAddress.text = "43369 Ellsworth St, remont,CA"
-        lblYourOrder.text = "MyOrderDetailsVC_lblYourOrder".Localized()
-        lblSubTotalTitle.text = "MyOrderDetailsVC_lblSubTotalTitle".Localized()
-        lblServiceFeeTitle.text = "MyOrderDetailsVC_lblServiceFeeTitle".Localized()
-        lblTaxesTitle.text = "MyOrderDetailsVC_lblTaxesTitle".Localized()
-        lblTotalTitle.text = "MyOrderDetailsVC_lblTotalTitle".Localized()
+        lblAddress.text = "43369 Ellsworth St, remont,CA".Localized()
         btnCancel.setTitle("MyOrderDetailsVC_btnCancel".Localized(), for: .normal)
         btnRateOrder.setTitle("MyOrderDetailsVC_btnRateOrder".Localized(), for: .normal)
         btnShareOrder.setTitle("MyOrderDetailsVC_btnShareOrder".Localized(), for: .normal)
@@ -284,6 +355,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 self.objOrderDetailsData = orderData.data.mainOrder
                 self.arrItem = self.objOrderDetailsData.item
                 self.setData()
+                self.tblOrderDetails.reloadData()
+                self.tblOrderDetails.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
                 Utilities.displayAlert("", message: response["message"].string ?? "", completion: {_ in
                     self.navigationController?.popViewController(animated: true)
                 }, otherTitles: nil)

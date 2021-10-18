@@ -282,6 +282,7 @@
 		88F6D94A26CFB4B400ED5C95 /* ShareDetailsMainOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94626CFB4B400ED5C95 /* ShareDetailsMainOrder.swift */; };
 		88F6D94B26CFB4B400ED5C95 /* shareDetailsResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94726CFB4B400ED5C95 /* shareDetailsResModel.swift */; };
 		88F7235C269823600002441E /* RestaurantDetailsPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7235B269823600002441E /* RestaurantDetailsPopupCell.swift */; };
+		906079A62717017B00183F5A /* MyOrderTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906079A52717017B00183F5A /* MyOrderTotalCell.swift */; };
 		9203B478268B58720096AFDF /* HomeSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203B476268B58720096AFDF /* HomeSkeletonCell.swift */; };
 		9203B479268B58730096AFDF /* HomeSkeletonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9203B477268B58720096AFDF /* HomeSkeletonCell.xib */; };
 		9203B47B268B58FA0096AFDF /* NoDataCollectionview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203B47A268B58FA0096AFDF /* NoDataCollectionview.swift */; };
@@ -579,6 +580,7 @@
 		88F6D94626CFB4B400ED5C95 /* ShareDetailsMainOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailsMainOrder.swift; sourceTree = "<group>"; };
 		88F6D94726CFB4B400ED5C95 /* shareDetailsResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shareDetailsResModel.swift; sourceTree = "<group>"; };
 		88F7235B269823600002441E /* RestaurantDetailsPopupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsPopupCell.swift; sourceTree = "<group>"; };
+		906079A52717017B00183F5A /* MyOrderTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderTotalCell.swift; sourceTree = "<group>"; };
 		9203B476268B58720096AFDF /* HomeSkeletonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCell.swift; sourceTree = "<group>"; };
 		9203B477268B58720096AFDF /* HomeSkeletonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSkeletonCell.xib; sourceTree = "<group>"; };
 		9203B47A268B58FA0096AFDF /* NoDataCollectionview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataCollectionview.swift; sourceTree = "<group>"; };
@@ -704,6 +706,7 @@
 				84C5F68A2643A91C000B2DDE /* PromocodeCell.swift */,
 				88F7235B269823600002441E /* RestaurantDetailsPopupCell.swift */,
 				888EBCB9269D9D01006C1424 /* searchFoodLIstCell.swift */,
+				906079A52717017B00183F5A /* MyOrderTotalCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1781,6 +1784,7 @@
 				81CFFD862574C60D005AA86A /* CustomSlider.swift in Sources */,
 				88ECB13126A93BAB001872D7 /* CartDatum.swift in Sources */,
 				34C3756325CD41970049289A /* orderDetailsData.swift in Sources */,
+				906079A62717017B00183F5A /* MyOrderTotalCell.swift in Sources */,
 				81E67217257E68BC00DCE9DA /* addPaymentVC.swift in Sources */,
 				881715E9267B12A300F821AA /* VerifyVC.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,

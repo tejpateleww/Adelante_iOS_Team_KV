@@ -400,7 +400,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.vwStapper.isHidden = false
                     }
                     cell.decreaseData = {
-                        if variantValue > 0 && self.arrMenuitem[indexPath.row].cartVariantCount.toInt() == 1{
+                        if variantValue > 0 && self.arrMenuitem[indexPath.row].totalvariant.toInt() > 1{
                             if variantValue > 0{
                                 self.arrItemList = [ItemList]()
                                 self.tblPopup.showAnimatedSkeleton()
@@ -590,7 +590,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.btnCustomize.isHidden = true
                     }
                     cell.decreaseData = { [self] in
-                        if variantValue > 0 && self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartVariantCount.toInt() == 1{
+                        if variantValue > 0 && self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].totalvariant.toInt() > 1{
                             if variantValue > 0{
                                 self.arrItemList = [ItemList]()
                                 self.tblPopup.showAnimatedSkeleton()
@@ -775,7 +775,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.btnCustomize.isHidden = true
                 }
                 cell.decreaseData = {
-                    if variantValue > 0 && self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartVariantCount.toInt() == 1{
+                    if variantValue > 0 && self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].totalvariant.toInt() > 1{
                         if variantValue > 0{
                             self.arrItemList = [ItemList]()
                             self.tblPopup.showAnimatedSkeleton()
@@ -1242,7 +1242,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }else{
                         let variantValue = arrMenuitem[selectedIndexItem.row].variant.ToDouble()
-                        if variantValue > 0 && arrMenuitem[selectedIndexItem.row].cartVariantCount.toInt() == 1{
+                        if variantValue > 0 && arrMenuitem[selectedIndexItem.row].totalvariant.toInt() > 1{
                             if variantValue > 0{
                                 let cell = self.tblPopup.cellForRow(at: index) as! RestaurantDetailsPopupCell
                                 if (cell.lblNoOfItem.text?.toInt())! <= 1 && strType == "0"{

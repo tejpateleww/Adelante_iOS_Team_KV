@@ -51,36 +51,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var lblCancellation: CheckOutLabel!
     @IBOutlet weak var btnReadPOlicy: checkoutButton!
     @IBOutlet weak var btnAddFoodlist: checkoutButton!
+    @IBOutlet weak var btnChange: checkoutButton!
     @IBOutlet weak var btnPlaceOrder: submitButton!
     
     // MARK: - ViewController Lifecycle
     
-    // handle notification
-//    @objc func GetPromocodeData(notification: NSNotification) {
-//
-//
-//        do {
-//            let jsonData = try JSONSerialization.data(withJSONObject: notification.userInfo ?? [:], options: .prettyPrinted)
-//            // here "jsonData" is the dictionary encoded in JSON data
-//
-//            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
-//            // here "decoded" is of type `Any`, decoded from JSON data
-//
-//            // you can now cast it with the right type
-//            if let dictFromJSON = decoded as? [String:String] {
-//                let ResModel = applyPromocodeResModel.init(coder: dictFromJSON)
-//                AppliedPromocode = ResModel
-//                ApplyPromocode()
-//                self.tblOrderDetails.reloadData()
-//                // use dictFromJSON
-//            }
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//
-//
-//
-//    }
     func ApplyPromocode() {
         
         if AppliedPromocode != nil {
@@ -88,6 +63,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             
             lblPromoCode.isHidden = false
             lblPromoCode.text = AppliedPromocode?.name
+            btnChange.isHidden = false
             btnCanclePromoCOde.isHidden = false
         }
         
@@ -169,6 +145,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
             lblPromoCode.isHidden = false
             lblPromoCode.text = cartDetails?.promocode
             btnCanclePromoCOde.isHidden = false
+            btnChange.isHidden = false
         }
         // }
     }
@@ -191,6 +168,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         btnAddFoodlist.setTitle("checkOutVC_btnAddFoodlist".Localized(), for: .normal)
         btnPlaceOrder.setTitle("checkOutVC_btnPlaceOrder".Localized(), for: .normal)
         btnCanclePromoCOde.setTitle("checkOutVC_btnCanclePromoCOde".Localized(), for: .normal)
+        btnChange.setTitle("checkOutVC_btnChangePromoCOde".Localized(), for: .normal)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -319,6 +297,21 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     @IBAction func btnReadPolicyTap(_ sender: Any) {
         webserviceGetSettings()
+    }
+    @IBAction func btnChangeClick(_ sender: Any) {
+        let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: PromocodeVC.storyboardID) as! PromocodeVC
+        vc.RestuarantID = cartDetails?.id ?? ""
+        vc.cartID = cartDetails?.cartId ?? ""
+        vc.ApplyPromoAmount = { promocodeApplyData in
+            self.AppliedPromocode = promocodeApplyData
+            self.LblTotlaPrice.text = "\(CurrencySymbol)\(self.AppliedPromocode?.grandTotal ?? "")"
+            self.cartDetails?.total = self.AppliedPromocode?.oldTotal
+            self.cartDetails?.tax = self.AppliedPromocode?.tax
+            self.cartDetails?.serviceFee = self.AppliedPromocode?.serviceFee
+            self.ApplyPromocode()
+            self.tblOrderDetails.reloadData()
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func ApplyPromoCode(_ sender: submitButton) {
         
@@ -513,6 +506,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
                 self.AppliedPromocode = nil
                 self.lblPromoCode.isHidden = true
                 self.btnCanclePromoCOde.isHidden = true
+                self.btnChange.isHidden = true
                 self.btnAppyPromoCode.isHidden = false
                 self.btnAppyPromoCode.titleLabel?.textAlignment = .left
                 self.lblPromoCode.text = ""

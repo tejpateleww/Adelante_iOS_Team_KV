@@ -33,7 +33,7 @@ class MenuItem : NSObject, NSCoding{
     var variant : String!
     var vegNonveg : String!
     var viewCount : String!
-
+    var totalvariant : String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -65,6 +65,7 @@ class MenuItem : NSObject, NSCoding{
         variant = json["variant"].stringValue
         vegNonveg = json["veg_nonveg"].stringValue
         viewCount = json["view_count"].stringValue
+        totalvariant = json["total_variant"].stringValue
 	}
 
 	/**
@@ -145,6 +146,9 @@ class MenuItem : NSObject, NSCoding{
         if viewCount != nil{
         	dictionary["view_count"] = viewCount
         }
+        if totalvariant != nil{
+            dictionary["total_variant"] = totalvariant
+        }
 		return dictionary
 	}
 
@@ -178,6 +182,7 @@ class MenuItem : NSObject, NSCoding{
 		variant = aDecoder.decodeObject(forKey: "variant") as? String
 		vegNonveg = aDecoder.decodeObject(forKey: "veg_nonveg") as? String
 		viewCount = aDecoder.decodeObject(forKey: "view_count") as? String
+        totalvariant = aDecoder.decodeObject(forKey: "total_variant") as? String
 	}
 
     /**
@@ -258,7 +263,9 @@ class MenuItem : NSObject, NSCoding{
 		if viewCount != nil{
 			aCoder.encode(viewCount, forKey: "view_count")
 		}
-
+        if totalvariant != nil{
+            aCoder.encode(totalvariant, forKey: "total_variant")
+        }
 	}
 
 }
