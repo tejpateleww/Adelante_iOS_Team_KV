@@ -122,6 +122,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objShareOrderDetails.restaurantName
                 lblLocation.text = objShareOrderDetails.street
+                lblAddress.text = objShareOrderDetails.address
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objShareOrderDetails.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -137,19 +138,22 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objOrderDetailsData.restaurantName
                 lblLocation.text = objOrderDetailsData.street
+                lblAddress.text = objOrderDetailsData.address
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objOrderDetailsData.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 lblTotal.text = CurrencySymbol + objOrderDetailsData.total
                 if objOrderDetailsData.shareFrom == ""{
-                    lblSharedDetail.isHidden = true
+//                    lblSharedDetail.isHidden = true
                 }else{
-                    lblSharedDetail.text = objOrderDetailsData.shareFrom
+                    lblSharedDetail.isHidden = false
+                    lblSharedDetail.text = "Shared from " + objOrderDetailsData.shareFrom
                 }
                 if objOrderDetailsData.shareTo == ""{
-                    lblSharedDetail.isHidden = true
+//                    lblSharedDetail.isHidden = true
                 }else{
-                    lblSharedDetail.text = objOrderDetailsData.shareTo
+                    lblSharedDetail.isHidden = false
+                    lblSharedDetail.text = "Shared to " + objOrderDetailsData.shareTo
                 }
             }
         }
@@ -189,25 +193,29 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - IBActions
     @IBAction func btnCancelOrderClicked(_ sender: Any) {
-        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-        //controller.modalPresentationStyle = .fullScreen
-        controller.isHideCancelButton = true
-        controller.isHideSubmitButton = false
-        controller.submitBtnTitle = "Cancel Order       "
-        controller.cancelBtnTitle = ""
-        controller.strDescription = "Do you really want  to cancel the order."
-        
-        controller.strPopupTitle = "Are you Sure?"
-        controller.submitBtnColor = colors.appRedColor
-        controller.cancelBtnColor = colors.appGreenColor
-        controller.strPopupImage = "ic_popupCancleOrder"
-        controller.isCancleOrder = true
-        controller.btnSubmit = {
-            controller.dismiss(animated: true, completion: nil)
-            self.webserviceCancelOrder()
-            //                            dismiss(animated: , completion: nil)
+        if objOrderDetailsData.trash.toInt() == 0{
+            let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+            //controller.modalPresentationStyle = .fullScreen
+            controller.isHideCancelButton = true
+            controller.isHideSubmitButton = false
+            controller.submitBtnTitle = "Cancel Order       "
+            controller.cancelBtnTitle = ""
+            controller.strDescription = "Do you really want  to cancel the order."
+            
+            controller.strPopupTitle = "Are you Sure?"
+            controller.submitBtnColor = colors.appRedColor
+            controller.cancelBtnColor = colors.appGreenColor
+            controller.strPopupImage = "ic_popupCancleOrder"
+            controller.isCancleOrder = true
+            controller.btnSubmit = {
+                controller.dismiss(animated: true, completion: nil)
+                self.webserviceCancelOrder()
+                //                            dismiss(animated: , completion: nil)
+            }
+            self.present(controller, animated: true, completion: nil)
+        }else{
+            btnCancel.isUserInteractionEnabled = false
         }
-        self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {

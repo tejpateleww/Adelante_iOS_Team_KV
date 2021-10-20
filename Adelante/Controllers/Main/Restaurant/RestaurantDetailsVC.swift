@@ -442,6 +442,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                             controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                             controller.selectedRestaurantId = self.objRestaurant.id
+                            controller.isFromRestaurant = true
                             controller.delegateAddVariant = self
                             self.strItemId = self.arrMenuitem[indexPath.row].id
                             self.navigationController?.pushViewController(controller, animated: true)
@@ -482,6 +483,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                         controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                                         controller.selectedRestaurantId = self.objRestaurant.id
+                                        controller.isFromRestaurant = true
                                         controller.delegateAddVariant = self
                                         self.strItemId = self.arrMenuitem[indexPath.row].id
                                         self.navigationController?.pushViewController(controller, animated: true)
@@ -508,6 +510,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 if self.arrMenuitem[indexPath.row].quantity > 1 && variantValue > 0{
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrMenuitem[indexPath.row].id
+                                    controller.isFromRestaurant = true
                                     controller.selectedRestaurantId = self.objRestaurant.id
                                     controller.delegateAddVariant = self
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
@@ -630,6 +633,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         if variantValue > 0{
                             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                             controller.selectedItemId = self.arrMenuitem[indexPath.row].id
+                            controller.isFromRestaurant = true
                             controller.selectedRestaurantId = self.objRestaurant.id
                             controller.delegateAddVariant = self
                             self.strItemId = self.arrMenuitem[indexPath.row].id
@@ -666,6 +670,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                         controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                                         controller.selectedRestaurantId = self.objRestaurant.id
+                                        controller.isFromRestaurant = true
                                         controller.delegateAddVariant = self
                                         self.strItemId = self.arrMenuitem[indexPath.row].id
                                         self.navigationController?.pushViewController(controller, animated: true)
@@ -693,6 +698,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                                     controller.selectedRestaurantId = self.objRestaurant.id
+                                    controller.isFromRestaurant = true
                                     controller.delegateAddVariant = self
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
                                     self.navigationController?.pushViewController(controller, animated: true)
@@ -816,6 +822,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                         controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                         controller.selectedRestaurantId = self.objRestaurant.id
+                        controller.isFromRestaurant = true
                         controller.delegateAddVariant = self
                         self.strItemId = self.arrMenuitem[indexPath.row].id
                         self.navigationController?.pushViewController(controller, animated: true)
@@ -871,6 +878,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                                     controller.selectedRestaurantId = self.objRestaurant.id
+                                    controller.isFromRestaurant = true
                                     controller.delegateAddVariant = self
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
                                     self.navigationController?.pushViewController(controller, animated: true)
@@ -898,6 +906,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                 controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                                 controller.selectedRestaurantId = self.objRestaurant.id
+                                controller.isFromRestaurant = true
                                 controller.delegateAddVariant = self
                                 self.strItemId = self.arrMenuitem[indexPath.row].id
                                 self.navigationController?.pushViewController(controller, animated: true)

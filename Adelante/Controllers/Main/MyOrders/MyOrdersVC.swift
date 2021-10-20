@@ -261,7 +261,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = false
                     }
-                    if arrInProcessList[indexPath.row].shareOrderId.toInt() == 0{
+                    if arrInProcessList[indexPath.row].shareOrderId.toInt() == 0 && arrInProcessList[indexPath.row].trash.toInt() == 0{
                         cell.share = {
     //                        if let https://www.adelantemovil.com
                             if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(self.arrInProcessList[indexPath.row].id ?? "")"), !name.absoluteString.isEmpty {
@@ -272,8 +272,29 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                               // show alert for not available
                             }
                         }
+                        cell.cancel = {
+                            
+                            let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+                            //controller.modalPresentationStyle = .fullScreen
+                            controller.isHideCancelButton = true
+                            controller.isHideSubmitButton = false
+                            controller.submitBtnTitle = "Cancel Order       "
+                            controller.cancelBtnTitle = ""
+                            controller.strDescription = "Do you really want  to cancel the order."
+                            controller.strPopupTitle = "Are you Sure?"
+                            controller.submitBtnColor = colors.appRedColor
+                            controller.cancelBtnColor = colors.appGreenColor
+                            controller.strPopupImage = "ic_popupCancleOrder"
+                            controller.isCancleOrder = true
+                            controller.btnSubmit = {
+                                controller.dismiss(animated: true, completion: nil)
+                                self.webserviceCancelOrder(orderID: self.arrInProcessList[indexPath.row].id)
+                            }
+                            self.present(controller, animated: true, completion: nil)
+                        }
                     }else{
                         cell.btnShare.isUserInteractionEnabled = false
+                        cell.btnCancelOrder.isUserInteractionEnabled = false
                     }
                     let obj = self.arrInProcessList[indexPath.row]
                     cell.lblRestName.text = obj.restaurantName
@@ -290,26 +311,6 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     }
                     strOrderId = obj.id
                     
-                    cell.cancel = {
-                        
-                        let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
-                        //controller.modalPresentationStyle = .fullScreen
-                        controller.isHideCancelButton = true
-                        controller.isHideSubmitButton = false
-                        controller.submitBtnTitle = "Cancel Order       "
-                        controller.cancelBtnTitle = ""
-                        controller.strDescription = "Do you really want  to cancel the order."
-                        controller.strPopupTitle = "Are you Sure?"
-                        controller.submitBtnColor = colors.appRedColor
-                        controller.cancelBtnColor = colors.appGreenColor
-                        controller.strPopupImage = "ic_popupCancleOrder"
-                        controller.isCancleOrder = true
-                        controller.btnSubmit = {
-                            controller.dismiss(animated: true, completion: nil)
-                            self.webserviceCancelOrder(orderID: self.arrInProcessList[indexPath.row].id)
-                        }
-                        self.present(controller, animated: true, completion: nil)
-                    }
                     cell.selectionStyle = .none
                     return cell
                 }else{

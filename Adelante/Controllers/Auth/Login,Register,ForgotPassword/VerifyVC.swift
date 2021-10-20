@@ -20,7 +20,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     var reqModelLogin = LoginReqModel()
     var textFieldsIndexes:[OTPTextField:Int] = [:]
     var verifyOTPClosour : (() -> ())?
-    weak var timer: Timer?
+    var timer = Timer()
     
     // MARK: - IBOutlets
     @IBOutlet weak var lblVerify: themeLabel!
@@ -31,11 +31,9 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     @IBOutlet weak var txtCode3: OTPTextField!
     @IBOutlet weak var btnResendOtp: btnOTP!
     @IBOutlet weak var btnVerify: OtpButton!
-    @IBOutlet weak var btnDontRecOtp: btnOTP!
     @IBOutlet var txtOtpOutletCollection: [OTPTextField]!
     
     @IBOutlet weak var lblCount: themeLabel!
-    @IBOutlet weak var viewResendOTP: UIStackView!
     
     var strfirst = ""
     var strLast = ""
@@ -43,7 +41,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     var strphoneNo = ""
     var strPassword = ""
 //    var strType = ""
-    var strtime = 30
+    var strtime = 31
     var selectedImage : UIImage?
     var isRemovePhoto = false
     
@@ -52,7 +50,6 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         // Do any additional setup after loading the view.
         setUp()
         setUpLocalizedStrings()
-        setUpDetails()
         
         for index in 0 ..< txtOtpOutletCollection.count {
             textFieldsIndexes[txtOtpOutletCollection[index]] = index
@@ -63,26 +60,38 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         txtOtpOutletCollection[3].myDelegate = self
         txtOtpOutletCollection[4].myDelegate = self
         txtOtpOutletCollection[5].myDelegate = self
-        lblCount.isHidden = false
-        lblCount.text = "\(strtime)"
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            self?.setCalculationLs()
+        if isFromLogin == false && isFromRegister == true {
+            self.webserviceForSendOTP(type: "0")
+        }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
+            self.webserviceForSendOTP(type: "1")
         }
-        viewResendOTP.isHidden = true
     }
-    
-    deinit {
-        timer?.invalidate()
+    func reversetimer(){
+        self.timer.invalidate() // just in case this button is tapped multiple times
+        self.lblCount.isHidden = false
+        self.btnResendOtp.isHidden = true
+//        self.btnResendOtp.isUserInteractionEnabled = false
+//        self.btnResendOtp.setTitleColor(colors.appOrangeColor.value, for: .normal)
+//        self.btnResendOtp.titleLabel?.font = CustomFont.AileronBold.returnFont(15)
+//        self.btnResendOtp.setunderline(title: "verify_btnResendOtp".Localized(), color: colors.lightOrange, font: CustomFont.AileronBold.returnFont(15))
+//        self.btnResendOtp.setTitleColor(#colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1).withAlphaComponent(0.3), for: .normal)
+        
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
-    
-    func setCalculationLs() {
-        strtime = strtime - 1
-        lblCount.text = "\(strtime)"
-        print(strtime)
-        if strtime == 0{
-            lblCount.isHidden = true
-            viewResendOTP.isHidden = false
-            timer?.invalidate()
+    @objc func timerAction() {
+        if self.strtime > 0{
+            self.strtime -= 1
+            self.lblCount.text =  "Resend after \(self.strtime > 9 ? "00:\(self.strtime)" : "00:0\(self.strtime)")  seconds"
+        } else {
+            self.btnResendOtp.isHidden = false
+            self.lblCount.isHidden = true
+            self.btnResendOtp.isUserInteractionEnabled = true
+            btnResendOtp.setTitle("verify_btnResendOtp".Localized(), for: .normal)
+            self.btnResendOtp.setTitleColor(colors.appOrangeColor.value, for: .normal)
+            self.btnResendOtp.titleLabel?.font = CustomFont.AileronBold.returnFont(15)
+            self.btnResendOtp.setunderline(title: "verify_btnResendOtp".Localized(), color: colors.appOrangeColor, font: CustomFont.AileronBold.returnFont(15))
+            self.timer.invalidate()
         }
     }
     
@@ -90,17 +99,12 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     func setUpLocalizedStrings() {
         lblVerify.text = "verify_lblVerify".Localized()
         lblCodeInstruction.text = "verify_lblCodeInstruction".Localized()
-        btnDontRecOtp.setTitle("verify_btnDontRecOtp".Localized(), for: .normal)
-        btnResendOtp.setTitle("verify_btnResendOtp".Localized(), for: .normal)
         btnVerify.setTitle("verify_btnVerify".Localized(), for: .normal)
-    }
-    
-    func setUpDetails() {
     }
     
     func navigateToVerifyScreen(strOTP: String, reqLogin: LoginReqModel) {
         let verifyVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID) as! VerifyVC
-        verifyVC.strOTP = strOTP
+//        verifyVC.strOTP = strOTP
         verifyVC.isFromLogin = true
         verifyVC.isFromRegister = false
         verifyVC.reqModelLogin = reqLogin
@@ -119,11 +123,6 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                 for i in neIndex..<txtOtpOutletCollection.count {
                     txtOtpOutletCollection[i].text = ""
                 }
-                
-                //                let prevIndex = index - 1
-                //                for i in 0..<prevIndex {
-                //                    txtOtpOutletCollection[i].isUserInteractionEnabled = false
-                //                }
             }
         } else {
             index == txtOtpOutletCollection.count - 1 ?
@@ -145,7 +144,10 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     func setUp() {
         self.navigationController?.navigationBar.isHidden = false
         setNavigationBarInViewController(controller: self, naviColor: colors.appGreenColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        Utilities.showAlertOfAPIResponse(param: strOTP, vc: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0){
+//            Utilities.showAlertOfAPIResponse(param: self.strOTP, vc: self)
+            Utilities.showAlert(AppName, message: self.strOTP, vc: self)
+        }
     }
     
     func validation() -> Bool {
@@ -190,9 +192,13 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
             self.clearAllFields()
         } else if isFromLogin == false && isFromRegister == true {
             self.clearAllFields()
+            self.strtime = 31
+            self.reversetimer()
             self.webserviceForSendOTP(type: "0")
         }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
             self.clearAllFields()
+            self.strtime = 31
+            self.reversetimer()
             self.webserviceForSendOTP(type: "1")
         }
     }
@@ -315,13 +321,14 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                 let otpModel = otpReceive.init(fromJson: json)
                 Utilities.showAlertOfAPIResponse(param: otpModel.code ?? "-", vc: self)
                 print(json)
-                strtime = 30
-                lblCount.isHidden = false
-                lblCount.text = "\(strtime)"
-                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-                    self?.setCalculationLs()
-                }
-                viewResendOTP.isHidden = true
+                reversetimer()
+//                strtime = 30
+//                lblCount.isHidden = false
+//                lblCount.text = "\(strtime)"
+//                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+//                    self?.setCalculationLs()
+//                }
+//                viewResendOTP.isHidden = true
                 strOTP = otpModel.code
             }else {
                 if let strMessage = json["message"].string {

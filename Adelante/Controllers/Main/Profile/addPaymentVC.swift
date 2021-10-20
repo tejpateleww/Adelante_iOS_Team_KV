@@ -395,7 +395,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         addpayment.is_paypal = (IsPaypalSelected == true) ? "1" : "0"
         WebServiceSubClass.PayNow(ReqModel: addpayment, showHud: false, completion: { (json, status, error) in
         
-            if(status) {
+             if(status) {
       
                 let vc : PaymentWebViewVC = PaymentWebViewVC.instantiate(fromAppStoryboard: .Main)
                 vc.strUrl = json["url"].stringValue

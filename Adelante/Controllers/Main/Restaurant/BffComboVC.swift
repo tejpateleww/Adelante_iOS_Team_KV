@@ -59,7 +59,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     var delegateAddVariant : AddveriantDelegate!
     var selectedOption = SelectedVarient()
     var TotalItemPrice = Int()
-    
+    var itemBasePrice = Double()
+    var isFromRestaurant : Bool = false
     // MARK: - IBOutlets
     
     @IBOutlet weak var tblBFFCombo: UITableView!{
@@ -96,9 +97,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         checkItemsAndUpdateFooter()
         setup()
         
-        
         selectedOption.onTotalUpdated = { [unowned self] amount in
-            self.lblItem.text = CurrencySymbol + "\(amount)"
+            self.lblItem.text = CurrencySymbol + "\(amount+itemBasePrice)"
         }
         // Do any additional setup after loading the view.
     }
@@ -175,7 +175,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 let cell = tblBFFCombo.dequeueReusableCell(withIdentifier: bffComboCell.reuseIdentifier, for: indexPath) as! bffComboCell
                 cell.lblbffComboTitle.text = arrVariants?[indexPath.section].option[indexPath.row].name
                 cell.lblBffComboPrice.isHidden = (arrVariants?[indexPath.section].option[indexPath.row].price != "") ? false : true
-                
+                let varient = self.arrVariants?[indexPath.section]
+                let option = varient!.option[indexPath.row]
                 if arrVariants?[indexPath.section].option[indexPath.row].price == "0.00"{
                     cell.lblBffComboPrice.isHidden = true
                 }else{
@@ -188,25 +189,21 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 if isFromWebservice == true{
                     if arrVariants?[indexPath.section].defaultItem == "" && arrVariants?[indexPath.section].variantItem == "0"{
                         self.arrVariants?[indexPath.section].option[0].isSelected = true
-                       
                     }else{
                         if let obj = arrVariants?[indexPath.section].defaultItem.split(separator: ",") {
                             for i in obj{
                                 if (arrVariants?[indexPath.section].option?[indexPath.row].id ?? "0") == i {
                                     arrVariants?[indexPath.section].option?[indexPath.row].isSelected = true
-                                   
                                 }
                             }
                         }
-                       
-                       
                     }
                 }
-//                if arrVariants?[indexPath.section].option?[indexPath.row].isSelected == true {
-//                    total += Int(arrVariants?[indexPath.section].option?[indexPath.row].doublePrice ?? 0.0)
-//                    selectedOption.manage(Option(Price:"\(total)", Name: "Total", isSelected: true, id: "0"))
-//                }
-                
+                if isFromRestaurant{
+                    if arrVariants?[indexPath.section].option?[indexPath.row].isSelected == true {
+                        self.selectedOption.manage(option)
+                    }
+                }
                 if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 {
                     cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
                 } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0 {
@@ -216,32 +213,19 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 } else {
                     cell.selectButton.setImage(UIImage(named: "ic_sortunSelected"), for: .normal)
                 }
-                cell.selectedBtn = {
-                    self.isFromWebservice = false
-                    if selectOne == 0{
-                        guard let varient = self.arrVariants?[indexPath.section] else {
-                            return
-                        }
-                        let option = varient.option[indexPath.row]
-                        
-                        
-                        self.arrVariants?[indexPath.section].option.forEach { $0.isSelected = false }
-                        self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = true
-                        self.selectedOption.manage(option)
-                    }else{
-                        guard let varient = self.arrVariants?[indexPath.section] else {
-                            return
-                        }
-                        
-                        let option = varient.option[indexPath.row]
-                        
-                        self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = !(self.arrVariants?[indexPath.section].option[indexPath.row].isSelected ?? Bool())
-                        self.selectedOption.manage(option)
-                        
-                    }
-                    self.checkandUpdateVariants()
-                    self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
-                }
+//                cell.selectedBtn = {
+//                    self.isFromWebservice = false
+//                    if selectOne == 0{
+//                        self.arrVariants?[indexPath.section].option.forEach { $0.isSelected = false }
+//                        self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = true
+//                        self.selectedOption.manage(option)
+//                    }else{
+//                        self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = !(self.arrVariants?[indexPath.section].option[indexPath.row].isSelected ?? Bool())
+//                        self.selectedOption.manage(option)
+//
+//                    }
+//
+//                }
                 cell.selectionStyle = .none
                 return cell
             }else{
@@ -256,6 +240,36 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             cell.selectionStyle = .none
             return cell
         }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.isFromRestaurant = false
+        let selectOne = arrVariants?[indexPath.section].menuChoice.toInt()
+        let varient = self.arrVariants?[indexPath.section]
+        let option = varient!.option[indexPath.row]
+        self.isFromWebservice = false
+        if selectOne == 0{
+            
+            for i in 0..<(self.arrVariants?[indexPath.section].option?.count ?? 0)
+            {
+                let obj = self.arrVariants?[indexPath.section].option?[i]
+                if (obj?.isSelected == true)
+                {
+                    obj?.isSelected = false
+                }
+                
+                self.selectedOption.manage(obj!)
+            }
+          let obj2 = self.arrVariants?[indexPath.section].option?[indexPath.row]
+            
+            obj2?.isSelected = true
+            self.selectedOption.manage(obj2!)
+           
+        }else{
+            self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = !(self.arrVariants?[indexPath.section].option[indexPath.row].isSelected ?? Bool())
+            self.selectedOption.manage(option)
+        }
+        self.checkandUpdateVariants()
+        self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         if responseStatus == .gotData{
@@ -394,8 +408,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 let resVariant = RestaurantVariantResModel.init(fromJson: response)
                 let cell = self.tblBFFCombo.dequeueReusableCell(withIdentifier: BffComboShimmerCell.reuseIdentifier) as! BffComboShimmerCell
                 cell.stopShimmering()
-                self.lblItem.text = CurrencySymbol + resVariant.itemPrice
-                
+//                self.lblItem.text = CurrencySymbol + resVariant.itemPrice
+                itemBasePrice = Double(resVariant.itemPrice) ?? 0.00
                 let objDoublePrice = Double(resVariant.itemPrice ?? "0") ?? 0
                 self.total = Int(objDoublePrice)
                 self.tblBFFCombo.stopSkeletonAnimation()
@@ -414,10 +428,6 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 }
             }
         })
-        
-        //        DispatchQueue.main.async {
-        //
-        //        }
     }
     
     func webwerviceAddtoCart(strAddon:String){
