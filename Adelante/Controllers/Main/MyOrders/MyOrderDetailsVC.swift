@@ -119,6 +119,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 } else {
                     lblNoOfItems.text = objShareOrderDetails.itemQuantity + " item"
                 }
+                lblTotal.text = CurrencySymbol + objShareOrderDetails.total
                 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objShareOrderDetails.restaurantName
                 lblLocation.text = objShareOrderDetails.street
@@ -158,6 +159,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         }
         tblItems.reloadData()
+        tblOrderDetails.reloadData()
         self.heightTblItems.constant = tblItems.contentSize.height
     }
     
@@ -250,24 +252,43 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
             return arrItem.count
         case tblOrderDetails:
-            arrayForTitle.removeAll()
-            
-            arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
-            var cnt = 1
-            if objOrderDetailsData?.promocodeType == "discount" || objOrderDetailsData?.promocode != ""{
-                arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())
-                cnt = cnt + 1
+            if isfromShare{
+                arrayForTitle.removeAll()
+                
+                arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
+                var cnt = 1
+                if objShareOrderDetails?.promocodeType == "discount" || objShareOrderDetails?.promocode != ""{
+                    arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())
+                    cnt = cnt + 1
+                }
+                if (objShareOrderDetails?.serviceFee ?? "0") != "0"{
+                    arrayForTitle.append("checkOutVC_arrayForTitle_title1".Localized())
+                    cnt = cnt + 1
+                }
+                if (objShareOrderDetails?.tax ?? "0") != "0"{
+                    arrayForTitle.append("checkOutVC_arrayForTitle_title2".Localized())
+                    cnt = cnt + 1
+                }
+                return cnt
+            }else{
+                arrayForTitle.removeAll()
+                
+                arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
+                var cnt = 1
+                if objOrderDetailsData?.promocodeType == "discount" || objOrderDetailsData?.promocode != ""{
+                    arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())
+                    cnt = cnt + 1
+                }
+                if (objOrderDetailsData?.serviceFee ?? "0") != "0"{
+                    arrayForTitle.append("checkOutVC_arrayForTitle_title1".Localized())
+                    cnt = cnt + 1
+                }
+                if (objOrderDetailsData?.tax ?? "0") != "0"{
+                    arrayForTitle.append("checkOutVC_arrayForTitle_title2".Localized())
+                    cnt = cnt + 1
+                }
+                return cnt
             }
-            if (objOrderDetailsData?.serviceFee ?? "0") != "0"{
-                arrayForTitle.append("checkOutVC_arrayForTitle_title1".Localized())
-                cnt = cnt + 1
-            }
-            if (objOrderDetailsData?.tax ?? "0") != "0"{
-                arrayForTitle.append("checkOutVC_arrayForTitle_title2".Localized())
-                cnt = cnt + 1
-            }
-            
-            return cnt
         default:
             return 0
         }
@@ -296,32 +317,57 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 return cell
             }
         case tblOrderDetails:
-            let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: MyOrderTotalCell.reuseIdentifier, for: indexPath) as! MyOrderTotalCell
-            switch arrayForTitle[indexPath.row] {
-            case "checkOutVC_arrayForTitle_title".Localized():
-                cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.subTotal ?? "")"
-            case "checkOutVC_arrayForTitle_title1".Localized():
-                cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.serviceFee ?? "")"
-            case "checkOutVC_arrayForTitle_title2".Localized():
-                cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.totalRound ?? "")"
-            case "checkOutVC_arrayForTitle_title3".Localized():
-                if objOrderDetailsData?.promocodeType == "discount"{
-                    cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
-                }else if objOrderDetailsData?.promocode != ""{
-                    cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
+            if isfromShare{
+                let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: MyOrderTotalCell.reuseIdentifier, for: indexPath) as! MyOrderTotalCell
+                switch arrayForTitle[indexPath.row] {
+                case "checkOutVC_arrayForTitle_title".Localized():
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.subTotal ?? "")"
+                case "checkOutVC_arrayForTitle_title1".Localized():
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.serviceFee ?? "")"
+                case "checkOutVC_arrayForTitle_title2".Localized():
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.totalRound ?? "")"
+                case "checkOutVC_arrayForTitle_title3".Localized():
+                    if objShareOrderDetails?.promocodeType == "discount"{
+                        cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.discountAmount ?? "")"
+                    }else if objShareOrderDetails?.promocode != ""{
+                        cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.discountAmount ?? "")"
+                    }
+                default:
+                    break
                 }
-            default:
-                break
+                cell.lblTitle.text = arrayForTitle[indexPath.row]
+                if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objShareOrderDetails?.tax! ?? "0")%)"
+                }
+                cell.selectionStyle = .none
+                return cell
+            }else{
+                let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: MyOrderTotalCell.reuseIdentifier, for: indexPath) as! MyOrderTotalCell
+                switch arrayForTitle[indexPath.row] {
+                case "checkOutVC_arrayForTitle_title".Localized():
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.subTotal ?? "")"
+                case "checkOutVC_arrayForTitle_title1".Localized():
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.serviceFee ?? "")"
+                case "checkOutVC_arrayForTitle_title2".Localized():
+                    cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.totalRound ?? "")"
+                case "checkOutVC_arrayForTitle_title3".Localized():
+                    if objOrderDetailsData?.promocodeType == "discount"{
+                        cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
+                    }else if objOrderDetailsData?.promocode != ""{
+                        cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
+                    }
+                default:
+                    break
+                }
+                cell.lblTitle.text = arrayForTitle[indexPath.row]
+                if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objOrderDetailsData?.tax! ?? "0")%)"
+                }
+                cell.selectionStyle = .none
+                return cell
             }
-            cell.lblTitle.text = arrayForTitle[indexPath.row]
-            if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
-                cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objOrderDetailsData?.tax! ?? "0")%)"
-            }
-            cell.selectionStyle = .none
-            return cell
-        
         default:
-        return UITableViewCell()
+            return UITableViewCell()
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

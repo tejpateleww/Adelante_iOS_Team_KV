@@ -226,6 +226,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
 //                    }
 //
 //                }
+                self.checkandUpdateVariants()
                 cell.selectionStyle = .none
                 return cell
             }else{
@@ -259,11 +260,11 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 
                 self.selectedOption.manage(obj!)
             }
-          let obj2 = self.arrVariants?[indexPath.section].option?[indexPath.row]
+            let obj2 = self.arrVariants?[indexPath.section].option?[indexPath.row]
             
             obj2?.isSelected = true
             self.selectedOption.manage(obj2!)
-           
+            
         }else{
             self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = !(self.arrVariants?[indexPath.section].option[indexPath.row].isSelected ?? Bool())
             self.selectedOption.manage(option)

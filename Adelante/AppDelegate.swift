@@ -18,7 +18,7 @@ import Braintree
 @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate,CLLocationManagerDelegate {
     
     var window: UIWindow?
-    var locationManager: CLLocationManager?
+    var locationManager: CLLocationManager? 
     var fromPushUserId = String()
     var fromPushItemId = String()
     
@@ -118,8 +118,8 @@ import Braintree
       return true
     }
     @objc func OnLinkClickToNavigate(){
-        if UserDefaults.standard.value(forKey: "IsLogin") != nil{
-            if UserDefaults.standard.value(forKey: "IsLogin") as! Bool{
+        if UserDefaults.standard.value(forKey: "isUserLogin") != nil{
+            if UserDefaults.standard.value(forKey: "isUserLogin") as! Bool{
                 
                 if let Navigation = appDel.window?.rootViewController as? UINavigationController{
                     let tabVC = Navigation.children.first as? CustomTabBarVC

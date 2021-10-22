@@ -354,17 +354,22 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     //MARK: -btnAction
     @IBAction func BtnpayNow(_ sender: submitButton) {
-        if isfromPayment{
-            
+        if IsWalletSelected == false && IsPaypalSelected == false
+        {
+            btnAddCart.isUserInteractionEnabled = false
         }else{
-            if WalletBalance < CartTotal {
-                if IsWalletSelected && !IsPaypalSelected  {
-                    Utilities.ShowAlert(OfMessage: "Your wallet amount is lower than total amount")
+            if isfromPayment{
+                
+            }else{
+                if WalletBalance < CartTotal {
+                    if IsWalletSelected && !IsPaypalSelected  {
+                        Utilities.ShowAlert(OfMessage: "Your wallet amount is lower than total amount")
+                    } else {
+                        WebServiceCallForOrder()
+                    }
                 } else {
                     WebServiceCallForOrder()
                 }
-            } else {
-                WebServiceCallForOrder()
             }
         }
     }

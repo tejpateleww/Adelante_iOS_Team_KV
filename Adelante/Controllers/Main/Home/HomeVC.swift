@@ -73,11 +73,22 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNIB()
-        if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String == nil{
-            self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
-        }else{
-            lblAddress.text = PlaceName
-        }
+//        if lblAddress.text == ""{
+//
+//                self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+//            }
+//            alertController.addAction(okAction)
+//            self.present(alertController, animated: true, completion: nil)
+//        }else{
+            if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String == nil{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+                    self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+                    print("Location Found")
+                }
+            }else{
+                lblAddress.text = PlaceName
+            }
+//        }
         setUpLocalizedStrings()
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()

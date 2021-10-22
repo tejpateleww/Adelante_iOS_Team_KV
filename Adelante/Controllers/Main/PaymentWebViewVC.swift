@@ -36,7 +36,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
     func setUp() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: strNavTitle, leftImage: NavItemsLeft.none.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: strNavTitle, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.webView)
@@ -77,7 +77,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
      
         
         if str == callBackURL {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
                 controller.selectedIndex = 2
                 
