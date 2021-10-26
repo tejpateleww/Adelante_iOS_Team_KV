@@ -19,6 +19,7 @@
 		189E57BD2664BDA9008AECA6 /* NoDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189E57B92664BDA9008AECA6 /* NoDataTableViewCell.xib */; };
 		189E57BE2664BDA9008AECA6 /* NoDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E57BA2664BDA9008AECA6 /* NoDataCollectionViewCell.swift */; };
 		189E57C12664BEDC008AECA6 /* NoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E57C02664BEDC008AECA6 /* NoData.swift */; };
+		18B392142722CAD400692D1D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 18B392132722CAD400692D1D /* loading.json */; };
 		18E0B578265790F90016AFE9 /* PromocodeListReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0B577265790F90016AFE9 /* PromocodeListReqModel.swift */; };
 		18F369532580AE0000992FCD /* BffComboVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369502580ADFE00992FCD /* BffComboVC.swift */; };
 		18F369542580AE0000992FCD /* commonPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F369512580ADFE00992FCD /* commonPopup.swift */; };
@@ -306,6 +307,7 @@
 		189E57B92664BDA9008AECA6 /* NoDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataTableViewCell.xib; sourceTree = "<group>"; };
 		189E57BA2664BDA9008AECA6 /* NoDataCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		189E57C02664BEDC008AECA6 /* NoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoData.swift; sourceTree = "<group>"; };
+		18B392132722CAD400692D1D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		18E0B577265790F90016AFE9 /* PromocodeListReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeListReqModel.swift; sourceTree = "<group>"; };
 		18F369502580ADFE00992FCD /* BffComboVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BffComboVC.swift; sourceTree = "<group>"; };
 		18F369512580ADFE00992FCD /* commonPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonPopup.swift; sourceTree = "<group>"; };
@@ -626,6 +628,14 @@
 				189E57BA2664BDA9008AECA6 /* NoDataCollectionViewCell.swift */,
 			);
 			path = NodataCell;
+			sourceTree = "<group>";
+		};
+		18B392122722CAC200692D1D /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				18B392132722CAD400692D1D /* loading.json */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		3400017A25C7CBB400C584DE /* RestaurantVariant */ = {
@@ -1049,6 +1059,7 @@
 		81CFFD332574C60D005AA86A /* Adelante */ = {
 			isa = PBXGroup;
 			children = (
+				18B392122722CAC200692D1D /* Lottie */,
 				189E57B62664BDA9008AECA6 /* NodataCell */,
 				342ADF3A25B70A170097B5AD /* Adelante.entitlements */,
 				81CFFD682574C60D005AA86A /* AppDelegate.swift */,
@@ -1487,6 +1498,7 @@
 				8105FE0825751644008D36D6 /* NexaBoldItalic.otf in Resources */,
 				817A16FD25839D7100C11BB2 /* Nunito-SemiBold.ttf in Resources */,
 				8105FDF425751644008D36D6 /* Aileron-Light.otf in Resources */,
+				18B392142722CAD400692D1D /* loading.json in Resources */,
 				8105FDFC25751644008D36D6 /* Aileron-HeavyItalic.otf in Resources */,
 				817A16FB25839D7100C11BB2 /* Nunito-Regular.ttf in Resources */,
 				817A16FF25839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf in Resources */,

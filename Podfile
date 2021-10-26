@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
  platform :ios, '12.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
+
 
 target 'Adelante' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -24,4 +24,5 @@ pod 'Alamofire', '5.0'
     pod 'SkeletonView'
     pod 'Socket.IO-Client-Swift', '~> 15.2.0'
     pod 'BraintreeDropIn'
+    pod 'lottie-ios'
 end
