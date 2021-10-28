@@ -342,29 +342,29 @@ class Utilities:NSObject{
     }
     
     
-    class func showHud()
-    {
-//        let size = CGSize(width: 40, height: 40)
-        //        let activityData = ActivityData(size: size, message: "", messageFont: nil, messageSpacing: nil, type: .lineScale, color: colors.btnColor.value, padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor: UIColor.black.withAlphaComponent(0.5), textColor: nil)
-        //        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
-        MKProgress.config.hudType = .radial
-    MKProgress.config.hudColor = .clear
-    MKProgress.config.width = 65.0
-    MKProgress.config.height = 65.0
-    MKProgress.config.circleRadius = 30.0
-    MKProgress.config.cornerRadius = 16.0
-        MKProgress.config.circleBorderColor = UIColor.init(hexString: "#E34A25")
-    MKProgress.config.circleBorderWidth = 3.0
-    MKProgress.config.backgroundColor = .clear
-    MKProgress.show()
-
-    }
-
-    class func hideHud()
-    {
-        //        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
-        MKProgress.hide()
-    }
+//    class func showHud()
+//    {
+////        let size = CGSize(width: 40, height: 40)
+//        //        let activityData = ActivityData(size: size, message: "", messageFont: nil, messageSpacing: nil, type: .lineScale, color: colors.btnColor.value, padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor: UIColor.black.withAlphaComponent(0.5), textColor: nil)
+//        //        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+//        MKProgress.config.hudType = .radial
+//    MKProgress.config.hudColor = .clear
+//    MKProgress.config.width = 65.0
+//    MKProgress.config.height = 65.0
+//    MKProgress.config.circleRadius = 30.0
+//    MKProgress.config.cornerRadius = 16.0
+//        MKProgress.config.circleBorderColor = UIColor.init(hexString: "#E34A25")
+//    MKProgress.config.circleBorderWidth = 3.0
+//    MKProgress.config.backgroundColor = .clear
+//    MKProgress.show()
+//
+//    }
+//
+//    class func hideHud()
+//    {
+//        //        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+//        MKProgress.hide()
+//    }
     
     
     
@@ -584,60 +584,60 @@ extension UIImage {
     }
     
 }
-//class AnimationLoader: NSObject {
-//    
-//    static var ViewBG = UIView()
-//    static var loadingView = AnimationView(name: "loading")
-//   
-//    
-//    class func showActivityIndicatory() {
-//        
-//        let size:CGSize = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.frame.size ?? CGSize()
-//        ViewBG.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//        ViewBG.center = CGPoint(x: size.width / 2, y: size.height / 2)
-//        ViewBG.backgroundColor = UIColor.clear
-//    
-//        
-//        loadingView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//        loadingView.contentMode = .scaleAspectFit
-//        loadingView.backgroundColor = .clear
-//        loadingView.clipsToBounds = true
-//        loadingView.animationSpeed = 0.5
-//        loadingView.loopMode = .loop
-////        loadingView.layer.cornerRadius = 10
-//        
-//       
-//        loadingView.contentMode = .scaleAspectFit
-//        
-//        if !ViewBG.subviews.contains(loadingView){
-//            ViewBG.addSubview(loadingView)
-//        }
-//        loadingView.play()
-//        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(ViewBG)
-//        print("ATDebug :: \(ViewBG.frame)")
-//
-////        UIApplication.shared.keyWindow?.addSubview(ViewBG)
-//    }
-//    
-//    class func hideLoader(){
-//        
-//        DispatchQueue.main.async(execute: {
-//            loadingView.stop()
-//            ViewBG.removeFromSuperview()
-//        })
-//    }
-//}
-//extension Utilities {
-//    static func showHud(){
-//        DispatchQueue.main.async {
-//            AnimationLoader.showActivityIndicatory()
-//        }
-//    }
-//    
-//    static func hideHud(){
-//        DispatchQueue.main.async {
-//            AnimationLoader.hideLoader()
-//        }
-//    }
-//    
-//}
+class AnimationLoader: NSObject {
+    
+    static var ViewBG = UIView()
+    static var loadingView = AnimationView(name: "loading")
+   
+    
+    class func showActivityIndicatory() {
+        
+        let size:CGSize = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.frame.size ?? CGSize()
+        ViewBG.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ViewBG.center = CGPoint(x: size.width / 2, y: size.height / 2)
+        ViewBG.backgroundColor = UIColor.clear
+    
+        
+        loadingView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.backgroundColor = .clear
+        loadingView.clipsToBounds = true
+        loadingView.animationSpeed = 1.0
+        loadingView.loopMode = .loop
+//        loadingView.layer.cornerRadius = 10
+        
+       
+        loadingView.contentMode = .scaleAspectFit
+        
+        if !ViewBG.subviews.contains(loadingView){
+            ViewBG.addSubview(loadingView)
+        }
+        loadingView.play()
+        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(ViewBG)
+        print("ATDebug :: \(ViewBG.frame)")
+
+//        UIApplication.shared.keyWindow?.addSubview(ViewBG)
+    }
+    
+    class func hideLoader(){
+        
+        DispatchQueue.main.async(execute: {
+            loadingView.stop()
+            ViewBG.removeFromSuperview()
+        })
+    }
+}
+extension Utilities {
+    static func showHud(){
+        DispatchQueue.main.async {
+            AnimationLoader.showActivityIndicatory()
+        }
+    }
+    
+    static func hideHud(){
+        DispatchQueue.main.async {
+            AnimationLoader.hideLoader()
+        }
+    }
+    
+}
