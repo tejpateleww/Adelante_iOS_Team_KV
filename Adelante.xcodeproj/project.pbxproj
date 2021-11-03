@@ -12,6 +12,7 @@
 		180A9F06265D0A4500AC7A22 /* PromocodeAppliedResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180A9F05265D0A4500AC7A22 /* PromocodeAppliedResModel.swift */; };
 		180F19DF265B81EC00150966 /* Promocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F19DD265B81EB00150966 /* Promocode.swift */; };
 		180F19E0265B81EC00150966 /* PromoCodeResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F19DE265B81EB00150966 /* PromoCodeResModel.swift */; };
+		183A0657272A9B93008F4D3B /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 183A0656272A9B93008F4D3B /* loading.json */; };
 		18550403265F66F800D73B2B /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18550402265F66F800D73B2B /* NotificationType.swift */; };
 		1855042B265F955400D73B2B /* OrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1855042A265F955400D73B2B /* OrderReqModel.swift */; };
 		189E57BB2664BDA9008AECA6 /* NoDataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189E57B72664BDA9008AECA6 /* NoDataCollectionViewCell.xib */; };
@@ -283,7 +284,6 @@
 		88F6D94B26CFB4B400ED5C95 /* shareDetailsResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94726CFB4B400ED5C95 /* shareDetailsResModel.swift */; };
 		88F7235C269823600002441E /* RestaurantDetailsPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F7235B269823600002441E /* RestaurantDetailsPopupCell.swift */; };
 		906079A62717017B00183F5A /* MyOrderTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906079A52717017B00183F5A /* MyOrderTotalCell.swift */; };
-		908B08932728045D00295826 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 908B08922728045C00295826 /* loading.json */; };
 		9203B478268B58720096AFDF /* HomeSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203B476268B58720096AFDF /* HomeSkeletonCell.swift */; };
 		9203B479268B58730096AFDF /* HomeSkeletonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9203B477268B58720096AFDF /* HomeSkeletonCell.xib */; };
 		9203B47B268B58FA0096AFDF /* NoDataCollectionview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203B47A268B58FA0096AFDF /* NoDataCollectionview.swift */; };
@@ -300,6 +300,7 @@
 		180A9F05265D0A4500AC7A22 /* PromocodeAppliedResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromocodeAppliedResModel.swift; sourceTree = "<group>"; };
 		180F19DD265B81EB00150966 /* Promocode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promocode.swift; sourceTree = "<group>"; };
 		180F19DE265B81EB00150966 /* PromoCodeResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCodeResModel.swift; sourceTree = "<group>"; };
+		183A0656272A9B93008F4D3B /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		18550402265F66F800D73B2B /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		1855042A265F955400D73B2B /* OrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReqModel.swift; sourceTree = "<group>"; };
 		189E57B72664BDA9008AECA6 /* NoDataCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -582,7 +583,6 @@
 		88F6D94726CFB4B400ED5C95 /* shareDetailsResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shareDetailsResModel.swift; sourceTree = "<group>"; };
 		88F7235B269823600002441E /* RestaurantDetailsPopupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsPopupCell.swift; sourceTree = "<group>"; };
 		906079A52717017B00183F5A /* MyOrderTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderTotalCell.swift; sourceTree = "<group>"; };
-		908B08922728045C00295826 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		9203B476268B58720096AFDF /* HomeSkeletonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCell.swift; sourceTree = "<group>"; };
 		9203B477268B58720096AFDF /* HomeSkeletonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSkeletonCell.xib; sourceTree = "<group>"; };
 		9203B47A268B58FA0096AFDF /* NoDataCollectionview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataCollectionview.swift; sourceTree = "<group>"; };
@@ -633,7 +633,7 @@
 		18B392122722CAC200692D1D /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				908B08922728045C00295826 /* loading.json */,
+				183A0656272A9B93008F4D3B /* loading.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1479,6 +1479,7 @@
 				34A9003F25947A8500EAD2FF /* Auth.storyboard in Resources */,
 				8105FE0725751644008D36D6 /* Nexa Bold.otf in Resources */,
 				81B447F5257613DB00A0724E /* Nexa Regular.otf in Resources */,
+				183A0657272A9B93008F4D3B /* loading.json in Resources */,
 				34A9004C25947AFC00EAD2FF /* LaunchScreen.storyboard in Resources */,
 				8105FE0C25751644008D36D6 /* Nexa Light.otf in Resources */,
 				8105FE0A25751644008D36D6 /* NexaThinItalic.otf in Resources */,
@@ -1498,7 +1499,6 @@
 				8105FE0825751644008D36D6 /* NexaBoldItalic.otf in Resources */,
 				817A16FD25839D7100C11BB2 /* Nunito-SemiBold.ttf in Resources */,
 				8105FDF425751644008D36D6 /* Aileron-Light.otf in Resources */,
-				908B08932728045D00295826 /* loading.json in Resources */,
 				8105FDFC25751644008D36D6 /* Aileron-HeavyItalic.otf in Resources */,
 				817A16FB25839D7100C11BB2 /* Nunito-Regular.ttf in Resources */,
 				817A16FF25839D7100C11BB2 /* Nunito-ExtraBoldItalic.ttf in Resources */,
