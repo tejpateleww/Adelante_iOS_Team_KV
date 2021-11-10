@@ -28,6 +28,7 @@ class RestaurantList : NSObject, NSCoding{
     var updatedAt : String!
     var userId : String!
     var zipCode : String!
+    var rating_count : String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -55,6 +56,7 @@ class RestaurantList : NSObject, NSCoding{
         updatedAt = json["updated_at"].stringValue
         userId = json["user_id"].stringValue
         zipCode = json["zip_code"].stringValue
+        rating_count = json["rating_count"].stringValue
 	}
 
 	/**
@@ -120,6 +122,9 @@ class RestaurantList : NSObject, NSCoding{
         if zipCode != nil{
         	dictionary["zip_code"] = zipCode
         }
+        if rating_count != nil{
+            dictionary["rating_count"] = rating_count
+        }
 		return dictionary
 	}
 
@@ -148,6 +153,7 @@ class RestaurantList : NSObject, NSCoding{
 		updatedAt = aDecoder.decodeObject(forKey: "updated_at") as? String
 		userId = aDecoder.decodeObject(forKey: "user_id") as? String
 		zipCode = aDecoder.decodeObject(forKey: "zip_code") as? String
+        rating_count = aDecoder.decodeObject(forKey: "rating_count") as? String
 	}
 
     /**
@@ -213,7 +219,9 @@ class RestaurantList : NSObject, NSCoding{
 		if zipCode != nil{
 			aCoder.encode(zipCode, forKey: "zip_code")
 		}
-
+        if rating_count != nil{
+            aCoder.encode(rating_count, forKey: "rating_count")
+        }
 	}
 
 }

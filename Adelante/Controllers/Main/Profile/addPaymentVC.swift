@@ -401,14 +401,17 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         WebServiceSubClass.PayNow(ReqModel: addpayment, showHud: false, completion: { (json, status, error) in
         
              if(status) {
+                if json["url"].stringValue != "" {
+                    let vc : PaymentWebViewVC = PaymentWebViewVC.instantiate(fromAppStoryboard: .Main)
+                    vc.strUrl = json["url"].stringValue
+                    vc.OrderID = OrderId
+                    vc.callBackURL = json["callbackurl"].stringValue
+                    vc.cancelURL = json["cancel_url"].stringValue
+                    
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
       
-                let vc : PaymentWebViewVC = PaymentWebViewVC.instantiate(fromAppStoryboard: .Main)
-                vc.strUrl = json["url"].stringValue
-                vc.OrderID = OrderId
-                vc.callBackURL = json["callbackurl"].stringValue
-                vc.cancelURL = json["cancel_url"].stringValue
                 
-                self.navigationController?.pushViewController(vc, animated: true)
                 
                print(json)
             } else {
@@ -460,12 +463,20 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     self.WebServiceForPayment(OrderId: json["order_id"].stringValue)
                     self.socketManageSetup()
                     controller.btnSubmit = {
-                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
-                        controller.selectedIndex = 2
-                        SingletonClass.sharedInstance.selectInProcessInMyOrder = true
-                        let nav = UINavigationController(rootViewController: controller)
-                        nav.navigationBar.isHidden = true
-                        appDel.window?.rootViewController = nav
+                        if let TabVC =  appDel.window?.rootViewController?.children.first {
+                            if TabVC.isKind(of: CustomTabBarVC.self) {
+                                                        SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+
+                                let vc = TabVC as! CustomTabBarVC
+                                vc.selectedIndex = 2
+                            }
+                        }
+//                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
+//                        controller.selectedIndex = 2
+//                        SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+//                        let nav = UINavigationController(rootViewController: controller)
+//                        nav.navigationBar.isHidden = true
+//                        appDel.window?.rootViewController = nav
                     }
                     self.present(controller, animated: true, completion: nil)
                 } else {

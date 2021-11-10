@@ -11,6 +11,7 @@ import MapKit
 import SwiftyJSON
 import GooglePlaces
 import GoogleMaps
+
 class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     // MARK: - Properties
@@ -22,6 +23,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized(),"".Localized()]
     let MapViewForShowRastaurantLocation = MKMapView()
     lazy var skeletonData : skeletonCheckout = skeletonCheckout.fromNib()
+    
     var cartDetails : CartDatum?
     var arritem = [String]()
     var arrCartItem = [CartItem]()
@@ -30,6 +32,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var strCartId = ""
     var isfromPromocode : Bool = false
     var SettingsData : SettingsResModel!
+    var locationManager = CLLocationManager()
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
@@ -285,7 +288,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     //MARK: - IBActions
     @objc func btnSubmitCommonPopupClicked() {
-        print("hellloo")
+        print("hello")
     }
     @IBAction func BtnCancelPromocodeClick(_ sender: Any) {
 //        btnAppyPromoCode.isHidden = false
@@ -334,16 +337,16 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     @IBAction func placeOrderBtn(_ sender: submitButton) {
-        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-        controller.CartTotal = (LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
-        //CGFloat(LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: ""))
-        
-        controller.strCartID = strCartId
-        self.navigationController?.pushViewController(controller, animated: true)
-        
-        
+            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+            controller.CartTotal = (LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
+            controller.strCartID = strCartId
+            self.navigationController?.pushViewController(controller, animated: true)
     }
-    
+    func locationdata() -> Bool{
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        return true
+    }
     @IBAction func seeMenu(_ sender: submitButton) {
         
     }

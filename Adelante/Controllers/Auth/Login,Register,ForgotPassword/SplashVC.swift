@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import CoreLocation
 
 class SplashVC: UIViewController {
     
@@ -44,7 +45,22 @@ class SplashVC: UIViewController {
             }
         }
     }
-    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .restricted:
+            print("Location access was restricted.")
+        case .denied:
+            print("User denied access to location.")
+        // Display the map using the default location.
+        
+        case .notDetermined:
+            print("Location status not determined.")
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            print("Location status is OK.")
+            
+        }
+    }
     //MARK:- IBActions
     
     // MARK: - Api Calls
@@ -56,7 +72,6 @@ extension SplashVC{
         WebServiceSubClass.initApi(strURL: strURL) { (json, status, error) in
             
             if status {
-                
                 if let isUpdateAvailble = json["update"].bool {
                     if !isUpdateAvailble {
                         
@@ -138,7 +153,7 @@ extension SplashVC{
                 if let strMessage = json["message"].string {
                     Utilities.ShowAlert(OfMessage: strMessage)
                 } else {
-                    Utilities.ShowAlert(OfMessage: "Something went wrong")
+                    Utilities.ShowAlert(OfMessage: "No internet connection")
                     
                 }
             }
@@ -156,7 +171,7 @@ extension SplashVC{
             }
             else
             {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayErrorAlert(json["message"].string ?? "No internet connection")
             }
         })
     }

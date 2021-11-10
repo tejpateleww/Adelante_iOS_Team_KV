@@ -33,7 +33,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     //        }
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrFilter = ["HomeVC_arrFilter_title1".Localized(),"HomeVC_arrFilter_title2".Localized(),"HomeVC_arrFilter_title3".Localized()]
+    var arrFilter = ["HomeVC_arrFilter_title1".Localized(),"HomeVC_arrFilter_title2".Localized(),"HomeVC_arrFilter_title3".Localized(),"HomeVC_arrFilter_title4".Localized()]
     //    structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: "")//["","Mobile Pickup", "Recently Viewed", "Top Rated"]
     var selectedSortTypedIndexFromcolVwFilter = 0
     var refresher = UIRefreshControl()
@@ -53,6 +53,8 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var selectedIndex = 0
     var PlaceName = userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String
     let activityView = UIActivityIndicatorView(style: .white)
+    var timer: Timer?
+
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -72,7 +74,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         registerNIB()
+        self.startTimer()
 //        if lblAddress.text == ""{
 //
 //                self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
@@ -81,9 +85,10 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
 //            self.present(alertController, animated: true, completion: nil)
 //        }else{
             if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String == nil{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+                if lblAddress.text == ""{
+                    lblAddress.text = "Please select Address"
+                }else{
                     self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
-                    print("Location Found")
                 }
             }else{
                 lblAddress.text = PlaceName
@@ -192,7 +197,6 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         
         colVwRestWthPage.delegate = self
         colVwRestWthPage.dataSource = self
-        colVwRestWthPage.reloadData()
         tblMainList.delegate = self
         tblMainList.dataSource = self
         tblMainList.reloadData()
@@ -205,11 +209,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         pageControl.hidesForSinglePage = true
     }
     @objc func refreshListing(){
+     
         responseStatus = .initial
         arrRestaurant.removeAll()
-        //        tblMainList.reloadData()
-        //        colVwRestWthPage.reloadData()
-        //        colVwFilterOptions.reloadData()
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true
@@ -223,6 +225,32 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         lblMylocation.text = "HomeVC_lblMylocation".Localized()
         //        lblAddress.text = "30 Memorial Drive, Avon MA 2322"
     }
+    @objc func scrollAutomatically(_ timer1: Timer) {
+        for cell in colVwRestWthPage.visibleCells {
+            if arrBanner.count == 1 {
+                return
+            }
+            let indexPath = colVwRestWthPage.indexPath(for: cell)!
+            if indexPath.row < (arrBanner.count - 1) {
+                let indexPath1 = IndexPath.init(row: indexPath.row + 1, section: indexPath.section)
+                colVwRestWthPage.scrollToItem(at: indexPath1, at: .right, animated: true)
+                pageControl.currentPage = indexPath1.row
+            }
+            else {
+                let indexPath1 = IndexPath.init(row: 0, section: indexPath.section)
+                colVwRestWthPage.scrollToItem(at: indexPath1, at: .left, animated: true)
+                pageControl.currentPage = indexPath1.row
+            }
+        }
+    }
+    func startTimer() {
+        if timer != nil{
+            timer = nil
+        }
+        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(scrollAutomatically), userInfo: nil, repeats: true)
+    }
+    
+    
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
         if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
@@ -419,6 +447,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.colVwFilterOptions{
             selectedIndex = indexPath.row
+            self.pageNumber = 1
             webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
             colVwFilterOptions.reloadData()
         }else{
@@ -455,7 +484,12 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             if arrRestaurant.count != 0 {
                 let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
                 cell.lblItemName.text = arrRestaurant[indexPath.row].name
-                cell.lblMiles.text = arrRestaurant[indexPath.row].distance//arrRestaurant[indexPath.row - 1].distance
+                if arrRestaurant[indexPath.row].distance != "0 miles"{
+                    cell.stackMiles.isHidden = false
+                    cell.lblMiles.text = arrRestaurant[indexPath.row].distance
+                }else {
+                    cell.stackMiles.isHidden = true
+                }
                 cell.lblRating.text = arrRestaurant[indexPath.row].rating_count
                 cell.btnFavorite.isHidden = false
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
@@ -656,6 +690,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.colVwRestWthPage.dataSource = self
                 self.colVwRestWthPage.isScrollEnabled = true
                 self.colVwRestWthPage.isUserInteractionEnabled = true
+                
                 self.colVwRestWthPage.reloadData()
                 
                 if isFromFilter{

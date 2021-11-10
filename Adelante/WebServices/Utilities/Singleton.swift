@@ -23,6 +23,8 @@ class SingletonClass: NSObject
     var isPresented = false
     var expandedCell = -1
     var selectInProcessInMyOrder : Bool?
+    var selectInProcessShareOrder : Bool?
+    var isShareble : Bool = false
     var arrFutureYears:[String] {
         get {
             let calendar = Calendar.current

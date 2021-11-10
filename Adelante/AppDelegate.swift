@@ -21,11 +21,11 @@ import Braintree
     var locationManager: CLLocationManager? 
     var fromPushUserId = String()
     var fromPushItemId = String()
+    var shareUrl = ""
     
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        setupNavigation()
@@ -82,29 +82,25 @@ import Braintree
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             let url = userActivity.webpageURL!
             print(url)
-            
             let myUrl: String? = userActivity.webpageURL?.absoluteString
-            let itemID = url.valueOf("itemid")
+            let itemID = url.valueOf("orderid")
             fromPushItemId = itemID ?? ""
-            if myUrl?.range(of: "item") != nil {
+            if myUrl?.range(of: "ShareOrder") != nil {
                 if let _ = (self.window?.rootViewController as! UINavigationController).viewControllers.first as? SplashVC {
-                
                     NotificationCenter.default.addObserver(self, selector: #selector(OnLinkClickToNavigate), name: NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
-                                           
                 }
                 else {
-                     OnLinkClickToNavigate()
+                    OnLinkClickToNavigate()
                 }
                 
-              }
+            }
         }
-        
         return true
     }
     
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let appUrl = URL(string: "https://www.adelantemovil.com/admin/item/view?itemid=151")
+        let appUrl = URL(string: shareUrl)
         if UIApplication.shared.canOpenURL(appUrl!) {
             UIApplication.shared.open(appUrl!, options: [:], completionHandler: nil)
             //If you want handle the completion block than
@@ -118,9 +114,10 @@ import Braintree
       return true
     }
     @objc func OnLinkClickToNavigate(){
+        
         if UserDefaults.standard.value(forKey: "isUserLogin") != nil{
             if UserDefaults.standard.value(forKey: "isUserLogin") as! Bool{
-                
+                webserviceShareOrder(strMainOrderId: fromPushItemId)
                 if let Navigation = appDel.window?.rootViewController as? UINavigationController{
                     let tabVC = Navigation.children.first as? CustomTabBarVC
                     if tabVC?.selectedIndex == 3 || tabVC?.selectedIndex == 0 || tabVC?.selectedIndex == 1 || tabVC?.selectedIndex == 4{
@@ -131,32 +128,50 @@ import Braintree
                                 if (nav?.presentedViewController?.isKind(of: addPaymentVC.self)) != nil{
                                     nav?.dismiss(animated: true, completion: nil)
                                 }
-                              
                             }
-                            
                             let ItemDetailVC = nav?.topViewController as! MyOrdersVC
                             ItemDetailVC.strOrderId = fromPushItemId
+                            SingletonClass.sharedInstance.selectInProcessShareOrder = true
                             ItemDetailVC.webserviceGetOrderDetail(selectedOrder: ItemDetailVC.strOrderId)
                         }
                             
                         else{
-                            tabVC?.selectedIndex = 0
-                            let nav = tabVC!.children[0] as? UINavigationController
-                            let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC//MyOrdersVC.instantiate(appStoryboard: .main)
-                            itemDetailVC.strOrderId = fromPushItemId
+                            tabVC?.selectedIndex = 2
+                            let selectedindex = tabVC?.selectedIndex
+                            let nav = tabVC!.children[selectedindex ?? 0] as? UINavigationController
+                            if ((nav?.topViewController as? CustomTabBarVC) != nil){
+                                let CustomTabBarVC = nav?.topViewController as! MyOrdersVC
+                                CustomTabBarVC.strOrderId = fromPushItemId
+                                SingletonClass.sharedInstance.selectInProcessShareOrder = true
+                            }
+                            
+                            
+//                            let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC//MyOrdersVC.instantiate(appStoryboard: .main)
+//                            itemDetailVC.strOrderId = fromPushItemId
+//                            SingletonClass.sharedInstance.selectInProcessShareOrder = true
                             //itemDetailVC.isFromOthersProfile = true
                             
-                            nav?.pushViewController(itemDetailVC, animated: true)
+                           // nav?.pushViewController(itemDetailVC, animated: true)
                         }
                     }
                     else {
-                        tabVC?.selectedIndex = 0
-                        let nav = tabVC?.children[0] as? UINavigationController
-                        let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC
-                        itemDetailVC.strOrderId = fromPushItemId
+                        tabVC?.selectedIndex = 2
+                        let selectedindex = tabVC?.selectedIndex
+                        let nav = tabVC!.children[selectedindex ?? 0] as? UINavigationController
+                        if ((nav?.topViewController as? CustomTabBarVC) != nil){
+                            let CustomTabBarVC = nav?.topViewController as! MyOrdersVC
+                            CustomTabBarVC.strOrderId = fromPushItemId
+                            SingletonClass.sharedInstance.selectInProcessShareOrder = true
+                        }
+//                        tabVC?.selectedIndex = 2
+//                        let nav = tabVC?.children[2] as? UINavigationController
+//
+//                        let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC
+//                        itemDetailVC.strOrderId = fromPushItemId
+//                        SingletonClass.sharedInstance.selectInProcessShareOrder = true
                         //itemDetailVC.isFromOthersProfile = true
                         
-                        nav?.pushViewController(itemDetailVC, animated: true)
+                      //  nav?.pushViewController(itemDetailVC, animated: true)
                     }
                 }
             }
@@ -168,8 +183,27 @@ import Braintree
             
             Utilities.ShowAlert(OfMessage: "Please login before you proceed")//OkalerwithAction(Msg: "Please login before you proceed") {
             }
+        
     }
-    
+    func webserviceShareOrder(strMainOrderId:String){
+        let shareOrder = shareOrderReqModel()
+        shareOrder.user_type = SingletonClass.sharedInstance.LoginRegisterUpdateData?.email ?? ""
+        shareOrder.main_order_id = strMainOrderId
+        WebServiceSubClass.ShareOrder(shareOrder: shareOrder, showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                
+            }
+            else
+            {
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
+            }
+        })
+    }
    
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         debugPrint("handleEventsForBackgroundURLSession: \(identifier)")

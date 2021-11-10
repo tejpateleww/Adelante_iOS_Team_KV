@@ -262,6 +262,7 @@
 		888EBC80269D7C43006C1424 /* updateCartResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EBC7C269D7C43006C1424 /* updateCartResModel.swift */; };
 		888EBC81269D7C43006C1424 /* updateQtyDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EBC7D269D7C43006C1424 /* updateQtyDatum.swift */; };
 		888EBCBA269D9D01006C1424 /* searchFoodLIstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EBCB9269D9D01006C1424 /* searchFoodLIstCell.swift */; };
+		88A162F6273B9ECA0036110D /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A162F5273B9ECA0036110D /* LocationService.swift */; };
 		88B0F41D26A7F737001DA88F /* applyPromocodeResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0F41B26A7F737001DA88F /* applyPromocodeResModel.swift */; };
 		88C9E4FB268ED612005B0899 /* skeletonCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9E4FA268ED612005B0899 /* skeletonCheckout.swift */; };
 		88C9E4FE268ED64D005B0899 /* skeletonCheckout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */; };
@@ -561,6 +562,7 @@
 		888EBC7C269D7C43006C1424 /* updateCartResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = updateCartResModel.swift; sourceTree = "<group>"; };
 		888EBC7D269D7C43006C1424 /* updateQtyDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = updateQtyDatum.swift; sourceTree = "<group>"; };
 		888EBCB9269D9D01006C1424 /* searchFoodLIstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchFoodLIstCell.swift; sourceTree = "<group>"; };
+		88A162F5273B9ECA0036110D /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		88B0F41B26A7F737001DA88F /* applyPromocodeResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = applyPromocodeResModel.swift; sourceTree = "<group>"; };
 		88C9E4FA268ED612005B0899 /* skeletonCheckout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skeletonCheckout.swift; sourceTree = "<group>"; };
 		88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = skeletonCheckout.xib; sourceTree = "<group>"; };
@@ -1188,6 +1190,7 @@
 		81CFFD422574C60D005AA86A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				88A162F5273B9ECA0036110D /* LocationService.swift */,
 				81CFFD432574C60D005AA86A /* Constants.swift */,
 				81CFFD442574C60D005AA86A /* Utilities.swift */,
 				81CFFD452574C60D005AA86A /* Singleton.swift */,
@@ -1776,6 +1779,7 @@
 				81CFFD8D2574C60D005AA86A /* LoginViewController.swift in Sources */,
 				34525DFE25AED8A900406EB6 /* sortingResModel.swift in Sources */,
 				3400019725C7EB8E00C584DE /* RestaurantVariantResModel.swift in Sources */,
+				88A162F6273B9ECA0036110D /* LocationService.swift in Sources */,
 				8170CAF9257A142200B24B7A /* CustomTextView.swift in Sources */,
 				347D953E25A70A23000C64B5 /* Dashboard.swift in Sources */,
 				88883F69269716E90041D277 /* myFoodlistItem.swift in Sources */,

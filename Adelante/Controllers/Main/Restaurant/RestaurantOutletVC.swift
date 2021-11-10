@@ -178,7 +178,12 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 let cell = tblRestaurantList.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
                 cell.lblAreaName.text = arrOutletList[indexPath.row].name
                 cell.lblAddress.text = arrOutletList[indexPath.row].address
-                cell.lblMiles.text = arrOutletList[indexPath.row].distance
+                if arrOutletList[indexPath.row].distance == "0 miles"{
+                    cell.stackMiles.isHidden = false
+                    cell.lblMiles.text = arrOutletList[indexPath.row].distance
+                }else{
+                    cell.stackMiles.isHidden = true
+                }
                 cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray

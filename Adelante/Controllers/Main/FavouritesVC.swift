@@ -151,7 +151,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
             if arrFavoriteRest.count != 0 {
                 let cell = tblMainList.dequeueReusableCell(withIdentifier: YourFavouriteCell.reuseIdentifier, for: indexPath) as! YourFavouriteCell
                 cell.lblItemName.text = arrFavoriteRest[indexPath.row].name
-                cell.lblRating.text = arrFavoriteRest[indexPath.row].review
+                cell.lblRating.text = arrFavoriteRest[indexPath.row].rating_count
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrFavoriteRest[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())

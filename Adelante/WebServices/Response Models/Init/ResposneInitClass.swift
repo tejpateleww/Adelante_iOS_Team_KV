@@ -12,7 +12,7 @@ class ResposneInitClass : NSObject, NSCoding{
     var message : String!
     var status : Bool!
     var update : Bool!
-
+    var wallet_balance : String?
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -23,6 +23,7 @@ class ResposneInitClass : NSObject, NSCoding{
         message = json["message"].stringValue
         status = json["status"].boolValue
         update = json["update"].boolValue
+        wallet_balance = json["wallet_balance"].stringValue
 	}
 
 	/**
@@ -40,6 +41,9 @@ class ResposneInitClass : NSObject, NSCoding{
         if update != nil{
         	dictionary["update"] = update
         }
+        if wallet_balance != nil{
+            dictionary["wallet_balance"] = wallet_balance
+        }
 		return dictionary
 	}
 
@@ -53,6 +57,7 @@ class ResposneInitClass : NSObject, NSCoding{
 		message = aDecoder.decodeObject(forKey: "message") as? String
 		status = aDecoder.decodeObject(forKey: "status") as? Bool
 		update = aDecoder.decodeObject(forKey: "update") as? Bool
+        wallet_balance = aDecoder.decodeObject(forKey: "wallet_balance") as? String
 	}
 
     /**
@@ -70,7 +75,9 @@ class ResposneInitClass : NSObject, NSCoding{
 		if update != nil{
 			aCoder.encode(update, forKey: "update")
 		}
-
+        if wallet_balance != nil{
+            aCoder.encode(wallet_balance, forKey: "wallet_balance")
+        }
 	}
 
 }

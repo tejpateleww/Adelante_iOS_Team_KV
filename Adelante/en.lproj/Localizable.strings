@@ -12,7 +12,7 @@
 "MainLoginVC_btnCreateAccount" = "Create Account";
 
 //LoginViewController
-"LoginViewController_lblTitle" = "Welcome\nBack";
+"LoginViewController_lblTitle" = "Nice To Have\nYou Back";
 "LoginViewController_txtEmail" = "Email / Phone Number";
 "LoginViewController_txtPassword" = "Password";
 "LoginViewController_btnForgotPassword" = "Forgot Password";
@@ -77,7 +77,7 @@
 //FeedbackVC
 "FeedbackVC_txtTitle" = "Title";
 "FeedbackVC_txtEmail" = "Email";
-"FeedbackVC_tvFeedback" = "Feedback Description";
+"FeedbackVC_tvFeedback" = "Comments";
 "FeedbackVC_btnSubmit" = "Submit";
 
 //ChangePasswordVC
@@ -216,6 +216,7 @@
 "HomeVC_arrFilter_title1" = "Mobile Pickup";
 "HomeVC_arrFilter_title2" = "Recently Viewed";
 "HomeVC_arrFilter_title3" = "Top Rated";
+"HomeVC_arrFilter_title4" = "Curbside Pickup";
 
 //checkOutVC
 "checkOutVC_lblItemName" = "Kangkung siram sambel";
@@ -255,6 +256,7 @@
 "NavigationTitles_MyOrders" = "My Orders";
 "NavigationTitles_PastOrderDetails" = "Previous Order Details";
 "NavigationTitles_UpcomingOrderDetails" = "In-Process Order Details";
+"NavigationTitles_ShareOrderDetails" = "Share Order Details";
 "NavigationTitles_Checkout" = "Checkout";
 "NavigationTitles_AddPayment" = "Add Payment";
 "NavigationTitles_AddCard" = "Add Card";

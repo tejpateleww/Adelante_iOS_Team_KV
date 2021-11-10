@@ -10,7 +10,7 @@ import UIKit
 //}
 
 var selectedTabIndex = 0
-class CustomTabBarVC: UITabBarController, UITabBarControllerDelegate {
+class CustomTabBarVC: UITabBarController,UITabBarControllerDelegate {
     var lastSelectedIndex = 0
     let coustmeTabBarView:UIView = {
         //  daclare coustmeTabBarView as view
@@ -67,12 +67,12 @@ class CustomTabBarVC: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        self.selectedIndex = 0
         var h = tabBar.frame.height + 12
         if #available(iOS 13.0, *) {
             h = tabBar.frame.height + 25
         }
-
+        
         coustmeTabBarView.layer.cornerRadius = 8
         coustmeTabBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         coustmeTabBarView.clipsToBounds = true
@@ -105,14 +105,6 @@ class CustomTabBarVC: UITabBarController, UITabBarControllerDelegate {
             vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: normalTitleFont], for: .normal)
         }
         
-        for vc in self.viewControllers! {
-            vc.tabBarItem.title = nil
-            if DeviceType.hasTopNotch && !DeviceType.IS_IPHONE_X {
-                    vc.tabBarItem.imageInsets = UIEdgeInsets(top: 16.0, left: 0.0, bottom: -16.0, right: 0.0)
-                } else {
-                    vc.tabBarItem.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
-                }
-            }
         
 //        for vc in self.viewControllers! {
 //            if DeviceType.hasTopNotch {
@@ -186,7 +178,37 @@ class CustomTabBarVC: UITabBarController, UITabBarControllerDelegate {
     }
     
 }
-
+//class CustomTabBar: UITabBar {
+//
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+////        self.clipsToBounds = false
+////        layer.masksToBounds = true
+//        layer.cornerRadius = 10
+//        layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
+////        layer.shadowOffset = CGSize(width: -3, height: 0)
+////        layer.shadowColor = UIColor.black.cgColor
+////        layer.shadowOpacity = 0.3
+//
+////        self.backgroundImage = UIImage.from(color: .white)
+//    }
+//
+//
+//    override func layoutSubviews() {
+//          super.layoutSubviews()
+//          self.isTranslucent = true
+//          var tabFrame            = self.frame
+//          tabFrame.size.height    = 50 + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? CGFloat.zero)
+//          tabFrame.origin.y       = self.frame.origin.y +   ( self.frame.height - 55 - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? CGFloat.zero))
+//          self.layer.cornerRadius = 0
+//          self.frame            = tabFrame
+//
+//          self.items?.forEach({ $0.titlePositionAdjustment = UIOffset(horizontal: 0.0, vertical: -5.0) })
+//
+//
+//      }
+//
+//}
 extension UIImage {
     static func from(color: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)

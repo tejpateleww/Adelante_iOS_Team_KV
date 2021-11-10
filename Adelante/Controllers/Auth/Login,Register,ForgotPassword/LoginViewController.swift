@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CoreLocation
 
 class LoginViewController: BaseViewController {
-
+    var locationManager : LocationService?
+    
     @IBOutlet weak var lblTitle: themeTitleLabel!
     @IBOutlet weak var txtEmail : floatTextField!
     @IBOutlet weak var txtPassword : floatTextField!
@@ -108,7 +110,7 @@ class LoginViewController: BaseViewController {
             else
             {
                 if json["message"].string == "Your account is not activated yet!" {
-                    self.showAlertWithTwoButtonCompletion(title: AppName, Message: "To login, you must have to activate your account.To activate account, you have to click on activation link, which has been sent to your email.", defaultButtonTitle: "OK", cancelButtonTitle: "Resend Email") { [self] (index) in
+                    self.showAlertWithTwoButtonCompletion(title: AppName, Message: "To activate your account, please click on the activation link which we have sent to your email, then click OK.", defaultButtonTitle: "OK", cancelButtonTitle: "Resend Email") { [self] (index) in
                         if index == 1{
                             self.webserviceForSendEmailVerify()
                         }
@@ -133,7 +135,7 @@ class LoginViewController: BaseViewController {
             self.hideHUD()
             if(status){
                 print(json)
-                Utilities.displayErrorAlert(json["message"].string!)
+                Utilities.displayAlert(json["message"].string!)
             }else {
                 if let strMessage = json["message"].string {
                     Utilities.displayAlert(strMessage)

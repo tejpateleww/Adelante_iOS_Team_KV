@@ -78,13 +78,21 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
         
         if str == callBackURL {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
-                controller.selectedIndex = 2
-                
-                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
-                let nav = UINavigationController(rootViewController: controller)
-                nav.navigationBar.isHidden = true
-                appDel.window?.rootViewController = nav
+                if let TabVC =  appDel.window?.rootViewController?.children.first {
+                    if TabVC.isKind(of: CustomTabBarVC.self) {
+                                                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+
+                        let vc = TabVC as! CustomTabBarVC
+                        vc.selectedIndex = 2
+                    }
+                }
+//                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
+//                controller.selectedIndex = 2
+//
+//                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+//                let nav = UINavigationController(rootViewController: controller)
+//                nav.navigationBar.isHidden = true
+//                appDel.window?.rootViewController = nav
             }
 //            let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
 //            controller.isHideCancelButton = true

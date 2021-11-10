@@ -41,7 +41,12 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             self.selectedSegmentTag = 1
             self.segmentControlChanged(self.segment)
         }
-        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
+        if let _ = SingletonClass.sharedInstance.selectInProcessShareOrder{
+            self.segment.setIndex(2)
+            self.selectedSegmentTag = 2
+            self.segmentControlChanged(self.segment)
+        }
+//        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
         tblOrders.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         setup()
@@ -49,6 +54,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
+
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         if let _ = SingletonClass.sharedInstance.selectInProcessInMyOrder{
@@ -188,13 +195,13 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(obj.id ?? "")"){
-                            //URL(string: "https://www.adelantemovil.com/home?user_id=\(SingletonClass.sharedInstance.UserId)&order_id=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
-                          let objectsToShare = [name]
-                          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                          self.present(activityVC, animated: true, completion: nil)
+                        if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(obj.id ?? "")"){
+                            let objectsToShare = [name]
+                            appDel.shareUrl = "\(name)"
+                            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                            self.present(activityVC, animated: true, completion: nil)
                         } else {
-                          // show alert for not available
+                            // show alert for not available
                         }
                     }
                     cell.Repeat = {
@@ -261,15 +268,29 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = false
                     }
+                    let obj = self.arrInProcessList[indexPath.row]
+                    cell.lblRestName.text = obj.restaurantName
+                    cell.lblRestLocation.text = obj.street
+                    cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
+                    cell.lblItem.text = obj.restaurantItemName
+                    cell.lblDtTime.text = obj.date
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
+                    cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    
+                    cell.Repeat = {
+                        self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
+                    }
+                    strOrderId = obj.id
                     if arrInProcessList[indexPath.row].shareOrderId.toInt() == 0 && arrInProcessList[indexPath.row].trash.toInt() == 0{
                         cell.share = {
-    //                        if let https://www.adelantemovil.com
-                            if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(self.arrInProcessList[indexPath.row].id ?? "")"), !name.absoluteString.isEmpty {
-                              let objectsToShare = [name]
-                              let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                              self.present(activityVC, animated: true, completion: nil)
+                            if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(obj.id ?? "")"),!name.absoluteString.isEmpty {//&&isShareable=\(SingletonClass.sharedInstance.isShareble)"),
+                                let objectsToShare = [name]
+                                appDel.shareUrl = "\(name)"
+                                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                self.present(activityVC, animated: true, completion: nil)
                             } else {
-                              // show alert for not available
+                                // show alert for not availableb
                             }
                         }
                         cell.cancel = {
@@ -296,20 +317,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.btnShare.isUserInteractionEnabled = false
                         cell.btnCancelOrder.isUserInteractionEnabled = false
                     }
-                    let obj = self.arrInProcessList[indexPath.row]
-                    cell.lblRestName.text = obj.restaurantName
-                    cell.lblRestLocation.text = obj.street
-                    cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
-                    cell.lblItem.text = obj.restaurantItemName
-                    cell.lblDtTime.text = obj.date
-                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(obj.image ?? "")"
-                    cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                    cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     
-                    cell.Repeat = {
-                        self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
-                    }
-                    strOrderId = obj.id
                     
                     cell.selectionStyle = .none
                     return cell
@@ -359,12 +367,13 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(obj.id ?? "")"), !name.absoluteString.isEmpty {
-                          let objectsToShare = [name]
-                          let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                          self.present(activityVC, animated: true, completion: nil)
+                        if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(obj.id ?? "")"),!name.absoluteString.isEmpty {//URL(string: "http://adelantemovil.com?order_id=\(obj.id ?? "")"), 
+                            let objectsToShare = [name]
+                            appDel.shareUrl = "\(name)"
+                            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                            self.present(activityVC, animated: true, completion: nil)
                         } else {
-                          // show alert for not available
+                            // show alert for not available
                         }
                     }
                     cell.Repeat = {
@@ -480,6 +489,12 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 orderDetailsVC.isfromShare = true
                 orderDetailsVC.strRestaurantId = obj.restaurantId
                 orderDetailsVC.delegateCancelOrder = self
+                orderDetailsVC.AcceptOrder = {
+                    self.webserviceShareList()
+                    self.segment.setIndex(1)
+                    self.selectedSegmentTag = 1
+                    self.segmentControlChanged(self.segment)
+                }
                 self.navigationController?.pushViewController(orderDetailsVC, animated: true)
             }
         }
@@ -620,7 +635,21 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         WebServiceSubClass.AcceptOrder(AcceptOrder: acceptOrder, showHud: true, completion: { (json, status, response) in
             if(status)
             {
-                Utilities.displayAlert(json["message"].stringValue)
+                let alertController = UIAlertController(title: AppName, message: json["message"].stringValue, preferredStyle: .alert)
+
+                    // Create the actions
+                let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                        UIAlertAction in
+                    self.webserviceShareList()
+                    self.segment.setIndex(1)
+                    self.selectedSegmentTag = 1
+                    self.segmentControlChanged(self.segment)
+                    }
+                
+                    alertController.addAction(okAction)
+
+                    // Present the controller
+                self.present(alertController, animated: true, completion: nil)
             }
             else
             {

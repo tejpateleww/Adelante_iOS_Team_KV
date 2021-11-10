@@ -134,6 +134,7 @@ class commonPopup: UIViewController {
     }
     
     @IBAction func submitButtonAction(_ sender: commonPopupButton) {
+        self.dismiss(animated: true, completion: nil)
         if let click = self.btnSubmit
         {
             click()

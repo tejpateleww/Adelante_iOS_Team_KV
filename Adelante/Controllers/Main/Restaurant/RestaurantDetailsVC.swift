@@ -176,7 +176,12 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             self.lblRestaurantName.text = objRestaurant.name ?? ""
             self.lblrating.text = objRestaurant.rating
             self.lblReviews.text = "(" + String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review) + ")"
-            self.lblDistance.text =  objRestaurant.distance
+            if objRestaurant.distance != "0 Miles"{
+                self.lblDistance.isHidden = false
+                self.lblDistance.text =  objRestaurant.distance
+            }else{
+                self.lblDistance.isHidden = true
+            }
             self.lblAddress.text = objRestaurant.address ?? ""
             self.lblEastern.text = objRestaurant.timeZone
             self.lblTime.text = "\(objRestaurant.fromTime ?? "")"

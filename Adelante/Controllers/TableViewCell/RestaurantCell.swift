@@ -16,6 +16,7 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var imgRestaurant: customImageView!
     @IBOutlet weak var btnFavorite: UIButton!
     @IBOutlet weak var vwIndicator: UIView!
+    @IBOutlet weak var stackMiles: UIStackView!
     override func awakeFromNib() {
         super.awakeFromNib()
        // setUpLocalizedStrings()

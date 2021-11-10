@@ -36,6 +36,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     lazy var skeletonViewData : SkeletonOrderDetails = SkeletonOrderDetails.fromNib()
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]//"checkOutVC_arrayForTitle_title3".Localized()
     var isfromShare : Bool = false
+    var AcceptOrder : (()->())?
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
     @IBOutlet weak var lblId: orderDetailsLabel!
@@ -104,8 +105,10 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         addNavBarImage(isLeft: true, isRight: true)
         if selectedSegmentTag == 0 {
             setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.pastOrderDetails.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
-        } else {
+        } else if selectedSegmentTag == 1{
             setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.upcomingOrderDetails.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        }else{
+            setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.shareOrderDetails.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         }
         setUpOrderDetails()
     }
@@ -229,8 +232,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
         if objOrderDetailsData.shareOrderId.toInt() == 0{
-            if let name = URL(string:"https://www.adelantemovil.com/admin/item/view?itemid=\(orderId)"), !name.absoluteString.isEmpty {
+            if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(orderId)"), !name.absoluteString.isEmpty {
                 let objectsToShare = [name]
+                appDel.shareUrl = "\(name)"
                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                 self.present(activityVC, animated: true, completion: nil)
             } else {
@@ -241,6 +245,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnAcceptClick(_ sender: Any) {
+        
         webserviceAcceptOrder()
     }
     // MARK: - UITableView Delegates & Datasource
@@ -476,7 +481,16 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         WebServiceSubClass.AcceptOrder(AcceptOrder: acceptOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
-                Utilities.displayAlert(json["message"].stringValue)
+                let alertController = UIAlertController(title: AppName, message: json["message"].string, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                    UIAlertAction in
+                    if let click = self.AcceptOrder{
+                        click()
+                    }
+                    self.navigationController?.popViewController(animated: true)
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
             }
             else
             {
