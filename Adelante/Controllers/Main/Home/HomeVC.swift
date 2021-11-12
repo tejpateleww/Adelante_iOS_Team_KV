@@ -75,6 +75,11 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNIB()
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
+        
+        
         self.startTimer()
         
         if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) != nil , userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as! String  != ""{

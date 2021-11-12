@@ -88,6 +88,7 @@ import Braintree
             fromPushItemId = itemID ?? ""
             if myUrl?.range(of: "ShareOrder") != nil {
                 if let _ = (self.window?.rootViewController as! UINavigationController).viewControllers.first as? SplashVC {
+                    NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
                     NotificationCenter.default.addObserver(self, selector: #selector(OnLinkClickToNavigate), name: NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
                 }
                 else {
@@ -155,6 +156,12 @@ import Braintree
                             }
                         }
                     }
+                } else {
+                    let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
+                    controller.selectedIndex = 2
+                    let nav = UINavigationController(rootViewController: controller)
+                    nav.navigationBar.isHidden = true
+                    self.window?.rootViewController = nav
                 }
             }
             else{
@@ -238,6 +245,8 @@ import Braintree
         let nav = UINavigationController(rootViewController: controller)
         nav.navigationBar.isHidden = true
         self.window?.rootViewController = nav
+        
+    
     }
     
     func navigateToMainLogin() {

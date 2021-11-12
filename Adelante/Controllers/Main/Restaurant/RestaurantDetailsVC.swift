@@ -252,7 +252,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         }
     }
     @IBAction func btnViewPolicy(_ sender: Any) {
-        webserviceGetSettings()
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
+        controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
+        controller.strStorePolicy = objRestaurant.storePolicy
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     @IBAction func BtnRattingsAndReviews(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantReviewVC.storyboardID) as! RestaurantReviewVC

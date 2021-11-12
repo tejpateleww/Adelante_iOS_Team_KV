@@ -38,7 +38,9 @@ class SplashVC: UIViewController {
                     SingletonClass.sharedInstance.Api_Key = "\(userDefault.value(forKey: UserDefaultsKey.X_API_KEY.rawValue) ?? "")"
                     SingletonClass.sharedInstance.LoginRegisterUpdateData = userdata
                     userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
+                    
                     appDel.navigateToHome()
+                    
                 }
             } else {
                 appDel.navigateToMainLogin()
