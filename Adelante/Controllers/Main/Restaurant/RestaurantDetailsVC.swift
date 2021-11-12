@@ -231,7 +231,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
         if objRestaurant != nil{
-            if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+            if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
                 let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
                 let navController = UINavigationController.init(rootViewController: vc)
                 navController.modalPresentationStyle = .overFullScreen
@@ -270,7 +270,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func btnViewCart(_ sender: Any) {
-        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
             let navController = UINavigationController.init(rootViewController: vc)
             navController.modalPresentationStyle = .overFullScreen
@@ -472,7 +472,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.btnCustomize.isHidden = true
                     }
                     cell.btnAddAction = {
-                        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
                             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
                             let navController = UINavigationController.init(rootViewController: vc)
                             navController.modalPresentationStyle = .overFullScreen
@@ -659,7 +659,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }
                     cell.btnAddAction = {
-                        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
                             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
                             let navController = UINavigationController.init(rootViewController: vc)
                             navController.modalPresentationStyle = .overFullScreen
@@ -867,7 +867,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.btnCustomize.isHidden = true
                 }
                 cell.btnAddAction = {
-                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
                         let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
                         let navController = UINavigationController.init(rootViewController: vc)
                         navController.modalPresentationStyle = .overFullScreen

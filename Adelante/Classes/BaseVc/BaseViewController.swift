@@ -178,7 +178,7 @@ class BaseViewController: UIViewController {
         controller?.navigationController?.pushViewController(notifVc, animated: true)
     }
     @objc func likeDislikeReaustrant(_ sender: UIButton?) {
-        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
             let navController = UINavigationController.init(rootViewController: vc)
             navController.modalPresentationStyle = .overFullScreen

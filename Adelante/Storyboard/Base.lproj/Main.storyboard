@@ -4277,7 +4277,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1350"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiA-YC-T9e">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1061.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1071.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kiJ-0j-0Df">
                                                         <rect key="frame" x="18" y="0.0" width="378" height="1061.5"/>
@@ -4848,7 +4848,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="kiJ-0j-0Df" secondAttribute="trailing" constant="18" id="CJC-Oh-46Y"/>
-                                                    <constraint firstAttribute="bottom" secondItem="kiJ-0j-0Df" secondAttribute="bottom" id="Sch-ql-hTR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kiJ-0j-0Df" secondAttribute="bottom" constant="10" id="Sch-ql-hTR"/>
                                                     <constraint firstItem="kiJ-0j-0Df" firstAttribute="top" secondItem="IiA-YC-T9e" secondAttribute="top" id="Uqg-1x-alh"/>
                                                     <constraint firstItem="kiJ-0j-0Df" firstAttribute="leading" secondItem="IiA-YC-T9e" secondAttribute="leading" constant="18" id="xKZ-6z-2al"/>
                                                 </constraints>

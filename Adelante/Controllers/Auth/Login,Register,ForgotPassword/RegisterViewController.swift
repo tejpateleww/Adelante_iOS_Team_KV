@@ -191,9 +191,9 @@ class RegisterViewController: UIViewController {
                 self.navigationController?.pushViewController(OTPVC, animated: true)
             }else {
                 if let strMessage = json["message"].string {
-                    Utilities.displayAlert(strMessage)
+                    Utilities.showAlert(AppInfo.appName, message: strMessage, vc: self)//displayAlert(strMessage)
                 }else {
-                    Utilities.displayAlert("Something went wrong")
+                    Utilities.showAlert(AppInfo.appName, message: "Something went wrong", vc: self)//displayAlert("Something went wrong")
                 }
             }
         }

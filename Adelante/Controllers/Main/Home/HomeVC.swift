@@ -74,26 +74,18 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         registerNIB()
         self.startTimer()
-//        if lblAddress.text == ""{
-//
-//                self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
-//            }
-//            alertController.addAction(okAction)
-//            self.present(alertController, animated: true, completion: nil)
-//        }else{
-            if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String == nil{
-                if lblAddress.text == ""{
-                    lblAddress.text = "Please select Address"
-                }else{
-                    self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
-                }
-            }else{
-                lblAddress.text = PlaceName
-            }
-//        }
+        
+        if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) != nil , userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as! String  != ""{
+            lblAddress.text = PlaceName
+        }else if SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude == 0.0 && SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude == 0.0 && userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) == nil{
+            lblAddress.text = "Please Select Address"
+        }else{
+            self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+        }
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "OrderDone"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.OrderDone), name: NSNotification.Name(rawValue: "OrderDone"), object: nil)
         setUpLocalizedStrings()
         self.colVwRestWthPage.showAnimatedSkeleton()
         self.tblMainList.showAnimatedSkeleton()
@@ -107,7 +99,11 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         pageControl.numberOfPages = arrBanner.count
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
-    
+    @objc func OrderDone() {
+     
+        
+       
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
         print("homeVc \(#function)")
@@ -253,7 +249,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     
     // MARK: - IBActions
     @IBAction func buttonTapFavorite(_ sender: UIButton) {
-        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
             let navController = UINavigationController.init(rootViewController: vc)
             navController.modalPresentationStyle = .overFullScreen
@@ -273,7 +269,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         }
     }
     @IBAction func btnNotifClicked(_ sender: Any) {
-        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
             let navController = UINavigationController.init(rootViewController: vc)
             navController.modalPresentationStyle = .overFullScreen
@@ -496,7 +492,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 cell.btnFavouriteClick = {
-                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
                         let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
                         let navController = UINavigationController.init(rootViewController: vc)
                         navController.modalPresentationStyle = .overFullScreen

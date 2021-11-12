@@ -465,25 +465,18 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     controller.btnSubmit = {
                         if let TabVC =  appDel.window?.rootViewController?.children.first {
                             if TabVC.isKind(of: CustomTabBarVC.self) {
-                                                        SingletonClass.sharedInstance.selectInProcessInMyOrder = true
-
+                                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
                                 let vc = TabVC as! CustomTabBarVC
                                 vc.selectedIndex = 2
                             }
                         }
-//                        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
-//                        controller.selectedIndex = 2
-//                        SingletonClass.sharedInstance.selectInProcessInMyOrder = true
-//                        let nav = UINavigationController(rootViewController: controller)
-//                        nav.navigationBar.isHidden = true
-//                        appDel.window?.rootViewController = nav
                     }
                     self.present(controller, animated: true, completion: nil)
                 } else {
                     self.WebServiceForPayment(OrderId: json["order_id"].stringValue)
                     self.orderid = json["order_id"].stringValue
                 }
-//
+                
             }
             else
             {

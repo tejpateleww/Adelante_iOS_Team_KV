@@ -72,11 +72,12 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     override func btnBackAction() {
 //        super.btnBackAction()
         if isfromcheckout == true{
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CustomTabBarVC.storyboardID) as! CustomTabBarVC
-            controller.selectedIndex = 3
-            let nav = UINavigationController(rootViewController: controller)
-            nav.navigationBar.isHidden = true
-            appDel.window?.rootViewController = nav
+            if let TabVC =  appDel.window?.rootViewController?.children.first {
+                if TabVC.isKind(of: CustomTabBarVC.self) {
+                    let vc = TabVC as! CustomTabBarVC
+                    vc.selectedIndex = 3
+                }
+            }
         }else{
             super.btnBackAction()
         }

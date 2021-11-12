@@ -12,7 +12,7 @@ import SwiftyJSON
 import GooglePlaces
 import GoogleMaps
 
-class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, CLLocationManagerDelegate {
     
     // MARK: - Properties
     var TotalTaxAmount = ""
@@ -33,6 +33,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var isfromPromocode : Bool = false
     var SettingsData : SettingsResModel!
     var locationManager = CLLocationManager()
+//    var locationManager : LocationService?
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
     @IBOutlet weak var tblOrderDetails: UITableView!
@@ -99,6 +100,15 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         self.skeletonData.stopSkeletonAnimation()
     }
     // MARK: - Other Methods
+//    func getLocation() -> Bool {
+//        if SingletonClass.sharedInstance. == nil{
+//            self.locationManager = LocationService()
+//            self.locationManager.startUpdatingLocation()
+//            return false
+//        }else{
+//            return true
+//        }
+//    }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         tblOrderDetails.layer.removeAllAnimations()
         tblOrderDetailsHeight.constant = tblOrderDetails.contentSize.height
@@ -335,17 +345,27 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
-    
     @IBAction func placeOrderBtn(_ sender: submitButton) {
+            checkLocation()
+    }
+    func checkLocation(){
+        let LocationStatus = CLLocationManager.authorizationStatus()
+        if LocationStatus == .notDetermined {
+            AppDelegate.shared.locationService.locationManager?.requestWhenInUseAuthorization()
+        }else if LocationStatus == .restricted || LocationStatus == .denied {
+            Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: "Please turn on permission from settings, to track location in app.", buttons: ["Cancel","Settings"]) { (index) in
+                if index == 1 {
+                    if let settingsAppURL = URL(string: UIApplication.openSettingsURLString){
+                        UIApplication.shared.open(settingsAppURL, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+        }else{
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
             controller.CartTotal = (LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
             controller.strCartID = strCartId
             self.navigationController?.pushViewController(controller, animated: true)
-    }
-    func locationdata() -> Bool{
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        return true
+        }
     }
     @IBAction func seeMenu(_ sender: submitButton) {
         

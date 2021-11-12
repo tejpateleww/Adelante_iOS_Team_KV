@@ -378,7 +378,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     
     // MARK: - IBActions
     @IBAction func btnViewCart(_ sender: Any) {
-        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+        if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
             let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
             //             vc.delegateFilter = self
             //             vc.selectedSortData = self.SelectFilterId

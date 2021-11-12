@@ -22,6 +22,7 @@ import Braintree
     var fromPushUserId = String()
     var fromPushItemId = String()
     var shareUrl = ""
+    var locationService = LocationService()
     
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -125,7 +126,7 @@ import Braintree
                         let nav = tabVC?.children[selectedIndex!] as? UINavigationController
                         if ((nav?.topViewController as? MyOrdersVC) != nil){
                             if nav?.presentedViewController != nil{
-                                if (nav?.presentedViewController?.isKind(of: addPaymentVC.self)) != nil{
+                                if (nav?.presentedViewController?.isKind(of: MyOrdersVC.self)) != nil{
                                     nav?.dismiss(animated: true, completion: nil)
                                 }
                             }
@@ -134,44 +135,25 @@ import Braintree
                             SingletonClass.sharedInstance.selectInProcessShareOrder = true
                             ItemDetailVC.webserviceGetOrderDetail(selectedOrder: ItemDetailVC.strOrderId)
                         }
-                            
+                        
                         else{
-                            tabVC?.selectedIndex = 2
-                            let selectedindex = tabVC?.selectedIndex
-                            let nav = tabVC!.children[selectedindex ?? 0] as? UINavigationController
-                            if ((nav?.topViewController as? CustomTabBarVC) != nil){
-                                let CustomTabBarVC = nav?.topViewController as! MyOrdersVC
-                                CustomTabBarVC.strOrderId = fromPushItemId
-                                SingletonClass.sharedInstance.selectInProcessShareOrder = true
+                            if let TabVC =  appDel.window?.rootViewController?.children.first {
+                                if TabVC.isKind(of: CustomTabBarVC.self) {
+                                    SingletonClass.sharedInstance.selectInProcessShareOrder = true
+                                    let vc = TabVC as! CustomTabBarVC
+                                    vc.selectedIndex = 2
+                                }
                             }
-                            
-                            
-//                            let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC//MyOrdersVC.instantiate(appStoryboard: .main)
-//                            itemDetailVC.strOrderId = fromPushItemId
-//                            SingletonClass.sharedInstance.selectInProcessShareOrder = true
-                            //itemDetailVC.isFromOthersProfile = true
-                            
-                           // nav?.pushViewController(itemDetailVC, animated: true)
                         }
                     }
                     else {
-                        tabVC?.selectedIndex = 2
-                        let selectedindex = tabVC?.selectedIndex
-                        let nav = tabVC!.children[selectedindex ?? 0] as? UINavigationController
-                        if ((nav?.topViewController as? CustomTabBarVC) != nil){
-                            let CustomTabBarVC = nav?.topViewController as! MyOrdersVC
-                            CustomTabBarVC.strOrderId = fromPushItemId
-                            SingletonClass.sharedInstance.selectInProcessShareOrder = true
+                        if let TabVC =  appDel.window?.rootViewController?.children.first {
+                            if TabVC.isKind(of: CustomTabBarVC.self) {
+                                SingletonClass.sharedInstance.selectInProcessShareOrder = true
+                                let vc = TabVC as! CustomTabBarVC
+                                vc.selectedIndex = 2
+                            }
                         }
-//                        tabVC?.selectedIndex = 2
-//                        let nav = tabVC?.children[2] as? UINavigationController
-//
-//                        let itemDetailVC:MyOrdersVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyOrdersVC") as! MyOrdersVC
-//                        itemDetailVC.strOrderId = fromPushItemId
-//                        SingletonClass.sharedInstance.selectInProcessShareOrder = true
-                        //itemDetailVC.isFromOthersProfile = true
-                        
-                      //  nav?.pushViewController(itemDetailVC, animated: true)
                     }
                 }
             }
@@ -180,9 +162,8 @@ import Braintree
             }
         }
         else {
-            
             Utilities.ShowAlert(OfMessage: "Please login before you proceed")//OkalerwithAction(Msg: "Please login before you proceed") {
-            }
+        }
         
     }
     func webserviceShareOrder(strMainOrderId:String){

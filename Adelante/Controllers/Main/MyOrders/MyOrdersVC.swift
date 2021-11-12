@@ -77,8 +77,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         tblOrders.dataSource = self
     }
     @objc func refreshData(){
+        arrShareList.removeAll()
+        arrInProcessList.removeAll()
+        arrPastList.removeAll()
         responseStatus = .initial
-        tblOrders.reloadData()
+        
         self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
     }
     // MARK: - IBActions
@@ -88,13 +91,22 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         selectedSegmentTag = sender.index
         if selectedSegmentTag == 0{
             if self.arrPastList.count == 0{
+                arrShareList.removeAll()
+                arrInProcessList.removeAll()
+                arrPastList.removeAll()
                 webserviceGetOrderDetail(selectedOrder:  "past" )
             }
         }else if selectedSegmentTag == 1{
+            arrShareList.removeAll()
+            arrInProcessList.removeAll()
+            arrPastList.removeAll()
             if self.arrInProcessList.count == 0 {
                 webserviceGetOrderDetail(selectedOrder:  "In-Process")
             }
         }else{
+            arrShareList.removeAll()
+            arrInProcessList.removeAll()
+            arrPastList.removeAll()
             webserviceShareList()
         }
         self.tblOrders.reloadData()
@@ -184,6 +196,13 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = false
                     }
+                    if arrPastList[indexPath.row].trash.toInt() == 1{
+                        cell.btnCancelOrder.isHidden = false
+                    }else{
+                        cell.btnShare.isHidden = true
+                        cell.btnCancelOrder.isHidden = true
+                    }
+                    
                     
                     let obj = self.arrPastList[indexPath.row]
                     cell.lblRestName.text = obj.restaurantName
@@ -282,7 +301,19 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         self.webserviceRepeatOrder(strMainOrderId: obj.id, row: indexPath.row)
                     }
                     strOrderId = obj.id
-                    if arrInProcessList[indexPath.row].shareOrderId.toInt() == 0 && arrInProcessList[indexPath.row].trash.toInt() == 0{
+                    if arrInProcessList[indexPath.row].trash.toInt() == 0{
+                        if arrInProcessList[indexPath.row].shareOrderId.toInt() != 0{
+                            cell.btnShare.isHidden = true
+                        }else{
+                            cell.btnShare.isHidden = false
+                        }
+                        
+                        cell.btnCancelOrder.isHidden = false
+                    }else{
+                        cell.btnShare.isHidden = true
+                        cell.btnCancelOrder.isHidden = true
+                    }
+                    
                         cell.share = {
                             if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(obj.id ?? "")"),!name.absoluteString.isEmpty {//&&isShareable=\(SingletonClass.sharedInstance.isShareble)"),
                                 let objectsToShare = [name]
@@ -313,10 +344,6 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                             }
                             self.present(controller, animated: true, completion: nil)
                         }
-                    }else{
-                        cell.btnShare.isUserInteractionEnabled = false
-                        cell.btnCancelOrder.isUserInteractionEnabled = false
-                    }
                     
                     
                     cell.selectionStyle = .none
@@ -517,9 +544,12 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 self.tblOrders.stopSkeletonAnimation()
                 let OrderList:[orderListingData] = orderListData.data
                 if self.selectedSegmentTag == 0 {
+                    self.arrInProcessList.removeAll()
                     self.arrPastList = OrderList
                     
                 } else if self.selectedSegmentTag == 1{
+                    self.arrPastList.removeAll()
+
                     self.arrInProcessList = OrderList
                     
                 }else{

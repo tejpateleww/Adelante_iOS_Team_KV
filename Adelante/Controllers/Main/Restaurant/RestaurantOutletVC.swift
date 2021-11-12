@@ -190,7 +190,7 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 cell.btnFavorite.isHidden = false
                 cell.btnFavouriteClick = {
-                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false{
+                    if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool ?? false == false{
                         let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
                         let navController = UINavigationController.init(rootViewController: vc)
                         navController.modalPresentationStyle = .overFullScreen

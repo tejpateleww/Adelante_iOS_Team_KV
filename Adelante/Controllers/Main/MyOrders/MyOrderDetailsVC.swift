@@ -148,16 +148,25 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 lblTotal.text = CurrencySymbol + objOrderDetailsData.total
                 if objOrderDetailsData.shareFrom == ""{
-//                    lblSharedDetail.isHidden = true
                 }else{
                     lblSharedDetail.isHidden = false
                     lblSharedDetail.text = "Shared from " + objOrderDetailsData.shareFrom
                 }
                 if objOrderDetailsData.shareTo == ""{
-//                    lblSharedDetail.isHidden = true
                 }else{
                     lblSharedDetail.isHidden = false
                     lblSharedDetail.text = "Shared to " + objOrderDetailsData.shareTo
+                }
+                if objOrderDetailsData.trash.toInt() == 0{
+                    if objOrderDetailsData.shareOrderId.toInt() != 0{
+                        vwShareOrder.isHidden = true
+                    }else {
+                        vwShareOrder.isHidden = false
+                    }
+                    vwCancel.isHidden = false
+                }else{
+                    vwShareOrder.isHidden = true
+                    vwCancel.isHidden = true
                 }
             }
         }
@@ -174,7 +183,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             self.vwBarCode.isHidden = true
             self.vwAccept.isHidden = true
         } else if selectedSegmentTag == 1{
-            self.vwCancel.isHidden = false
             self.vwRateOrder.isHidden = true
             if isSharedOrder {
                 self.vwShareOrder.isHidden = true
@@ -215,7 +223,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             controller.btnSubmit = {
                 controller.dismiss(animated: true, completion: nil)
                 self.webserviceCancelOrder()
-                //                            dismiss(animated: , completion: nil)
             }
             self.present(controller, animated: true, completion: nil)
         }else{
@@ -231,7 +238,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnShareOrderClicked(_ sender: Any) {
-        if objOrderDetailsData.shareOrderId.toInt() == 0{
+        if objOrderDetailsData.trash.toInt() == 0{
             if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(orderId)"), !name.absoluteString.isEmpty {
                 let objectsToShare = [name]
                 appDel.shareUrl = "\(name)"
@@ -413,6 +420,10 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 self.skeletonViewData.stopSkeletonAnimation()
                 self.objOrderDetailsData = orderData.data.mainOrder
                 self.arrItem = self.objOrderDetailsData.item
+                if self.objOrderDetailsData.trash.toInt() != 0{
+                    self.vwCancel.isHidden = true
+                    self.vwShareOrder.isHidden = true
+                }
                 self.setData()
                 self.tblOrderDetails.reloadData()
                 self.tblOrderDetails.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)

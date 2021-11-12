@@ -160,7 +160,6 @@ class CustomTabBarVC: UITabBarController,UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let i = tabBarController.selectedIndex
         print("Selected Index: \(i)")
-        
         selectedTabIndex = tabBarController.selectedIndex
         if (tabBarController.selectedIndex == 2 || tabBarController.selectedIndex == 3 || tabBarController.selectedIndex == 4) {
             if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) == nil || (userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false){
@@ -174,6 +173,20 @@ class CustomTabBarVC: UITabBarController,UITabBarControllerDelegate {
                 SingletonClass.sharedInstance.isPresented = true
             tabBarController.selectedIndex = lastSelectedIndex
             }
+        }
+        if tabBarController.selectedIndex == 0 {
+            if let navVc = tabBarController.children.first {
+                if navVc.isKind(of: UINavigationController.self) {
+                    let vc = navVc as! UINavigationController
+                    if vc.children.count > 1 {
+                        vc.popToRootViewController(animated: false)
+                    }
+                    
+                }
+
+               
+            }
+           
         }
     }
     
