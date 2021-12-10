@@ -186,6 +186,7 @@ class checkoutButton : UIButton {
     @IBInspectable var isSeeMenu : Bool = false
     @IBInspectable var isReadPolicy : Bool = false
     @IBInspectable var isChange : Bool = false
+    @IBInspectable var isRadio : Bool = false
     //.double.rawValue, .thick.rawValue
     override func awakeFromNib() {
         if isChangeLocation {
@@ -220,6 +221,9 @@ class checkoutButton : UIButton {
             let attributeString = NSMutableAttributedString(string: (self.titleLabel?.text ?? ""),
                                                             attributes: yourAttributes)
             self.setAttributedTitle(attributeString, for: .normal)
+        }else if isRadio{
+            self.titleLabel?.font = CustomFont.NexaRegular.returnFont(14)
+            self.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
         } else {
             self.setTitleColor(UIColor(hexString: "#E34A25"), for: .normal)
             self.titleLabel?.font = CustomFont.NexaBold.returnFont(16)

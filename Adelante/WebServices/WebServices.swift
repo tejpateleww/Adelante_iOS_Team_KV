@@ -39,7 +39,7 @@ class WebService{
         }
         else { parameterString = "" }
         #warning("Please remove make payment api user when complete")
-        guard let url = (api == .make_payment) ? URL(string: "https://www.adelantemovil.com/api/User/" + api.rawValue + parameterString) : URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
+        guard let url = (api == .make_payment) ? URL(string: "http://18.215.15.214/api/User/" + api.rawValue + parameterString) : URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
             completion(JSON(),false, "")
             return
         }

@@ -145,14 +145,24 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     //MARK: -tblViewMethods
     func numberOfSections(in tableView: UITableView) -> Int {
+        if WalletBalance == 0.0{
+            return 1
+        }
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-//                if WalletBalance == 0.0 {
-//                    return 1
-//                }
+            
+            if isfromPayment{
+                if WalletBalance == 0.0{
+                    return 0
+                }
+            }else{
+                if WalletBalance == 0.0{
+                    return 1
+                }
+            }
             return 1
         case 1:
             return 2
@@ -166,26 +176,28 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         switch indexPath.section {
         case 0:
             var cell = UITableViewCell()
-                    let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell1.reuseIdentifier, for: indexPath) as! paymentMethodCell1
-                    cell1.paymentImageView.image = UIImage(named: "ic_wallet")
-                    cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
-                    cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
-                    cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-                    
-                    if WalletBalance == 0.0{
-                        cell1.lblwalletBalance.text = "\(CurrencySymbol)\("0.00")"
-                    }else{
-                        cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
-                    }
-                    cell1.btnDelete.isHidden = true
-                    
-                    if IsWalletSelected {
-                        cell1.selectPaymentMethodButton.isSelected = true
-                    }else{
-                        cell1.selectPaymentMethodButton.isSelected = false
-                    }
-                    cell1.selectionStyle = .none
-                    cell = cell1
+            let cell1 = tblPaymentMethod.dequeueReusableCell(withIdentifier: paymentMethodCell1.reuseIdentifier, for: indexPath) as! paymentMethodCell1
+            cell1.paymentImageView.image = UIImage(named: "ic_wallet")
+            cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
+            cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
+            cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
+//            let strUrl = "http://3.239.174.164/assets/images/Braintree-logo.png"
+//            cell1.paymentImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//            cell1.paymentImageView.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+            if WalletBalance == 0.0{
+                cell1.lblwalletBalance.text = "\(CurrencySymbol)\("0.00")"
+            }else{
+                cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
+            }
+            cell1.btnDelete.isHidden = true
+            
+            if IsWalletSelected {
+                cell1.selectPaymentMethodButton.isSelected = true
+            }else{
+                cell1.selectPaymentMethodButton.isSelected = false
+            }
+            cell1.selectionStyle = .none
+            cell = cell1
             cell.selectionStyle = .none
             return cell
         case 1:

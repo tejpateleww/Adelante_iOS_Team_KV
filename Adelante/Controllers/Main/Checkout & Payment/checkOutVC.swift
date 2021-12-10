@@ -57,6 +57,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
     @IBOutlet weak var btnAddFoodlist: checkoutButton!
     @IBOutlet weak var btnChange: checkoutButton!
     @IBOutlet weak var btnPlaceOrder: submitButton!
+    @IBOutlet weak var btnYes: UIButton!
+    @IBOutlet weak var btnNo: UIButton!
     
     // MARK: - ViewController Lifecycle
     
@@ -134,8 +136,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         restaurantLocationView.addSubview(MapViewForShowRastaurantLocation)
     }
     func setData(){
-        // if SingletonClass.sharedInstance.restCurrentOrder != nil{
-        // self.objCurrentorder = SingletonClass.sharedInstance.restCurrentOrder
         lblItemName.text = cartDetails?.name//objCurrentorder?.currentRestaurantDetail.name
         centerMapOnLocation(location: CLLocation(latitude: Double(cartDetails?.lat ?? "") ?? 0.0, longitude: Double(cartDetails?.lng ?? "") ?? 0.0), mapView: MapViewForShowRastaurantLocation)
         lblAddress.text = cartDetails?.address
@@ -146,10 +146,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         tblOrderDetails.dataSource = self
         tblOrderDetails.reloadData()
         self.strCartId = cartDetails?.cartId ?? ""
-        // calculateTotalAndSubtotal()
-        
         reloadAddproductTableAndResize()
-        // }else{
         tblAddProductHeight.constant = 0
         tblOrderDetailsHeight.constant = 0
         if cartDetails?.promocode != ""{
@@ -159,7 +156,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             btnCanclePromoCOde.isHidden = false
             btnChange.isHidden = false
         }
-        // }
     }
     
     func reloadAddproductTableAndResize(){
@@ -190,7 +186,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             return self.arrCartItem.count
         case tblOrderDetails:
             arrayForTitle.removeAll()
-            
             arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
             var cnt = 1
             if AppliedPromocode?.promocodeType == "discount" || cartDetails?.promocode != ""{
@@ -205,7 +200,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 arrayForTitle.append("checkOutVC_arrayForTitle_title2".Localized())
                 cnt = cnt + 1
             }
-            
             return cnt
         default:
             return 0
@@ -292,20 +286,23 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         default:
             return 43
         }
-        
     }
     
     //MARK: - IBActions
     @objc func btnSubmitCommonPopupClicked() {
         print("hello")
     }
+    @IBAction func btnRadioClick(_ sender: UIButton) {
+        if sender.tag == 0{
+            btnYes.isSelected = true
+            btnNo.isSelected = false
+        }else{
+            btnNo.isSelected = true
+            btnYes.isSelected = false
+        }
+    }
     @IBAction func BtnCancelPromocodeClick(_ sender: Any) {
-//        btnAppyPromoCode.isHidden = false
-//        btnCanclePromoCOde.isHidden = true
-//        lblPromoCode.text = ""
-//        AppliedPromocode = nil
         webserviceRemovePromocode()
-//        self.tblOrderDetails.reloadData()
     }
     @IBAction func btnReadPolicyTap(_ sender: Any) {
         webserviceGetSettings()
@@ -340,7 +337,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             self.ApplyPromocode()
             self.tblOrderDetails.reloadData()
         }
-        //        vc.RestuarantID = objCurrentorder?.restaurant_id ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -360,10 +356,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 }
             }
         }else{
-//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-//            controller.CartTotal = (LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
-//            controller.strCartID = strCartId
-//            self.navigationController?.pushViewController(controller, animated: true)
             webserviceCheckOrder()
         }
     }
@@ -422,8 +414,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 }
                 alert.addAction(OkAction)
                 appDel.window?.rootViewController?.present(alert, animated: true, completion: nil)
-               
-//                Utilities.displayAlert(json["message"].string ?? "")
             }
             else
             {
@@ -465,9 +455,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             }
         }
     }
-    
     //Api for update Qty of item
-    //NOTE :- type 1- increment, 0 - decrement
     func webserviceUpdateQty(itemID:String,strtype:String){
         let updateCart = UpdateCardQtyReqModel()
         updateCart.cart_item_id = itemID
@@ -480,22 +468,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 print(json)
                 let cartData = CartListResModel.init(fromJson: json)
                 self.cartDetails = cartData.data
-                //self.arrCartItem = cartData.data.item
                 if self.cartDetails == nil{
                     self.navigationController?.popViewController(animated: true)
                 }else{
                     let tempArr = cartData.data.item.filter { (item) -> Bool in
                         return item.cartQty.toInt() != 0
                     }
-                    //print(tempArr)
                     self.arrCartItem = tempArr
-//                    {
-//                        self.arrCartItem.remove(at: index.row)
-//                        self.tblAddedProduct.deleteRows(at: [index], with: .fade)
-//                    }
-//                    if let obj = self.addRemoveItem{
-//                        obj(Int(self.cartDetails?.id ?? "") ?? 0,cartData.data.totalQuantity.toInt())
-//                    }
                 }
                 self.setData()
                 self.location()
@@ -545,7 +524,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         })
     }
     func webserviceGetSettings(){
-        
         WebServiceSubClass.Settings(showHud: true, completion: { (json, status, response) in
             if(status)
             {
@@ -612,6 +590,3 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                         marker.map = restaurantLocationView
     }
 }
-
-
-

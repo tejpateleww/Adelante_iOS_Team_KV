@@ -50,6 +50,7 @@ class CheckOutLabel : UILabel {
     @IBInspectable var isProductTotalPrice: Bool = false
     @IBInspectable var isPromo : Bool = false
     @IBInspectable var isDescription : Bool = false
+    @IBInspectable var isCurbside : Bool = false
     override func drawText(in rect: CGRect) {
       
         if isUserName || isAddress {
@@ -136,6 +137,10 @@ class CheckOutLabel : UILabel {
         }else if isDescription{
             self.font = CustomFont.NexaRegular.returnFont(10)
             self.textColor = colors.black.value
+            self.textAlignment = .left
+        }else if isCurbside{
+            self.font = CustomFont.NexaRegular.returnFont(15)
+            self.textColor = colors.appOrangeColor.value
             self.textAlignment = .left
         }
         

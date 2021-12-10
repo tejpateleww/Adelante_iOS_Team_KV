@@ -18,7 +18,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
     var strNavTitle = ""
     var strStorePolicy = ""
     var OrderID = ""
-   
+    
     var callBackURL = ""
     var cancelURL = ""
     // MARK: - IBOutlets
@@ -53,7 +53,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
         webView.load(URLRequest.init(url: URLTemp!))//load(URLRequest(url: URLTemp))
         Utilities.showHud()
         webView.allowsBackForwardNavigationGestures = true
-     
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -74,7 +74,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
         print("didFinish: \(String(describing: webView.url?.absoluteString))")
         
         let  str = webView.url?.absoluteString ?? ""
-     
+        
         
         if str == callBackURL {
             vwWebMain.isHidden = true
@@ -101,6 +101,8 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
                 }
             }
             self.present(controller, animated: true, completion: nil)
+        }else{
+            self.navigationController?.popViewController(animated: true)
         }
         if str == self.cancelURL {
             self.dismiss(animated: true, completion: nil)
@@ -111,7 +113,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         Utilities.hideHud()
         print("didFail: \(String(describing: webView.url?.absoluteString))")
-            // pop..
+        // pop..
     }
 }
 extension PaymentWebViewVC{
@@ -190,17 +192,6 @@ extension PaymentWebViewVC{
     
     func onSocketUpdateLocation(){
         SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { (json) in
-//            print(#function, "\n ",json)
-//            self.driverLat = json.first?.1.first?.1.arrayValue[0].doubleValue ?? 0.0 //json["lat"].doubleValue
-//            self.driverLng = json.first?.1.first?.1.arrayValue[1].doubleValue ?? 0.0//json["lng"].doubleValue
-//
-//            if !self.isgetDriverlocation{
-//                self.isgetDriverlocation = true
-//                self.mapRouteForcurrentToRestaurant(PickupLat: SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude, PickupLng: SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude, destLat: self.driverLat , DestLng: self.driverLng)
-//            }
-//            self.updateMarker(lat: self.driverLat, lng: self.driverLng)
-//            self.setDriverMarker()
-            
         }
     }
     
@@ -220,7 +211,7 @@ extension PaymentWebViewVC{
     
     func emitSocketUpdateLocation() {
         print(#function)
-//        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
+        //        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
         let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
                                     "order_id" : self.OrderID,
                                     "lat": SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude ,
