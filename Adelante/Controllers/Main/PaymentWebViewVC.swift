@@ -73,12 +73,18 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
         Utilities.hideHud()
         print("didFinish: \(String(describing: webView.url?.absoluteString))")
         
-        let  str = webView.url?.absoluteString ?? ""
-        
-        
-        if str == callBackURL {
+        let str = webView.url?.absoluteString ?? ""
+        if str.contains("success") {
             vwWebMain.isHidden = true
             webView.isHidden = true
+            let strArray = str.components(separatedBy: "//")
+            let strUrl = strArray[1].components(separatedBy: "/")
+            let strID = strUrl.last?.components(separatedBy: "?")
+            self.OrderID = strID?.last ?? ""
+            print(strID)
+//            let strArray =  str.components(separatedBy: "/")
+//            let str = strArray.last?.components(separatedBy: "?")
+            //self.OrderID = str
             let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
             controller.isHideCancelButton = true
             controller.isHideSubmitButton = false
@@ -101,8 +107,24 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
                 }
             }
             self.present(controller, animated: true, completion: nil)
-        }else{
-            self.navigationController?.popViewController(animated: true)
+        }else if str.contains("failed"){
+            vwWebMain.isHidden = true
+            webView.isHidden = true
+            let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+            controller.isHideCancelButton = true
+            controller.isHideSubmitButton = false
+            controller.submitBtnTitle = "OK               "
+            controller.cancelBtnTitle = ""
+            controller.strDescription = ""
+            controller.strPopupTitle = "Payment Failed"
+            controller.submitBtnColor = colors.appRedColor
+            controller.cancelBtnColor = colors.appRedColor
+            controller.strPopupImage = "Dummy_notif2"
+            controller.isCancleOrder = true
+            controller.btnSubmit = {
+                self.navigationController?.popViewController(animated: true)
+            }
+            self.present(controller, animated: true, completion: nil)
         }
         if str == self.cancelURL {
             self.dismiss(animated: true, completion: nil)
@@ -213,11 +235,35 @@ extension PaymentWebViewVC{
         print(#function)
         //        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
         let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
-                                    "order_id" : self.OrderID,
+                                    "order_id" : OrderID,
                                     "lat": SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude ,
                                     "lng" :SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude
         ]
         SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
         
     }
+}
+//extension StringProtocol { // for Swift 4 you need to add the constrain `where Index == String.Index`
+//    var byWords: [SubSequence] {
+//        var byWords: [SubSequence] = []
+//        enumerateSubstrings(in: startIndex..., options: .byWords) { , range, , _ in
+//            byWords.append(self[range])
+//        }
+//        return byWords
+//    }
+//}
+extension String {
+
+    func trim(_ emptyToNil: Bool = true)->String? {
+        let text = self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return emptyToNil && text.isEmpty ? nil : text
+    }
+
+    var lastWord: String? {
+        if let size = self.lastIndex(of: " "), size >= self.startIndex {
+            return String(self[size...]).trim()
+        }
+        return nil
+    }
+
 }

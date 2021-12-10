@@ -100,7 +100,6 @@ enum ApiKey: String {
     case Notification = "notification"
     case fetch_promocode = "fetch_promocode"
     case apply_promocode = "apply_promocode"
-    case orderPlaced = "order"
     case Email_verify = "resend_link"
     case Add_Foodlist = "foodlist"
     case Add_to_Card = "add_cart"
@@ -119,7 +118,7 @@ enum ApiKey: String {
 }
 
 enum SocketData : String{
-    case kSocketHostUrl = "https://www.adelantemovil.com:8080/"//"http://3.239.174.164:8080/"//"http://18.208.18.170:8080/"
+    case kSocketHostUrl = "http://18.215.15.214:8080"//"https://www.adelantemovil.com:8080/"//"http://3.239.174.164:8080/"//"http://18.208.18.170:8080/"
     case kConnectUser   = "connect_user"
     case kLocationTracking = "location_tracking"
     case kcustomerinterval = "customer_interval"

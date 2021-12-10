@@ -841,7 +841,6 @@ extension HomeVC{
     func allSocketOffMethods() {
         print("\n\n", #function, "\n\n")
         SocketIOManager.shared.socket.off(SocketData.kConnectUser.rawValue)
-        //        SocketIOManager.shared.socket.off(SocketKeys.SendMessage.rawValue)
         SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
     }
     
@@ -852,7 +851,7 @@ extension HomeVC{
         SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
             print(#function, "\n ", json)
             if(self.timerSocket == nil){
-                self.timerSocket = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
+                self.timerSocket = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
                     self.emitSocketUpdateLocation()
                 })
             }
@@ -861,19 +860,14 @@ extension HomeVC{
     
     
     func onSocketUpdateLocation(){
-        SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { (json) in
+        SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { [self] (json) in
             print(#function, "\n ",json)
-            
-//            self.driverLat = json.first?.1.first?.1.arrayValue[0].doubleValue ?? 0.0 //json["lat"].doubleValue
-//            self.driverLng = json.first?.1.first?.1.arrayValue[1].doubleValue ?? 0.0//json["lng"].doubleValue
-//
-//            if !self.isgetDriverlocation{
-//                self.isgetDriverlocation = true
-//                self.mapRouteForcurrentToRestaurant(PickupLat: SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude, PickupLng: SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude, destLat: self.driverLat , DestLng: self.driverLng)
-//            }
-//            self.updateMarker(lat: self.driverLat, lng: self.driverLng)
-//            self.setDriverMarker()
-            
+            let orderId = json["order_id"].stringValue
+            self.orderIdArray.removeAll(where: {$0 == orderId})
+            if self.orderIdArray.isEmpty {
+                self.timerSocket?.invalidate()
+                self.timerSocket = nil
+            }
         }
     }
     
@@ -903,8 +897,8 @@ extension HomeVC{
         print(#function)
         let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
                                     "order_id" : orderId,
-                                    "lat": SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude ,
-                                    "lng" :SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude
+                                    "lat": String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude) ,
+                                    "lng" : String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)
         ]
         SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
         

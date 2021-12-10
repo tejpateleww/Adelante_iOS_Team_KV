@@ -408,6 +408,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     if json["url"].stringValue != "" {
                         let vc : PaymentWebViewVC = PaymentWebViewVC.instantiate(fromAppStoryboard: .Main)
                         vc.strUrl = json["url"].stringValue
+                        vc.OrderID = json["order_id"].stringValue
                         vc.callBackURL = json["callbackurl"].stringValue
                         vc.cancelURL = json["cancel_url"].stringValue
                         self.navigationController?.pushViewController(vc, animated: true)
@@ -603,8 +604,8 @@ extension addPaymentVC{
 //        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
         let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
                                     "order_id" : self.orderid,
-                                    "lat": SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude ,
-                                    "lng" :SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude
+                                    "lat": String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude) ,
+                                    "lng" :String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)
         ]
         SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
         
