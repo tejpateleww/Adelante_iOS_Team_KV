@@ -36,7 +36,7 @@ class Profile : Codable{
     var rememberSelector : String!
     var trash : String!
     var username : String!
-    
+    var car_number : String!
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
@@ -71,6 +71,7 @@ class Profile : Codable{
         rememberSelector = json["remember_selector"].stringValue
         trash = json["trash"].stringValue
         username = json["username"].stringValue
+        car_number = json["car_number"].stringValue
     }
     /**
      * Instantiate the instance using the passed dictionary values to set the properties values
@@ -103,6 +104,7 @@ class Profile : Codable{
         rememberSelector = dictionary["remember_selector"] as? String
         trash = dictionary["trash"] as? String
         username = dictionary["username"] as? String
+        car_number = dictionary["car_number"] as? String
     }
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
@@ -191,6 +193,9 @@ class Profile : Codable{
         if username != nil{
             dictionary["username"] = username
         }
+        if car_number != nil{
+            dictionary["car_number"] = car_number
+        }
         return dictionary
     }
     
@@ -227,6 +232,7 @@ class Profile : Codable{
         rememberSelector = aDecoder.decodeObject(forKey: "remember_selector") as? String
         trash = aDecoder.decodeObject(forKey: "trash") as? String
         username = aDecoder.decodeObject(forKey: "username") as? String
+        car_number = aDecoder.decodeObject(forKey: "car_number") as? String
     }
     
     /**
@@ -316,7 +322,9 @@ class Profile : Codable{
         if username != nil{
             aCoder.encode(username, forKey: "username")
         }
-        
+        if car_number != nil{
+            aCoder.encode(car_number, forKey: "car_number")
+        }
     }
     
 }

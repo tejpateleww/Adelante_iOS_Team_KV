@@ -238,6 +238,7 @@
 		882A0B2C26CCD0CA0021D0E8 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A0B2B26CCD0C90021D0E8 /* SocketManager.swift */; };
 		883614522693172A00B35C1D /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8836144F2693172900B35C1D /* CartItem.swift */; };
 		883614532693172A00B35C1D /* CartListResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883614502693172A00B35C1D /* CartListResModel.swift */; };
+		883B0CB3274D0E86006237D7 /* QRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883B0CB2274D0E86006237D7 /* QRCodeVC.swift */; };
 		884B350326844F8B0019BB4F /* otpReceive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884B350226844F8B0019BB4F /* otpReceive.swift */; };
 		8851B9E726A143CF00D614EA /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851B9E526A143CE00D614EA /* MenuItem.swift */; };
 		8851B9E826A143CF00D614EA /* SubMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851B9E626A143CF00D614EA /* SubMenu.swift */; };
@@ -268,6 +269,7 @@
 		88C9E4FE268ED64D005B0899 /* skeletonCheckout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */; };
 		88C9E502268F1730005B0899 /* BffComboShimmerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */; };
 		88C9E503268F1730005B0899 /* BffComboShimmerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C9E501268F1730005B0899 /* BffComboShimmerCell.xib */; };
+		88DCCC142761D0C500D0A118 /* checkOrderReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCCC132761D0C500D0A118 /* checkOrderReqModel.swift */; };
 		88E806F5268D821E007B3FC0 /* SearchResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E806F1268D821D007B3FC0 /* SearchResModel.swift */; };
 		88E806FD268D8509007B3FC0 /* SearchRestaurantItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E806FA268D8508007B3FC0 /* SearchRestaurantItem.swift */; };
 		88E806FE268D8509007B3FC0 /* SearchRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E806FB268D8508007B3FC0 /* SearchRestaurant.swift */; };
@@ -536,6 +538,7 @@
 		882A0B2B26CCD0C90021D0E8 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		8836144F2693172900B35C1D /* CartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		883614502693172A00B35C1D /* CartListResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartListResModel.swift; sourceTree = "<group>"; };
+		883B0CB2274D0E86006237D7 /* QRCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeVC.swift; sourceTree = "<group>"; };
 		884B350226844F8B0019BB4F /* otpReceive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otpReceive.swift; sourceTree = "<group>"; };
 		8851B9E526A143CE00D614EA /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		8851B9E626A143CF00D614EA /* SubMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMenu.swift; sourceTree = "<group>"; };
@@ -568,6 +571,7 @@
 		88C9E4FD268ED64D005B0899 /* skeletonCheckout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = skeletonCheckout.xib; sourceTree = "<group>"; };
 		88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BffComboShimmerCell.swift; sourceTree = "<group>"; };
 		88C9E501268F1730005B0899 /* BffComboShimmerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BffComboShimmerCell.xib; sourceTree = "<group>"; };
+		88DCCC132761D0C500D0A118 /* checkOrderReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkOrderReqModel.swift; sourceTree = "<group>"; };
 		88E806F1268D821D007B3FC0 /* SearchResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResModel.swift; sourceTree = "<group>"; };
 		88E806FA268D8508007B3FC0 /* SearchRestaurantItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestaurantItem.swift; sourceTree = "<group>"; };
 		88E806FB268D8508007B3FC0 /* SearchRestaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestaurant.swift; sourceTree = "<group>"; };
@@ -905,6 +909,7 @@
 				8105FDC02574D0F9008D36D6 /* FavouritesVC.swift */,
 				84C5F6872643A8B7000B2DDE /* PromocodeVC.swift */,
 				1800C41026EB503300AC4190 /* PaymentWebViewVC.swift */,
+				883B0CB2274D0E86006237D7 /* QRCodeVC.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1183,6 +1188,7 @@
 				180A9E7D265CDB3700AC7A22 /* PromocodeApplyReqModel.swift */,
 				1855042A265F955400D73B2B /* OrderReqModel.swift */,
 				88E8071B268DCA9C007B3FC0 /* AddToFoodlistReqModel.swift */,
+				88DCCC132761D0C500D0A118 /* checkOrderReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1695,6 +1701,7 @@
 				888EBC71269D74DF006C1424 /* addCartDatum.swift in Sources */,
 				34A260E525D3B43800E24D73 /* ReviewListReqModel.swift in Sources */,
 				347D955C25A71637000C64B5 /* DashBoardResModel.swift in Sources */,
+				88DCCC142761D0C500D0A118 /* checkOrderReqModel.swift in Sources */,
 				8851B9EB26A14C0D00D614EA /* updateQtyItem.swift in Sources */,
 				882A0B2C26CCD0CA0021D0E8 /* SocketManager.swift in Sources */,
 				888EBC81269D7C43006C1424 /* updateQtyDatum.swift in Sources */,
@@ -1792,6 +1799,7 @@
 				3431E05025931CC1002F1435 /* ReViewDiscCell.swift in Sources */,
 				3431E04E25931C43002F1435 /* NotificationCell.swift in Sources */,
 				88736F4A269C22EE00400087 /* RestaurantDataDetails.swift in Sources */,
+				883B0CB3274D0E86006237D7 /* QRCodeVC.swift in Sources */,
 				3431E06225932058002F1435 /* bffComboCell.swift in Sources */,
 				81E67215257E68BC00DCE9DA /* checkOutVC.swift in Sources */,
 				81CFFD6E2574C60D005AA86A /* UserInfo.swift in Sources */,

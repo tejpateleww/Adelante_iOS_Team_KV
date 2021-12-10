@@ -21,6 +21,8 @@ class MyProfileVC: BaseViewController,EditProfileDelegate {
     @IBOutlet weak var txtEmail: floatTextField!
     @IBOutlet weak var txtPhoneNumber: floatTextField!
     @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var txtPlateNumber: EditProfileTextField!
+    @IBOutlet weak var stackPlateNumber: UIStackView!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -43,6 +45,12 @@ class MyProfileVC: BaseViewController,EditProfileDelegate {
         txtEmail.text = loginModelDetails?.email
         txtPhoneNumber.text = loginModelDetails?.phone
         lblName.text = loginModelDetails?.fullName
+        if loginModelDetails?.car_number == ""{
+            stackPlateNumber.isHidden = true
+        }else{
+            stackPlateNumber.isHidden = false
+            txtPlateNumber.text = loginModelDetails?.car_number
+        }
         let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(loginModelDetails?.profilePicture ?? "")"
             imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
             imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
@@ -52,6 +60,7 @@ class MyProfileVC: BaseViewController,EditProfileDelegate {
         btnEditAccount.setTitle("MyProfileVC_btnEditAccount".Localized(), for: .normal)
         txtEmail.placeholder = "MyProfileVC_txtEmail".Localized()
         txtPhoneNumber.placeholder = "MyProfileVC_txtPhoneNumber".Localized()
+        txtPlateNumber.placeholder = "MyProfileVC_txtPlateNumber".Localized()
     }
     // MARK: - IBActions
     

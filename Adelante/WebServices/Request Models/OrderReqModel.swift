@@ -22,7 +22,8 @@ class shareOrderlistReqModel:RequestModel{
 }
 class PayNowReqModel:RequestModel{
     var user_id : String = ""
-    var order_id : String = ""
+    var cart_id : String = ""
     var is_wallet : String = ""
     var is_paypal : String = ""
+    var is_braintree : String = ""
 }

@@ -182,11 +182,8 @@ class CustomTabBarVC: UITabBarController,UITabBarControllerDelegate {
                         vc.popToRootViewController(animated: false)
                     }
                     
-                }
-
-               
+                }  
             }
-           
         }
     }
     

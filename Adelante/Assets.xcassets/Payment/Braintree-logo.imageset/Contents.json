@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_dummyVisa.png",
+      "filename" : "Braintree-logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_dummyVisa@2x.png",
+      "filename" : "Braintree-logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_dummyVisa@3x.png",
+      "filename" : "Braintree-logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

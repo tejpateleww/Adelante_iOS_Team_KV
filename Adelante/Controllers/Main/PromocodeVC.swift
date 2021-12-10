@@ -59,7 +59,7 @@ extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
         if self.PromoCodeList.count == 0 {
             return 1
         } else {
-            return PromoCodeList.count ?? 0
+            return PromoCodeList.count 
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

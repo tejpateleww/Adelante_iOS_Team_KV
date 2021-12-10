@@ -31,12 +31,13 @@ class EditProfileVC: BaseViewController{
     @IBOutlet weak var txtPhoneNumber: floatTextField!
     @IBOutlet weak var lblUnverified: themeLabel!
     @IBOutlet weak var btnSave: submitButton!
+    @IBOutlet weak var txtPlateNumber: EditProfileTextField!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         txtEmail.autocorrectionType = .no
-
+        txtPlateNumber.delegate = self
         txtPhoneNumber.delegate = self
         //        imgProfile.layer.cornerRadius = imgProfile.layer.bounds.height / 2
         self.imagePicker = ImagePicker(presentationController: self, delegate: self, allowsEditing: false)
@@ -65,6 +66,7 @@ class EditProfileVC: BaseViewController{
             txtLastName.text = userdata.lastName ?? ""
             txtEmail.text = userdata.email ?? ""
             txtPhoneNumber.text = userdata.phone
+            txtPlateNumber.text = userdata.car_number
             if SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture != ""{
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(userdata.profilePicture ?? "")"
                 imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -151,6 +153,7 @@ class EditProfileVC: BaseViewController{
         lblVerified.text = "EditProfileVC_lblVerified".Localized()
         txtPhoneNumber.placeholder = "EditProfileVC_txtPhoneNumber".Localized()
         lblUnverified.text = "EditProfileVC_lblVerified".Localized()
+        txtPlateNumber.placeholder = "EditProfileVC_txtPlateNumber".Localized()
         btnSave.setTitle("EditProfileVC_btnSave".Localized(), for: .normal)
     }
     
@@ -166,6 +169,7 @@ class EditProfileVC: BaseViewController{
         updateModel.last_name = txtLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.phone = StrPhone! //txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         updateModel.user_id = SingletonClass.sharedInstance.UserId
+        updateModel.car_number = txtPlateNumber.text ?? ""
         if self.isRemovePhoto{
             updateModel.remove_image = "1"
         }
@@ -276,6 +280,18 @@ extension EditProfileVC:UITextFieldDelegate{
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
+        } else if textField == txtPlateNumber{
+            let ACCEPTABLE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-"
+            let currentString: NSString = txtPlateNumber.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            let cs = NSCharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+            let filtered = string.components(separatedBy: cs).joined(separator: "")
+            if textField != txtPlateNumber{
+                return false
+            }else{
+                return (string == filtered) ? (newString.length <= 15) : false
+            }
         }
         return true
     }

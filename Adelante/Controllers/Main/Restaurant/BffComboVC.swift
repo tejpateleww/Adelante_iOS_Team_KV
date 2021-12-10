@@ -409,7 +409,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 let resVariant = RestaurantVariantResModel.init(fromJson: response)
                 let cell = self.tblBFFCombo.dequeueReusableCell(withIdentifier: BffComboShimmerCell.reuseIdentifier) as! BffComboShimmerCell
                 cell.stopShimmering()
-//                self.lblItem.text = CurrencySymbol + resVariant.itemPrice
+                self.lblItem.text = CurrencySymbol + resVariant.itemPrice
                 itemBasePrice = Double(resVariant.itemPrice) ?? 0.00
                 let objDoublePrice = Double(resVariant.itemPrice ?? "0") ?? 0
                 self.total = Int(objDoublePrice)

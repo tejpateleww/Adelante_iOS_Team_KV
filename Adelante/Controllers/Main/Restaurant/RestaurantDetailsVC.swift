@@ -318,7 +318,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     // MARK: - UITableViewDelegates And Datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        //                return self.arrSections.count
         if tableView == tblRestaurantDetails{
             return arrMenuitem.count > 0 ? arrFoodMenu.count + 1 : arrFoodMenu.count
         }else{
@@ -570,14 +569,16 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 } else {
                     let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
                     let variantValue = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant.ToDouble()
-                    cell.lblItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name.trimmingCharacters(in: .whitespacesAndNewlines)
+                    cell.lblItemName.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name.trimmingCharacters(in: .whitespacesAndNewlines)
                     cell.lblItemPrice.text = "\(CurrencySymbol)" + arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.ConvertToTwoDecimal()
-                    cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].size
+                    let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].image ?? "")"
+                    cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                    cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.lblNoOfItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty
-                    
-                    cell.btnAdd.isHidden = false
+                    cell.lblAboutItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].Description
+                    cell.btnAddItem.isHidden = false
                     cell.vwStapper.isHidden = true
-                    cell.StackHide.isHidden = false
+                    cell.stackHide.isHidden = false
                     self.activityView.stopAnimating()
                     if indexPath.section == 1 && indexPath.row == 0{
                         if objRestaurant.foodType == 1{
@@ -591,7 +592,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
                     }
                     if Int(arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty) ?? 0 > 0 {
-                        cell.btnAdd.isHidden = true
+                        cell.btnAddItem.isHidden = true
                         cell.vwStapper.isHidden = false
                     }
                     
@@ -622,7 +623,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                                 self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
                                 self.isfromMenu = false
-                                cell.StackHide.isHidden = true
+                                cell.stackHide.isHidden = true
                                 self.activityView.center = cell.vwStapper.center
                                 cell.vwStapper.addSubview(self.activityView)
                                 self.activityView.startAnimating()
@@ -631,7 +632,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             self.isfromMenu = false
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                             self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
-                            cell.StackHide.isHidden = true
+                            cell.stackHide.isHidden = true
                             self.activityView.center = cell.vwStapper.center
                             cell.vwStapper.addSubview(self.activityView)
                             self.activityView.startAnimating()
@@ -652,7 +653,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section - 1)
                             self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
                             self.isfromMenu = false
-                            cell.StackHide.isHidden = true
+                            cell.stackHide.isHidden = true
                             self.activityView.center = cell.vwStapper.center
                             cell.vwStapper.addSubview(self.activityView)
                             self.activityView.startAnimating()
@@ -685,10 +686,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     }else{
                                         let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                                         if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > value {
-                                            cell.btnAdd.isHidden = true
+                                            cell.btnAddItem.isHidden = true
                                             cell.vwStapper.isHidden = false
                                             self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                            cell.StackHide.isHidden = true
+                                            cell.stackHide.isHidden = true
                                             self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
                                             cell.vwStapper.addSubview(self.activityView)
                                             self.activityView.startAnimating()
@@ -713,10 +714,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 }else{
                                     let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                                     if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > value {
-                                        cell.btnAdd.isHidden = true
+                                        cell.btnAddItem.isHidden = true
                                         cell.vwStapper.isHidden = false
                                         self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                        cell.StackHide.isHidden = true
+                                        cell.stackHide.isHidden = true
                                         self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
                                         cell.vwStapper.addSubview(self.activityView)
                                         self.activityView.startAnimating()
@@ -762,16 +763,20 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             } else {
                 let cell:RestaurantItemCell = tblRestaurantDetails.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath)as! RestaurantItemCell
                 let variantValue = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant.ToDouble()
-                cell.lblItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].name
+                cell.lblItemName.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].name
+                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrFoodMenu[indexPath.section].subMenu[indexPath.row].image ?? "")"
+                cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                cell.lblAboutItem.text = arrFoodMenu[indexPath.row].subMenu[indexPath.row].Description
                 cell.lblItemPrice.text = CurrencySymbol + arrFoodMenu[indexPath.section].subMenu[indexPath.row].price
-                cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].size
+//                cell.lblSizeOfItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].size
                 cell.lblNoOfItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartQty
-                cell.btnAdd.isHidden = false
+                cell.btnAddItem.isHidden = false
                 cell.vwStapper.isHidden = true
-                cell.StackHide.isHidden = false
+                cell.stackHide.isHidden = false
                 self.activityView.stopAnimating()
                 if Int(arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartQty) ?? 0 > 0 {
-                    cell.btnAdd.isHidden = true
+                    cell.btnAddItem.isHidden = true
                     cell.vwStapper.isHidden = false
                 }
                 if indexPath.section == 0 && indexPath.row == 0{
@@ -810,7 +815,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                             self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
                             self.isfromMenu = false
-                            cell.StackHide.isHidden = true
+                            cell.stackHide.isHidden = true
                             self.activityView.center = cell.vwStapper.center
                             cell.vwStapper.addSubview(self.activityView)
                             self.activityView.startAnimating()
@@ -819,7 +824,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         self.isfromMenu = false
                         self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "0", row: indexPath.row)
                         self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
-                        cell.StackHide.isHidden = true
+                        cell.stackHide.isHidden = true
                         self.activityView.center = cell.vwStapper.center
                         cell.vwStapper.addSubview(self.activityView)
                         self.activityView.startAnimating()
@@ -854,7 +859,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > value {
                             self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
                             self.webserviceUpdateCartQuantity(strItemid: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
-                            cell.StackHide.isHidden = true
+                            cell.stackHide.isHidden = true
                             self.isfromMenu = false
                             self.activityView.center = cell.vwStapper.center
                             cell.vwStapper.addSubview(self.activityView)
@@ -893,10 +898,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 }else{
                                     let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                                     if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > value {
-                                        cell.btnAdd.isHidden = true
+                                        cell.btnAddItem.isHidden = true
                                         cell.vwStapper.isHidden = false
                                         self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                        cell.StackHide.isHidden = true
+                                        cell.stackHide.isHidden = true
                                         self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
                                         cell.vwStapper.addSubview(self.activityView)
                                         self.activityView.startAnimating()
@@ -921,10 +926,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             }else{
                                 let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                                 if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > value {
-                                    cell.btnAdd.isHidden = true
+                                    cell.btnAddItem.isHidden = true
                                     cell.vwStapper.isHidden = false
                                     self.webwerviceAddtoCart(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id, Section: indexPath.section, row: indexPath.row)
-                                    cell.StackHide.isHidden = true
+                                    cell.stackHide.isHidden = true
                                     self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2 + 15, y: cell.vwStapper.frame.height/2)
                                     cell.vwStapper.addSubview(self.activityView)
                                     self.activityView.startAnimating()
@@ -1031,7 +1036,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 48))
             headerView.backgroundColor = .white
             let label = UILabel()
-            label.frame = CGRect.init(x: 20, y: 14, width: headerView.frame.width-40, height: 20)
+            label.frame = CGRect.init(x: 20, y: 14, width: headerView.frame.width-40, height: 60)
             label.center.y = headerView.frame.size.height / 2
             
             label.font = CustomFont.NexaBold.returnFont(20)
@@ -1040,6 +1045,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             if arrMenuitem.count > 0 {
                 if section == 0 {
                     label.text = "RestaurantDetailsVC_arrSection".Localized()
+                    label.lineBreakMode = .byWordWrapping
+                    label.numberOfLines = 0
                 } else {
                     let expandImageView = UIImageView()
                     expandImageView.frame = CGRect.init(x: headerView.frame.width - 35.66, y: 34.31, width: 16.66, height: 8.38)
@@ -1085,7 +1092,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == tblRestaurantDetails{
-            return 48
+            if arrMenuitem.count > 0 {
+                if section == 0{
+                    return 60
+                }else{
+                    return 48
+                }
+            }else{
+                return 48
+            }
         }else{
             return 0
         }

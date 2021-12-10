@@ -61,6 +61,7 @@
 "MyProfileVC_btnEditAccount" = "EDIT ACCOUNT";
 "MyProfileVC_txtEmail" = "Email";
 "MyProfileVC_txtPhoneNumber" = "Phone Number";
+"MyProfileVC_txtPlateNumber" = "Plate Number";
 
 //EditProfileVC
 "EditProfileVC_txtFirstName" = "First Name";
@@ -69,6 +70,7 @@
 "EditProfileVC_lblVerified" = "Verified";
 "EditProfileVC_txtPhoneNumber" = "Phone Number";
 "EditProfileVC_lblUnverified" = "Unverified";
+"EditProfileVC_txtPlateNumber" = "Plate Number";
 "EditProfileVC_btnSave" = "Save";
 "EditProfileVC_EmailChange" = "Are you sure you want to change email id? if you change your email id then you will be logout from application you have to verify that email then you will able to do login in application.";
 "EditProfileVC_PhoneChange" = "Are you sure you want to change phone number? if you change your number then you will be logout from application you have to do login again.";
@@ -152,6 +154,7 @@
 //addPaymentVC
 "addPaymentVC_btnAddCart" = "Add Card";
 "addPaymentVC_lblWallet" = "Wallet";
+"addPaymentVC_lblWallet1" = "Braintree";
 "addPaymentVC_lblcardDetails" = "**** **** **** 5967";
 "addPaymentVC_lblExpiresDate" = "Expires %@";
 
@@ -188,7 +191,7 @@
 "RestaurantDetailsVC_lblNoOfItem" = "%@ Item ";
 "RestaurantDetailsVC_lblSign" = "|";
 "RestaurantDetailsVC_lblViewCart" = "View Cart";
-"RestaurantDetailsVC_arrSection" = "Menu";
+"RestaurantDetailsVC_arrSection" = "Menu \nCombo";
 "RestaurantDetailsVC_arrSection1" = "Sandwiches";
 "RestaurantDetailsVC_arrSection2" = "Salad";
 

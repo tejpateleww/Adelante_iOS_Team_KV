@@ -53,7 +53,7 @@ class commonPopup: UIViewController {
     func setUpBlurView() {
       
     }
-        
+
     func setUp() {
         tap = UITapGestureRecognizer(target: self, action: #selector(dismissView(_:)))
         view.addGestureRecognizer(tap)
@@ -129,8 +129,8 @@ class commonPopup: UIViewController {
     
     // MARK: - IBActions
     @objc func dismissView(_ gesture : UITapGestureRecognizer) {
-        self.dismiss(animated: true, completion: nil)
-        view.removeGestureRecognizer(tap)
+//        self.dismiss(animated: true, completion: nil)
+//        view.removeGestureRecognizer(tap)
     }
     
     @IBAction func submitButtonAction(_ sender: commonPopupButton) {

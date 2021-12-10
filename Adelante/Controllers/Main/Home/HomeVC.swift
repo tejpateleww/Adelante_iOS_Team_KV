@@ -24,13 +24,6 @@ struct structFilter {
 }
 
 class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
-    
-    
-    //        func SelectedCategory(_ CategoryId: String) -> (Bool, String) {
-    //
-    //            self.SelectedCatId = CategoryId
-    //            return webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
-    //        }
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
     var arrFilter = ["HomeVC_arrFilter_title1".Localized(),"HomeVC_arrFilter_title2".Localized(),"HomeVC_arrFilter_title3".Localized(),"HomeVC_arrFilter_title4".Localized()]
@@ -51,9 +44,11 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
     var selectedIndex = 0
+    var orderIdArray : [String] = []
     var PlaceName = userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String
     let activityView = UIActivityIndicatorView(style: .white)
     var timer: Timer?
+    var timerSocket : Timer?
 
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
@@ -660,6 +655,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 Bannercell.stopShimmering()
                 self.arrCategories = Homedata.category
                 self.arrBanner = Homedata.banner
+                self.orderIdArray = Homedata.orderIds
+                if Homedata.orderIds.count != 0{
+                    self.socketManageSetup()
+                }
                 self.pageControl.numberOfPages = self.arrBanner.count
                 self.isRefresh = false
                 if self.pageNumber == 1 {
@@ -788,3 +787,126 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
     
 }
 
+extension HomeVC{
+    func socketManageSetup(){
+        SocketIOManager.shared.establishSocketConnection()
+        allSocketOffMethods()
+        self.SocketOnMethods()
+    }
+    
+    func SocketOnMethods() {
+        
+        SocketIOManager.shared.socket.on(clientEvent: .disconnect) { (data, ack) in
+            print ("socket is disconnected please reconnect")
+            SocketIOManager.shared.isSocketOn = false
+        }
+        
+        SocketIOManager.shared.socket.on(clientEvent: .reconnect) { (data, ack) in
+            print ("socket is reconnected")
+            SocketIOManager.shared.isSocketOn = true
+            
+        }
+        
+        
+        print("===========\(SocketIOManager.shared.socket.status)========================",SocketIOManager.shared.socket.status.active)
+        SocketIOManager.shared.socket.on(clientEvent: .connect) {data, ack in
+            print ("socket connected")
+            
+            SocketIOManager.shared.isSocketOn = true
+            //            self.allSocketOffMethods()
+            self.emitSocketUserConnect()
+            self.allSocketOnMethods()
+            
+        }
+        //Connect User On Socket
+        SocketIOManager.shared.establishConnection()
+        //MARK: -====== Socket connection =======
+        
+        print("==============\(SocketIOManager.shared.socket.status)=====================",SocketIOManager.shared.socket.status.active)
+        
+    }
+    
+    
+    
+    // ON ALL SOCKETS
+    func allSocketOnMethods() {
+        print("\n\n", #function, "\n\n")
+        onSocketConnectUser()
+        //        onSocket_SendMessage()
+        onSocketUpdateLocation()
+        
+    }
+    
+    // OFF ALL SOCKETS
+    func allSocketOffMethods() {
+        print("\n\n", #function, "\n\n")
+        SocketIOManager.shared.socket.off(SocketData.kConnectUser.rawValue)
+        //        SocketIOManager.shared.socket.off(SocketKeys.SendMessage.rawValue)
+        SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
+    }
+    
+    //-------------------------------------
+    // MARK:= SOCKET ON METHODS =
+    //-------------------------------------
+    func onSocketConnectUser(){
+        SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
+            print(#function, "\n ", json)
+            if(self.timerSocket == nil){
+                self.timerSocket = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
+                    self.emitSocketUpdateLocation()
+                })
+            }
+        }
+    }
+    
+    
+    func onSocketUpdateLocation(){
+        SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { (json) in
+            print(#function, "\n ",json)
+            
+//            self.driverLat = json.first?.1.first?.1.arrayValue[0].doubleValue ?? 0.0 //json["lat"].doubleValue
+//            self.driverLng = json.first?.1.first?.1.arrayValue[1].doubleValue ?? 0.0//json["lng"].doubleValue
+//
+//            if !self.isgetDriverlocation{
+//                self.isgetDriverlocation = true
+//                self.mapRouteForcurrentToRestaurant(PickupLat: SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude, PickupLng: SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude, destLat: self.driverLat , DestLng: self.driverLng)
+//            }
+//            self.updateMarker(lat: self.driverLat, lng: self.driverLng)
+//            self.setDriverMarker()
+            
+        }
+    }
+    
+    //-------------------------------------
+    // MARK:= SOCKET EMIT METHODS =
+    //-------------------------------------
+    
+    // Socket Emit Connect user
+    func emitSocketUserConnect(){
+        print(#function)
+        //        customer_id,lat,lng
+        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
+        ]
+        SocketIOManager.shared.socketEmit(for: SocketData.kConnectUser.rawValue, with: param)
+        self.emitSocketUpdateLocation()
+    }
+    
+    func emitSocketUpdateLocation() {
+        print(#function)
+        self.orderIdArray.forEach({
+            emitSocketUpdateLocation(orderId: $0)
+        })
+        
+    }
+    
+    func emitSocketUpdateLocation(orderId: String) {
+        print(#function)
+        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
+                                    "order_id" : orderId,
+                                    "lat": SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude ,
+                                    "lng" :SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude
+        ]
+        SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
+        
+    }
+}

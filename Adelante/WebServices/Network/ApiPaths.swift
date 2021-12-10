@@ -115,12 +115,12 @@ enum ApiKey: String {
     case Accept = "share_order_accept"
     case shareDetails = "share_order_details"
     case make_payment = "make_payment"
-    
-    
+    case checkOrder = "check_order"
 }
 
 enum SocketData : String{
     case kSocketHostUrl = "https://www.adelantemovil.com:8080/"//"http://3.239.174.164:8080/"//"http://18.208.18.170:8080/"
     case kConnectUser   = "connect_user"
     case kLocationTracking = "location_tracking"
+    case kcustomerinterval = "customer_interval"
 }

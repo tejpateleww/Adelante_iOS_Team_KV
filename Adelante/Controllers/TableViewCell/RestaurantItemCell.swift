@@ -10,37 +10,28 @@ import UIKit
 
 class RestaurantItemCell: UITableViewCell {
 
-    @IBOutlet weak var StackHide: UIStackView!
+    @IBOutlet weak var stackHide: UIStackView!
     @IBOutlet weak var vwRadius: UIView!
-    @IBOutlet weak var vwStapper: UIView!
-    @IBOutlet weak var btnCustomize: underLineButton!
-    @IBOutlet weak var lblNoOfItem: UILabel!
-    @IBOutlet weak var lblItem: tblMyOrdersLabel!
-    @IBOutlet weak var btnAdd: UIButton!
-    @IBOutlet weak var lblItemPrice: tblMyOrdersLabel!
-    @IBOutlet weak var lblSizeOfItem: tblMyOrdersLabel!
     @IBOutlet weak var vwSeperator: seperatorView!
+    @IBOutlet weak var btnCustomize: underLineButton!
+    @IBOutlet weak var btnAddItem: UIButton!
+    @IBOutlet weak var lblAboutItem: tblMyOrdersLabel!
+    @IBOutlet weak var lblItemPrice: tblMyOrdersLabel!
+    @IBOutlet weak var lblItemName: tblMyOrdersLabel!
+    @IBOutlet weak var imgFoodDetails: UIImageView!
+    @IBOutlet weak var lblNoOfItem: UILabel!
+    @IBOutlet weak var vwStapper: UIView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setUpLocalizedStrings()
+    }
     var customize : (() -> ())?
     var decreaseData : (() -> ())?
     var IncreseData : (() -> ())?
     var btnAddAction : (() -> ())?
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     @IBAction func btnCustomize(_ sender: Any) {
         if let click = self.customize {
             click()
-        }
-    }
-    @IBAction func btnAdd(_ sender: Any) {
-        if let btnAdd = self.btnAddAction{
-            btnAdd()
-        }
-    }
-    @IBAction func btnIncrease(_ sender: Any) {
-        if let Increase = self.IncreseData{
-            Increase()
         }
     }
     @IBAction func btnDecrease(_ sender: Any) {
@@ -48,8 +39,21 @@ class RestaurantItemCell: UITableViewCell {
             Decrease()
         }
     }
+    @IBAction func btnIncrease(_ sender: Any) {
+        if let Increase = self.IncreseData{
+            Increase()
+        }
+    }
+    @IBAction func btnAdd(_ sender: Any) {
+        if let btnAdd = self.btnAddAction{
+            btnAdd()
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    func setUpLocalizedStrings(){
+        btnCustomize.setTitle("RestaurantDetailsVC_RestaurantDetailsCell_btnCustomize".Localized(), for: .normal)
     }
 
 }

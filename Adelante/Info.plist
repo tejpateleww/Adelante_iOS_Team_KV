@@ -20,40 +20,6 @@
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string></string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>Adelante</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.eww.adelante</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.eww.adelante.payments</string>
-			</array>
-			<key>CFBundleURLTypes</key>
-			<array>
-				<dict>
-					<key>CFBundleURLName</key>
-					<string>com.Adelante</string>
-					<key>CFBundleURLSchemes</key>
-					<array>
-						<string>Adelante</string>
-					</array>
-				</dict>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -148,5 +114,39 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Adelante</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.eww.adelante</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.eww.adelante.payments</string>
+			</array>
+			<key>CFBundleURLTypes</key>
+			<array>
+				<dict>
+					<key>CFBundleURLName</key>
+					<string>com.Adelante</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>Adelante</string>
+					</array>
+				</dict>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

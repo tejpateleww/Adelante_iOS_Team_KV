@@ -43,7 +43,7 @@ class WebService{
             completion(JSON(),false, "")
             return
         }
-        
+        //https://www.adelantemovil.com/api/User/
         
         
         print("the url is \(url) and the parameters are \n \(parameters) and the headers are \(APIEnvironment.headers)")
@@ -101,7 +101,7 @@ class WebService{
             .validate()
             .responseJSON { (response) in
                 // LoaderClass.hideActivityIndicator()
-                var headers = APIEnvironment.headers
+                let headers = APIEnvironment.headers
                 print("The webservice call is for \(url) and the headers are \(headers)")
                 if let json = response.value{
                     let resJson = JSON(json)

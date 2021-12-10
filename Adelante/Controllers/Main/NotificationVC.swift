@@ -27,7 +27,10 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     var refreshList = UIRefreshControl()
     var responseStatus : webserviceResponse = .initial
     var arrNotification = [NotificationDatum]()
-
+    var pageNumber = 1
+    var isNeedToReload = true
+    var pageLimit = 5
+    var isRefresh = false
     // MARK: - IBOutlets
    
     @IBOutlet weak var tbvNotification: UITableView!{
@@ -56,6 +59,9 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.notifications.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     @objc func refreshNotificationList(){
+        self.pageNumber = 1
+        self.isRefresh = true
+        self.isNeedToReload = true
         webservicePostNotification()
     }
     func registerNIB(){
@@ -77,6 +83,18 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             return 0
         }
         return 10
+    }
+    // MARK: - UIScrollView Delegates
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        stoppedScrolling()
+    }
+    
+    func stoppedScrolling() {
+        if self.isNeedToReload && self.isRefresh == false{
+            self.pageNumber = self.pageNumber + 1
+            webservicePostNotification()
+        }
+        // done, do whatever
     }
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -135,15 +153,40 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     func webservicePostNotification(){
         let notification = NotificationReqModel()
         notification.user_id = SingletonClass.sharedInstance.UserId
+        notification.page = "\(self.pageNumber)"
         WebServiceSubClass.NotificationModel(notificationModel: notification, showHud: false, completion: { (response, status, error) in
             self.refreshList.endRefreshing()
             self.responseStatus = .gotData
             if status {
                 let notificatiData = notificaationResModel.init(fromJson: response)
-                self.arrNotification = notificatiData.data
                 let Cell = self.tbvNotification.dequeueReusableCell(withIdentifier: "ShimmerCell") as! ShimmerCell
                 Cell.stopShimmering()
                 self.tbvNotification.stopSkeletonAnimation()
+                self.isRefresh = false
+                if self.pageNumber == 1 {
+                    self.arrNotification = notificatiData.data
+                    let arrTemp = notificatiData.data
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
+                    }
+                } else {
+                    let arrTemp = notificatiData.data
+                    if arrTemp!.count > 0 {
+                        for i in 0..<arrTemp!.count {
+                            self.arrNotification.append(arrTemp![i])
+                        }
+                    }
+                    if arrTemp!.count < self.pageLimit {
+                        self.isNeedToReload = false
+                    } else {
+                        self.isNeedToReload = true
+                    }
+                }
+                
+//                self.arrNotification = notificatiData.data
+                
                 self.tbvNotification.dataSource = self
                 self.tbvNotification.isScrollEnabled = true
                 self.tbvNotification.isUserInteractionEnabled = true

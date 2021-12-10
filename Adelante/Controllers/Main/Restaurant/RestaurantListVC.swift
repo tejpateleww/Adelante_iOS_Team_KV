@@ -87,7 +87,6 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
             webserviceGetRestaurantList(strSearch: "")
     }
     func setup() {
-        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.restaurantList.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         NotificationCenter.default.removeObserver(self, name: notifDeSelectFilterRestaurant, object: nil)

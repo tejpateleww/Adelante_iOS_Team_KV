@@ -169,6 +169,11 @@ class WebServiceSubClass
         let params : [String:String] = PromocodeModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .apply_promocode, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
     }
+    //check order
+    class func checkOrder( checkOrderModel : checkOrderReqModel,showHud : Bool = false , completion: @escaping CompletionResponse ){
+        let params : [String:String] = checkOrderModel.generatPostParams() as! [String:String]
+        WebService.shared.requestMethod(api: .checkOrder, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
+    }
     //Order
     class func PlaceOrder( OrderModel : orderPlaceReqModel,showHud : Bool = false , completion: @escaping CompletionResponse  ){
         let params : [String:String] = OrderModel.generatPostParams() as! [String:String]

@@ -154,7 +154,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         tblOrderDetailsHeight.constant = 0
         if cartDetails?.promocode != ""{
             btnAppyPromoCode.isHidden = true
-            
             lblPromoCode.isHidden = false
             lblPromoCode.text = cartDetails?.promocode
             btnCanclePromoCOde.isHidden = false
@@ -361,10 +360,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 }
             }
         }else{
-            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
-            controller.CartTotal = (LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
-            controller.strCartID = strCartId
-            self.navigationController?.pushViewController(controller, animated: true)
+//            let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+//            controller.CartTotal = (LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
+//            controller.strCartID = strCartId
+//            self.navigationController?.pushViewController(controller, animated: true)
+            webserviceCheckOrder()
         }
     }
     @IBAction func seeMenu(_ sender: submitButton) {
@@ -574,6 +574,29 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             if(status) {
                 self.arrCartItem.removeAll()
             } else {
+            }
+        })
+    }
+    //check order api calling
+    func webserviceCheckOrder(){
+        let checkOrder = checkOrderReqModel()
+        checkOrder.user_id = SingletonClass.sharedInstance.UserId
+        checkOrder.cart_id = strCartId
+        WebServiceSubClass.checkOrder(checkOrderModel: checkOrder, showHud: false, completion: { (json, status, response) in
+            if(status)
+            {
+                let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
+                controller.CartTotal = (self.LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
+                controller.strCartID = self.strCartId
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+            else
+            {
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
             }
         })
     }

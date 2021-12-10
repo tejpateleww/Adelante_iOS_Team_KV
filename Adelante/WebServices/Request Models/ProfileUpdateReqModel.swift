@@ -15,4 +15,5 @@ class EditProfileReqModel : RequestModel{
     var user_id : String = ""
     var remove_image : String = ""
     var profile_picture : String = ""
+    var car_number : String = ""
 }

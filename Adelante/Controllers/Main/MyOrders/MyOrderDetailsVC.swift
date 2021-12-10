@@ -37,6 +37,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var arrayForTitle : [String] = ["checkOutVC_arrayForTitle_title".Localized(),"checkOutVC_arrayForTitle_title1".Localized(),"checkOutVC_arrayForTitle_title2".Localized()]//"checkOutVC_arrayForTitle_title3".Localized()
     var isfromShare : Bool = false
     var AcceptOrder : (()->())?
+    var QRCodeimage = UIImageView()
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
     @IBOutlet weak var lblId: orderDetailsLabel!
@@ -60,6 +61,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tblOrderDetailsHeight: NSLayoutConstraint!
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var lblSharedDetail: orderDetailsLabel!
+    @IBOutlet weak var btnQRCOde: UIButton!
     //    @IBOutlet weak var viewSkeleton: skeletonView!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -130,6 +132,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objShareOrderDetails.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                self.QRCodeimage.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             }
         }else{
             if objOrderDetailsData != nil{
@@ -146,6 +149,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objOrderDetailsData.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                self.QRCodeimage.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 lblTotal.text = CurrencySymbol + objOrderDetailsData.total
                 if objOrderDetailsData.shareFrom == ""{
                 }else{
@@ -237,6 +241,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @IBAction func btnQrCodeClick(_ sender: Any) {
+        let controller:QRCodeVC = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: QRCodeVC.storyboardID) as! QRCodeVC
+        controller.qrImage = self.QRCodeimage.image
+        self.navigationController?.pushViewController(controller, animated: true)
+        
+    }
     @IBAction func btnShareOrderClicked(_ sender: Any) {
         if objOrderDetailsData.trash.toInt() == 0{
             if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(orderId)"), !name.absoluteString.isEmpty {
