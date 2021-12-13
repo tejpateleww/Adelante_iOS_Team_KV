@@ -83,6 +83,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblItems.rowHeight = UITableView.automaticDimension
         tblItems.estimatedRowHeight = 66.5
         setup()
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,6 +137,23 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 self.QRCodeimage.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             }
         }else{
+            
+            if(self.orderType == "In-Process"){
+                self.vwShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
+                self.btnShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
+            }
+            
+            if(self.orderType == "past"){
+                if(self.objOrderDetailsData.status == "3"){
+                    self.vwShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
+                    self.btnShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
+                    self.vwCancel.isHidden = (self.objOrderDetailsData.isCancel.toInt() == 0) ? true : false
+                    self.btnCancel.isHidden = (self.objOrderDetailsData.isCancel.toInt() == 0) ? true : false
+                    self.vwRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
+                    self.btnRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
+                }
+            }
+            
             if objOrderDetailsData != nil{
                 lblId.text = objOrderDetailsData.orderId
                 if objOrderDetailsData.itemQuantity.toInt() > 1 {

@@ -277,7 +277,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         cell.btnCancelOrder.setTitle("MyOrderVC_MyOrdersCess_btnCancelOrder".Localized(), for: .normal)
                         cell.btnCancelOrder.isUserInteractionEnabled = true
                         cell.btnCancelOrder.setTitleColor(UIColor.red, for: .normal)
-                        cell.vwShare.isHidden = false
+                        //cell.vwShare.isHidden = false
+                        cell.vwShare.isHidden = (self.arrInProcessList[indexPath.row].isShare.toInt() == 0) ? true : false
                         cell.vwCancelOrder.isHidden = false
                         cell.vwRepeatOrder.isHidden = true
                         cell.vwAccept.isHidden = true

@@ -14,6 +14,8 @@ class MainOrder : NSObject, NSCoding{
     var discount : String!
     var discountAmount : String!
     var isRate : String!
+    var isShare : String!
+    var isCancel : String!
     var item : [Item]!
     var itemQuantity : String!
     var orderId : String!
@@ -35,6 +37,7 @@ class MainOrder : NSObject, NSCoding{
     var totalRound : String!
     var trash : String!
     var username : String!
+    var status : String!
 
     /**
      * Instantiate the instance using the passed json values to set the properties values
@@ -48,6 +51,8 @@ class MainOrder : NSObject, NSCoding{
         discount = json["discount"].stringValue
         discountAmount = json["discount_amount"].stringValue
         isRate = json["is_rate"].stringValue
+        isShare = json["is_share"].stringValue
+        isCancel = json["is_cancel"].stringValue
         item = [Item]()
         let itemArray = json["item"].arrayValue
         for itemJson in itemArray{
@@ -74,6 +79,7 @@ class MainOrder : NSObject, NSCoding{
         totalRound = json["total_round"].stringValue
         trash = json["trash"].stringValue
         username = json["username"].stringValue
+        status = json["status"].stringValue
     }
 
     /**
@@ -96,6 +102,12 @@ class MainOrder : NSObject, NSCoding{
         }
         if isRate != nil{
             dictionary["is_rate"] = isRate
+        }
+        if isShare != nil{
+            dictionary["is_share"] = isShare
+        }
+        if isCancel != nil{
+            dictionary["is_cancel"] = isCancel
         }
         if item != nil{
         var dictionaryElements = [[String:Any]]()
@@ -164,6 +176,9 @@ class MainOrder : NSObject, NSCoding{
         if username != nil{
             dictionary["username"] = username
         }
+        if status != nil{
+            dictionary["status"] = status
+        }
         return dictionary
     }
 
@@ -178,6 +193,8 @@ class MainOrder : NSObject, NSCoding{
         discount = aDecoder.decodeObject(forKey: "discount") as? String
         discountAmount = aDecoder.decodeObject(forKey: "discount_amount") as? String
         isRate = aDecoder.decodeObject(forKey: "is_rate") as? String
+        isShare = aDecoder.decodeObject(forKey: "is_share") as? String
+        isCancel = aDecoder.decodeObject(forKey: "is_cancel") as? String
         item = aDecoder.decodeObject(forKey: "item") as? [Item]
         itemQuantity = aDecoder.decodeObject(forKey: "item_quantity") as? String
         orderId = aDecoder.decodeObject(forKey: "order_id") as? String
@@ -199,6 +216,7 @@ class MainOrder : NSObject, NSCoding{
         totalRound = aDecoder.decodeObject(forKey: "total_round") as? String
         trash = aDecoder.decodeObject(forKey: "trash") as? String
         username = aDecoder.decodeObject(forKey: "username") as? String
+        status = aDecoder.decodeObject(forKey: "status") as? String
     }
 
     /**
@@ -221,6 +239,12 @@ class MainOrder : NSObject, NSCoding{
         }
         if isRate != nil{
             aCoder.encode(isRate, forKey: "is_rate")
+        }
+        if isShare != nil{
+            aCoder.encode(isShare, forKey: "is_share")
+        }
+        if isCancel != nil{
+            aCoder.encode(isCancel, forKey: "is_cancel")
         }
         if item != nil{
             aCoder.encode(item, forKey: "item")
@@ -284,6 +308,9 @@ class MainOrder : NSObject, NSCoding{
         }
         if username != nil{
             aCoder.encode(username, forKey: "username")
+        }
+        if status != nil{
+            aCoder.encode(status, forKey: "status")
         }
 
     }
