@@ -40,6 +40,8 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var OrderDetails : String?
     var orderid = ""
     var isfromPayment : Bool = false
+    var isdelivery: String = ""
+    
     
     // MARK: - IBOutlets
     @IBOutlet weak var tblPaymentMethod: UITableView!
@@ -146,7 +148,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     //MARK: -tblViewMethods
     func numberOfSections(in tableView: UITableView) -> Int {
         if WalletBalance == 0.0{
-            return 1
+            return 2
         }
         return 2
     }
@@ -160,7 +162,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 }
             }else{
                 if WalletBalance == 0.0{
-                    return 1
+                    return 0
                 }
             }
             return 1
@@ -190,16 +192,16 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
             }
             cell1.btnDelete.isHidden = true
-            
+            cell1.lblwalletBalance.isHidden = false
             if IsWalletSelected {
                 cell1.selectPaymentMethodButton.isSelected = true
             }else{
                 cell1.selectPaymentMethodButton.isSelected = false
             }
-            cell1.selectionStyle = .none
-            cell = cell1
-            cell.selectionStyle = .none
-            return cell
+//            cell1.selectionStyle = .none
+//            cell = cell1
+//            cell.selectionStyle = .none
+            return cell1
         case 1:
             var cell = UITableViewCell()
             if indexPath.row == 0{
@@ -233,10 +235,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 }
                 cell1.btnDelete.isHidden = true
                 cell1.selectionStyle = .none
-                cell = cell1
+                return cell1
+//                cell = cell1
             }
-            cell.selectionStyle = .none
-            return cell
+//            cell.selectionStyle = .none
+//            return cell
         default:
             return UITableViewCell()
         }
@@ -376,6 +379,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         addpayment.is_wallet = (IsWalletSelected == true) ? "1" : "0"
         addpayment.is_paypal = (IsPaypalSelected == true) ? "1" : "0"
         addpayment.is_braintree = (IsBrainTreeSelected == true) ? "1" : "0"
+        addpayment.is_delivery = isdelivery
         WebServiceSubClass.PayNow(ReqModel: addpayment, showHud: false, completion: { (json, status, error) in
             
             if(status) {

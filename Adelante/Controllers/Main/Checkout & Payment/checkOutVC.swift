@@ -566,6 +566,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC
                 controller.CartTotal = (self.LblTotlaPrice.text?.replacingOccurrences(of: "\(CurrencySymbol)", with: "") ?? "").ConvertToCGFloat()
                 controller.strCartID = self.strCartId
+                controller.isdelivery = self.btnYes.isSelected ? "1" : "0"
                 self.navigationController?.pushViewController(controller, animated: true)
             }
             else

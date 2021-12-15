@@ -18,6 +18,8 @@ enum UserDefaultsKey : String {
     case DeviceToken = "DeviceToken"
     case selLanguage = "language"
     case PlaceName = "PlaceName"
+    case PlaceLocationLatitude = "PlaceLocationLatitude"
+    case PlaceLocationLongitude = "PlaceLocationLongitude"
 }
 enum APIEnvironment : String{
     

@@ -220,6 +220,10 @@
 "HomeVC_arrFilter_title2" = "Recently Viewed";
 "HomeVC_arrFilter_title3" = "Top Rated";
 "HomeVC_arrFilter_title4" = "Curbside Pickup";
+"HomeVC_arrFilter_title5" = "All";
+"HomeVc_LoginforRecentlyViewed_LblDec" = "You Must Be Logged In To See Recently Viewed Items";
+"HomeVc_LoginforRecentlyViewed_Lbltitle" = "Please login first!";
+
 
 //checkOutVC
 "checkOutVC_lblItemName" = "Kangkung siram sambel";

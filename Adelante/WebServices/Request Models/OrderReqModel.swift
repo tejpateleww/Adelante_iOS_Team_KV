@@ -26,4 +26,5 @@ class PayNowReqModel:RequestModel{
     var is_wallet : String = ""
     var is_paypal : String = ""
     var is_braintree : String = ""
+    var is_delivery : String = ""
 }

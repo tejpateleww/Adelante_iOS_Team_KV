@@ -26,7 +26,8 @@ struct structFilter {
 class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrFilter = ["HomeVC_arrFilter_title1".Localized(),"HomeVC_arrFilter_title2".Localized(),"HomeVC_arrFilter_title3".Localized(),"HomeVC_arrFilter_title4".Localized()]
+    var arrFilter = ["HomeVC_arrFilter_title5".Localized(),"HomeVC_arrFilter_title1".Localized(), "HomeVC_arrFilter_title2".Localized(), "HomeVC_arrFilter_title3".Localized(), "HomeVC_arrFilter_title4".Localized()]
+    //"HomeVC_arrFilter_titleAll".Localized() ,
     //    structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: "")//["","Mobile Pickup", "Recently Viewed", "Top Rated"]
     var selectedSortTypedIndexFromcolVwFilter = 0
     var refresher = UIRefreshControl()
@@ -35,7 +36,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var arrBanner = [Banner]()
     var SelectedCatId = "0"
     var SelectedCatIndex = IndexPath()
-    var SelectFilterId = ""
+    var SelectFilterId = "1"
     var refreshList = UIRefreshControl()
     var pageNumber = 1
     var isNeedToReload = false
@@ -44,6 +45,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
     var selectedIndex = 0
+    var selectedIndexgray = 0
     var orderIdArray : [String] = []
     var PlaceName = userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String
     let activityView = UIActivityIndicatorView(style: .white)
@@ -79,6 +81,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         
         if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) != nil , userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as! String  != ""{
             lblAddress.text = PlaceName
+            if let longitude = userDefault.value(forKey: UserDefaultsKey.PlaceLocationLongitude.rawValue) as? CLLocationDegrees , let latitude = userDefault.value(forKey: UserDefaultsKey.PlaceLocationLatitude.rawValue) as? CLLocationDegrees {
+                SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: latitude, longitude: longitude)
+            }
         }else if SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude == 0.0 && SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude == 0.0 && userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) == nil{
             lblAddress.text = "Please Select Address"
         }else{
@@ -377,7 +382,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             cell.btnFilterOptions.setTitle(arrFilter[indexPath.row], for: .normal)
             
             //            if selectedIndex == indexPath.row {//selectedSortTypedIndexFromcolVwFilter != -1 && selectedSortTypedIndexFromcolVwFilter
-            cell.btnFilterOptions.backgroundColor = (selectedIndex == indexPath.row) ? colors.segmentSelectedColor.value : colors.segmentDeselectedColor.value
+            cell.btnFilterOptions.backgroundColor = (selectedIndexgray == indexPath.row) ? colors.segmentSelectedColor.value : colors.segmentDeselectedColor.value
             //                cell.btnFilterOptions.setImage(selectedIndex == indexPath.row, for: .normal)
             //                cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
             //            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
@@ -442,9 +447,46 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.colVwFilterOptions{
-            selectedIndex = indexPath.row
+            selectedIndexgray = indexPath.row
+            if arrFilter[indexPath.row] == "HomeVC_arrFilter_title5".Localized(){
+                selectedIndex = 4
+            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title1".Localized(){
+                selectedIndex = 0
+            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title2".Localized(){
+                selectedIndex = 1
+            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title3".Localized(){
+                selectedIndex = 2
+            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title4".Localized(){
+                selectedIndex = 3
+            }
+    
             self.pageNumber = 1
-            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
+            if SingletonClass.sharedInstance.UserId == "" && selectedIndex == 1{
+                let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
+                controller.isHideCancelButton = false
+                controller.isHideSubmitButton = false
+                controller.submitBtnTitle = "checkOutVC_strSubmit_title".Localized()
+                controller.cancelBtnTitle = "checkOutVC_strCancel_title".Localized()
+                controller.strDescription = "HomeVc_LoginforRecentlyViewed_LblDec".Localized()
+                controller.strPopupTitle = "HomeVc_LoginforRecentlyViewed_Lbltitle".Localized()
+                controller.submitBtnColor = colors.appGreenColor
+                controller.cancelBtnColor = colors.appRedColor
+                controller.strPopupImage = "ic_popupCancleOrder"
+                controller.isCancleOrder = true
+                controller.btnSubmit = {
+                    let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                    let navController = UINavigationController.init(rootViewController: vc)
+                    navController.modalPresentationStyle = .overFullScreen
+                    navController.navigationController?.modalTransitionStyle = .crossDissolve
+                    navController.navigationBar.isHidden = true
+                    self.present(navController, animated: true, completion: nil)
+                }
+                self.present(controller, animated: true, completion: nil)
+                self.arrRestaurant.removeAll()
+                self.tblMainList.reloadData()
+            }else{
+                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
+            }
             colVwFilterOptions.reloadData()
         }else{
             let restaurantListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID) as! RestaurantListVC
@@ -462,6 +504,8 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return responseStatus == .gotData ? (self.arrRestaurant.count > 0 ? RestaurantCell.reuseIdentifier : NoDataTableViewCell.reuseIdentifier) :  HomeSkeletonCell.reuseIdentifier
     }
+    
+    
     // MARK: - UITableViewDelegates And Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if responseStatus == .gotData{
@@ -561,7 +605,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         headerCell?.colRestaurantCatList.reloadData()
         headerCell?.selectionStyle = .none
         headerCell?.filter = {
-            self.headerCell?.selectedIdForFood = "-1"
+            self.headerCell?.selectedIdForFood = "0"
             self.headerCell?.colRestaurantCatList.reloadData()
             if self.headerCell?.btnFilter.isSelected == true{
                 self.headerCell?.btnFilter.backgroundColor = colors.segmentDeselectedColor.value
@@ -609,7 +653,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:true, strTabfilter: "\(selectedIndex)")
+        self.webserviceGetDashboard(isFromFilter:false, strTabfilter: "\(selectedIndex)")
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
@@ -758,7 +802,9 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
         print("Place ID: \(place.placeID!)")
         userDefault.setValue(place.name, forKey: UserDefaultsKey.PlaceName.rawValue)
         
-        userDefault.synchronize()
+        userDefault.set(place.coordinate.latitude, forKey:  UserDefaultsKey.PlaceLocationLatitude.rawValue)
+        userDefault.set(place.coordinate.longitude, forKey:  UserDefaultsKey.PlaceLocationLongitude.rawValue)
+//        userDefault.synchronize()
         
         lblAddress.text =  place.name
         SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)

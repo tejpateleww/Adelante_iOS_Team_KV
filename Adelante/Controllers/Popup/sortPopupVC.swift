@@ -15,7 +15,7 @@ class sortPopupVC: UIViewController,UITableViewDataSource ,UITableViewDelegate {
     // var customTabBarController: CustomTabBarVC?
     var refreshList = UIRefreshControl()
     var delegateFilter : SortListDelegate!
-    var selectedSortData = ""
+    var selectedSortData = "1"
     
     // @IBOutlet weak var heightViewBG: NSLayoutConstraint!
     @IBOutlet weak var tblSorting: UITableView!
