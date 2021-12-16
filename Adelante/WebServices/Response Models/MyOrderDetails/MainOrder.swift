@@ -38,7 +38,10 @@ class MainOrder : NSObject, NSCoding{
     var trash : String!
     var username : String!
     var status : String!
-
+    var deliveryType: String!
+    var parking_no: String!
+    var parking_type: String!
+    var parking_id: String!
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
@@ -80,6 +83,10 @@ class MainOrder : NSObject, NSCoding{
         trash = json["trash"].stringValue
         username = json["username"].stringValue
         status = json["status"].stringValue
+        deliveryType = json["delivery_type"].stringValue
+        parking_no = json["parking_no"].stringValue
+        parking_type = json["parking_type"].stringValue
+        parking_id = json["parking_id"].stringValue
     }
 
     /**

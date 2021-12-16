@@ -38,6 +38,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var isfromShare : Bool = false
     var AcceptOrder : (()->())?
     var QRCodeimage = UIImageView()
+    var ParkingNoPicker = UIPickerView()
+    
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
     @IBOutlet weak var lblId: orderDetailsLabel!
@@ -62,6 +64,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var lblSharedDetail: orderDetailsLabel!
     @IBOutlet weak var btnQRCOde: UIButton!
+    @IBOutlet weak var CurbSideYesBtn: UIButton!
+    @IBOutlet weak var CurbSideNoBtn: UIButton!
+    @IBOutlet weak var TxtParkingNo: UITextField!
+    @IBOutlet weak var LblcurbsideParkingPickup: UILabel!
+    
+    
     //    @IBOutlet weak var viewSkeleton: skeletonView!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -141,6 +149,33 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if(self.orderType == "In-Process"){
                 self.vwShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
                 self.btnShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
+                self.ParkingNoPicker.delegate = self
+                self.ParkingNoPicker.dataSource = self
+                self.TxtParkingNo.inputView = ParkingNoPicker
+                
+                if self.objOrderDetailsData.deliveryType == "1"{
+                    if self.objOrderDetailsData.parking_type == "1"{
+                        if self.objOrderDetailsData.parking_id == "0"{
+                            LblcurbsideParkingPickup.superview?.isHidden = true
+                            self.CurbSideYesBtn.isSelected = true
+                            self.CurbSideNoBtn.isSelected = false
+                            TxtParkingNo.superview?.isHidden = !CurbSideYesBtn.isSelected
+                        }
+                        else{
+                            self.CurbSideYesBtn.superview?.superview?.isHidden = true
+                            TxtParkingNo.superview?.isHidden = true
+                        }
+                    }
+                    else{
+                        LblcurbsideParkingPickup.superview?.isHidden = true
+                        self.CurbSideNoBtn.isSelected = true
+                        self.CurbSideYesBtn.isSelected = false
+                        TxtParkingNo.superview?.isHidden = true
+                    }
+                }else{
+                    LblcurbsideParkingPickup.superview?.superview?.isHidden = true
+                }
+             
             }
             
             if(self.orderType == "past"){
@@ -279,6 +314,23 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             btnShareOrder.isUserInteractionEnabled = false
         }
     }
+    
+    //MARK: - Curbside parking selected
+    
+    @IBAction func CurbsideParkingBtnclick(_ sender: UIButton) {
+        if sender == CurbSideYesBtn{
+            CurbSideYesBtn.isSelected = true
+            CurbSideNoBtn.isSelected = false
+            TxtParkingNo.superview?.isHidden = false
+        }else
+        {
+            CurbSideYesBtn.isSelected = false
+            CurbSideNoBtn.isSelected = true
+            TxtParkingNo.superview?.isHidden = true
+        }
+        
+    }
+    
     
     @IBAction func btnAcceptClick(_ sender: Any) {
         
@@ -568,4 +620,24 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
+}
+
+//MARK: - Parking No Picker view delegate methods
+extension MyOrderDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 5
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "abcdf"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(row)
+    }
+    
 }
