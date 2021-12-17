@@ -37,7 +37,6 @@ class commonPopup: UIViewController {
     
     var submitBtnColor: colors!
     var cancelBtnColor: colors!
-    
     @IBOutlet weak var vwCancel: UIView!
     @IBOutlet weak var vwSubmit: UIView!
     
@@ -129,8 +128,10 @@ class commonPopup: UIViewController {
     
     // MARK: - IBActions
     @objc func dismissView(_ gesture : UITapGestureRecognizer) {
-//        self.dismiss(animated: true, completion: nil)
-//        view.removeGestureRecognizer(tap)
+        if isCancleOrder{
+            self.dismiss(animated: true, completion: nil)
+            view.removeGestureRecognizer(tap)
+        }
     }
     
     @IBAction func submitButtonAction(_ sender: commonPopupButton) {

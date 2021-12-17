@@ -7,7 +7,7 @@ import Foundation
 import SwiftyJSON
 
 
-class orderDetailsData : NSObject, NSCoding{
+class orderDetailsData : Codable{
 
     var mainOrder : MainOrder!
 
@@ -24,37 +24,5 @@ class orderDetailsData : NSObject, NSCoding{
         }
 	}
 
-	/**
-	 * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
-	 */
-	func toDictionary() -> [String:Any]
-	{
-		var dictionary = [String:Any]()
-        if mainOrder != nil{
-        	dictionary["mainOrder"] = mainOrder.toDictionary()
-        }
-		return dictionary
-	}
-
-    /**
-    * NSCoding required initializer.
-    * Fills the data from the passed decoder
-    */
-    @objc required init(coder aDecoder: NSCoder)
-	{
-		mainOrder = aDecoder.decodeObject(forKey: "main_order") as? MainOrder
-	}
-
-    /**
-    * NSCoding required method.
-    * Encodes mode properties into the decoder
-    */
-    func encode(with aCoder: NSCoder)
-	{
-		if mainOrder != nil{
-			aCoder.encode(mainOrder, forKey: "main_order")
-		}
-
-	}
 
 }

@@ -117,6 +117,7 @@ enum ApiKey: String {
     case shareDetails = "share_order_details"
     case make_payment = "make_payment"
     case checkOrder = "check_order"
+    case updateParkingLocation = "update_parking_details"
 }
 
 enum SocketData : String{

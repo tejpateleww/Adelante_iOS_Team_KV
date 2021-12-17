@@ -11,7 +11,6 @@ import BetterSegmentedControl
 import SDWebImage
 import SkeletonView
 
-
 class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIGestureRecognizerDelegate,orderCancelDelegate,SkeletonTableViewDataSource {
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -22,6 +21,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var arrInProcessList =  [orderListingData]()
     var strOrderId = ""
     var arrShareList = [ShareOrderListDatum]()
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tblOrders: UITableView!{
         didSet{
@@ -242,7 +242,6 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         controller.cancelBtnColor = colors.appGreenColor
                         controller.strPopupImage = "ic_popupCancleOrder"
                         controller.isCancleOrder = true
-                        
                         controller.btnSubmit = {
                             controller.dismiss(animated: true, completion: nil)
                             self.webserviceCancelOrder(orderID: self.arrPastList[indexPath.row].id)

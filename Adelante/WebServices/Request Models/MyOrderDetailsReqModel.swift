@@ -18,3 +18,8 @@ class shareorderDetailsReqModel:RequestModel{
     var user_id : String = ""
     var order_id : String = ""
 }
+class updateParkingDetailsReqModel:RequestModel{
+    var order_id : String = ""
+    var parking_id : String = ""
+    var type : String = ""
+}

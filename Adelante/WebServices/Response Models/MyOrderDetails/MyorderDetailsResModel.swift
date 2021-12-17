@@ -7,9 +7,10 @@ import Foundation
 import SwiftyJSON
 
 
-class MyorderDetailsResModel : NSObject, NSCoding{
+class MyorderDetailsResModel : Codable{
 
     var data : orderDetailsData!
+    var parkinglist : [Parkinglist]!
     var status : Bool!
 
 	/**
@@ -23,47 +24,37 @@ class MyorderDetailsResModel : NSObject, NSCoding{
         if !dataJson.isEmpty{
             data = orderDetailsData(fromJson: dataJson)
         }
+        parkinglist = [Parkinglist]()
+        let itemArray = json["parking_list"].arrayValue
+        for itemJson in itemArray{
+            let value = Parkinglist(fromJson: itemJson)
+            parkinglist.append(value)
+        }
         status = json["status"].boolValue
 	}
 
-	/**
-	 * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
-	 */
-	func toDictionary() -> [String:Any]
-	{
-		var dictionary = [String:Any]()
-        if data != nil{
-        	dictionary["data"] = data.toDictionary()
+	
+
+}
+class Parkinglist : Codable{
+
+    var id : String!
+    var outlet_id : String!
+    var parking_no : String!
+    var status : Bool!
+    var trash : String!
+    var created_at : String!
+    init(fromJson json: JSON!){
+        if json.isEmpty{
+            return
         }
-        if status != nil{
-        	dictionary["status"] = status
-        }
-		return dictionary
-	}
+        id = json["id"].stringValue
+        outlet_id = json["outlet_id"].stringValue
+        parking_no = json["parking_no"].stringValue
+        status = json["status"].boolValue
+        trash = json["trash"].stringValue
+        created_at = json["created_at"].stringValue
+    }
 
-    /**
-    * NSCoding required initializer.
-    * Fills the data from the passed decoder
-    */
-    @objc required init(coder aDecoder: NSCoder)
-	{
-		data = aDecoder.decodeObject(forKey: "data") as? orderDetailsData
-		status = aDecoder.decodeObject(forKey: "status") as? Bool
-	}
-
-    /**
-    * NSCoding required method.
-    * Encodes mode properties into the decoder
-    */
-    func encode(with aCoder: NSCoder)
-	{
-		if data != nil{
-			aCoder.encode(data, forKey: "data")
-		}
-		if status != nil{
-			aCoder.encode(status, forKey: "status")
-		}
-
-	}
-
+    
 }

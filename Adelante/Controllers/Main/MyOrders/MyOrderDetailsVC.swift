@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import SkeletonView
+import DropDown
 
 protocol orderCancelDelegate {
     func refreshOrderDetailsScreen()
@@ -29,6 +30,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var orderId = ""
     var objOrderDetailsData : MainOrder!
     var arrItem = [Item]()
+    var arrVehicle = [Parkinglist]()
     var orderType = ""
     var strRestaurantId = ""
     var arrShareDetail = [ShareDetailsItem]()
@@ -38,7 +40,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var isfromShare : Bool = false
     var AcceptOrder : (()->())?
     var QRCodeimage = UIImageView()
-    var ParkingNoPicker = UIPickerView()
+    let vehicleDropdown = DropDown()
+    var parking_id = ""
+    
     
     // MARK: - IBOutlets
     @IBOutlet weak var lblOrderId: UILabel!
@@ -68,12 +72,14 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var CurbSideNoBtn: UIButton!
     @IBOutlet weak var TxtParkingNo: UITextField!
     @IBOutlet weak var LblcurbsideParkingPickup: UILabel!
+    @IBOutlet weak var stackParkingList: UIStackView!
     
     
     //    @IBOutlet weak var viewSkeleton: skeletonView!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        TxtParkingNo.delegate = self
         tblOrderDetails.delegate = self
         tblOrderDetails.dataSource = self
         tblOrderDetails.reloadData()
@@ -81,6 +87,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         skeletonViewData.showAnimatedSkeleton()
         skeletonViewData.frame.size.width = view.frame.size.width
         self.view.addSubview(skeletonViewData)
+        vehicleDropdown.anchorView = TxtParkingNo
+        
         setUpLocalizedStrings()
         if isfromShare{
             webserviceShareOrderDetails()
@@ -91,8 +99,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblItems.rowHeight = UITableView.automaticDimension
         tblItems.estimatedRowHeight = 66.5
         setup()
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,10 +111,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if collObj == self.tblOrderDetails{
                 self.tblOrderDetailsHeight.constant = tblOrderDetails.contentSize.height
             }
-//            else if collObj == self.tblPopup{
-//                
-//                self.tblPopupHeight.constant = tblPopup.contentSize.height
-//            }
         }
     }
     // MARK: - Other Methods
@@ -124,7 +126,17 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
         setUpOrderDetails()
     }
-    
+    func Dropdown(Dropdown : DropDown?, StringArray : [String], control : UIView, displayView : UIView){
+        Dropdown?.anchorView = displayView
+        Dropdown?.dataSource = StringArray
+        Dropdown?.selectionAction = { [unowned self] (index, item) in
+            print("Selected Item: \(item) at index: \(index)")
+            let index = Int(vehicleDropdown.selectedItem ?? "")
+            self.parking_id = self.arrVehicle[index ?? 0].id
+            self.TxtParkingNo.text = self.vehicleDropdown.selectedItem
+            self.TxtParkingNo.textColor = .black
+        }
+    }
     func setData(){
         if isfromShare{
             if objShareOrderDetails != nil{
@@ -135,7 +147,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                     lblNoOfItems.text = objShareOrderDetails.itemQuantity + " item"
                 }
                 lblTotal.text = CurrencySymbol + objShareOrderDetails.total
-                //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objShareOrderDetails.restaurantName
                 lblLocation.text = objShareOrderDetails.street
                 lblAddress.text = objShareOrderDetails.address
@@ -145,35 +156,45 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 self.QRCodeimage.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             }
         }else{
-            
+            let arrayVehicleData:[String] = self.arrVehicle.compactMap({$0.parking_no})
+//            self.vehicleDropdown.dataSource = arrayVehicleData
+            Dropdown(Dropdown: vehicleDropdown, StringArray: arrayVehicleData, control: TxtParkingNo, displayView: TxtParkingNo)
             if(self.orderType == "In-Process"){
                 self.vwShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
                 self.btnShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
-                self.ParkingNoPicker.delegate = self
-                self.ParkingNoPicker.dataSource = self
-                self.TxtParkingNo.inputView = ParkingNoPicker
+                //self.TxtParkingNo.inputView = vehicleDropdown
                 
                 if self.objOrderDetailsData.deliveryType == "1"{
                     if self.objOrderDetailsData.parking_type == "1"{
                         if self.objOrderDetailsData.parking_id == "0"{
-                            LblcurbsideParkingPickup.superview?.isHidden = true
+                            stackParkingList.subviews[0].isHidden = true
+                            stackParkingList.subviews[1].isHidden = false
+                            stackParkingList.subviews[2].isHidden = false
+//                            LblcurbsideParkingPickup.superview?.isHidden = true
                             self.CurbSideYesBtn.isSelected = true
                             self.CurbSideNoBtn.isSelected = false
-                            TxtParkingNo.superview?.isHidden = !CurbSideYesBtn.isSelected
+                            
+//                            TxtParkingNo.superview?.isHidden = !CurbSideYesBtn.isSelected
+                            
                         }
                         else{
-                            self.CurbSideYesBtn.superview?.superview?.isHidden = true
-                            TxtParkingNo.superview?.isHidden = true
+                            stackParkingList.subviews[0].isHidden = false
+                            stackParkingList.subviews[1].isHidden = true
+                            stackParkingList.subviews[2].isHidden = true
+                            LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
                         }
                     }
                     else{
-                        LblcurbsideParkingPickup.superview?.isHidden = true
+                        stackParkingList.subviews[0].isHidden = true
+                        stackParkingList.subviews[1].isHidden = false
+                        stackParkingList.subviews[2].isHidden = true
+//                        LblcurbsideParkingPickup.superview?.isHidden = true
                         self.CurbSideNoBtn.isSelected = true
                         self.CurbSideYesBtn.isSelected = false
-                        TxtParkingNo.superview?.isHidden = true
+//                        TxtParkingNo.superview?.isHidden = true
                     }
                 }else{
-                    LblcurbsideParkingPickup.superview?.superview?.isHidden = true
+                    LblcurbsideParkingPickup.superview?.superview?.superview?.isHidden = true
                 }
              
             }
@@ -186,6 +207,18 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                     self.btnCancel.isHidden = (self.objOrderDetailsData.isCancel.toInt() == 0) ? true : false
                     self.vwRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
                     self.btnRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
+                    if objOrderDetailsData.parking_no != ""{
+                        self.LblcurbsideParkingPickup.text = objOrderDetailsData.parking_no
+                        stackParkingList.subviews[0].isHidden = false
+                        stackParkingList.subviews[1].isHidden = true
+                        stackParkingList.subviews[2].isHidden = true
+                    }else{
+                        stackParkingList.subviews[0].isHidden = true
+                        stackParkingList.subviews[1].isHidden = true
+                        stackParkingList.subviews[2].isHidden = true
+                    }
+                }else{
+                    LblcurbsideParkingPickup.superview?.superview?.superview?.isHidden = true
                 }
             }
             
@@ -272,7 +305,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             controller.submitBtnTitle = "Cancel Order       "
             controller.cancelBtnTitle = ""
             controller.strDescription = "Do you really want  to cancel the order."
-            
             controller.strPopupTitle = "Are you Sure?"
             controller.submitBtnColor = colors.appRedColor
             controller.cancelBtnColor = colors.appGreenColor
@@ -286,6 +318,14 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         }else{
             btnCancel.isUserInteractionEnabled = false
         }
+    }
+    @IBAction func btnSaveParkingClick(_ sender: UIButton) {
+        if TxtParkingNo.text != ""{
+            webserviceUpdateParkingDetails(parking_id: parking_id, type: "update")
+        }
+    }
+    @IBAction func btnCancelParkingClick(_ sender: UIButton) {
+        webserviceUpdateParkingDetails(parking_id: objOrderDetailsData.parking_id, type: "Cancel")
     }
     
     @IBAction func btnRateOrderClicked(_ sender: Any) {
@@ -322,8 +362,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             CurbSideYesBtn.isSelected = true
             CurbSideNoBtn.isSelected = false
             TxtParkingNo.superview?.isHidden = false
-        }else
-        {
+        }else{
             CurbSideYesBtn.isSelected = false
             CurbSideNoBtn.isSelected = true
             TxtParkingNo.superview?.isHidden = true
@@ -347,7 +386,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         case tblOrderDetails:
             if isfromShare{
                 arrayForTitle.removeAll()
-                
                 arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
                 var cnt = 1
                 if objShareOrderDetails?.promocodeType == "discount" || objShareOrderDetails?.promocode != ""{
@@ -365,7 +403,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 return cnt
             }else{
                 arrayForTitle.removeAll()
-                
                 arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
                 var cnt = 1
                 if objOrderDetailsData?.promocodeType == "discount" || objOrderDetailsData?.promocode != ""{
@@ -496,6 +533,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         WebServiceSubClass.orderDetailList(orderDetails: orderDetails, showHud: false, completion: { (response, status, error) in
             if status{
                 let orderData = MyorderDetailsResModel.init(fromJson: response)
+                if orderData.parkinglist.count != 0{
+                    self.arrVehicle = orderData.parkinglist
+                }
                 self.skeletonViewData.removeFromSuperview()
                 self.skeletonViewData.stopShimmering()
                 self.skeletonViewData.stopSkeletonAnimation()
@@ -566,6 +606,26 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
+    func webserviceUpdateParkingDetails(parking_id:String,type:String){
+        let ParkingDetails = updateParkingDetailsReqModel()
+        ParkingDetails.order_id = orderId
+        ParkingDetails.parking_id = parking_id
+        ParkingDetails.type = type
+        WebServiceSubClass.updateParkingList(updateParkingListModel: ParkingDetails, completion: { (json, status, response) in
+            if(status)
+            {
+                self.webserviceOrderDetails()
+            }
+            else
+            {
+                if let strMessage = json["message"].string {
+                    Utilities.displayAlert(strMessage)
+                }else {
+                    Utilities.displayAlert("Something went wrong")
+                }
+            }
+        })
+    }
     func webserviceAcceptOrder(){
         let acceptOrder = AcceptOrderReqModel()
         acceptOrder.user_id = SingletonClass.sharedInstance.UserId
@@ -620,24 +680,16 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         })
     }
-}
+    
 
-//MARK: - Parking No Picker view delegate methods
-extension MyOrderDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+}
+extension MyOrderDetailsVC : UITextFieldDelegate{
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//
+//    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        TxtParkingNo.resignFirstResponder()
+        vehicleDropdown.show()
+        return false
     }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 5
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "abcdf"
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(row)
-    }
-    
 }
