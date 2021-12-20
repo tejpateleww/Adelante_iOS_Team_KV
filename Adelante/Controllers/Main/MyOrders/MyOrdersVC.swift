@@ -45,6 +45,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             self.segment.setIndex(2)
             self.selectedSegmentTag = 2
             self.segmentControlChanged(self.segment)
+            webserviceShareList()
         }
 //        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
         tblOrders.refreshControl = refreshList

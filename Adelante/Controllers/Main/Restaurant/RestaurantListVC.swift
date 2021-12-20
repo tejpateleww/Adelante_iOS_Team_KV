@@ -185,7 +185,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
                 let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantListCell.reuseIdentifier, for: indexPath) as! RestaurantListCell
                 cell.lblName.text = arrRestaurantList[indexPath.row].name
                 cell.lblRating.text = arrRestaurantList[indexPath.row].rating_count
-                if arrRestaurantList[indexPath.row].distance != "0 miles"{
+                if arrRestaurantList[indexPath.row].distance != "0 Miles"{
                     cell.stackMIles.isHidden = false
                     cell.lblMiles.text = arrRestaurantList[indexPath.row].distance
                 }else{

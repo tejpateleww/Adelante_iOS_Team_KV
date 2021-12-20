@@ -41,7 +41,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     var AcceptOrder : (()->())?
     var QRCodeimage = UIImageView()
     let vehicleDropdown = DropDown()
-    var parking_id = ""
+    var parkingID = ""
     
     
     // MARK: - IBOutlets
@@ -131,8 +131,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         Dropdown?.dataSource = StringArray
         Dropdown?.selectionAction = { [unowned self] (index, item) in
             print("Selected Item: \(item) at index: \(index)")
-            let index = Int(vehicleDropdown.selectedItem ?? "")
-            self.parking_id = self.arrVehicle[index ?? 0].id
+//            let index1 = Int(vehicleDropdown.selectedItem ?? "")
+            self.parkingID = self.arrVehicle[index].id
             self.TxtParkingNo.text = self.vehicleDropdown.selectedItem
             self.TxtParkingNo.textColor = .black
         }
@@ -321,7 +321,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     @IBAction func btnSaveParkingClick(_ sender: UIButton) {
         if TxtParkingNo.text != ""{
-            webserviceUpdateParkingDetails(parking_id: parking_id, type: "update")
+            webserviceUpdateParkingDetails(parking_id: parkingID, type: "update")
         }
     }
     @IBAction func btnCancelParkingClick(_ sender: UIButton) {
@@ -611,7 +611,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         ParkingDetails.order_id = orderId
         ParkingDetails.parking_id = parking_id
         ParkingDetails.type = type
-        WebServiceSubClass.updateParkingList(updateParkingListModel: ParkingDetails, completion: { (json, status, response) in
+        WebServiceSubClass.updateParkingList(updateParkingListModel: ParkingDetails, showHud: true, completion: { (json, status, response) in
             if(status)
             {
                 self.webserviceOrderDetails()
