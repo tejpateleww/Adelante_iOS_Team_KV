@@ -193,11 +193,18 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             }
             cell1.btnDelete.isHidden = true
             cell1.lblwalletBalance.isHidden = false
-            if IsWalletSelected {
-                cell1.selectPaymentMethodButton.isSelected = true
+            
+            if(isfromPayment){
+                cell1.selectPaymentMethodButton.isHidden = true
             }else{
-                cell1.selectPaymentMethodButton.isSelected = false
+                cell1.selectPaymentMethodButton.isHidden = false
+                if IsWalletSelected {
+                    cell1.selectPaymentMethodButton.isSelected = true
+                }else{
+                    cell1.selectPaymentMethodButton.isSelected = false
+                }
             }
+
 //            cell1.selectionStyle = .none
 //            cell = cell1
 //            cell.selectionStyle = .none
@@ -211,12 +218,19 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell.lblExpiresDate.text = "Default method"
                 cell.btnDelete.isHidden = true
                 cell.vwCvv.isHidden = true
-                if IsPaypalSelected {
-                    cell.selectPaymentMethodButton.isSelected = true
+                if(isfromPayment){
+                    cell.selectPaymentMethodButton.isHidden = true
+                }else{
+                    cell.selectPaymentMethodButton.isHidden = false
+                    if IsPaypalSelected {
+                        cell.selectPaymentMethodButton.isSelected = true
+                    }
+                    else{
+                        cell.selectPaymentMethodButton.isSelected = false
+                    }
                 }
-                else{
-                    cell.selectPaymentMethodButton.isSelected = false
-                }
+                
+            
                 cell.selectionStyle = .none
                 return cell
             }else{
@@ -227,12 +241,20 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
                 
                 cell1.lblwalletBalance.isHidden = true
-                if IsBrainTreeSelected {
-                    cell1.selectPaymentMethodButton.isSelected = true
+                
+                if(isfromPayment){
+                    cell1.selectPaymentMethodButton.isHidden = true
+                }else{
+                    cell1.selectPaymentMethodButton.isHidden = false
+                    if IsBrainTreeSelected {
+                        cell1.selectPaymentMethodButton.isSelected = true
+                    }
+                    else{
+                        cell1.selectPaymentMethodButton.isSelected = false
+                    }
                 }
-                else{
-                    cell1.selectPaymentMethodButton.isSelected = false
-                }
+                
+
                 cell1.btnDelete.isHidden = true
                 cell1.selectionStyle = .none
                 return cell1
@@ -269,7 +291,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             label.textColor = UIColor(hexString: "#222B45")
             label.textAlignment = .left
             
-            print(headerView.frame)
             headerView.addSubview(label)
             return headerView
         case 1:
@@ -304,9 +325,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             return 0
         }
     }
+    
     func setUpLocalizedStrings(){
         btnAddCart.setTitle("addPaymentVC_btnAddCart".Localized(), for: .normal)
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.section {
@@ -327,6 +350,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         }
         tblPaymentMethod.reloadData()
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             webServiceDeletePaymentCard(strCardId: self.arrCard[indexPath.row - 1].id)
@@ -398,7 +422,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     self.orderid = json["order_id"].stringValue
                     self.socketManageSetup()
                     controller.btnSubmit = {
-                        
                         if let TabVC =  appDel.window?.rootViewController?.children.first {
                             if TabVC.isKind(of: CustomTabBarVC.self) {
                                 SingletonClass.sharedInstance.selectInProcessInMyOrder = true

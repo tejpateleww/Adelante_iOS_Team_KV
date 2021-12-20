@@ -525,11 +525,12 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 let cell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCell.reuseIdentifier, for: indexPath) as! RestaurantCell
                 cell.lblItemName.text = arrRestaurant[indexPath.row].name
                 if arrRestaurant[indexPath.row].distance != "0 miles"{
-                    cell.stackMiles.isHidden = false
+                    cell.lblMiles.isHidden = false
                     cell.lblMiles.text = arrRestaurant[indexPath.row].distance
                 }else {
-                    cell.stackMiles.isHidden = true
+                    cell.lblMiles.isHidden = true
                 }
+                cell.lblAddress.text = arrRestaurant[indexPath.row].address ?? "Test"
                 cell.lblRating.text = arrRestaurant[indexPath.row].rating_count
                 cell.btnFavorite.isHidden = false
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
@@ -593,8 +594,6 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return responseStatus == .gotData ?  230 : 131
         }
     }
-    
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         headerCell = tblMainList.dequeueReusableCell(withIdentifier: RestaurantCatListCell.reuseIdentifier) as? RestaurantCatListCell
