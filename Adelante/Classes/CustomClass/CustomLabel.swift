@@ -481,21 +481,24 @@ class colVwRestaurantLabel: UILabel {
 class tblHomeLabels: UILabel {
     
     @IBInspectable var isRestaurantName:Bool = false
+    @IBInspectable var isRestaurantAddress:Bool = false
     @IBInspectable var isPrice:Bool = false
     @IBInspectable var isRating:Bool = false
     @IBInspectable var isDistance:Bool = false
     
-    
-      @IBInspectable var topInset: CGFloat = 0.0
-      @IBInspectable var bottomInset: CGFloat = 0.0
-      @IBInspectable var leftInset: CGFloat = 0.0
-      @IBInspectable var rightInset: CGFloat = 0.0
+    @IBInspectable var topInset: CGFloat = 0.0
+    @IBInspectable var bottomInset: CGFloat = 0.0
+    @IBInspectable var leftInset: CGFloat = 0.0
+    @IBInspectable var rightInset: CGFloat = 0.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textColor = colors.black.value
         if isRestaurantName {
             self.font = CustomFont.NexaRegular.returnFont(18)
+        } else if isRestaurantAddress {
+            self.font = CustomFont.NexaBold.returnFont(12)
+            self.textColor = UIColor.lightGray
         } else if isPrice {
             self.font = CustomFont.NexaBold.returnFont(13)
         } else if isDistance {
@@ -504,6 +507,8 @@ class tblHomeLabels: UILabel {
         }  else if isRating {
             self.font = CustomFont.NexaRegular.returnFont(9)
             self.textAlignment = .left
+        }else{
+            self.font = CustomFont.NexaBold.returnFont(12)
         }
     }
     override func drawText(in rect: CGRect) {

@@ -179,10 +179,10 @@ class RestaurantOutletVC: BaseViewController,UITableViewDelegate,UITableViewData
                 cell.lblAreaName.text = arrOutletList[indexPath.row].name
                 cell.lblAddress.text = arrOutletList[indexPath.row].address
                 if arrOutletList[indexPath.row].distance == "0 miles"{
-                    cell.stackMiles.isHidden = false
+                    cell.lblMiles.isHidden = false
                     cell.lblMiles.text = arrOutletList[indexPath.row].distance
                 }else{
-                    cell.stackMiles.isHidden = true
+                    cell.lblMiles.isHidden = true
                 }
                 cell.lblRating.text = arrOutletList[indexPath.row].ratingCount
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrOutletList[indexPath.row].image ?? "")"

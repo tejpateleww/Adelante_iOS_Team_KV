@@ -14,10 +14,9 @@ class RestaurantListCell: UITableViewCell {
     @IBOutlet weak var imgRestaurant: customImagewithShadow!
     @IBOutlet weak var lblMiles: tblHomeLabels!
     @IBOutlet weak var lblRating: tblHomeLabels!
-    @IBOutlet weak var lblPrice: tblHomeLabels!
+    @IBOutlet weak var lblAddress: tblHomeLabels!
     @IBOutlet weak var btnFavorite: UIButton!
     @IBOutlet weak var vwIndicator: UIView!
-    @IBOutlet weak var stackMIles: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
