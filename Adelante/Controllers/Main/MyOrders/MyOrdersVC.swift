@@ -215,7 +215,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(obj.id ?? "")"){
+                        if let name = URL(string: APIEnvironment.ShareOrderLink.rawValue + "\(obj.id ?? "")"){
                             let objectsToShare = [name]
                             appDel.shareUrl = "\(name)"
                             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
@@ -316,7 +316,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     }
                     
                         cell.share = {
-                            if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(obj.id ?? "")"),!name.absoluteString.isEmpty {//&&isShareable=\(SingletonClass.sharedInstance.isShareble)"),
+                            if let name = URL(string: APIEnvironment.ShareOrderLink.rawValue + "\(obj.id ?? "")"),!name.absoluteString.isEmpty {//&&isShareable=\(SingletonClass.sharedInstance.isShareble)"),
                                 let objectsToShare = [name]
                                 appDel.shareUrl = "\(name)"
                                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
@@ -395,7 +395,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                     cell.share = {
-                        if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(obj.id ?? "")"),!name.absoluteString.isEmpty {//URL(string: "http://adelantemovil.com?order_id=\(obj.id ?? "")"), 
+                        if let name = URL(string: APIEnvironment.ShareOrderLink.rawValue + "\(obj.id ?? "")"),!name.absoluteString.isEmpty {//URL(string: "http://adelantemovil.com?order_id=\(obj.id ?? "")"),
                             let objectsToShare = [name]
                             appDel.shareUrl = "\(name)"
                             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

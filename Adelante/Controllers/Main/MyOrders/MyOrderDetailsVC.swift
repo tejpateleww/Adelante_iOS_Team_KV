@@ -73,6 +73,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var TxtParkingNo: UITextField!
     @IBOutlet weak var LblcurbsideParkingPickup: UILabel!
     @IBOutlet weak var stackParkingList: UIStackView!
+    @IBOutlet weak var CurbparkingCancelBtn: UIButton!
     
     
     //    @IBOutlet weak var viewSkeleton: skeletonView!
@@ -175,7 +176,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                             self.CurbSideNoBtn.isSelected = false
                             
 //                            TxtParkingNo.superview?.isHidden = !CurbSideYesBtn.isSelected
-                            
                         }
                         else{
                             stackParkingList.subviews[0].isHidden = false
@@ -208,10 +208,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                     self.vwRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
                     self.btnRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
                     if objOrderDetailsData.parking_no != ""{
-                        self.LblcurbsideParkingPickup.text = objOrderDetailsData.parking_no
+                        self.LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
                         stackParkingList.subviews[0].isHidden = false
                         stackParkingList.subviews[1].isHidden = true
                         stackParkingList.subviews[2].isHidden = true
+                        CurbparkingCancelBtn.isHidden = true
+
                     }else{
                         stackParkingList.subviews[0].isHidden = true
                         stackParkingList.subviews[1].isHidden = true
@@ -343,7 +345,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     @IBAction func btnShareOrderClicked(_ sender: Any) {
         if objOrderDetailsData.trash.toInt() == 0{
-            if let name = URL(string: "https://www.adelantemovil.com/ShareOrder?orderid=\(orderId)"), !name.absoluteString.isEmpty {
+            if let name = URL(string: APIEnvironment.ShareOrderLink.rawValue +  orderId), !name.absoluteString.isEmpty {
                 let objectsToShare = [name]
                 appDel.shareUrl = "\(name)"
                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

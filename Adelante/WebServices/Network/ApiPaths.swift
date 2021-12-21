@@ -25,10 +25,11 @@ enum APIEnvironment : String{
     
 //    case bu = "http://adelante.excellentwebworld.in/api/User/"
 //    case profileBu = "http://adelante.excellentwebworld.in/"
-    case BaseURL = "http://18.215.15.214/api/User/"
-//    case BaseURL =  "https://www.adelantemovil.com/api/User/" //"http://18.208.18.170/api/User/"
-//    case profileBaseURL =  "https://www.adelantemovil.com/" //"http://18.208.18.170/"
-    case profileBaseURL = "http://18.215.15.214/"
+//    case BaseURL = "http://18.215.15.214/api/User/"
+    case BaseURL =  "https://www.adelantemovil.com/api/User/" //"http://18.208.18.170/api/User/"
+    case profileBaseURL =  "https://www.adelantemovil.com/" //"http://18.208.18.170/"
+//    case profileBaseURL = "http://18.215.15.214/"
+    case ShareOrderLink = "https://www.adelantemovil.com/ShareOrder?orderid="
     static var baseURL: String{
         return APIEnvironment.environment.rawValue
     }
@@ -118,6 +119,7 @@ enum ApiKey: String {
     case make_payment = "make_payment"
     case checkOrder = "check_order"
     case updateParkingLocation = "update_parking_details"
+    
 }
 
 enum SocketData : String{
