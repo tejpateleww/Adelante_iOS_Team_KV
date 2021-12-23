@@ -11,4 +11,6 @@ class RestaurantFavoriteReqModel:RequestModel{
     var name : String = ""
     var user_id : String = ""
     var page : String = ""
+    var lat: String = ""
+    var lng: String = ""
 }

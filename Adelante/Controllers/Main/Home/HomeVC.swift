@@ -85,6 +85,8 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
                 SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: latitude, longitude: longitude)
             }
         }else if SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude == 0.0 && SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude == 0.0 && userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) == nil{
+            let locationService = LocationService()
+            locationService.startUpdatingLocation()
             lblAddress.text = "Please Select Address"
         }else{
             self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
@@ -216,7 +218,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
     }
     @objc func deSelectFilterAndRefresh() {
         selectedSortTypedIndexFromcolVwFilter = 1
@@ -749,7 +751,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 if let strMessage = response["message"].string {
                     Utilities.displayAlert(strMessage)
                 }else {
-                    Utilities.displayAlert("Something went wrong")
+                    Utilities.displayAlert(error as? String ?? "Something went wrong")
                 }
             }
             

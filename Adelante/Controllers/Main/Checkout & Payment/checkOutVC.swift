@@ -341,6 +341,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         
     }
     @IBAction func placeOrderBtn(_ sender: submitButton) {
+        Utilities.showHud()
             checkLocation()
     }
     func checkLocation(){
@@ -560,7 +561,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         let checkOrder = checkOrderReqModel()
         checkOrder.user_id = SingletonClass.sharedInstance.UserId
         checkOrder.cart_id = strCartId
-        WebServiceSubClass.checkOrder(checkOrderModel: checkOrder, showHud: false, completion: { (json, status, response) in
+        WebServiceSubClass.checkOrder(checkOrderModel: checkOrder, showHud: true, completion: { (json, status, response) in
             if(status)
             {
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: addPaymentVC.storyboardID) as! addPaymentVC

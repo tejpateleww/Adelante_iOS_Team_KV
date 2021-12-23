@@ -596,6 +596,7 @@ class AnimationLoader: NSObject {
         ViewBG.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         ViewBG.center = CGPoint(x: size.width / 2, y: size.height / 2)
         ViewBG.backgroundColor = UIColor.clear
+        
     
         
         loadingView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
@@ -614,6 +615,7 @@ class AnimationLoader: NSObject {
         }
         loadingView.play()
         UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(ViewBG)
+        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.isUserInteractionEnabled = false
         print("ATDebug :: \(ViewBG.frame)")
 
 //        UIApplication.shared.keyWindow?.addSubview(ViewBG)
@@ -624,14 +626,15 @@ class AnimationLoader: NSObject {
         DispatchQueue.main.async(execute: {
             loadingView.stop()
             ViewBG.removeFromSuperview()
+            UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.isUserInteractionEnabled = true
         })
     }
 }
 extension Utilities {
     static func showHud(){
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             AnimationLoader.showActivityIndicatory()
-        }
+//        }
     }
     
     static func hideHud(){

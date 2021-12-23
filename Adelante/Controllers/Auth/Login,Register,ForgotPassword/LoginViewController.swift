@@ -39,6 +39,19 @@ class LoginViewController: BaseViewController {
         txtEmail.text = ""
         txtPassword.text = ""
     }
+    override func btnBackAction() {
+        if self.navigationController?.children.count == 1 {
+//            if SingletonClass.sharedInstance.isPresented  {
+//                SingletonClass.sharedInstance.isPresented = false
+                self.navigationController?.dismiss(animated: true, completion: nil)
+//            } else {
+                appDel.navigateToMainLogin()
+//            }
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
     
     // MARK: - IBActions
     @IBAction func btnForgotPasswordClicked(_ sender: Any) {

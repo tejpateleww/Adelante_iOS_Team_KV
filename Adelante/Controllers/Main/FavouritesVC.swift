@@ -152,6 +152,13 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
                 let cell = tblMainList.dequeueReusableCell(withIdentifier: YourFavouriteCell.reuseIdentifier, for: indexPath) as! YourFavouriteCell
                 cell.lblItemName.text = arrFavoriteRest[indexPath.row].name
                 cell.lblRating.text = arrFavoriteRest[indexPath.row].rating_count
+                cell.lblAddress.text = arrFavoriteRest[indexPath.row].address
+                if arrFavoriteRest[indexPath.row].distance != "0 miles"{
+                    cell.LblMiles.isHidden = false
+                    cell.LblMiles.text = arrFavoriteRest[indexPath.row].distance
+                }else {
+                    cell.LblMiles.isHidden = true
+                }
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrFavoriteRest[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -204,6 +211,9 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         RestaurantFavorite.name = strSearch
         RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
         RestaurantFavorite.page = "\(self.pageNumber)"
+        RestaurantFavorite.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+        RestaurantFavorite.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        
         WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
             self.refreshList.endRefreshing()
             self.responseStatus = .gotData

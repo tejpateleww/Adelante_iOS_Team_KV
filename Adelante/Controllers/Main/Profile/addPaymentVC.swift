@@ -655,6 +655,7 @@ extension addPaymentVC: GMSMapViewDelegate,CLLocationManagerDelegate{
            case .authorizedAlways: fallthrough
            case .authorizedWhenInUse:
              print("Location status is OK.")
+               
            @unknown default:
              fatalError()
            }

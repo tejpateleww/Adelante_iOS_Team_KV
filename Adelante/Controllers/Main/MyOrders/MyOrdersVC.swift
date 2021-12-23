@@ -581,7 +581,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     if let strMessage = response["message"].string {
                         Utilities.displayAlert(strMessage)
                     }else {
-                        Utilities.displayAlert("Something went wrong")
+                        Utilities.displayAlert(error as? String ?? "Something went wrong")
                     }
                 }
             }
@@ -611,7 +611,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     if let strMessage = response["message"].string {
                         Utilities.displayAlert(strMessage)
                     }else {
-                        Utilities.displayAlert("Something went wrong")
+                        Utilities.displayAlert(error as? String ?? "Something went wrong")
                     }
                 }
             }
@@ -635,7 +635,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 if let strMessage = json["message"].string {
                     Utilities.displayAlert(strMessage)
                 }else {
-                    Utilities.displayAlert("Something went wrong")
+                    Utilities.displayAlert(response as? String ?? "Something went wrong")
                 }
             }
         })
@@ -654,7 +654,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 if let strMessage = json["message"].string {
                     Utilities.displayAlert(strMessage)
                 }else {
-                    Utilities.displayAlert("Something went wrong")
+                    Utilities.displayAlert(response as? String ?? "Something went wrong")
                 }
             }
         })

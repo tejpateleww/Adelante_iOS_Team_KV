@@ -157,8 +157,8 @@ class RegisterViewController: UIViewController {
             Utilities.displayAlert(confirmPW.1)
             return false
         }
-        else if txtPassword.text?.lowercased() != txtConPassword.text?.lowercased(){
-            Utilities.showAlert(AppInfo.appName, message: "Entered email address or password doesn't match with the records", vc: self)
+        else if txtPassword.text != txtConPassword.text{
+            Utilities.showAlert(AppInfo.appName, message: "Password and confirm password must be same", vc: self)
             return false
         }
         return true

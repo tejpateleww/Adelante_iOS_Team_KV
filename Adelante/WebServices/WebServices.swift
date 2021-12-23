@@ -26,7 +26,7 @@ class WebService{
     // MARK:- Method for Get, post..
     //-------------------------------------
     func requestMethod(api: ApiKey, httpMethod:Method, showHud : Bool = false,parameters: Any, completion: @escaping CompletionResponse){
-        guard isConnected else { completion(JSON(), false, "Something went wrong"); return }
+        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
         
         var parameterString = "" // "/"
         if httpMethod == .get{

@@ -160,6 +160,10 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         if strEnteredOTP == "" {
             Utilities.ShowAlert(OfMessage: "validMsg_RequiredOtp".Localized())
             return false
+        }else if !self.timer.isValid{
+            self.clearAllFields()
+            Utilities.ShowAlert(OfMessage: "Your OTP has been expired")
+            return false
         } else if self.strOTP != strEnteredOTP {
             self.clearAllFields()
             Utilities.ShowAlert(OfMessage: "validMsg_InvalidOtp".Localized())

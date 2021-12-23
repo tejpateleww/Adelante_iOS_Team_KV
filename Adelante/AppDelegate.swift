@@ -415,7 +415,7 @@ import Braintree
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
             print("Location status is OK.")
-            
+            locationService.startUpdatingLocation()
         }
     }
     
