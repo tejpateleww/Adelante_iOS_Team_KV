@@ -257,6 +257,10 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                         vwShareOrder.isHidden = false
                     }
                     vwCancel.isHidden = false
+                    
+                }else if objOrderDetailsData.trash.toInt() == 1{
+                    vwRateOrder.isHidden = true
+                    
                 }else{
                     vwShareOrder.isHidden = true
                     vwCancel.isHidden = true

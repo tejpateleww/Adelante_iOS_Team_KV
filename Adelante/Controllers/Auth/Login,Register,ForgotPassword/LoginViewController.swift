@@ -45,7 +45,7 @@ class LoginViewController: BaseViewController {
 //                SingletonClass.sharedInstance.isPresented = false
                 self.navigationController?.dismiss(animated: true, completion: nil)
 //            } else {
-                appDel.navigateToMainLogin()
+//                appDel.navigateToMainLogin()
 //            }
         }
         else {

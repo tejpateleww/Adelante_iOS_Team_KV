@@ -392,7 +392,7 @@ import Braintree
         userDefault.set(false, forKey: UserDefaultsKey.isUserLogin.rawValue)
         SingletonClass.sharedInstance.clearSingletonClass()
         self.checkAndSetDefaultLanguage()
-        self.navigateToLogin()
+        self.navigateToMainLogin()
     }
     // MARK: - LocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
