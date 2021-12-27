@@ -30,7 +30,7 @@ class CartDatum : NSObject, NSCoding{
     var total : String!
     var totalQuantity : String!
     var totalRound : String!
-
+    var delivery_type:String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -64,6 +64,7 @@ class CartDatum : NSObject, NSCoding{
         total = json["total"].stringValue
         totalQuantity = json["total_quantity"].stringValue
         totalRound = json["total_round"].stringValue
+        delivery_type = json["delivery_type"].stringValue
 	}
 
 	/**
@@ -139,6 +140,9 @@ class CartDatum : NSObject, NSCoding{
         if totalRound != nil{
         	dictionary["total_round"] = totalRound
         }
+        if delivery_type != nil{
+            dictionary["delivery_type"] = delivery_type
+        }
 		return dictionary
 	}
 
@@ -169,6 +173,7 @@ class CartDatum : NSObject, NSCoding{
 		total = aDecoder.decodeObject(forKey: "total") as? String
 		totalQuantity = aDecoder.decodeObject(forKey: "total_quantity") as? String
 		totalRound = aDecoder.decodeObject(forKey: "total_round") as? String
+        delivery_type = aDecoder.decodeObject(forKey: "delivery_type") as? String
 	}
 
     /**
@@ -240,6 +245,9 @@ class CartDatum : NSObject, NSCoding{
 		if totalRound != nil{
 			aCoder.encode(totalRound, forKey: "total_round")
 		}
+        if delivery_type != nil{
+            aCoder.encode(delivery_type, forKey: "delivery_type")
+        }
 
 	}
 
