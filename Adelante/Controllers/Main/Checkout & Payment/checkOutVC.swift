@@ -60,6 +60,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
     @IBOutlet weak var btnYes: UIButton!
     @IBOutlet weak var btnNo: UIButton!
     
+    @IBOutlet weak var viewCurbSide: UIView!
+    
     // MARK: - ViewController Lifecycle
     
     func ApplyPromocode() {
@@ -435,6 +437,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             {
                 print(json)
                 let cartData = CartListResModel.init(fromJson: json)
+                
+                    viewCurbSide.isHidden = (cartData.data.delivery_type == "1") ? false : true
+                
                 self.cartDetails = cartData.data
                 self.arrCartItem = cartData.data.item
                 Utilities.displayAlert(json["messSage"].string ?? "")
