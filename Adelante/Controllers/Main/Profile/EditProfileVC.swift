@@ -281,7 +281,7 @@ extension EditProfileVC:UITextFieldDelegate{
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
         } else if textField == txtPlateNumber{
-            let ACCEPTABLE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-()"
+            let ACCEPTABLE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-() "
             let currentString: NSString = txtPlateNumber.text! as NSString
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString
