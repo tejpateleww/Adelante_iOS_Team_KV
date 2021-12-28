@@ -142,6 +142,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         centerMapOnLocation(location: CLLocation(latitude: Double(cartDetails?.lat ?? "") ?? 0.0, longitude: Double(cartDetails?.lng ?? "") ?? 0.0), mapView: MapViewForShowRastaurantLocation)
         lblAddress.text = cartDetails?.address
         LblTotlaPrice.text = "\(CurrencySymbol)\(cartDetails?.grandTotal ?? "")"
+        
         tblAddedProduct.delegate = self
         tblOrderDetails.delegate = self
         tblAddedProduct.dataSource = self
@@ -191,7 +192,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
             var cnt = 1
             if AppliedPromocode?.promocodeType == "discount" || cartDetails?.promocode != ""{
-                arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())
+                arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())//+ "( \(cartDetails?.discount ?? ""))")
                 cnt = cnt + 1
             }
             if (cartDetails?.serviceFee ?? "0") != "0"{
@@ -259,10 +260,11 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
             case "checkOutVC_arrayForTitle_title3".Localized():
                 if AppliedPromocode?.promocodeType == "discount"{
-                    cell.lblPrice.text = "\(CurrencySymbol)\(AppliedPromocode?.discountAmount ?? "")"
+                    cell.lblPrice.text = "- \(CurrencySymbol)\(AppliedPromocode?.discountAmount ?? "")"
                 }else if cartDetails?.promocode != ""{
-                    cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.discountAmount ?? "")"
+                    cell.lblPrice.text = "- \(CurrencySymbol)\(cartDetails?.discountAmount ?? "")"
                 }
+                cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(cartDetails?.discount ?? "0")%)"
             default:
                 break
             }
@@ -351,6 +353,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         if LocationStatus == .notDetermined {
             AppDelegate.shared.locationService.locationManager?.requestWhenInUseAuthorization()
         }else if LocationStatus == .restricted || LocationStatus == .denied {
+            Utilities.hideHud()
             Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: "Please turn on permission from settings, to track location in app.", buttons: ["Cancel","Settings"]) { (index) in
                 if index == 1 {
                     if let settingsAppURL = URL(string: UIApplication.openSettingsURLString){

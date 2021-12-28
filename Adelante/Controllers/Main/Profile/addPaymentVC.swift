@@ -404,7 +404,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         addpayment.is_paypal = (IsPaypalSelected == true) ? "1" : "0"
         addpayment.is_braintree = (IsBrainTreeSelected == true) ? "1" : "0"
         addpayment.is_delivery = isdelivery
-        WebServiceSubClass.PayNow(ReqModel: addpayment, showHud: false, completion: { (json, status, error) in
+        WebServiceSubClass.PayNow(ReqModel: addpayment, showHud: true, completion: { (json, status, error) in
             
             if(status) {
                 if self.IsWalletSelected && !self.IsPaypalSelected && !self.IsBrainTreeSelected{
@@ -427,6 +427,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                                 SingletonClass.sharedInstance.selectInProcessInMyOrder = true
                                 let vc = TabVC as! CustomTabBarVC
                                 vc.selectedIndex = 2
+//                                if let nav = vc.viewControllers?[2] as? UINavigationController {
+//                                        nav.popToRootViewController(animated: false)
+//                                }
+                                
                             }
                         }
                     }

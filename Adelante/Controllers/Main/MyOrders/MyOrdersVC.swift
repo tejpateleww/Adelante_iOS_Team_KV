@@ -82,8 +82,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         arrInProcessList.removeAll()
         arrPastList.removeAll()
         responseStatus = .initial
-        
-        self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
+        if self.selectedSegmentTag == 2{
+            webserviceShareList()
+        }else {
+            self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
+        }
     }
     // MARK: - IBActions
     
@@ -91,26 +94,26 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         SingletonClass.sharedInstance.selectInProcessInMyOrder = nil
         selectedSegmentTag = sender.index
         if selectedSegmentTag == 0{
-            if self.arrPastList.count == 0{
-                arrShareList.removeAll()
-                arrInProcessList.removeAll()
-                arrPastList.removeAll()
+//            if self.arrPastList.count == 0{
+//                arrShareList.removeAll()
+//                arrInProcessList.removeAll()
+//                arrPastList.removeAll()
                 webserviceGetOrderDetail(selectedOrder:  "past" )
-            }
+//            }
         }else if selectedSegmentTag == 1{
-            arrShareList.removeAll()
-            arrInProcessList.removeAll()
-            arrPastList.removeAll()
-            if self.arrInProcessList.count == 0 {
+//            arrShareList.removeAll()
+//            arrInProcessList.removeAll()
+//            arrPastList.removeAll()
+//            if self.arrInProcessList.count == 0 {
                 webserviceGetOrderDetail(selectedOrder:  "In-Process")
-            }
+//            }
         }else{
-            arrShareList.removeAll()
-            arrInProcessList.removeAll()
-            arrPastList.removeAll()
+//            arrShareList.removeAll()
+//            arrInProcessList.removeAll()
+//            arrPastList.removeAll()
             webserviceShareList()
         }
-        self.tblOrders.reloadData()
+//        self.tblOrders.reloadData()
     }
     // MARK: - SkeletonTableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
@@ -365,6 +368,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             if responseStatus == .gotData{
                 if arrShareList.count != 0 {
                     let cell = tblOrders.dequeueReusableCell(withIdentifier: MyOrdersCell.reuseIdentifier, for: indexPath) as! MyOrdersCell
+                   
                     if selectedSegmentTag == 0 {
                         cell.vwShare.isHidden = true
                         cell.vwCancelOrder.isHidden = true
@@ -445,6 +449,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 }} else{
                     let cell = tblOrders.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
                     cell.selectionStyle = .none
+                    cell.stopShimmering()
+                    self.tblOrders.stopSkeletonAnimation()
                     return cell
                 }
         }
@@ -541,7 +547,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             if status{
                 let orderListData = orderListingResModel.init(fromJson: response)
                 let cell = self.tblOrders.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
-                cell.stopShimmering()
+                
                 self.tblOrders.stopSkeletonAnimation()
                 let OrderList:[orderListingData] = orderListData.data
                 if self.selectedSegmentTag == 0 {
@@ -556,11 +562,11 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 }else{
                     self.webserviceShareList()
                 }
-                self.tblOrders.dataSource = self
+//                self.tblOrders.dataSource = self
                 self.tblOrders.isScrollEnabled = true
                 self.tblOrders.isUserInteractionEnabled = true
                 self.tblOrders.reloadData()
-                
+                cell.stopShimmering()
             }else{
                 
                 if(response["data"] != nil)
@@ -594,15 +600,17 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         WebServiceSubClass.shareOrderList(shareOrderListModel: shareList, showHud: false, completion: { (response, status, error) in
             self.responseStatus = .gotData
             if status{
+                self.refreshList.endRefreshing()
                 let ResModel = shareOrderListResModel.init(fromJson: response)
                 let cell = self.tblOrders.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
                 cell.stopShimmering()
                 self.tblOrders.stopSkeletonAnimation()
+                self.arrShareList.removeAll()
                 self.arrShareList = ResModel.data
-                self.tblOrders.dataSource = self
                 self.tblOrders.isScrollEnabled = true
                 self.tblOrders.isUserInteractionEnabled = true
                 self.tblOrders.reloadData()
+                
             }else{
                 if(response["data"] != nil){
                     self.arrShareList.removeAll()
