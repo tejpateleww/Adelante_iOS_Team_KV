@@ -251,28 +251,33 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         case tblOrderDetails:
             
             let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: orderDetailsCell.reuseIdentifier, for: indexPath) as! orderDetailsCell
+            cell.lblTitle.text = arrayForTitle[indexPath.row]
+            if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
+                cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(cartDetails?.tax! ?? "0")%)"
+            }
             switch arrayForTitle[indexPath.row] {
             case "checkOutVC_arrayForTitle_title".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.oldTotal ?? "")"
             case "checkOutVC_arrayForTitle_title1".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.serviceFee ?? "")"
             case "checkOutVC_arrayForTitle_title2".Localized():
-                cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
+                if AppliedPromocode?.promocodeType == "discount"{
+                    cell.lblPrice.text = "\(CurrencySymbol)\(AppliedPromocode?.totalRound ?? "")"
+                }else{
+                    cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
+                }
             case "checkOutVC_arrayForTitle_title3".Localized():
                 if AppliedPromocode?.promocodeType == "discount"{
                     cell.lblPrice.text = "- \(CurrencySymbol)\(AppliedPromocode?.discountAmount ?? "")"
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(AppliedPromocode?.discount ?? "0")%)"
                 }else if cartDetails?.promocode != ""{
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(cartDetails?.discount ?? "0")%)"
                     cell.lblPrice.text = "- \(CurrencySymbol)\(cartDetails?.discountAmount ?? "")"
                 }
-                cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(cartDetails?.discount ?? "0")%)"
             default:
                 break
             }
             
-            cell.lblTitle.text = arrayForTitle[indexPath.row]
-            if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
-                cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(cartDetails?.tax! ?? "0")%)"
-            }
             cell.selectionStyle = .none
             return cell
             
@@ -487,6 +492,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 }
                 self.setData()
                 self.location()
+                self.webserviceGetCartDetails()
             }
             else
             {
@@ -513,7 +519,8 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             // self.hideHUD()
             if(status) {
                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
-                self.LblTotlaPrice.text = self.cartDetails?.grandTotal
+                self.webserviceCheckOrder()
+                self.LblTotlaPrice.text = "\(CurrencySymbol)\(self.cartDetails?.grandTotal ?? "")"
                 self.AppliedPromocode = nil
                 self.lblPromoCode.isHidden = true
                 self.btnCanclePromoCOde.isHidden = true
