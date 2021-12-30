@@ -329,11 +329,11 @@ import Braintree
         
         let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type")
 
-        if key as? String ?? "" == PushNotifications.logout.Name {
+//        if key as? String ?? "" == PushNotifications.logout.Name {
             self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
-        } else {
-         //   self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
-        }
+//        } else {
+//         //   self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
+//        }
         
     }
     
@@ -438,6 +438,10 @@ extension AppDelegate {
         case PushNotifications.logout.Name:
             Utilities.hideHud()
             appDel.SetLogout()
+            
+        case PushNotifications.ShareOrderAccept.Name:
+//            SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
         default:
             break
         }

@@ -49,6 +49,7 @@ enum NotificationKeys : CaseIterable{
     static let PushWeekly = "WeeklyPush"
     static let PushLittleoneBirthday = "LittleoneBirthday"
     static let PushyourBirthday = "YourBirthdayPush"
+    static let PushShareOrderAccept = "ShareOrderAccept"
     
 }
 struct ScreenSize {

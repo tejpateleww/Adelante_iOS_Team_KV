@@ -9,14 +9,18 @@
 import Foundation
 enum PushNotifications {
     
-    case logout
+    case logout,OrderPrepare, ShareOrderAccept
     
     var Name:String {
         switch self {
        
         case .logout:
             return "logout"
-       
+        case .OrderPrepare:
+            return "orderprepare"
+            
+        case .ShareOrderAccept:
+            return "shareorderaccept" 
         }
     }
 }

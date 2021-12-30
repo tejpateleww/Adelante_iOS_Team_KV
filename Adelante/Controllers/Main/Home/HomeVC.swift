@@ -934,12 +934,19 @@ extension HomeVC{
     
     func emitSocketUpdateLocation() {
         print(#function)
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderPushGet), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
         self.orderIdArray.forEach({
+//            if orderid == $0{
+//                
+//            }
             emitSocketUpdateLocation(orderId: $0)
         })
         
     }
-    
+    @objc func ShareOrderPushGet(){
+        self.timerSocket?.invalidate()
+    }
     func emitSocketUpdateLocation(orderId: String) {
         print(#function)
         let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,

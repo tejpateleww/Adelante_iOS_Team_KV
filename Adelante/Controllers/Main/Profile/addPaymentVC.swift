@@ -419,8 +419,11 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     controller.cancelBtnColor = colors.appRedColor
                     controller.strPopupImage = "ic_popupPaymentSucessful"
                     controller.isCancleOrder = true
+                    controller.tap.isEnabled = false
                     self.orderid = json["order_id"].stringValue
                     self.socketManageSetup()
+                    NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderPushGet), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
                     controller.btnSubmit = {
                         if let TabVC =  appDel.window?.rootViewController?.children.first {
                             if TabVC.isKind(of: CustomTabBarVC.self) {
@@ -468,6 +471,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
             }
         })
+    }
+    
+    @objc func ShareOrderPushGet(){
+        self.timer?.invalidate()
     }
     func refreshAddPaymentScreen() {
         webserviceGetAddPayment()
@@ -563,9 +570,10 @@ extension addPaymentVC{
             timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
                 print(timer)
                 if SocketIOManager.shared.socket.status.active{
-                    self.allSocketOffMethods()
-                    self.emitSocketUserConnect()
-                    self.allSocketOnMethods()
+//                    self.allSocketOffMethods()
+//                    self.emitSocketUserConnect()
+//                    self.allSocketOnMethods()
+                    self.emitSocketUpdateLocation()
                 }
             })
         }
@@ -612,6 +620,14 @@ extension addPaymentVC{
 //            }
 //            self.updateMarker(lat: self.driverLat, lng: self.driverLng)
 //            self.setDriverMarker()
+            
+            print(#function, "\n ",json)
+//            let orderId = json["order_id"].stringValue
+//            self.orderIdArray.removeAll(where: {$0 == orderId})
+//            if self.orderIdArray.isEmpty {
+                self.timer?.invalidate()
+//                self.time = nil
+//            }
             
         }
     }
