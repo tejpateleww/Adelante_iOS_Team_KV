@@ -21,7 +21,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     
     
     // MARK: - Properties
-    var IsWalletSelected = false
+    var IsWalletSelected = true
     var IsPaypalSelected = false
     var IsBrainTreeSelected = false
     
@@ -29,7 +29,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     var WalletBalance:CGFloat = 0.0
     var cardDetails : [String] = []
     var customTabBarController: CustomTabBarVC?
-    var selectedPaymentMethods: IndexPath?
     var refreshList = UIRefreshControl()
     var arrCard = [CardList]()
     var filterSelect = [0]
@@ -71,11 +70,13 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         if isfromPayment{
             btnAddCart.isHidden = true
             btnPayNow.isHidden = true
+            setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: "Payment", leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
+        }else{
+            setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         }
         setUpLocalizedStrings()
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.addPaymentVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         fetchClientToken()
         imgEmptyCard.isHidden = true
 //        webserviceGetAddPayment()
@@ -183,9 +184,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             cell1.lblWallet.text = "addPaymentVC_lblWallet".Localized()
             cell1.lblwalletBalance.text = "\(CurrencySymbol)\(WalletBalance)"
             cell1.vWMain.layer.borderColor = UIColor(hexString: "#E34A25").cgColor
-//            let strUrl = "http://3.239.174.164/assets/images/Braintree-logo.png"
-//            cell1.paymentImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//            cell1.paymentImageView.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
             if WalletBalance == 0.0{
                 cell1.lblwalletBalance.text = "\(CurrencySymbol)\("0.00")"
             }else{
@@ -204,10 +202,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     cell1.selectPaymentMethodButton.isSelected = false
                 }
             }
-
-//            cell1.selectionStyle = .none
-//            cell = cell1
-//            cell.selectionStyle = .none
             return cell1
         case 1:
             var cell = UITableViewCell()
@@ -229,8 +223,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                         cell.selectPaymentMethodButton.isSelected = false
                     }
                 }
-                
-            
                 cell.selectionStyle = .none
                 return cell
             }else{
@@ -253,15 +245,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                         cell1.selectPaymentMethodButton.isSelected = false
                     }
                 }
-                
-
                 cell1.btnDelete.isHidden = true
                 cell1.selectionStyle = .none
                 return cell1
-//                cell = cell1
             }
-//            cell.selectionStyle = .none
-//            return cell
         default:
             return UITableViewCell()
         }
@@ -342,7 +329,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 IsPaypalSelected = !IsPaypalSelected
             } else {
                 IsPaypalSelected = false
-                IsWalletSelected = false
                 IsBrainTreeSelected = !IsBrainTreeSelected
             }
         default:
@@ -413,7 +399,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     controller.isHideSubmitButton = false
                     controller.submitBtnTitle = "OK               "
                     controller.cancelBtnTitle = ""
-                    controller.strDescription = ""
+                    controller.strDescription = "Your order has been placed"
                     controller.strPopupTitle = "Payment Successful"
                     controller.submitBtnColor = colors.appGreenColor
                     controller.cancelBtnColor = colors.appRedColor
