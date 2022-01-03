@@ -418,22 +418,28 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     controller.submitBtnColor = colors.appGreenColor
                     controller.cancelBtnColor = colors.appRedColor
                     controller.strPopupImage = "ic_popupPaymentSucessful"
-                    controller.isCancleOrder = true
-                    controller.tap.isEnabled = false
+                    
                     self.orderid = json["order_id"].stringValue
+                    //MARK: -  Uncomment Below  line
                     self.socketManageSetup()
                     NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
                     NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderPushGet), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+                    NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
                     controller.btnSubmit = {
                         if let TabVC =  appDel.window?.rootViewController?.children.first {
                             if TabVC.isKind(of: CustomTabBarVC.self) {
                                 SingletonClass.sharedInstance.selectInProcessInMyOrder = true
                                 let vc = TabVC as! CustomTabBarVC
-                                vc.selectedIndex = 2
-//                                if let nav = vc.viewControllers?[2] as? UINavigationController {
-//                                        nav.popToRootViewController(animated: false)
+
+                               
+//                                for controller in self.navigationController!.viewControllers as Array {
+//                                    if controller.isKind(of: SearchVC.self) {
+//                                        self.navigationController!.popToViewController(controller, animated: true)
+//                                        break
+//                                    }
 //                                }
-                                
+                                vc.selectedIndex = 2
                             }
                         }
                     }
@@ -474,6 +480,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
     }
     
     @objc func ShareOrderPushGet(){
+        self.timer?.invalidate()
+    }
+    @objc func CancelOrderGet(_ Notification: NSNotification){
+
         self.timer?.invalidate()
     }
     func refreshAddPaymentScreen() {

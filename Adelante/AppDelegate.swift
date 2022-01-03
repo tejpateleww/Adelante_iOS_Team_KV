@@ -62,6 +62,7 @@ import Braintree
 //    }
     func setUpLocationServices() {
         locationManager = CLLocationManager()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
         if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
@@ -328,7 +329,7 @@ import Braintree
         completionHandler([.alert, .sound])
         
         let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type")
-
+        
 //        if key as? String ?? "" == PushNotifications.logout.Name {
             self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
 //        } else {
@@ -441,7 +442,9 @@ extension AppDelegate {
             
         case PushNotifications.ShareOrderAccept.Name:
 //            SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+            let orderID = (userData as NSDictionary).object(forKey: "gcm.notification.order_id") as? String
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil, userInfo: ["orderID" : orderID ?? ""])
         default:
             break
         }

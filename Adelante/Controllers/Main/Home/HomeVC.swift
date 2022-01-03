@@ -936,16 +936,27 @@ extension HomeVC{
         print(#function)
         NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderPushGet), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
+        if self.orderIdArray.isEmpty{
+            self.timerSocket?.invalidate()
+        }
         self.orderIdArray.forEach({
-//            if orderid == $0{
-//                
-//            }
             emitSocketUpdateLocation(orderId: $0)
         })
         
     }
-    @objc func ShareOrderPushGet(){
-        self.timerSocket?.invalidate()
+    @objc func ShareOrderPushGet(_ Notification: NSNotification){
+//        self.timerSocket?.invalidate()
+        if let orderID = Notification.userInfo?["orderID"] as? String{
+            self.orderIdArray.removeAll(where: {$0 == orderID})
+        }
+    }
+    @objc func CancelOrderGet(_ Notification: NSNotification){
+//        self.timerSocket?.invalidate()
+        if let orderID = Notification.userInfo?["orderID"] as? String{
+            self.orderIdArray.removeAll(where: {$0 == orderID})
+        }
     }
     func emitSocketUpdateLocation(orderId: String) {
         print(#function)

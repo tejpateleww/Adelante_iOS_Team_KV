@@ -28,6 +28,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         super.init()
 
         self.locationManager = CLLocationManager()
+        self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         guard let locationManager = self.locationManager else {
             return
         }
