@@ -59,6 +59,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         button.addTarget(self, action: #selector(buttonTapFavorite), for: .touchUpInside)
         NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantList, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavList), name: notifRefreshRestaurantList, object: nil)
+        self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
     }
     func registerNIB(){
         tblMainList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")

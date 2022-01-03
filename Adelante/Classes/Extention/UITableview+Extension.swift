@@ -20,9 +20,15 @@ extension UITableView {
         messageLabel.sizeToFit()
 
         self.backgroundView = messageLabel
-//        self.separatorStyle = .none
     }
-
+    func setDataImage(image:String) {
+        let Mainview  = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        let imageView = UIImageView(frame:CGRect(x: 0 , y: 0, width: 140, height: 140))
+        imageView.center = CGPoint(x: Mainview.frame.size.width / 2, y: Mainview.frame.size.height / 2)
+        imageView.image = UIImage(named: image)
+        Mainview.addSubview(imageView)
+        self.backgroundView = Mainview
+    }
     func restore() {
         self.backgroundView = nil
 //        self.separatorStyle = .singleLine

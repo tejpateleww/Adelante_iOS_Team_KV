@@ -80,7 +80,7 @@ extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() )"
             case "discount":
                 cell.lblOfferDescription.text = "Get \(PromoCodeList[indexPath.row].percentage ?? "")% discount"
-                cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get \(PromoCodeList[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() )"
+                cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get \(PromoCodeList[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() )"
             default:
                 break
             }

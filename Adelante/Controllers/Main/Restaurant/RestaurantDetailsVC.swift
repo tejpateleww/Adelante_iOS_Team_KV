@@ -839,21 +839,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         controller.delegateAddVariant = self
                         self.strItemId = self.arrMenuitem[indexPath.row].id
                         self.navigationController?.pushViewController(controller, animated: true)
-                        //                        self.arrItemList = [ItemList]()
-                        //                        self.tblPopup.showAnimatedSkeleton()
-                        //                        self.tblPopup.reloadData()
-                        //                        self.ViewForBottom.constant = 0
-                        //                        self.viewPopup.layoutIfNeeded()
-                        //                        self.viewPopup.layoutSubviews()
-                        //                        self.viewBG.isHidden = false
-                        //                        self.viewPopup.isHidden = false
-                        //                        UIView.animate(withDuration: 0.6, animations: {
-                        //                            //                                self.view.layoutIfNeeded()
-                        //                        }){ (success) in
-                        //                            self.isfromMenu = false
-                        //                            self.webserviceItemList(strItemId: self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartItemId)
-                        //                            self.selectedIndexItem = IndexPath(row: indexPath.row, section: indexPath.section)
-                        //                        }
                     }else{
                         let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                         if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > value {

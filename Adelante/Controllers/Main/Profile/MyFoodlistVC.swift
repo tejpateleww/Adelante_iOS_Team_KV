@@ -59,7 +59,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
         addNavBarImage(isLeft: true, isRight: true)
-        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.clearAll.value], isTranslucent: true, isShowHomeTopBar: false)
+        setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
     }
     override func btnClearAllClick() {
         webserviceRemoveCart()
@@ -70,7 +70,6 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     override func btnBackAction() {
-//        super.btnBackAction()
         if isfromcheckout == true{
             if let TabVC =  appDel.window?.rootViewController?.children.first {
                 if TabVC.isKind(of: CustomTabBarVC.self) {
@@ -78,10 +77,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                     vc.selectedIndex = 3
                 }
             }
-        }else{
+        }else {
             super.btnBackAction()
         }
-        
     }
     
     // MARK: - IBActions
@@ -202,7 +200,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let myfoodlistData = MyFoodLIstResModel.init(fromJson: response)
                 self.arrOrderData = myfoodlistData.data.item
                 self.objFoodlist = myfoodlistData.data
-                
+                if myfoodlistData.data.item.count != 0 {
+                    self.setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.clearAll.value], isTranslucent: true, isShowHomeTopBar: false)
+                }
                 self.tblFoodLIst.reloadData()
                 DispatchQueue.main.async {
                     self.refreshList.endRefreshing()
@@ -233,6 +233,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             // self.hideHUD()
             if(status) {
                 Utilities.showAlertOfAPIResponse(param: json["message"].string ?? "", vc: self)
+                self.setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
                 self.arrOrderData.removeAll()
                 self.webserviceGetFoodlist()
             } else {

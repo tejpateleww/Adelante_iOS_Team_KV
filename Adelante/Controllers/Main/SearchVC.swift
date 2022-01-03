@@ -40,6 +40,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         tblRestaurant.isHidden = false
         tblFoodList.isHidden = true
         tblFoodList.tableFooterView = UIView()
+        tblRestaurant.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
+        tblFoodList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
@@ -47,8 +49,10 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         if txtSearch.text!.isEmptyOrWhitespace(){
-            self.tblRestaurant.setEmptyMessage("Search something")
-            self.tblFoodList.setEmptyMessage("Search something")
+            self.tblRestaurant.setDataImage(image: "Restaurant")
+            self.tblFoodList.setDataImage(image: "MyFoodlist")
+//            self.tblRestaurant.backgroundView = UIImageView(image: UIImage(named: "Restaurant"))//setEmptyMessage("Search Something")
+//            self.tblFoodList.backgroundView = UIImageView(image: UIImage(named: "MyFoodlist"))//setEmptyMessage("Search Something")
         }
     }
     @objc func refreshFavList() {
@@ -73,23 +77,32 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tblRestaurant {
-            let cell = tblRestaurant.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
-            cell.lblAreaName.text = arrSearchRestList[indexPath.row].name
-            cell.lblAddress.text = arrSearchRestList[indexPath.row].address
-            cell.lblMiles.text = arrSearchRestList[indexPath.row].distance
-            let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestList[indexPath.row].image ?? "")"
-            cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-            cell.btnFavorite.tag = indexPath.row
-            cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
-            if arrSearchRestList[indexPath.row].favourite == "1"{
-                cell.btnFavorite.isSelected = true
-            }else{
-                cell.btnFavorite.isSelected = false
-            }
-            cell.selectionStyle = .none
-            return cell
+//            if arrSearchRestList.count != 0{
+                let cell = tblRestaurant.dequeueReusableCell(withIdentifier: RestaurantOutletListCell.reuseIdentifier,for: indexPath) as! RestaurantOutletListCell
+                cell.lblAreaName.text = arrSearchRestList[indexPath.row].name
+                cell.lblAddress.text = arrSearchRestList[indexPath.row].address
+                cell.lblMiles.text = arrSearchRestList[indexPath.row].distance
+                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestList[indexPath.row].image ?? "")"
+                cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                cell.btnFavorite.tag = indexPath.row
+                cell.btnFavorite.addTarget(self, action: #selector(btnTapFavorite(_:)), for: .touchUpInside)
+                if arrSearchRestList[indexPath.row].favourite == "1"{
+                    cell.btnFavorite.isSelected = true
+                }else{
+                    cell.btnFavorite.isSelected = false
+                }
+                cell.selectionStyle = .none
+                return cell
+//            }else {
+//                let NoDatacell = tblRestaurant.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+//                NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
+//                NoDatacell.lblNoDataTitle.isHidden = true
+//                NoDatacell.selectionStyle = .none
+//                return NoDatacell
+//            }
         }else{
-            let cell:searchFoodLIstCell = tblFoodList.dequeueReusableCell(withIdentifier: "searchFoodLIstCell", for: indexPath) as! searchFoodLIstCell
+//            if arrSearchRestList.count != 0{
+            let cell:searchFoodLIstCell = tblFoodList.dequeueReusableCell(withIdentifier: searchFoodLIstCell.reuseIdentifier, for: indexPath) as! searchFoodLIstCell
             cell.lblComboTitle.text = arrSearchRestItemList[indexPath.row].name
             cell.lblPrice.text = (CurrencySymbol) + arrSearchRestItemList[indexPath.row].price
             cell.lblDisc.text = arrSearchRestItemList[indexPath.row].descriptionField
@@ -156,6 +169,13 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                 }
             }
             return cell
+//            }else {
+//                let NoDatacell = tblMainList.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as! NoDataTableViewCell
+//                NoDatacell.imgNoData.image = UIImage(named: "Restaurant")
+//                NoDatacell.lblNoDataTitle.isHidden = true
+//                NoDatacell.selectionStyle = .none
+//                return NoDatacell
+//            }
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -238,8 +258,10 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                 self.arrSearchRestList = result.data.restaurant
                 self.arrSearchRestItemList = result.data.restaurantItem
                 if self.txtSearch.text == ""{
-                    self.tblRestaurant.setEmptyMessage("Search something")
-                    self.tblFoodList.setEmptyMessage("Search something")
+                    self.tblRestaurant.setDataImage(image: "Restaurant")
+                    self.tblFoodList.setDataImage(image: "MyFoodlist")
+//                    self.tblRestaurant.backgroundView = UIImageView(image: UIImage(named: "Restaurant"))//setEmptyMessage("Search Something")
+//                    self.tblFoodList.backgroundView = UIImageView(image: UIImage(named: "MyFoodlist"))//setEmptyMessage("Search Something")
                 }
                 self.tblRestaurant.reloadData()
                 self.tblFoodList.reloadData()
@@ -281,26 +303,31 @@ extension SearchVC:UISearchBarDelegate{
     }
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if txtSearch.text == ""{
-            self.tblRestaurant.setEmptyMessage("Search something")
-            self.tblFoodList.setEmptyMessage("Search something")
+            self.tblRestaurant.setDataImage(image: "Restaurant")
+            self.tblFoodList.setDataImage(image: "MyFoodlist")
+//            self.tblRestaurant.backgroundView = UIImageView(image: UIImage(named: "Restaurant"))//setEmptyMessage("Search Something")
+//            self.tblFoodList.backgroundView = UIImageView(image: UIImage(named: "MyFoodlist"))//setEmptyMessage("Search Something")
         }
         return true
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         txtSearch.text = ""
         if txtSearch.text == ""{
-            self.tblRestaurant.setEmptyMessage("Search something")
-            self.tblFoodList.setEmptyMessage("Search something")
+            self.tblRestaurant.setDataImage(image: "Restaurant")
+            self.tblFoodList.setDataImage(image: "MyFoodlist")
+//            self.tblRestaurant.backgroundView = UIImageView(image: UIImage(named: "Restaurant"))//setEmptyMessage("Search Something")
+//            self.tblFoodList.backgroundView = UIImageView(image: UIImage(named: "MyFoodlist"))//setEmptyMessage("Search Something")
         }
     }
     @objc private func makeNetworkCall(_ query: String)
     {
         if query == ""{
             if txtSearch.text == ""{
-                self.tblRestaurant.setEmptyMessage("Search something")
-                self.tblFoodList.setEmptyMessage("Search something")
+                self.tblRestaurant.setDataImage(image: "Restaurant")
+                self.tblFoodList.setDataImage(image: "MyFoodlist")
+//                self.tblRestaurant.backgroundView = UIImageView(image: UIImage(named: "Restaurant"))//setEmptyMessage("Search Something")
+//                self.tblFoodList.backgroundView = UIImageView(image: UIImage(named: "MyFoodlist"))setEmptyMessage("Search Something")
             }
-            //            webserviceSearchModel(strSearch: query)
             arrSearchRestList.removeAll()
             arrSearchRestItemList.removeAll()
             tblRestaurant.reloadData()

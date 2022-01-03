@@ -90,7 +90,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
             controller.isHideSubmitButton = false
             controller.submitBtnTitle = "OK               "
             controller.cancelBtnTitle = ""
-            controller.strDescription = ""
+            controller.strDescription = "Your order has been placed"
             controller.strPopupTitle = "Payment Successful"
             controller.submitBtnColor = colors.appGreenColor
             controller.cancelBtnColor = colors.appRedColor

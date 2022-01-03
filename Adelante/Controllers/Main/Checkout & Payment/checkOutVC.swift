@@ -30,7 +30,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
     var addRemoveItem : ((Int,Int)->())?
     let activityView = UIActivityIndicatorView(style: .gray)
     var strCartId = ""
-    var isfromPromocode : Bool = false
     var SettingsData : SettingsResModel!
     var locationManager = CLLocationManager()
 //    var locationManager : LocationService?
@@ -64,7 +63,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
     
     // MARK: - ViewController Lifecycle
     
-    func ApplyPromocode() {
+    @objc func ApplyPromocode() {
         
         if AppliedPromocode != nil {
             btnAppyPromoCode.isHidden = true
@@ -90,7 +89,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.checkOutVC.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.GetPromocodeData(notification:)), name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ApplyPromocode), name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
 //        location()
         webserviceGetCartDetails()
     }
@@ -104,15 +103,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         self.skeletonData.stopSkeletonAnimation()
     }
     // MARK: - Other Methods
-//    func getLocation() -> Bool {
-//        if SingletonClass.sharedInstance. == nil{
-//            self.locationManager = LocationService()
-//            self.locationManager.startUpdatingLocation()
-//            return false
-//        }else{
-//            return true
-//        }
-//    }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         tblOrderDetails.layer.removeAllAnimations()
         tblOrderDetailsHeight.constant = tblOrderDetails.contentSize.height
@@ -191,7 +181,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             arrayForTitle.removeAll()
             arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
             var cnt = 1
-            if AppliedPromocode?.promocodeType == "discount" || cartDetails?.promocode != ""{
+            if cartDetails?.promocodeType == "discount" {
                 arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())//+ "( \(cartDetails?.discount ?? ""))")
                 cnt = cnt + 1
             }
@@ -261,16 +251,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             case "checkOutVC_arrayForTitle_title1".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.serviceFee ?? "")"
             case "checkOutVC_arrayForTitle_title2".Localized():
-                if AppliedPromocode?.promocodeType == "discount"{
-                    cell.lblPrice.text = "\(CurrencySymbol)\(AppliedPromocode?.totalRound ?? "")"
-                }else{
-                    cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
-                }
+                cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
             case "checkOutVC_arrayForTitle_title3".Localized():
-                if AppliedPromocode?.promocodeType == "discount"{
-                    cell.lblPrice.text = "- \(CurrencySymbol)\(AppliedPromocode?.discountAmount ?? "")"
-                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(AppliedPromocode?.discount ?? "0")%)"
-                }else if cartDetails?.promocode != ""{
+                if cartDetails?.promocodeType == "discount" {
                     cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(cartDetails?.discount ?? "0")%)"
                     cell.lblPrice.text = "- \(CurrencySymbol)\(cartDetails?.discountAmount ?? "")"
                 }
@@ -312,6 +295,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
     }
     @IBAction func BtnCancelPromocodeClick(_ sender: Any) {
         webserviceRemovePromocode()
+        webserviceGetCartDetails()
     }
     @IBAction func btnReadPolicyTap(_ sender: Any) {
         webserviceGetSettings()
@@ -322,7 +306,12 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         vc.cartID = cartDetails?.cartId ?? ""
         vc.ApplyPromoAmount = { promocodeApplyData in
             self.AppliedPromocode = promocodeApplyData
+            self.cartDetails?.discountAmount = self.AppliedPromocode?.discountAmount
+            self.cartDetails?.promocodeType = self.AppliedPromocode?.promocodeType
+            self.cartDetails?.totalRound = self.AppliedPromocode?.totalRound
+            self.cartDetails?.promocode = self.AppliedPromocode?.name
             self.LblTotlaPrice.text = "\(CurrencySymbol)\(self.AppliedPromocode?.grandTotal ?? "")"
+            self.cartDetails?.discount = self.AppliedPromocode?.discount
             self.cartDetails?.total = self.AppliedPromocode?.oldTotal
             self.cartDetails?.tax = self.AppliedPromocode?.tax
             self.cartDetails?.serviceFee = self.AppliedPromocode?.serviceFee
@@ -338,7 +327,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         vc.cartID = cartDetails?.cartId ?? ""
         
         vc.ApplyPromoAmount = { promocodeApplyData in
+            
             self.AppliedPromocode = promocodeApplyData
+            self.cartDetails?.discountAmount = self.AppliedPromocode?.discountAmount
+            self.cartDetails?.promocodeType = self.AppliedPromocode?.promocodeType
+            self.cartDetails?.totalRound = self.AppliedPromocode?.totalRound
+            self.cartDetails?.discount = self.AppliedPromocode?.discount
+            self.cartDetails?.promocode = self.AppliedPromocode?.name
             self.LblTotlaPrice.text = "\(CurrencySymbol)\(self.AppliedPromocode?.grandTotal ?? "")"
             self.cartDetails?.total = self.AppliedPromocode?.oldTotal
             self.cartDetails?.tax = self.AppliedPromocode?.tax
@@ -376,6 +371,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
     
     @IBAction func canclePromoCode(_ sender: myOrdersBtn) {
         webserviceRemovePromocode()
+        self.webserviceGetCartDetails()
     }
     
     @IBAction func btnChangeLocationClicked(_ sender: Any) {
@@ -492,7 +488,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 }
                 self.setData()
                 self.location()
-                self.webserviceGetCartDetails()
             }
             else
             {
@@ -529,7 +524,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 self.btnAppyPromoCode.titleLabel?.textAlignment = .left
                 self.lblPromoCode.text = ""
                 self.tblOrderDetails.reloadData()
-                
+//                self.webserviceGetCartDetails()
             } else {
                 if let strMessage = json["message"].string {
                     Utilities.displayAlert(strMessage)
