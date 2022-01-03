@@ -124,7 +124,6 @@ class AddCardVC: BaseViewController,FormTextFieldDelegate {
         else if txtDate.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).count == 0 {
             isValidate = false
             ValidatorMessage = "Please enter expiry date"
-            
         } else if txtCvv.text!.isEmptyOrWhitespace() {
             isValidate = false
             ValidatorMessage = "Please enter cvv"

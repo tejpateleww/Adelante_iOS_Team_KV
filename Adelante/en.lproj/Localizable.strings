@@ -301,7 +301,8 @@
 "MessagePassword" = "Password do not match";
 "MessageNoIntenet" = "Something went wrong";
 //"MessageQtyNotAvailable" = "The item %@ has only %@ quantities.";
-"MessageQtyNotAvailable" = "No stock available for this item";
+//"MessageQtyNotAvailable" = "No stock available for this item";
+"MessageQtyNotAvailable" = "Requested quantity is not available";
 
 //Empty Messages
 "emptyMsg_Common" = "No Records Found.";

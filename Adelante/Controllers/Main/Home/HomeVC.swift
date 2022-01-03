@@ -44,14 +44,14 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var selectedRestaurantId = ""
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
-    var selectedIndex = 0
+    var selectedIndex = 4
     var selectedIndexgray = 0
     var orderIdArray : [String] = []
     var PlaceName = userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String
     let activityView = UIActivityIndicatorView(style: .white)
     var timer: Timer?
     var timerSocket : Timer?
-
+    var responseStatus : webserviceResponse = .initial
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -689,7 +689,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         Deshboard.tab_filter = strTabfilter
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
-            responseStatus = .gotData
+            self.responseStatus = .gotData
             if status{
                 let Homedata = DashBoardResModel.init(fromJson: response)
                 let cell = self.tblMainList.dequeueReusableCell(withIdentifier: HomeSkeletonCell.reuseIdentifier) as! HomeSkeletonCell

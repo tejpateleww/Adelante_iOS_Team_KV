@@ -200,7 +200,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let myfoodlistData = MyFoodLIstResModel.init(fromJson: response)
                 self.arrOrderData = myfoodlistData.data.item
                 self.objFoodlist = myfoodlistData.data
-                if myfoodlistData.data.item.count != 0 {
+                if self.arrOrderData.count != 0 {
                     self.setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.clearAll.value], isTranslucent: true, isShowHomeTopBar: false)
                 }
                 self.tblFoodLIst.reloadData()
@@ -211,12 +211,8 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
             else
             {
                 self.arrOrderData.removeAll()
+                self.setNavigationBarInViewController(controller: self, naviColor: colors.appOrangeColor.value, naviTitle: NavTitles.myFoodlist.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
                 self.tblFoodLIst.reloadData()
-//                if let strMessage = response["message"].string {
-//                    Utilities.displayAlert(strMessage)
-//                }else {
-//                    Utilities.displayAlert("Something went wrong")
-//                }
             }
             if self.arrOrderData.count == 0{
                 self.btnAddtoCart.isHidden = true
@@ -255,9 +251,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: false){ (json, status, response) in
             if(status)
             {
-                let cartData = updateCartResModel.init(fromJson: json)
                 self.webserviceGetFoodlist()
-                self.tblFoodLIst.reloadData()
             }
             else
             {

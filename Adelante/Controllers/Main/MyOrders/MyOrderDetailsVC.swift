@@ -171,6 +171,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                             stackParkingList.subviews[0].isHidden = true
                             stackParkingList.subviews[1].isHidden = false
                             stackParkingList.subviews[2].isHidden = false
+                            if arrVehicle.count != 0{
+                                TxtParkingNo.text = arrVehicle[0].parking_no
+                            }
 //                            LblcurbsideParkingPickup.superview?.isHidden = true
                             self.CurbSideYesBtn.isSelected = true
                             self.CurbSideNoBtn.isSelected = false

@@ -60,6 +60,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         if let _ = SingletonClass.sharedInstance.selectInProcessInMyOrder{
+            arrInProcessList.removeAll()
+            responseStatus = .initial
+            self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
             self.segment.setIndex(1)
             self.segmentControlChanged(self.segment)
         }

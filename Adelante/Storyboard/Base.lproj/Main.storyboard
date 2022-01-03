@@ -2187,14 +2187,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="C8p-Rg-VNk">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="781"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-Ln-P1R">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-Ln-P1R">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="714"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-a4-mfH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-a4-mfH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="291"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                                <rect key="frame" x="18" y="55" width="378" height="232"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
+                                                                <rect key="frame" x="18" y="55" width="378" height="216"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -2236,11 +2236,11 @@
                                                                             </view>
                                                                         </subviews>
                                                                     </stackView>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                        <rect key="frame" x="0.0" y="166" width="378" height="66"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
+                                                                        <rect key="frame" x="0.0" y="166" width="378" height="50"/>
                                                                         <subviews>
-                                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
+                                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="34"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2258,8 +2258,8 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textView>
-                                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="65" width="378" height="1"/>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="49" width="378" height="1"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -4637,6 +4637,13 @@
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                         <textInputTraits key="textInputTraits"/>
                                                                                     </textField>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_expand" translatesAutoresizingMaskIntoConstraints="NO" id="MVR-Op-gIu">
+                                                                                        <rect key="frame" x="208" y="72" width="15" height="15"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="height" constant="15" id="9FW-bg-quP"/>
+                                                                                            <constraint firstAttribute="width" secondItem="MVR-Op-gIu" secondAttribute="height" multiplier="1:1" id="OdM-Gi-psM"/>
+                                                                                        </constraints>
+                                                                                    </imageView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYu-KS-ECD" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                                                         <rect key="frame" x="248" y="54.5" width="120" height="50"/>
                                                                                         <constraints>
@@ -4659,6 +4666,8 @@
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="bottom" secondItem="3cR-eC-MgS" secondAttribute="bottom" constant="15" id="CC0-2e-gb4"/>
+                                                                                    <constraint firstItem="MVR-Op-gIu" firstAttribute="trailing" secondItem="3cR-eC-MgS" secondAttribute="trailing" constant="-10" id="CpF-89-WGW"/>
+                                                                                    <constraint firstItem="MVR-Op-gIu" firstAttribute="centerY" secondItem="3cR-eC-MgS" secondAttribute="centerY" id="Ezd-r7-0m2"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="FYu-KS-ECD" secondAttribute="trailing" constant="10" id="G1t-sM-klg"/>
                                                                                     <constraint firstItem="HS5-oE-Bvg" firstAttribute="leading" secondItem="6HO-zJ-y3x" secondAttribute="leading" constant="5" id="Mig-bX-8X3"/>
                                                                                     <constraint firstItem="FYu-KS-ECD" firstAttribute="centerY" secondItem="3cR-eC-MgS" secondAttribute="centerY" id="NDE-ME-Hfr"/>
@@ -10205,14 +10214,71 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
+        <designable name="0kK-8b-MA7">
+            <size key="intrinsicContentSize" width="195" height="32"/>
+        </designable>
+        <designable name="0t8-U3-ebv">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="2Ut-AC-9Qr">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
         <designable name="2fI-hX-w88">
             <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="4rN-z1-ohE">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="G78-jH-dfh">
+            <size key="intrinsicContentSize" width="195" height="32"/>
         </designable>
         <designable name="HGY-kw-5YU">
             <size key="intrinsicContentSize" width="210" height="30"/>
         </designable>
+        <designable name="IOt-oG-ldn">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="JpT-yH-Jap">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="M00-EB-i9S">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
         <designable name="Q44-Lk-LSf">
             <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="QPd-3g-SxC">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="Tme-wR-K6Z">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+        <designable name="cc0-dj-TGl">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="cpW-fr-cqC">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="lWD-a0-7KT">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="mJ2-zK-PS6">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="nWr-lG-oph">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="oP7-OM-AFy">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+        <designable name="pGH-j9-vWm">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="ypJ-aF-6Y5">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        </designable>
+        <designable name="zNM-X4-rQ4">
+            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
         </designable>
     </designables>
     <resources>
@@ -10243,6 +10309,7 @@ avoid cancellations </string>
         <image name="ic_dummyMasterCard" width="45" height="28.5"/>
         <image name="ic_dummyVisa" width="45" height="28.5"/>
         <image name="ic_dummycirrus" width="45" height="28.5"/>
+        <image name="ic_expand" width="15" height="8.5"/>
         <image name="ic_favouriteSelected" width="27" height="27"/>
         <image name="ic_paymentSelected" width="24" height="24"/>
         <image name="ic_policyCancellation" width="15" height="20"/>
