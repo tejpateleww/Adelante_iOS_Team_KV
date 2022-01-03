@@ -181,7 +181,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             arrayForTitle.removeAll()
             arrayForTitle.append("checkOutVC_arrayForTitle_title".Localized())
             var cnt = 1
-            if cartDetails?.promocodeType == "discount" {
+            if cartDetails?.promocodeType == "discount" || cartDetails?.promocodeType == "flat" {
                 arrayForTitle.append("checkOutVC_arrayForTitle_title3".Localized())//+ "( \(cartDetails?.discount ?? ""))")
                 cnt = cnt + 1
             }
@@ -253,7 +253,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             case "checkOutVC_arrayForTitle_title2".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
             case "checkOutVC_arrayForTitle_title3".Localized():
-                if cartDetails?.promocodeType == "discount" {
+                if cartDetails?.promocodeType == "discount" || cartDetails?.promocodeType == "flat" {
                     cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(cartDetails?.discount ?? "0")%)"
                     cell.lblPrice.text = "- \(CurrencySymbol)\(cartDetails?.discountAmount ?? "")"
                 }
@@ -524,7 +524,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 self.btnAppyPromoCode.titleLabel?.textAlignment = .left
                 self.lblPromoCode.text = ""
                 self.tblOrderDetails.reloadData()
-//                self.webserviceGetCartDetails()
+                self.webserviceGetCartDetails()
             } else {
                 if let strMessage = json["message"].string {
                     Utilities.displayAlert(strMessage)

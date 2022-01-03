@@ -187,7 +187,7 @@
 "RestaurantDetailsVC_lblEastern" = "Eastern";
 "RestaurantDetailsVC_lblAboutRestaurant" = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.";
 "RestaurantDetailsVC_btnViewPolicy" = "View Store Policy";
-"RestaurantDetailsVC_RestaurantDetailsCell_btnCustomize" = "Customize";
+"RestaurantDetailsVC_RestaurantDetailsCell_btnCustomize" = "Customizable";
 "RestaurantDetailsVC_lblNoOfItem" = "%@ Item ";
 "RestaurantDetailsVC_lblSign" = "|";
 "RestaurantDetailsVC_lblViewCart" = "View Cart";

@@ -21,6 +21,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
     var strcartitemid = ""
     var objFoodlist : myFoodlistDatum?
     var isfromcheckout : Bool = false
+    var IsGoToCheckOut: Bool = false
     let activityView = UIActivityIndicatorView(style: .gray)
     var restaurantid = ""
     // MARK: - IBOutlet
@@ -69,19 +70,25 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         self.customTabBarController?.hideTabBar()
     }
     
-    override func btnBackAction() {
-        if isfromcheckout == true{
-            if let TabVC =  appDel.window?.rootViewController?.children.first {
-                if TabVC.isKind(of: CustomTabBarVC.self) {
-                    let vc = TabVC as! CustomTabBarVC
-                    vc.selectedIndex = 3
+//    override func btnBackAction() {
+//
+//    }
+    override func viewWillDisappear(_ animated: Bool) {
+        if !IsGoToCheckOut{
+            if isfromcheckout == true{
+                if let TabVC =  appDel.window?.rootViewController?.children.first {
+                    if TabVC.isKind(of: CustomTabBarVC.self) {
+                        let vc = TabVC as! CustomTabBarVC
+                        vc.selectedIndex = 3
+                    }
                 }
+            }else {
+                btnBackAction()
             }
-        }else {
-            super.btnBackAction()
         }
+        super.viewWillDisappear(true)
+       
     }
-    
     // MARK: - IBActions
     
     @IBAction func btnAddToCartClick(_ sender: Any) {
@@ -271,6 +278,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let vc =  AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "RestaurantDetailsVC") as! RestaurantDetailsVC
                 vc.isFromFoodlist = true
                 vc.selectedRestaurantId = self.restaurantid
+                self.IsGoToCheckOut = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else

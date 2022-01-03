@@ -562,7 +562,20 @@ class Utilities:NSObject{
         
         return nil
     }
-    
+    class func appTopViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return appTopViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return appTopViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return appTopViewController(controller: presented)
+        }
+        return controller
+    }
 }
 
 
