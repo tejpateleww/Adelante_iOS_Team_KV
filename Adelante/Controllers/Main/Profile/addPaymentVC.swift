@@ -145,6 +145,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
    
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
+       
     }
     //MARK: -tblViewMethods
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -417,15 +418,18 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                             if TabVC.isKind(of: CustomTabBarVC.self) {
                                 SingletonClass.sharedInstance.selectInProcessInMyOrder = true
                                 let vc = TabVC as! CustomTabBarVC
-
-                               
-//                                for controller in self.navigationController!.viewControllers as Array {
-//                                    if controller.isKind(of: SearchVC.self) {
-//                                        self.navigationController!.popToViewController(controller, animated: true)
-//                                        break
-//                                    }
-//                                }
-                                vc.selectedIndex = 2
+                                
+                                for controllers in self.navigationController!.viewControllers as Array {
+                                    if controllers.isKind(of: SearchVC.self) {
+                                        
+                                        self.navigationController?.viewControllers.first?.navigationController?.popToRootViewController(animated: false)
+                                        break
+                                    }
+                                }
+                                DispatchQueue.main.async {
+                                    vc.selectedIndex = 2
+                                }
+                                
                             }
                         }
                     }
@@ -561,18 +565,7 @@ extension addPaymentVC{
         SocketIOManager.shared.establishConnection()
         //MARK: -====== Socket connection =======
         
-        print("==============\(SocketIOManager.shared.socket.status)=====================",SocketIOManager.shared.socket.status.active)
-        if(timer == nil){
-            timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
-                print(timer)
-                if SocketIOManager.shared.socket.status.active{
-//                    self.allSocketOffMethods()
-//                    self.emitSocketUserConnect()
-//                    self.allSocketOnMethods()
-                    self.emitSocketUpdateLocation()
-                }
-            })
-        }
+   
     }
     
     
@@ -600,6 +593,18 @@ extension addPaymentVC{
     func onSocketConnectUser(){
         SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
             print(#function, "\n ", json)
+            print("==============\(SocketIOManager.shared.socket.status)=====================",SocketIOManager.shared.socket.status.active)
+            if(self.timer == nil){
+                self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
+                    print(timer)
+                    if SocketIOManager.shared.socket.status.active{
+    //                    self.allSocketOffMethods()
+    //                    self.emitSocketUserConnect()
+    //                    self.allSocketOnMethods()
+                        self.emitSocketUpdateLocation()
+                    }
+                })
+            }
         }
     }
     

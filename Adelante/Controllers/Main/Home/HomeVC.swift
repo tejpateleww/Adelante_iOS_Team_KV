@@ -940,6 +940,7 @@ extension HomeVC{
         NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
         if self.orderIdArray.isEmpty{
             self.timerSocket?.invalidate()
+            self.allSocketOffMethods()
         }
         self.orderIdArray.forEach({
             emitSocketUpdateLocation(orderId: $0)

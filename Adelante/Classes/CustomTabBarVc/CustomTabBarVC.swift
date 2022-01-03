@@ -174,7 +174,7 @@ class CustomTabBarVC: UITabBarController,UITabBarControllerDelegate {
             tabBarController.selectedIndex = lastSelectedIndex
             }
         }
-        if tabBarController.selectedIndex == 0 {
+        if tabBarController.selectedIndex == 0  {
             if let navVc = tabBarController.children.first {
                 if navVc.isKind(of: UINavigationController.self) {
                     let vc = navVc as! UINavigationController

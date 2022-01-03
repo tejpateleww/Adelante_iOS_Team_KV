@@ -31,6 +31,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     // MARK: - ViewController Lifecycl
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         txtSearch.delegate = self
         tblRestaurant.refreshControl = refreshList
         tblFoodList.refreshControl = refreshList
@@ -43,9 +44,11 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         tblRestaurant.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
         tblFoodList.register(UINib(nibName:"NoDataTableViewCell", bundle: nil), forCellReuseIdentifier: "NoDataTableViewCell")
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         if txtSearch.text!.isEmptyOrWhitespace(){
@@ -67,6 +70,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         tblFoodList.delegate = self
         tblFoodList.dataSource = self
     }
+
     //MARK: - UITableview Delegate and Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblRestaurant {
@@ -265,6 +269,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                 }
                 self.tblRestaurant.reloadData()
                 self.tblFoodList.reloadData()
+                self.view.endEditing(true)
             }else{
                 if let strMessage = response["message"].string {
                     Utilities.displayAlert(strMessage)
