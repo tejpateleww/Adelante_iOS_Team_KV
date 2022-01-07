@@ -639,7 +639,18 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: true, completion: { (json, status, response) in
             if(status)
             {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil, userInfo: ["orderID" : orderID])
+              
+                if let TabVC =  appDel.window?.rootViewController?.children.first {
+                    if TabVC.isKind(of: CustomTabBarVC.self) {
+                        let vc = TabVC as! CustomTabBarVC
+                        if let homevc = vc.children.first?.children.first as? HomeVC{
+                            homevc.orderIdArray.removeAll(where: {$0 == orderID})
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil, userInfo: nil)
+                        }
+                    }
+                }
+                
+                
                 self.webserviceGetOrderDetail(selectedOrder: self.selectedSegmentTag == 0 ? "past" : self.selectedSegmentTag == 1 ? "In-Process" : "share")
             }
             else
@@ -687,7 +698,20 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     self.segment.setIndex(1)
                     self.selectedSegmentTag = 1
                     self.segmentControlChanged(self.segment)
-                    self.socketManageSetup()
+                    if let TabVC =  appDel.window?.rootViewController?.children.first {
+                        if TabVC.isKind(of: CustomTabBarVC.self) {
+                            let vc = TabVC as! CustomTabBarVC
+                            if let homevc = vc.children.first?.children.first as? HomeVC{
+                                homevc.orderIdArray.append(self.strOrderId)
+                                let order_user_id = json["order_user_id"].stringValue
+                                self.emitShareOrderAccept(order_user_id: order_user_id, order_id: self.strOrderId)
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil, userInfo: nil)
+                                }
+                                
+                            }
+                        }
+                    }
                 }
                 
                 alertController.addAction(okAction)
@@ -744,116 +768,24 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
 }
 extension MyOrdersVC{
-    func socketManageSetup(){
-        SocketIOManager.shared.establishSocketConnection()
-        allSocketOffMethods()
-        self.SocketOnMethods()
-    }
-    
-    func SocketOnMethods() {
-        
-        SocketIOManager.shared.socket.on(clientEvent: .disconnect) { (data, ack) in
-            print ("socket is disconnected please reconnect")
-            SocketIOManager.shared.isSocketOn = false
-        }
-        
-        SocketIOManager.shared.socket.on(clientEvent: .reconnect) { (data, ack) in
-            print ("socket is reconnected")
-            SocketIOManager.shared.isSocketOn = true
-            
-        }
-        
-        
-        print("===========\(SocketIOManager.shared.socket.status)========================",SocketIOManager.shared.socket.status.active)
-        SocketIOManager.shared.socket.on(clientEvent: .connect) {data, ack in
-            print ("socket connected")
-            
-            SocketIOManager.shared.isSocketOn = true
-            //            self.allSocketOffMethods()
-            self.emitSocketUserConnect()
-            self.allSocketOnMethods()
-            
-        }
-        //Connect User On Socket
-        SocketIOManager.shared.establishConnection()
-        //MARK: -====== Socket connection =======
-        
-        print("==============\(SocketIOManager.shared.socket.status)=====================",SocketIOManager.shared.socket.status.active)
-        if(timer == nil){
-            timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
-                print(timer)
-                if SocketIOManager.shared.socket.status.active{
-                    self.emitSocketUpdateLocation()
-                }
-            })
-        }
-    }
     
     
-    
-    // ON ALL SOCKETS
-    func allSocketOnMethods() {
-        print("\n\n", #function, "\n\n")
-        onSocketConnectUser()
-        //        onSocket_SendMessage()
-        onSocketUpdateLocation()
-        
-    }
-    
-    // OFF ALL SOCKETS
-    func allSocketOffMethods() {
-        print("\n\n", #function, "\n\n")
-        SocketIOManager.shared.socket.off(SocketData.kConnectUser.rawValue)
-        //        SocketIOManager.shared.socket.off(SocketKeys.SendMessage.rawValue)
-        SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
-    }
-    
-    //-------------------------------------
-    // MARK:= SOCKET ON METHODS =
-    //-------------------------------------
-    func onSocketConnectUser(){
-        SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
-            print(#function, "\n ", json)
-        }
-    }
-    
-    
-    func onSocketUpdateLocation(){
-        SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { (json) in
-            print(#function, "\n ",json)
-//            let orderId = json["order_id"].stringValue
-//            self.orderIdArray.removeAll(where: {$0 == orderId})
-//            if self.orderIdArray.isEmpty {
-                self.timer?.invalidate()
-//                self.time = nil
-//            }
-            
-        }
-    }
-    
-    //-------------------------------------
-    // MARK:= SOCKET EMIT METHODS =
-    //-------------------------------------
-    
-    // Socket Emit Connect user
-    func emitSocketUserConnect(){
+    // Share Order Accept
+    func emitShareOrderAccept(order_user_id:String,order_id:String){
         print(#function)
         //        customer_id,lat,lng
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
-        ]
-        SocketIOManager.shared.socketEmit(for: SocketData.kConnectUser.rawValue, with: param)
-        self.emitSocketUpdateLocation()
+        let param: [String: Any] = ["order_user_id": order_user_id,"order_id": order_id]
+        if SocketIOManager.shared.socket.status == .connected {
+            SocketIOManager.shared.socketEmit(for: SocketData.kacceptOrder.rawValue, with: param)
+        }
+        else{
+            print("Disconnected Sokect")
+            SocketIOManager.shared.socket.connect()
+            DispatchQueue.main.async {
+                SocketIOManager.shared.socketEmit(for: SocketData.kacceptOrder.rawValue, with: param)
+            }
+            
+        }
     }
     
-    func emitSocketUpdateLocation() {
-        print(#function)
-//        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
-                                    "order_id" : self.strOrderId,
-                                    "lat": String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude) ,
-                                    "lng" :String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)
-        ]
-        SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
-        
-    }
 }

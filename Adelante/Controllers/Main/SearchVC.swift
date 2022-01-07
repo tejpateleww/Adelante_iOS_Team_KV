@@ -250,8 +250,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
     @objc func webserviceSearchModel(strSearch:String){
         let search = SearchReqModel()
         search.name = strSearch
-        search.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        search.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        search.lat = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.latitude)"
+        search.lng = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.longitude)"
         search.user_id = SingletonClass.sharedInstance.UserId
         search.page = "\(pageNumber)"
         

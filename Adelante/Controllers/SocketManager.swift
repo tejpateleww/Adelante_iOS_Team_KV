@@ -44,7 +44,10 @@ class SocketIOManager: NSObject {
         if SocketIOManager.shared.socket.status == .connected {
             SocketIOManager.shared.socket.on(key, callback: { (data, ack) in
                 let result = self.dataSerializationToJson(data: data)
+                print("Result:-",result)
+                print("Result:-",result.status)
                 guard result.status else { return }
+                print("completion:-",completion)
                 if completion != nil { completion!(result.json) }
             })
         }

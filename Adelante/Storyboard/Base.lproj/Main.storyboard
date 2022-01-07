@@ -2187,14 +2187,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="C8p-Rg-VNk">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="781"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-Ln-P1R">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-Ln-P1R">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="714"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-a4-mfH">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-a4-mfH">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
-                                                                <rect key="frame" x="18" y="55" width="378" height="212"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
+                                                                <rect key="frame" x="18" y="55" width="378" height="232"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-ob-Qcu">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="63"/>
@@ -2236,11 +2236,11 @@
                                                                             </view>
                                                                         </subviews>
                                                                     </stackView>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
-                                                                        <rect key="frame" x="0.0" y="166" width="378" height="46"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CdW-6o-K39">
+                                                                        <rect key="frame" x="0.0" y="166" width="378" height="66"/>
                                                                         <subviews>
-                                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="30"/>
+                                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tme-wR-K6Z" customClass="themeTextView" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2258,8 +2258,8 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textView>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="45" width="378" height="1"/>
+                                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-SR-rs1" customClass="seperatorView" customModule="Adelante" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="65" width="378" height="1"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="Euj-mT-6ur"/>
@@ -3355,20 +3355,20 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReViewDiscCell" id="zYv-cy-nYb" customClass="ReViewDiscCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="414" height="158.5"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="128.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zYv-cy-nYb" id="F95-Xz-0AW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="158.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rlp-bS-0tk" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
-                                                            <rect key="frame" x="18" y="7.5" width="378" height="143.5"/>
+                                                            <rect key="frame" x="18" y="7.5" width="378" height="113.5"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17.699999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="iSf-Fx-yzY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="143.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="113.5"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6.5999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="2u5-vb-Qf5">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="106.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="76.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vf1-pQ-gG0" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
@@ -3380,7 +3380,7 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </label>
                                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q44-Lk-LSf" customClass="CosmosView" customModule="Cosmos">
-                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="50"/>
+                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="20"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Selected_star"/>
@@ -3396,7 +3396,7 @@
                                                                             </subviews>
                                                                         </stackView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSc-1R-Zli" customClass="CustomLabel" customModule="Adelante" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="124" width="378" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="94" width="378" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -3414,7 +3414,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHa-yr-DeQ">
-                                                                            <rect key="frame" x="0.0" y="141.5" width="378" height="2"/>
+                                                                            <rect key="frame" x="0.0" y="111.5" width="378" height="2"/>
                                                                             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685523750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="2" id="RXK-sN-mTn"/>
@@ -8661,13 +8661,13 @@
                                                         <rect key="frame" x="18" y="0.0" width="378" height="44"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJo-2g-fLJ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="44"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="310" height="44"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yw3-Yh-Ul0">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="44"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="44"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ea9-5q-A9k" customClass="myLocationLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="16"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="310" height="16"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="16" id="yVw-ff-qoF"/>
@@ -8680,7 +8680,7 @@
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="98g-ab-Dqo">
-                                                                                <rect key="frame" x="0.0" y="16" width="345" height="28"/>
+                                                                                <rect key="frame" x="0.0" y="16" width="310" height="28"/>
                                                                                 <subviews>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="DdZ-bw-vTw">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="11" height="28"/>
@@ -8690,13 +8690,13 @@
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSi-Jk-NWy" customClass="myLocationLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                        <rect key="frame" x="14" y="0.0" width="254.5" height="28"/>
+                                                                                        <rect key="frame" x="14" y="0.0" width="210.5" height="28"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPw-4l-C5x">
-                                                                                        <rect key="frame" x="271.5" y="0.0" width="73.5" height="28"/>
+                                                                                        <rect key="frame" x="227.5" y="0.0" width="82.5" height="28"/>
                                                                                         <subviews>
                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vje-T2-awR">
                                                                                                 <rect key="frame" x="5" y="0.0" width="28" height="28"/>
@@ -8722,7 +8722,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPb-aB-cO7">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="44"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="44"/>
                                                                         <connections>
                                                                             <action selector="btnNavAddressHomeClicked:" destination="wni-gD-ddk" eventType="touchUpInside" id="kOV-TM-G4I"/>
                                                                         </connections>
@@ -8740,10 +8740,22 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3V-Cr-PTO">
-                                                                <rect key="frame" x="350" y="0.0" width="28" height="44"/>
+                                                                <rect key="frame" x="315" y="0.0" width="63" height="44"/>
                                                                 <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b55-f8-aC3">
+                                                                        <rect key="frame" x="5" y="9.5" width="25" height="25"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="25" id="hmz-Ve-zzZ"/>
+                                                                            <constraint firstAttribute="width" secondItem="b55-f8-aC3" secondAttribute="height" multiplier="1:1" id="unR-Ix-k1P"/>
+                                                                        </constraints>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <state key="normal" image="MyLocation"/>
+                                                                        <connections>
+                                                                            <action selector="GetCurrentLocationBtnClick:" destination="wni-gD-ddk" eventType="touchUpInside" id="7Tf-Er-IUe"/>
+                                                                        </connections>
+                                                                    </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRd-d7-QV4">
-                                                                        <rect key="frame" x="5" y="0.0" width="18" height="44"/>
+                                                                        <rect key="frame" x="40" y="0.0" width="18" height="44"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="44" id="QAv-Ws-gnn"/>
                                                                             <constraint firstAttribute="width" constant="18" id="jmO-Qy-hQu"/>
@@ -8755,9 +8767,9 @@
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstItem="nRd-d7-QV4" firstAttribute="centerX" secondItem="k3V-Cr-PTO" secondAttribute="centerX" id="JFY-AQ-NPg"/>
-                                                                    <constraint firstItem="nRd-d7-QV4" firstAttribute="leading" secondItem="k3V-Cr-PTO" secondAttribute="leading" constant="5" id="PJY-Ma-3e9"/>
-                                                                    <constraint firstAttribute="width" constant="28" id="m5R-Ye-wpG"/>
+                                                                    <constraint firstItem="b55-f8-aC3" firstAttribute="centerY" secondItem="k3V-Cr-PTO" secondAttribute="centerY" id="5xK-3h-168"/>
+                                                                    <constraint firstItem="nRd-d7-QV4" firstAttribute="leading" secondItem="b55-f8-aC3" secondAttribute="trailing" constant="10" id="FYW-Or-mAK"/>
+                                                                    <constraint firstItem="b55-f8-aC3" firstAttribute="leading" secondItem="k3V-Cr-PTO" secondAttribute="leading" constant="5" id="YS3-9r-PhK"/>
                                                                     <constraint firstItem="nRd-d7-QV4" firstAttribute="centerY" secondItem="k3V-Cr-PTO" secondAttribute="centerY" id="oGN-18-8p5"/>
                                                                     <constraint firstAttribute="trailing" secondItem="nRd-d7-QV4" secondAttribute="trailing" constant="5" id="q4d-Eo-KDV"/>
                                                                     <constraint firstAttribute="height" constant="44" id="ycv-fk-W2k"/>
@@ -10214,68 +10226,14 @@ avoid cancellations </string>
         </scene>
     </scenes>
     <designables>
-        <designable name="0kK-8b-MA7">
-            <size key="intrinsicContentSize" width="195" height="32"/>
-        </designable>
-        <designable name="0t8-U3-ebv">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="2Ut-AC-9Qr">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
         <designable name="2fI-hX-w88">
             <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="4rN-z1-ohE">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="G78-jH-dfh">
-            <size key="intrinsicContentSize" width="195" height="32"/>
         </designable>
         <designable name="HGY-kw-5YU">
             <size key="intrinsicContentSize" width="210" height="30"/>
         </designable>
-        <designable name="IOt-oG-ldn">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="JpT-yH-Jap">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="M00-EB-i9S">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="QPd-3g-SxC">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="Tme-wR-K6Z">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-        <designable name="cc0-dj-TGl">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="cpW-fr-cqC">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="lWD-a0-7KT">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="mJ2-zK-PS6">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="nWr-lG-oph">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="oP7-OM-AFy">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
-        </designable>
-        <designable name="pGH-j9-vWm">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="ypJ-aF-6Y5">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
-        </designable>
-        <designable name="zNM-X4-rQ4">
-            <size key="intrinsicContentSize" width="378" height="39.220703125"/>
+        <designable name="Q44-Lk-LSf">
+            <size key="intrinsicContentSize" width="120" height="20"/>
         </designable>
     </designables>
     <resources>
@@ -10287,6 +10245,7 @@ avoid cancellations </string>
         <image name="Dummy-RightShape" width="24" height="24"/>
         <image name="Dummy-Sandwich" width="164" height="120"/>
         <image name="EditProfilePhoto" width="13.5" height="13"/>
+        <image name="MyLocation" width="512" height="512"/>
         <image name="RatingImage" width="382" height="231"/>
         <image name="Restaurant" width="166" height="166"/>
         <image name="Review" width="13.5" height="13"/>

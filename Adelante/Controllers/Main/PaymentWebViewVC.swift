@@ -96,7 +96,12 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
             controller.cancelBtnColor = colors.appRedColor
             controller.strPopupImage = "ic_popupPaymentSucessful"
             controller.isCancleOrder = true
-            self.socketManageSetup()
+//            self.socketManageSetup()
+            if let homevc =  self.navigationController?.children.first as? HomeVC{
+                homevc.orderIdArray.append(self.OrderID)
+                homevc.socketManageSetup()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil, userInfo: nil)
+            }
             controller.btnSubmit = {
                 if let TabVC =  appDel.window?.rootViewController?.children.first {
                     if TabVC.isKind(of: CustomTabBarVC.self) {
@@ -138,111 +143,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
         // pop..
     }
 }
-extension PaymentWebViewVC{
-    func socketManageSetup(){
-        SocketIOManager.shared.establishSocketConnection()
-        allSocketOffMethods()
-        self.SocketOnMethods()
-    }
-    
-    func SocketOnMethods() {
-        
-        SocketIOManager.shared.socket.on(clientEvent: .disconnect) { (data, ack) in
-            print ("socket is disconnected please reconnect")
-            SocketIOManager.shared.isSocketOn = false
-        }
-        
-        SocketIOManager.shared.socket.on(clientEvent: .reconnect) { (data, ack) in
-            print ("socket is reconnected")
-            SocketIOManager.shared.isSocketOn = true
-            
-        }
-        
-        
-        print("===========\(SocketIOManager.shared.socket.status)========================",SocketIOManager.shared.socket.status.active)
-        SocketIOManager.shared.socket.on(clientEvent: .connect) {data, ack in
-            print ("socket connected")
-            
-            SocketIOManager.shared.isSocketOn = true
-            //            self.allSocketOffMethods()
-            self.emitSocketUserConnect()
-            
-            self.allSocketOnMethods()
-            
-        }
-        //Connect User On Socket
-        SocketIOManager.shared.establishConnection()
-        //MARK: -====== Socket connection =======
-        
-        print("==============\(SocketIOManager.shared.socket.status)=====================",SocketIOManager.shared.socket.status.active)
-        
-        if SocketIOManager.shared.socket.status.active{
-            self.allSocketOffMethods()
-            self.emitSocketUserConnect()
-            self.allSocketOnMethods()
-        }
-    }
-    
-    
-    
-    // ON ALL SOCKETS
-    func allSocketOnMethods() {
-        print("\n\n", #function, "\n\n")
-        onSocketConnectUser()
-        //        onSocket_SendMessage()
-        onSocketUpdateLocation()
-        
-    }
-    
-    // OFF ALL SOCKETS
-    func allSocketOffMethods() {
-        print("\n\n", #function, "\n\n")
-        SocketIOManager.shared.socket.off(SocketData.kConnectUser.rawValue)
-        //        SocketIOManager.shared.socket.off(SocketKeys.SendMessage.rawValue)
-        SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
-    }
-    
-    //-------------------------------------
-    // MARK:= SOCKET ON METHODS =
-    //-------------------------------------
-    func onSocketConnectUser(){
-        SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
-            print(#function, "\n ", json)
-        }
-    }
-    
-    
-    func onSocketUpdateLocation(){
-        SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { (json) in
-        }
-    }
-    
-    //-------------------------------------
-    // MARK:= SOCKET EMIT METHODS =
-    //-------------------------------------
-    
-    // Socket Emit Connect user
-    func emitSocketUserConnect(){
-        print(#function)
-        //        customer_id,lat,lng
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
-        ]
-        SocketIOManager.shared.socketEmit(for: SocketData.kConnectUser.rawValue, with: param)
-        self.emitSocketUpdateLocation()
-    }
-    
-    func emitSocketUpdateLocation() {
-        print(#function)
-        //        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
-                                    "order_id" : OrderID,
-                                    "lat": SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude ,
-                                    "lng" :SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude
-        ]
-        SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
-        
-    }
-}
+
 //extension StringProtocol { // for Swift 4 you need to add the constrain `where Index == String.Index`
 //    var byWords: [SubSequence] {
 //        var byWords: [SubSequence] = []

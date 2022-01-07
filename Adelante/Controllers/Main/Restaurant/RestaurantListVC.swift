@@ -282,8 +282,8 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         RestaurantList.item_id = strItemId
         RestaurantList.item_type = strItemType
         RestaurantList.page = "\(self.pageNumber)"
-        RestaurantList.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        RestaurantList.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        RestaurantList.lat = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.latitude)"
+        RestaurantList.lng = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.longitude)"
         WebServiceSubClass.RestaurantList(RestaurantListmodel: RestaurantList, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             self.responseStatus = .gotData

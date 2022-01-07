@@ -127,4 +127,5 @@ enum SocketData : String{
     case kConnectUser   = "connect_user"
     case kLocationTracking = "location_tracking"
     case kcustomerinterval = "customer_interval"
+    case kacceptOrder = "accept_order"
 }

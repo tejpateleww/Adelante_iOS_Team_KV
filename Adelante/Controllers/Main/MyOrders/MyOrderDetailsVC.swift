@@ -602,8 +602,19 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         WebServiceSubClass.CancelOrder(cancelOrder: cancelOrder, showHud: false, completion: { (json, status, response) in
             if(status)
             {
+                if let TabVC =  appDel.window?.rootViewController?.children.first {
+                    if TabVC.isKind(of: CustomTabBarVC.self) {
+                        let vc = TabVC as! CustomTabBarVC
+                        if let homevc = vc.children.first?.children.first as? HomeVC{
+                            homevc.orderIdArray.removeAll(where: {$0 == self.orderId})
+//                            homevc.socketManageSetup()
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil, userInfo: nil)
+                        }
+                    }
+                }
                 self.delegateCancelOrder.refreshOrderDetailsScreen()
                 self.navigationController?.popViewController(animated: true)
+               
             }
             else
             {
@@ -645,6 +656,20 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 let alertController = UIAlertController(title: AppName, message: json["message"].string, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                     UIAlertAction in
+                    if let TabVC =  appDel.window?.rootViewController?.children.first {
+                        if TabVC.isKind(of: CustomTabBarVC.self) {
+                            let vc = TabVC as! CustomTabBarVC
+                            if let homevc = vc.children.first?.children.first as? HomeVC{
+                                homevc.orderIdArray.append(self.orderId)
+                                let order_user_id = json["order_user_id"].stringValue
+                                self.emitShareOrderAccept(order_user_id: order_user_id, order_id: self.orderId)
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil, userInfo: nil)
+                                }
+                                
+                            }
+                        }
+                    }
                     if let click = self.AcceptOrder{
                         click()
                     }
@@ -701,4 +726,26 @@ extension MyOrderDetailsVC : UITextFieldDelegate{
         vehicleDropdown.show()
         return false
     }
+}
+extension MyOrderDetailsVC{
+    
+    
+    // Share Order Accept
+    func emitShareOrderAccept(order_user_id:String,order_id:String){
+        print(#function)
+        //        customer_id,lat,lng
+        let param: [String: Any] = ["order_user_id": order_user_id,"order_id": order_id]
+        if SocketIOManager.shared.socket.status == .connected {
+            SocketIOManager.shared.socketEmit(for: SocketData.kacceptOrder.rawValue, with: param)
+        }
+        else{
+            print("Disconnected Sokect")
+            SocketIOManager.shared.socket.connect()
+            DispatchQueue.main.async {
+                SocketIOManager.shared.socketEmit(for: SocketData.kacceptOrder.rawValue, with: param)
+            }
+            
+        }
+    }
+    
 }

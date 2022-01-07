@@ -79,7 +79,18 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 if let TabVC =  appDel.window?.rootViewController?.children.first {
                     if TabVC.isKind(of: CustomTabBarVC.self) {
                         let vc = TabVC as! CustomTabBarVC
-                        vc.selectedIndex = 3
+                        
+//                        for controllers in self.navigationController!.viewControllers as Array {
+//                            if controllers.isKind(of: checkOutVC.self) {
+//                                self.navigationController?.viewControllers.first?.navigationController?.popToRootViewController(animated: false)
+//                                break
+//                            }
+//                        }
+//
+//                        DispatchQueue.main.async {
+                            vc.selectedIndex = 3
+//                        }
+                        
                     }
                 }
             }else {

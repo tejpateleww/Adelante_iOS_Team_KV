@@ -179,10 +179,10 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 let option = varient!.option[indexPath.row]
                 if arrVariants?[indexPath.section].option[indexPath.row].price == "0.00"{
                     cell.lblBffComboPrice.isHidden = true
-                }else{
-                    cell.lblBffComboPrice.isHidden = false
-                    cell.lblBffComboPrice.text = (CurrencySymbol) + (arrVariants?[indexPath.section].option[indexPath.row].price)!
-                }
+                    }else{
+                        cell.lblBffComboPrice.isHidden = false
+                        cell.lblBffComboPrice.text = (CurrencySymbol) + (arrVariants?[indexPath.section].option[indexPath.row].price)!
+                    }
                 
                 let selectOne = arrVariants?[indexPath.section].menuChoice.toInt()
                 
@@ -204,10 +204,12 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                         self.selectedOption.manage(option)
                     }
                 }
-                if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 {
+                if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 && arrVariants?[indexPath.section].variantItem.toInt() == 0{
                     cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
-                } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0 {
+                } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0  && arrVariants?[indexPath.section].variantItem.toInt() == 0{
                     cell.selectButton.setImage(UIImage(named: "ic_unselectedBFFCombo"), for: .normal)
+                } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 && arrVariants?[indexPath.section].variantItem.toInt() != 0{
+                    cell.selectButton.setImage(UIImage(named: "ic_paymentSelected"), for: .normal)
                 } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne != 0 {
                     cell.selectButton.setImage(UIImage(named: "ic_paymentSelected"), for: .normal)
                 } else {
@@ -248,7 +250,13 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         let varient = self.arrVariants?[indexPath.section]
         let option = varient!.option[indexPath.row]
         self.isFromWebservice = false
-        if selectOne == 0{
+        if selectOne == 0  && arrVariants?[indexPath.section].variantItem.toInt() != 0{
+            self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = !(self.arrVariants?[indexPath.section].option[indexPath.row].isSelected ?? Bool())
+            self.selectedOption.manage(option)
+            self.checkandUpdateVariants()
+            self.tblBFFCombo.reloadRows(at: [indexPath], with: .automatic)
+        }
+       else if selectOne == 0 {
             
             for i in 0..<(self.arrVariants?[indexPath.section].option?.count ?? 0)
             {
@@ -264,13 +272,17 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             
             obj2?.isSelected = true
             self.selectedOption.manage(obj2!)
-            
+            self.checkandUpdateVariants()
+            self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .none)
         }else{
             self.arrVariants?[indexPath.section].option[indexPath.row].isSelected = !(self.arrVariants?[indexPath.section].option[indexPath.row].isSelected ?? Bool())
             self.selectedOption.manage(option)
+            self.checkandUpdateVariants()
+            self.tblBFFCombo.reloadRows(at: [indexPath], with: .automatic)
         }
-        self.checkandUpdateVariants()
-        self.tblBFFCombo.reloadSections(IndexSet(integer: indexPath.section) , with: .automatic)
+        
+
+        
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         if responseStatus == .gotData{

@@ -28,7 +28,8 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         super.init()
 
         self.locationManager = CLLocationManager()
-        self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//        self.locationManager?.distanceFilter = 5
         guard let locationManager = self.locationManager else {
             return
         }
@@ -38,7 +39,8 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             self.locationManager?.requestWhenInUseAuthorization()
         }
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//        locationManager.distanceFilter = 5
         locationManager.delegate = self
     }
     

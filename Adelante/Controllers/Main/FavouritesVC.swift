@@ -211,8 +211,8 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         RestaurantFavorite.name = strSearch
         RestaurantFavorite.user_id = SingletonClass.sharedInstance.UserId
         RestaurantFavorite.page = "\(self.pageNumber)"
-        RestaurantFavorite.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        RestaurantFavorite.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        RestaurantFavorite.lat = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.latitude)"
+        RestaurantFavorite.lng = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.longitude)"
         
         WebServiceSubClass.RestaurantFavorite(RestaurantFavoritemodel: RestaurantFavorite, showHud: false, completion: { (response, status, error) in
             self.refreshList.endRefreshing()

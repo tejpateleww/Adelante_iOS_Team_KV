@@ -52,6 +52,10 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var timer: Timer?
     var timerSocket : Timer?
     var responseStatus : webserviceResponse = .initial
+    var timerForInterval : Timer?
+    
+    var order_user_id:String = ""
+    var order_id:String = ""
     // MARK: - IBOutlets
     @IBOutlet weak var lblMylocation: myLocationLabel!
     @IBOutlet weak var lblAddress: myLocationLabel!
@@ -72,17 +76,25 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNIB()
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.StartUpdateLocation), name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil)
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
         NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
         
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil)
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderAccept), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+        socketManageSetup()
         
         self.startTimer()
         
         if userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) != nil , userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as! String  != ""{
             lblAddress.text = PlaceName
             if let longitude = userDefault.value(forKey: UserDefaultsKey.PlaceLocationLongitude.rawValue) as? CLLocationDegrees , let latitude = userDefault.value(forKey: UserDefaultsKey.PlaceLocationLatitude.rawValue) as? CLLocationDegrees {
-                SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: latitude, longitude: longitude)
+//                SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: latitude, longitude: longitude)
+                SingletonClass.sharedInstance.userDefaultLocation = CLLocation(latitude: latitude, longitude: longitude)
             }
         }else if SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude == 0.0 && SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude == 0.0 && userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) == nil{
             let locationService = LocationService()
@@ -90,6 +102,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
             lblAddress.text = "Please Select Address"
         }else{
             self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+            SingletonClass.sharedInstance.userDefaultLocation =  SingletonClass.sharedInstance.userCurrentLocation
         }
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "OrderDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.OrderDone), name: NSNotification.Name(rawValue: "OrderDone"), object: nil)
@@ -287,6 +300,21 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         }else{
             let notifVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: NotificationVC.storyboardID)
             self.navigationController?.pushViewController(notifVc, animated: true)
+        }
+    }
+    
+    
+    @IBAction func GetCurrentLocationBtnClick(_ sender: UIButton) {
+        
+        let locationService = LocationService()
+        locationService.startUpdatingLocation()
+        DispatchQueue.main.async {
+            self.getAddressFromLatLon(pdblLatitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude), withLongitude: String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude))
+            
+            SingletonClass.sharedInstance.userDefaultLocation =  SingletonClass.sharedInstance.userCurrentLocation
+            userDefault.set(nil, forKey: UserDefaultsKey.PlaceName.rawValue)
+            self.pageNumber = 1
+            self.webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         }
     }
     
@@ -683,10 +711,12 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         Deshboard.category_id = SelectedCatId
         Deshboard.user_id = SingletonClass.sharedInstance.UserId
         Deshboard.filter = SelectFilterId
-        Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        Deshboard.lng =  "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+//        Deshboard.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
+//        Deshboard.lng =  "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        Deshboard.lat = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.latitude)"
+        Deshboard.lng =  "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.longitude)"
         Deshboard.page = "\(self.pageNumber)"
-        Deshboard.tab_filter = strTabfilter
+        Deshboard.tab_filter = strTabfilter == "" ? "\(selectedIndex)" : strTabfilter
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             self.responseStatus = .gotData
@@ -702,7 +732,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.arrBanner = Homedata.banner
                 self.orderIdArray = Homedata.orderIds
                 if Homedata.orderIds.count != 0{
-                    self.socketManageSetup()
+//                    self.socketManageSetup()
                 }
                 self.pageControl.numberOfPages = self.arrBanner.count
                 self.isRefresh = false
@@ -808,7 +838,11 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
 //        userDefault.synchronize()
         
         lblAddress.text =  place.name
-        SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+//        SingletonClass.sharedInstance.userCurrentLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+//        SingletonClass.sharedInstance.userSelectedLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        
+        SingletonClass.sharedInstance.userDefaultLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        self.pageNumber = 1
         webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         dismiss(animated: true, completion: nil)
     }
@@ -831,13 +865,13 @@ extension HomeVC: GMSAutocompleteViewControllerDelegate {
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-    
+  
 }
 
 extension HomeVC{
+//    func socketManageSetup(_ IsShareOrderAccept: Bool = false ,order_user_id: String = "",order_id: String = ""){
     func socketManageSetup(){
         SocketIOManager.shared.establishSocketConnection()
-        allSocketOffMethods()
         self.SocketOnMethods()
     }
     
@@ -854,13 +888,11 @@ extension HomeVC{
             
         }
         
-        
         print("===========\(SocketIOManager.shared.socket.status)========================",SocketIOManager.shared.socket.status.active)
         SocketIOManager.shared.socket.on(clientEvent: .connect) {data, ack in
             print ("socket connected")
-            
             SocketIOManager.shared.isSocketOn = true
-            //            self.allSocketOffMethods()
+            self.allSocketOffMethods()
             self.emitSocketUserConnect()
             self.allSocketOnMethods()
             
@@ -879,22 +911,30 @@ extension HomeVC{
     func allSocketOnMethods() {
         print("\n\n", #function, "\n\n")
         onSocketConnectUser()
-        //        onSocket_SendMessage()
         onSocketUpdateLocation()
-        
+        onSocketAcceptShareOrder()
     }
     
     // OFF ALL SOCKETS
     func allSocketOffMethods() {
+        print("--------------------------------")
         print("\n\n", #function, "\n\n")
+        print("--------------------------------")
+        
         SocketIOManager.shared.socket.off(SocketData.kConnectUser.rawValue)
         SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
+        SocketIOManager.shared.socket.off(SocketData.kcustomerinterval.rawValue)
+        SocketIOManager.shared.socket.off(SocketData.kacceptOrder.rawValue)
     }
+    
     
     //-------------------------------------
     // MARK:= SOCKET ON METHODS =
     //-------------------------------------
     func onSocketConnectUser(){
+        print("--------------------------------")
+        print("Connect User Key :- ",SocketData.kConnectUser.rawValue)
+        print("--------------------------------")
         SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
             print(#function, "\n ", json)
             if(self.timerSocket == nil){
@@ -907,10 +947,30 @@ extension HomeVC{
     
     
     func onSocketUpdateLocation(){
+        print("--------------------------------")
+        print("Location Tracking Key :- ",SocketData.kLocationTracking.rawValue)
+        print("--------------------------------")
         SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { [self] (json) in
             print(#function, "\n ",json)
-            let orderId = json["order_id"].stringValue
+            let orderId = json[0]["order_id"].stringValue
             self.orderIdArray.removeAll(where: {$0 == orderId})
+            if self.orderIdArray.isEmpty {
+                self.timerSocket?.invalidate()
+                self.timerSocket = nil
+            }
+        }
+    }
+    
+    func onSocketAcceptShareOrder(){
+        print("--------------------------------")
+        print("Accept Order Key :- ",SocketData.kacceptOrder.rawValue)
+        print("--------------------------------")
+        SocketIOManager.shared.socketCall(for: SocketData.kacceptOrder.rawValue) { json in
+            print(#function, "\n ",json)
+            let orderId = json[0]["order_id"].stringValue
+            print("Order ID ",json[0]["order_id"].stringValue)
+            self.orderIdArray.removeAll(where: {$0 == orderId})
+            print("orderIdArray ",self.orderIdArray)
             if self.orderIdArray.isEmpty {
                 self.timerSocket?.invalidate()
                 self.timerSocket = nil
@@ -926,35 +986,53 @@ extension HomeVC{
     func emitSocketUserConnect(){
         print(#function)
         //        customer_id,lat,lng
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
-        ]
+        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId]
         SocketIOManager.shared.socketEmit(for: SocketData.kConnectUser.rawValue, with: param)
         self.emitSocketUpdateLocation()
+        if(self.timerForInterval == nil){
+            self.timerForInterval = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
+                self.emitCustomerInterval()
+            })
+        }
     }
     
+    // Socket Emit Connect user
+    func emitCustomerInterval(){
+        print(#function)
+        //        customer_id,lat,lng
+        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
+        ]
+        SocketIOManager.shared.socketEmit(for: SocketData.kcustomerinterval.rawValue, with: param)
+    }
+
     func emitSocketUpdateLocation() {
         print(#function)
-        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderPushGet), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
-        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
         if self.orderIdArray.isEmpty{
             self.timerSocket?.invalidate()
-            self.allSocketOffMethods()
+            self.timerSocket = nil
         }
         self.orderIdArray.forEach({
             emitSocketUpdateLocation(orderId: $0)
         })
         
     }
-    @objc func ShareOrderPushGet(_ Notification: NSNotification){
-//        self.timerSocket?.invalidate()
+    @objc func StartUpdateLocation(_ Notification: NSNotification){
+        self.emitSocketUpdateLocation()
+        if(self.timerSocket == nil){
+            self.timerSocket = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
+                self.emitSocketUpdateLocation()
+            })
+        }
+        
+    }
+    @objc func CancelOrderGet(_ Notification: NSNotification){
+
         if let orderID = Notification.userInfo?["orderID"] as? String{
             self.orderIdArray.removeAll(where: {$0 == orderID})
         }
     }
-    @objc func CancelOrderGet(_ Notification: NSNotification){
-//        self.timerSocket?.invalidate()
+    @objc func ShareOrderAccept(_ Notification: NSNotification){
+        
         if let orderID = Notification.userInfo?["orderID"] as? String{
             self.orderIdArray.removeAll(where: {$0 == orderID})
         }
@@ -967,6 +1045,5 @@ extension HomeVC{
                                     "lng" : String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)
         ]
         SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
-        
     }
 }

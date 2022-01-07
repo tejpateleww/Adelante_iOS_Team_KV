@@ -1124,8 +1124,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         ResDetails.restaurant_id = selectedRestaurantId
         ResDetails.page = "\(pageNumber)"
         ResDetails.user_id = SingletonClass.sharedInstance.UserId
-        ResDetails.lat = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude)"
-        ResDetails.lng = "\(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)"
+        ResDetails.lat = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.latitude)"
+        ResDetails.lng = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.longitude)"
         ResDetails.search = SearchData
         WebServiceSubClass.RestaurantDetails(RestaurantDetailsmodel: ResDetails, showHud: false, completion: { (response, status, error) in
             if status {

@@ -407,18 +407,19 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     controller.strPopupImage = "ic_popupPaymentSucessful"
                     
                     self.orderid = json["order_id"].stringValue
-                    //MARK: -  Uncomment Below  line
-                    self.socketManageSetup()
-                    NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
-                    NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderPushGet), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
-                    NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
-                    NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrderAccept), object: nil)
                     controller.btnSubmit = {
+                        
                         if let TabVC =  appDel.window?.rootViewController?.children.first {
                             if TabVC.isKind(of: CustomTabBarVC.self) {
                                 SingletonClass.sharedInstance.selectInProcessInMyOrder = true
                                 let vc = TabVC as! CustomTabBarVC
                                 
+                                if let homevc = vc.children.first?.children.first as? HomeVC{
+                                    homevc.orderIdArray.append(self.orderid)
+                                    DispatchQueue.main.async {
+                                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil, userInfo: nil)
+                                    }
+                                }
                                 for controllers in self.navigationController!.viewControllers as Array {
                                     if controllers.isKind(of: SearchVC.self) {
                                         
@@ -429,6 +430,9 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                                 DispatchQueue.main.async {
                                     vc.selectedIndex = 2
                                 }
+                                
+                                
+                                
                                 
                             }
                         }
@@ -530,135 +534,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         FormTextField.appearance().invalidTextColor = UIColor(hexString: "FF4B47")
     }
 }
-extension addPaymentVC{
-    func socketManageSetup(){
-        SocketIOManager.shared.establishSocketConnection()
-        allSocketOffMethods()
-        self.SocketOnMethods()
-    }
-    
-    func SocketOnMethods() {
-        
-        SocketIOManager.shared.socket.on(clientEvent: .disconnect) { (data, ack) in
-            print ("socket is disconnected please reconnect")
-            SocketIOManager.shared.isSocketOn = false
-        }
-        
-        SocketIOManager.shared.socket.on(clientEvent: .reconnect) { (data, ack) in
-            print ("socket is reconnected")
-            SocketIOManager.shared.isSocketOn = true
-            
-        }
-        
-        
-        print("===========\(SocketIOManager.shared.socket.status)========================",SocketIOManager.shared.socket.status.active)
-        SocketIOManager.shared.socket.on(clientEvent: .connect) {data, ack in
-            print ("socket connected")
-            
-            SocketIOManager.shared.isSocketOn = true
-            //            self.allSocketOffMethods()
-            self.emitSocketUserConnect()
-            self.allSocketOnMethods()
-            
-        }
-        //Connect User On Socket
-        SocketIOManager.shared.establishConnection()
-        //MARK: -====== Socket connection =======
-        
-   
-    }
-    
-    
-    
-    // ON ALL SOCKETS
-    func allSocketOnMethods() {
-        print("\n\n", #function, "\n\n")
-        onSocketConnectUser()
-        //        onSocket_SendMessage()
-        onSocketUpdateLocation()
-        
-    }
-    
-    // OFF ALL SOCKETS
-    func allSocketOffMethods() {
-        print("\n\n", #function, "\n\n")
-        SocketIOManager.shared.socket.off(SocketData.kConnectUser.rawValue)
-        //        SocketIOManager.shared.socket.off(SocketKeys.SendMessage.rawValue)
-        SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
-    }
-    
-    //-------------------------------------
-    // MARK:= SOCKET ON METHODS =
-    //-------------------------------------
-    func onSocketConnectUser(){
-        SocketIOManager.shared.socketCall(for: SocketData.kConnectUser.rawValue) { (json) in
-            print(#function, "\n ", json)
-            print("==============\(SocketIOManager.shared.socket.status)=====================",SocketIOManager.shared.socket.status.active)
-            if(self.timer == nil){
-                self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
-                    print(timer)
-                    if SocketIOManager.shared.socket.status.active{
-    //                    self.allSocketOffMethods()
-    //                    self.emitSocketUserConnect()
-    //                    self.allSocketOnMethods()
-                        self.emitSocketUpdateLocation()
-                    }
-                })
-            }
-        }
-    }
-    
-    
-    func onSocketUpdateLocation(){
-        SocketIOManager.shared.socketCall(for: SocketData.kLocationTracking.rawValue) { (json) in
-//            print(#function, "\n ",json)
-//            self.driverLat = json.first?.1.first?.1.arrayValue[0].doubleValue ?? 0.0 //json["lat"].doubleValue
-//            self.driverLng = json.first?.1.first?.1.arrayValue[1].doubleValue ?? 0.0//json["lng"].doubleValue
-//
-//            if !self.isgetDriverlocation{
-//                self.isgetDriverlocation = true
-//                self.mapRouteForcurrentToRestaurant(PickupLat: SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude, PickupLng: SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude, destLat: self.driverLat , DestLng: self.driverLng)
-//            }
-//            self.updateMarker(lat: self.driverLat, lng: self.driverLng)
-//            self.setDriverMarker()
-            
-            print(#function, "\n ",json)
-//            let orderId = json["order_id"].stringValue
-//            self.orderIdArray.removeAll(where: {$0 == orderId})
-//            if self.orderIdArray.isEmpty {
-                self.timer?.invalidate()
-//                self.time = nil
-//            }
-            
-        }
-    }
-    
-    //-------------------------------------
-    // MARK:= SOCKET EMIT METHODS =
-    //-------------------------------------
-    
-    // Socket Emit Connect user
-    func emitSocketUserConnect(){
-        print(#function)
-        //        customer_id,lat,lng
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
-        ]
-        SocketIOManager.shared.socketEmit(for: SocketData.kConnectUser.rawValue, with: param)
-        self.emitSocketUpdateLocation()
-    }
-    
-    func emitSocketUpdateLocation() {
-        print(#function)
-//        SocketIOManager.shared.socketEmit(for: SocketData.kDriverLocation.rawValue, with: [:])
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId,
-                                    "order_id" : self.orderid,
-                                    "lat": String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.latitude) ,
-                                    "lng" :String(SingletonClass.sharedInstance.userCurrentLocation.coordinate.longitude)
-        ]
-        SocketIOManager.shared.socketEmit(for: SocketData.kLocationTracking.rawValue, with: param)
-        
-    }
-}
+
 
 extension addPaymentVC: GMSMapViewDelegate,CLLocationManagerDelegate{
     

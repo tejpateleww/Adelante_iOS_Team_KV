@@ -62,7 +62,8 @@ import Braintree
 //    }
     func setUpLocationServices() {
         locationManager = CLLocationManager()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//        locationManager?.distanceFilter = 5
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
         if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
@@ -444,7 +445,12 @@ extension AppDelegate {
 //            SocketIOManager.shared.socket.off(SocketData.kLocationTracking.rawValue)
             let orderID = (userData as NSDictionary).object(forKey: "gcm.notification.order_id") as? String
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil, userInfo: ["orderID" : orderID ?? ""])
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil, userInfo: ["orderID" : orderID ?? ""])
+        case PushNotifications.cancelorder.Name:
+            let orderID = (userData as NSDictionary).object(forKey: "gcm.notification.order_id") as? String
+            
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil, userInfo: ["orderID" : orderID ?? ""])
+            
         default:
             break
         }

@@ -45,14 +45,18 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.customTabBarController?.showTabBar()
+        
         lblName.text = SingletonClass.sharedInstance.LoginRegisterUpdateData?.fullName
         let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(SingletonClass.sharedInstance.LoginRegisterUpdateData?.profilePicture ?? "")"
         imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imgProfile.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage(named: "Default_user"))
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.customTabBarController?.showTabBar()
+    }
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
