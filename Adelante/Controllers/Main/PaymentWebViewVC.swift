@@ -99,7 +99,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
 //            self.socketManageSetup()
             if let homevc =  self.navigationController?.children.first as? HomeVC{
                 homevc.orderIdArray.append(self.OrderID)
-                homevc.socketManageSetup()
+//                homevc.socketManageSetup()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.StartUpdateLocation), object: nil, userInfo: nil)
             }
             controller.btnSubmit = {

@@ -290,7 +290,7 @@ extension EditProfileVC:UITextFieldDelegate{
             if textField != txtPlateNumber{
                 return false
             }else{
-                return (string == filtered) ? (newString.length <= 10) : false
+                return (string == filtered) ? (newString.length <= 18) : false
             }
         }
         return true

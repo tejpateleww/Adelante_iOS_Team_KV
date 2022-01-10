@@ -253,7 +253,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     @IBAction func btnViewPolicy(_ sender: Any) {
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-        controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
+        controller.strNavTitle = "View Store Policy"// "NavigationTitles_Privacypolicy".Localized()
         controller.strStorePolicy = objRestaurant.storePolicy
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -1361,7 +1361,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             {
                 self.SettingsData = SettingsResModel.init(fromJson: json)
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: CommonWebViewVC.storyboardID) as! CommonWebViewVC
-                controller.strNavTitle = "NavigationTitles_Privacypolicy".Localized()
+                controller.strNavTitle = "View Store Policy"//"NavigationTitles_Privacypolicy".Localized()
                 controller.strUrl = self.SettingsData.privacyPolicy
                 self.navigationController?.pushViewController(controller, animated: true)
             }

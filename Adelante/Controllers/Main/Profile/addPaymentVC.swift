@@ -353,7 +353,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                 btnAddCart.isHidden = true
             }else{
                 if WalletBalance < CartTotal {
-                    if IsWalletSelected && !IsPaypalSelected  {
+                    if IsWalletSelected && !IsPaypalSelected && !IsBrainTreeSelected {
                         Utilities.ShowAlert(OfMessage: "Your wallet amount is lower than total amount")
                     } else {
                         WebServiceForPayment()

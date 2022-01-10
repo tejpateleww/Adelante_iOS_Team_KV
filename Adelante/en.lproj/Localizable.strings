@@ -70,7 +70,7 @@
 "EditProfileVC_lblVerified" = "Verified";
 "EditProfileVC_txtPhoneNumber" = "Phone Number";
 "EditProfileVC_lblUnverified" = "Unverified";
-"EditProfileVC_txtPlateNumber" = "Plate Number";
+"EditProfileVC_txtPlateNumber" = "vehicle plate number";
 "EditProfileVC_btnSave" = "Save";
 "EditProfileVC_EmailChange" = "Are you sure you want to change email id? if you change your email id then you will be logout from application you have to verify that email then you will able to do login in application.";
 "EditProfileVC_PhoneChange" = "Are you sure you want to change phone number? if you change your number then you will be logout from application you have to do login again.";
