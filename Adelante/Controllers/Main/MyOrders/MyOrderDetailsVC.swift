@@ -149,7 +149,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 }
                 lblTotal.text = CurrencySymbol + objShareOrderDetails.total
                 lblRestName.text = objShareOrderDetails.restaurantName
-                lblLocation.text = objShareOrderDetails.street
+                if objShareOrderDetails.street != "" {
+                    lblLocation.isHidden = false
+                    lblLocation.text = objShareOrderDetails.street
+                }else {
+                    lblLocation.isHidden = true
+                }
                 lblAddress.text = objShareOrderDetails.address
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objShareOrderDetails.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -164,42 +169,46 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 self.vwShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
                 self.btnShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
                 //self.TxtParkingNo.inputView = vehicleDropdown
-                
-                if self.objOrderDetailsData.deliveryType == "1"{
-                    if self.objOrderDetailsData.parking_type == "1"{
-                        if self.objOrderDetailsData.parking_id == "0"{
-                            stackParkingList.subviews[0].isHidden = true
-                            stackParkingList.subviews[1].isHidden = false
-                            stackParkingList.subviews[2].isHidden = false
-                            if arrVehicle.count != 0{
-                                TxtParkingNo.text = arrVehicle[0].parking_no
+                if self.objOrderDetailsData.isShare == "0" {
+                    stackParkingList.superview?.isHidden = true
+                }else {
+                    stackParkingList.superview?.isHidden = false
+                    if self.objOrderDetailsData.deliveryType == "1"{
+                        if self.objOrderDetailsData.parking_type == "1"{
+                            if self.objOrderDetailsData.parking_id == "0"{
+                                stackParkingList.subviews[0].isHidden = true
+                                stackParkingList.subviews[1].isHidden = false
+                                stackParkingList.subviews[2].isHidden = false
+                                if arrVehicle.count != 0{
+                                    TxtParkingNo.text = arrVehicle[0].parking_no
+                                }
+                                //                            LblcurbsideParkingPickup.superview?.isHidden = true
+                                self.CurbSideYesBtn.isSelected = true
+                                self.CurbSideNoBtn.isSelected = false
+                                
+                                //                            TxtParkingNo.superview?.isHidden = !CurbSideYesBtn.isSelected
                             }
-//                            LblcurbsideParkingPickup.superview?.isHidden = true
-                            self.CurbSideYesBtn.isSelected = true
-                            self.CurbSideNoBtn.isSelected = false
-                            
-//                            TxtParkingNo.superview?.isHidden = !CurbSideYesBtn.isSelected
+                            else{
+                                stackParkingList.subviews[0].isHidden = false
+                                stackParkingList.subviews[1].isHidden = true
+                                stackParkingList.subviews[2].isHidden = true
+                                LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
+                            }
                         }
                         else{
-                            stackParkingList.subviews[0].isHidden = false
-                            stackParkingList.subviews[1].isHidden = true
+                            stackParkingList.subviews[0].isHidden = true
+                            stackParkingList.subviews[1].isHidden = false
                             stackParkingList.subviews[2].isHidden = true
-                            LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
+                            //                        LblcurbsideParkingPickup.superview?.isHidden = true
+                            self.CurbSideNoBtn.isSelected = true
+                            self.CurbSideYesBtn.isSelected = false
+                            //                        TxtParkingNo.superview?.isHidden = true
                         }
+                    }else{
+                        LblcurbsideParkingPickup.superview?.superview?.superview?.isHidden = true
                     }
-                    else{
-                        stackParkingList.subviews[0].isHidden = true
-                        stackParkingList.subviews[1].isHidden = false
-                        stackParkingList.subviews[2].isHidden = true
-//                        LblcurbsideParkingPickup.superview?.isHidden = true
-                        self.CurbSideNoBtn.isSelected = true
-                        self.CurbSideYesBtn.isSelected = false
-//                        TxtParkingNo.superview?.isHidden = true
-                    }
-                }else{
-                    LblcurbsideParkingPickup.superview?.superview?.superview?.isHidden = true
                 }
-             
+                
             }
             
             if(self.orderType == "past"){
@@ -236,7 +245,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 }
                 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objOrderDetailsData.restaurantName
-                lblLocation.text = objOrderDetailsData.street
+                if objOrderDetailsData.street != "" {
+                    lblLocation.isHidden = false
+                    lblLocation.text = objOrderDetailsData.street
+                }else {
+                    lblLocation.isHidden = true
+                }
                 lblAddress.text = objOrderDetailsData.address
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objOrderDetailsData.qrcode ?? "")"
                 imgBarCode.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -452,6 +466,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.lblDateTime.text = arrItem[indexPath.row].date
                 cell.lblQty.text = arrItem[indexPath.row].quantity
                 cell.lblPrice.text = (CurrencySymbol) + arrItem[indexPath.row].subTotal
+                if arrItem[indexPath.row].detail != ""{
+                    cell.lblDescription.isHidden = false
+                    cell.lblDescription.text = arrItem[indexPath.row].detail
+                }else {
+                    cell.lblDescription.isHidden = true
+                }
                 cell.selectionStyle = .none
                 return cell
             }

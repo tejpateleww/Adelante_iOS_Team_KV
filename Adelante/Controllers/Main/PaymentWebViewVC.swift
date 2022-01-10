@@ -51,7 +51,7 @@ class PaymentWebViewVC: BaseViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         let URLTemp = URL.init(string: strUrl)
         webView.load(URLRequest.init(url: URLTemp!))//load(URLRequest(url: URLTemp))
-        Utilities.showHud()
+//        Utilities.showHud()
         webView.allowsBackForwardNavigationGestures = true
         
     }

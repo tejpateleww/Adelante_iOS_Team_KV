@@ -26,7 +26,7 @@ struct structFilter {
 class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate , RestaurantCatListDelegate ,SortListDelegate,favoriteDelegate{
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
-    var arrFilter = ["HomeVC_arrFilter_title5".Localized(),"HomeVC_arrFilter_title1".Localized(), "HomeVC_arrFilter_title2".Localized(), "HomeVC_arrFilter_title3".Localized(), "HomeVC_arrFilter_title4".Localized()]
+    var arrFilter = [FilterData]()//["HomeVC_arrFilter_title5".Localized(),"HomeVC_arrFilter_title1".Localized(), "HomeVC_arrFilter_title2".Localized(), "HomeVC_arrFilter_title3".Localized(), "HomeVC_arrFilter_title4".Localized()]
     //"HomeVC_arrFilter_titleAll".Localized() ,
     //    structFilter(strselectedImage: UIImage.init(named: "filterImageSelected")! , strDeselectedImage: UIImage.init(named: "filterImage")!, strTitle: "")//["","Mobile Pickup", "Recently Viewed", "Top Rated"]
     var selectedSortTypedIndexFromcolVwFilter = 0
@@ -44,7 +44,6 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var selectedRestaurantId = ""
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
-    var selectedIndex = 4
     var selectedIndexgray = 0
     var orderIdArray : [String] = []
     var PlaceName = userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String
@@ -231,7 +230,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         self.pageNumber = 1
         isRefresh = true
         self.isNeedToReload = true
-        webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
+        webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndexgray))
     }
     @objc func deSelectFilterAndRefresh() {
         selectedSortTypedIndexFromcolVwFilter = 1
@@ -409,10 +408,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         if collectionView == self.colVwFilterOptions{
             let cell = colVwFilterOptions.dequeueReusableCell(withReuseIdentifier: FilterOptionsCell.reuseIdentifier, for: indexPath) as! FilterOptionsCell
-            cell.btnFilterOptions.setTitle(arrFilter[indexPath.row], for: .normal)
+            cell.btnFilterOptions.setTitle(arrFilter[indexPath.row].name, for: .normal)
             
             //            if selectedIndex == indexPath.row {//selectedSortTypedIndexFromcolVwFilter != -1 && selectedSortTypedIndexFromcolVwFilter
-            cell.btnFilterOptions.backgroundColor = (selectedIndexgray == indexPath.row) ? colors.segmentSelectedColor.value : colors.segmentDeselectedColor.value
+            cell.btnFilterOptions.backgroundColor = (selectedIndexgray == arrFilter[indexPath.row].value.toInt()) ? colors.segmentSelectedColor.value : colors.segmentDeselectedColor.value
             //                cell.btnFilterOptions.setImage(selectedIndex == indexPath.row, for: .normal)
             //                cell.btnFilterOptions.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
             //            webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
@@ -462,7 +461,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.colVwFilterOptions{
             
-            let s = arrFilter[indexPath.row].size(withAttributes:[.font: CustomFont.NexaRegular.returnFont(14)])
+            let s = arrFilter[indexPath.row].name.size(withAttributes:[.font: CustomFont.NexaRegular.returnFont(14)])
             return CGSize(width: s.width + 20, height: colVwFilterOptions.frame.size.height)
         } else {
             return CGSize(width: colVwRestWthPage.frame.size.width, height: colVwRestWthPage.frame.size.height)
@@ -477,21 +476,21 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.colVwFilterOptions{
-            selectedIndexgray = indexPath.row
-            if arrFilter[indexPath.row] == "HomeVC_arrFilter_title5".Localized(){
-                selectedIndex = 4
-            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title1".Localized(){
-                selectedIndex = 0
-            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title2".Localized(){
-                selectedIndex = 1
-            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title3".Localized(){
-                selectedIndex = 2
-            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title4".Localized(){
-                selectedIndex = 3
-            }
+            selectedIndexgray = arrFilter[indexPath.row].value.toInt()
+//            if arrFilter[indexPath.row] == "HomeVC_arrFilter_title5".Localized(){
+//                selectedIndex = 4
+//            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title1".Localized(){
+//                selectedIndex = 0
+//            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title2".Localized(){
+//                selectedIndex = 1
+//            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title3".Localized(){
+//                selectedIndex = 2
+//            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title4".Localized(){
+//                selectedIndex = 3
+//            }
     
             self.pageNumber = 1
-            if SingletonClass.sharedInstance.UserId == "" && selectedIndex == 1{
+            if SingletonClass.sharedInstance.UserId == "" && selectedIndexgray == 1{
                 let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
                 controller.isHideCancelButton = false
                 controller.isHideSubmitButton = false
@@ -515,7 +514,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.arrRestaurant.removeAll()
                 self.tblMainList.reloadData()
             }else{
-                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndex))
+                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndexgray))
             }
             colVwFilterOptions.reloadData()
         }else{
@@ -682,7 +681,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:false, strTabfilter: "\(selectedIndex)")
+        self.webserviceGetDashboard(isFromFilter:false, strTabfilter: "\(selectedIndexgray)")
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
@@ -716,7 +715,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         Deshboard.lat = "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.latitude)"
         Deshboard.lng =  "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.longitude)"
         Deshboard.page = "\(self.pageNumber)"
-        Deshboard.tab_filter = strTabfilter == "" ? "\(selectedIndex)" : strTabfilter
+        Deshboard.tab_filter = strTabfilter == "" ? "\(selectedIndexgray)" : strTabfilter
         WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
             //self.hideHUD()
             self.responseStatus = .gotData
@@ -730,6 +729,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 Bannercell.stopShimmering()
                 self.arrCategories = Homedata.category
                 self.arrBanner = Homedata.banner
+                self.arrFilter = Homedata.filterData
                 self.orderIdArray = Homedata.orderIds
                 if Homedata.orderIds.count != 0{
 //                    self.socketManageSetup()
@@ -765,7 +765,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.colVwRestWthPage.dataSource = self
                 self.colVwRestWthPage.isScrollEnabled = true
                 self.colVwRestWthPage.isUserInteractionEnabled = true
-                
+                self.colVwFilterOptions.reloadData()
                 self.colVwRestWthPage.reloadData()
                 
                 if isFromFilter{

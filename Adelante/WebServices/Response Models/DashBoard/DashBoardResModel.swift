@@ -15,6 +15,7 @@ class DashBoardResModel : NSObject, NSCoding{
         var orderIds : [String]!
         var restaurant : [Restaurant]!
         var status : Bool!
+        var filterData : [FilterData]!
 
         /**
          * Instantiate the instance using the passed json values to set the properties values
@@ -46,6 +47,12 @@ class DashBoardResModel : NSObject, NSCoding{
             for restaurantJson in restaurantArray{
                 let value = Restaurant(fromJson: restaurantJson)
                 restaurant.append(value)
+            }
+            filterData = [FilterData]()
+            let filterArray = json["filter_data"].arrayValue
+            for filterJson in filterArray{
+                let value = FilterData(fromJson: filterJson)
+                filterData.append(value)
             }
             status = json["status"].boolValue
         }
@@ -83,6 +90,13 @@ class DashBoardResModel : NSObject, NSCoding{
             }
             dictionary["restaurant"] = dictionaryElements
             }
+            if filterData != nil{
+            var dictionaryElements = [[String:Any]]()
+            for filterElement in filterData {
+                dictionaryElements.append(filterElement.toDictionary())
+            }
+            dictionary["filter_data"] = dictionaryElements
+            }
             if status != nil{
                 dictionary["status"] = status
             }
@@ -100,6 +114,7 @@ class DashBoardResModel : NSObject, NSCoding{
             message = aDecoder.decodeObject(forKey: "message") as? String
             orderIds = aDecoder.decodeObject(forKey: "order_ids") as? [String]
             restaurant = aDecoder.decodeObject(forKey: "restaurant") as? [Restaurant]
+            filterData = aDecoder.decodeObject(forKey: "filter_data") as? [FilterData]
             status = aDecoder.decodeObject(forKey: "status") as? Bool
         }
 
@@ -123,6 +138,9 @@ class DashBoardResModel : NSObject, NSCoding{
             }
             if restaurant != nil{
                 aCoder.encode(restaurant, forKey: "restaurant")
+            }
+            if filterData != nil{
+                aCoder.encode(filterData, forKey: "filter_data")
             }
             if status != nil{
                 aCoder.encode(status, forKey: "status")

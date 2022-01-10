@@ -17,6 +17,7 @@ class Item : Codable{
     var restaurantItemName : String!
     var subTotal : String!
     var date : String!
+    var detail : String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -32,6 +33,7 @@ class Item : Codable{
         restaurantItemName = json["restaurant_item_name"].stringValue
         subTotal = json["sub_total"].stringValue
         date = json["date"].stringValue
+        detail = json["description"].stringValue
 	}
 
 }

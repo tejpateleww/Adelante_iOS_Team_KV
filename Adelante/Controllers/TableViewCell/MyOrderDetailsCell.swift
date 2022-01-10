@@ -16,6 +16,7 @@ class MyOrderDetailsCell: UITableViewCell {
      @IBOutlet weak var lblDateTime: orderDetailsLabel!
     @IBOutlet weak var lblQty: UILabel!
     @IBOutlet weak var lblPrice: UILabel!
+    @IBOutlet weak var lblDescription: orderDetailsLabel!
     
      // MARK: - Properties
      
