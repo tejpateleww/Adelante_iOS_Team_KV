@@ -26,7 +26,9 @@ struct structSections {
 }
 
 
-class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,AddveriantDelegate,SkeletonTableViewDataSource {
+class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,AddveriantDelegate,SkeletonTableViewDataSource, ExpandableLabelDelegate {
+    
+    
     
     // MARK: - Properties
     var customTabBarController: CustomTabBarVC?
@@ -80,7 +82,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var lblCompleteTime: themeLabel!
     @IBOutlet weak var lblTimeZone: themeLabel!
     @IBOutlet weak var lblEastern: themeLabel!
-    @IBOutlet weak var lblAboutRestaurant: themeLabel!
+    @IBOutlet weak var lblAboutRestaurant: ExpandableLabel!
     @IBOutlet weak var btnViewPolicy: submitButton!
     @IBOutlet weak var lblNoOfItem: themeLabel!
     @IBOutlet weak var lblSign: themeLabel!
@@ -186,7 +188,28 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             self.lblEastern.text = objRestaurant.timeZone
             self.lblTime.text = "\(objRestaurant.fromTime ?? "")"
             self.lblCompleteTime.text = "\(objRestaurant.toTime ?? "")"
-            self.lblAboutRestaurant.text = objRestaurant.descriptionField ?? ""
+            lblAboutRestaurant.delegate = self
+            lblAboutRestaurant.ellipsis = NSAttributedString(string: "...")
+            lblAboutRestaurant.font = CustomFont.NexaRegular.returnFont(13)
+            lblAboutRestaurant.tintColor = UIColor(hexString: "#1C1C1C")
+            
+          
+            let myAttribute =  [NSAttributedString.Key.foregroundColor:UIColor(hexString: "#E34A25"),NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+            let viewMoreString = NSAttributedString(string: "View More", attributes: myAttribute)
+            let viewLessString = NSAttributedString(string: "View Less", attributes: myAttribute)
+
+           
+            
+            lblAboutRestaurant.collapsedAttributedLink = viewMoreString
+            lblAboutRestaurant.expandedAttributedLink = viewLessString
+     
+            lblAboutRestaurant.shouldCollapse = true
+            lblAboutRestaurant.textReplacementType = .word
+            lblAboutRestaurant.numberOfLines = 5
+            lblAboutRestaurant.collapsed = true
+            
+            lblAboutRestaurant.text = objRestaurant?.descriptionField ?? ""
+//            self.lblAboutRestaurant.text = objRestaurant.descriptionField ?? ""
             let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(objRestaurant.image ?? "")"
             self.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
             self.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -1117,7 +1140,42 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         footerView.backgroundColor = UIColor(hexString: "#707070").withAlphaComponent(0.2)
         return footerView
     }
+    //Expandeble label
+    func willExpandLabel(_ label: ExpandableLabel) {
+        if label == lblAboutRestaurant {
+            lblAboutRestaurant.numberOfLines = 0
+            lblAboutRestaurant.collapsed = false
+        }
+        
+    }
     
+    func didExpandLabel(_ label: ExpandableLabel) {
+        if label == lblAboutRestaurant {
+            
+        } else {
+            
+        }
+        
+    }
+    
+    func willCollapseLabel(_ label: ExpandableLabel) {
+        if label == lblAboutRestaurant {
+            lblAboutRestaurant.numberOfLines = 5
+            lblAboutRestaurant.collapsed = true
+        } else {
+            
+        }
+        
+    }
+    
+    func didCollapseLabel(_ label: ExpandableLabel) {
+        if label == lblAboutRestaurant {
+            
+        } else {
+           
+        }
+        
+    }
     // MARK: - Api Calls
     func webservicePostRestaurantDetails(){
         let ResDetails = RestaurantDetailsReqModel()
