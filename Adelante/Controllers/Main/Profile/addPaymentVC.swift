@@ -322,9 +322,16 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
         
         switch indexPath.section {
         case 0:
+            if WalletBalance >= CartTotal{
+                IsBrainTreeSelected = false
+                IsPaypalSelected = false
+            }
             IsWalletSelected = !IsWalletSelected
             tblPaymentMethod.reloadData()
         case 1:
+            if WalletBalance >= CartTotal{
+                IsWalletSelected = false
+            }
             if indexPath.row == 0 {
                 IsBrainTreeSelected = false
                 IsPaypalSelected = !IsPaypalSelected

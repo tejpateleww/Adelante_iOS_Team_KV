@@ -100,6 +100,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         tblItems.rowHeight = UITableView.automaticDimension
         tblItems.estimatedRowHeight = 66.5
         setup()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -168,44 +170,53 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if(self.orderType == "In-Process"){
                 self.vwShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
                 self.btnShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
-                //self.TxtParkingNo.inputView = vehicleDropdown
-                if self.objOrderDetailsData.isShare == "0" {
-                    stackParkingList.superview?.isHidden = true
-                }else {
-                    stackParkingList.superview?.isHidden = false
-                    if self.objOrderDetailsData.deliveryType == "1"{
-                        if self.objOrderDetailsData.parking_type == "1"{
-                            if self.objOrderDetailsData.parking_id == "0"{
-                                stackParkingList.subviews[0].isHidden = true
-                                stackParkingList.subviews[1].isHidden = false
-                                stackParkingList.subviews[2].isHidden = false
-                                if arrVehicle.count != 0{
-                                    TxtParkingNo.text = arrVehicle[0].parking_no
-                                }
-                                //                            LblcurbsideParkingPickup.superview?.isHidden = true
-                                self.CurbSideYesBtn.isSelected = true
-                                self.CurbSideNoBtn.isSelected = false
-                                
-                                //                            TxtParkingNo.superview?.isHidden = !CurbSideYesBtn.isSelected
-                            }
-                            else{
-                                stackParkingList.subviews[0].isHidden = false
-                                stackParkingList.subviews[1].isHidden = true
-                                stackParkingList.subviews[2].isHidden = true
-                                LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
-                            }
-                        }
-                        else{
-                            stackParkingList.subviews[0].isHidden = true
-                            stackParkingList.subviews[1].isHidden = false
-                            stackParkingList.subviews[2].isHidden = true
-                            //                        LblcurbsideParkingPickup.superview?.isHidden = true
-                            self.CurbSideNoBtn.isSelected = true
-                            self.CurbSideYesBtn.isSelected = false
-                            //                        TxtParkingNo.superview?.isHidden = true
-                        }
+                print("------------------------------------")
+                print("deliveryType")
+                print(self.objOrderDetailsData.deliveryType)
+                print("parking_type")
+                print(self.objOrderDetailsData.parking_type)
+                print("parking_id")
+                print(self.objOrderDetailsData.parking_id)
+                print(".shareTo")
+                print(objOrderDetailsData.shareTo)
+                print(".shareFrom")
+                print(objOrderDetailsData.shareFrom)
+                print("------------------------------------")
+                
+                
+                stackParkingList.subviews[0].isHidden = true
+                stackParkingList.subviews[1].isHidden = true
+                stackParkingList.subviews[2].isHidden = true
+                if objOrderDetailsData.status != "3" && objOrderDetailsData.status != "4" && self.objOrderDetailsData.deliveryType != "0"{
+                    if self.objOrderDetailsData.parking_id == "0" || self.objOrderDetailsData.deliveryType == "0"{
+                        // Yes no Button
+                        stackParkingList.subviews[0].isHidden = true
+                        stackParkingList.subviews[1].isHidden = false
+                        stackParkingList.subviews[2].isHidden = self.CurbSideNoBtn.isSelected
+                        //                                if arrVehicle.count != 0{
+                        //                                    TxtParkingNo.text = arrVehicle[0].parking_no
+                        //                                }
+                        //                            LblcurbsideParkingPickup.superview?.isHidden = true
+//                        self.CurbSideYesBtn.isSelected = true
+//                        self.CurbSideNoBtn.isSelected = false
                     }else{
-                        LblcurbsideParkingPickup.superview?.superview?.superview?.isHidden = true
+                        // Line with cancel button
+                        stackParkingList.subviews[0].isHidden = false
+                        stackParkingList.subviews[1].isHidden = true
+                        stackParkingList.subviews[2].isHidden = true
+                        LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
+                        CurbparkingCancelBtn.isHidden = false
+                    }
+                    
+                }else{
+                    if self.objOrderDetailsData.parking_id != "0" && self.objOrderDetailsData.deliveryType != "0"{
+                        
+                        // Line without cancel button
+                        stackParkingList.subviews[0].isHidden = false
+                        stackParkingList.subviews[1].isHidden = true
+                        stackParkingList.subviews[2].isHidden = true
+                        LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
+                        CurbparkingCancelBtn.isHidden = true
                     }
                 }
                 
@@ -257,13 +268,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 imgBarCode.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 self.QRCodeimage.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 lblTotal.text = CurrencySymbol + objOrderDetailsData.total
-                if objOrderDetailsData.shareFrom == ""{
-                }else{
+                if objOrderDetailsData.shareFrom != ""{
                     lblSharedDetail.isHidden = false
                     lblSharedDetail.text = "Shared from " + objOrderDetailsData.shareFrom
                 }
-                if objOrderDetailsData.shareTo == ""{
-                }else{
+                if objOrderDetailsData.shareTo != ""{
                     lblSharedDetail.isHidden = false
                     lblSharedDetail.text = "Shared to " + objOrderDetailsData.shareTo
                 }
@@ -482,14 +491,15 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 case "checkOutVC_arrayForTitle_title".Localized():
                     cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.subTotal ?? "")"
                 case "checkOutVC_arrayForTitle_title1".Localized():
+                   
                     cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.serviceFee ?? "")"
                 case "checkOutVC_arrayForTitle_title2".Localized():
                     cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.totalRound ?? "")"
                 case "checkOutVC_arrayForTitle_title3".Localized():
                     if objShareOrderDetails?.promocodeType == "discount"{
-                        cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.discountAmount ?? "")"
+                        cell.lblPrice.text = "- \(CurrencySymbol)\(objShareOrderDetails?.discountAmount ?? "")"
                     }else if objShareOrderDetails?.promocode != ""{
-                        cell.lblPrice.text = "\(CurrencySymbol)\(objShareOrderDetails?.discountAmount ?? "")"
+                        cell.lblPrice.text = "- \(CurrencySymbol)\(objShareOrderDetails?.discountAmount ?? "")"
                     }
                 default:
                     break
@@ -497,6 +507,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.lblTitle.text = arrayForTitle[indexPath.row]
                 if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
                     cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objShareOrderDetails?.tax! ?? "0")%)"
+                }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title1".Localized() {
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized() + " (\(objShareOrderDetails?.restaurant_service_fee ?? "0")%)"
+                }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title3".Localized() {
+                    if let promocode = objShareOrderDetails?.promocode{
+                        cell.lblTitle.text = "Promocode (\(promocode))"
+                    }
                 }
                 cell.selectionStyle = .none
                 return cell
@@ -506,14 +522,15 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 case "checkOutVC_arrayForTitle_title".Localized():
                     cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.subTotal ?? "")"
                 case "checkOutVC_arrayForTitle_title1".Localized():
+                    
                     cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.serviceFee ?? "")"
                 case "checkOutVC_arrayForTitle_title2".Localized():
                     cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.totalRound ?? "")"
                 case "checkOutVC_arrayForTitle_title3".Localized():
                     if objOrderDetailsData?.promocodeType == "discount"{
-                        cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
+                        cell.lblPrice.text = "- \(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
                     }else if objOrderDetailsData?.promocode != ""{
-                        cell.lblPrice.text = "\(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
+                        cell.lblPrice.text = "- \(CurrencySymbol)\(objOrderDetailsData?.discountAmount ?? "")"
                     }
                 default:
                     break
@@ -521,6 +538,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.lblTitle.text = arrayForTitle[indexPath.row]
                 if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
                     cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objOrderDetailsData?.tax! ?? "0")%)"
+                }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title1".Localized() {
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized() + " (\(objOrderDetailsData?.restaurant_service_fee ?? "0")%)"
+                }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title3".Localized() {
+                    if let promocode = objOrderDetailsData?.promocode{
+                        cell.lblTitle.text = "Promocode (\(promocode))"
+                    }
                 }
                 cell.selectionStyle = .none
                 return cell

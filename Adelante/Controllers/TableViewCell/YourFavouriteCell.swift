@@ -18,5 +18,6 @@ class YourFavouriteCell: UITableViewCell {
     @IBOutlet weak var lblAddress: tblHomeLabels!
     @IBOutlet weak var LblMiles: tblHomeLabels!
     
+    @IBOutlet weak var Lblclosed: themeLabel!
     
 }

@@ -23,6 +23,7 @@ import Braintree
     var fromPushItemId = String()
     var shareUrl = ""
     var locationService = LocationService()
+    var customTabBarController: CustomTabBarVC?
     
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -338,7 +339,18 @@ import Braintree
 //        }
         
     }
-    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        
+        let userInfo = response.notification.request.content.userInfo
+        print(userInfo)
+        let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type")
+        
+        self.handlePushnotifications(NotificationType: key as? String ?? "", userData: userInfo)
+        completionHandler()
+    }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         //        if let refreshedToken = InstanceID.instanceID().token() {
@@ -371,15 +383,7 @@ import Braintree
         }
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        
-        let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
-        completionHandler()
-    }
+    
     
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print(fcmToken)
@@ -446,10 +450,41 @@ extension AppDelegate {
             let orderID = (userData as NSDictionary).object(forKey: "gcm.notification.order_id") as? String
             
 //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil, userInfo: ["orderID" : orderID ?? ""])
+           
+            
+            
         case PushNotifications.cancelorder.Name:
             let orderID = (userData as NSDictionary).object(forKey: "gcm.notification.order_id") as? String
             
 //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil, userInfo: ["orderID" : orderID ?? ""])
+            if let _ = Utilities.appTopViewController() as? SplashVC {
+//                NotificationCenter.default.addObserver(
+//                    appDelegate,
+//                    selector: #selector(appDelegate.moveToOrderSumaryPage),
+//                    name: Notification.Name(rawValue: NotificationKey.OrderPush.rawValue),
+//                    object: nil)
+            }else if let myOrdersVC = Utilities.appTopViewController() as? MyOrdersVC {
+                print("do nothingas we are on order summary page only.")
+                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+                myOrdersVC.webserviceGetOrderDetail(selectedOrder: "In-Process")
+            }
+            else if let myOrderDetailsVC = Utilities.appTopViewController() as?  MyOrderDetailsVC{
+                print("do nothingas we are on order details page only.")
+                myOrderDetailsVC.orderId = orderID ?? ""
+                myOrderDetailsVC.webserviceOrderDetails()
+            }else{
+                //                        appDelegate.isComingFromOrderPush = true
+                //                        appDelegate.selectedOrderIdFromPush = orderId
+                appDel.moveToOrderDetailsPage()
+            }
+        
+        case PushNotifications.OrderPrepare.Name:
+            let orderID = (userData as NSDictionary).object(forKey: "gcm.notification.order_id") as? String
+            if let myOrderDetailsVC = Utilities.appTopViewController() as?  MyOrderDetailsVC{
+                print("do nothingas we are on order details page only.")
+                myOrderDetailsVC.orderId = orderID ?? ""
+                myOrderDetailsVC.webserviceOrderDetails()
+            }
             
         default:
             break
@@ -512,4 +547,17 @@ extension AppDelegate {
     
     
     
+}
+
+//MARK: - Push Notification Redirection methods
+extension AppDelegate{
+    
+    @objc func moveToOrderDetailsPage() {
+        //If tab is not opened
+        self.customTabBarController?.selectedIndex = 2
+        if let nav = customTabBarController?.viewControllers?[2] as? UINavigationController, let myOrder = nav.viewControllers.first as? MyOrdersVC {
+            nav.popToRootViewController(animated: false)
+            myOrder.webserviceGetOrderDetail(selectedOrder: "In-Process")
+        }
+    }
 }

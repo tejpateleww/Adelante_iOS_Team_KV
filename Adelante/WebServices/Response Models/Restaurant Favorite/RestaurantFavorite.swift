@@ -25,6 +25,7 @@ class RestaurantFavorite : NSObject, NSCoding{
     var lng : String!
     var type : String!
     var address: String!
+    var is_close: String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -48,7 +49,7 @@ class RestaurantFavorite : NSObject, NSCoding{
         lng = json["lng"].stringValue
         type = json["type"].stringValue
         address = json["address"].stringValue
-        
+        is_close = json["is_close"].stringValue
 	}
 
 	/**

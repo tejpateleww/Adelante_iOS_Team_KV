@@ -31,6 +31,10 @@ class CartDatum : NSObject, NSCoding{
     var totalQuantity : String!
     var totalRound : String!
     var delivery_type:String!
+    var restaurant_service_fee: String!
+    var is_close: String!
+    
+    
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -65,6 +69,9 @@ class CartDatum : NSObject, NSCoding{
         totalQuantity = json["total_quantity"].stringValue
         totalRound = json["total_round"].stringValue
         delivery_type = json["delivery_type"].stringValue
+        restaurant_service_fee = json["restaurant_service_fee"].stringValue
+        is_close = json["is_close"].stringValue
+      
 	}
 
 	/**

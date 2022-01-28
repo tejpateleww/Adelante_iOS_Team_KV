@@ -32,6 +32,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
     var strCartId = ""
     var SettingsData : SettingsResModel!
     var locationManager = CLLocationManager()
+    var IsClosed:Bool = false
 //    var locationManager : LocationService?
     // MARK: - IBOutlets
     @IBOutlet weak var tblAddedProduct: UITableView!
@@ -132,7 +133,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         centerMapOnLocation(location: CLLocation(latitude: Double(cartDetails?.lat ?? "") ?? 0.0, longitude: Double(cartDetails?.lng ?? "") ?? 0.0), mapView: MapViewForShowRastaurantLocation)
         lblAddress.text = cartDetails?.address
         LblTotlaPrice.text = "\(CurrencySymbol)\(cartDetails?.grandTotal ?? "")"
-        
+        self.IsClosed = cartDetails?.is_close == "1"
         tblAddedProduct.delegate = self
         tblOrderDetails.delegate = self
         tblAddedProduct.dataSource = self
@@ -148,6 +149,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             lblPromoCode.text = cartDetails?.promocode
             btnCanclePromoCOde.isHidden = false
             btnChange.isHidden = false
+        }
+        else{
+            btnAppyPromoCode.isHidden = false
+            lblPromoCode.isHidden = true
+            lblPromoCode.text = ""
+            btnChange.isHidden = true
+            btnCanclePromoCOde.isHidden = true
         }
     }
     
@@ -249,12 +257,14 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             case "checkOutVC_arrayForTitle_title".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.oldTotal ?? "")"
             case "checkOutVC_arrayForTitle_title1".Localized():
+                cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized() + " (\(cartDetails?.restaurant_service_fee ?? "0")%)"
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.serviceFee ?? "")"
             case "checkOutVC_arrayForTitle_title2".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
             case "checkOutVC_arrayForTitle_title3".Localized():
                 if cartDetails?.promocodeType == "discount" || cartDetails?.promocodeType == "flat" {
-                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(cartDetails?.discount ?? "0")%)"
+//                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title3".Localized() + " (\(cartDetails?.discount ?? "0")%)"
+                    cell.lblTitle.text = "Promocode (\(cartDetails?.promocode ?? ""))"
                     cell.lblPrice.text = "- \(CurrencySymbol)\(cartDetails?.discountAmount ?? "")"
                 }
             default:
@@ -362,7 +372,12 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 }
             }
         }else{
-            webserviceCheckOrder()
+            if self.IsClosed{
+                Utilities.hideHud()
+                Utilities.showAlert(AppInfo.appName, message: "Restaurant is close please choose anthore resutaturant and get back after some time ", vc: self)
+            }else{
+                self.webserviceCheckOrder()
+            }
         }
     }
     @IBAction func seeMenu(_ sender: submitButton) {
@@ -466,12 +481,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         }
     }
     //Api for update Qty of item
-    func webserviceUpdateQty(itemID:String,strtype:String){
+    func webserviceUpdateQty(itemID:String,strtype:String,promocodeRemove:String = ""){
         let updateCart = UpdateCardQtyReqModel()
         updateCart.cart_item_id = itemID
         updateCart.qty = "1"
         updateCart.type = strtype
         updateCart.status = "0"
+        updateCart.promocode_remove = promocodeRemove
         WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: false) { (json, status, response) in
             if(status)
             {
@@ -491,10 +507,21 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             }
             else
             {
-                if let strMessage = json["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
+                if json["promocode_popup"].stringValue == "1"{
+                    Utilities.showAlertWithTitleFromWindow(title: AppInfo.appName, andMessage: json["message"].stringValue, buttons: ["Ok","Cancel"]) { index in
+                        if index == 0{
+                            self.webserviceUpdateQty(itemID: itemID, strtype: strtype,promocodeRemove: "1")
+                        }else{
+                            self.webserviceGetCartDetails()
+                        }
+                    }
+                }
+                else{
+                    if let strMessage = json["message"].string {
+                        Utilities.displayAlert(strMessage)
+                    }else {
+                        Utilities.displayAlert("Something went wrong")
+                    }
                 }
             }
         }

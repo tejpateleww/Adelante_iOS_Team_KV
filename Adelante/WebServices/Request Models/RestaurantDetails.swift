@@ -38,6 +38,7 @@ class UpdateCardQtyReqModel:RequestModel{
     var type : String = ""
     var status : String = ""
     var search : String = ""
+    var promocode_remove: String = ""
 }
 
 class ItemListReqModel: RequestModel{

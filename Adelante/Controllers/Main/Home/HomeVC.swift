@@ -44,7 +44,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var selectedRestaurantId = ""
     var isRefresh = false
     var headerCell : RestaurantCatListCell?
-    var selectedIndexgray = 0
+    var selectedIndexgray = 5
     var orderIdArray : [String] = []
     var PlaceName = userDefault.object(forKey: UserDefaultsKey.PlaceName.rawValue) as? String
     let activityView = UIActivityIndicatorView(style: .white)
@@ -81,10 +81,10 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
         NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushOnLinkClick), object: nil)
         
-        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil)
-        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderAccept), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+//        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.CancelOrderGet), name: NSNotification.Name(rawValue: NotificationKeys.CancelOrder), object: nil)
+//        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.ShareOrderAccept), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
         socketManageSetup()
         
         self.startTimer()
@@ -562,6 +562,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 cell.lblAddress.text = arrRestaurant[indexPath.row].address ?? "Test"
                 cell.lblRating.text = arrRestaurant[indexPath.row].rating_count
                 cell.btnFavorite.isHidden = false
+                cell.LblClosed.isHidden = arrRestaurant[indexPath.row].is_close == "0"
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -999,10 +1000,13 @@ extension HomeVC{
     // Socket Emit Connect user
     func emitCustomerInterval(){
         print(#function)
-        //        customer_id,lat,lng
-        let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId
-        ]
-        SocketIOManager.shared.socketEmit(for: SocketData.kcustomerinterval.rawValue, with: param)
+        if SingletonClass.sharedInstance.UserId == ""{
+            self.timerForInterval?.invalidate()
+            self.timerForInterval = nil
+        }else {
+            let param: [String: Any] = ["customer_id" : SingletonClass.sharedInstance.UserId]
+            SocketIOManager.shared.socketEmit(for: SocketData.kcustomerinterval.rawValue, with: param)
+        }
     }
 
     func emitSocketUpdateLocation() {

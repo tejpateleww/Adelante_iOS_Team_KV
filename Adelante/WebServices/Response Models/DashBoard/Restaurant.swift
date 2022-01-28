@@ -42,7 +42,7 @@ class Restaurant : NSObject, NSCoding{
     var store_policy : String!
     var parking_slot : String!
     var lng: String!
-    
+    var is_close: String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -83,6 +83,7 @@ class Restaurant : NSObject, NSCoding{
         store_policy =  json["store_policy"].stringValue
         parking_slot =  json["parking_slot"].stringValue
         lng = json["lng"].stringValue
+        is_close = json["is_close"].stringValue
 	}
 
 	/**

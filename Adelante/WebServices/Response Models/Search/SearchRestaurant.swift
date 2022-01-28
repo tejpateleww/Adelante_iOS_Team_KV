@@ -42,6 +42,7 @@ class SearchRestaurant : NSObject, NSCoding{
     var updatedAt : String!
     var userId : String!
     var zipCode : String!
+    var is_close: String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -83,6 +84,7 @@ class SearchRestaurant : NSObject, NSCoding{
         updatedAt = json["updated_at"].stringValue
         userId = json["user_id"].stringValue
         zipCode = json["zip_code"].stringValue
+        is_close = json["is_close"].stringValue
 	}
 
 	/**

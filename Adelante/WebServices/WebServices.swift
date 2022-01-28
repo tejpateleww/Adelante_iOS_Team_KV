@@ -256,7 +256,6 @@ class WebService{
         {
             Utilities.showHud()
         }
-        
         AF.upload(multipartFormData: { (multiPart) in
             for (key, value) in dictParams {
                 if let temp = value as? String {

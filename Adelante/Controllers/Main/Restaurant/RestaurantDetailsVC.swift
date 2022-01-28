@@ -93,6 +93,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var viewBG: UIView!
     @IBOutlet weak var tblPopupHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var Lbloperatingdays: themeLabel!
+    @IBOutlet weak var LblClosed: themeLabel!
     @IBOutlet weak var ViewForBottom: NSLayoutConstraint!
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -192,7 +194,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             lblAboutRestaurant.ellipsis = NSAttributedString(string: "...")
             lblAboutRestaurant.font = CustomFont.NexaRegular.returnFont(13)
             lblAboutRestaurant.tintColor = UIColor(hexString: "#1C1C1C")
-            
+            self.LblClosed.isHidden = objRestaurant.is_close == "0"
+            self.Lbloperatingdays.text = objRestaurant.days
           
             let myAttribute =  [NSAttributedString.Key.foregroundColor:UIColor(hexString: "#E34A25"),NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
             let viewMoreString = NSAttributedString(string: "View More", attributes: myAttribute)
@@ -1275,14 +1278,14 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         
     }
     //MARK : - update quantity
-    func webserviceUpdateCartQuantity(strItemid:String,strQty:String,strType:String,row:Int){
+    func webserviceUpdateCartQuantity(strItemid:String,strQty:String,strType:String,row:Int, PromocodeRemove: String = ""){
         let updateCart = UpdateCardQtyReqModel()
         updateCart.cart_item_id = strItemid
         updateCart.qty = strQty
         updateCart.type = strType
         updateCart.search = SearchData
         updateCart.status = "0"
-        
+        updateCart.promocode_remove = PromocodeRemove
         WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: false){ [self] (json, status, response) in
             
             if(status)
@@ -1371,10 +1374,22 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }
                 self.tblRestaurantDetails.reloadData()
             }else{
-                if let strMessage = json["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
+                
+                if json["promocode_popup"].stringValue == "1"{
+                    Utilities.showAlertWithTitleFromWindow(title: AppInfo.appName, andMessage: json["message"].stringValue, buttons: ["Ok","Cancel"]) { index in
+                        if index == 0{
+                            self.webserviceUpdateCartQuantity(strItemid: strItemid, strQty: strQty, strType: strType, row: row, PromocodeRemove: "1")
+                        }else{
+                            self.webservicePostRestaurantDetails()
+                        }
+                    }
+                }
+                else{
+                    if let strMessage = json["message"].string {
+                        Utilities.displayAlert(strMessage)
+                    }else {
+                        Utilities.displayAlert("Something went wrong")
+                    }
                 }
             }
         }

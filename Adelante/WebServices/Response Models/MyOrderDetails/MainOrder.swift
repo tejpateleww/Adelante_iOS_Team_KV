@@ -42,6 +42,8 @@ class MainOrder : Codable{
     var parking_no: String!
     var parking_type: String!
     var parking_id: String!
+    var restaurant_service_fee: String!
+    var CrubSidestatus: String!
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
@@ -87,6 +89,8 @@ class MainOrder : Codable{
         parking_no = json["parking_no"].stringValue
         parking_type = json["parking_type"].stringValue
         parking_id = json["parking_id"].stringValue
+        restaurant_service_fee = json["restaurant_service_fee"].stringValue
+        CrubSidestatus = json["status"].stringValue
     }
 
 }

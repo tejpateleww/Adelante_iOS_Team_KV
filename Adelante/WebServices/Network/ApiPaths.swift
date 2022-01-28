@@ -123,7 +123,7 @@ enum ApiKey: String {
 }
 
 enum SocketData : String{
-    case kSocketHostUrl = "https://www.adelantemovil.com:8080/"//"http://3.239.174.164:8080/"//"http://18.208.18.170:8080/""http://18.215.15.214:8080"//"
+    case kSocketHostUrl = "https://www.adelantemovil.com:8080/"   // "http://54.67.52.213:8080/" //
     case kConnectUser   = "connect_user"
     case kLocationTracking = "location_tracking"
     case kcustomerinterval = "customer_interval"

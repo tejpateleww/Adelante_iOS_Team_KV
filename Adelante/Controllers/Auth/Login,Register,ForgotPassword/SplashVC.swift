@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import CoreLocation
+import Alamofire
 
 class SplashVC: UIViewController {
     
@@ -20,6 +21,8 @@ class SplashVC: UIViewController {
         super.viewDidLoad()
         webservice_Init()
         webserviceSorting()
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDel.moveToOrderDetailsPage), name: NSNotification.Name(rawValue: NotificationKeys.PushShareOrderAccept), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -200,3 +203,5 @@ struct InitObject {
         isMaintenance = json["maintenance"].stringValue
     }
 }
+
+

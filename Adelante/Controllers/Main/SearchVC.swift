@@ -86,6 +86,7 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
                 cell.lblAreaName.text = arrSearchRestList[indexPath.row].name
                 cell.lblAddress.text = arrSearchRestList[indexPath.row].address
                 cell.lblMiles.text = arrSearchRestList[indexPath.row].distance
+                cell.LblClosed.isHidden = arrSearchRestList[indexPath.row].is_close == "0"
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrSearchRestList[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 cell.btnFavorite.tag = indexPath.row

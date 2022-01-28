@@ -30,6 +30,7 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
     var totalRound : String!
     var username : String!
     var promocode : String!
+    var restaurant_service_fee: String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -64,6 +65,7 @@ class ShareDetailsMainOrder : NSObject, NSCoding{
         totalRound = json["total_round"].stringValue
         username = json["username"].stringValue
         promocode = json["promocode"].stringValue
+        restaurant_service_fee = json["restaurant_service_fee"].stringValue
 	}
 
 	/**
