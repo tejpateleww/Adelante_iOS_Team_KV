@@ -190,15 +190,14 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 if objOrderDetailsData.status != "3" && objOrderDetailsData.status != "4" && self.objOrderDetailsData.deliveryType != "0"{
                     if self.objOrderDetailsData.parking_id == "0" || self.objOrderDetailsData.deliveryType == "0"{
                         // Yes no Button
+                    
+            
+                        self.CurbSideYesBtn.isSelected = self.objOrderDetailsData.parking_type == "1"
+                        self.CurbSideNoBtn.isSelected = self.objOrderDetailsData.parking_type == "0"
+                        
                         stackParkingList.subviews[0].isHidden = true
                         stackParkingList.subviews[1].isHidden = false
                         stackParkingList.subviews[2].isHidden = self.CurbSideNoBtn.isSelected
-                        //                                if arrVehicle.count != 0{
-                        //                                    TxtParkingNo.text = arrVehicle[0].parking_no
-                        //                                }
-                        //                            LblcurbsideParkingPickup.superview?.isHidden = true
-//                        self.CurbSideYesBtn.isSelected = true
-//                        self.CurbSideNoBtn.isSelected = false
                     }else{
                         // Line with cancel button
                         stackParkingList.subviews[0].isHidden = false
@@ -230,7 +229,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                     self.btnCancel.isHidden = (self.objOrderDetailsData.isCancel.toInt() == 0) ? true : false
                     self.vwRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
                     self.btnRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
-                    if objOrderDetailsData.parking_no != ""{
+                    if objOrderDetailsData.parking_no != "" && self.objOrderDetailsData.parking_id != "0"{
                         self.LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
                         stackParkingList.subviews[0].isHidden = false
                         stackParkingList.subviews[1].isHidden = true

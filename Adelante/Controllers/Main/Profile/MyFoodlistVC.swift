@@ -152,11 +152,11 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 cell.IncreseData = {
                     let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
                     if self.arrOrderData[indexPath.row].quantity.toInt() > value {
-                    self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
-                    cell.stackHide.isHidden = true
-                    self.activityView.center = cell.vwStapper.center
-                    cell.vwStapper.addSubview(self.activityView)
-                    self.activityView.startAnimating()
+                        self.webserviceUpdateCartQuantity(strItemid: self.arrOrderData[indexPath.row].cartItemId, strQty: "1", strType: "1", row: indexPath.row)
+                        cell.stackHide.isHidden = true
+                        self.activityView.center = cell.vwStapper.center
+                        cell.vwStapper.addSubview(self.activityView)
+                        self.activityView.startAnimating()
                     }else{
                         Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(self.arrOrderData[indexPath.row].itemName ?? "")",self.arrOrderData[indexPath.row].quantity.toInt()]), vc: self)
                     }
@@ -269,6 +269,9 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
         WebServiceSubClass.UpdateItemQty(updateQtyModel: updateCart, showHud: false){ (json, status, response) in
             if(status)
             {
+                if json["is_added"].stringValue == "0"{
+                    Utilities.displayAlert( json["message"].stringValue)
+                }
                 self.webserviceGetFoodlist()
             }
             else

@@ -12,7 +12,7 @@ class CartListResModel : NSObject, NSCoding{
     var data : CartDatum!
     var message : String!
     var status : Bool!
-
+    var is_added: String!
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
@@ -26,6 +26,7 @@ class CartListResModel : NSObject, NSCoding{
         }
         message = json["message"].stringValue
         status = json["status"].boolValue
+        is_added = json["is_added"].stringValue
 	}
 
 	/**

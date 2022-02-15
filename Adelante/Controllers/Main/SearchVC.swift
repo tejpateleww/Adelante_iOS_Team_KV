@@ -54,8 +54,6 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         if txtSearch.text!.isEmptyOrWhitespace(){
             self.tblRestaurant.setDataImage(image: "Restaurant")
             self.tblFoodList.setDataImage(image: "MyFoodlist")
-//            self.tblRestaurant.backgroundView = UIImageView(image: UIImage(named: "Restaurant"))//setEmptyMessage("Search Something")
-//            self.tblFoodList.backgroundView = UIImageView(image: UIImage(named: "MyFoodlist"))//setEmptyMessage("Search Something")
         }
     }
     @objc func refreshFavList() {

@@ -13,6 +13,7 @@ class updateCartResModel : NSObject, NSCoding{
     var message : String!
     var restaurant : updateQtyRestaurant!
     var status : Bool!
+    var is_added: String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -31,6 +32,7 @@ class updateCartResModel : NSObject, NSCoding{
             restaurant = updateQtyRestaurant(fromJson: restaurantJson)
         }
         status = json["status"].boolValue
+        is_added = json["is_added"].stringValue
 	}
 
 	/**

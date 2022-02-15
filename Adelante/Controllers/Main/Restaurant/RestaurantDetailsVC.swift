@@ -114,7 +114,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         skeletonViewData.showAnimatedSkeleton()
         skeletonViewData.frame.size.width = view.frame.size.width
         self.view.addSubview(skeletonViewData)
-        webservicePostRestaurantDetails()
+//        webservicePostRestaurantDetails()
         setUpLocalizedStrings()
         //        NotificationCenter.default.removeObserver(self, name: notifRefreshRestaurantDetails, object: nil)
         setup()
@@ -1291,6 +1291,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             if(status)
             {
                 let cartData = updateCartResModel.init(fromJson: json)
+                if cartData.is_added == "0"{
+                    Utilities.displayAlert(cartData.message)
+                    
+                }
                 self.arrUpdateQty = cartData.data
                 self.arrFoodMenu = cartData.restaurant.foodMenu
                 self.arrMenuitem = cartData.restaurant.menuItem

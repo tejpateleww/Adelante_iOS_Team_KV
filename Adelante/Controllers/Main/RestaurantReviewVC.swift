@@ -125,6 +125,9 @@ class RestaurantReviewVC: BaseViewController,UITableViewDelegate,UITableViewData
                 if cell.lblDescription.text == ""{
                     cell.lblDescription.isHidden = true
                     cell.lblSaperator.isHidden = false
+                }else{
+                    cell.lblDescription.isHidden = false
+                    cell.lblSaperator.isHidden = true
                 }
                 cell.vwRating.rating = Double(arrDetails?[indexPath.row].rating ?? "0.0") ?? 0.0
                 cell.selectionStyle = .none

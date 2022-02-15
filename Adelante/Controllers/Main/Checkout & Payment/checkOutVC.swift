@@ -493,6 +493,10 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             {
                 print(json)
                 let cartData = CartListResModel.init(fromJson: json)
+                if cartData.is_added == "0"{
+                    Utilities.displayAlert(cartData.message)
+                    
+                }
                 self.cartDetails = cartData.data
                 if self.cartDetails == nil{
                     self.navigationController?.popViewController(animated: true)

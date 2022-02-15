@@ -47,7 +47,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         txtSearch.delegate = self
         setUpLocalizedStrings()
         self.tblMainList.showAnimatedSkeleton()
-        webservicePostRestaurantFav(strSearch: "")
+//        webservicePostRestaurantFav(strSearch: "")
       
         tblMainList.refreshControl = refreshList
         refreshList.addTarget(self, action: #selector(refreshFavList), for: .valueChanged)
@@ -62,6 +62,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
+        self.txtSearch.text = ""
         webservicePostRestaurantFav(strSearch: "")
     }
     func registerNIB(){
@@ -85,7 +86,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         self.pageNumber = 1
         self.isNeedToReload = true
         self.isRefresh = true
-        self.webservicePostRestaurantFav(strSearch: "")
+        self.webservicePostRestaurantFav(strSearch: txtSearch.text ?? "")
     }
     func setUpLocalizedStrings() {
         txtSearch.placeholder = "FavouritesVC_txtSearch".Localized()
