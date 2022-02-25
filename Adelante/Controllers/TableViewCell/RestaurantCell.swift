@@ -20,6 +20,7 @@ class RestaurantCell: UITableViewCell {
     @IBOutlet weak var vwIndicator: UIView!
     
     @IBOutlet weak var LblClosed: UILabel!
+    @IBOutlet weak var closeLblHeight: NSLayoutConstraint!
     
 //    @IBOutlet weak var stackMiles: UIStackView!
     override func awakeFromNib() {

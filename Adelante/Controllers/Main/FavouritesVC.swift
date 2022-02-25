@@ -155,6 +155,7 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
                 cell.lblRating.text = arrFavoriteRest[indexPath.row].rating_count
                 cell.lblAddress.text = arrFavoriteRest[indexPath.row].address
                 cell.Lblclosed.isHidden = arrFavoriteRest[indexPath.row].is_close == "0"
+                cell.closeLblHeight.constant = arrFavoriteRest[indexPath.row].is_close == "0" ? 0 : 20
                 if arrFavoriteRest[indexPath.row].distance != "0 miles"{
                     cell.LblMiles.isHidden = false
                     cell.LblMiles.text = arrFavoriteRest[indexPath.row].distance

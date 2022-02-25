@@ -28,6 +28,7 @@ class notificaationResModel : NSObject, NSCoding{
         }
         message = json["message"].stringValue
         status = json["status"].boolValue
+        
 	}
 
 	/**

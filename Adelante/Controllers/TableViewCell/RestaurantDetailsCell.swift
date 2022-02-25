@@ -8,14 +8,14 @@
 
 import UIKit
 
-class RestaurantDetailsCell: UITableViewCell {
+class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
 
     @IBOutlet weak var stackHide: UIStackView!
     @IBOutlet weak var vwRadius: UIView!
     @IBOutlet weak var vwSeperator: seperatorView!
     @IBOutlet weak var btnCustomize: underLineButton!
     @IBOutlet weak var btnAddItem: UIButton!
-    @IBOutlet weak var lblAboutItem: tblMyOrdersLabel!
+    @IBOutlet weak var lblAboutItem: ExpandableLabel!
     @IBOutlet weak var lblItemPrice: tblMyOrdersLabel!
     @IBOutlet weak var lblItemName: tblMyOrdersLabel!
     @IBOutlet weak var imgFoodDetails: UIImageView!
@@ -56,4 +56,40 @@ class RestaurantDetailsCell: UITableViewCell {
         btnCustomize.setTitle("RestaurantDetailsVC_RestaurantDetailsCell_btnCustomize".Localized(), for: .normal)
     }
 
+    //Expandeble label
+    func willExpandLabel(_ label: ExpandableLabel) {
+        if label == lblAboutItem {
+            lblAboutItem.numberOfLines = 0
+            lblAboutItem.collapsed = false
+        }
+        
+    }
+    
+    func didExpandLabel(_ label: ExpandableLabel) {
+        if label == lblAboutItem {
+            
+        } else {
+            
+        }
+        
+    }
+    
+    func willCollapseLabel(_ label: ExpandableLabel) {
+        if label == lblAboutItem {
+            lblAboutItem.numberOfLines = 2
+            lblAboutItem.collapsed = true
+        } else {
+            
+        }
+        
+    }
+    
+    func didCollapseLabel(_ label: ExpandableLabel) {
+        if label == lblAboutItem {
+            
+        } else {
+           
+        }
+        
+    }
 }

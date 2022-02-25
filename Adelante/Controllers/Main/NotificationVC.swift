@@ -8,6 +8,7 @@
 
 import UIKit
 import SkeletonView
+import SDWebImage
 
 struct notificationDetail{
     var strTitle : String!
@@ -115,13 +116,17 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
                 let cell:NotificationCell = tbvNotification.dequeueReusableCell(withIdentifier: NotificationCell.reuseIdentifier , for: indexPath)as! NotificationCell
                 cell.lblNotificationName.text = arrNotification[indexPath.row].notificationTitle
                 cell.lblNotificationDetail.text = arrNotification[indexPath.row].descriptionField
-                if cell.lblNotificationName.text == "Order Placed" || cell.lblNotificationName.text == "Share Order" || cell.lblNotificationName.text == "Send Qsr Order"{
-                    cell.imgNotificationIcon.image = UIImage(named: "Dummy_notif1")
-                }else if cell.lblNotificationName.text == "Cancel Order"{
-                    cell.imgNotificationIcon.image = UIImage(named: "Dummy_notif2")
-                }else{
-                    cell.imgNotificationIcon.image = UIImage(named: "Dummy_notif3")
-                }
+//                if cell.lblNotificationName.text == "Order Placed" || cell.lblNotificationName.text == "Share Order" || cell.lblNotificationName.text == "Send Qsr Order"{
+//                    cell.imgNotificationIcon.image = UIImage(named: "Dummy_notif1")
+//                }else if cell.lblNotificationName.text == "Cancel Order"{
+//                    cell.imgNotificationIcon.image = UIImage(named: "Dummy_notif2")
+//                }else{
+//                    cell.imgNotificationIcon.image = UIImage(named: "Dummy_notif1")
+//                }
+                
+                let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrNotification[indexPath.row].image ?? "")"
+                cell.imgNotificationIcon.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.imgNotificationIcon.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
                 cell.selectionStyle = .none
                 return cell
             } else {

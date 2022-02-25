@@ -19,5 +19,6 @@ class YourFavouriteCell: UITableViewCell {
     @IBOutlet weak var LblMiles: tblHomeLabels!
     
     @IBOutlet weak var Lblclosed: themeLabel!
+    @IBOutlet weak var closeLblHeight: NSLayoutConstraint!
     
 }

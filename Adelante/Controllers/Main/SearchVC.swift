@@ -52,8 +52,8 @@ class SearchVC: BaseViewController,UINavigationControllerDelegate, UIGestureReco
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
         if txtSearch.text!.isEmptyOrWhitespace(){
-            self.tblRestaurant.setDataImage(image: "Restaurant")
-            self.tblFoodList.setDataImage(image: "MyFoodlist")
+//            self.tblRestaurant.setDataImage(image: "Restaurant")
+//            self.tblFoodList.setDataImage(image: "MyFoodlist")
         }
     }
     @objc func refreshFavList() {

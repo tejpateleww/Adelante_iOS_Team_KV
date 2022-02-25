@@ -231,16 +231,16 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             
             cell.increaseClick = { [self] in
                 let value : Int = (cell.lbltotalCount.text! as NSString).integerValue
-                if objitem.quantity.toInt() > value {
+//                if objitem.quantity.toInt() > value {
                     webserviceUpdateQty(itemID: objitem.cartItemId, strtype: "1")
                     cell.stackHide.isHidden = true
                     cell.vwStapper.isHidden = false
                     self.activityView.center = CGPoint(x: cell.vwStapper.frame.width / 2, y: cell.vwStapper.frame.height/2)
                     cell.vwStapper.addSubview(self.activityView)
                     self.activityView.startAnimating()
-                }else{
-                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(objitem.itemName ?? "")",objitem.quantity]), vc: self)
-                }
+//                }else{
+//                    Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized(), arguments: ["\(objitem.itemName ?? "")",objitem.quantity]), vc: self)
+//                }
             }
             
             cell.selectionStyle = .none
@@ -461,7 +461,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 
                 self.cartDetails = cartData.data
                 self.arrCartItem = cartData.data.item
-                Utilities.displayAlert(json["messSage"].string ?? "")
+//                Utilities.displayAlert(json["messSage"].string ?? "")
                 self.tblAddedProduct.reloadData()
                 self.tblOrderDetails.reloadData()
                 setData()
@@ -472,11 +472,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             }
             else
             {
-                if let strMessage = json["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
-                }
+                Utilities.displayAlert(title: AppInfo.appName, message: json["message"].string ?? "Something went wrong" , completion: { index in
+                    self.navigationController?.popViewController(animated: true)
+                })
             }
         }
     }
@@ -495,7 +493,6 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 let cartData = CartListResModel.init(fromJson: json)
                 if cartData.is_added == "0"{
                     Utilities.displayAlert(cartData.message)
-                    
                 }
                 self.cartDetails = cartData.data
                 if self.cartDetails == nil{
@@ -613,11 +610,9 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             }
             else
             {
-                if let strMessage = json["message"].string {
-                    Utilities.displayAlert(strMessage)
-                }else {
-                    Utilities.displayAlert("Something went wrong")
-                }
+                Utilities.displayAlert(AppInfo.appName, message: json["message"].string ?? "Something went wrong", completion: { index in
+                    self.webserviceGetCartDetails()
+                })
             }
         })
     }

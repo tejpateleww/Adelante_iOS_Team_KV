@@ -61,6 +61,8 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
     var TotalItemPrice = Int()
     var itemBasePrice = Double()
     var isFromRestaurant : Bool = false
+    var TotalVeriantsQty = "0"
+    var AddVeriantQty = "0"
     // MARK: - IBOutlets
     
     @IBOutlet weak var tblBFFCombo: UITableView!{
@@ -402,8 +404,17 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
             self.present(navController, animated: true, completion: nil)
         }else{
             //            self.navigationController?.popViewController(animated: true)
-            let strarray = arrselectedId.joined(separator: ",")
-            webwerviceAddtoCart(strAddon: strarray)
+            
+            
+//            let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
+            if (Int(self.TotalVeriantsQty) ?? 0)  > (Int(AddVeriantQty) ?? 0){
+                let strarray = arrselectedId.joined(separator: ",")
+                webwerviceAddtoCart(strAddon: strarray)
+            }else{
+                Utilities.showAlert(AppName, message: String(format: "MessageQtyNotAvailable".Localized()), vc: self)
+            }
+            
+            
             // self.delegateAddVariant.addVeriantincart(veriantid: strarray)
         }
     }
@@ -427,6 +438,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 self.total = Int(objDoublePrice)
                 self.tblBFFCombo.stopSkeletonAnimation()
                 self.arrVariants = resVariant.variants
+                self.TotalVeriantsQty = resVariant.item_quantity
                 self.tblBFFCombo.dataSource = self
                 self.tblBFFCombo.isScrollEnabled = true
                 self.tblBFFCombo.isUserInteractionEnabled = true

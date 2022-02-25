@@ -213,7 +213,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     
                     let obj = self.arrPastList[indexPath.row]
                     cell.lblRestName.text = obj.restaurantName
-                    cell.lblRestLocation.text = obj.street
+                    cell.lblRestLocation.text = obj.address
                     cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
                     cell.lblItem.text = obj.restaurantItemName
                     cell.lblDtTime.text = obj.date
@@ -296,7 +296,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     }
                     let obj = self.arrInProcessList[indexPath.row]
                     cell.lblRestName.text = obj.restaurantName
-                    cell.lblRestLocation.text = obj.street
+                    cell.lblRestLocation.text = obj.address
                     cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
                     cell.lblItem.text = obj.restaurantItemName
                     cell.lblDtTime.text = obj.date
@@ -394,7 +394,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     
                     let obj = arrShareList[indexPath.row]
                     cell.lblRestName.text = obj.restaurantName
-                    cell.lblRestLocation.text = obj.street
+                    cell.lblRestLocation.text = obj.address
                     cell.lblPrice.text = "\(CurrencySymbol)" + obj.total.ConvertToTwoDecimal()
                     cell.lblItem.text = obj.restaurantItemName
                     cell.lblDtTime.text = obj.date

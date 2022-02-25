@@ -352,28 +352,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         navController.navigationBar.isHidden = true
         self.present(navController, animated: true, completion: nil)
     }
-    @IBAction func btnFilterClicked(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            //            if self.selectedSortTypedIndexFromcolVwFilter == 1 {
-            //                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
-            //                let selectedIndexPath = IndexPath(item:self.selectedSortTypedIndexFromcolVwFilter , section: 0)
-            //                self.colVwFilterOptions.reloadItems(at: [selectedIndexPath])
-            //                self.tblMainList.reloadData()
-            //            }
-            //            else if self.selectedSortTypedIndexFromcolVwFilter == sender.tag{
-            //                self.selectedSortTypedIndexFromcolVwFilter = 1
-            //                self.colVwFilterOptions.reloadData()
-            //                self.tblMainList.reloadData()
-            //            } else {
-            //                self.selectedSortTypedIndexFromcolVwFilter = sender.tag
-            //                self.colVwFilterOptions.reloadData()
-            //                self.tblMainList.reloadData()
-            //            }
-            //            if self.selectedSortTypedIndexFromcolVwFilter == 0 {
-            
-            //            }
-        }
-    }
+  
 }
 extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,SkeletonTableViewDataSource,SkeletonCollectionViewDataSource{
     // MARK: - skeletonCollectionview Datasource
@@ -514,9 +493,10 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.arrRestaurant.removeAll()
                 self.tblMainList.reloadData()
             }else{
-                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndexgray))
+                webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndexgray),showhud: true)
             }
             colVwFilterOptions.reloadData()
+            
         }else{
             let restaurantListVc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantListVC.storyboardID) as! RestaurantListVC
             //restaurantListVc.strItemId = arrBanner[indexPath.row].id
@@ -563,6 +543,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 cell.lblRating.text = arrRestaurant[indexPath.row].rating_count
                 cell.btnFavorite.isHidden = false
                 cell.LblClosed.isHidden = arrRestaurant[indexPath.row].is_close == "0"
+                cell.closeLblHeight.constant = arrRestaurant[indexPath.row].is_close == "0" ? 0 : 30
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrRestaurant[indexPath.row].image ?? "")"
                 cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -633,6 +614,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         headerCell?.selectedIndexPath = self.SelectedCatIndex
         headerCell?.colRestaurantCatList.reloadData()
         headerCell?.selectionStyle = .none
+        headerCell?.btnFilter.isHidden = arrCategories.count == 0
         headerCell?.filter = {
             self.headerCell?.selectedIdForFood = "0"
             self.headerCell?.colRestaurantCatList.reloadData()
@@ -663,6 +645,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if  arrRestaurant.count == 0 {return}
         if arrRestaurant[indexPath.row].type != "outlet" {
             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RestaurantOutletVC.storyboardID) as! RestaurantOutletVC
             controller.selectedRestaurantId = arrRestaurant[indexPath.row].id
@@ -682,7 +665,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.SelectedCatIndex = SelctedIndex
         print("selectedcategoryid",SelectedCatId)
         self.pageNumber = 1
-        self.webserviceGetDashboard(isFromFilter:false, strTabfilter: "\(selectedIndexgray)")
+        self.webserviceGetDashboard(isFromFilter:false, strTabfilter: "\(selectedIndexgray)",showhud:  true)
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
@@ -706,7 +689,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         }
     }
     // MARK: - Api Calls
-    @objc func webserviceGetDashboard(isFromFilter : Bool,strTabfilter:String){
+    @objc func webserviceGetDashboard(isFromFilter : Bool,strTabfilter:String,showhud: Bool = false){
         let Deshboard = DashboardReqModel()
         Deshboard.category_id = SelectedCatId
         Deshboard.user_id = SingletonClass.sharedInstance.UserId
@@ -717,7 +700,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         Deshboard.lng =  "\(SingletonClass.sharedInstance.userDefaultLocation.coordinate.longitude)"
         Deshboard.page = "\(self.pageNumber)"
         Deshboard.tab_filter = strTabfilter == "" ? "\(selectedIndexgray)" : strTabfilter
-        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: false, completion: { (response, status, error) in
+        WebServiceSubClass.deshboard(DashboardModel: Deshboard, showHud: showhud, completion: { (response, status, error) in
             //self.hideHUD()
             self.responseStatus = .gotData
             if status{
@@ -774,6 +757,11 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     self.tblMainList.reloadRows(at: indexes, with: .fade)
                     DispatchQueue.main.async {
                         self.headerCell?.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .centeredHorizontally, animated: false)
+                    }
+                }else if !self.SelectedCatIndex.isEmpty{
+                    DispatchQueue.main.async {
+                        self.headerCell?.colRestaurantCatList.scrollToItem(at: self.SelectedCatIndex, at: .centeredHorizontally, animated: false)
+                        self.headerCell?.colRestaurantCatList.reloadData()
                     }
                 }else{
                     self.tblMainList.reloadData()

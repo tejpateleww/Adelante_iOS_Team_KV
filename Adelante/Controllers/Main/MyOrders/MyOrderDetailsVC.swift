@@ -145,9 +145,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if objShareOrderDetails != nil{
                 lblId.text = objShareOrderDetails.orderId
                 if objShareOrderDetails.itemQuantity.toInt() > 1 {
-                    lblNoOfItems.text = objShareOrderDetails.itemQuantity + " items"
+                    lblNoOfItems.text = objShareOrderDetails.itemQuantity + " food items"
                 } else {
-                    lblNoOfItems.text = objShareOrderDetails.itemQuantity + " item"
+                    lblNoOfItems.text = objShareOrderDetails.itemQuantity + " food item"
                 }
                 lblTotal.text = CurrencySymbol + objShareOrderDetails.total
                 lblRestName.text = objShareOrderDetails.restaurantName
@@ -249,9 +249,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if objOrderDetailsData != nil{
                 lblId.text = objOrderDetailsData.orderId
                 if objOrderDetailsData.itemQuantity.toInt() > 1 {
-                    lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
+                    lblNoOfItems.text = objOrderDetailsData.itemQuantity + " food items"
                 } else {
-                    lblNoOfItems.text = objOrderDetailsData.itemQuantity + " item"
+                    lblNoOfItems.text = objOrderDetailsData.itemQuantity + " food item"
                 }
                 //            lblNoOfItems.text = objOrderDetailsData.itemQuantity + " items"
                 lblRestName.text = objOrderDetailsData.restaurantName
@@ -363,6 +363,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: RateReviewVC.storyboardID) as! RateReviewVC
         controller.strRestaurantId = strRestaurantId
         controller.strOrderId = orderId
+        controller.GiveRateReviewdone = { status in
+            self.webserviceOrderDetails()
+        }
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

@@ -16,6 +16,7 @@ class RateReviewVC: BaseViewController {
     var customTabBarController: CustomTabBarVC?
     var strRestaurantId = ""
     var strOrderId = ""
+    var GiveRateReviewdone:((Bool)->())?
     // MARK: - IBOutlets
     @IBOutlet weak var lblRateRestaurant: themeLabel!
     @IBOutlet weak var tvRateReview: themeTextView!
@@ -60,9 +61,15 @@ class RateReviewVC: BaseViewController {
             //            self.hideHUD()
             if(status)
             {
-                Utilities.displayAlert(json["message"].string ?? "")
-                self.tvRateReview.text = ""
-                self.vwRating.rating = 1
+                Utilities.displayAlert(title: AppInfo.appName, message: json["message"].string ?? "", completion: { index in
+                    self.tvRateReview.text = ""
+                    self.vwRating.rating = 1
+                    if let donereview = self.GiveRateReviewdone{
+                        donereview(true)
+                    }
+                    self.navigationController?.popViewController(animated: true)
+                })
+                
             }
             else
             {

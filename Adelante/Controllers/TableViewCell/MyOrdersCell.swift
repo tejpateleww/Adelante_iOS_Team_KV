@@ -25,6 +25,7 @@ class MyOrdersCell: UITableViewCell {
      @IBOutlet weak var btnCancelOrder: myOrdersBtn!
     @IBOutlet weak var btnAccept: myOrdersBtn!
     @IBOutlet weak var vwAccept: UIView!
+ 
     
      // MARK: - Properties
     var cancel : (() -> ())?

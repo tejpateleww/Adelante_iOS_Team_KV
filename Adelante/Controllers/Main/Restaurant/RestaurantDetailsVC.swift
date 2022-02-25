@@ -198,11 +198,10 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
             self.Lbloperatingdays.text = objRestaurant.days
           
             let myAttribute =  [NSAttributedString.Key.foregroundColor:UIColor(hexString: "#E34A25"),NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
-            let viewMoreString = NSAttributedString(string: "View More", attributes: myAttribute)
-            let viewLessString = NSAttributedString(string: "View Less", attributes: myAttribute)
+            let viewMoreString = NSAttributedString(string: "Show More", attributes: myAttribute)
+            let viewLessString = NSAttributedString(string: "Show Less", attributes: myAttribute)
 
            
-            
             lblAboutRestaurant.collapsedAttributedLink = viewMoreString
             lblAboutRestaurant.expandedAttributedLink = viewLessString
      
@@ -394,7 +393,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 if arrItemList.count != 0 {
                     return self.arrItemList.count
                 }else{
-                    return 1
+                    return 0
                 }
             }else{
                 return 1
@@ -411,6 +410,22 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     cell.lblItemName.text = arrMenuitem[indexPath.row].name
                     cell.lblItemPrice.text = "\(CurrencySymbol)" + arrMenuitem[indexPath.row].price.ConvertToTwoDecimal()
                     cell.lblAboutItem.text = arrMenuitem[indexPath.row].descriptionField
+                    
+                    cell.lblAboutItem.delegate = self
+                    cell.lblAboutItem.ellipsis = NSAttributedString(string: "...")
+                    
+                    let myAttribute =  [NSAttributedString.Key.foregroundColor:UIColor(hexString: "#E34A25"),NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+                    let viewMoreString = NSAttributedString(string: "Show More", attributes: myAttribute)
+                    let viewLessString = NSAttributedString(string: "Show Less", attributes: myAttribute)
+
+                    cell.lblAboutItem.collapsedAttributedLink = viewMoreString
+                    cell.lblAboutItem.expandedAttributedLink = viewLessString
+             
+                    cell.lblAboutItem.shouldCollapse = true
+                    cell.lblAboutItem.textReplacementType = .word
+                    cell.lblAboutItem.numberOfLines = 2
+                    cell.lblAboutItem.collapsed = true
+                    
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrMenuitem[indexPath.row].image ?? "")"
                     cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgFoodDetails.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
@@ -477,6 +492,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             controller.selectedRestaurantId = self.objRestaurant.id
                             controller.isFromRestaurant = true
                             controller.delegateAddVariant = self
+                            controller.AddVeriantQty = self.arrMenuitem[indexPath.row].cartQty
                             self.strItemId = self.arrMenuitem[indexPath.row].id
                             self.navigationController?.pushViewController(controller, animated: true)
                         }else{
@@ -519,6 +535,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                         controller.isFromRestaurant = true
                                         controller.delegateAddVariant = self
                                         self.strItemId = self.arrMenuitem[indexPath.row].id
+                                        controller.AddVeriantQty = self.arrMenuitem[indexPath.row].cartQty
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }else{
                                         let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
@@ -546,6 +563,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     controller.isFromRestaurant = true
                                     controller.selectedRestaurantId = self.objRestaurant.id
                                     controller.delegateAddVariant = self
+                                    controller.AddVeriantQty = self.arrMenuitem[indexPath.row].cartQty
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }else{
@@ -574,6 +592,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                                 controller.selectedRestaurantId = self.objRestaurant.id
                                 controller.delegateAddVariant = self
+                                controller.AddVeriantQty = self.arrMenuitem[indexPath.row].cartQty
                                 self.strItemId = self.arrMenuitem[indexPath.row].id
                                 self.navigationController?.pushViewController(controller, animated: true)
                             }
@@ -586,6 +605,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                             controller.selectedRestaurantId = self.objRestaurant.id
                             controller.delegateAddVariant = self
+                            controller.AddVeriantQty = self.arrMenuitem[indexPath.row].cartQty
                             self.strItemId = self.arrMenuitem[indexPath.row].id
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
@@ -672,6 +692,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             controller.selectedRestaurantId = self.objRestaurant.id
                             controller.delegateAddVariant = self
                             self.strItemId = self.arrMenuitem[indexPath.row].id
+                            controller.AddVeriantQty = self.arrMenuitem[indexPath.row].cartQty
                             self.navigationController?.pushViewController(controller, animated: true)
                         }else{
                             let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
@@ -707,6 +728,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                         controller.selectedRestaurantId = self.objRestaurant.id
                                         controller.isFromRestaurant = true
                                         controller.delegateAddVariant = self
+                                        controller.AddVeriantQty = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty
                                         self.strItemId = self.arrMenuitem[indexPath.row].id
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }else{
@@ -736,6 +758,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     controller.isFromRestaurant = true
                                     controller.delegateAddVariant = self
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
+                                    controller.AddVeriantQty = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }else{
                                     let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
@@ -767,6 +790,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                                 controller.selectedRestaurantId = self.objRestaurant.id
                                 controller.delegateAddVariant = self
+                                controller.AddVeriantQty = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty
                                 self.strItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                                 self.navigationController?.pushViewController(controller, animated: true)
                             }
@@ -779,6 +803,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                             controller.selectedRestaurantId = self.objRestaurant.id
                             controller.delegateAddVariant = self
+                            controller.AddVeriantQty = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty
                             self.strItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
@@ -863,6 +888,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         controller.selectedRestaurantId = self.objRestaurant.id
                         controller.isFromRestaurant = true
                         controller.delegateAddVariant = self
+                        controller.AddVeriantQty = self.arrMenuitem[indexPath.row].cartQty
                         self.strItemId = self.arrMenuitem[indexPath.row].id
                         self.navigationController?.pushViewController(controller, animated: true)
                     }else{
@@ -905,6 +931,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                     controller.isFromRestaurant = true
                                     controller.delegateAddVariant = self
                                     self.strItemId = self.arrMenuitem[indexPath.row].id
+                                    controller.AddVeriantQty = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartQty
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }else{
                                     let value : Int = (cell.lblNoOfItem.text! as NSString).integerValue
@@ -932,6 +959,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 controller.selectedRestaurantId = self.objRestaurant.id
                                 controller.isFromRestaurant = true
                                 controller.delegateAddVariant = self
+                                controller.AddVeriantQty = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty
                                 self.strItemId = self.arrMenuitem[indexPath.row].id
                                 self.navigationController?.pushViewController(controller, animated: true)
                             }else{
@@ -962,6 +990,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                             controller.selectedRestaurantId = self.objRestaurant.id
                             controller.delegateAddVariant = self
+                            controller.AddVeriantQty = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty
                             self.strItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
@@ -974,6 +1003,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                         controller.selectedRestaurantId = self.objRestaurant.id
                         controller.delegateAddVariant = self
+                        controller.AddVeriantQty = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].cartQty
                         self.strItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                         self.navigationController?.pushViewController(controller, animated: true)
                     }
@@ -1248,13 +1278,16 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { [self] (response, status, error) in
             if status {
                 let cartitem = addCartResModel.init(fromJson: response)
-                arrAddToCartItem = cartitem.data
-                arrFoodMenu = cartitem.restaurant.foodMenu
-                arrMenuitem = cartitem.restaurant.menuItem
-                objRestaurant.isdiff = cartitem.restaurant.isdiff
-                self.checkItemsAndUpdateFooter(Qty: arrAddToCartItem.totalQuantity, Total: arrAddToCartItem.total)
+                if cartitem.data != nil{
+                    arrAddToCartItem = cartitem.data
+                    arrFoodMenu = cartitem.restaurant.foodMenu
+                    arrMenuitem = cartitem.restaurant.menuItem
+                    objRestaurant.isdiff = cartitem.restaurant.isdiff
+                    self.checkItemsAndUpdateFooter(Qty: arrAddToCartItem.totalQuantity, Total: arrAddToCartItem.total)
+                }
                 tblRestaurantDetails.reloadData()
                 tblPopup.reloadData()
+                
             } else {
                 if let strMessage = response["message"].string {
                     Utilities.displayAlert(strMessage)
@@ -1293,7 +1326,6 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 let cartData = updateCartResModel.init(fromJson: json)
                 if cartData.is_added == "0"{
                     Utilities.displayAlert(cartData.message)
-                    
                 }
                 self.arrUpdateQty = cartData.data
                 self.arrFoodMenu = cartData.restaurant.foodMenu

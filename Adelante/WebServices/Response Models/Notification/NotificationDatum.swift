@@ -12,6 +12,7 @@ class NotificationDatum : NSObject, NSCoding{
     var descriptionField : String!
     var id : String!
     var notificationTitle : String!
+    var image: String!
 
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
@@ -23,6 +24,7 @@ class NotificationDatum : NSObject, NSCoding{
         descriptionField = json["description"].stringValue
         id = json["id"].stringValue
         notificationTitle = json["notification_title"].stringValue
+        image = json["image"].stringValue
 	}
 
 	/**

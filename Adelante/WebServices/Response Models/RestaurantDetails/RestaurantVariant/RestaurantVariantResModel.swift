@@ -12,6 +12,7 @@ class RestaurantVariantResModel : NSObject, NSCoding{
     var itemPrice : String!
     var message : String!
     var status : Bool!
+    var item_quantity: String!
 
     /**
      * Instantiate the instance using the passed json values to set the properties values
@@ -29,6 +30,7 @@ class RestaurantVariantResModel : NSObject, NSCoding{
         itemPrice = json["item_price"].stringValue
         message = json["message"].stringValue
         status = json["status"].boolValue
+        item_quantity = json["item_quantity"].stringValue
     }
 
     /**

@@ -438,9 +438,6 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                                     vc.selectedIndex = 2
                                 }
                                 
-                                
-                                
-                                
                             }
                         }
                     }
@@ -456,8 +453,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
                     }
                 }
             } else {
-                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
-                
+//                Utilities.displayErrorAlert(json["message"].string ?? "Something went wrong")
+                Utilities.displayAlert(title: "Error", message: json["message"].string ?? "Something went wrong", completion: { index in
+                    self.navigationController?.popToViewController(ofClass: RestaurantDetailsVC.self, animated: true)
+                })
             }
         })
         
