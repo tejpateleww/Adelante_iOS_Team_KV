@@ -451,6 +451,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 }else {
                     Utilities.displayAlert("Something went wrong")
                 }
+                
             }
         })
     }

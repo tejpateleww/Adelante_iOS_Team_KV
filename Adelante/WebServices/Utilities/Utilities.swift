@@ -173,9 +173,10 @@ class Utilities:NSObject{
             
             alertController.addAction(action)
         }
+        DispatchQueue.main.async {
         
-        appDel.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-        
+            appDel.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
     }
     static func displayAlert(_ title: String, message: String, completion:((_ index: Int) -> Void)?, acceptTitle:String, otherTitles: String? ...) {
         if message.trimmedString == "" {

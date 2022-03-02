@@ -34,6 +34,7 @@ import Braintree
         BTAppContextSwitcher.setReturnURLScheme("com.eww.adelante.payments")
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 //        FirebaseApp.configure()
         if let url = launchOptions?[.url] as? URL, let annotation = launchOptions?[.annotation] {
@@ -465,8 +466,11 @@ extension AppDelegate {
 //                    object: nil)
             }else if let myOrdersVC = Utilities.appTopViewController() as? MyOrdersVC {
                 print("do nothingas we are on order summary page only.")
-                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
-                myOrdersVC.webserviceGetOrderDetail(selectedOrder: "In-Process")
+//                SingletonClass.sharedInstance.selectInProcessInMyOrder = true
+//                SingletonClass.sharedInstance.selectInProcessShareOrder = true
+                myOrdersVC.segment.setIndex(0)
+                myOrdersVC.selectedSegmentTag = 0
+                myOrdersVC.webserviceGetOrderDetail(selectedOrder: "past")
             }
             else if let myOrderDetailsVC = Utilities.appTopViewController() as?  MyOrderDetailsVC{
                 print("do nothingas we are on order details page only.")

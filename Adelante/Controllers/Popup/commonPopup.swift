@@ -26,6 +26,7 @@ class commonPopup: UIViewController {
     
     var btnSubmit : (() -> ())?
     
+    
     var isHideCancelButton = true
     var isHideSubmitButton = true
     var submitBtnTitle = ""
@@ -145,7 +146,8 @@ class commonPopup: UIViewController {
     }
     
     @IBAction func btnCancelAction(_ sender: commonPopupButton) {
-            self.dismiss(animated: true, completion: nil)
-            view.removeGestureRecognizer(tap)
+        self.dismiss(animated: true, completion: nil)
+        view.removeGestureRecognizer(tap)
+            
     }
 }

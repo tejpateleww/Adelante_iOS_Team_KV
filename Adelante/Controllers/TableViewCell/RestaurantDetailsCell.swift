@@ -10,6 +10,14 @@ import UIKit
 
 class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
 
+    
+    var customize : (() -> ())?
+    var decreaseData : (() -> ())?
+    var IncreseData : (() -> ())?
+    var btnAddAction : (() -> ())?
+    var ExpandedLabel : ((Bool) -> ())?
+    
+    
     @IBOutlet weak var stackHide: UIStackView!
     @IBOutlet weak var vwRadius: UIView!
     @IBOutlet weak var vwSeperator: seperatorView!
@@ -21,14 +29,14 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
     @IBOutlet weak var imgFoodDetails: UIImageView!
     @IBOutlet weak var lblNoOfItem: UILabel!
     @IBOutlet weak var vwStapper: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpLocalizedStrings()
+        SetExpandeLable()
     }
-    var customize : (() -> ())?
-    var decreaseData : (() -> ())?
-    var IncreseData : (() -> ())?
-    var btnAddAction : (() -> ())?
+
+   
     @IBAction func btnCustomize(_ sender: Any) {
         if let click = self.customize {
             click()
@@ -57,10 +65,33 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
     }
 
     //Expandeble label
+    
+    func SetExpandeLable(){
+        self.lblAboutItem.delegate = self
+//        self.lblAboutItem.ellipsis = NSAttributedString(string: "...")
+        
+        let myAttribute =  [NSAttributedString.Key.foregroundColor:UIColor(hexString: "#E34A25"),NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+        let viewMoreString = NSAttributedString(string: "Show More", attributes: myAttribute)
+        let viewLessString = NSAttributedString(string: "Show Less", attributes: myAttribute)
+
+        self.lblAboutItem.collapsedAttributedLink = viewMoreString
+        self.lblAboutItem.expandedAttributedLink = viewLessString
+ 
+//        self.lblAboutItem.shouldCollapse = true
+//        lblAboutItem.textReplacementType = .word
+        self.lblAboutItem.numberOfLines = 3
+//        self.lblAboutItem.collapsed = true
+    }
+    
+    
     func willExpandLabel(_ label: ExpandableLabel) {
         if label == lblAboutItem {
             lblAboutItem.numberOfLines = 0
             lblAboutItem.collapsed = false
+            if let expandedLabel = ExpandedLabel{
+                expandedLabel(true)
+            }
+            
         }
         
     }
@@ -76,8 +107,11 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
     
     func willCollapseLabel(_ label: ExpandableLabel) {
         if label == lblAboutItem {
-            lblAboutItem.numberOfLines = 2
+            lblAboutItem.numberOfLines = 3
             lblAboutItem.collapsed = true
+            if let expandedLabel = ExpandedLabel{
+                expandedLabel(false)
+            }
         } else {
             
         }

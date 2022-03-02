@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 enum Direction { case left, right }
 
@@ -21,6 +22,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
     var textFieldsIndexes:[OTPTextField:Int] = [:]
     var verifyOTPClosour : (() -> ())?
     var timer = Timer()
+    var customTabBarController: CustomTabBarVC?
     
     // MARK: - IBOutlets
     @IBOutlet weak var lblVerify: themeLabel!
@@ -66,6 +68,10 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
             self.webserviceForSendOTP(type: "1")
         }
     }
+    
+    
+    
+    
     func reversetimer(){
         self.timer.invalidate() // just in case this button is tapped multiple times
         self.lblCount.isHidden = false
@@ -146,7 +152,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
         setNavigationBarInViewController(controller: self, naviColor: colors.appGreenColor.value, naviTitle: NavTitles.none.value, leftImage: NavItemsLeft.back.value, rightImages: [NavItemsRight.none.value], isTranslucent: true, isShowHomeTopBar: false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0){
 //            Utilities.showAlertOfAPIResponse(param: self.strOTP, vc: self)
-            Utilities.showAlert(AppName, message: self.strOTP, vc: self)
+//            Utilities.showAlert(AppName, message: self.strOTP, vc: self)
         }
     }
     
@@ -262,7 +268,7 @@ class VerifyVC: BaseViewController,UITextFieldDelegate, OTPTextFieldDelegate {
                     userDefault.setValue(registerRespoDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                     userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                     userDefault.setUserData(objProfile: registerRespoDetails!)
-                    appDel.navigateToLogin()
+                    appDel.navigateToMainLogin()
                     appDel.clearData()
                 }, otherTitles: nil)
             }

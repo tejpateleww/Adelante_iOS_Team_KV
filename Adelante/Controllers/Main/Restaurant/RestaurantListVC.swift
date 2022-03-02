@@ -76,7 +76,7 @@ class RestaurantListVC: BaseViewController, UITableViewDelegate, UITableViewData
         self.pageNumber = 1
         self.isRefresh = true
         self.isNeedToReload = true
-        self.webserviceGetRestaurantList(strSearch: "")
+        self.webserviceGetRestaurantList(strSearch: txtSearch.text ?? "")
     }
     func SelectedSortList(_ SortId: String) {
         DispatchQueue.main.async {

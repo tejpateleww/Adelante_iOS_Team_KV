@@ -163,15 +163,15 @@ class CustomTabBarVC: UITabBarController,UITabBarControllerDelegate {
         selectedTabIndex = tabBarController.selectedIndex
         if (tabBarController.selectedIndex == 2 || tabBarController.selectedIndex == 3 || tabBarController.selectedIndex == 4) {
             if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) == nil || (userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false){
-            let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
-            let navController = UINavigationController.init(rootViewController: vc)
-            navController.modalPresentationStyle = .overFullScreen
-            navController.navigationController?.modalTransitionStyle = .crossDissolve
-            navController.navigationBar.isHidden = true
-            self.present(navController, animated: true, completion: nil)
+                let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                let navController = UINavigationController.init(rootViewController: vc)
+                navController.modalPresentationStyle = .overFullScreen
+                navController.navigationController?.modalTransitionStyle = .crossDissolve
+                navController.navigationBar.isHidden = true
+                self.present(navController, animated: true, completion: nil)
                 appDel.clearData()
                 SingletonClass.sharedInstance.isPresented = true
-            tabBarController.selectedIndex = lastSelectedIndex
+                tabBarController.selectedIndex = lastSelectedIndex
             }
         }
         if tabBarController.selectedIndex == 0  {

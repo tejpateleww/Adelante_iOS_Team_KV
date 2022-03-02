@@ -272,9 +272,12 @@ class FavouritesVC: BaseViewController, UITableViewDelegate, SkeletonTableViewDa
         WebServiceSubClass.Favorite(Favoritemodel: favorite, showHud: true, completion: { (response, status, error) in
             if status{
                 self.pageNumber = 1
-                self.webservicePostRestaurantFav(strSearch: "")
+                
+                self.webservicePostRestaurantFav(strSearch: self.txtSearch.text ?? "")
+                
                 NotificationCenter.default.post(name: notifRefreshDashboardList, object: nil)
                 NotificationCenter.default.post(name: notifRefreshRestaurantList, object: nil)
+                
             }else{
                 if let strMessage = response["message"].string {
                     Utilities.displayAlert(strMessage)

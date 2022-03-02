@@ -58,6 +58,7 @@ class OTPTextField: UITextField {
         self.layer.borderColor = colors.appOrangeColor.value.cgColor
         self.layer.borderWidth = 1
         self.font = CustomFont.AileronBold.returnFont(27)
+        self.ignoreSwitchingByNextPrevious = true
     }
 }
 

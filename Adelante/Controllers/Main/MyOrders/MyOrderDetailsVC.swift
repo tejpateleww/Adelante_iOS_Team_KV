@@ -83,6 +83,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         TxtParkingNo.delegate = self
         tblOrderDetails.delegate = self
         tblOrderDetails.dataSource = self
+        tblItems.delegate = self
+        tblItems.dataSource = self
         tblOrderDetails.reloadData()
         tblOrderDetails.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         skeletonViewData.showAnimatedSkeleton()
@@ -97,8 +99,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             webserviceOrderDetails()
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PromocodeApply"), object: nil)
         }
-        tblItems.rowHeight = UITableView.automaticDimension
-        tblItems.estimatedRowHeight = 66.5
+//        tblItems.rowHeight = UITableView.automaticDimension
+//        tblItems.estimatedRowHeight = 66.5
         setup()
         
         
@@ -106,7 +108,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         self.customTabBarController?.hideTabBar()
-        tblItems.reloadData()
+//        tblItems.reloadData()
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
         if let info = object, let collObj = info as? UITableView{
@@ -116,6 +118,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        self.heightTblItems.constant = tblItems.contentSize.height
+    }
+    
     // MARK: - Other Methods
     func setup() {
         self.customTabBarController = (self.tabBarController as! CustomTabBarVC)
@@ -170,19 +177,6 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if(self.orderType == "In-Process"){
                 self.vwShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
                 self.btnShareOrder.isHidden = (self.objOrderDetailsData.isShare.toInt() == 0) ? true : false
-                print("------------------------------------")
-                print("deliveryType")
-                print(self.objOrderDetailsData.deliveryType)
-                print("parking_type")
-                print(self.objOrderDetailsData.parking_type)
-                print("parking_id")
-                print(self.objOrderDetailsData.parking_id)
-                print(".shareTo")
-                print(objOrderDetailsData.shareTo)
-                print(".shareFrom")
-                print(objOrderDetailsData.shareFrom)
-                print("------------------------------------")
-                
                 
                 stackParkingList.subviews[0].isHidden = true
                 stackParkingList.subviews[1].isHidden = true
@@ -294,6 +288,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
         tblItems.reloadData()
         tblOrderDetails.reloadData()
+        print("===================================")
+        print("height", tblItems.contentSize.height)
+        print("===================================")
         self.heightTblItems.constant = tblItems.contentSize.height
     }
     
@@ -320,10 +317,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             self.vwBarCode.isHidden = false
             self.vwAccept.isHidden = false
         }
-        tblItems.delegate = self
-        tblItems.dataSource = self
-        tblItems.reloadData()
-        self.heightTblItems.constant = tblItems.contentSize.height
+       
+//        tblItems.reloadData()
+//        print("===================================")
+//        print("height",  tblItems.contentSize.height)
+//        print("===================================")
+//        self.heightTblItems.constant = tblItems.contentSize.height
     }
     
     // MARK: - IBActions
@@ -416,6 +415,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             if isfromShare{
                 return arrShareDetail.count
             }
+            print("===================================")
+            print( arrItem.count)
+            print("===================================")
             return arrItem.count
         case tblOrderDetails:
             if isfromShare{
@@ -472,6 +474,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.selectionStyle = .none
                 return cell
             }else{
+                print("===================================")
+                print( arrItem[indexPath.row].restaurantItemName, indexPath.row)
+                print("===================================")
                 let cell = tblItems.dequeueReusableCell(withIdentifier: MyOrderDetailsCell.reuseIdentifier, for: indexPath) as! MyOrderDetailsCell
                 cell.lblItemName.text = arrItem[indexPath.row].restaurantItemName
                 cell.lblDateTime.text = arrItem[indexPath.row].date
@@ -484,6 +489,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                     cell.lblDescription.isHidden = true
                 }
                 cell.selectionStyle = .none
+              
                 return cell
             }
         case tblOrderDetails:
@@ -554,6 +560,12 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
             return UITableViewCell()
         }
     }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if tableView == tblItems{
+//            self.heightTblItems.constant = tblItems.contentSize.height
+//        }
+//    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView {
         case tblItems:
@@ -561,7 +573,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
         case tblOrderDetails:
             return 43
         default:
-            return 43
+            return UITableView.automaticDimension
         }
     }
     func setUpLocalizedStrings()

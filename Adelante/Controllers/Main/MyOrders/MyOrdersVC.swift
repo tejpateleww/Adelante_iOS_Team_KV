@@ -96,6 +96,10 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func segmentControlChanged(_ sender: BetterSegmentedControl) {
         SingletonClass.sharedInstance.selectInProcessInMyOrder = nil
         selectedSegmentTag = sender.index
+        arrShareList.removeAll()
+        arrInProcessList.removeAll()
+        arrPastList.removeAll()
+        self.tblOrders.reloadData()
         if selectedSegmentTag == 0{
 //            if self.arrPastList.count == 0{
 //                arrShareList.removeAll()
@@ -116,7 +120,7 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
 //            arrPastList.removeAll()
             webserviceShareList()
         }
-//        self.tblOrders.reloadData()
+        
     }
     // MARK: - SkeletonTableview Datasource
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {

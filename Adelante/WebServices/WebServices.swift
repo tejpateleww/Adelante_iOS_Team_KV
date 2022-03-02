@@ -64,7 +64,9 @@ class WebService{
         {
             Utilities.showHud()
         }
-        
+        if api == .OrderList{
+            AF.cancelAllRequests()
+        }
         AF.request(url, method: method, parameters: params as? [String : Any], encoding: URLEncoding.httpBody, headers: APIEnvironment.headers).validate()
             .responseJSON { (response) in
                 // LoaderClass.hideActivityIndicator()
@@ -88,11 +90,14 @@ class WebService{
                             Utilities.showAlertWithTitleFromWindow(title: AppName, andMessage: GlobalStrings.EndSession_Logout.rawValue, buttons: ["ok"]) { _ in
                                 appDel.SetLogout()
                             }
+                        }else if error.localizedDescription == "Request explicitly cancelled."{
+                            print("Request explicitly cancelled.")
                         }
                         else{
                             //                            utility.ShowAlert(OfMessage: error.localizedDescription)
+                            completion(JSON(), false, error.localizedDescription)
                         }
-                        completion(JSON(), false, error.localizedDescription)
+                        
                         
                     }
                 }
@@ -139,8 +144,7 @@ class WebService{
     }
     func getMethod(api: ApiKey,parameterString:String, httpMethod:Method,showHud : Bool = false, completion: @escaping CompletionResponse)
     {
-        guard isConnected else { completion(JSON(), false, "Something went wrong"); return }
-        
+        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
         guard let url = URL(string: APIEnvironment.baseURL + api.rawValue + parameterString) else {
             completion(JSON(),false, "")
             return
@@ -244,7 +248,7 @@ class WebService{
     
     func postDataWithImage(api: ApiKey, isRemoveimage: Bool, showHud : Bool, parameter dictParams: [String: Any], image: UIImage?, imageParamName: String, completion: @escaping CompletionResponse) {
         
-        guard isConnected else { completion(JSON(), false, "Something went wrong"); return }
+        guard isConnected else { completion(JSON(), false, "No internet connection"); return }
         guard let url = URL(string: APIEnvironment.baseURL + api.rawValue) else { return }
         //        let request = URLRequest(url: url)
         print("the url is \(url) and the parameters are \n \(dictParams) and the headers are \(APIEnvironment.headers)")

@@ -70,6 +70,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         }
     }
     @IBOutlet weak var colVwFilterOptions: UICollectionView!
+    @IBOutlet weak var NotificationIconBtn: UIButton!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -222,6 +223,8 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         colVwFilterOptions.reloadData()
         
         pageControl.hidesForSinglePage = true
+        
+        NotificationIconBtn.isHidden = SingletonClass.sharedInstance.UserId == ""
     }
     @objc func refreshListing(){
      
@@ -455,7 +458,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.colVwFilterOptions{
-            selectedIndexgray = arrFilter[indexPath.row].value.toInt()
+          
 //            if arrFilter[indexPath.row] == "HomeVC_arrFilter_title5".Localized(){
 //                selectedIndex = 4
 //            }else if arrFilter[indexPath.row] == "HomeVC_arrFilter_title1".Localized(){
@@ -469,7 +472,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //            }
     
             self.pageNumber = 1
-            if SingletonClass.sharedInstance.UserId == "" && selectedIndexgray == 1{
+            if SingletonClass.sharedInstance.UserId == "" && arrFilter[indexPath.row].value.toInt() == 1{
                 let controller = AppStoryboard.Popup.instance.instantiateViewController(withIdentifier: commonPopup.storyboardID) as! commonPopup
                 controller.isHideCancelButton = false
                 controller.isHideSubmitButton = false
@@ -493,6 +496,8 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 self.arrRestaurant.removeAll()
                 self.tblMainList.reloadData()
             }else{
+
+                selectedIndexgray = arrFilter[indexPath.row].value.toInt()
                 webserviceGetDashboard(isFromFilter: false, strTabfilter: String(selectedIndexgray),showhud: true)
             }
             colVwFilterOptions.reloadData()
