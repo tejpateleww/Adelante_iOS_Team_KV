@@ -11,8 +11,15 @@ import UIKit
 struct AppInfo {
     
     static var appVersion: String {
-        if let app_version = Bundle.main.infoDictionary?["CFBundleVersion"]  as? String {
+        if let app_version = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
             return app_version
+        } else{
+            return "no Version"
+        }
+    }
+    static var appBuild: String {
+        if let app_Build = Bundle.main.infoDictionary?["CFBundleVersion"]  as? String {
+            return app_Build
         } else{
             return "no Version"
         }

@@ -102,10 +102,10 @@ class EditProfileVC: BaseViewController{
                             webserviceForEditprofile()
                         }, otherTitles: nil)
                     }else if userdata.phone != txtPhoneNumber.text {
-//                        Utilities.displayAlert("", message: "EditProfileVC_PhoneChange".Localized(), completion: { [self]_ in
-//
-//                        }, otherTitles: nil)
-                        self.webserviceForSendOTP()
+                        Utilities.displayAlert("", message: "EditProfileVC_PhoneChange".Localized(), completion: { [self]_ in
+                            self.webserviceForSendOTP()
+                        }, otherTitles: nil)
+                        
                     }else{
                         webserviceForEditprofile()
                     }
@@ -211,7 +211,7 @@ class EditProfileVC: BaseViewController{
             if(status){
                 print(json)
                 let otpModel = otpReceive.init(fromJson: json)
-                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID) as! VerifyVC
+                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: OTPVC.storyboardID) as! OTPVC
                 OTPVC.isFromEditProfile = true
                 OTPVC.strfirst = self.txtFirstName.text!
                 OTPVC.strLast = self.txtLastName.text!

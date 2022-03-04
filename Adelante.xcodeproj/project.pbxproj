@@ -114,6 +114,8 @@
 		34EBD2A225C96FA600EC643A /* AddCardReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EBD2A125C96FA600EC643A /* AddCardReqModel.swift */; };
 		34EBD2A625C9728400EC643A /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EBD2A525C9728400EC643A /* MonthYearPickerView.swift */; };
 		34EE68E925CC15E300056D62 /* AddPaymentDeleteReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EE68E825CC15E300056D62 /* AddPaymentDeleteReqModel.swift */; };
+		4701101D27CF8B370083264F /* OTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4701101C27CF8B370083264F /* OTPVC.swift */; };
+		474DFA5127D0B81C0075ACD2 /* new.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474DFA5027D0B81C0075ACD2 /* new.swift */; };
 		4BD05A891D199EA6A88DAFB6 /* Pods_Adelante.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5F2D505CEAA7CF6129117F /* Pods_Adelante.framework */; };
 		8105FDA92574C9A2008D36D6 /* ProfileUpdateReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105FDA72574C9A2008D36D6 /* ProfileUpdateReqModel.swift */; };
 		8105FDAA2574C9A2008D36D6 /* RegisterReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105FDA82574C9A2008D36D6 /* RegisterReqModel.swift */; };
@@ -234,7 +236,6 @@
 		84C5F68E2643BCAF000B2DDE /* NotificationReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F68D2643BCAF000B2DDE /* NotificationReqModel.swift */; };
 		84C5F6AB2643C05A000B2DDE /* notificaationResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */; };
 		84C5F6AC2643C05A000B2DDE /* NotificationDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */; };
-		881715E9267B12A300F821AA /* VerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881715E8267B12A300F821AA /* VerifyVC.swift */; };
 		882A0B2C26CCD0CA0021D0E8 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A0B2B26CCD0C90021D0E8 /* SocketManager.swift */; };
 		883614522693172A00B35C1D /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8836144F2693172900B35C1D /* CartItem.swift */; };
 		883614532693172A00B35C1D /* CartListResModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883614502693172A00B35C1D /* CartListResModel.swift */; };
@@ -412,6 +413,8 @@
 		34EBD2A125C96FA600EC643A /* AddCardReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardReqModel.swift; sourceTree = "<group>"; };
 		34EBD2A525C9728400EC643A /* MonthYearPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
 		34EE68E825CC15E300056D62 /* AddPaymentDeleteReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentDeleteReqModel.swift; sourceTree = "<group>"; };
+		4701101C27CF8B370083264F /* OTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVC.swift; sourceTree = "<group>"; };
+		474DFA5027D0B81C0075ACD2 /* new.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = new.swift; sourceTree = "<group>"; };
 		4C5F2D505CEAA7CF6129117F /* Pods_Adelante.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adelante.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3EEF10A4484D80DEFA8759 /* Pods-Adelante.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adelante.debug.xcconfig"; path = "Target Support Files/Pods-Adelante/Pods-Adelante.debug.xcconfig"; sourceTree = "<group>"; };
 		64C68ADE241BBB2900B97B25 /* Adelante.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Adelante.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -536,7 +539,6 @@
 		84C5F6A92643C05A000B2DDE /* notificaationResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificaationResModel.swift; sourceTree = "<group>"; };
 		84C5F6AA2643C05A000B2DDE /* NotificationDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDatum.swift; sourceTree = "<group>"; };
 		86784D51C37BBA35E10C918A /* Pods-ApiStructureModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApiStructureModule.release.xcconfig"; path = "Target Support Files/Pods-ApiStructureModule/Pods-ApiStructureModule.release.xcconfig"; sourceTree = "<group>"; };
-		881715E8267B12A300F821AA /* VerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyVC.swift; sourceTree = "<group>"; };
 		882A0B2B26CCD0C90021D0E8 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		8836144F2693172900B35C1D /* CartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		883614502693172A00B35C1D /* CartListResModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartListResModel.swift; sourceTree = "<group>"; };
@@ -1008,6 +1010,7 @@
 				349347B225D10EEB006366B4 /* RestaurantOutletVC.swift */,
 				88C9E500268F1730005B0899 /* BffComboShimmerCell.swift */,
 				88C9E501268F1730005B0899 /* BffComboShimmerCell.xib */,
+				474DFA5027D0B81C0075ACD2 /* new.swift */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -1290,7 +1293,7 @@
 				8105FDCA2574F13B008D36D6 /* MainLoginVC.swift */,
 				81CFFD662574C60D005AA86A /* LoginViewController.swift */,
 				81CFFD672574C60D005AA86A /* RegisterViewController.swift */,
-				881715E8267B12A300F821AA /* VerifyVC.swift */,
+				4701101C27CF8B370083264F /* OTPVC.swift */,
 			);
 			path = "Login,Register,ForgotPassword";
 			sourceTree = "<group>";
@@ -1646,6 +1649,7 @@
 				343C5A6225BFE98400C6A7CA /* CustomTabBarVC.swift in Sources */,
 				340D4AF625D25CB8007CC54B /* SubOrder.swift in Sources */,
 				340D4AF825D25CB8007CC54B /* RepeatOrderResModel.swift in Sources */,
+				474DFA5127D0B81C0075ACD2 /* new.swift in Sources */,
 				345EA8F225B5477100A4E56D /* restaurantDetailsList.swift in Sources */,
 				88F6D94926CFB4B400ED5C95 /* ShareDetailsItem.swift in Sources */,
 				3431E0682593224C002F1435 /* RestWithPageCell.swift in Sources */,
@@ -1777,6 +1781,7 @@
 				888EBC76269D77B8006C1424 /* addCartItem.swift in Sources */,
 				8170CAF7257A10B500B24B7A /* ChangePasswordVC.swift in Sources */,
 				8105FDCF2574F714008D36D6 /* SplashVC.swift in Sources */,
+				4701101D27CF8B370083264F /* OTPVC.swift in Sources */,
 				8170CAF5257A10B500B24B7A /* CategoryVC.swift in Sources */,
 				349347BD25D13FBF006366B4 /* RateOrderReqModel.swift in Sources */,
 				81CFFD7D2574C60D005AA86A /* UILabel+Extension.swift in Sources */,
@@ -1816,7 +1821,6 @@
 				34C3756325CD41970049289A /* orderDetailsData.swift in Sources */,
 				906079A62717017B00183F5A /* MyOrderTotalCell.swift in Sources */,
 				81E67217257E68BC00DCE9DA /* addPaymentVC.swift in Sources */,
-				881715E9267B12A300F821AA /* VerifyVC.swift in Sources */,
 				81CFFD7A2574C60D005AA86A /* AuthenticationToken.swift in Sources */,
 				3400019825C7EB8E00C584DE /* Variant.swift in Sources */,
 				819B0C94257E101700289BBF /* MyOrderDetailsVC.swift in Sources */,
@@ -2040,7 +2044,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.5;
+				CURRENT_PROJECT_VERSION = 1.1.6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";
@@ -2066,7 +2070,7 @@
 				CODE_SIGN_ENTITLEMENTS = Adelante/Adelante.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.5;
+				CURRENT_PROJECT_VERSION = 1.1.6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 47RU9D4XHG;
 				INFOPLIST_FILE = "$(SRCROOT)/Adelante/Info.plist";

@@ -14,7 +14,7 @@ class RestaurantItemCell: UITableViewCell,ExpandableLabelDelegate {
     var decreaseData : (() -> ())?
     var IncreseData : (() -> ())?
     var btnAddAction : (() -> ())?
-    var ExpandedLabel : ((Bool) -> ())?
+    var ExpandedLabel : ((Int) -> ())?
     
     @IBOutlet weak var stackHide: UIStackView!
     @IBOutlet weak var vwRadius: UIView!
@@ -73,7 +73,7 @@ class RestaurantItemCell: UITableViewCell,ExpandableLabelDelegate {
         self.lblAboutItem.collapsedAttributedLink = viewMoreString
         self.lblAboutItem.expandedAttributedLink = viewLessString
  
-//        self.lblAboutItem.shouldCollapse = true
+        self.lblAboutItem.shouldCollapse = true
 //        lblAboutItem.textReplacementType = .word
         self.lblAboutItem.numberOfLines = 3
 //        self.lblAboutItem.collapsed = true
@@ -84,7 +84,7 @@ class RestaurantItemCell: UITableViewCell,ExpandableLabelDelegate {
             lblAboutItem.numberOfLines = 0
             lblAboutItem.collapsed = false
             if let expandedLabel = ExpandedLabel{
-                expandedLabel(true)
+                expandedLabel(0)
             }
             
         }
@@ -105,7 +105,7 @@ class RestaurantItemCell: UITableViewCell,ExpandableLabelDelegate {
             lblAboutItem.numberOfLines = 3
             lblAboutItem.collapsed = true
             if let expandedLabel = ExpandedLabel{
-                expandedLabel(false)
+                expandedLabel(3)
             }
         } else {
             

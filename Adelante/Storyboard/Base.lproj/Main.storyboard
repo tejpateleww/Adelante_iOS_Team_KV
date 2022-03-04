@@ -1600,7 +1600,6 @@
                     <tabBarItem key="tabBarItem" title="" image="tabFavouriteUnselected" selectedImage="tabFavouriteSelected" id="cyJ-WX-1Aq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ooT-ZS-4dU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2222,7 +2221,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="714"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-a4-mfH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="291"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
                                                                 <rect key="frame" x="18" y="55" width="378" height="232"/>
@@ -3386,20 +3385,20 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReViewDiscCell" id="zYv-cy-nYb" customClass="ReViewDiscCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="414" height="158.5"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="128.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zYv-cy-nYb" id="F95-Xz-0AW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="158.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rlp-bS-0tk" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
-                                                            <rect key="frame" x="18" y="7.5" width="378" height="143.5"/>
+                                                            <rect key="frame" x="18" y="7.5" width="378" height="113.5"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17.699999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="iSf-Fx-yzY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="143.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="113.5"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6.5999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="2u5-vb-Qf5">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="106.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="76.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vf1-pQ-gG0" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
@@ -3411,7 +3410,7 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </label>
                                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q44-Lk-LSf" customClass="CosmosView" customModule="Cosmos">
-                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="50"/>
+                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="20"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Selected_star"/>
@@ -3427,7 +3426,7 @@
                                                                             </subviews>
                                                                         </stackView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSc-1R-Zli" customClass="CustomLabel" customModule="Adelante" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="124" width="378" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="94" width="378" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -3445,7 +3444,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHa-yr-DeQ">
-                                                                            <rect key="frame" x="0.0" y="141.5" width="378" height="2"/>
+                                                                            <rect key="frame" x="0.0" y="111.5" width="378" height="2"/>
                                                                             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685523750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="2" id="RXK-sN-mTn"/>
@@ -6409,7 +6408,7 @@
                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isItem" value="YES"/>
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </label>
-                                                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gx-w0-JvE" customClass="ExpandableLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gx-w0-JvE" customClass="ExpandableLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                     <rect key="frame" x="0.0" y="42" width="194" height="32"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Dup-u6-vex"/>
@@ -6662,7 +6661,7 @@
                                                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isItem" value="YES"/>
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </label>
-                                                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZu-JD-lJs" customClass="ExpandableLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZu-JD-lJs" customClass="ExpandableLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                     <rect key="frame" x="0.0" y="42" width="204" height="55"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="1MU-KU-nV5"/>
@@ -6850,7 +6849,7 @@
                                                                 </prototypes>
                                                             </tableView>
                                                             <view alpha="0.40000000000000002" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RpY-Y3-LQW">
-                                                                <rect key="frame" x="0.0" y="769" width="414" height="368"/>
+                                                                <rect key="frame" x="0.0" y="782" width="414" height="355"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                         </subviews>
@@ -7046,7 +7045,7 @@
                                             <constraint firstAttribute="height" constant="200" id="cgw-uN-0L8"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailsPopupCell" id="l4c-f5-JEK" customClass="RestaurantDetailsPopupCell" customModule="Adelante" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailsPopupCell" id="l4c-f5-JEK" customClass="RestaurantDetailsPopupCell" customModule="Adelante" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="44.5" width="414" height="111"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l4c-f5-JEK" id="Wzm-MO-XGy">
@@ -9555,7 +9554,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="894"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N9U-F4-98c">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="972"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="949"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D7V-Gz-Qf2" customClass="GMSMapView">
                                                         <rect key="frame" x="16" y="16" width="382" height="156"/>
@@ -9644,23 +9643,23 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addedProductCell" id="SoL-Y3-stF" customClass="addedProductCell" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="44.5" width="378" height="156.5"/>
+                                                                <rect key="frame" x="0.0" y="44.5" width="378" height="175.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SoL-Y3-stF" id="qxs-jW-5YR">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="156.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="175.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zcy-gl-rnv">
-                                                                            <rect key="frame" x="0.0" y="10" width="378" height="136.5"/>
+                                                                            <rect key="frame" x="0.0" y="10" width="378" height="155.5"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="wc1-4K-Www">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="136.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="155.5"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BtN-RD-9qH">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="180" height="136.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="180" height="155.5"/>
                                                                                             <subviews>
                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OJv-4w-kNU">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="136.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="155.5"/>
                                                                                                     <subviews>
                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cE9-zM-f6m" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="180" height="60"/>
@@ -9675,7 +9674,7 @@
                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                         </label>
                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBQ-Fo-H8R" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                            <rect key="frame" x="0.0" y="60" width="180" height="76.5"/>
+                                                                                                            <rect key="frame" x="0.0" y="60" width="180" height="95.5"/>
                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                             <nil key="textColor"/>
                                                                                                             <nil key="highlightedColor"/>
@@ -9695,10 +9694,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WzF-D9-zqZ">
-                                                                                            <rect key="frame" x="187" y="0.0" width="134" height="136.5"/>
+                                                                                            <rect key="frame" x="187" y="0.0" width="134" height="155.5"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TS-kt-GpR" customClass="checkoutView" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="59" y="54.5" width="75" height="28"/>
+                                                                                                    <rect key="frame" x="59" y="64" width="75" height="28"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="y1b-uq-kKp">
                                                                                                             <rect key="frame" x="5" y="0.0" width="65" height="28"/>
@@ -9747,7 +9746,7 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHm-IQ-8Y9" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                            <rect key="frame" x="328" y="0.0" width="50" height="136.5"/>
+                                                                                            <rect key="frame" x="328" y="0.0" width="50" height="155.5"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="50" id="cn9-Wx-OV4"/>
                                                                                             </constraints>
@@ -9987,13 +9986,13 @@
                                                         </prototypes>
                                                     </tableView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sHF-mY-dY3">
-                                                        <rect key="frame" x="18" y="623" width="378" height="136"/>
+                                                        <rect key="frame" x="18" y="623" width="378" height="113"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHs-mc-ceX">
-                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="60"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="378" height="40"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrW-aI-xlY" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="37" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="37" height="40"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -10002,7 +10001,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$39" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USK-oh-BOC" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="347" y="0.0" width="31" height="60"/>
+                                                                        <rect key="frame" x="347" y="0.0" width="31" height="40"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -10013,7 +10012,7 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="60" id="4eM-Qs-yXz"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="4eM-Qs-yXz"/>
                                                                     <constraint firstAttribute="bottom" secondItem="xrW-aI-xlY" secondAttribute="bottom" id="X0B-IU-Lgt"/>
                                                                     <constraint firstItem="xrW-aI-xlY" firstAttribute="leading" secondItem="CHs-mc-ceX" secondAttribute="leading" id="Z5f-d1-WNx"/>
                                                                     <constraint firstAttribute="trailing" secondItem="USK-oh-BOC" secondAttribute="trailing" id="lFb-GL-UjQ"/>
@@ -10023,9 +10022,9 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nel-49-cTE">
-                                                                <rect key="frame" x="0.0" y="65" width="378" height="71"/>
+                                                                <rect key="frame" x="0.0" y="45" width="378" height="68"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do You Want To Pick Order From Curbside Parking?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-Bg-uJT" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do You Want To Pick Order From Curbside Parking ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-Bg-uJT" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="41"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
@@ -10035,7 +10034,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TdN-DI-CS9">
-                                                                        <rect key="frame" x="0.0" y="49" width="160" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="46" width="160" height="22"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs0-KP-FdG" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
@@ -10080,13 +10079,16 @@
                                                                     <constraint firstItem="Pnk-Bg-uJT" firstAttribute="leading" secondItem="nel-49-cTE" secondAttribute="leading" id="iVg-aE-wRT"/>
                                                                     <constraint firstAttribute="bottom" secondItem="TdN-DI-CS9" secondAttribute="bottom" id="o4V-T6-1b1"/>
                                                                     <constraint firstAttribute="trailing" secondItem="Pnk-Bg-uJT" secondAttribute="trailing" id="pro-gj-sre"/>
-                                                                    <constraint firstItem="TdN-DI-CS9" firstAttribute="top" secondItem="Pnk-Bg-uJT" secondAttribute="bottom" constant="8" id="rdM-dR-569"/>
+                                                                    <constraint firstItem="TdN-DI-CS9" firstAttribute="top" secondItem="Pnk-Bg-uJT" secondAttribute="bottom" constant="5" id="rdM-dR-569"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="nel-49-cTE" secondAttribute="trailing" id="aic-oX-nap"/>
+                                                        </constraints>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ws3-6D-Cfd">
-                                                        <rect key="frame" x="18" y="769" width="378" height="70"/>
+                                                        <rect key="frame" x="18" y="746" width="378" height="70"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_policyCancellation" translatesAutoresizingMaskIntoConstraints="NO" id="w3v-ab-NF1">
                                                                 <rect key="frame" x="0.0" y="5" width="20" height="20"/>
@@ -10186,7 +10188,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btV-nS-6Lx">
-                                                        <rect key="frame" x="18" y="839" width="378" height="60"/>
+                                                        <rect key="frame" x="18" y="816" width="378" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epc-Qg-J09" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="378" height="60"/>
@@ -10209,7 +10211,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80K-yg-nBL">
-                                                        <rect key="frame" x="18" y="899" width="378" height="73"/>
+                                                        <rect key="frame" x="18" y="876" width="378" height="73"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDn-ZD-Muc" customClass="submitButton" customModule="Adelante" customModuleProvider="target">
                                                                 <rect key="frame" x="14" y="0.0" width="350" height="44"/>
@@ -10353,50 +10355,20 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="0t8-U3-ebv">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+        <designable name="0kK-8b-MA7">
+            <size key="intrinsicContentSize" width="195" height="32"/>
         </designable>
-        <designable name="2Ut-AC-9Qr">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+        <designable name="2fI-hX-w88">
+            <size key="intrinsicContentSize" width="120" height="20"/>
         </designable>
-        <designable name="4rN-z1-ohE">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+        <designable name="G78-jH-dfh">
+            <size key="intrinsicContentSize" width="195" height="32"/>
         </designable>
-        <designable name="IOt-oG-ldn">
-            <size key="intrinsicContentSize" width="4" height="18.5"/>
+        <designable name="HGY-kw-5YU">
+            <size key="intrinsicContentSize" width="210" height="30"/>
         </designable>
-        <designable name="JpT-yH-Jap">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="M00-EB-i9S">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="QPd-3g-SxC">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="cc0-dj-TGl">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="cpW-fr-cqC">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="lWD-a0-7KT">
-            <size key="intrinsicContentSize" width="90.5" height="34"/>
-        </designable>
-        <designable name="mJ2-zK-PS6">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="nWr-lG-oph">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="pGH-j9-vWm">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="ypJ-aF-6Y5">
-            <size key="intrinsicContentSize" width="32" height="34"/>
-        </designable>
-        <designable name="zNM-X4-rQ4">
-            <size key="intrinsicContentSize" width="4" height="18.5"/>
+        <designable name="Q44-Lk-LSf">
+            <size key="intrinsicContentSize" width="120" height="20"/>
         </designable>
     </designables>
     <resources>

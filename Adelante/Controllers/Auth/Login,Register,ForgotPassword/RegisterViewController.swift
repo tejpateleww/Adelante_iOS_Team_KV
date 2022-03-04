@@ -71,8 +71,6 @@ class RegisterViewController: UIViewController {
     //MARK:- Button action
     @IBAction func btnSignUp(sender:Any){
         
-//        let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID)
-//        self.navigationController?.pushViewController(OTPVC, animated: true)
         if(validation())
         {
             webserviceForSendOTP()
@@ -180,7 +178,7 @@ class RegisterViewController: UIViewController {
             if(status){
                 print(json)
                 let otpModel = otpReceive.init(fromJson: json)
-                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: VerifyVC.storyboardID) as! VerifyVC
+                let OTPVC = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: OTPVC.storyboardID) as! OTPVC
                 OTPVC.isFromRegister = true
                 OTPVC.strfirst = self.txtFirstName.text!
                 OTPVC.strLast = self.txtLastName.text!

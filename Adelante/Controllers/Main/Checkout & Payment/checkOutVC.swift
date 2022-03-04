@@ -374,7 +374,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
         }else{
             if self.IsClosed{
                 Utilities.hideHud()
-                Utilities.showAlert(AppInfo.appName, message: "Restaurant is close please choose anthore resutaturant and get back after some time ", vc: self)
+                Utilities.showAlert(AppInfo.appName, message: "Restaurant is closed , try after some time", vc: self)
             }else{
                 self.webserviceCheckOrder()
             }

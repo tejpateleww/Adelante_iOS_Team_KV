@@ -103,6 +103,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         ViewForBottom.constant = -(ViewForAddItem.frame.size.height)
         viewBG.isHidden = true
         tblPopup.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+        
         tblRestaurantDetails.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         viewPopup.frame = self.view.frame
         tblPopup.delegate = self
@@ -243,7 +244,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     }
     
     override func viewDidLayoutSubviews() {
-        ViewForAddItem.roundCorners(corners: [.topLeft,.topRight], radius: 10.0)
+        ViewForAddItem.roundCorners(corners: [.topLeft,.topRight], radius: 15.0)
         self.ViewForAddItem.clipsToBounds = true
         //        self.calculateTableHeight()
     }
@@ -385,9 +386,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         }
         return 3
     }
+    
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        let count = (arrMenuitem.count > 0) ? (arrFoodMenu.count + 1) : arrFoodMenu.count
+        return count
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblRestaurantDetails{
             return self.setRowCount(section: section)
+            
         }else{
             if responseStatus == .gotData{
                 if arrItemList.count != 0 {
@@ -404,17 +411,22 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tblRestaurantDetails{
             if arrMenuitem.count > 0 {
+                let cell:RestaurantDetailsCell = tableView.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath) as! RestaurantDetailsCell
                 if indexPath.section == 0 {
-                    let cell:RestaurantDetailsCell = tableView.dequeueReusableCell(withIdentifier: "RestaurantDetailsCell", for: indexPath) as! RestaurantDetailsCell
+                    
+                    
                     let variantValue = arrMenuitem[indexPath.row].variant.ToDouble()
                     cell.lblItemName.text = arrMenuitem[indexPath.row].name
                     cell.lblItemPrice.text = "\(CurrencySymbol)" + arrMenuitem[indexPath.row].price.ConvertToTwoDecimal()
                     cell.lblAboutItem.text = arrMenuitem[indexPath.row].descriptionField
+//                    cell.lblAboutItem.numberOfLines = self.arrMenuitem[indexPath.row].IsExpandedLabel
                     cell.ExpandedLabel = { index in
-                        cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 2 : 0
-                        cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
+//                        cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 2 : 0
+//                        cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
 
-                        self.tblRestaurantDetails.reloadData()
+//                        self.tblRestaurantDetails.reloadData()
+                        self.arrMenuitem[indexPath.row].IsExpandedLabel = index
+                        self.tblRestaurantDetails.reloadRows(at: [indexPath], with: .none)
                     }
                     
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrMenuitem[indexPath.row].image ?? "")"
@@ -604,15 +616,18 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
 //                    cell.selectionStyle = .none
                     return cell
                 } else {
-                    let cell:RestaurantItemCell = tableView.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath) as! RestaurantItemCell
+//                    let cell:RestaurantItemCell = tableView.dequeueReusableCell(withIdentifier: "RestaurantItemCell", for: indexPath) as! RestaurantItemCell
                     let variantValue = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].variant.ToDouble()
                     cell.lblItemName.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].name.trimmingCharacters(in: .whitespacesAndNewlines)
                     cell.lblItemPrice.text = "\(CurrencySymbol)" + arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].price.ConvertToTwoDecimal()
                     cell.lblAboutItem.text = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].Description
+//                    cell.lblAboutItem.numberOfLines = arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].IsExpandedLabel
                     cell.ExpandedLabel = { index in
-                        cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
-                        cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
+//                        cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
+//                        cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
 //                        self.tblRestaurantDetails.reloadData()
+                        self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].IsExpandedLabel = index
+                        self.tblRestaurantDetails.reloadRows(at: [indexPath], with: .none)
                     }
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].image ?? "")"
                     cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -813,10 +828,15 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 let variantValue = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant.ToDouble()
                 cell.lblItemName.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].name
                 cell.lblAboutItem.text = arrFoodMenu[indexPath.section].subMenu[indexPath.row].Description
+//                cell.lblAboutItem.numberOfLines = arrFoodMenu[indexPath.section].subMenu[indexPath.row].IsExpandedLabel
+                
                 cell.ExpandedLabel = { index in
-                    cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
-                    cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
+//                    cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
+//                    cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
 //                    self.tblRestaurantDetails.reloadData()
+                    self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].IsExpandedLabel = index
+                    self.tblRestaurantDetails.reloadRows(at: [indexPath], with: .none)
+                    
                 }
                 let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrFoodMenu[indexPath.section].subMenu[indexPath.row].image ?? "")"
                 cell.imgFoodDetails.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -1076,6 +1096,27 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         }
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if tableView == tblRestaurantDetails{
+////            if arrMenuitem.count > 0 {
+//                if let cell = tableView.cellForRow(at: indexPath) as? RestaurantItemCell{
+//                    cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
+//                    cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
+//                    self.tblRestaurantDetails.reloadData()
+////                    self.tblRestaurantDetails.reloadRows(at: [indexPath], with: .none)
+//
+//                }else if let cell = tableView.cellForRow(at: indexPath) as? RestaurantDetailsCell{
+//                    cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
+//                    cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
+//                    self.tblRestaurantDetails.reloadData()
+////                    self.tblRestaurantDetails.reloadRows(at: [indexPath], with: .none)
+////                    self.tblRestaurantDetails.reloadSections(IndexSet(integer: indexPath.section), with: .none)
+//
+//                }
+////            }
+//        }
+//    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == tblRestaurantDetails{
             let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tblRestaurantDetails.frame.width, height: 48))
@@ -1101,7 +1142,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }else{
                         expandImageView.image = UIImage(named: "ic_expand")
                     }
-                    headerView.addSubview(expandImageView)
+                    headerView.addSubview(expandImageView) 
                     
                     let expandButton = UIButton()
                     expandButton.frame = CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
@@ -1135,27 +1176,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         return UIView()
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == tblRestaurantDetails{
-//            if arrMenuitem.count > 0 {
-                if let cell = tableView.cellForRow(at: indexPath) as? RestaurantItemCell{
-                    cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
-                    cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
-                    self.tblRestaurantDetails.reloadData()
-//                    self.tblRestaurantDetails.reloadRows(at: [indexPath], with: .none)
-                    
-                }else if let cell = tableView.cellForRow(at: indexPath) as? RestaurantDetailsCell{
-                    cell.lblAboutItem.numberOfLines =  cell.lblAboutItem.numberOfLines == 0 ? 3 : 0
-                    cell.lblAboutItem.collapsed = cell.lblAboutItem.numberOfLines != 0
-                    self.tblRestaurantDetails.reloadData()
-//                    self.tblRestaurantDetails.reloadRows(at: [indexPath], with: .none)
-//                    self.tblRestaurantDetails.reloadSections(IndexSet(integer: indexPath.section), with: .none)
-                        
-                }
-//            }
-        }
-    }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == tblRestaurantDetails{
             if arrMenuitem.count > 0 {

@@ -34,6 +34,8 @@ class MenuItem : NSObject, NSCoding{
     var vegNonveg : String!
     var viewCount : String!
     var totalvariant : String!
+    var IsExpandedLabel : Int = 3
+    
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */

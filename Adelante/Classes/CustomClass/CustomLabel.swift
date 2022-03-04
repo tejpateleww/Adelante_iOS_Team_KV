@@ -141,7 +141,7 @@ class CheckOutLabel : UILabel {
         }else if isCurbside{
             self.font = CustomFont.NexaRegular.returnFont(15)
             self.textColor = colors.appOrangeColor.value
-            self.textAlignment = .left
+//            self.textAlignment = .left
         }
         
     }

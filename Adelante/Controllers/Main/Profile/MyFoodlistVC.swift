@@ -134,7 +134,7 @@ class MyFoodlistVC: BaseViewController,UITableViewDelegate,UITableViewDataSource
                 let cell:MyFoodlistCell = tblFoodLIst.dequeueReusableCell(withIdentifier: "MyFoodlistCell", for: indexPath) as! MyFoodlistCell
                 self.strcartitemid = arrOrderData[indexPath.row].cartItemId
                 cell.lblComboTitle.text = arrOrderData[indexPath.row].itemName
-                cell.lblPrice.text = (CurrencySymbol) + arrOrderData[indexPath.row].price
+                cell.lblPrice.text = (CurrencySymbol) + "\(arrOrderData[indexPath.row].subTotal ?? 0)"
                 cell.lblDisc.text = arrOrderData[indexPath.row].descriptionField
                 cell.lblNoOfItem.text = arrOrderData[indexPath.row].cartQty
                 self.restaurantid = arrOrderData[indexPath.row].outletId

@@ -15,7 +15,7 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
     var decreaseData : (() -> ())?
     var IncreseData : (() -> ())?
     var btnAddAction : (() -> ())?
-    var ExpandedLabel : ((Bool) -> ())?
+    var ExpandedLabel : ((Int) -> ())?
     
     
     @IBOutlet weak var stackHide: UIStackView!
@@ -36,7 +36,7 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
         SetExpandeLable()
     }
 
-   
+    
     @IBAction func btnCustomize(_ sender: Any) {
         if let click = self.customize {
             click()
@@ -71,13 +71,14 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
 //        self.lblAboutItem.ellipsis = NSAttributedString(string: "...")
         
         let myAttribute =  [NSAttributedString.Key.foregroundColor:UIColor(hexString: "#E34A25"),NSAttributedString.Key.font: CustomFont.NexaBold.returnFont(12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue] as [NSAttributedString.Key : Any]
+        
         let viewMoreString = NSAttributedString(string: "Show More", attributes: myAttribute)
         let viewLessString = NSAttributedString(string: "Show Less", attributes: myAttribute)
-
+        
         self.lblAboutItem.collapsedAttributedLink = viewMoreString
         self.lblAboutItem.expandedAttributedLink = viewLessString
  
-//        self.lblAboutItem.shouldCollapse = true
+        self.lblAboutItem.shouldCollapse = true
 //        lblAboutItem.textReplacementType = .word
         self.lblAboutItem.numberOfLines = 3
 //        self.lblAboutItem.collapsed = true
@@ -89,7 +90,7 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
             lblAboutItem.numberOfLines = 0
             lblAboutItem.collapsed = false
             if let expandedLabel = ExpandedLabel{
-                expandedLabel(true)
+                expandedLabel(0)
             }
             
         }
@@ -110,8 +111,9 @@ class RestaurantDetailsCell: UITableViewCell ,ExpandableLabelDelegate{
             lblAboutItem.numberOfLines = 3
             lblAboutItem.collapsed = true
             if let expandedLabel = ExpandedLabel{
-                expandedLabel(false)
+                expandedLabel(3)
             }
+            
         } else {
             
         }

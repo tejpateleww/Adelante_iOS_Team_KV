@@ -27,7 +27,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         //addNavBarImage(isLeft: true, isRight: true)
-        lblVersion.text = "Version " + AppInfo.appVersion
+        lblVersion.text = "Version " + AppInfo.appVersion + "(\(AppInfo.appBuild))"
         allDetails = [
             //            myAccountDetails(icon: UIImage(named: "ic_myOrder")!, title: "My Orders", subTitle: [], selectedIcon: UIImage(named: "ic_myOrderSelected")!),
             

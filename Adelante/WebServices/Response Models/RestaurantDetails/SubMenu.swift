@@ -24,6 +24,8 @@ class SubMenu : NSObject, NSCoding{
     var variant : String!
     var totalvariant : String!
     var Description : String!
+    var IsExpandedLabel : Int = 3
+    
 	/**
 	 * Instantiate the instance using the passed json values to set the properties values
 	 */
