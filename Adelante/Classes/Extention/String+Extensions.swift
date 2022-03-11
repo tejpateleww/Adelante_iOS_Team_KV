@@ -263,5 +263,7 @@ extension String{
     func ConvertToTwoDecimal() -> String {
         return String(format: "%.2f", ((self.replacingOccurrences(of: "\(CurrencySymbol)", with: "") as NSString?)?.floatValue) ?? 0.00)
     }
+    
+    
 }
 

@@ -1,16 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "Group 55049.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "MyFoodlist@3x copy@2x.png",
+      "filename" : "Group 55049@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "MyFoodlist@3x copy.png",
+      "filename" : "Group 55049@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

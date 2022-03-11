@@ -100,7 +100,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
         setup()
         
         selectedOption.onTotalUpdated = { [unowned self] amount in
-            self.lblItem.text = CurrencySymbol + "\(amount+itemBasePrice)"
+            self.lblItem.text = CurrencySymbol + "\(amount+itemBasePrice)".ConvertToTwoDecimal()
         }
         // Do any additional setup after loading the view.
     }
@@ -183,7 +183,7 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                     cell.lblBffComboPrice.isHidden = true
                     }else{
                         cell.lblBffComboPrice.isHidden = false
-                        cell.lblBffComboPrice.text = (CurrencySymbol) + (arrVariants?[indexPath.section].option[indexPath.row].price)!
+                        cell.lblBffComboPrice.text = (CurrencySymbol) + (arrVariants?[indexPath.section].option[indexPath.row].price.ConvertToTwoDecimal())!
                     }
                 
                 let selectOne = arrVariants?[indexPath.section].menuChoice.toInt()
@@ -201,11 +201,11 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                         }
                     }
                 }
-                if isFromRestaurant{
-                    if arrVariants?[indexPath.section].option?[indexPath.row].isSelected == true {
-                        self.selectedOption.manage(option)
-                    }
-                }
+//                if isFromRestaurant{
+//                    if arrVariants?[indexPath.section].option?[indexPath.row].isSelected == true {
+////                        self.selectedOption.manage(option)
+//                    }
+//                }
                 if arrVariants?[indexPath.section].option[indexPath.row].isSelected == true && selectOne == 0 && arrVariants?[indexPath.section].variantItem.toInt() == 0{
                     cell.selectButton.setImage(UIImage(named: "ic_selectedBFFCombo"), for: .normal)
                 } else if arrVariants?[indexPath.section].option[indexPath.row].isSelected == false && selectOne == 0  && arrVariants?[indexPath.section].variantItem.toInt() == 0{
@@ -439,6 +439,20 @@ class BffComboVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,S
                 self.tblBFFCombo.stopSkeletonAnimation()
                 self.arrVariants = resVariant.variants
                 self.TotalVeriantsQty = resVariant.item_quantity
+                
+                self.selectedOption.array.removeAll()
+                
+                for i in (0..<resVariant.variants.count){
+                    if arrVariants?[i].defaultItem == "" && arrVariants?[i].variantItem == "0"{
+                        self.arrVariants?[i].option[0].isSelected = true
+                    }
+                }
+                
+                for i in resVariant.variants{
+                    if i.option[0].isSelected{
+                        self.selectedOption.manage(i.option[0])
+                    }
+                }
                 self.tblBFFCombo.dataSource = self
                 self.tblBFFCombo.isScrollEnabled = true
                 self.tblBFFCombo.isUserInteractionEnabled = true

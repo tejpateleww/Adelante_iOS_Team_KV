@@ -180,7 +180,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         if objRestaurant != nil{
             self.lblRestaurantName.text = objRestaurant.name ?? ""
             self.lblrating.text = objRestaurant.rating
-            self.lblReviews.text = "(" + String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review) + ")"
+            self.lblReviews.text = "( " + String(format: "RestaurantReviewVC_lblReviews".Localized(), objRestaurant.review) + " )"
             if objRestaurant.distance != "0 Miles"{
                 self.lblDistance.isHidden = false
                 self.lblDistance.text =  objRestaurant.distance
@@ -1336,6 +1336,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                 }else {
                     Utilities.displayAlert("Something went wrong")
                 }
+                self.tblRestaurantDetails.reloadData()
             }
         }
     }
@@ -1458,7 +1459,13 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         if index == 0{
                             self.webserviceUpdateCartQuantity(strItemid: strItemid, strQty: strQty, strType: strType, row: row, PromocodeRemove: "1")
                         }else{
-                            self.webservicePostRestaurantDetails()
+                            if !self.viewPopup.isHidden{
+//                                self.webserviceItemList(strItemId: <#T##String#>)
+                                self.tblPopup.reloadData()
+                                self.tblRestaurantDetails.reloadData()
+                            }else{
+                                self.webservicePostRestaurantDetails()
+                            }
                         }
                     }
                 }
@@ -1468,6 +1475,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }else {
                         Utilities.displayAlert("Something went wrong")
                     }
+                    
                 }
             }
         }

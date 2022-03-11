@@ -61,7 +61,7 @@
 "MyProfileVC_btnEditAccount" = "EDIT ACCOUNT";
 "MyProfileVC_txtEmail" = "Email";
 "MyProfileVC_txtPhoneNumber" = "Phone Number";
-"MyProfileVC_txtPlateNumber" = "Plate Number";
+"MyProfileVC_txtPlateNumber" = "Vehicle Plate Number";
 
 //EditProfileVC
 "EditProfileVC_txtFirstName" = "First Name";

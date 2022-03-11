@@ -120,7 +120,10 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewDidLayoutSubviews() {
-        self.heightTblItems.constant = tblItems.contentSize.height
+        DispatchQueue.main.async {
+            self.heightTblItems.constant = self.tblItems.contentSize.height
+        }
+        
     }
     
     // MARK: - Other Methods
@@ -156,6 +159,11 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 } else {
                     lblNoOfItems.text = objShareOrderDetails.itemQuantity + " food item"
                 }
+                
+                stackParkingList.subviews[0].isHidden = true
+                stackParkingList.subviews[1].isHidden = true
+                stackParkingList.subviews[2].isHidden = true
+                
                 lblTotal.text = CurrencySymbol + objShareOrderDetails.total
                 lblRestName.text = objShareOrderDetails.restaurantName
                 if objShareOrderDetails.street != "" {
@@ -197,7 +205,8 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                         stackParkingList.subviews[0].isHidden = false
                         stackParkingList.subviews[1].isHidden = true
                         stackParkingList.subviews[2].isHidden = true
-                        LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
+                        LblcurbsideParkingPickup.attributedText = Utilities.attributedText(withString: "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking", boldString: objOrderDetailsData.parking_no, font: CustomFont.NexaRegular.returnFont(16))
+                       
                         CurbparkingCancelBtn.isHidden = false
                     }
                     
@@ -208,7 +217,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                         stackParkingList.subviews[0].isHidden = false
                         stackParkingList.subviews[1].isHidden = true
                         stackParkingList.subviews[2].isHidden = true
-                        LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
+                        LblcurbsideParkingPickup.attributedText = Utilities.attributedText(withString: "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking", boldString: objOrderDetailsData.parking_no, font: CustomFont.NexaRegular.returnFont(16))
                         CurbparkingCancelBtn.isHidden = true
                     }
                 }
@@ -224,7 +233,7 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                     self.vwRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
                     self.btnRateOrder.isHidden = (self.objOrderDetailsData.isRate.toInt() == 0) ? true : false
                     if objOrderDetailsData.parking_no != "" && self.objOrderDetailsData.parking_id != "0"{
-                        self.LblcurbsideParkingPickup.text = "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking"
+                        self.LblcurbsideParkingPickup.attributedText = Utilities.attributedText(withString: "Order Pickup from " + objOrderDetailsData.parking_no + "\nCurbside Parking", boldString: objOrderDetailsData.parking_no, font: CustomFont.NexaRegular.returnFont(16))
                         stackParkingList.subviews[0].isHidden = false
                         stackParkingList.subviews[1].isHidden = true
                         stackParkingList.subviews[2].isHidden = true

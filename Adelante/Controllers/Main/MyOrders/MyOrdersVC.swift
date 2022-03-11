@@ -456,8 +456,8 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 }} else{
                     let cell = tblOrders.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier, for: indexPath) as! ShimmerCell
                     cell.selectionStyle = .none
-                    cell.stopShimmering()
-                    self.tblOrders.stopSkeletonAnimation()
+//                    cell.stopShimmering()
+//                    self.tblOrders.stopSkeletonAnimation()
                     return cell
                 }
         }
@@ -606,8 +606,9 @@ class MyOrdersVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         shareList.user_id = SingletonClass.sharedInstance.UserId
         WebServiceSubClass.shareOrderList(shareOrderListModel: shareList, showHud: false, completion: { (response, status, error) in
             self.responseStatus = .gotData
+            self.refreshList.endRefreshing()
             if status{
-                self.refreshList.endRefreshing()
+               
                 let ResModel = shareOrderListResModel.init(fromJson: response)
                 let cell = self.tblOrders.dequeueReusableCell(withIdentifier: ShimmerCell.reuseIdentifier) as! ShimmerCell
                 cell.stopShimmering()

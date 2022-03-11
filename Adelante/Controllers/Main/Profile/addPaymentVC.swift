@@ -86,6 +86,10 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             
             if status {
                 self.WalletBalance = json["wallet_balance"].stringValue.ConvertToCGFloat()//
+                if self.WalletBalance == 0.0{
+                    self.IsWalletSelected = false
+                    self.IsPaypalSelected = true
+                }
                 self.tblPaymentMethod.reloadData()
             }
                  

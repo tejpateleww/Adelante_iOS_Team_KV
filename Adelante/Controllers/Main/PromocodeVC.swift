@@ -77,17 +77,17 @@ extension PromocodeVC:UITableViewDelegate,UITableViewDataSource{
             case "flat":
                 cell.lblOfferDescription.text = "Get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() )"
                 if PromoCodeList[indexPath.row].maxAmount != ""{
-                    cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() ) on orders from \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() ) to \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() )"
+                    cell.lblValidOn.text = PromoCodeList[indexPath.row].descriptionField//"Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() ) on orders from \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() ) to \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() )"
                 }else {
-                    cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() )"
+                    cell.lblValidOn.text = PromoCodeList[indexPath.row].descriptionField//"Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get flat \(CurrencySymbol)\(PromoCodeList[indexPath.row].percentage.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() )"
                 }
             case "discount":
                 cell.lblOfferDescription.text = "Get \(PromoCodeList[indexPath.row].percentage ?? "")% discount"
                 if PromoCodeList[indexPath.row].maxAmount != ""{
-                    cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get \(PromoCodeList[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() ) on orders from \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() ) to \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() )"
+                    cell.lblValidOn.text = PromoCodeList[indexPath.row].descriptionField//"Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get \(PromoCodeList[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() ) on orders from \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() ) to \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() )"
                 }
                 else{
-                    cell.lblValidOn.text = "Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get \(PromoCodeList[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() )"
+                    cell.lblValidOn.text = PromoCodeList[indexPath.row].descriptionField//"Use code \(PromoCodeList[indexPath.row].promocode ?? "") & get \(PromoCodeList[indexPath.row].percentage ?? "")% discount upto \(CurrencySymbol)\(PromoCodeList[indexPath.row].maxAmount.ConvertToTwoDecimal() ) on orders above \(CurrencySymbol)\(PromoCodeList[indexPath.row].minAmount.ConvertToTwoDecimal() )"
                 }
             default:
                 break
