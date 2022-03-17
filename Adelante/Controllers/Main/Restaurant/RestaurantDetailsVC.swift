@@ -489,7 +489,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                     cell.IncreseData = {
                         
-                        if variantValue > 0{
+                        if self.arrMenuitem[indexPath.row].quantity > (Int(self.arrMenuitem[indexPath.row].cartQty ?? "0") ?? 0) && variantValue > 0{
                             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                             controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                             controller.selectedRestaurantId = self.objRestaurant.id
@@ -531,7 +531,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             if self.objRestaurant.isdiff == 0{
                                 let alert = UIAlertController(title: AppName, message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                                 let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
-                                    if self.arrMenuitem[indexPath.row].quantity > 1 && variantValue > 0{
+                                    if self.arrMenuitem[indexPath.row].quantity > 0 && variantValue > 0{
                                         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                         controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                                         controller.selectedRestaurantId = self.objRestaurant.id
@@ -560,7 +560,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 alert.addAction(NoAction)
                                 self.present(alert, animated: true, completion: nil)
                             }else{
-                                if self.arrMenuitem[indexPath.row].quantity > 1 && variantValue > 0{
+                                if self.arrMenuitem[indexPath.row].quantity > 0 && variantValue > 0{
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                                     controller.isFromRestaurant = true
@@ -697,7 +697,8 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         }
                     }
                     cell.IncreseData = {
-                        if variantValue > 0{
+                        if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > (Int(self.arrMenuitem[indexPath.row].cartQty ?? "0") ?? 0) && variantValue > 0{
+//                        if variantValue > 0{
                             let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                             controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                             controller.isFromRestaurant = true
@@ -734,7 +735,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             if self.objRestaurant.isdiff == 0{
                                 let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                                 let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
-                                    if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
+                                    if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 0 && variantValue > 0{
                                         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                         controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                                         controller.selectedRestaurantId = self.objRestaurant.id
@@ -763,7 +764,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                                 alert.addAction(NoAction)
                                 self.present(alert, animated: true, completion: nil)
                             }else{
-                                if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
+                                if self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].quantity > 0 && variantValue > 0{
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].id
                                     controller.selectedRestaurantId = self.objRestaurant.id
@@ -905,7 +906,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                     }
                 }
                 cell.IncreseData = { [self] in
-                    if variantValue > 0{
+                    if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > (Int(self.arrMenuitem[indexPath.row].cartQty ?? "0") ?? 0) && variantValue > 0{
                         let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                         controller.selectedItemId = self.arrMenuitem[indexPath.row].id
                         controller.selectedRestaurantId = self.objRestaurant.id
@@ -947,7 +948,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         if self.objRestaurant.isdiff == 0{
                             let alert = UIAlertController(title: "Adelante System", message: "If you are adding the item from this restaurant then your previously added items will be removed", preferredStyle: UIAlertController.Style.alert)
                             let yesAction = UIAlertAction(title:"Yes" , style: .default) { (sct) in
-                                if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 && variantValue > 0 {
+                                if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 0 && variantValue > 0 {
                                     let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                     controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                                     controller.selectedRestaurantId = self.objRestaurant.id
@@ -976,7 +977,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             alert.addAction(NoAction)
                             self.present(alert, animated: true, completion: nil)
                         }else{
-                            if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 1 && variantValue > 0{
+                            if self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].quantity > 0 && variantValue > 0{
                                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: BffComboVC.storyboardID) as! BffComboVC
                                 controller.selectedItemId = self.arrFoodMenu[indexPath.section].subMenu[indexPath.row].id
                                 controller.selectedRestaurantId = self.objRestaurant.id

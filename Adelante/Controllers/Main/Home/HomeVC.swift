@@ -36,7 +36,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     var arrBanner = [Banner]()
     var SelectedCatId = "0"
     var SelectedCatIndex = IndexPath()
-    var SelectFilterId = "1"
+    var SelectFilterId = "2"
     var refreshList = UIRefreshControl()
     var pageNumber = 1
     var isNeedToReload = false
@@ -674,6 +674,18 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     // MARK: - filterDelegate
     func SelectedSortList(_ SortId: String) {
+        if SortId == "1"{
+            if userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) == nil || (userDefault.object(forKey: UserDefaultsKey.isUserLogin.rawValue) as? Bool == false){
+                let vc = AppStoryboard.Auth.instance.instantiateViewController(withIdentifier: LoginViewController.storyboardID) as! LoginViewController
+                let navController = UINavigationController.init(rootViewController: vc)
+                navController.modalPresentationStyle = .overFullScreen
+                navController.navigationController?.modalTransitionStyle = .crossDissolve
+                navController.navigationBar.isHidden = true
+                self.present(navController, animated: true, completion: nil)
+                SingletonClass.sharedInstance.isPresented = true
+                return
+            }
+        }
         DispatchQueue.main.async {
             self.selectedSortTypedIndexFromcolVwFilter = -1
             self.colVwFilterOptions.reloadItems(at: [IndexPath(item: 0, section: 0)])
