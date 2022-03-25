@@ -235,11 +235,13 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         if Qty != "0"{
             viewFooter.isHidden = false
             lblSign.isHidden = false
+            SingletonClass.sharedInstance.IsCartHide = false
         }else{
             viewFooter.isHidden = true
             lblPrice.text = ""
             lblNoOfItem.text = ""
             lblSign.isHidden = true
+            SingletonClass.sharedInstance.IsCartHide = true
         }
     }
     
@@ -444,7 +446,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             cell.vwRadius.layer.borderWidth = 1
                         }else{
                             cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                            cell.vwRadius.layer.borderWidth = 0
                         }
+                    }else{
+                        cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                        cell.vwRadius.layer.borderWidth = 0
                     }
                     if Int(arrMenuitem[indexPath.row].cartQty) ?? 0 > 0 {
                         cell.btnAddItem.isHidden = true
@@ -645,9 +651,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                             cell.vwRadius.layer.borderWidth = 1
                         }else{
                             cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                            cell.vwRadius.layer.borderWidth = 0
                         }
                     }else{
                         cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                        cell.vwRadius.layer.borderWidth = 0
                     }
                     if Int(arrFoodMenu[indexPath.section - 1].subMenu[indexPath.row].cartQty) ?? 0 > 0 {
                         cell.btnAddItem.isHidden = true
@@ -861,7 +869,11 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
                         cell.vwRadius.layer.borderWidth = 1
                     }else{
                         cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                        cell.vwRadius.layer.borderWidth = 0
                     }
+                }else{
+                    cell.vwRadius.layer.borderColor = colors.clearCol.value.cgColor
+                    cell.vwRadius.layer.borderWidth = 0
                 }
                 if arrFoodMenu[indexPath.section].subMenu[indexPath.row].variant == "1"{
                     cell.btnCustomize.isHidden = false
@@ -1321,6 +1333,7 @@ class RestaurantDetailsVC: BaseViewController,UITableViewDataSource,UITableViewD
         WebServiceSubClass.AddToCart(AddToCartModel: addToCart, showHud: false) { [self] (response, status, error) in
             if status {
                 let cartitem = addCartResModel.init(fromJson: response)
+                
                 if cartitem.data != nil{
                     arrAddToCartItem = cartitem.data
                     arrFoodMenu = cartitem.restaurant.foodMenu

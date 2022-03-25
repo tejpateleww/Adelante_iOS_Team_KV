@@ -2222,7 +2222,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="714"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-a4-mfH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="291"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-Ly-reK">
                                                                 <rect key="frame" x="18" y="55" width="378" height="232"/>
@@ -3391,20 +3391,20 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReViewDiscCell" id="zYv-cy-nYb" customClass="ReViewDiscCell" customModule="Adelante" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="414" height="128.5"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="158.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zYv-cy-nYb" id="F95-Xz-0AW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="158.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rlp-bS-0tk" customClass="viewWithClearBG" customModule="Adelante" customModuleProvider="target">
-                                                            <rect key="frame" x="18" y="7.5" width="378" height="113.5"/>
+                                                            <rect key="frame" x="18" y="7.5" width="378" height="143.5"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17.699999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="iSf-Fx-yzY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="113.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="143.5"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6.5999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="2u5-vb-Qf5">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="76.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="378" height="106.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vf1-pQ-gG0" customClass="themeLabel" customModule="Adelante" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
@@ -3416,7 +3416,7 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </label>
                                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q44-Lk-LSf" customClass="CosmosView" customModule="Cosmos">
-                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="20"/>
+                                                                                    <rect key="frame" x="0.0" y="56.5" width="378" height="50"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Selected_star"/>
@@ -3432,7 +3432,7 @@
                                                                             </subviews>
                                                                         </stackView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSc-1R-Zli" customClass="CustomLabel" customModule="Adelante" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="94" width="378" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="124" width="378" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -3450,7 +3450,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHa-yr-DeQ">
-                                                                            <rect key="frame" x="0.0" y="111.5" width="378" height="2"/>
+                                                                            <rect key="frame" x="0.0" y="141.5" width="378" height="2"/>
                                                                             <color key="backgroundColor" red="0.95687168840000003" green="0.95685106519999996" blue="0.95685523750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="2" id="RXK-sN-mTn"/>
@@ -4598,8 +4598,8 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2o-gU-ZoR">
                                                                                 <rect key="frame" x="0.0" y="61" width="378" height="71"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do You Want To Pick Order From Curbside Parking?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xu-1b-CdP" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="41"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would You Like To Use Curbside Pickup?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xu-1b-CdP" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -4608,10 +4608,10 @@
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ljj-dQ-BKA">
-                                                                                        <rect key="frame" x="0.0" y="49" width="175" height="22"/>
+                                                                                        <rect key="frame" x="0.0" y="28.5" width="175" height="42.5"/>
                                                                                         <subviews>
                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98p-tT-qK0" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="42.5"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="width" constant="80" id="t09-Gd-jrK"/>
                                                                                                 </constraints>
@@ -4629,7 +4629,7 @@
                                                                                                 </connections>
                                                                                             </button>
                                                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fto-fS-VaM" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                                                <rect key="frame" x="95" y="0.0" width="80" height="22"/>
+                                                                                                <rect key="frame" x="95" y="0.0" width="80" height="42.5"/>
                                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="45" maxY="0.0"/>
                                                                                                 <state key="normal" title="No" image="ic_unselectedBFFCombo">
@@ -9520,18 +9520,44 @@
                                     <constraint firstAttribute="trailing" secondItem="PqJ-MQ-F9D" secondAttribute="trailing" id="w4Q-6t-17T"/>
                                 </constraints>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iad-kB-pKN">
+                                <rect key="frame" x="329" y="708" width="65" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="2IW-bv-pyY"/>
+                                    <constraint firstAttribute="height" constant="65" id="9L4-P9-PFG"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="ic_cart_floting"/>
+                                <connections>
+                                    <action selector="BtnCartClick:" destination="wni-gD-ddk" eventType="touchUpInside" id="4S4-Ef-Sxs"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQx-Mr-Ynh">
+                                <rect key="frame" x="329" y="708" width="65" height="65"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WSM-Z9-OC6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="WSM-Z9-OC6" firstAttribute="bottom" secondItem="3rO-Df-l9c" secondAttribute="bottom" constant="20" id="2Ts-6E-h91"/>
+                            <constraint firstItem="IQx-Mr-Ynh" firstAttribute="bottom" secondItem="Iad-kB-pKN" secondAttribute="bottom" id="2s7-e4-7CX"/>
+                            <constraint firstItem="IQx-Mr-Ynh" firstAttribute="leading" secondItem="Iad-kB-pKN" secondAttribute="leading" id="VT3-dJ-wOK"/>
                             <constraint firstItem="3rO-Df-l9c" firstAttribute="leading" secondItem="WSM-Z9-OC6" secondAttribute="leading" id="Zsx-ap-Kt6"/>
+                            <constraint firstItem="IQx-Mr-Ynh" firstAttribute="top" secondItem="Iad-kB-pKN" secondAttribute="top" id="fm2-o2-ild"/>
+                            <constraint firstItem="WSM-Z9-OC6" firstAttribute="bottom" secondItem="Iad-kB-pKN" secondAttribute="bottom" constant="40" id="jnH-SM-xcz"/>
+                            <constraint firstItem="IQx-Mr-Ynh" firstAttribute="trailing" secondItem="Iad-kB-pKN" secondAttribute="trailing" id="jwY-kx-Rfs"/>
                             <constraint firstItem="WSM-Z9-OC6" firstAttribute="trailing" secondItem="3rO-Df-l9c" secondAttribute="trailing" id="knh-ox-KB6"/>
                             <constraint firstItem="3rO-Df-l9c" firstAttribute="top" secondItem="WSM-Z9-OC6" secondAttribute="top" id="wue-Ft-W3n"/>
+                            <constraint firstItem="WSM-Z9-OC6" firstAttribute="trailing" secondItem="Iad-kB-pKN" secondAttribute="trailing" constant="20" id="x1d-fm-6U5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BEh-5J-Gre"/>
                     <connections>
+                        <outlet property="BtnCart" destination="Iad-kB-pKN" id="pJ2-UR-KaB"/>
+                        <outlet property="LblCartCount" destination="IQx-Mr-Ynh" id="3Nw-8m-BMt"/>
                         <outlet property="NotificationIconBtn" destination="nRd-d7-QV4" id="pIl-R4-G6X"/>
                         <outlet property="colVwFilterOptions" destination="c64-PX-Tll" id="ylS-Op-QHb"/>
                         <outlet property="colVwRestWthPage" destination="bLN-Sa-bFh" id="p0N-FQ-tbf"/>
@@ -9649,23 +9675,23 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addedProductCell" id="SoL-Y3-stF" customClass="addedProductCell" customModule="Adelante" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="44.5" width="378" height="183.5"/>
+                                                                <rect key="frame" x="0.0" y="44.5" width="378" height="188"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SoL-Y3-stF" id="qxs-jW-5YR">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="183.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="188"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zcy-gl-rnv">
-                                                                            <rect key="frame" x="0.0" y="10" width="378" height="163.5"/>
+                                                                            <rect key="frame" x="0.0" y="10" width="378" height="168"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="wc1-4K-Www">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="163.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="378" height="168"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BtN-RD-9qH">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="180" height="163.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="180" height="168"/>
                                                                                             <subviews>
                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OJv-4w-kNU">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="163.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="168"/>
                                                                                                     <subviews>
                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cE9-zM-f6m" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="180" height="60"/>
@@ -9680,7 +9706,7 @@
                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                         </label>
                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBQ-Fo-H8R" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                                            <rect key="frame" x="0.0" y="60" width="180" height="103.5"/>
+                                                                                                            <rect key="frame" x="0.0" y="60" width="180" height="108"/>
                                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                             <nil key="textColor"/>
                                                                                                             <nil key="highlightedColor"/>
@@ -9700,10 +9726,10 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WzF-D9-zqZ">
-                                                                                            <rect key="frame" x="187" y="0.0" width="134" height="163.5"/>
+                                                                                            <rect key="frame" x="187" y="0.0" width="134" height="168"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TS-kt-GpR" customClass="checkoutView" customModule="Adelante" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="59" y="68" width="75" height="28"/>
+                                                                                                    <rect key="frame" x="59" y="70" width="75" height="28"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="y1b-uq-kKp">
                                                                                                             <rect key="frame" x="5" y="0.0" width="65" height="28"/>
@@ -9752,7 +9778,7 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHm-IQ-8Y9" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                                            <rect key="frame" x="328" y="0.0" width="50" height="163.5"/>
+                                                                                            <rect key="frame" x="328" y="0.0" width="50" height="168"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="50" id="cn9-Wx-OV4"/>
                                                                                             </constraints>
@@ -10030,8 +10056,8 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nel-49-cTE">
                                                                 <rect key="frame" x="0.0" y="45" width="378" height="68"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do You Want To Pick Order From Curbside Parking ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-Bg-uJT" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="41"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would You Like To Use Curbside Pickup?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-Bg-uJT" customClass="CheckOutLabel" customModule="Adelante" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="378" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -10040,10 +10066,10 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TdN-DI-CS9">
-                                                                        <rect key="frame" x="0.0" y="46" width="160" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="25.5" width="160" height="42.5"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs0-KP-FdG" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="42.5"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="80" id="Q36-KU-Imc"/>
                                                                                 </constraints>
@@ -10061,7 +10087,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuL-sJ-ARf" customClass="checkoutButton" customModule="Adelante" customModuleProvider="target">
-                                                                                <rect key="frame" x="80" y="0.0" width="80" height="22"/>
+                                                                                <rect key="frame" x="80" y="0.0" width="80" height="42.5"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="45" maxY="0.0"/>
                                                                                 <state key="normal" title="No" image="ic_unselectedBFFCombo">
@@ -10360,17 +10386,6 @@
             <point key="canvasLocation" x="3239.130434782609" y="892.63392857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="2fI-hX-w88">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="HGY-kw-5YU">
-            <size key="intrinsicContentSize" width="210" height="30"/>
-        </designable>
-        <designable name="Q44-Lk-LSf">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Add  +" width="46" height="18"/>
         <image name="Braintree-logo" width="139" height="141"/>
@@ -10393,6 +10408,7 @@
         <image name="filterImage" width="15.5" height="15"/>
         <image name="filterImageSelected" width="15.5" height="15"/>
         <image name="ic_applyPromoCode" width="36" height="36"/>
+        <image name="ic_cart_floting" width="46" height="46"/>
         <image name="ic_dislike" width="27" height="27"/>
         <image name="ic_dummyAExpress" width="45" height="28.5"/>
         <image name="ic_dummyDirectDebit" width="45" height="28.5"/>

@@ -12,6 +12,7 @@ class Userinfo : Codable{
     var message : String!
     var profile : Profile!
     var status : Bool!
+    var is_cart: String!
     
     /**
      * Instantiate the instance using the passed json values to set the properties values
@@ -29,6 +30,7 @@ class Userinfo : Codable{
             profile = Profile(fromJson: profileData)
         }
         status = json["status"].boolValue
+        is_cart = json["is_cart"].stringValue
     }
     /**
      * Instantiate the instance using the passed dictionary values to set the properties values
@@ -43,7 +45,7 @@ class Userinfo : Codable{
                 profile = Profile(fromDictionary: userData)
             }
         }
-        
+        is_cart = dictionary["is_cart"] as? String
     }
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property

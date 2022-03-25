@@ -16,6 +16,7 @@ class DashBoardResModel : NSObject, NSCoding{
         var restaurant : [Restaurant]!
         var status : Bool!
         var filterData : [FilterData]!
+    var is_cart: String!
 
         /**
          * Instantiate the instance using the passed json values to set the properties values
@@ -55,6 +56,7 @@ class DashBoardResModel : NSObject, NSCoding{
                 filterData.append(value)
             }
             status = json["status"].boolValue
+            is_cart = json["is_cart"].stringValue
         }
 
         /**

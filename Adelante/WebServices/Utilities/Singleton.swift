@@ -34,6 +34,7 @@ class SingletonClass: NSObject
             return (currentYear...(currentYear + 11)).map { String($0)}
         }
     }
+    var IsCartHide: Bool = true
     
     func clearSingletonClass() {
         SingletonClass.sharedInstance.UserId = ""

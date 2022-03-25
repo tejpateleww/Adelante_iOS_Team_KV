@@ -71,6 +71,8 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
     }
     @IBOutlet weak var colVwFilterOptions: UICollectionView!
     @IBOutlet weak var NotificationIconBtn: UIButton!
+    @IBOutlet weak var BtnCart: UIButton!
+    @IBOutlet weak var LblCartCount: UILabel!
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -130,6 +132,9 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         //        webserviceGetDashboard(isFromFilter: false, strTabfilter: "")
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.customTabBarController?.showTabBar()
+        
+        BtnCart.isHidden = SingletonClass.sharedInstance.IsCartHide
+        LblCartCount.isHidden = SingletonClass.sharedInstance.IsCartHide
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -265,7 +270,7 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         if timer != nil{
             timer = nil
         }
-        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(scrollAutomatically), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(scrollAutomatically), userInfo: nil, repeats: true)
     }
     
     
@@ -355,6 +360,14 @@ class HomeVC: BaseViewController,UINavigationControllerDelegate, UIGestureRecogn
         navController.navigationBar.isHidden = true
         self.present(navController, animated: true, completion: nil)
     }
+    
+    @IBAction func BtnCartClick(_ sender: UIButton) {
+        
+        let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: checkOutVC.storyboardID) as! checkOutVC
+        self.navigationController?.pushViewController(controller, animated: true)
+
+    }
+    
   
 }
 extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource,SkeletonTableViewDataSource,SkeletonCollectionViewDataSource{
@@ -414,18 +427,20 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrBanner[indexPath.row].image ?? "")"
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
+                    cell.lblRestName.text = arrBanner[indexPath.row].name
                     if cell.lblRestName.text == ""{
                         cell.vwRestName.isHidden = true
                     }else{
                         cell.vwRestName.isHidden = false
                     }
+                    cell.lblRestDesc.text = ""//arrBanner[indexPath.row].descriptionField
                     if cell.lblRestDesc.text == ""{
                         cell.vwRestDesc.isHidden = true
                     }else{
                         cell.vwRestDesc.isHidden = false
                     }
-                    cell.lblRestName.text = arrBanner[indexPath.row].name
-                    cell.lblRestDesc.text = arrBanner[indexPath.row].descriptionField
+                    
+                    
                     return cell
                 }else{
                     let NoDatacell = colVwRestWthPage.dequeueReusableCell(withReuseIdentifier: "NoDataCollectionview", for: indexPath) as! NoDataCollectionview
@@ -493,8 +508,8 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     self.present(navController, animated: true, completion: nil)
                 }
                 self.present(controller, animated: true, completion: nil)
-                self.arrRestaurant.removeAll()
-                self.tblMainList.reloadData()
+//                self.arrRestaurant.removeAll()
+//                self.tblMainList.reloadData()
             }else{
 
                 selectedIndexgray = arrFilter[indexPath.row].value.toInt()
@@ -759,6 +774,12 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                         self.isNeedToReload = true
                     }
                 }
+                // floting cart icon hide show
+              
+                SingletonClass.sharedInstance.IsCartHide = Homedata.is_cart == "0"
+                self.BtnCart.isHidden = SingletonClass.sharedInstance.IsCartHide
+                self.LblCartCount.isHidden = SingletonClass.sharedInstance.IsCartHide
+                
                 self.tblMainList.dataSource = self
                 self.tblMainList.isScrollEnabled = true
                 self.tblMainList.isUserInteractionEnabled = true

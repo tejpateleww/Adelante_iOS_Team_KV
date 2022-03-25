@@ -105,6 +105,7 @@ class LoginViewController: BaseViewController {
                 SingletonClass.sharedInstance.UserId = loginModelDetails?.id ?? ""
                 SingletonClass.sharedInstance.Api_Key = loginModelDetails?.apiKey ?? ""
                 SingletonClass.sharedInstance.LoginRegisterUpdateData = loginModelDetails
+                SingletonClass.sharedInstance.IsCartHide = loginModel.is_cart == "0"
                 userDefault.setValue(loginModelDetails?.apiKey , forKey: UserDefaultsKey.X_API_KEY.rawValue)
                 userDefault.setValue(true, forKey: UserDefaultsKey.isUserLogin.rawValue)
                 userDefault.setUserData(objProfile: loginModelDetails!)

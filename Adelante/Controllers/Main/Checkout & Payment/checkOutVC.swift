@@ -427,6 +427,7 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             if(status)
             {
                 print(json)
+                SingletonClass.sharedInstance.IsCartHide = true
                 let alert = UIAlertController(title: AppName, message: json["message"].stringValue, preferredStyle: UIAlertController.Style.alert)
                 let OkAction = UIAlertAction(title:"OK" , style: .default) { (sct) in
                     let vc = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "MyFoodlistVC") as! MyFoodlistVC
@@ -496,11 +497,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
                 }
                 self.cartDetails = cartData.data
                 if self.cartDetails == nil{
+                    SingletonClass.sharedInstance.IsCartHide = true
                     self.navigationController?.popViewController(animated: true)
                 }else{
                     let tempArr = cartData.data.item.filter { (item) -> Bool in
                         return item.cartQty.toInt() != 0
                     }
+                    SingletonClass.sharedInstance.IsCartHide = false
                     self.arrCartItem = tempArr
                 }
                 self.setData()
