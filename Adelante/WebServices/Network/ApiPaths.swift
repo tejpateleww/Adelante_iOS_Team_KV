@@ -26,7 +26,7 @@ enum APIEnvironment : String{
 //    case bu = "http://adelante.excellentwebworld.in/api/User/"
 //    case profileBu = "http://adelante.excellentwebworld.in/"
 //    case BaseURL = "http://18.215.15.214/api/User/"
-    case BaseURL =  "https://www.adelantemovil.com/api/User/" //"http://18.208.18.170/api/User/" "http://18.215.15.214/api/User/"//
+    case BaseURL =  "https://www.adelantemovil.com/api/User/" //"http://18.208.18.170/api/User/"  "http://18.215.15.214/api/User/"//
     case profileBaseURL =  "https://www.adelantemovil.com/" //"http://18.208.18.170/" "http://18.215.15.214/"//
 //    case profileBaseURL = "http://18.215.15.214/api/User/"
     case ShareOrderLink = "https://www.adelantemovil.com/ShareOrder?orderid="

@@ -30,7 +30,7 @@ class OTPVC: BaseViewController,OTPTextFieldDelegate, UITextFieldDelegate {
     var strphoneNo = ""
     var strPassword = ""
 //    var strType = ""
-    var strtime = 31
+    var strtime = 61
     var selectedImage : UIImage?
     var isRemovePhoto = false
     
@@ -80,12 +80,12 @@ class OTPVC: BaseViewController,OTPTextFieldDelegate, UITextFieldDelegate {
         txtOtpOutletCollection[3].myDelegate = self
         txtOtpOutletCollection[4].myDelegate = self
         txtOtpOutletCollection[5].myDelegate = self
-        
-        if isFromLogin == false && isFromRegister == true {
-            self.webserviceForSendOTP(type: "0")
-        }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
-            self.webserviceForSendOTP(type: "1")
-        }
+        self.reversetimer()
+//        if isFromLogin == false && isFromRegister == true {
+//            self.webserviceForSendOTP(type: "0")
+//        }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
+//            self.webserviceForSendOTP(type: "1")
+//        }
     }
     func setUpLocalizedStrings() {
         lblVerify.text = "verify_lblVerify".Localized()
@@ -110,13 +110,13 @@ class OTPVC: BaseViewController,OTPTextFieldDelegate, UITextFieldDelegate {
             self.clearAllFields()
         } else if isFromLogin == false && isFromRegister == true {
             self.clearAllFields()
-            self.strtime = 31
-            self.reversetimer()
+//            self.strtime = 31
+//            self.reversetimer()
             self.webserviceForSendOTP(type: "0")
         }else if isFromLogin == false && isFromRegister == false && isFromEditProfile == true {
             self.clearAllFields()
-            self.strtime = 31
-            self.reversetimer()
+//            self.strtime = 31
+//            self.reversetimer()
             self.webserviceForSendOTP(type: "1")
         }
     }
@@ -218,21 +218,23 @@ class OTPVC: BaseViewController,OTPTextFieldDelegate, UITextFieldDelegate {
         self.timer.invalidate() // just in case this button is tapped multiple times
 //        self.lblCount.isHidden = false
 //        self.btnResendOtp.isHidden = true
-        
-        
+        self.lblCount.isHidden = false
+        self.btnResendOtp.isHidden = true
+        self.strtime = 61
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
     
     
     @objc func timerAction() {
         if self.strtime > 0{
+            
             self.strtime -= 1
             self.lblCount.text =  "Resend after \(self.strtime > 9 ? "00:\(self.strtime)" : "00:0\(self.strtime)")  seconds"
         } else {
             self.btnResendOtp.isHidden = false
             self.lblCount.isHidden = true
             self.btnResendOtp.isUserInteractionEnabled = true
-            btnResendOtp.setTitle("verify_btnResendOtp".Localized(), for: .normal)
+            self.btnResendOtp.setTitle("verify_btnResendOtp".Localized(), for: .normal)
             self.btnResendOtp.setTitleColor(colors.appOrangeColor.value, for: .normal)
             self.btnResendOtp.titleLabel?.font = CustomFont.AileronBold.returnFont(15)
             self.btnResendOtp.setunderline(title: "verify_btnResendOtp".Localized(), color: colors.appOrangeColor, font: CustomFont.AileronBold.returnFont(15))
@@ -252,7 +254,7 @@ class OTPVC: BaseViewController,OTPTextFieldDelegate, UITextFieldDelegate {
             self.hideHUD()
             if(status){
                 let otpModel = otpReceive.init(fromJson: json)
-                Utilities.showAlertOfAPIResponse(param: otpModel.code ?? "-", vc: self)
+//                Utilities.showAlertOfAPIResponse(param: otpModel.code ?? "-", vc: self)
                 print(json)
                 reversetimer()
 //                strtime = 30

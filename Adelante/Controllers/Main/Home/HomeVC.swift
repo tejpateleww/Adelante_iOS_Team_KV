@@ -427,7 +427,7 @@ extension HomeVC :  UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     let strUrl = "\(APIEnvironment.profileBaseURL.rawValue)\(arrBanner[indexPath.row].image ?? "")"
                     cell.imgRestaurant.sd_imageIndicator = SDWebImageActivityIndicator.gray
                     cell.imgRestaurant.sd_setImage(with: URL(string: strUrl),  placeholderImage: UIImage())
-                    cell.lblRestName.text = arrBanner[indexPath.row].name
+                    cell.lblRestName.text = ""//arrBanner[indexPath.row].name
                     if cell.lblRestName.text == ""{
                         cell.vwRestName.isHidden = true
                     }else{

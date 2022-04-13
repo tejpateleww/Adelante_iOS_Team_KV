@@ -68,17 +68,17 @@
 		<dict/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) camera use</string>
+	<string>$(PRODUCT_NAME) user can upload profile picture &amp; in order to upload this we are using camera permission.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) requires access to your location</string>
+	<string>$(PRODUCT_NAME) is using user's current location to get "Nearby Restaurants"  (Restaurant which are near to user's desired location) location service.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>$(PRODUCT_NAME) requires access to your location</string>
+	<string>$(PRODUCT_NAME) is using user's current location to get "Nearby Restaurants"  (Restaurant which are near to user's desired location) location service.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>$(PRODUCT_NAME) requires access to your location</string>
+	<string>$(PRODUCT_NAME) is using user's current location to get "Nearby Restaurants"  (Restaurant which are near to user's desired location) location service.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) requires access to your location</string>
+	<string>$(PRODUCT_NAME) is using user's current location to get "Nearby Restaurants"  (Restaurant which are near to user's desired location) location service.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) photo use</string>
+	<string>$(PRODUCT_NAME) use photo to upload user profile picture.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Aileron-UltraLightItalic.otf</string>

@@ -173,7 +173,7 @@ class addPaymentVC: BaseViewController ,UITableViewDelegate,UITableViewDataSourc
             }
             return 1
         case 1:
-            return 2
+            return 1
         default:
             return 0
         }
