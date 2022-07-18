@@ -284,6 +284,7 @@
 		88E80728268DF4C2007B3FC0 /* skeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E80726268DF4C2007B3FC0 /* skeletonView.swift */; };
 		88ECB12D26A93740001872D7 /* ApplyPromoDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ECB12C26A93740001872D7 /* ApplyPromoDatum.swift */; };
 		88ECB13126A93BAB001872D7 /* CartDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ECB13026A93BAB001872D7 /* CartDatum.swift */; };
+		88F144EC28856DAA0002D599 /* DeleteAccountReqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F144EB28856DAA0002D599 /* DeleteAccountReqModel.swift */; };
 		88F6D94826CFB4B400ED5C95 /* ShareDetailsDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94426CFB4B400ED5C95 /* ShareDetailsDatum.swift */; };
 		88F6D94926CFB4B400ED5C95 /* ShareDetailsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94526CFB4B400ED5C95 /* ShareDetailsItem.swift */; };
 		88F6D94A26CFB4B400ED5C95 /* ShareDetailsMainOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D94626CFB4B400ED5C95 /* ShareDetailsMainOrder.swift */; };
@@ -589,6 +590,7 @@
 		88E80726268DF4C2007B3FC0 /* skeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = skeletonView.swift; sourceTree = "<group>"; };
 		88ECB12C26A93740001872D7 /* ApplyPromoDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyPromoDatum.swift; sourceTree = "<group>"; };
 		88ECB13026A93BAB001872D7 /* CartDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartDatum.swift; sourceTree = "<group>"; };
+		88F144EB28856DAA0002D599 /* DeleteAccountReqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountReqModel.swift; sourceTree = "<group>"; };
 		88F6D94426CFB4B400ED5C95 /* ShareDetailsDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailsDatum.swift; sourceTree = "<group>"; };
 		88F6D94526CFB4B400ED5C95 /* ShareDetailsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailsItem.swift; sourceTree = "<group>"; };
 		88F6D94626CFB4B400ED5C95 /* ShareDetailsMainOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailsMainOrder.swift; sourceTree = "<group>"; };
@@ -1198,6 +1200,7 @@
 				1855042A265F955400D73B2B /* OrderReqModel.swift */,
 				88E8071B268DCA9C007B3FC0 /* AddToFoodlistReqModel.swift */,
 				88DCCC132761D0C500D0A118 /* checkOrderReqModel.swift */,
+				88F144EB28856DAA0002D599 /* DeleteAccountReqModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -1761,6 +1764,7 @@
 				347D955E25A71637000C64B5 /* Restaurant.swift in Sources */,
 				3431E06A25932287002F1435 /* RestaurantCategoryCell.swift in Sources */,
 				81CFFD702574C60D005AA86A /* RequestModel.swift in Sources */,
+				88F144EC28856DAA0002D599 /* DeleteAccountReqModel.swift in Sources */,
 				345EA8F025B5477100A4E56D /* RestaurantFavResModel.swift in Sources */,
 				34A260E025D3B26000E24D73 /* ReviewData.swift in Sources */,
 				88E80720268DF38C007B3FC0 /* SkeletonOrderDetails.swift in Sources */,

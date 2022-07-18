@@ -36,6 +36,7 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "MyAccountVC_title4".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_C".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_D".Localized())], selectedIcon: UIImage(named: "ic_HelpSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "MyAccountVC_title5".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
+            myAccountDetails(icon: UIImage(named: "trash")!, title: "Delete Account".Localized(), subTitle: [], selectedIcon: UIImage(named: "trash")!)
         ]
         webserviceGetSettings()
         setup()
@@ -85,6 +86,26 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             self.present(alertController, animated: true)
         }
     }
+    
+    func deleteAccount() {
+        let alertController = UIAlertController(title: AppName,
+                                                message: "Are you sure you want to delete your account?",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel".Localized(), style: .cancel){ _ in
+            self.expandedCell = -1
+            DispatchQueue.main.async {
+                self.tblAcountDetails.reloadData()
+            }
+        })
+        alertController.addAction(UIAlertAction(title: "Delete Account".Localized(), style: .default){ _ in
+            appDel.performDeleteAccount()
+        })
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
+    }
+    
     @objc  func btnExpand(_ sender : UIButton) {
         let  _ = allDetails.map({$0.isExpanded = true})
         allDetails[sender.tag].isExpanded = false
@@ -107,6 +128,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         case 4:
             showLogout()
             print(sender.tag)
+        case 5:
+            deleteAccount()
         default:
             print(sender.tag)
         }
@@ -185,6 +208,9 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         label.text = allDetails[section].detailsTitle
         
         label.textColor = colors.black.value
+        if allDetails[section].detailsTitle == "Delete Account"{
+            label.textColor = colors.appRedColor.value
+        }
         headerView.addSubview(label)
         
         let expandImageView = UIImageView()

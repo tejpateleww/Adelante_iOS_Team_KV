@@ -319,6 +319,22 @@ import Braintree
             }
         })
     }
+    
+    func performDeleteAccount(){
+        let logout = DeleteAccountReqModel()
+        logout.user_id = SingletonClass.sharedInstance.UserId
+        WebServiceSubClass.deleteAccount(logoutModel: logout, showHud: true, completion: { (response, status, error) in
+             if status{
+                appDel.SetLogout()
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                     Utilities.ShowAlert(OfMessage: "Your account deleted successfully.")
+                 }
+            }else{
+               
+            }
+        })
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         print(#function, notification)

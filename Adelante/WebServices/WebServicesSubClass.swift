@@ -58,6 +58,13 @@ class WebServiceSubClass
         let  params : [String:String] = logoutModel.generatPostParams() as! [String : String]
         WebService.shared.requestMethod(api: .Logout, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
     }
+    
+    //DeleteAccount
+    class func deleteAccount( logoutModel : DeleteAccountReqModel ,showHud : Bool = true ,completion: @escaping CompletionResponse ) {
+        let  params : [String:String] = logoutModel.generatPostParams() as! [String : String]
+        WebService.shared.requestMethod(api: .DeleteAccount, httpMethod: .post,showHud: showHud, parameters: params, completion: completion)
+    }
+    
     class func deshboard( DashboardModel : DashboardReqModel ,showHud : Bool = false, completion: @escaping CompletionResponse ) {
         let params : [String:String] = DashboardModel.generatPostParams() as! [String:String]
         WebService.shared.requestMethod(api: .Dashboard, httpMethod: .post, showHud: showHud, parameters: params, completion: completion)
