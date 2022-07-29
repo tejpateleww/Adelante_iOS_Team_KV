@@ -34,9 +34,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             myAccountDetails(icon: UIImage(named: "ic_payemt")!, title: "MyAccountVC_title1".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_payemtSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_myFoodList")!, title: "MyAccountVC_title2".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_myFoodListSelected")!),
             myAccountDetails(icon: UIImage(named: "ic_changePassword")!, title: "MyAccountVC_title4".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_changePasswordSelected")!),
-            myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_C".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_D".Localized())], selectedIcon: UIImage(named: "ic_HelpSelected")!),
-            myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "MyAccountVC_title5".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!),
-            myAccountDetails(icon: UIImage(named: "trash")!, title: "Delete Account".Localized(), subTitle: [], selectedIcon: UIImage(named: "trash")!)
+            myAccountDetails(icon: UIImage(named: "ic_Help")!, title: "MyAccountVC_title3".Localized(), subTitle: [subAccountDetails(subTitle: "MyAccountVC_title3_A".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_B".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_C".Localized()),subAccountDetails(subTitle: "MyAccountVC_title3_D".Localized()),subAccountDetails(subTitle: "Delete Account".Localized())], selectedIcon: UIImage(named: "ic_HelpSelected")!),
+            myAccountDetails(icon: UIImage(named: "ic_Logout")!, title: "MyAccountVC_title5".Localized(), subTitle: [], selectedIcon: UIImage(named: "ic_LogoutSelected")!)
         ]
         webserviceGetSettings()
         setup()
@@ -128,8 +127,6 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
         case 4:
             showLogout()
             print(sender.tag)
-        case 5:
-            deleteAccount()
         default:
             print(sender.tag)
         }
@@ -179,6 +176,13 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblAcountDetails.dequeueReusableCell(withIdentifier: myAccountSubDetails.reuseIdentifier, for: indexPath) as! myAccountSubDetails
         cell.lblAccountSubDetails.text = allDetails[indexPath.section].subDetails![indexPath.row].subAccountTitle
+        
+        if(cell.lblAccountSubDetails.text == "Delete Account"){
+            cell.lblAccountSubDetails.textColor = colors.appRedColor.value
+        }else{
+            cell.lblAccountSubDetails.textColor = colors.black.value
+        }
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -256,6 +260,8 @@ class MyAccountVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,
             case 3:
                 let controller = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: FeedbackVC.storyboardID) as! FeedbackVC
                 self.navigationController?.pushViewController(controller, animated: true)
+            case 4:
+                deleteAccount()
             default:
                 print(indexPath.row)
             }

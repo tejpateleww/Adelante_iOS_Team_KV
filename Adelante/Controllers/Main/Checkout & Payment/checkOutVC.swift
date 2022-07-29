@@ -251,13 +251,13 @@ class checkOutVC: BaseViewController,UITableViewDelegate,UITableViewDataSource, 
             let cell = tblOrderDetails.dequeueReusableCell(withIdentifier: orderDetailsCell.reuseIdentifier, for: indexPath) as! orderDetailsCell
             cell.lblTitle.text = arrayForTitle[indexPath.row]
             if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
-                cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(cartDetails?.tax! ?? "0")%)"
+                cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized()
             }
             switch arrayForTitle[indexPath.row] {
             case "checkOutVC_arrayForTitle_title".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.oldTotal ?? "")"
             case "checkOutVC_arrayForTitle_title1".Localized():
-                cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized() + " (\(cartDetails?.restaurant_service_fee ?? "0")%)"
+                cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized()
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.serviceFee ?? "")"
             case "checkOutVC_arrayForTitle_title2".Localized():
                 cell.lblPrice.text = "\(CurrencySymbol)\(cartDetails?.totalRound ?? "")"
