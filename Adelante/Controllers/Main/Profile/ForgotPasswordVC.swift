@@ -40,9 +40,7 @@ class ForgotPasswordVC: BaseViewController {
     // MARK: - IBActions
     @IBAction func btnSend(_ sender: Any) {
         let checkEmail = txtEmailOrPhone.validatedText(validationType: .email)
-        
-        if(!checkEmail.0)
-        {
+        if(!checkEmail.0){
             Utilities.ShowAlert(OfMessage: checkEmail.1)
             return
         }else{
@@ -54,7 +52,9 @@ class ForgotPasswordVC: BaseViewController {
     func webserviceForForgotPassword(){
         let forgot = ForgotPasswordReqModel()
         forgot.email = txtEmailOrPhone.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        Utilities.showHud()
         WebServiceSubClass.ForgotPassword(forgotPassword: forgot, showHud: true, completion: { (response, status, error) in
+            Utilities.hideHud()
             if (status){
                 self.showAlertWithTwoButtonCompletion(title: AppName, Message: response["message"].stringValue, defaultButtonTitle: "OK", cancelButtonTitle: "") { (index) in
                     if index == 0{

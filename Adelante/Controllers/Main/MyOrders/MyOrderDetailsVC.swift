@@ -523,9 +523,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 }
                 cell.lblTitle.text = arrayForTitle[indexPath.row]
                 if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
-                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objShareOrderDetails?.tax! ?? "0")%)"
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized()
                 }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title1".Localized() {
-                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized() + " (\(objShareOrderDetails?.restaurant_service_fee ?? "0")%)"
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized()
                 }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title3".Localized() {
                     if let promocode = objShareOrderDetails?.promocode{
                         cell.lblTitle.text = "Promocode (\(promocode))"
@@ -554,9 +554,9 @@ class MyOrderDetailsVC: BaseViewController, UITableViewDelegate, UITableViewData
                 }
                 cell.lblTitle.text = arrayForTitle[indexPath.row]
                 if cell.lblTitle.text == "checkOutVC_arrayForTitle_title2".Localized() {
-                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized() + " (\(objOrderDetailsData?.tax! ?? "0")%)"
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title2".Localized()
                 }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title1".Localized() {
-                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized() + " (\(objOrderDetailsData?.restaurant_service_fee ?? "0")%)"
+                    cell.lblTitle.text = "checkOutVC_arrayForTitle_title1".Localized()
                 }else if cell.lblTitle.text == "checkOutVC_arrayForTitle_title3".Localized() {
                     if let promocode = objOrderDetailsData?.promocode{
                         cell.lblTitle.text = "Promocode (\(promocode))"
